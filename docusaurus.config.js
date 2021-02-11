@@ -2,7 +2,7 @@ module.exports = {
   title: '<mapml-viewer> documentation',
   tagline: 'A custom <mapml-viewer> and <layer-> element suite',
   url: 'http://maps4html.org/web-map-doc/',
-  baseUrl: '/web-map-doc/index.html/',
+  baseUrl: '/web-map-doc/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
