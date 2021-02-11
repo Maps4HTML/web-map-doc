@@ -87,6 +87,9 @@ module.exports = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Maps4HTML. Built with Docusaurus.`,
     },
+    prism: {
+      theme: require('prism-react-renderer/themes/duotoneLight'),
+    },
   },
   presets: [
     [

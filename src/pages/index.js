@@ -55,7 +55,7 @@ function Feature({ imageUrl, title, description }) {
 }
 
 function Home() {
-  const mapiframe = `<script type="module" src="../static/dist/mapml-viewer.js" ></script>
+  const mapiframe = `<script type="module" src="dist/mapml-viewer.js" ></script>
   <mapml-viewer style="width:100%;height:490px;" projection="CBMTILE" zoom="5" lat="58" lon="-90" controls>
     <layer- label="CBMT" src="https://geogratis.gc.ca/mapml/en/cbmtile/cbmt/" checked></layer->
   </mapml-viewer>`;
@@ -63,8 +63,8 @@ function Home() {
   const { siteConfig = {} } = context;
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title="Home"
+      description="Documentation for mapml-viewer and layer element suite">
 
       <iframe height="500px" width="100%" frameborder="0" scrolling="no" srcdoc={mapiframe}></iframe>
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
@@ -78,7 +78,7 @@ function Home() {
                 'button button--outline button--secondary button--lg',
                 styles.getStarted,
               )}
-              to={useBaseUrl('docs/')}>
+              to={useBaseUrl('docs/installation')}>
               Get Started
             </Link>
           </div>
