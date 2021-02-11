@@ -1,33 +1,8 @@
-# Website
+# web-map-element documentation
 
-This website is built using [Docusaurus 2](https://v2.docusaurus.io/), a modern static website generator.
+## What is the `<mapml-viewer>` and `<layer->` element suite?
 
-## Installation
-
-```console
-yarn install
-```
-
-## Local Development
-
-```console
-yarn start
-```
-
-This command starts a local development server and open up a browser window. Most changes are reflected live without having to restart the server.
-
-## Build
-
-```console
-yarn build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-## Deployment
-
-```console
-GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+The `<mapml-viewer>` custom element is a prototype implementation of the
+[`<map>` media element](https://maps4html.org/MapML/spec/#web-maps)
+defined in the MapML (Map Markup Language)
+[specification](https://maps4html.org/MapML/spec/). This repository is the documentation for this suite of elements, avaliable [here](http://maps4html.org/web-map-doc/).

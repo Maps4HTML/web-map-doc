@@ -39,7 +39,7 @@ const features = [
   },
 ];
 
-function Feature({imageUrl, title, description}) {
+function Feature({ imageUrl, title, description }) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
     <div className={clsx('col col--4', styles.feature)}>
@@ -55,14 +55,21 @@ function Feature({imageUrl, title, description}) {
 }
 
 function Home() {
+  const mapiframe = `<script type="module" src="../static/dist/mapml-viewer.js" ></script>
+  <mapml-viewer style="width:100%;height:490px;" projection="CBMTILE" zoom="5" lat="58" lon="-90" controls>
+    <layer- label="CBMT" src="https://geogratis.gc.ca/mapml/en/cbmtile/cbmt/" checked></layer->
+  </mapml-viewer>`;
   const context = useDocusaurusContext();
-  const {siteConfig = {}} = context;
+  const { siteConfig = {} } = context;
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
+
+      <iframe height="500px" width="100%" frameborder="0" scrolling="no" srcdoc={mapiframe}></iframe>
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
+
           <h1 className="hero__title">{siteConfig.title}</h1>
           <p className="hero__subtitle">{siteConfig.tagline}</p>
           <div className={styles.buttons}>
@@ -78,6 +85,7 @@ function Home() {
         </div>
       </header>
       <main>
+
         {features && features.length > 0 && (
           <section className={styles.features}>
             <div className="container">
