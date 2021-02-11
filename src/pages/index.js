@@ -8,46 +8,34 @@ import styles from './styles.module.css';
 
 const features = [
   {
-    title: 'Easy to Use',
-    imageUrl: 'img/undraw_docusaurus_mountain.svg',
+    title: 'Minimum Code',
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        MapML prioritizes minimum code needed to create elaborate maps. No Javascript required, everything can be done using HTML + custom elements.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    imageUrl: 'img/undraw_docusaurus_tree.svg',
+    title: 'Accessible Maps',
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        This suite of elements enables fast and easy use of functions in an accessible manner. Keyboard navigation and interaction is contantly being improved.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    imageUrl: 'img/undraw_docusaurus_react.svg',
+    title: 'Future Standard',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        With the goal of one day being part of browsers natively, MapML provides the ability for all maps created using this custom suite to work once MapML is integrated with HTML.
       </>
     ),
   },
 ];
 
-function Feature({ imageUrl, title, description }) {
-  const imgUrl = useBaseUrl(imageUrl);
+function Feature({ title, description }) {
   return (
     <div className={clsx('col col--4', styles.feature)}>
-      {imgUrl && (
-        <div className="text--center">
-          <img className={styles.featureImage} src={imgUrl} alt={title} />
-        </div>
-      )}
       <h3>{title}</h3>
       <p>{description}</p>
     </div>
@@ -66,7 +54,7 @@ function Home() {
       title="Home"
       description="Documentation for mapml-viewer and layer element suite">
 
-      <iframe height="500px" width="100%" frameborder="0" scrolling="no" srcdoc={mapiframe}></iframe>
+      <iframe tabIndex="-1" height="500px" width="100%" frameborder="0" scrolling="no" srcdoc={mapiframe}></iframe>
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
         <div className="container">
 
@@ -75,7 +63,7 @@ function Home() {
           <div className={styles.buttons}>
             <Link
               className={clsx(
-                'button button--outline button--secondary button--lg',
+                'button button--lg',
                 styles.getStarted,
               )}
               to={useBaseUrl('docs/installation')}>
@@ -85,7 +73,6 @@ function Home() {
         </div>
       </header>
       <main>
-
         {features && features.length > 0 && (
           <section className={styles.features}>
             <div className="container">
@@ -97,8 +84,20 @@ function Home() {
             </div>
           </section>
         )}
+        <div className="container">
+          <h2>Capabilities</h2>
+          <p>A thorough breakdown of the capabilities compared to other web map solutions can be found <a href="https://maps4html.org/UCR-MapML-Matrix/mapml-ucrs-fulfillment-matrix.html">here.</a>
+          </p>
+          <br />
+          <h2>Getting Involved</h2>
+          <p>The custom element suite is an open source project. Anyone who wants to submit changes/fixes is welcomed to doing so through Pull Requests to our <a href="https://github.com/Maps4HTML/Web-Map-Custom-Element">Github Repository</a>.
+            <br />
+            <br />
+            You can also contribute by reporting any bugs or issues while using the element suite in the form of an issue on the same <a href="https://github.com/Maps4HTML/Web-Map-Custom-Element">Github Repository</a>.
+          </p>
+        </div>
       </main>
-    </Layout>
+    </Layout >
   );
 }
 
