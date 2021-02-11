@@ -1,7 +1,7 @@
 module.exports = {
   someSidebar: {
-    Docusaurus: ['doc1', 'doc2', 'doc3'],
-    New: ['doc5'],
+    MapML: ['intro', 'doc3', 'doc5'],
+    'Getting Started': ['installation'],
     Features: ['mdx'],
   },
 };
