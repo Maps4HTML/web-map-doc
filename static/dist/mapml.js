@@ -2200,7 +2200,7 @@
           _reset: function () {
   		var image = this._image,
   		    location = this._location,
-                      size = this._size;
+                      size = this._size;
 
                   // TBD use the angle to establish the image rotation in CSS
 
