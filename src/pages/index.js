@@ -43,8 +43,8 @@ function Feature({ title, description }) {
 }
 
 function Home() {
-  const mapiframe = `<script type="module" src="dist/mapml-viewer.js" ></script>
-  <mapml-viewer style="width:100%;height:490px;" projection="CBMTILE" zoom="5" lat="58" lon="-90" controls>
+  const mapiframe = `<script type="module" src="dist/mapml-viewer.js"></script>
+  <mapml-viewer style="width:100%;height:490px;border:0;background-color:#bfe8fc;" projection="CBMTILE" zoom="5" lat="58" lon="-90" controls>
     <layer- label="CBMT" src="https://geogratis.gc.ca/mapml/en/cbmtile/cbmt/" checked></layer->
   </mapml-viewer>`;
   const context = useDocusaurusContext();
