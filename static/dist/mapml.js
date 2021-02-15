@@ -2778,7 +2778,7 @@
               // Fixes flickering by only moving element when there is enough space
               let offset = moveEvent.clientY - yPos;
               moving = Math.abs(offset) > 5 || moving;
-              if(controls && !moving || 
+              if( (controls && !moving) || (controls && controls.childElementCount <= 1) || 
                   controls.getBoundingClientRect().top > control.getBoundingClientRect().bottom || 
                   controls.getBoundingClientRect().bottom < control.getBoundingClientRect().top){
                     return;
