@@ -7,6 +7,8 @@ module.exports = {
         'Creating Layers': [
           'layers/static-tiles',
           'layers/static-features',
+          'layers/static-images',
+          'layers/templated-tiles',
         ],
       },
     ],

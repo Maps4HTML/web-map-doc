@@ -18,7 +18,11 @@ Add an image file to your project directory. Now you can access this image in Ma
 
 ```
 
-### Attributes
+## Associated Elements
+
+### `<tile>`
+
+#### Attributes
 
 - `col`
   - The col attribute allows you to set the column value of the static tile.
@@ -29,7 +33,9 @@ Add an image file to your project directory. Now you can access this image in Ma
 - `zoom`
   - This allows you to set the zoom level the tile is rendered at. The zoom value should fall within the range of 0 to the maximum zoom level of a [projection](www.example.com).
 
-### Additional Context
+---
+
+## Additional Context
 
 You can also provide a set of elements to further define the static tile layer. This is the list of availble additions with examples.
 
