@@ -115,7 +115,7 @@ Sets the [extent](www.example.com) of the layer.
 ## Full Examples
 
 ```html
-  <map style="height: 500px;width:500px;" is="web-map" projection="CBMTILE" zoom="2" lat="45.5052040" lon="-75.2202344"
+  <mapml-viewer style="height: 500px;width:500px;" is="web-map" projection="CBMTILE" zoom="2" lat="45.5052040" lon="-75.2202344"
     controls>
 
     <layer- label="Arizona" checked>
@@ -176,6 +176,6 @@ Sets the [extent](www.example.com) of the layer.
         </geometry>
       </feature>
     </layer->
-  </map>
+  </mapml-viewer>
 ```
 [ADD MAP HERE]

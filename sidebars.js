@@ -1,6 +1,6 @@
 module.exports = {
   someSidebar: {
-    MapML: ['intro', 'doc3', 'doc5'],
+    MapML: ['intro'],
     'Getting Started': ['installation'],
     Guides: [
       {
