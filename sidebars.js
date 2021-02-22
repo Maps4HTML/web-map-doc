@@ -1,7 +1,16 @@
 module.exports = {
   someSidebar: {
-    MapML: ['intro', 'doc3', 'doc5'],
+    MapML: ['intro'],
     'Getting Started': ['installation'],
-    Features: ['mdx'],
+    Guides: [
+      {
+        'Creating Layers': [
+          'layers/static-tiles',
+          'layers/static-features',
+          'layers/static-images',
+          'layers/templated-tiles',
+        ],
+      },
+    ],
   },
 };
