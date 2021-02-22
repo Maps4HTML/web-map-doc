@@ -24,7 +24,7 @@ In this section, we will learn how to create a templated tile layer. A templated
 ### `<extent>`
 
 - `units`
-  - This allows you to define what the [projection](www.example.com) of the templated tiles are.
+  - This allows you to define what the [projection](http://example.org/) of the templated tiles are.
 
 ---
 
@@ -73,7 +73,7 @@ In this section, we will learn how to create a templated tile layer. A templated
 You can also provide a set of elements to further define the templated tile layer. This is the list of availble additions with examples.
 
 #### `<meta name="zoom">`
-Sets the native minumum and maximum [native zoom](www.example.com). It also allows you to set a value, this is the default zoom of all features in the case the `<feature>` is missing a zoom attribute.
+Sets the native minumum and maximum [native zoom](http://example.org/). It also allows you to set a value, this is the default zoom of all features in the case the `<feature>` is missing a zoom attribute.
 
 ```html
 <meta name="zoom" content="min=1,max=5,value=0" />

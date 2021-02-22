@@ -31,7 +31,7 @@ Add an image file to your project directory. Now you can access this image in Ma
 - `src`
   - The src attribute lets you set the path to the image source of the static tile.
 - `zoom`
-  - This allows you to set the zoom level the tile is rendered at. The zoom value should fall within the range of 0 to the maximum zoom level of a [projection](www.example.com).
+  - This allows you to set the zoom level the tile is rendered at. The zoom value should fall within the range of 0 to the maximum zoom level of a [projection](http://example.org/).
 
 ---
 
@@ -51,7 +51,7 @@ Sets the attribution link of the layer. Example:
 
 #### `<meta name="zoom">` 
 
-Sets the native minumum and maximum [native zoom](www.example.com).
+Sets the native minumum and maximum [native zoom](http://example.org/).
 
 ```html
 <meta name="zoom" content="min=1,max=4">
@@ -61,7 +61,7 @@ Sets the native minumum and maximum [native zoom](www.example.com).
 
 #### `<meta name="projection">` 
 
-Sets the [projection](www.example.com) of the layer. 
+Sets the [projection](http://example.org/) of the layer. 
 
 ```html
 <meta name="projection" content="CBMTILE">

@@ -15,7 +15,7 @@ as you zoom in and out without distortion.
   <feature zoom="2">
     <properties>
       <h1>Feature Popup Text</h1>
-      <a href="www.example.com">Feature Popup Link</a>
+      <a href="http://example.org/">Feature Popup Link</a>
     </properties>
     <geometry cs="tilematrix">
       <polygon>
@@ -36,7 +36,7 @@ Parent element that contains the `<properties>` and `<geometry>` elements
 #### Attributes
 
 - `zoom`
-  - This allows you to set the zoom level the feature is rendered at. The zoom value should fall within the range of 0 to the maximum zoom level of the map's [projection](www.example.com).
+  - This allows you to set the zoom level the feature is rendered at. The zoom value should fall within the range of 0 to the maximum zoom level of the map's [projection](http://example.org/).
 
 ---
 
@@ -53,7 +53,7 @@ This element contains the different points, lines and polygons that will be draw
 #### Attributes
 
 - `cs`
-  - This allows you to set the [coordinate system](www.example.com) of the points, lines and polygons.
+  - This allows you to set the [coordinate system](http://example.org/) of the points, lines and polygons.
   - Defaults to gcrs, but can be set to tilematrix | pcrs | gcrs explicity.
 
 ---
@@ -74,7 +74,7 @@ Sets the attribution link of the layer. Example:
 
 #### `<meta name="zoom">`
 
-Sets the native minumum and maximum [native zoom](www.example.com). It also allows you to set a value, this is the default zoom of all features in the case the `<feature>` is missing a zoom attribute.
+Sets the native minumum and maximum [native zoom](http://example.org/). It also allows you to set a value, this is the default zoom of all features in the case the `<feature>` is missing a zoom attribute.
 
 ```html
 <meta name="zoom" content="min=1,max=5,value=0" />
@@ -84,7 +84,7 @@ Sets the native minumum and maximum [native zoom](www.example.com). It also allo
 
 #### `<meta name="projection">`
 
-Sets the [projection](www.example.com) of the layer. 
+Sets the [projection](http://example.org/) of the layer. 
 
 ```html
 <meta name="projection" content="CBMTILE">
@@ -94,7 +94,7 @@ Sets the [projection](www.example.com) of the layer.
 
 #### `<meta name="cs">`
 
-Sets the default [coordinate system](www.example.com) of the layer. If a feature is missing the cs attribute, it will default to this, and if this is missing it will default to gcrs.
+Sets the default [coordinate system](http://example.org/) of the layer. If a feature is missing the cs attribute, it will default to this, and if this is missing it will default to gcrs.
 
 ```html
 <meta name="cs" content="gcrs">
@@ -104,7 +104,7 @@ Sets the default [coordinate system](www.example.com) of the layer. If a feature
 
 #### `<meta name="extent">`
 
-Sets the [extent](www.example.com) of the layer.
+Sets the [extent](http://example.org/) of the layer.
 
 ```html
 <meta name="extent" content="zoom=0,top-left-column=0,top-left-row=0,bottom-right-column=5,bottom-right-row=5" />
@@ -127,7 +127,7 @@ Sets the [extent](www.example.com) of the layer.
       <feature zoom="2" class="refDiff">
         <properties>
           <h1>Test</h1>
-          <a href="www.example.com">test</a>
+          <a href="http://example.org/">test</a>
         </properties>
         <geometry cs="tilematrix">
           <polygon>
