@@ -48,7 +48,7 @@ This element contains the contents of the popup associated to a given feature.
 
 ### `<geometry>`
 
-This element contains the different points, lines and polygons that will be drawn. Details on the geometry elements and it's syntax can be found [here](example.com).
+This element contains the different points, lines and polygons that will be drawn. Details on the geometry elements and it's syntax can be found [here](http://example.org/).
 
 #### Attributes
 
