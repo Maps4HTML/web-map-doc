@@ -313,12 +313,12 @@
       },
 
       onRemove: function(map){
-        L.FeatureGroup.prototype.onRemove.call(this, map);
         if(this._mapmlFeatures){
           map.off("featurepagination", this.showPaginationFeature, this);
           delete this._mapmlFeatures;
+          L.DomUtil.remove(this._container);
         }
-        L.DomUtil.remove(this._container);
+        L.FeatureGroup.prototype.onRemove.call(this, map);
       },
 
       getEvents: function(){
