@@ -2742,6 +2742,18 @@
           opacityControlSummaryLabel = document.createElement('label'),
           mapEl = this._layerEl.parentNode;
 
+          let removeButton = document.createElement('a');
+          removeButton.href = '#';
+          removeButton.role = 'button';
+          removeButton.title = 'Remove Layer';
+          removeButton.innerHTML = "<span aria-hidden='true'>&#10006;</span>";
+          removeButton.classList.add('mapml-layer-remove-button');
+          L.DomEvent.disableClickPropagation(removeButton);
+          L.DomEvent.on(removeButton, 'click', L.DomEvent.stop);
+          L.DomEvent.on(removeButton, 'click', (e)=>{
+            mapEl.removeChild(e.target.closest("fieldset").querySelector("span").layer._layerEl);
+          }, this);
+
           input.defaultChecked = this._map ? true: false;
           input.type = 'checkbox';
           input.className = 'leaflet-control-layers-selector';
@@ -2846,6 +2858,7 @@
           fieldset.appendChild(details);
           details.appendChild(summary);
           summary.appendChild(label);
+          summary.appendChild(removeButton);
           details.appendChild(opacityControl);
 
           if (this._styles) {
