@@ -640,16 +640,6 @@
           latlng, latlngs, coordinates, member, members, linestrings;
 
       coordsToLatLng = coordsToLatLng || this.coordsToLatLng;
-      var pointOptions = {  opacity: vectorOptions.opacity ? vectorOptions.opacity : null,
-                            icon: L.icon(
-                              { iconUrl: vectorOptions.imagePath+"marker-icon.png",
-                                iconRetinaUrl: vectorOptions.imagePath+"marker-icon-2x.png",
-                                shadowUrl: vectorOptions.imagePath+"marker-shadow.png",
-                                iconSize: [25, 41],
-                                iconAnchor: [12, 41],
-                                popupAnchor: [1, -34],
-                                shadowSize: [41, 41]
-                              })};
       
       var cs = geometry.getAttribute("cs") || nativeCS;
 
@@ -658,8 +648,7 @@
           coordinates = [];
           geometry.getElementsByTagName('coordinates')[0].textContent.split(/\s+/gim).forEach(M.parseNumber,coordinates);
           latlng = coordsToLatLng(coordinates, cs, zoom, this.options.projection);
-          return pointToLayer ? pointToLayer(mapml, latlng) : 
-                                      new L.Marker(latlng, pointOptions);
+          return pointToLayer ? pointToLayer(mapml, latlng) : M.svgMarker(latlng, vectorOptions);
 
         case 'MULTIPOINT':
           coordinates = [];
@@ -667,7 +656,7 @@
           latlngs = this.coordsToLatLngs(coordinates, 0, coordsToLatLng, cs, zoom);
           var points = new Array(latlngs.length);
           for(member=0;member<points.length;member++) {
-            points[member] = new L.Marker(latlngs[member],pointOptions);
+            points[member] = M.svgMarker(latlngs[member], vectorOptions);
           }
           return new L.featureGroup(points);
         case 'LINESTRING':
@@ -5163,6 +5152,48 @@
     return new Crosshair(options);
   };
 
+  var SVGMarker = L.Path.extend({
+    options: {
+      fillColor: '#2e91bf',
+      color: '#ffffff',
+      fill: true,
+      className: "mapml-marker",
+      fillOpacity: 1,
+      weight: 1,
+    },
+
+    initialize: function (latlng, options) {
+      L.setOptions(this, options);
+      this._latlng = L.latLng(latlng);
+    },
+
+    _project: function () {
+      this._point = this._map.latLngToLayerPoint(this._latlng);
+    },
+
+    _update: function () {
+      if (!this._map) return;
+      this._path.setAttribute("d", this.defineMarker(this._point));
+    },
+
+    getLatLngs: function () {
+      return this._latlng;
+    },
+
+    getCenter: function () {
+      return this._latlng;
+    },
+
+    defineMarker: function (p) {
+      return `M${p.x} ${p.y} L${p.x - 12.5} ${p.y - 30} C${p.x - 12.5} ${p.y - 50}, ${p.x + 12.5} ${p.y - 50}, ${p.x + 12.5} ${p.y - 30} L${p.x} ${p.y}z`;
+    },
+
+  });
+
+  var svgMarker = function (latlng, options) {
+    return new SVGMarker(latlng, options);
+  };
+
   /* 
    * Copyright 2015-2016 Canada Centre for Mapping and Earth Observation, 
    * Earth Sciences Sector, Natural Resources Canada.
@@ -5780,6 +5811,9 @@
 
   M.Crosshair = Crosshair;
   M.crosshair = crosshair;
+
+  M.SVGMarker = SVGMarker;
+  M.svgMarker = svgMarker;
 
   }(window));
 
