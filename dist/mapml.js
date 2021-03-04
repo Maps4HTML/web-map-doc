@@ -277,6 +277,20 @@
         // must have leaflet-pane class because of new/changed rule in leaflet.css
         // info: https://github.com/Leaflet/Leaflet/pull/4597 
         L.DomUtil.addClass(this._container,'leaflet-pane mapml-vector-container');
+
+        let anim = L.DomUtil.create("style", "mapml-feature-animation", this._container);
+        anim.innerHTML = `@keyframes pathSelect {
+        0% {stroke: white;}
+        50% {stroke: black;}
+      }
+      
+      .mapml-path-selected {
+        animation-name: pathSelect;
+        animation-duration: 1s;
+        stroke-width: 5;
+        stroke: black;
+      }`;
+
         L.setOptions(this.options.renderer, {pane: this._container});
         this._layers = {};
         if(this.options.query){
@@ -325,6 +339,7 @@
         if(this._staticFeature){
           return {
             'moveend':this._handleMoveEnd,
+            'zoomend' : this._handleZoomEnd,
           };
         }
         return {
@@ -341,20 +356,20 @@
               } else {
                 path._path.removeAttribute("tabindex");
               }
-              if(path._path.childElementCount === 0) {
-                let title = L.SVG.create("title");
-                title.innerHTML = path.accessibleTitle;
-                path._path.appendChild(title);
-              }
+              path._path.setAttribute("aria-label", path.accessibleTitle);
               path._path.setAttribute("aria-expanded", "false");
               /* jshint ignore:start */
               L.DomEvent.on(path._path, "keyup keydown", (e)=>{
                 if((e.keyCode === 9 || e.keyCode === 16 || e.keyCode === 13) && e.type === "keyup"){
+                  path._path.classList.add("mapml-path-selected");
                   path.openTooltip();
                 } else {
+                  path._path.classList.remove("mapml-path-selected");
                   path.closeTooltip(); 
                 }
               });
+              path._path.classList.remove("mapml-path-selected");
+              if(path.isTooltipOpen())path.closeTooltip(); 
               /* jshint ignore:end */
             }
           }
@@ -418,21 +433,25 @@
       },
 
       _handleMoveEnd : function(){
-        let mapZoom = this._map.getZoom();
-        if(mapZoom > this.zoomBounds.maxZoom || mapZoom < this.zoomBounds.minZoom){
-          this.clearLayers();
-          this.isVisible = false;
-          return;
-        }
-        let clampZoom = this._clampZoom(mapZoom);
-        this._resetFeatures(clampZoom);
-        this.isVisible = this._layers && this.layerBounds && 
+        let mapZoom = this._map.getZoom(),
+            withinZoom = mapZoom <= this.zoomBounds.maxZoom && mapZoom >= this.zoomBounds.minZoom;   
+        this.isVisible = withinZoom && this._layers && this.layerBounds && 
                           this.layerBounds.overlaps(
                             M.pixelToPCRSBounds(
                               this._map.getPixelBounds(),
                               mapZoom,this._map.options.projection));
         this._removeCSS();
         this._updateTabIndex();
+      },
+
+      _handleZoomEnd: function(e){
+        let mapZoom = this._map.getZoom();
+        if(mapZoom > this.zoomBounds.maxZoom || mapZoom < this.zoomBounds.minZoom){
+          this.clearLayers();
+          return;
+        }
+        let clampZoom = this._clampZoom(mapZoom);
+        this._resetFeatures(clampZoom);
       },
 
       //sets default if any are missing, better to only replace ones that are missing
@@ -627,6 +646,7 @@
       _removeCSS: function(){
         let toDelete = this._container.querySelectorAll("link[rel=stylesheet],style");
         for(let i = 0; i < toDelete.length;i++){
+          if(toDelete[i].classList.contains("mapml-feature-animation")) continue;
           this._container.removeChild(toDelete[i]);
         }
       },
@@ -2365,7 +2385,7 @@
                     var c = document.createElement('div');
                     c.classList.add("mapml-popup-content");
                     c.insertAdjacentHTML('afterbegin', properties.innerHTML);
-                    geometry.bindPopup(c, {autoPan:false, minWidth: 108});
+                    geometry.bindPopup(c, {autoClose: false, minWidth: 108});
                   }
                 }
               });
@@ -2395,7 +2415,7 @@
                         var c = document.createElement('div');
                         c.classList.add("mapml-popup-content");
                         c.insertAdjacentHTML('afterbegin', properties.innerHTML);
-                        geometry.bindPopup(c, {autoPan:false, minWidth: 108});
+                        geometry.bindPopup(c, {autoClose: false, minWidth: 108});
                       }
                     }
                   }).addTo(map);
@@ -3875,7 +3895,7 @@
             crs = layer.crs,
             tileSize = map.options.crs.options.crs.tile.bounds.max.x,
             container = layer._container,
-            popupOptions = {autoPan: true, maxHeight: (map.getSize().y * 0.5) - 50},
+            popupOptions = {autoClose: false, autoPan: true, maxHeight: (map.getSize().y * 0.5) - 50},
             tcrs2pcrs = function (c) {
               return crs.transformation.untransform(c,crs.scale(zoom));
             },
