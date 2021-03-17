@@ -66,7 +66,7 @@ function Home() {
                 'button button--lg',
                 styles.getStarted,
               )}
-              to={useBaseUrl('docs/installation')}>
+              to={useBaseUrl('docs/')}>
               Get Started
             </Link>
           </div>
