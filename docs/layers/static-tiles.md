@@ -37,7 +37,7 @@ Add an image file to your project directory. Now you can access this image in Ma
 
 ## Additional Context
 
-You can also provide a set of elements to further define the static tile layer. This is the list of availble additions with examples.
+You can also provide a set of elements to further define the static tile layer. This is the list of available additions with examples.
 
 #### `<link rel="license">` 
 
@@ -51,7 +51,7 @@ Sets the attribution link of the layer. Example:
 
 #### `<meta name="zoom">` 
 
-Sets the native minumum and maximum [native zoom](http://example.org/).
+Sets the native minimum and maximum [native zoom](http://example.org/).
 
 ```html
 <meta name="zoom" content="min=1,max=4">
