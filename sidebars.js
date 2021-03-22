@@ -10,6 +10,7 @@ module.exports = {
           'layers/static-images',
           'layers/templated-tiles',
           'layers/templated-features',
+          'layers/templated-images',
         ],
       },
     ],

@@ -79,17 +79,16 @@ In this section, we will learn how to create a templated feature layer. A templa
 You can also provide a set of elements to further define the templated feature layer. This is the list of available additions with examples.
 
 #### `<meta name="zoom">`
-Sets the native minimum and maximum [native zoom](http://example.org/). It also allows you to set a value, this is the default zoom options of the layer.
+Sets the zoom range of the layer. The layer will make requests from zoom levels 1 to 5 in the example below.
 
 ```html
-<meta name="zoom" content="min=1,max=5,value=0" />
+<meta name="zoom" content="min=1,max=5" />
 ```
 
 ---
 
 ```html
-<map style="width: 500px;height: 500px;" is="web-map" projection="CBMTILE" zoom="3" lat="45.5052040" lon="-75.2202344"
-    controls>
+<mapml-viewer projection="CBMTILE" zoom="3" lat="45.5052040" lon="-75.2202344" controls>
   <layer- label="Alabama" checked>
     <meta name="zoom" content="min=2,max=5" />
     <extent units="CBMTILE">
@@ -101,7 +100,7 @@ Sets the native minimum and maximum [native zoom](http://example.org/). It also 
       <link rel="features" tref="data/alabama_feature.mapml?{xmin}{ymin}{xmax}{ymax}{z}" />
     </extent>
   </layer->
-</map>
+</mapml-viewer>
 ```
 
 [ADD MAP HERE]
