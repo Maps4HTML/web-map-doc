@@ -4,7 +4,7 @@ title: Templated Tiles Layer
 slug: /layers/templated-tiles
 ---
 
-In this section, we will learn how to create a templated tile layer. A templated layer is a layer that makes HTTP requests for it's data. In this case requests are made to fill in the grid of tiles avabible on the map's viewport.
+In this section, we will learn how to create a templated tile layer. A templated layer is a layer that makes HTTP requests for it's data. In this case requests are made to fill in the grid of tiles available on the map's viewport.
 
 ## Adding a templated layer
 
@@ -70,10 +70,10 @@ In this section, we will learn how to create a templated tile layer. A templated
 
 ## Additional Context
 
-You can also provide a set of elements to further define the templated tile layer. This is the list of availble additions with examples.
+You can also provide a set of elements to further define the templated tile layer. This is the list of available additions with examples.
 
 #### `<meta name="zoom">`
-Sets the native minumum and maximum [native zoom](http://example.org/). It also allows you to set a value, this is the default zoom of all features in the case the `<feature>` is missing a zoom attribute.
+Sets the native minimum and maximum [native zoom](http://example.org/). It also allows you to set a value, this is the default zoom of all features in the case the `<feature>` is missing a zoom attribute.
 
 ```html
 <meta name="zoom" content="min=1,max=5,value=0" />
