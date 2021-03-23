@@ -1,10 +1,12 @@
 module.exports = {
   someSidebar: {
-    MapML: ['intro'],
     'Getting Started': ['installation'],
-    Guides: [
+    'Mapping Elements': [
+      'intro',
+      'maps/mapml-viewer',
+      'maps/web-map',
       {
-        'Creating Layers': [
+        'Layers': [
           'layers/static-tiles',
           'layers/static-features',
           'layers/static-images',
@@ -12,7 +14,10 @@ module.exports = {
           'layers/templated-features',
           'layers/templated-images',
         ],
-      },
-    ],
+    },
+  ],
+    Resources: [
+      'resources/resources',
+      ],
   },
 };
