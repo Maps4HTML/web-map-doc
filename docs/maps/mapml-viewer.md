@@ -10,12 +10,12 @@ The `<mapml-viewer>` element is the main element you can use to put a custom Web
 
 ```html
 <!DOCTYPE html>
-<html>
+<html lang="en">
    <head>
-     <title>A Simple Web Map[tm]</title>
      <meta charset="utf-8" />
+     <title>A Simple Web Map[tm]</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
      <script type="module" src="web-map/mapml-viewer.js"></script>
-     <style>html {height:100%} * {margin:0px;padding:0px} body,mapml-viewer {height:inherit}</style>
    </head>
    <body>
     <mapml-viewer projection="OSMTILE" zoom="0" lat="0.0" lon="0.0" controls>
@@ -43,7 +43,7 @@ The `<mapml-viewer>` element has several attributes to control the presentation 
 
   - `APSTILE` is based on the Alaska Polar Stereographic (EPSG:5936) projected coordinate reference system, and has 20 zoom levels (0 to 19).
 
-  - other projections are possible, using the "[Custom Projections](https://github.com/Maps4HTML/Web-Map-Custom-Element/pull/239/commits/e9a29e7abcc43d7f15eb64729920e2ad06fc25c5)" API
+  - other projections are possible, using the "[Custom Projections](https://github.com/Maps4HTML/Web-Map-Custom-Element/blob/8723e4d8bad8e3629bc9dca7a6fe81d724e8418f/demo/CustomProjection.html#L1-L158)" API
 
 `zoom` - a non-negative integer.  The value establishes the initial zoom level of the map.  For a small scale view of the world, use a lower value.  Use larger values for larger scales (smaller area maps). The maximum value depends on the particular `projection` and data source. Many map data sources have limited zoom levels available.
 

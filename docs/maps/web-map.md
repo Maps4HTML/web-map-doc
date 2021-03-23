@@ -10,7 +10,11 @@ In recent years, client side image maps have fallen out of wide use, due to impr
 
 The web-map custom element suite provides a set of proof-of-concept "[customized built-in](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)" elements based on `<map>`, `<area>` and `<img>` that will "fall back" to a client side image map in older browsers, or in the absence of JavaScript (scripting disabled).
 
+:::caution
+
 Note that because not all modern Web browsers implement HTML's customized built-in elements, it is not recommended to use this proof-of-concept on a public Web site, as end-user confusion may be the result.
+
+:::
 
 The following markup may work on Chrome and Firefox, although it may take some fine tuning:
 
