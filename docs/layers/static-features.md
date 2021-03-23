@@ -60,7 +60,7 @@ This element contains the different points, lines and polygons that will be draw
 
 ## Additional Context
 
-You can also provide a set of elements to further define the static feature layer. This is the list of availble additions with examples.
+You can also provide a set of elements to further define the static feature layer. This is the list of available additions with examples.
 
 #### `<link rel="license">`
 
@@ -74,7 +74,7 @@ Sets the attribution link of the layer. Example:
 
 #### `<meta name="zoom">`
 
-Sets the native minumum and maximum [native zoom](http://example.org/). It also allows you to set a value, this is the default zoom of all features in the case the `<feature>` is missing a zoom attribute.
+Sets the native minimum and maximum [native zoom](http://example.org/). It also allows you to set a value, this is the default zoom of all features in the case the `<feature>` is missing a zoom attribute.
 
 ```html
 <meta name="zoom" content="min=1,max=5,value=0" />

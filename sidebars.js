@@ -9,6 +9,8 @@ module.exports = {
           'layers/static-features',
           'layers/static-images',
           'layers/templated-tiles',
+          'layers/templated-features',
+          'layers/templated-images',
         ],
       },
     ],
