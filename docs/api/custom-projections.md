@@ -6,7 +6,7 @@ slug: /api/custom-projections
 
 ## Introduction
 
-MapML defines a few built-in tiled CRS "projections", including Web Mercator (OSMTILE), pseudo-plate carrée (WGS84), and  Canada's base map tile grid (CBMTILE). 
+MapML defines a few built-in tiled CRS projections, including Web Mercator (OSMTILE), pseudo-plate carrée (WGS84), and  Canada's base map tile grid (CBMTILE). 
 
 The `<mapml-viewer>` and `<map is="web-map">` custom elements provide the "GeoReferencing API", which gives you the ability to create custom projections and use them in the `<mapml-viewer>` or `<map is="web-map">` elements, defined using extended JSON-based "proj4" syntax, supported by the proj4js library.
 
