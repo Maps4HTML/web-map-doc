@@ -12,7 +12,7 @@ The `<mapml-viewer>` element is the main element you can use to put a custom Web
 <!DOCTYPE html>
 <html lang="en">
    <head>
-     <meta charset="utf-8" />
+     <meta charset="utf-8" >
      <title>A Simple Web Map[tm]</title>
      <meta name="viewport" content="width=device-width, initial-scale=1">
      <script type="module" src="web-map/mapml-viewer.js"></script>
