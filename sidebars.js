@@ -16,8 +16,11 @@ module.exports = {
         ],
     },
   ],
-    Resources: [
-      'resources/resources',
-      ],
+  API: [
+    'api/custom-projections',
+  ],
+  Resources: [
+    'resources/resources',
+    ],
   },
 };
