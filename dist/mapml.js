@@ -516,10 +516,14 @@
         let zoom = mapml.getAttribute("zoom") || nativeZoom, title = mapml.querySelector("featurecaption");
         title = title ? title.innerHTML : "Feature";
 
-        let layer = this.geometryToLayer(mapml, options.pointToLayer, options, nativeCS, +zoom, title);
+        let propertyContainer = document.createElement('div');
+        propertyContainer.classList.add("mapml-popup-content");
+        propertyContainer.insertAdjacentHTML('afterbegin', mapml.querySelector("properties").innerHTML);
+
+        options.properties = propertyContainer;
+
+        let layer = this.geometryToLayer(mapml, options, nativeCS, +zoom, title);
         if (layer) {
-          layer.properties = mapml.getElementsByTagName('properties')[0];
-          
           // if the layer is being used as a query handler output, it will have
           // a color option set.  Otherwise, copy classes from the feature
           if (!layer.options.color && mapml.hasAttribute('class')) {
@@ -529,15 +533,7 @@
           this.resetStyle(layer);
 
           if (options.onEachFeature) {
-            options.onEachFeature(layer.properties, layer);
             layer.bindTooltip(title, { interactive:true, sticky: true, });
-            if(layer._events){
-              if(!layer._events.keypress) layer._events.keypress = [];
-              layer._events.keypress.push({
-                "ctx": layer,
-                "fn": this._onSpacePress,
-              });
-            }
           }
           if(this._staticFeature){
             let featureZoom = mapml.getAttribute('zoom') || nativeZoom;
@@ -583,30 +579,36 @@
           this._container.removeChild(toDelete[i]);
         }
       },
-      _onSpacePress: function(e){
-        if(e.originalEvent.keyCode === 32){
-          this._openPopup(e);
-        }
-      },
-    geometryToLayer: function (mapml, pointToLayer, vectorOptions, nativeCS, zoom, title) {
+    geometryToLayer: function (mapml, vectorOptions, nativeCS, zoom, title) {
       let geometry = mapml.tagName.toUpperCase() === 'FEATURE' ? mapml.getElementsByTagName('geometry')[0] : mapml,
-          cs = geometry.getAttribute("cs") || nativeCS, subFeatures = geometry, group = [], multiGroup;
-
-      if(geometry.firstElementChild.tagName === "GEOMETRYCOLLECTION" || geometry.firstElementChild.tagName === "MULTIPOLYGON")
-        subFeatures = geometry.firstElementChild;
-
-      for(let geo of subFeatures.children){
-        if(group.length > 0) multiGroup = group[group.length - 1].group;
+          cs = geometry.getAttribute("cs") || nativeCS, group = [], svgGroup = L.SVG.create('g');
+      for(let geo of geometry.querySelectorAll('polygon, linestring, multilinestring, point, multipoint')){
         group.push(M.feature(geo, Object.assign(vectorOptions,
           { nativeCS: cs,
             nativeZoom: zoom,
             projection: this.options.projection,
             featureID: mapml.id,
-            multiGroup: multiGroup,
-            accessibleTitle: title,
+            group: svgGroup,
+            wrappers: this._getGeometryParents(geo.parentElement),
+            featureLayer: this,
+            _leafletLayer: this.options._leafletLayer,
           })));
       }
-      return M.featureGroup(group);
+      let groupOptions = {group:svgGroup, featureID: mapml.id, accessibleTitle: title, onEachFeature: vectorOptions.onEachFeature, properties: vectorOptions.properties, _leafletLayer: this.options._leafletLayer,},
+        collections = geometry.querySelector('multipolygon') || geometry.querySelector('geometrycollection');
+      if(collections) groupOptions.wrappers = this._getGeometryParents(collections.parentElement);
+
+      return M.featureGroup(group, groupOptions);
+    },
+
+    _getGeometryParents: function(subType, elems = []){
+      if(subType && subType.tagName.toUpperCase() !== "GEOMETRY"){
+        if(subType.tagName.toUpperCase() === "MULTIPOLYGON" || subType.tagName.toUpperCase() === "GEOMETRYCOLLECTION")
+          return this._getGeometryParents(subType.parentElement, elems);
+        return this._getGeometryParents(subType.parentElement, elems.concat([subType]));
+      } else {
+        return elems;
+      }
     },
   });
   var mapMlFeatures = function (mapml, options) {
@@ -1344,7 +1346,7 @@
         this._map._addZoomLimit(this);
         var mapml, headers = new Headers({'Accept': 'text/mapml'});
             var parser = new DOMParser(),
-            opacity = this.options.opacity,
+            opacity = this.options.opacity || 1,
             container = this._container,
             map = this._map;
         if (!this._features) {
@@ -4575,6 +4577,34 @@
     parseNumber : function(element, index, array){
       this.push(parseFloat(element));
     },
+
+    handleLink: function (link, linkTarget, linkType, leafletLayer) {
+      let layer = document.createElement('layer-');
+      if(linkType === "text/html" && linkTarget !== "_blank") linkTarget = "_top";
+      layer.setAttribute('src', link);
+      layer.setAttribute('checked', '');
+      switch (linkTarget) {
+        case "_blank":
+          if(linkType === "text/html"){
+            window.open(link);
+          } else {
+            leafletLayer._map.options.mapEl.appendChild(layer);
+          }
+          break;
+        case "_parent":
+          for(let l of leafletLayer._map.options.mapEl.querySelectorAll("layer-"))
+            if(l._layer !== leafletLayer) leafletLayer._map.options.mapEl.removeChild(l);
+          leafletLayer._map.options.mapEl.appendChild(layer);
+          leafletLayer._map.options.mapEl.removeChild(leafletLayer._layerEl);
+          break;
+        case "_top":
+          window.location.href = link;
+          break;
+        default:
+          leafletLayer._layerEl.insertAdjacentElement('beforebegin', layer);
+          leafletLayer._map.options.mapEl.removeChild(leafletLayer._layerEl);
+      }
+    },
   };
 
   var ReloadButton = L.Control.extend({
@@ -4732,13 +4762,15 @@
 
     _isMapFocused: function (e) {
       //set this._map.isFocused = true if arrow buttons are used
-      if (this._map._container.parentNode.activeElement.classList.contains("leaflet-container") && ["keydown"].includes(e.type) && (e.shiftKey && e.keyCode === 9)) {
+      if(!this._map._container.parentNode.activeElement){
         this._map.isFocused = false;
-      } else if (this._map._container.parentNode.activeElement.classList.contains("leaflet-container") && ["keyup", "keydown"].includes(e.type)) {
-        this._map.isFocused = true;
-      } else {
-        this._map.isFocused = false;
+        return;
       }
+      let isLeafletContainer = this._map._container.parentNode.activeElement.classList.contains("leaflet-container");
+      if (isLeafletContainer && ["keydown"].includes(e.type) && (e.shiftKey && e.keyCode === 9)) {
+        this._map.isFocused = false;
+      } else this._map.isFocused = isLeafletContainer && ["keyup", "keydown"].includes(e.type);
+
       this._addOrRemoveMapOutline();
       this._addOrRemoveCrosshair();
     },
@@ -4771,9 +4803,6 @@
    *  ];
    */
   var Feature = L.Path.extend({
-    options: {
-      accessibleTitle: "Feature",
-    },
 
     /**
      * Initializes the M.Feature
@@ -4784,9 +4813,12 @@
       this.type = markup.tagName.toUpperCase();
 
       if(this.type === "POINT" || this.type === "MULTIPOINT") options.fillOpacity = 1;
+
+      if(options.wrappers.length > 0)
+        options = Object.assign(this._convertWrappers(options.wrappers), options);
       L.setOptions(this, options);
 
-      this._createGroup();  // creates the <g> element for the feature, or sets the one passed in options as the <g>
+      this.group = this.options.group;
 
       this._parts = [];
       this._markup = markup;
@@ -4794,7 +4826,7 @@
 
       this._convertMarkup();
 
-      if(markup.querySelector('span') || markup.querySelector('a')){
+      if(markup.querySelector('span') || markup.querySelector('map-a')){
         this._generateOutlinePoints();
       }
 
@@ -4805,37 +4837,39 @@
      * Removes the focus handler, and calls the leaflet L.Path.onRemove
      */
     onRemove: function () {
-      L.DomEvent.off(this.group, "keyup keydown mousedown", this._handleFocus, this);
+      if(this.options.link) {
+        this.off({
+          click: this._handleLinkClick,
+          keypress: this._handleLinkKeypress,
+        });
+      }
+
+      if(this.options.interactive) this.off('keypress', this._handleSpaceDown);
+
       L.Path.prototype.onRemove.call(this);
     },
 
     /**
-     * Creates the <g> conditionally and also applies event handlers
-     * @private
+     * Attaches link handler to the sub parts' paths
+     * @param path
+     * @param link
+     * @param linkTarget
+     * @param linkType
+     * @param leafletLayer
      */
-    _createGroup: function(){
-      if(this.options.multiGroup){
-        this.group = this.options.multiGroup;
-      } else {
-        this.group = L.SVG.create('g');
-        if(this.options.interactive) this.group.setAttribute("aria-expanded", "false");
-        this.group.setAttribute('aria-label', this.options.accessibleTitle);
-        if(this.options.featureID) this.group.setAttribute("data-fid", this.options.featureID);
-        L.DomEvent.on(this.group, "keyup keydown mousedown", this._handleFocus, this);
-      }
-    },
-
-    /**
-     * Handler for focus events
-     * @param {L.DOMEvent} e - Event that occured
-     * @private
-     */
-    _handleFocus: function(e) {
-      if((e.keyCode === 9 || e.keyCode === 16 || e.keyCode === 13) && e.type === "keyup" && e.target.tagName === "g"){
-        this.openTooltip();
-      } else {
-        this.closeTooltip();
-      }
+    attachLinkHandler: function (path, link, linkTarget, linkType, leafletLayer) {
+      let drag = false; //prevents click from happening on drags
+      L.DomEvent.on(path, 'mousedown', () =>{ drag = false;}, this);
+      L.DomEvent.on(path, 'mousemove', () =>{ drag = true;}, this);
+      L.DomEvent.on(path, "mouseup", (e) => {
+        L.DomEvent.stop(e);
+        if(!drag) M.handleLink(link, linkTarget, linkType, leafletLayer);
+      }, this);
+      L.DomEvent.on(path, "keypress", (e) => {
+        L.DomEvent.stop(e);
+        if(e.keyCode === 13 || e.keyCode === 32)
+          M.handleLink(link, linkTarget, linkType, leafletLayer);
+      }, this);
     },
 
     /**
@@ -4893,6 +4927,32 @@
     },
 
     /**
+     * Converts the spans, a and divs around a geometry subtype into options for the feature
+     * @private
+     */
+    _convertWrappers: function (elems) {
+      if(!elems || elems.length === 0) return;
+      let classList = '', output = {};
+      for(let elem of elems){
+        if(elem.tagName.toUpperCase() !== "MAP-A" && elem.className){
+          // Useful if getting other attributes off spans and divs is useful
+  /*        let attr = elem.attributes;
+          for(let i = 0; i < attr.length; i++){
+            if(attr[i].name === "class" || attributes[attr[i].name]) continue;
+            attributes[attr[i].name] = attr[i].value;
+          }*/
+          classList +=`${elem.className} `;
+        } else if(!output.link && elem.getAttribute("href")) {
+          output.link = elem.getAttribute("href");
+          if(elem.hasAttribute("target")) output.linkTarget = elem.getAttribute("target");
+          if(elem.hasAttribute("type")) output.linkType = elem.getAttribute("type");
+        }
+      }
+      output.className = `${classList} ${this.options.className}`.trim();
+      return output;
+    },
+
+    /**
      * Converts this._markup to the internal structure of features
      * @private
      */
@@ -4901,6 +4961,8 @@
 
       let attr = this._markup.attributes;
       this.featureAttributes = {};
+      if(this.options.link && this._markup.parentElement.tagName.toUpperCase() === "MAP-A" && this._markup.parentElement.parentElement.tagName.toUpperCase() !== "GEOMETRY")
+        this.featureAttributes.tabindex = "0";
       for(let i = 0; i < attr.length; i++){
         this.featureAttributes[attr[i].name] = attr[i].value;
       }
@@ -4915,10 +4977,10 @@
             this._parts[0].subrings = this._parts[0].subrings.concat(subrings);
         } else if (this.type === "MULTIPOINT") {
           for (let point of ring[0].points.concat(subrings)) {
-            this._parts.push({ rings: [{ points: [point] }], subrings: [], cls: point.cls || this.options.className });
+            this._parts.push({ rings: [{ points: [point] }], subrings: [], cls:`${point.cls || ""} ${this.options.className || ""}`.trim() });
           }
         } else {
-          this._parts.push({ rings: ring, subrings: subrings, cls: this.featureAttributes.class || this.options.className });
+          this._parts.push({ rings: ring, subrings: subrings, cls: `${this.featureAttributes.class || ""} ${this.options.className || ""}`.trim() });
         }
         first = false;
       }
@@ -4964,11 +5026,12 @@
      * @param {Object[]} subParts - An empty array representing the sub parts
      * @param {boolean} isFirst - A true | false representing if the current HTML element is the parent coordinates element or not
      * @param {string} cls - The class of the coordinate/span
+     * @param parents
      * @private
      */
-    _coordinateToArrays: function (coords, main, subParts, isFirst = true, cls = undefined) {
+    _coordinateToArrays: function (coords, main, subParts, isFirst = true, cls = undefined, parents = []) {
       for (let span of coords.children) {
-        this._coordinateToArrays(span, main, subParts, false, span.getAttribute("class"));
+        this._coordinateToArrays(span, main, subParts, false, span.getAttribute("class"), parents.concat([span]));
       }
       let noSpan = coords.textContent.replace(/(<([^>]+)>)/ig, ''),
           pairs = noSpan.match(/(\S+\s+\S+)/gim), local = [];
@@ -4982,12 +5045,13 @@
       if (isFirst) {
         main.push({ points: local });
       } else {
-        let attrMap = {}, attr = coords.attributes;
+        let attrMap = {}, attr = coords.attributes, wrapperAttr = this._convertWrappers(parents);
+        if(wrapperAttr.link) attrMap.tabindex = "0";
         for(let i = 0; i < attr.length; i++){
           if(attr[i].name === "class") continue;
           attrMap[attr[i].name] = attr[i].value;
         }
-        subParts.unshift({ points: local, cls: cls || this.options.className, attr: attrMap});
+        subParts.unshift({ points: local, cls: `${cls || ""} ${wrapperAttr.className || ""}`.trim(), attr: attrMap, link: wrapperAttr.link, linkTarget: wrapperAttr.linkTarget, linkType: wrapperAttr.linkType});
       }
     },
 
@@ -5062,7 +5126,7 @@
         }
         if (p.subrings) {
           for (let r of p.subrings) {
-            this._createPath(r, layer.options.className, r.attr['aria-label'], false, r.attr);
+            this._createPath(r, layer.options.className, r.attr['aria-label'], (r.link !== undefined), r.attr);
             if(r.attr && r.attr.tabindex){
               p.path.setAttribute('tabindex', r.attr.tabindex || '0');
             }
@@ -5073,8 +5137,6 @@
       if(stampLayer){
         let stamp = L.stamp(layer);
         this._layers[stamp] = layer;
-        layer.group.setAttribute('tabindex', '0');
-        L.DomUtil.addClass(layer.group, "leaflet-interactive");
       }
     },
 
@@ -5122,6 +5184,10 @@
       for (let p of layer._parts) {
         if (p.path)
           layer.group.appendChild(p.path);
+        if (interactive){
+          if(layer.options.link) layer.attachLinkHandler(p.path, layer.options.link, layer.options.linkTarget, layer.options.linkType, layer.options._leafletLayer);
+          layer.addInteractiveTarget(p.path);
+        }
 
         if(!outlineAdded && layer.pixelOutline) {
           layer.group.appendChild(layer.outlinePath);
@@ -5129,8 +5195,13 @@
         }
 
         for (let subP of p.subrings) {
-          if (subP.path)
+          if (subP.path) {
+            if (subP.link){
+              layer.attachLinkHandler(subP.path, subP.link, subP.linkTarget, subP.linkType, layer.options._leafletLayer);
+              layer.addInteractiveTarget(subP.path);
+            }
             layer.group.appendChild(subP.path);
+          }
         }
       }
       c.appendChild(layer.group);
@@ -5213,6 +5284,13 @@
       if (!path || !layer) { return; }
       let options = layer.options, isClosed = layer.isClosed;
       if ((options.stroke && (!isClosed || isOutline)) || (isMain && !layer.outlinePath)) {
+        if (options.link){
+          path.style.stroke = "#0000EE";
+          path.style.strokeOpacity = "1";
+          path.style.strokeWidth = "1px";
+          path.style.strokeDasharray = "none";
+
+        }
         path.setAttribute('stroke', options.color);
         path.setAttribute('stroke-opacity', options.opacity);
         path.setAttribute('stroke-width', options.weight);
@@ -5291,13 +5369,65 @@
   };
 
   var FeatureGroup = L.FeatureGroup.extend({
+
     /**
-     * Adds layer to feature group
-     * @param {M.Feature} layer - The layer to be added
+     * Initialize the feature group
+     * @param {M.Feature[]} layers
+     * @param {Object} options
      */
+    initialize: function (layers, options) {
+      if(options.wrappers && options.wrappers.length > 0)
+        options = Object.assign(M.Feature.prototype._convertWrappers(options.wrappers), options);
+
+      L.LayerGroup.prototype.initialize.call(this, layers, options);
+
+      if(this.options.onEachFeature || this.options.link) {
+        this.options.group.setAttribute('tabindex', '0');
+        L.DomUtil.addClass(this.options.group, "leaflet-interactive");
+        L.DomEvent.on(this.options.group, "keyup keydown mousedown", this._handleFocus, this);
+        let firstLayer = layers[Object.keys(layers)[0]];
+        if(layers.length === 1 && firstLayer.options.link){ //if it's the only layer and it has a link, take it's link
+          this.options.link = firstLayer.options.link;
+          this.options.linkTarget = firstLayer.options.linkTarget;
+          this.options.linkType = firstLayer.options.linkType;
+        }
+        if(this.options.link){
+          M.Feature.prototype.attachLinkHandler.call(this, this.options.group, this.options.link, this.options.linkTarget, this.options.linkType, this.options._leafletLayer);
+        } else {
+          this.options.group.setAttribute("aria-expanded", "false");
+          this.options.onEachFeature(this.options.properties, this);
+          this.off("click", this._openPopup);
+        }
+      }
+
+      this.options.group.setAttribute('aria-label', this.options.accessibleTitle);
+      if(this.options.featureID) this.options.group.setAttribute("data-fid", this.options.featureID);
+    },
+
+    /**
+     * Handler for focus events
+     * @param {L.DOMEvent} e - Event that occured
+     * @private
+     */
+    _handleFocus: function(e) {
+      if(e.target.tagName.toUpperCase() !== "G") return;
+      if((e.keyCode === 9 || e.keyCode === 16 || e.keyCode === 13) && e.type === "keyup") {
+        this.openTooltip();
+      } else if (e.keyCode === 13 || e.keyCode === 32){
+        this.closeTooltip();
+        if(!this.options.link && this.options.onEachFeature){
+          L.DomEvent.stop(e);
+          this.openPopup();
+        }
+      } else {
+        this.closeTooltip();
+      }
+    },
+
     addLayer: function (layer) {
-      layer.openTooltip = () => { this.openTooltip(); };         // needed to open tooltip of child features
-      layer.closeTooltip = () => { this.closeTooltip(); };       // needed to close tooltip of child features
+      if(!layer.options.link && this.options.onEachFeature) {
+        this.options.onEachFeature(this.options.properties, layer);
+      }
       L.FeatureGroup.prototype.addLayer.call(this, layer);
     },
 
@@ -5919,6 +6049,7 @@
     });
   }());
 
+  M.handleLink = Util.handleLink;
   M.convertPCRSBounds = Util.convertPCRSBounds;
   M.axisToXY = Util.axisToXY;
   M.csToAxes = Util.csToAxes;
