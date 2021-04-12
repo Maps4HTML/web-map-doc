@@ -14,7 +14,12 @@ module.exports = {
           'layers/templated-features',
           'layers/templated-images',
         ],
-    },
+      },
+      {
+        'Other Elements': [
+          'other-elements/map-a',
+        ],
+      },
   ],
   API: [
     'api/custom-projections',
