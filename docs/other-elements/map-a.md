@@ -47,6 +47,9 @@ to the URL. This will pan & zoom the map to the given location.
 
 Fragments are in the following format `#zoom, longitude, latitude`.
 
+URL's solely defined in terms of location fragments pan and zoom the map to the given location regardless of the target value.
+i.e. `<map-a href="#1, 20, 30">...</map-a>` will pan to latitude: 30, longitude: 20 and zoom to level 1.
+
 ---
 
 ## Examples
