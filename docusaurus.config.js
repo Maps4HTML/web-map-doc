@@ -107,7 +107,4 @@ module.exports = {
       },
     ],
   ],
-  scripts: [
-    "https://maps4html.org/web-map-doc/dist/mapml-viewer.js",
-  ],
 };
