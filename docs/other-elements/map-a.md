@@ -5,7 +5,8 @@ slug: /other-elements/map-a
 ---
 
 In this section we'll learn about the `<map-a>` element. This element allows you to wrap parts of
-coordinates and feature types entirely, changing the interaction of whatever is wrapped.
+coordinates and feature types entirely, changing the interaction of the location/area that is wrapped. When a feature is 
+wrapped it places a blue outline that is 1 pixel wide around the feature, that lets the user know it's a "linked feature".
 
 ## Attributes
 
