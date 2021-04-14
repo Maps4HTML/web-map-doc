@@ -2540,9 +2540,9 @@
           }
           function _processInitialExtent(content) {
               var mapml = this.responseXML || content;
-              if(mapml.querySelector('feature'))layer._content = mapml;
+              if(mapml.querySelector && mapml.querySelector('feature'))layer._content = mapml;
               if(!this.responseXML && this.responseText) mapml = new DOMParser().parseFromString(this.responseText,'text/xml');
-              if (this.readyState === this.DONE && mapml.querySelector) {
+              if (this.readyState === this.DONE && mapml.querySelector && !mapml.querySelector("parsererror")) {
                   var serverExtent = mapml.querySelector('extent') || mapml.querySelector('meta[name=projection]'), projection;
 
                   if (serverExtent.tagName.toLowerCase() === "extent" && serverExtent.hasAttribute('units')){
