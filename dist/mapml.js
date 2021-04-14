@@ -4833,8 +4833,16 @@
       L.DomEvent.on(path, 'mousedown', () =>{ drag = false;}, this);
       L.DomEvent.on(path, 'mousemove', () =>{ drag = true;}, this);
       L.DomEvent.on(path, "mouseup", (e) => {
-        L.DomEvent.stop(e);
-        if(!drag) M.handleLink(link, leafletLayer);
+        let onTop = true, nextLayer = this.options._leafletLayer._layerEl.nextElementSibling;
+        while(nextLayer){
+          if(nextLayer.tagName && nextLayer.tagName.toUpperCase() === "LAYER-")
+            onTop = !(nextLayer.checked && nextLayer._layer.queryable);
+          nextLayer = nextLayer.nextElementSibling;
+        }
+        if(onTop) {
+          L.DomEvent.stop(e);
+          if (!drag) M.handleLink(link, leafletLayer);
+        }
       }, this);
       L.DomEvent.on(path, "keypress", (e) => {
         L.DomEvent.stop(e);
