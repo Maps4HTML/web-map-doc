@@ -2045,11 +2045,9 @@
         let noLayer = false;
         if(this._templateVars){
           for(let template of this._templateVars)
-            if(!template.projectionMatch) noLayer = true;
+            if(!template.projectionMatch && template.projection !== map.options.projection) noLayer = true;
         }
-        if(noLayer || this.getProjection() !== map.options.projection.toUpperCase())
-          return false;
-        return true;
+        return !(noLayer || this.getProjection() !== map.options.projection.toUpperCase());
       },
 
       //sets the <layer-> elements .bounds property 
@@ -2118,31 +2116,26 @@
             // since we are following a zoom link we will be getting a new
             // layer almost, resetting child content as appropriate
             this._href = this._extent.zoomin;
+            this._layerEl.src = this._extent.zoomin;
             // this.href is the "public" property. When a dynamic layer is
             // accessed, this value changes with every new extent received
             this.href = this._extent.zoomin;
+            this._layerEl.src = this._extent.zoomin;
           } else if (this._extent.zoomout && toZoom < min) {
             this._href = this._extent.zoomout;
             this.href = this._extent.zoomout;
+            this._layerEl.src = this._extent.zoomout;
           }
         }
-        if (this._templatedLayer && canZoom ) {
-          // get the new extent
-          this._initExtent();
-        }
+        if (this._templatedLayer && canZoom ) ;
       },
       onRemove: function (map) {
           L.DomUtil.remove(this._container);
-          if(this._staticTileLayer){
-            map.removeLayer(this._staticTileLayer);
-          }
-          if(this._mapmlvectors){
-            map.removeLayer(this._mapmlvectors);
-          }
-          map.removeLayer(this._imageLayer);
-          if (this._templatedLayer) {
-              map.removeLayer(this._templatedLayer);
-          }
+          if(this._staticTileLayer) map.removeLayer(this._staticTileLayer);
+          if(this._mapmlvectors) map.removeLayer(this._mapmlvectors);
+          if(this._imageLayer) map.removeLayer(this._imageLayer);
+          if (this._templatedLayer) map.removeLayer(this._templatedLayer);
+
           map.fire("checkdisabled");
           map.off("popupopen", this._attachSkipButtons);
       },
@@ -2569,6 +2562,9 @@
                        
                       layer.fire('changeprojection', {href:  (new URL(selectedAlternate.getAttribute('href'), base)).href}, false);
                       return;
+                  } else if (!projectionMatch && layer._map && layer._map.options.mapEl.querySelectorAll("layer-").length === 1){
+                    layer._map.options.mapEl.projection = projection;
+                    return;
                   } else if (serverExtent.querySelector('link[rel=tile],link[rel=image],link[rel=features],link[rel=query]') &&
                           serverExtent.hasAttribute("units")) {
                     layer._templateVars = [];
@@ -4592,6 +4588,8 @@
             newLayer = true;
         }
         if(!link.inPlace && newLayer) L.DomEvent.on(layer,'extentload', function focusOnLoad(e) {
+          if(newLayer && ["_parent", "_self"].includes(link.target) && layer.parentElement.querySelectorAll("layer-").length === 1)
+            layer.parentElement.projection = layer._layer.getProjection();
           if(layer.extent){
             if(zoomTo) layer.parentElement.zoomTo(+zoomTo.lat, +zoomTo.lng, +zoomTo.z);
             else layer.focus();
