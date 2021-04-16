@@ -3364,6 +3364,7 @@
           if (layers[i].options._leafletLayer)
             boundsRect.bindTooltip(layers[i].options._leafletLayer._title, { sticky: true });
           this.addLayer(boundsRect);
+          boundsRect.on('contextmenu', this._openContextMenu, this);
           j++;
         }
       }
@@ -3372,6 +3373,11 @@
     _mapLayerUpdate: function (e) {
       this.clearLayers();
       this._addBounds(e.target);
+    },
+
+    _openContextMenu: function (e) {
+      L.DomEvent.stop(e);
+      this._map.contextMenu._showAtPoint(e.containerPoint, e, this._map.contextMenu._container);
     },
   });
 
