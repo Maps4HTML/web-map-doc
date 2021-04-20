@@ -354,7 +354,8 @@
           this.clearLayers();
           this.addData(feature, this.options.nativeCS, this.options.nativeZoom);
           e.popup._navigationBar.querySelector("p").innerText = (e.i + 1) + "/" + this.options._leafletLayer._totalFeatureCount;
-          e.popup._content.querySelector("iframe").srcdoc = `<meta http-equiv="content-security-policy" content="script-src 'none';">` + feature.querySelector("properties").innerHTML;
+          e.popup._content.querySelector("iframe").setAttribute("sandbox", "allow-same-origin allow-forms");
+          e.popup._content.querySelector("iframe").srcdoc = feature.querySelector("properties").innerHTML;
         }
       },
 
@@ -3585,7 +3586,8 @@
           let div = L.DomUtil.create("div", "mapml-popup-content"),
               c = L.DomUtil.create("iframe");
           c.style = "border: none";
-          c.srcdoc = `<meta http-equiv="content-security-policy" content="script-src 'none';">` + mapmldoc.querySelector('feature properties').innerHTML;
+          c.srcdoc = mapmldoc.querySelector('feature properties').innerHTML;
+          c.setAttribute("sandbox","allow-same-origin allow-forms");
           div.appendChild(c);
           // passing a latlng to the popup is necessary for when there is no
           // geometry / null geometry
@@ -3601,7 +3603,8 @@
           let div = L.DomUtil.create("div", "mapml-popup-content"),
               c = L.DomUtil.create("iframe");
           c.style = "border: none";
-          c.srcdoc = `<meta http-equiv="content-security-policy" content="script-src 'none';">` + text;
+          c.srcdoc = text;
+          c.setAttribute("sandbox","allow-same-origin allow-forms");
           div.appendChild(c);
           layer.bindPopup(div, popupOptions).openPopup(loc);
         }
