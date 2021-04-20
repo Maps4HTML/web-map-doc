@@ -1912,6 +1912,7 @@
       },
       changeOpacity: function(opacity) {
           this._container.style.opacity = opacity;
+          if(this.opacityEl) this.opacityEl.value = opacity;
       },
       onAdd: function (map) {
           if(this._extent && !this._validProjection(map)){
@@ -2335,6 +2336,7 @@
           opacityControlSummary = document.createElement('summary'),
           opacityControlSummaryLabel = document.createElement('label'),
           mapEl = this._layerEl.parentNode;
+          this.opacityEl = opacity;
           
           summaryContainer.classList.add('mapml-control-summary-container');
           
@@ -4583,6 +4585,7 @@
             window.location.href = link.url;
             break;
           default:
+            opacity = leafletLayer._layerEl.opacity;
             leafletLayer._layerEl.insertAdjacentElement('beforebegin', layer);
             map.options.mapEl.removeChild(leafletLayer._layerEl);
             newLayer = true;
@@ -4595,10 +4598,13 @@
             else layer.focus();
             L.DomEvent.off(layer, 'extentload', focusOnLoad);
           }
+
+          if(opacity) layer.opacity = opacity;
           map.getContainer().focus();
         });
       } else if (zoomTo && !link.inPlace && justPan){
-        map.options.mapEl.zoomTo(+zoomTo.lat, +zoomTo.lng, +zoomTo.z);
+        leafletLayer._map.options.mapEl.zoomTo(+zoomTo.lat, +zoomTo.lng, +zoomTo.z);
+        if(opacity) layer.opacity = opacity;
         map.getContainer().focus();
       }
     },
