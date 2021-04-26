@@ -23,6 +23,8 @@ module.exports = {
   ],
   API: [
     'api/custom-projections',
+    'api/layer-api',
+    'api/mapml-viewer-api',
   ],
   Resources: [
     'resources/resources',
