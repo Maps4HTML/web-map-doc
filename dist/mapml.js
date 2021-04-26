@@ -582,9 +582,9 @@
       },
     geometryToLayer: function (mapml, vectorOptions, nativeCS, zoom, title) {
       let geometry = mapml.tagName.toUpperCase() === 'FEATURE' ? mapml.getElementsByTagName('geometry')[0] : mapml,
-          cs = geometry.getAttribute("cs") || nativeCS, group = [], svgGroup = L.SVG.create('g');
+          cs = geometry.getAttribute("cs") || nativeCS, group = [], svgGroup = L.SVG.create('g'), copyOptions = Object.assign({}, vectorOptions);
       for(let geo of geometry.querySelectorAll('polygon, linestring, multilinestring, point, multipoint')){
-        group.push(M.feature(geo, Object.assign(vectorOptions,
+        group.push(M.feature(geo, Object.assign(copyOptions,
           { nativeCS: cs,
             nativeZoom: zoom,
             projection: this.options.projection,
@@ -3557,6 +3557,7 @@
             if(!feature.querySelector('geometry')){
               let geo = document.createElement('geometry'), point = document.createElement('point'),
                 coords = document.createElement('coordinates');
+              geo.setAttribute("cs", "gcrs");
               coords.innerHTML = `${loc.lng} ${loc.lat}`;
               point.appendChild(coords);
               geo.appendChild(point);
