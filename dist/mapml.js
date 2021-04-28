@@ -521,11 +521,11 @@
         let zoom = mapml.getAttribute("zoom") || nativeZoom, title = mapml.querySelector("featurecaption");
         title = title ? title.innerHTML : "Feature";
 
-        let propertyContainer = document.createElement('div');
-        propertyContainer.classList.add("mapml-popup-content");
-        propertyContainer.insertAdjacentHTML('afterbegin', mapml.querySelector("properties").innerHTML);
-
-        options.properties = propertyContainer;
+        if(mapml.querySelector("properties")) {
+          options.properties = document.createElement('div');
+          options.properties.classList.add("mapml-popup-content");
+          options.properties.insertAdjacentHTML('afterbegin', mapml.querySelector("properties").innerHTML);
+        }
 
         let layer = this.geometryToLayer(mapml, options, nativeCS, +zoom, title);
         if (layer) {
@@ -4826,6 +4826,7 @@
       L.setOptions(this, options);
 
       this.group = this.options.group;
+      this.options.interactive = this.options.link || (this.options.properties && this.options.onEachFeature);
 
       this._parts = [];
       this._markup = markup;
@@ -5151,7 +5152,7 @@
       //creates the main parts and sub parts paths
       for (let p of layer._parts) {
         if (p.rings){
-          this._createPath(p, layer.options.className, layer.featureAttributes['aria-label'], true, layer.featureAttributes);
+          this._createPath(p, layer.options.className, layer.featureAttributes['aria-label'], layer.options.interactive, layer.featureAttributes);
           if(layer.outlinePath) p.path.style.stroke = "none";
         }
         if (p.subrings) {
@@ -5411,7 +5412,7 @@
 
       L.LayerGroup.prototype.initialize.call(this, layers, options);
 
-      if(this.options.onEachFeature || this.options.link) {
+      if((this.options.onEachFeature && this.options.properties) || this.options.link) {
         this.options.group.setAttribute('tabindex', '0');
         L.DomUtil.addClass(this.options.group, "leaflet-interactive");
         L.DomEvent.on(this.options.group, "keyup keydown mousedown", this._handleFocus, this);
@@ -5455,7 +5456,7 @@
      * @param layer
      */
     addLayer: function (layer) {
-      if(!layer.options.link && this.options.onEachFeature) {
+      if(!layer.options.link && layer.options.interactive) {
         this.options.onEachFeature(this.options.properties, layer);
       }
       L.FeatureGroup.prototype.addLayer.call(this, layer);
