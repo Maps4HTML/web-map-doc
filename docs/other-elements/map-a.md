@@ -55,6 +55,38 @@ i.e. `<map-a href="#1, 20, 30">...</map-a>` will pan to latitude: 30, longitude:
 
 ## Examples
 
+#### Styling Linked Features
+
+To style linked features simply target the `map-a` class in your CSS, once a link is clicked you can target the
+`map-a-visited` class. See the example below:
+
+```html
+<layer->
+  <style>
+    .map-a{
+      stroke:red;
+    }
+    .map-a-visited{
+      stroke:green;
+    }
+  </style>
+  <feature>
+    <properties>
+      <h1>Basic</h1>
+    </properties>
+    <geometry>
+      <map-a href="../externalMapML.mapml#2,-98,37">
+        <polygon>
+          <coordinates>2771 3106 2946 3113 2954 3210 2815 3192 2771 3106</coordinates>
+        </polygon>
+      </map-a>
+    </geometry>
+  </feature>
+</layer->
+```
+
+---
+
 #### Wrapping a Feature Type + Location Fragment 
 
 ```html
