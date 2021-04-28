@@ -4432,18 +4432,18 @@
     },
 
     convertPCRSBounds: function(pcrsBounds, zoom, projection, cs){
-      if(!pcrsBounds || !zoom && +zoom !== 0 || !cs) return undefined;
-      switch (cs.toLowerCase()) {
-        case "pcrs":
+      if(!pcrsBounds || (!zoom && zoom !== 0) || !Number.isFinite(+zoom) || !projection || !cs) return undefined;
+      switch (cs.toUpperCase()) {
+        case "PCRS":
           return pcrsBounds;
-        case "tcrs": 
-        case "tilematrix":
+        case "TCRS":
+        case "TILEMATRIX":
           let minPixel = this[projection].transformation.transform(pcrsBounds.min, this[projection].scale(+zoom)),
               maxPixel = this[projection].transformation.transform(pcrsBounds.max, this[projection].scale(+zoom));
-          if (cs.toLowerCase() === "tcrs") return L.bounds(minPixel, maxPixel);
+          if (cs.toUpperCase() === "TCRS") return L.bounds(minPixel, maxPixel);
           let tileSize = M[projection].options.crs.tile.bounds.max.x;
           return L.bounds(L.point(minPixel.x / tileSize, minPixel.y / tileSize), L.point(maxPixel.x / tileSize,maxPixel.y / tileSize)); 
-        case "gcrs":
+        case "GCRS":
           let minGCRS = this[projection].unproject(pcrsBounds.min),
               maxGCRS = this[projection].unproject(pcrsBounds.max);
           return L.bounds(L.point(minGCRS.lng, minGCRS.lat), L.point(maxGCRS.lng, maxGCRS.lat)); 
@@ -4452,37 +4452,37 @@
       }
     },
 
-    pointToPCRSPoint: function(p, zoom, projection, cs){
-      if(!p || !zoom && +zoom !== 0 || !cs || !projection) return undefined;
+    pointToPCRSPoint: function(point, zoom, projection, cs){
+      if(!point || (!zoom && zoom !== 0) || !Number.isFinite(+zoom) || !cs || !projection) return undefined;
       let tileSize = M[projection].options.crs.tile.bounds.max.x;
       switch(cs.toUpperCase()){
         case "TILEMATRIX":
-          return M.pixelToPCRSPoint(L.point(p.x*tileSize,p.y*tileSize),zoom,projection);
+          return M.pixelToPCRSPoint(L.point(point.x*tileSize,point.y*tileSize),zoom,projection);
         case "PCRS":
-          return p;
+          return point;
         case "TCRS" :
-          return M.pixelToPCRSPoint(p,zoom,projection);
+          return M.pixelToPCRSPoint(point,zoom,projection);
         case "GCRS":
-          return this[projection].project(L.latLng(p.y,p.x));
+          return this[projection].project(L.latLng(point.y,point.x));
         default:
           return undefined;
       }
     },
 
-    pixelToPCRSPoint: function(p, zoom, projection){
-      if(!p || !zoom && +zoom !== 0) return undefined;
-      return this[projection].transformation.untransform(p,this[projection].scale(zoom));
+    pixelToPCRSPoint: function(point, zoom, projection){
+      if(!point || (!zoom && zoom !== 0) || !Number.isFinite(+zoom) || !projection) return undefined;
+      return this[projection].transformation.untransform(point,this[projection].scale(zoom));
     },
 
     boundsToPCRSBounds: function(bounds, zoom, projection, cs){
-      if(!bounds || !zoom && +zoom !== 0 || !cs) return undefined;
+      if(!bounds || !bounds.max || !bounds.min || (!zoom && zoom !== 0) || !Number.isFinite(+zoom) || !projection || !cs) return undefined;
       return L.bounds(M.pointToPCRSPoint(bounds.min, zoom, projection, cs), M.pointToPCRSPoint(bounds.max, zoom, projection, cs));
     },
 
     //L.bounds have fixed point positions, where min is always topleft, max is always bottom right, and the values are always sorted by leaflet
     //important to consider when working with pcrs where the origin is not topleft but rather bottomleft, could lead to confusion
     pixelToPCRSBounds : function(bounds, zoom, projection){
-      if(!bounds || !bounds.max || !bounds.min ||zoom === undefined || zoom === null || zoom instanceof Object) return undefined;
+      if(!bounds || !bounds.max || !bounds.min || (!zoom && zoom !== 0) || !Number.isFinite(+zoom) || !projection) return undefined;
       return L.bounds(M.pixelToPCRSPoint(bounds.min, zoom, projection), M.pixelToPCRSPoint(bounds.max, zoom, projection));
     },
     //meta content is the content attribute of meta
@@ -4842,17 +4842,17 @@
 
     /**
      * Attaches link handler to the sub parts' paths
-     * @param path
-     * @param link
+     * @param {SVGElement} elem - The element to add listeners to, either path or g elements
+     * @param {Object} link - The link object that contains the url, type and target data
      * @param leafletLayer
      */
-    attachLinkHandler: function (path, link, leafletLayer) {
+    attachLinkHandler: function (elem, link, leafletLayer) {
       let dragStart, container = document.createElement('div'), p = document.createElement('p'), hovered = false;
       container.classList.add('mapml-link-preview');
       container.appendChild(p);
-      path.classList.add('map-a');
-      L.DomEvent.on(path, 'mousedown', e => dragStart = {x:e.clientX, y:e.clientY}, this);
-      L.DomEvent.on(path, "mouseup", (e) => {
+      elem.classList.add('map-a');
+      L.DomEvent.on(elem, 'mousedown', e => dragStart = {x:e.clientX, y:e.clientY}, this);
+      L.DomEvent.on(elem, "mouseup", (e) => {
         let onTop = true, nextLayer = this.options._leafletLayer._layerEl.nextElementSibling;
         while(nextLayer && onTop){
           if(nextLayer.tagName && nextLayer.tagName.toUpperCase() === "LAYER-")
@@ -4865,12 +4865,12 @@
           if (dist <= 5) M.handleLink(link, leafletLayer);
         }
       }, this);
-      L.DomEvent.on(path, "keypress", (e) => {
+      L.DomEvent.on(elem, "keypress", (e) => {
         L.DomEvent.stop(e);
         if(e.keyCode === 13 || e.keyCode === 32)
           M.handleLink(link, leafletLayer);
       }, this);
-      L.DomEvent.on(path, 'mouseenter keyup', (e) => {
+      L.DomEvent.on(elem, 'mouseenter keyup', (e) => {
         if(e.target !== e.currentTarget) return;
         hovered = true;
         let resolver = document.createElement('a'), mapWidth = this._map.getContainer().clientWidth;
@@ -4886,7 +4886,7 @@
           if(hovered) p.innerHTML = resolver.href;
         }, 1000);
       }, this);
-      L.DomEvent.on(path, 'mouseout keydown mousedown', (e) => {
+      L.DomEvent.on(elem, 'mouseout keydown mousedown', (e) => {
         if(e.target !== e.currentTarget || !container.parentElement) return;
         hovered = false;
         this._map.getContainer().removeChild(container);
@@ -4954,6 +4954,7 @@
 
     /**
      * Converts the spans, a and divs around a geometry subtype into options for the feature
+     * @param {HTMLElement[]} elems - The current zoom level of the map
      * @private
      */
     _convertWrappers: function (elems) {
@@ -4961,12 +4962,6 @@
       let classList = '', output = {};
       for(let elem of elems){
         if(elem.tagName.toUpperCase() !== "MAP-A" && elem.className){
-          // Useful if getting other attributes off spans and divs is useful
-  /*        let attr = elem.attributes;
-          for(let i = 0; i < attr.length; i++){
-            if(attr[i].name === "class" || attributes[attr[i].name]) continue;
-            attributes[attr[i].name] = attr[i].value;
-          }*/
           classList +=`${elem.className} `;
         } else if(!output.link && elem.getAttribute("href")) {
           let link = {};
@@ -4998,18 +4993,18 @@
 
       let first = true;
       for (let c of this._markup.querySelectorAll('coordinates')) {              //loops through the coordinates of the child
-        let ring = [], subrings = [];
-        this._coordinateToArrays(c, ring, subrings, this.options.className);              //creates an array of pcrs points for the main ring and the subparts
+        let ring = [], subRings = [];
+        this._coordinateToArrays(c, ring, subRings, this.options.className);              //creates an array of pcrs points for the main ring and the subparts
         if (!first && this.type === "POLYGON") {
           this._parts[0].rings.push(ring[0]);
-          if (subrings.length > 0)
-            this._parts[0].subrings = this._parts[0].subrings.concat(subrings);
+          if (subRings.length > 0)
+            this._parts[0].subrings = this._parts[0].subrings.concat(subRings);
         } else if (this.type === "MULTIPOINT") {
-          for (let point of ring[0].points.concat(subrings)) {
+          for (let point of ring[0].points.concat(subRings)) {
             this._parts.push({ rings: [{ points: [point] }], subrings: [], cls:`${point.cls || ""} ${this.options.className || ""}`.trim() });
           }
         } else {
-          this._parts.push({ rings: ring, subrings: subrings, cls: `${this.featureAttributes.class || ""} ${this.options.className || ""}`.trim() });
+          this._parts.push({ rings: ring, subrings: subRings, cls: `${this.featureAttributes.class || ""} ${this.options.className || ""}`.trim() });
         }
         first = false;
       }
@@ -5080,7 +5075,13 @@
           if(attr[i].name === "class") continue;
           attrMap[attr[i].name] = attr[i].value;
         }
-        subParts.unshift({ points: local, cls: `${cls || ""} ${wrapperAttr.className || ""}`.trim(), attr: attrMap, link: wrapperAttr.link, linkTarget: wrapperAttr.linkTarget, linkType: wrapperAttr.linkType});
+        subParts.unshift({
+          points: local,
+          cls: `${cls || ""} ${wrapperAttr.className || ""}`.trim(),
+          attr: attrMap,
+          link: wrapperAttr.link,
+          linkTarget: wrapperAttr.linkTarget,
+          linkType: wrapperAttr.linkType});
       }
     },
 
@@ -5431,7 +5432,7 @@
 
     /**
      * Handler for focus events
-     * @param {L.DOMEvent} e - Event that occured
+     * @param {L.DOMEvent} e - Event that occurred
      * @private
      */
     _handleFocus: function(e) {
@@ -5449,6 +5450,10 @@
       }
     },
 
+    /**
+     * Add a M.Feature to the M.FeatureGroup
+     * @param layer
+     */
     addLayer: function (layer) {
       if(!layer.options.link && this.options.onEachFeature) {
         this.options.onEachFeature(this.options.properties, layer);
