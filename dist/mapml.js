@@ -4852,6 +4852,7 @@
       container.classList.add('mapml-link-preview');
       container.appendChild(p);
       elem.classList.add('map-a');
+      if (link.visited) elem.classList.add("map-a-visited");
       L.DomEvent.on(elem, 'mousedown', e => dragStart = {x:e.clientX, y:e.clientY}, this);
       L.DomEvent.on(elem, "mouseup", (e) => {
         let onTop = true, nextLayer = this.options._leafletLayer._layerEl.nextElementSibling;
@@ -4863,13 +4864,22 @@
         if(onTop && dragStart) {
           L.DomEvent.stop(e);
           let dist = Math.sqrt(Math.pow(dragStart.x - e.clientX, 2) + Math.pow(dragStart.y - e.clientY, 2));
-          if (dist <= 5) M.handleLink(link, leafletLayer);
+          if (dist <= 5){
+            link.visited = true;
+            elem.setAttribute("stroke", "#6c00a2");
+            elem.classList.add("map-a-visited");
+            M.handleLink(link, leafletLayer);
+          }
         }
       }, this);
       L.DomEvent.on(elem, "keypress", (e) => {
         L.DomEvent.stop(e);
-        if(e.keyCode === 13 || e.keyCode === 32)
+        if(e.keyCode === 13 || e.keyCode === 32) {
+          link.visited = true;
+          elem.setAttribute("stroke", "#6c00a2");
+          elem.classList.add("map-a-visited");
           M.handleLink(link, leafletLayer);
+        }
       }, this);
       L.DomEvent.on(elem, 'mouseenter keyup', (e) => {
         if(e.target !== e.currentTarget) return;
@@ -5315,13 +5325,6 @@
       if (!path || !layer) { return; }
       let options = layer.options, isClosed = layer.isClosed;
       if ((options.stroke && (!isClosed || isOutline)) || (isMain && !layer.outlinePath)) {
-        if (options.link){
-          path.style.stroke = "#0000EE";
-          path.style.strokeOpacity = "1";
-          path.style.strokeWidth = "1px";
-          path.style.strokeDasharray = "none";
-
-        }
         path.setAttribute('stroke', options.color);
         path.setAttribute('stroke-opacity', options.opacity);
         path.setAttribute('stroke-width', options.weight);
@@ -5338,6 +5341,13 @@
           path.setAttribute('stroke-dashoffset', options.dashOffset);
         } else {
           path.removeAttribute('stroke-dashoffset');
+        }
+
+        if (options.link){
+          path.setAttribute("stroke", options.link.visited?"#6c00a2":"#0000EE");
+          path.setAttribute("stroke-opacity", "1");
+          path.setAttribute("stroke-width", "1px");
+          path.setAttribute("stroke-dasharray", "none");
         }
       } else {
         path.setAttribute('stroke', 'none');
