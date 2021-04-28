@@ -53,13 +53,17 @@
 
     createTile: function (coords) {
       let tileGroup = this._groups[this._tileCoordsToKey(coords)] || [],
-          tileElem = document.createElement('tile');
+          tileElem = document.createElement('tile'), tileSize = this.getTileSize();
       tileElem.setAttribute("col",coords.x);
       tileElem.setAttribute("row",coords.y);
       tileElem.setAttribute("zoom",coords.z);
       
       for(let i = 0;i<tileGroup.length;i++){
         let tile= document.createElement('img');
+        tile.width = tileSize.x;
+        tile.height = tileSize.y;
+        tile.alt = '';
+        tile.setAttribute("role","presentation");
         tile.src = tileGroup[i].src;
         tileElem.appendChild(tile);
       }
@@ -678,12 +682,9 @@
       },
       createTile: function (coords) {
         let tileGroup = document.createElement("DIV"),
-            tileSize = this._map.options.crs.options.crs.tile.bounds.max.x;
+            tileSize = this.getTileSize();
         L.DomUtil.addClass(tileGroup, "mapml-tile-group");
         L.DomUtil.addClass(tileGroup, "leaflet-tile");
-        
-        tileGroup.setAttribute("width", `${tileSize}`);
-        tileGroup.setAttribute("height", `${tileSize}`);
 
         this._template.linkEl.dispatchEvent(new CustomEvent('tileloadstart', {
           detail:{
@@ -695,7 +696,10 @@
         }));
 
         if (this._template.type.startsWith('image/')) {
-          tileGroup.appendChild(L.TileLayer.prototype.createTile.call(this, coords, function(){}));
+          let tile = L.TileLayer.prototype.createTile.call(this, coords, function(){});
+          tile.width = tileSize.x;
+          tile.height = tileSize.y;
+          tileGroup.appendChild(tile);
         } else if(!this._url.includes(BLANK_TT_TREF)) {
           // tiles of type="text/mapml" will have to fetch content while creating
           // the tile here, unless there can be a callback associated to the element
