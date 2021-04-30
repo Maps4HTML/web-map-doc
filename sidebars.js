@@ -28,6 +28,7 @@ module.exports = {
     'api/mapml-viewer-api',
   ],
   Resources: [
+    'resources/debug-mode',
     'resources/resources',
     ],
   },
