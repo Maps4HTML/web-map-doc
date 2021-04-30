@@ -3807,7 +3807,7 @@
           tL = layerElem.extent.topLeft.pcrs,
           bR = layerElem.extent.bottomRight.pcrs;
 
-      let data = `<meta name="extent" content="top-left-easting,${tL.horizontal}, top-left-northing,${tL.vertical}, bottom-right-easting,${bR.horizontal}, bottom-right-northing,${bR.vertical}">`;
+      let data = `<meta name="extent" content="top-left-easting=${tL.horizontal}, top-left-northing=${tL.vertical}, bottom-right-easting=${bR.horizontal}, bottom-right-northing=${bR.vertical}">`;
       context._copyData(data);
     },
 
