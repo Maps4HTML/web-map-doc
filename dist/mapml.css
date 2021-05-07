@@ -189,9 +189,6 @@
   display: inline;
 }
 
-.mapml-control-layers summary::-webkit-details-marker {
-  margin-right: 5px;
-}
 .mapml-control-layers summary::marker {
   margin-right: 5px;
 }
@@ -381,6 +378,12 @@
    delegating focus. */
 .leaflet-active:not(:focus) {
   outline: unset !important;
+}
+.leaflet-container:not(:focus-within) .mapml-outline {
+  outline: 0;
+}
+.leaflet-container:not(:focus-within) .mapml-crosshair {
+  visibility: hidden;
 }
 
 /* Restore the default UA tap highlight color by overriding the opinionated tap

@@ -899,11 +899,11 @@
                   min: crs.crs.tilematrix.horizontal.min,
                   max: crs.crs.tilematrix.horizontal.max(crs.resolutions.length-1)
                 };
-                if (!isNaN(Number.parseInt(min,10))) {
-                  col.min = Number.parseInt(min,10);
+                if (!isNaN(Number.parseFloat(min))) {
+                  col.min = Number.parseFloat(min);
                 }
-                if (!isNaN(Number.parseInt(max,10))) {
-                  col.max = Number.parseInt(max,10);
+                if (!isNaN(Number.parseFloat(max))) {
+                  col.max = Number.parseFloat(max);
                 }
                 break;
               case("row"):
@@ -912,11 +912,11 @@
                   min: crs.crs.tilematrix.vertical.min,
                   max:  crs.crs.tilematrix.vertical.max(crs.resolutions.length-1)
                 };
-                if (!isNaN(Number.parseInt(min,10))) {
-                  row.min = Number.parseInt(min,10);
+                if (!isNaN(Number.parseFloat(min))) {
+                  row.min = Number.parseFloat(min);
                 }
-                if (!isNaN(Number.parseInt(max,10))) {
-                  row.max = Number.parseInt(max,10);
+                if (!isNaN(Number.parseFloat(max))) {
+                  row.max = Number.parseFloat(max);
                 }
                 break;
               case('longitude'):
@@ -965,7 +965,7 @@
                 break;
                 // unsuportted axis value
             }
-          } else if (type.toLowerCase() === "zoom") {
+          } else if (type && type.toLowerCase() === "zoom") {
             //<input name="..." type="zoom" value="0" min="0" max="17">
              zoom = {
                name: name,
@@ -1012,9 +1012,6 @@
         var transformation = this.options.crs.transformation,
             tileSize = this.options.crs.options.crs.tile.bounds.max.x,
             scale = L.bind(this.options.crs.scale, this.options.crs),
-        tilematrix2pcrs = function (c,zoom) {
-          return transformation.untransform(c.multiplyBy(tileSize),scale(zoom));
-        },
         pcrs2tilematrix = function(c,zoom) {
           return transformation.transform(c, scale(zoom)).divideBy(tileSize).floor();
         };
@@ -1037,10 +1034,10 @@
               template.pcrs.northing = '';
             }
             
-            template.pcrs.bounds = L.bounds(
-              tilematrix2pcrs(L.point([col.min,row.min]),zoom.value),
-              tilematrix2pcrs(L.point([col.max,row.max]),zoom.value)
-            );
+            template.pcrs.bounds =  M.boundsToPCRSBounds(
+                        L.bounds(L.point([col.min,row.min]),
+                        L.point([col.max,row.max])),
+                        zoom.value, this.options.crs, M.axisToCS("column"));
             
             template.tilematrix = {};
             template.tilematrix.col = col;
@@ -1363,7 +1360,6 @@
             // it will append its own container for rendering into
             pane: container,
             opacity: opacity,
-            imagePath: this.options.imagePath,
             projection:map.options.projection,
             static: true,
             onEachFeature: function(properties, geometry) {
@@ -1935,7 +1931,6 @@
                 // it will append its own container for rendering into
                 pane: this._container,
                 opacity: this.options.opacity,
-                imagePath: M.detectImagePath(this._map.getContainer()),
                 projection:map.options.projection,
                 // each owned child layer gets a reference to the root layer
                 _leafletLayer: this,
@@ -1967,7 +1962,6 @@
                     // it will append its own container for rendering into
                     pane: this._container,
                     opacity: this.options.opacity,
-                    imagePath: M.detectImagePath(this._map.getContainer()),
                     projection:map.options.projection,
                     // each owned child layer gets a reference to the root layer
                     _leafletLayer: this,
@@ -2016,7 +2010,6 @@
               if (this._templateVars) {
                 this._templatedLayer = M.templatedLayer(this._templateVars, 
                 { pane: this._container,
-                  imagePath: M.detectImagePath(this._map.getContainer()),
                   _leafletLayer: this,
                   crs: this.crs
                 }).addTo(map);
@@ -2030,7 +2023,6 @@
                   if (this._templateVars) {
                     this._templatedLayer = M.templatedLayer(this._templateVars, 
                     { pane: this._container,
-                      imagePath: M.detectImagePath(this._map.getContainer()),
                       _leafletLayer: this,
                       crs: this.crs
                     }).addTo(map);
@@ -3578,7 +3570,6 @@
               // zoom
               projection: map.options.projection,
               _leafletLayer: layer,
-              imagePath: M.detectImagePath(map.getContainer()),
               query: true,
               static:true,
           });
@@ -4328,7 +4319,7 @@
         switch(inputs[i].getAttribute("type")){
           case "zoom":
             nMinZoom = +inputs[i].getAttribute("min");
-            nMaxZoom = +inputs[i].getAttribute("max");
+            nMaxZoom = +(inputs[i].hasAttribute("max") ? inputs[i].getAttribute("max") : nMaxZoom);
             value = +inputs[i].getAttribute("value");
           break;
           case "location":
@@ -4434,19 +4425,20 @@
 
     convertPCRSBounds: function(pcrsBounds, zoom, projection, cs){
       if(!pcrsBounds || (!zoom && zoom !== 0) || !Number.isFinite(+zoom) || !projection || !cs) return undefined;
+      projection = (typeof projection === "string") ? M[projection] : projection;
       switch (cs.toUpperCase()) {
         case "PCRS":
           return pcrsBounds;
         case "TCRS":
         case "TILEMATRIX":
-          let minPixel = this[projection].transformation.transform(pcrsBounds.min, this[projection].scale(+zoom)),
-              maxPixel = this[projection].transformation.transform(pcrsBounds.max, this[projection].scale(+zoom));
+          let minPixel = projection.transformation.transform(pcrsBounds.min, projection.scale(+zoom)),
+              maxPixel = projection.transformation.transform(pcrsBounds.max, projection.scale(+zoom));
           if (cs.toUpperCase() === "TCRS") return L.bounds(minPixel, maxPixel);
-          let tileSize = M[projection].options.crs.tile.bounds.max.x;
+          let tileSize = projection.options.crs.tile.bounds.max.x;
           return L.bounds(L.point(minPixel.x / tileSize, minPixel.y / tileSize), L.point(maxPixel.x / tileSize,maxPixel.y / tileSize)); 
         case "GCRS":
-          let minGCRS = this[projection].unproject(pcrsBounds.min),
-              maxGCRS = this[projection].unproject(pcrsBounds.max);
+          let minGCRS = projection.unproject(pcrsBounds.min),
+              maxGCRS = projection.unproject(pcrsBounds.max);
           return L.bounds(L.point(minGCRS.lng, minGCRS.lat), L.point(maxGCRS.lng, maxGCRS.lat)); 
         default:
           return undefined;
@@ -4455,7 +4447,8 @@
 
     pointToPCRSPoint: function(point, zoom, projection, cs){
       if(!point || (!zoom && zoom !== 0) || !Number.isFinite(+zoom) || !cs || !projection) return undefined;
-      let tileSize = M[projection].options.crs.tile.bounds.max.x;
+      projection = (typeof projection === "string") ? M[projection] : projection;
+      let tileSize = projection.options.crs.tile.bounds.max.x;
       switch(cs.toUpperCase()){
         case "TILEMATRIX":
           return M.pixelToPCRSPoint(L.point(point.x*tileSize,point.y*tileSize),zoom,projection);
@@ -4464,7 +4457,7 @@
         case "TCRS" :
           return M.pixelToPCRSPoint(point,zoom,projection);
         case "GCRS":
-          return this[projection].project(L.latLng(point.y,point.x));
+          return projection.project(L.latLng(point.y,point.x));
         default:
           return undefined;
       }
@@ -4472,11 +4465,13 @@
 
     pixelToPCRSPoint: function(point, zoom, projection){
       if(!point || (!zoom && zoom !== 0) || !Number.isFinite(+zoom) || !projection) return undefined;
-      return this[projection].transformation.untransform(point,this[projection].scale(zoom));
+      projection = (typeof projection === "string") ? M[projection] : projection;
+      return projection.transformation.untransform(point,projection.scale(zoom));
     },
 
     boundsToPCRSBounds: function(bounds, zoom, projection, cs){
       if(!bounds || !bounds.max || !bounds.min || (!zoom && zoom !== 0) || !Number.isFinite(+zoom) || !projection || !cs) return undefined;
+      projection = (typeof projection === "string") ? M[projection] : projection;
       return L.bounds(M.pointToPCRSPoint(bounds.min, zoom, projection, cs), M.pointToPCRSPoint(bounds.max, zoom, projection, cs));
     },
 
@@ -4484,6 +4479,7 @@
     //important to consider when working with pcrs where the origin is not topleft but rather bottomleft, could lead to confusion
     pixelToPCRSBounds : function(bounds, zoom, projection){
       if(!bounds || !bounds.max || !bounds.min || (!zoom && zoom !== 0) || !Number.isFinite(+zoom) || !projection) return undefined;
+      projection = (typeof projection === "string") ? M[projection] : projection;
       return L.bounds(M.pixelToPCRSPoint(bounds.min, zoom, projection), M.pixelToPCRSPoint(bounds.max, zoom, projection));
     },
     //meta content is the content attribute of meta
