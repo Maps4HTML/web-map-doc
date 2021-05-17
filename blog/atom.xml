@@ -6,7 +6,7 @@
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="http://maps4html.org/web-map-doc/blog"/>
     <subtitle>&lt;mapml-viewer&gt; documentation Blog</subtitle>
-    <icon>http://maps4html.org/web-map-doc/img/favicon.ico</icon>
+    <icon>http://maps4html.org/web-map-doc/https://maps4html.org/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[Welcome]]></title>
         <id>welcome</id>
