@@ -5,7 +5,7 @@ module.exports = {
   baseUrl: '/web-map-doc/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/favicon.ico',
+  favicon: 'https://maps4html.org/favicon.ico',
   organizationName: 'Maps4HTML', // Usually your GitHub org/user name.
   projectName: 'web-map-doc', // Usually your repo name.
   themeConfig: {
@@ -13,7 +13,7 @@ module.exports = {
       title: '<mapml-viewer>',
       logo: {
         alt: 'Maps4HTML Logo',
-        src: 'img/maps4html.png',
+        src: 'https://maps4html.org/favicon.ico',
       },
       items: [
         {
