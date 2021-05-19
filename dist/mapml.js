@@ -3024,6 +3024,8 @@
 
         popup._container.setAttribute("role", "dialog");
         content.setAttribute("tabindex", "-1");
+        // https://github.com/Maps4HTML/Web-Map-Custom-Element/pull/467#issuecomment-844307818
+        content.setAttribute("role", "document");
         popup._count = 0; // used for feature pagination
 
         if(popup._source._eventParents){ // check if the popup is for a feature or query
