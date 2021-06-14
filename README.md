@@ -1,5 +1,7 @@
 # web-map-element documentation
 
+![Sync Repositories](https://github.com/Maps4HTML/Web-Map-Custom-Element/workflows/Sync%20Repositories/badge.svg)
+
 ## What is the `<mapml-viewer>` and `<layer->` element suite?
 
 The `<mapml-viewer>` custom element is a prototype implementation of the
