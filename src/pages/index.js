@@ -100,7 +100,7 @@ function Home() {
         )}
         <div className="container">
           <h2>Capabilities</h2>
-          <p>A thorough breakdown of the capabilities compared to other web map solutions can be found <a href="https://maps4html.org/UCR-MapML-Matrix/mapml-ucrs-fulfillment-matrix.html">here.</a>
+          <p>A thorough breakdown of the capabilities compared to other web map solutions can be found in the <a href="https://maps4html.org/UCR-MapML-Matrix/mapml-ucrs-fulfillment-matrix.html">MapML UCR Fulfillment Matrix</a>.
           </p>
           <br />
           <h2>Getting Involved</h2>
