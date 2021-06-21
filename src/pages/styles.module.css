@@ -6,17 +6,52 @@
  */
 
 .heroBanner {
+  position: relative;
+  background-color: #000;
+  min-height: 60vh;
+}
+
+[data-theme="light"] .heroBanner {
+  color: #000;
+}
+
+.heroBanner iframe {
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
   position: absolute;
-  overflow: hidden;
-  left: 50%;
-  transform: translateY(-28rem) translateX(-50%);
 }
 
 @media screen and (max-width: 966px) {
-  .heroBanner {
-    padding: 2rem;
-    max-width: 100%;    
+  .heroBanner iframe {
+    pointer-events: none;
   }
+  h1 {
+    font-size: 2.2rem!important;
+  }
+}
+
+.heroBanner iframe ~ div {
+  z-index: 2;
+  text-align: center;
+  width: auto;
+  padding: 2rem;
+  pointer-events: none;
+  border-radius: 2px;
+  background-color: #52626c;
+  mix-blend-mode: multiply;
+  color: #fff;
+  
+}
+.heroBanner iframe ~ div a {
+  pointer-events: auto;
+  color: inherit!important;
+}
+
+.heroBanner > div > h1,
+.heroBanner > div > p {
+  user-select: none;
 }
 
 .buttons {
