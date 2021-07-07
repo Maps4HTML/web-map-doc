@@ -44,7 +44,21 @@ function Feature({ title, description }) {
 
 function Home() {
   const mapiframe = `<script type="module" src="dist/mapml-viewer.js"></script>
-  <mapml-viewer style="width:100%;height:490px;border:0;background-color:#bfe8fc;" projection="CBMTILE" zoom="5" lat="58" lon="-90" controls>
+  <style>
+  html,
+  body {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+  }
+  mapml-viewer {
+    width: 100%;
+    height: inherit;
+    background-color: #bfe8fc;
+  }
+  </style>
+  <mapml-viewer projection="CBMTILE" zoom="5" lat="58" lon="-90" frameborder="0" controls>
     <layer- label="CBMT" src="https://geogratis.gc.ca/mapml/en/cbmtile/cbmt/" checked></layer->
   </mapml-viewer>`;
   const context = useDocusaurusContext();
@@ -54,8 +68,8 @@ function Home() {
       title="Home"
       description="Documentation for mapml-viewer and layer element suite">
 
-      <iframe tabIndex="-1" height="500px" width="100%" frameborder="0" scrolling="no" srcdoc={mapiframe}></iframe>
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
+      <iframe tabIndex="-1" height="500px" width="100%" frameBorder="0" scrolling="no" srcDoc={mapiframe}></iframe>
         <div className="container">
 
           <h1 className="hero__title">{siteConfig.title}</h1>
@@ -86,7 +100,7 @@ function Home() {
         )}
         <div className="container">
           <h2>Capabilities</h2>
-          <p>A thorough breakdown of the capabilities compared to other web map solutions can be found <a href="https://maps4html.org/UCR-MapML-Matrix/mapml-ucrs-fulfillment-matrix.html">here.</a>
+          <p>A thorough breakdown of the capabilities compared to other web map solutions can be found in the <a href="https://maps4html.org/UCR-MapML-Matrix/mapml-ucrs-fulfillment-matrix.html">MapML UCR Fulfillment Matrix</a>.
           </p>
           <br />
           <h2>Getting Involved</h2>
