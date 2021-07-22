@@ -12,9 +12,9 @@ The web-map custom element suite provides a set of proof-of-concept "[customized
 
 :::caution
 
-Note that because not all modern Web browsers implement HTML's customized built-in elements, it is not recommended to use this proof-of-concept on a public Web site, as end-user confusion may be the result.
+Note that because [not all modern Web browsers implement HTML's customized built-in elements](https://caniuse.com/mdn-api_customelementregistry_builtin), it is not recommended to use this proof-of-concept on a public Web site, as end-user confusion may be the result.
 
-Additionally, built-in elements are not accessible to screen reader users in some browsers due to a [Chromium bug](https://bugs.chromium.org/p/chromium/issues/detail?id=1208405).
+Additionally, customized built-in elements are not accessible to screen reader users in some browsers due to a [Chromium bug](https://bugs.chromium.org/p/chromium/issues/detail?id=1208405).
 :::
 
 The following markup may work on Chrome and Firefox, although it may take some fine tuning:
