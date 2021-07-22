@@ -55,7 +55,6 @@ function Home() {
   mapml-viewer {
     width: 100%;
     height: inherit;
-    background-color: #bfe8fc;
   }
   </style>
   <mapml-viewer projection="CBMTILE" zoom="5" lat="58" lon="-90" frameborder="0" controls>
