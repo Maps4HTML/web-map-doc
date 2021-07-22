@@ -69,7 +69,7 @@ function Home() {
       description="Documentation for mapml-viewer and layer element suite">
 
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <iframe tabIndex="-1" height="500px" width="100%" frameBorder="0" scrolling="no" srcDoc={mapiframe}></iframe>
+      <iframe tabIndex="-1" height="500px" width="100%" frameBorder="0" scrolling="no" title="MapML-viewer" srcDoc={mapiframe}></iframe>
         <div className="container">
 
           <h1 className="hero__title">{siteConfig.title}</h1>
