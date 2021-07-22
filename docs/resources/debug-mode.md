@@ -23,4 +23,4 @@ panel that display's the mouse's current location in the various coordinate syst
 
 #### Map's API
 
-Toggling debug mode can also be done through the viewer's api, see [here](../api/mapml-viewer-api.md#toggledebug) for more.
+Toggling debug mode can also be done through the viewer's API, see the [`toggleDebug()` method](../api/mapml-viewer-api.md#toggledebug) for more.
