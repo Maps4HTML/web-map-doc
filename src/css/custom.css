@@ -40,3 +40,9 @@ a {
 p, li, dt, dd, figcaption {
   max-width: 80ch;
 }
+
+@media (min-width: 997px) {
+  .navbar-sidebar {
+    display: none;
+  }
+}
