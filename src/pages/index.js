@@ -107,7 +107,7 @@ function Home() {
           <p>The custom element suite is an open source project. Anyone who wants to submit changes/fixes is welcomed to doing so through Pull Requests to our <a href="https://github.com/Maps4HTML/Web-Map-Custom-Element">Github Repository</a>.
             <br />
             <br />
-            You can also contribute by reporting any bugs or issues while using the element suite in the form of an issue on the same <a href="https://github.com/Maps4HTML/Web-Map-Custom-Element">Github Repository</a>.
+            You can also contribute by reporting any bugs or issues while using the element suite in the form of one or more <a href="https://github.com/Maps4HTML/Web-Map-Custom-Element/issues">issues</a> on the same repository.
           </p>
         </div>
       </main>
