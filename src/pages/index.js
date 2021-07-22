@@ -19,7 +19,8 @@ const features = [
     title: 'Accessible Maps',
     description: (
       <>
-        This suite of elements enables fast and easy use of functions in an accessible manner. Keyboard navigation and interaction is contantly being improved.
+        This suite of elements enables fast and easy use of functions in an accessible manner.
+        Keyboard interaction and screen reader compatibility is contantly being improved.
       </>
     ),
   },
