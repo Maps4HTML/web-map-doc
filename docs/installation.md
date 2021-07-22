@@ -40,7 +40,7 @@ You can now use `<mapml-viewer>`, `<layer>` and the other elements that come in 
 
 An alternative to downloading the .zip file is to clone the github repository. This option allows you to make any modifications and view the source code more easily.
 
-#### Requreiments
+#### Requirements
 
 - [Node.js](https://nodejs.org/en/download/)
 
