@@ -36,3 +36,7 @@ a {
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
 }
+
+p, li, dt, dd, figcaption {
+  max-width: 80ch;
+}
