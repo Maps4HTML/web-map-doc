@@ -11,7 +11,7 @@ const features = [
     title: 'Minimum Code',
     description: (
       <>
-        MapML prioritizes minimum code needed to create elaborate maps. No Javascript required, everything can be done using HTML + custom elements.
+        <a href="https://maps4html.org/MapML/spec/"><abbr title="Map Markup Language">MapML</abbr></a> prioritizes minimum code needed to create elaborate maps. No Javascript required, everything can be done using HTML + custom elements.
       </>
     ),
   },
