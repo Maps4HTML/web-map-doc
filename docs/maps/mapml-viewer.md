@@ -34,6 +34,7 @@ The `<mapml-viewer>` element has several attributes to control the presentation 
 
 
 `projection` - an enumerated attribute. Case-sensitive values are: "`OSMTILE`", "`WGS84`", "`CBMTILE`" and "`APSTILE`".  
+The default projection is `OSMTILE`.
 
   - `OSMTILE` corresponds to the widely-used "Web Mercator" projected coordinate reference system, implying a "tile pyramid" zoom range from 0 to 23 (minimum tile size ~2.4m).
 
