@@ -7,7 +7,7 @@ title: Installation
 
 | Version | Description                                 |
 |---------|---------------------------------------------|
-| [master](https://github.com/Maps4HTML/Web-Map-Custom-Element/archive/master.zip)  | Latest version developed on `master` branch, needs to be built, steps can be found [here](/web-map-doc/docs/installation#clone-mapml-viewer-repository) |
+| [master](https://github.com/Maps4HTML/Web-Map-Custom-Element/archive/master.zip)  | Latest version developed on `master` branch, needs to be built, using the [steps to clone the repository](/web-map-doc/docs/installation#clone-mapml-viewer-repository) |
 | [v0.8.0](https://github.com/Maps4HTML/Web-Map-Custom-Element/archive/v0.8.0.zip)  | Latest zip release                          |
 
 #### Using a Downloaded Version of `<mapml-viewer>` Suite
@@ -57,4 +57,5 @@ npm install -g grunt-cli  #installs grunt command line tool
 grunt clean copy rollup   #builds mapml
 ```
 
-After the build is complete a dist folder will be created with the contents. Follow the steps [here](/web-map-doc/docs/installation#using-a-downloaded-version-of-mapml-viewer-suite) on how to use the contents.
+After the build is complete a `dist` folder will be created with the contents.
+Follow the steps of [Using a Downloaded Version](/web-map-doc/docs/installation#using-a-downloaded-version-of-mapml-viewer-suite) on how to use the contents.
