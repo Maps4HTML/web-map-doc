@@ -1,8 +1,10 @@
 module.exports = {
-  someSidebar: {
-    'Getting Started': ['installation'],
-    'Mapping Elements': [
+  sidebar: {
+    'Getting Started': [
       'intro',
+      'installation'
+    ],
+    'Mapping Elements': [
       'maps/mapml-viewer',
       'maps/web-map',
       {
@@ -22,10 +24,10 @@ module.exports = {
       },
   ],
   API: [
+    'api/mapml-viewer-api',
+    'api/layer-api',
     'api/custom-projections',
     'api/custom-rendering',
-    'api/layer-api',
-    'api/mapml-viewer-api',
   ],
   Resources: [
     'resources/debug-mode',
