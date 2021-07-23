@@ -22,13 +22,13 @@ The following markup may work on Chrome and Firefox, although it may take some f
 ```html
 <img usemap="#mymap" src="../map1.png" width="700" height="400" alt="Map area">
 <map name="mymap" is="web-map" zoom="17" lat="45.398043" lon="-75.70683" controls>
-    <layer- id="osm" src="https://geogratis.gc.ca/mapml/osmtile/osm/" label="Open Street Map" checked></layer->
-    <layer- id="marker" label="Marker layer" src="../marker.mapml"></layer->
-    <area is="map-area" href='http://example.com/marker/' alt="rectangle" coords="255,145,275,190" shape="rect">
-    <area is="map-area" id="donut" alt="Circle" href='http://example.com/circle/' coords="250,250,25" shape="circle">
-    <area is="map-area" id="hole" coords="250,250,7" shape="circle">
-    <area is="map-area" id="rect" href='http://example.com/rectangle/' alt="Rectangle" coords="345,290,415,320" shape="rect">
-    <area is="map-area" id="poly" href='http://example.com/polygon/' alt="Polygon" coords="392,116,430,100,441,128,405,145" shape="poly">
+  <layer- id="osm" src="https://geogratis.gc.ca/mapml/osmtile/osm/" label="Open Street Map" checked></layer->
+  <layer- id="marker" label="Marker layer" src="../marker.mapml"></layer->
+  <area is="map-area" href='http://example.com/marker/' alt="rectangle" coords="255,145,275,190" shape="rect">
+  <area is="map-area" id="donut" alt="Circle" href='http://example.com/circle/' coords="250,250,25" shape="circle">
+  <area is="map-area" id="hole" coords="250,250,7" shape="circle">
+  <area is="map-area" id="rect" href='http://example.com/rectangle/' alt="Rectangle" coords="345,290,415,320" shape="rect">
+  <area is="map-area" id="poly" href='http://example.com/polygon/' alt="Polygon" coords="392,116,430,100,441,128,405,145" shape="poly">
 </map>
 ```
 

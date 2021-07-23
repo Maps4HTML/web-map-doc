@@ -9,25 +9,25 @@ slug: /maps/mapml-viewer
 The `<mapml-viewer>` element is the main element you can use to put a custom Web map on your page.  To create a (really) simple Web map, you might use it like this:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-   <head>
-     <meta charset="utf-8" >
-     <title>A Simple Web Map[tm]</title>
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <script type="module" src="web-map/mapml-viewer.js"></script>
-     <style>
-     html, body {
-       height: 100%; /* These styles are required if you wish to use a % height
-                        value on the mapml-viewer element. */
-     }
-     </style>
-   </head>
-   <body>
-    <mapml-viewer projection="OSMTILE" zoom="0" lat="0.0" lon="0.0" controls>
-        <layer- label="OpenStreetMap" src="https://geogratis.gc.ca/mapml/en/osmtile/osm/" checked></layer->
-    </mapml-viewer>
-   </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A Simple Web Map[tm]</title>
+  <script type="module" src="web-map/mapml-viewer.js"></script>
+  <style>
+    html, body {
+    height: 100%; /* These styles are required if you wish to use a % based
+                     height value on the mapml-viewer element. */
+    }
+  </style>
+</head>
+<body>
+  <mapml-viewer projection="OSMTILE" zoom="0" lat="0.0" lon="0.0" controls>
+    <layer- label="OpenStreetMap" src="https://geogratis.gc.ca/mapml/en/osmtile/osm/" checked></layer->
+  </mapml-viewer>
+</body>
 </html>    
 ```
 Note that for the above example to run properly on your own site, you need to get a built copy of the `<mapml-viewer>` project in your site's folder. In the example, the `<mapml-viewer>` files are copied into the folder named "web-map" in your site root folder. Your own site's path to these files will depend on how you structure your folders.
