@@ -20,7 +20,7 @@ const features = [
     description: (
       <>
         This suite of elements enables fast and easy use of functions in an accessible manner.
-        Keyboard interaction and screen reader compatibility is contantly being improved.
+        Keyboard interaction and screen reader compatibility is constantly being improved.
       </>
     ),
   },
