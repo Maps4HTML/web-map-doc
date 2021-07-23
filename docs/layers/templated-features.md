@@ -78,7 +78,7 @@ In this section, we will learn how to create a templated feature layer. A templa
 
 You can also provide a set of elements to further define the templated feature layer. This is the list of available additions with examples.
 
-#### `<meta name="zoom">`
+### `<meta name="zoom">`
 Sets the zoom range of the layer. The layer will make requests from zoom levels 1 to 5 in the example below.
 
 ```html
@@ -86,6 +86,8 @@ Sets the zoom range of the layer. The layer will make requests from zoom levels 
 ```
 
 ---
+
+## Full Examples
 
 ```html
 <mapml-viewer projection="CBMTILE" zoom="3" lat="45.5052040" lon="-75.2202344" controls>

@@ -80,7 +80,7 @@ In this section, we will learn how to create a templated image layer. A template
 
 You can also provide a set of elements to further define the templated tile layer. This is the list of available additions with examples.
 
-#### `<meta name="zoom">`
+### `<meta name="zoom">`
 Sets the zoom range of the layer, in the following example the user can zoom from zoom level 1 to 5. 
 
 ```html
