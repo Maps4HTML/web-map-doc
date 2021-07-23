@@ -72,7 +72,7 @@ In this section, we will learn how to create a templated tile layer. A templated
 
 You can also provide a set of elements to further define the templated tile layer. This is the list of available additions with examples.
 
-#### `<meta name="zoom">`
+### `<meta name="zoom">`
 Sets the native minimum and maximum [native zoom](http://example.org/). It also allows you to set a value, this is the default zoom of all features in the case the `<feature>` is missing a zoom attribute.
 
 ```html

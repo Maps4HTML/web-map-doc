@@ -24,7 +24,6 @@ as you zoom in and out without distortion.
     </geometry>
   </feature>
 </layer->
-
 ```
 
 ## Associated Elements
@@ -62,7 +61,7 @@ This element contains the different points, lines and polygons that will be draw
 
 You can also provide a set of elements to further define the static feature layer. This is the list of available additions with examples.
 
-#### `<link rel="license">`
+### `<link rel="license">`
 
 Sets the attribution link of the layer. Example:
 
@@ -72,7 +71,7 @@ Sets the attribution link of the layer. Example:
 
 ---
 
-#### `<meta name="zoom">`
+### `<meta name="zoom">`
 
 Sets the native minimum and maximum [native zoom](http://example.org/). It also allows you to set a value, this is the default zoom of all features in the case the `<feature>` is missing a zoom attribute.
 
@@ -82,7 +81,7 @@ Sets the native minimum and maximum [native zoom](http://example.org/). It also 
 
 ---
 
-#### `<meta name="projection">`
+### `<meta name="projection">`
 
 Sets the [projection](http://example.org/) of the layer. 
 
@@ -92,7 +91,7 @@ Sets the [projection](http://example.org/) of the layer.
 
 ---
 
-#### `<meta name="cs">`
+### `<meta name="cs">`
 
 Sets the default [coordinate system](http://example.org/) of the layer. If a feature is missing the cs attribute, it will default to this, and if this is missing it will default to gcrs.
 
@@ -102,7 +101,7 @@ Sets the default [coordinate system](http://example.org/) of the layer. If a fea
 
 ---
 
-#### `<meta name="extent">`
+### `<meta name="extent">`
 
 Sets the [extent](http://example.org/) of the layer.
 

@@ -39,7 +39,7 @@ Add an image file to your project directory. Now you can access this image in Ma
 
 You can also provide a set of elements to further define the static tile layer. This is the list of available additions with examples.
 
-#### `<link rel="license">` 
+### `<link rel="license">` 
 
 Sets the attribution link of the layer. Example:
 
@@ -49,7 +49,7 @@ Sets the attribution link of the layer. Example:
 
 ---
 
-#### `<meta name="zoom">` 
+### `<meta name="zoom">` 
 
 Sets the native minimum and maximum [native zoom](http://example.org/).
 
@@ -59,7 +59,7 @@ Sets the native minimum and maximum [native zoom](http://example.org/).
 
 ---
 
-#### `<meta name="projection">` 
+### `<meta name="projection">` 
 
 Sets the [projection](http://example.org/) of the layer. 
 
