@@ -34,7 +34,6 @@ For example:
       map.projection = cProjection;
     </script>
    </head>
-   <body>
   <body>
     <mapml-viewer projection="ATLAS_POLAR_MAP" zoom="2" lat="83.48919" lon="-87.7687" controls>
       <layer- label="Atlas of Canada Polar Wall Map" checked>
