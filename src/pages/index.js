@@ -100,14 +100,16 @@ function Home() {
         )}
         <div className="container">
           <h2>Capabilities</h2>
-          <p>A thorough breakdown of the capabilities compared to other web map solutions can be found in the <a href="https://maps4html.org/UCR-MapML-Matrix/mapml-ucrs-fulfillment-matrix.html">MapML UCR Fulfillment Matrix</a>.
+          <p>
+          A thorough breakdown of the capabilities compared to other web map solutions can be found in the <a href="https://maps4html.org/UCR-MapML-Matrix/mapml-ucrs-fulfillment-matrix.html">MapML UCR Fulfillment Matrix</a>.
           </p>
-          <br />
+          
           <h2>Getting Involved</h2>
-          <p>The custom element suite is an open source project. Anyone who wants to submit changes/fixes is welcomed to doing so through Pull Requests to our <a href="https://github.com/Maps4HTML/Web-Map-Custom-Element">Github Repository</a>.
-            <br />
-            <br />
-            You can also contribute by reporting any bugs or issues while using the element suite in the form of one or more <a href="https://github.com/Maps4HTML/Web-Map-Custom-Element/issues">issues</a> on the same repository.
+          <p>
+          The custom element suite is an open source project. Anyone who wants to submit changes/fixes is welcomed to doing so through Pull Requests to our <a href="https://github.com/Maps4HTML/Web-Map-Custom-Element">Github Repository</a>.
+          </p>
+          <p>
+          You can also contribute by reporting any bugs or issues while using the element suite in the form of one or more <a href="https://github.com/Maps4HTML/Web-Map-Custom-Element/issues">issues</a> on the same repository.
           </p>
         </div>
       </main>
