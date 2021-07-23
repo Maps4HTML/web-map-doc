@@ -13,6 +13,7 @@ title: Installation
 ### Using a Downloaded Version
 
 #### Extract the zip file
+
 Extract the zip file downloaded from the links above, in there you will find many files, the following are needed for full functionality:
 
 - layer.js
@@ -32,7 +33,7 @@ Extract the zip file downloaded from the links above, in there you will find man
 Copy/move these files to your webpage's directory and add the following to the `<head>` of your HTML code:
 
 ```html
-  <script type="module" src="path/to/mapml-viewer.js"></script>
+<script type="module" src="path/to/mapml-viewer.js"></script>
 ```
 
 You can now use `<mapml-viewer>`, `<layer>` and the other elements that come in the `<mapml-viewer>` element suite on your webpages.
