@@ -36,7 +36,7 @@ Copy/move these files to your webpage's directory and add the following to the `
 <script type="module" src="path/to/mapml-viewer.js"></script>
 ```
 
-You can now use `<mapml-viewer>`, `<layer>` and the other elements that come in the `<mapml-viewer>` element suite on your webpages.
+You can now use `<mapml-viewer>`, `<layer->` and the other elements that come in the `<mapml-viewer>` element suite on your webpages.
 
 ## Clone `<mapml-viewer>` Repository
 
