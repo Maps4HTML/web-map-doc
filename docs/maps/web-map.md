@@ -33,7 +33,7 @@ The following markup may work on Chrome and Firefox, although it may take some f
 
 To experiment with the `web-map` and `map-area` custom elements, you should link your `<script type="module" src="web-map.js"></script>` to the `web-map.js` file that is built by the web-map custom element suite build process.
 
-In theory, if you take steps to provde the fallback markup, a normal (progressive) Web map experience will be had by most users, while those using an older browser or perhaps even Safari may get the "fallback" client side image map experience.  
+In theory, if you take steps to provide the fallback markup, a normal (progressive) Web map experience will be had by most users, while those using an older browser or perhaps even Safari may get the "fallback" client side image map experience.  
 
 An older example of such a Web map may be found in [this](https://maps4html.org/Web-Map-Custom-Element/blog/progressive-web-maps.html) blog post.  Please raise an [issue](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues) if you have comments about how that example works for you.
 
