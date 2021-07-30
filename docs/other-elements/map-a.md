@@ -63,11 +63,11 @@ To style linked features simply target the `map-a` class in your CSS, once a lin
 ```html
 <layer->
   <style>
-    .map-a{
-      stroke:red;
+    .map-a {
+      stroke: red;
     }
-    .map-a-visited{
-      stroke:green;
+    .map-a-visited {
+      stroke: green;
     }
   </style>
   <feature>
