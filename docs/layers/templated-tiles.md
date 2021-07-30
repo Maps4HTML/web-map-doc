@@ -14,7 +14,7 @@ In this section, we will learn how to create a templated tile layer. A templated
     <input name="zoomLevel" type="zoom" min="1" max="1" value="0" />
     <input name="row" type="location" axis="row" units="tilematrix" min="0" max="2" />
     <input name="col" type="location" axis="column" units="tilematrix" min="0" max="2" />
-    <link rel='tile' type='text/mapml' title='Templated Tiles' tref='tiles/{zoomLevel}/r{row}_c{col}.mapml' />
+    <link rel="tile" type="text/mapml" title="Templated Tiles" tref="tiles/{zoomLevel}/r{row}_c{col}.mapml" />
   </extent>
 </layer->
 ```
@@ -91,7 +91,7 @@ Sets the native minimum and maximum [native zoom](http://example.org/). It also 
       <input name="zoomLevel" type="zoom" min="1" max="1" value="0" />
       <input name="row" type="location" axis="row" units="tilematrix" min="0" max="2" />
       <input name="col" type="location" axis="column" units="tilematrix" min="0" max="2" />
-      <link rel='tile' type='text/mapml' title='Templated Tile Layer' tref='data/wgs84/{zoomLevel}/r{row}_c{col}.mapml' />
+      <link rel="tile" type="text/mapml" title="Templated Tile Layer" tref="data/wgs84/{zoomLevel}/r{row}_c{col}.mapml" />
     </extent>
   </layer->
 </mapml-viewer>
