@@ -53,7 +53,7 @@ This element contains the different points, lines and polygons that will be draw
 
 - `cs`
   - This allows you to set the [coordinate system](http://example.org/) of the points, lines and polygons.
-  - Defaults to gcrs, but can be set to tilematrix | pcrs | gcrs explicity.
+  - Defaults to gcrs, but can be set to tilematrix | pcrs | gcrs explicitly.
 
 ---
 
