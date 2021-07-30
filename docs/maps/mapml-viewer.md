@@ -9,19 +9,25 @@ slug: /maps/mapml-viewer
 The `<mapml-viewer>` element is the main element you can use to put a custom Web map on your page.  To create a (really) simple Web map, you might use it like this:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-   <head>
-     <meta charset="utf-8" >
-     <title>A Simple Web Map[tm]</title>
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <script type="module" src="web-map/mapml-viewer.js"></script>
-   </head>
-   <body>
-    <mapml-viewer projection="OSMTILE" zoom="0" lat="0.0" lon="0.0" controls>
-        <layer- label="OpenStreetMap" src="https://geogratis.gc.ca/mapml/en/osmtile/osm/" checked></layer->
-    </mapml-viewer>
-   </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A Simple Web Map[tm]</title>
+  <script type="module" src="web-map/mapml-viewer.js"></script>
+  <style>
+    html, body {
+    height: 100%; /* These styles are required if you wish to use a % based
+                     height value on the mapml-viewer element. */
+    }
+  </style>
+</head>
+<body>
+  <mapml-viewer projection="OSMTILE" zoom="0" lat="0.0" lon="0.0" controls>
+    <layer- label="OpenStreetMap" src="https://geogratis.gc.ca/mapml/en/osmtile/osm/" checked></layer->
+  </mapml-viewer>
+</body>
 </html>    
 ```
 Note that for the above example to run properly on your own site, you need to get a built copy of the `<mapml-viewer>` project in your site's folder. In the example, the `<mapml-viewer>` files are copied into the folder named "web-map" in your site root folder. Your own site's path to these files will depend on how you structure your folders.
@@ -34,6 +40,7 @@ The `<mapml-viewer>` element has several attributes to control the presentation 
 
 
 `projection` - an enumerated attribute. Case-sensitive values are: "`OSMTILE`", "`WGS84`", "`CBMTILE`" and "`APSTILE`".  
+The default projection is `OSMTILE`.
 
   - `OSMTILE` corresponds to the widely-used "Web Mercator" projected coordinate reference system, implying a "tile pyramid" zoom range from 0 to 23 (minimum tile size ~2.4m).
 
@@ -43,7 +50,7 @@ The `<mapml-viewer>` element has several attributes to control the presentation 
 
   - `APSTILE` is based on the Alaska Polar Stereographic (EPSG:5936) projected coordinate reference system, and has 20 zoom levels (0 to 19).
 
-  - other projections are possible, using the "[Custom Projections](https://github.com/Maps4HTML/Web-Map-Custom-Element/blob/8723e4d8bad8e3629bc9dca7a6fe81d724e8418f/demo/CustomProjection.html#L1-L158)" API
+  - other projections are possible, using the [Custom Projections API](../api/custom-projections).
 
 `zoom` - a non-negative integer.  The value establishes the initial zoom level of the map.  For a small scale view of the world, use a lower value.  Use larger values for larger scales (smaller area maps). The maximum value depends on the particular `projection` and data source. Many map data sources have limited zoom levels available.
 

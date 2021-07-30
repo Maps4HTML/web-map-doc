@@ -11,7 +11,7 @@ const features = [
     title: 'Minimum Code',
     description: (
       <>
-        MapML prioritizes minimum code needed to create elaborate maps. No Javascript required, everything can be done using HTML + custom elements.
+        <a href="https://maps4html.org/MapML/spec/"><abbr title="Map Markup Language">MapML</abbr></a> prioritizes minimum code needed to create elaborate maps. No Javascript required, everything can be done using HTML + custom elements.
       </>
     ),
   },
@@ -19,7 +19,8 @@ const features = [
     title: 'Accessible Maps',
     description: (
       <>
-        This suite of elements enables fast and easy use of functions in an accessible manner. Keyboard navigation and interaction is contantly being improved.
+        This suite of elements enables fast and easy use of functions in an accessible manner.
+        Keyboard interaction and screen reader compatibility is constantly being improved.
       </>
     ),
   },
@@ -55,7 +56,6 @@ function Home() {
   mapml-viewer {
     width: 100%;
     height: inherit;
-    background-color: #bfe8fc;
   }
   </style>
   <mapml-viewer projection="CBMTILE" zoom="5" lat="58" lon="-90" frameborder="0" controls>
@@ -69,7 +69,7 @@ function Home() {
       description="Documentation for mapml-viewer and layer element suite">
 
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <iframe tabIndex="-1" height="500px" width="100%" frameBorder="0" scrolling="no" srcDoc={mapiframe}></iframe>
+      <iframe tabIndex="-1" height="500px" width="100%" frameBorder="0" scrolling="no" title="MapML-viewer" srcDoc={mapiframe}></iframe>
         <div className="container">
 
           <h1 className="hero__title">{siteConfig.title}</h1>
@@ -100,14 +100,16 @@ function Home() {
         )}
         <div className="container">
           <h2>Capabilities</h2>
-          <p>A thorough breakdown of the capabilities compared to other web map solutions can be found in the <a href="https://maps4html.org/UCR-MapML-Matrix/mapml-ucrs-fulfillment-matrix.html">MapML UCR Fulfillment Matrix</a>.
+          <p>
+          A thorough breakdown of the capabilities compared to other web map solutions can be found in the <a href="https://maps4html.org/UCR-MapML-Matrix/mapml-ucrs-fulfillment-matrix.html">MapML UCR Fulfillment Matrix</a>.
           </p>
-          <br />
+          
           <h2>Getting Involved</h2>
-          <p>The custom element suite is an open source project. Anyone who wants to submit changes/fixes is welcomed to doing so through Pull Requests to our <a href="https://github.com/Maps4HTML/Web-Map-Custom-Element">Github Repository</a>.
-            <br />
-            <br />
-            You can also contribute by reporting any bugs or issues while using the element suite in the form of an issue on the same <a href="https://github.com/Maps4HTML/Web-Map-Custom-Element">Github Repository</a>.
+          <p>
+          The custom element suite is an open source project. Anyone who wants to submit changes/fixes is welcomed to doing so through Pull Requests to our <a href="https://github.com/Maps4HTML/Web-Map-Custom-Element">Github Repository</a>.
+          </p>
+          <p>
+          You can also contribute by reporting any bugs or issues while using the element suite in the form of one or more <a href="https://github.com/Maps4HTML/Web-Map-Custom-Element/issues">issues</a> on the same repository.
           </p>
         </div>
       </main>

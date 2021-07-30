@@ -14,7 +14,7 @@ To render custom tiles using JavaScript, listen for the `tileloadstart` event on
 ### `tileloadstart` Event
 
 This event is fired when a tile is first being created, the event contains the following structure in its detail property:
-```
+```js
 {
   x: 1,    // tilematrix x value of the tile loaded
   y: 2,    // tilematrix y value of the tile loaded
@@ -35,8 +35,8 @@ The map:
       <input name="zoomLevel" type="zoom" min="0" max="23" value="1" />
       <input name="row" type="location" axis="row" units="tilematrix" min="0" max="2" />
       <input name="col" type="location" axis="column" units="tilematrix" min="0" max="2" />
-
-      <link rel='tile' title='blank' tref='' /> //listen for the tileloadstart event on this element
+      <!-- listen for the tileloadstart event on this element -->
+      <link rel="tile" title="" tref="" />
     </extent>
   </layer->
 </mapml-viewer>

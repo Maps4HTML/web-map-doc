@@ -23,7 +23,7 @@ wrapped it places a blue outline that is 1 pixel wide around the feature, that l
   - Defaults to `text/mapml`, in the absence of a valid type value.
   
 
-#### Target Behavior for `text/mapml`
+## Target Behavior for `text/mapml`
 
 | Target Value 	| Behavior                                              	|
 |--------------	|-------------------------------------------------------	|
@@ -32,7 +32,7 @@ wrapped it places a blue outline that is 1 pixel wide around the feature, that l
 | _parent      	| Replace all the layers with the linked URL layer.     	|
 | _top         	| Navigate the webpage to the linked URL.               	|
 
-#### Target Behavior for `text/html`
+## Target Behavior for `text/html`
 
 | Target Value 	| Behavior                                	|
 |--------------	|-----------------------------------------	|
@@ -41,7 +41,7 @@ wrapped it places a blue outline that is 1 pixel wide around the feature, that l
 | _parent      	| Navigate the webpage to the linked URL. 	|
 | _top         	| Navigate the webpage to the linked URL. 	|
 
-#### Location fragments
+## Location fragments
 
 If the `type` attribute's value is `text/mapml`, you have the ability add a location fragment
 to the URL. This will pan & zoom the map to the given location.
@@ -55,7 +55,7 @@ i.e. `<map-a href="#1, 20, 30">...</map-a>` will pan to latitude: 30, longitude:
 
 ## Examples
 
-#### Styling Linked Features
+### Styling Linked Features
 
 To style linked features simply target the `map-a` class in your CSS, once a link is clicked you can target the
 `map-a-visited` class. See the example below:
@@ -63,11 +63,11 @@ To style linked features simply target the `map-a` class in your CSS, once a lin
 ```html
 <layer->
   <style>
-    .map-a{
-      stroke:red;
+    .map-a {
+      stroke: red;
     }
-    .map-a-visited{
-      stroke:green;
+    .map-a-visited {
+      stroke: green;
     }
   </style>
   <feature>
@@ -87,7 +87,7 @@ To style linked features simply target the `map-a` class in your CSS, once a lin
 
 ---
 
-#### Wrapping a Feature Type + Location Fragment 
+### Wrapping a Feature Type + Location Fragment 
 
 ```html
 <feature>
@@ -107,7 +107,7 @@ To style linked features simply target the `map-a` class in your CSS, once a lin
 This will replace the current layer with the layer within externalMapML.mapml, once it's added the map will then goto
 zoomlevel: 2, longitude: -98, latitude: 37.
 
-#### Wrapping a point coordinate with `target="_blank"` 
+### Wrapping a point coordinate with `target="_blank"` 
 
 ```html
 <feature>
@@ -124,7 +124,7 @@ zoomlevel: 2, longitude: -98, latitude: 37.
 
 In this example, a point will be created at (2954, 3210) which, once clicked, adds a new layer to the map.
 
-#### Nested `<map-a>` definition and behavior
+### Nested `<map-a>` definition and behavior
 
 ```html
 <feature>
