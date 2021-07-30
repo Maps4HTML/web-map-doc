@@ -93,6 +93,7 @@ module.exports = {
     },
     prism: {
       theme: require('prism-react-renderer/themes/duotoneLight'),
+      darkTheme: require('prism-react-renderer/themes/vsDark'),
     },
   },
   presets: [
