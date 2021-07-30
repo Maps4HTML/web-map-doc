@@ -69,6 +69,10 @@ module.exports = {
               label: 'Twitter',
               href: 'https://twitter.com/maps4html',
             },
+            {
+              label: 'YouTube',
+              href: 'https://www.youtube.com/channel/UCKIv6IGwzxPF2HNhvq-VhKA',
+            },
           ],
         },
         {

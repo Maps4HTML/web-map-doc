@@ -36,3 +36,40 @@ a {
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
 }
+
+p, li, dt, dd, figcaption {
+  max-width: 80ch;
+}
+
+.menu--responsive .menu__button {
+  color: #fff;
+  background: var(--ifm-link-color);
+  border: 0;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+  min-height: 45px;
+}
+
+/* Fix Docusaurus tabbing issues */
+@media (max-width: 996px) {
+  .navbar--fixed-top:not(.navbar-sidebar--show) .navbar-sidebar__items {
+    display: none;
+  }
+  .navbar--fixed-top.navbar-sidebar--show:not(:focus-within) .navbar-sidebar,
+  .navbar--fixed-top.navbar-sidebar--show:not(:focus-within) .navbar-sidebar__backdrop {
+    display: none;
+  }
+}
+@media (min-width: 997px) {
+  .navbar-sidebar {
+    display: none;
+  }
+}
+body {
+  overflow-y: auto!important;
+}
+:focus {
+  outline-color: -webkit-focus-ring-color !important;
+  outline-style: auto !important;
+  outline-width: thin !important;
+  outline: revert !important;
+}

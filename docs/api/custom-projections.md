@@ -13,42 +13,41 @@ The `<mapml-viewer>` and `<map is="web-map">` custom elements provide the custom
 For example:
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-   <head>
-     <meta charset="utf-8" >
-     <title>Example Custom Projection</title>
-     <meta name="viewport" content="width=device-width, initial-scale=1">
-     <script type="module" src="web-map/mapml-viewer.js"></script>
-     <script type="module">
-       let customProjectionDefinition = `{
-          "projection": "ATLAS_POLAR_MAP",
-          "proj4string" : "+proj=aeqd +lat_0=90 +lon_0=-90 +x_0=0 +y_0=0 +ellps=sphere +units=m +no_defs +type=crs",
-          "origin" : [-20015200,20015200],
-          "resolutions" :  [33073,16536.5,8268.246,4134.123,2067.061,1033.531,516.765],
-          "bounds" : [[4979939,-4846977],[-5139071,3980038]],
-          "tilesize" : 256
-        }`;
-      let map = document.querySelector("mapml-viewer");
-      let cProjection = map.defineCustomProjection(customProjectionDefinition);    
-      map.projection = cProjection;
-    </script>
-   </head>
-   <body>
-  <body>
-    <mapml-viewer projection="ATLAS_POLAR_MAP" zoom="2" lat="83.48919" lon="-87.7687" controls>
-      <layer- label="Atlas of Canada Polar Wall Map" checked>
-        <link rel="license" title="Canadian Federal Geospatial Platform" href="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN/MapServer/">
-        <extent units="ATLAS_POLAR_MAP">
-          <input type="zoom" name="z" min="0" max="6" value="6" >
-          <input type="location" name="x" axis="column" units="tilematrix" min="116" max="186">
-          <input type="location" name="y" axis="row" units="tilematrix" min="125" max="184">
-          <link rel="tile" tref="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN/MapServer/tile/{z}/{y}/{x}/">
-          <link rel="tile" tref="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN_A/MapServer/tile/{z}/{y}/{x}/">
-        </extent>
-      </layer->
-    </mapml-viewer>
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Example Custom Projection</title>
+  <script type="module" src="web-map/mapml-viewer.js"></script>
+  <script type="module">
+    let customProjectionDefinition = `{
+      "projection": "ATLAS_POLAR_MAP",
+      "proj4string" : "+proj=aeqd +lat_0=90 +lon_0=-90 +x_0=0 +y_0=0 +ellps=sphere +units=m +no_defs +type=crs",
+      "origin" : [-20015200,20015200],
+      "resolutions" :  [33073,16536.5,8268.246,4134.123,2067.061,1033.531,516.765],
+      "bounds" : [[4979939,-4846977],[-5139071,3980038]],
+      "tilesize" : 256
+      }`;
+    let map = document.querySelector("mapml-viewer");
+    let cProjection = map.defineCustomProjection(customProjectionDefinition);    
+    map.projection = cProjection;
+  </script>
+</head>
+<body>
+  <mapml-viewer projection="ATLAS_POLAR_MAP" zoom="2" lat="83.48919" lon="-87.7687" controls>
+    <layer- label="Atlas of Canada Polar Wall Map" checked>
+    <link rel="license" title="Canadian Federal Geospatial Platform" href="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN/MapServer/">
+      <extent units="ATLAS_POLAR_MAP">
+        <input type="zoom" name="z" min="0" max="6" value="6" >
+        <input type="location" name="x" axis="column" units="tilematrix" min="116" max="186">
+        <input type="location" name="y" axis="row" units="tilematrix" min="125" max="184">
+        <link rel="tile" tref="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN/MapServer/tile/{z}/{y}/{x}/">
+        <link rel="tile" tref="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN_A/MapServer/tile/{z}/{y}/{x}/">
+      </extent>
+    </layer->
+  </mapml-viewer>
+</body>
 </html>
 ```
 

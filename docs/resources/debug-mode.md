@@ -14,13 +14,13 @@ panel that display's the mouse's current location in the various coordinate syst
 - the solid red line represents the layer's extent, if there are multiple layers the solid line may be a variety of colours
 - The bottom left panel displays the current mouse's position
 
-### Accessing Debug Mode
+## Accessing Debug Mode
 
-#### Map's Context Menu
+### Map's Context Menu
 
 ![The map in debug mode](../assets/img/toggle-debug.gif)
 
 
-#### Map's API
+### Map's API
 
-Toggling debug mode can also be done through the viewer's api, see [here](../api/mapml-viewer-api.md#toggledebug) for more.
+Toggling debug mode can also be done through the viewer's API, see the [`toggleDebug()` method](../api/mapml-viewer-api.md#toggledebug) for more.
