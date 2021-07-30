@@ -28,7 +28,7 @@ the viewer through JavaScript.
 | Method                   	| Functionality                                                        	|
 |--------------------------	|----------------------------------------------------------------------	|
 | [back()](#back)                   	| Navigates back in the map's panning history.                         	|
-| defineCustomProjection() 	| Visit the [Custom Projections API](custom-projections) for more information.                                       	|
+| defineCustomProjection() 	| Visit the [Custom Projections API](../api/custom-projections) for more information.                                       	|
 | [forward()](#forward)                	| Navigates forward in the map's panning history.                      	|
 | [reload()](#reload)                 	| Clear the map's panning history and return to the starting location. 	|
 | [toggleDebug()](#toggledebug)            	| Toggle the debug functionality of the map.                           	|
