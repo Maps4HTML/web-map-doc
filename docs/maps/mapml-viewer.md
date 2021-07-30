@@ -50,7 +50,7 @@ The default projection is `OSMTILE`.
 
   - `APSTILE` is based on the Alaska Polar Stereographic (EPSG:5936) projected coordinate reference system, and has 20 zoom levels (0 to 19).
 
-  - other projections are possible, using the [Custom Projections API](../api/custom-projections).
+  - other projections are possible, using the [Custom Projections API](../custom-projections).
 
 `zoom` - a non-negative integer.  The value establishes the initial zoom level of the map.  For a small scale view of the world, use a lower value.  Use larger values for larger scales (smaller area maps). The maximum value depends on the particular `projection` and data source. Many map data sources have limited zoom levels available.
 
