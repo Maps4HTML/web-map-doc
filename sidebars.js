@@ -1,8 +1,8 @@
 module.exports = {
   sidebar: {
     'Getting Started': [
-      'intro',
       'installation',
+      'intro',
     ],
     'Mapping Elements': [
       'maps/mapml-viewer',

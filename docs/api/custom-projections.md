@@ -19,7 +19,7 @@ For example:
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Example Custom Projection</title>
-  <script type="module" src="web-map/mapml-viewer.js"></script>
+  <script type="module" src="https://unpkg.com/@maps4html/web-map-custom-element@latest/dist/mapml-viewer.js"></script>
   <script type="module">
     let customProjectionDefinition = `{
       "projection": "ATLAS_POLAR_MAP",
@@ -39,7 +39,7 @@ For example:
     <layer- label="Atlas of Canada Polar Wall Map" checked>
     <link rel="license" title="Canadian Federal Geospatial Platform" href="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN/MapServer/">
       <extent units="ATLAS_POLAR_MAP">
-        <input type="zoom" name="z" min="0" max="6" value="6" >
+        <input type="zoom" name="z" min="0" max="6" value="6">
         <input type="location" name="x" axis="column" units="tilematrix" min="116" max="186">
         <input type="location" name="y" axis="row" units="tilematrix" min="125" max="184">
         <link rel="tile" tref="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN/MapServer/tile/{z}/{y}/{x}/">

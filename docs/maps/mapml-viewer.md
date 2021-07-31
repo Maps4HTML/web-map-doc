@@ -13,7 +13,7 @@ The `<mapml-viewer>` element is the main element you can use to put a custom Web
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>A Simple Web Map[tm]</title>
-  <script type="module" src="web-map/mapml-viewer.js"></script>
+  <script type="module" src="https://unpkg.com/@maps4html/web-map-custom-element@latest/dist/mapml-viewer.js"></script>
   <style>
     html, body {
     height: 100%; /* These styles are required if you wish to use a % based
@@ -28,7 +28,6 @@ The `<mapml-viewer>` element is the main element you can use to put a custom Web
 </body>
 </html>    
 ```
-Note that for the above example to run properly on your own site, you need to get a built copy of the `<mapml-viewer>` project in your site's folder. In the example, the `<mapml-viewer>` files are copied into the folder named "web-map" in your site root folder. Your own site's path to these files will depend on how you structure your folders.
 
 `<mapml-viewer>` is an "[autonomous custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)" in HTML.  You can distinguish a custom element of any category from a "native" HTML element by the "-" anywhere in the element name. Autonomous custom elements are supported by all modern browsers, but don't work in old browsers (e.g. Internet Explorer and old Edge).
 
