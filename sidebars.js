@@ -9,6 +9,7 @@ module.exports = {
       'maps/web-map',
       {
         'Layers': [
+          'layers/layer',
           'layers/static-tiles',
           'layers/static-features',
           'layers/static-images',
