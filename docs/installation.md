@@ -24,7 +24,7 @@ slug: /
 
 | Version | Description                                 |
 |---------|---------------------------------------------|
-| [master](https://github.com/Maps4HTML/Web-Map-Custom-Element/archive/master.zip)  | Latest version developed on `master` branch, needs to be built, using the [steps to clone the repository](/web-map-doc/docs/installation#clone-mapml-viewer-repository) |
+| [master](https://github.com/Maps4HTML/Web-Map-Custom-Element/archive/master.zip)  | Latest version developed on `master` branch, needs to be built, using the [steps to clone the repository](/web-map-doc/docs#clone-mapml-viewer-repository) |
 | [v0.8.0](https://github.com/Maps4HTML/Web-Map-Custom-Element/archive/v0.8.0.zip)  | Latest zip release                          |
 
 ### Using a downloaded version
