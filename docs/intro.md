@@ -1,7 +1,7 @@
 ---
 id: intro
 title: Introduction
-slug: /intro
+slug: /
 ---
 
 The web-map custom element suite provides a Web map viewer 'widget' which is modelled somewhat after the HTML5 `<video>` tag: a fairly simple way to get started publishing Web content of the mapping variety.  If you're familiar with that HTML `<video>` developer and user experience you may find developing with and using the web-map custom element suite familiar.
