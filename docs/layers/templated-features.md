@@ -10,35 +10,35 @@ In this section, we will learn how to create a templated feature layer. A templa
 
 ```html
 <layer- label="Alabama" checked>
-  <meta name="zoom" content="min=2,max=5" />
-  <extent units="CBMTILE">
-    <input name="z" type="zoom" min="2" max="18" value="0" />
-    <input name="xmin" type="location" units="gcrs" axis="longitude" position="top-left" min="-76" max="-74" />
-    <input name="ymin" type="location" units="gcrs" axis="latitude" position="bottom-right" min="45" max="46" />
-    <input name="xmax" type="location" units="gcrs" axis="longitude" position="bottom-right" min="-76" max="-74" />
-    <input name="ymax" type="location" units="gcrs" axis="latitude" position="top-left" min="45" max="46" />
-    <link rel="features" tref="data/alabama_feature.mapml?{xmin}{ymin}{xmax}{ymax}{z}" />
-  </extent>
+  <map-meta name="zoom" content="min=2,max=5"></map-meta>
+  <map-extent units="CBMTILE">
+    <map-input name="z" type="zoom" min="2" max="18" value="0"></map-input>
+    <map-input name="xmin" type="location" units="gcrs" axis="longitude" position="top-left" min="-76" max="-74"></map-input>
+    <map-input name="ymin" type="location" units="gcrs" axis="latitude" position="bottom-right" min="45" max="46"></map-input>
+    <map-input name="xmax" type="location" units="gcrs" axis="longitude" position="bottom-right" min="-76" max="-74"></map-input>
+    <map-input name="ymax" type="location" units="gcrs" axis="latitude" position="top-left" min="45" max="46"></map-input>
+    <map-link rel="features" tref="data/alabama_feature.mapml?{xmin}{ymin}{xmax}{ymax}{z}"></map-link>
+  </map-extent>
 </layer->
 ```
 
 ## Associated Elements
 
-### `<extent>`
+### `<map-extent>`
 
 - `units`
   - This allows you to define what the [projection](http://example.org) of the templated features.
     
 ---
 
-### `<input>`
+### `<map-input>`
 
 - `axis`
     - This attribute is only useful on inputs of type <strong>location</strong>, it sets the axis the following input defines. This value also defines what the <strong>min</strong> and <strong>max</strong> value's units.
     - Options are, row | column | easting | northing | latitude | longitude
 
 - `name`
-    - This allows you to name the input, this name is then used in the url template used in the `<link>` href attribute.
+    - This allows you to name the input, this name is then used in the url template used in the `<map-link>` href attribute.
 
 - `type`
     - Sets the <strong>type</strong> of the input.
@@ -58,7 +58,7 @@ In this section, we will learn how to create a templated feature layer. A templa
 
 ---
 
-### `<link>`
+### `<map-link>`
 
 - `rel`
     - Set this to features in the case of a templated features layer.
@@ -78,11 +78,11 @@ In this section, we will learn how to create a templated feature layer. A templa
 
 You can also provide a set of elements to further define the templated feature layer. This is the list of available additions with examples.
 
-### `<meta name="zoom">`
+### `<map-meta name="zoom">`
 Sets the zoom range of the layer. The layer will make requests from zoom levels 1 to 5 in the example below.
 
 ```html
-<meta name="zoom" content="min=1,max=5" />
+<map-meta name="zoom" content="min=1,max=5"></map-meta>
 ```
 
 ---
@@ -92,15 +92,15 @@ Sets the zoom range of the layer. The layer will make requests from zoom levels 
 ```html
 <mapml-viewer projection="CBMTILE" zoom="3" lat="45.5052040" lon="-75.2202344" controls>
   <layer- label="Alabama" checked>
-    <meta name="zoom" content="min=2,max=5" />
-    <extent units="CBMTILE">
-      <input name="z" type="zoom" min="2" max="18" value="0" />
-      <input name="xmin" type="location" units="gcrs" axis="longitude" position="top-left" min="-76" max="-74" />
-      <input name="ymin" type="location" units="gcrs" axis="latitude" position="bottom-right" min="45" max="46" />
-      <input name="xmax" type="location" units="gcrs" axis="longitude" position="bottom-right" min="-76" max="-74" />
-      <input name="ymax" type="location" units="gcrs" axis="latitude" position="top-left" min="45" max="46" />
-      <link rel="features" tref="data/alabama_feature.mapml?{xmin}{ymin}{xmax}{ymax}{z}" />
-    </extent>
+    <map-meta name="zoom" content="min=2,max=5"></map-meta>
+    <map-extent units="CBMTILE">
+      <map-input name="z" type="zoom" min="2" max="18" value="0"></map-input>
+      <map-input name="xmin" type="location" units="gcrs" axis="longitude" position="top-left" min="-76" max="-74"></map-input>
+      <map-input name="ymin" type="location" units="gcrs" axis="latitude" position="bottom-right" min="45" max="46"></map-input>
+      <map-input name="xmax" type="location" units="gcrs" axis="longitude" position="bottom-right" min="-76" max="-74"></map-input>
+      <map-input name="ymax" type="location" units="gcrs" axis="latitude" position="top-left" min="45" max="46"></map-input>
+      <map-link rel="features" tref="data/alabama_feature.mapml?{xmin}{ymin}{xmax}{ymax}{z}"></map-link>
+    </map-extent>
   </layer->
 </mapml-viewer>
 ```
