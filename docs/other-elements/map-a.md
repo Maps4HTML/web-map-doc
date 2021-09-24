@@ -62,26 +62,26 @@ To style linked features simply target the `map-a` class in your CSS, once a lin
 
 ```html
 <layer->
-  <style>
+  <map-style>
     .map-a {
       stroke: red;
     }
     .map-a-visited {
       stroke: green;
     }
-  </style>
-  <feature>
-    <properties>
+  </map-style>
+  <map-feature>
+    <map-properties>
       <h1>Basic</h1>
-    </properties>
-    <geometry>
+    </map-properties>
+    <map-geometry>
       <map-a href="../externalMapML.mapml#2,-98,37">
-        <polygon>
-          <coordinates>2771 3106 2946 3113 2954 3210 2815 3192 2771 3106</coordinates>
-        </polygon>
+        <map-polygon>
+          <map-coordinates>2771 3106 2946 3113 2954 3210 2815 3192 2771 3106</map-coordinates>
+        </map-polygon>
       </map-a>
-    </geometry>
-  </feature>
+    </map-geometry>
+  </map-feature>
 </layer->
 ```
 
@@ -90,18 +90,18 @@ To style linked features simply target the `map-a` class in your CSS, once a lin
 ### Wrapping a Feature Type + Location Fragment 
 
 ```html
-<feature>
-  <properties>
+<map-feature>
+  <map-properties>
     <h1>Basic</h1>
-  </properties>
-  <geometry>
+  </map-properties>
+  <map-geometry>
     <map-a href="../externalMapML.mapml#2,-98,37">
-      <polygon>
-        <coordinates>2771 3106 2946 3113 2954 3210 2815 3192 2771 3106</coordinates>
-      </polygon>
+      <map-polygon>
+        <map-coordinates>2771 3106 2946 3113 2954 3210 2815 3192 2771 3106</map-coordinates>
+      </map-polygon>
     </map-a>
-  </geometry>
-</feature>
+  </map-geometry>
+</map-feature>
 ```
 
 This will replace the current layer with the layer within externalMapML.mapml, once it's added the map will then goto
@@ -110,16 +110,16 @@ zoomlevel: 2, longitude: -98, latitude: 37.
 ### Wrapping a point coordinate with `target="_blank"` 
 
 ```html
-<feature>
-  <properties>
+<map-feature>
+  <map-properties>
     <h1>_blank target</h1>
-  </properties>
-  <geometry>
-    <polygon>
-      <coordinates>2771 3106 2946 3113 <map-a href="file.mapml" target="_blank"> 2954 3210 </map-a> 2815 3192 2771 3106</coordinates>
-    </polygon>
-  </geometry>
-</feature>
+  </map-properties>
+  <map-geometry>
+    <map-polygon>
+      <map-coordinates>2771 3106 2946 3113 <map-a href="file.mapml" target="_blank"> 2954 3210 </map-a> 2815 3192 2771 3106</map-coordinates>
+    </map-polygon>
+  </map-geometry>
+</map-feature>
 ```
 
 In this example, a point will be created at (2954, 3210) which, once clicked, adds a new layer to the map.
@@ -127,25 +127,25 @@ In this example, a point will be created at (2954, 3210) which, once clicked, ad
 ### Nested `<map-a>` definition and behavior
 
 ```html
-<feature>
-  <properties>
+<map-feature>
+  <map-properties>
     <h1>Advanced Example</h1>
-  </properties>
-  <geometry>
+  </map-properties>
+  <map-geometry>
     <map-a href="parent.mapml" target="_blank">
-      <multipolygon>
-        <polygon>
-          <coordinates>2771 3106 2946 3113 <map-a href="webpage.html" target="_blank" type="text/mapml"> 2954 3210 </map-a> 2815 3192 2771 3106</coordinates>
-        </polygon>
+      <map-multipolygon>
+        <map-polygon>
+          <map-coordinates>2771 3106 2946 3113 <map-a href="webpage.html" target="_blank" type="text/mapml"> 2954 3210 </map-a> 2815 3192 2771 3106</map-coordinates>
+        </map-polygon>
         <map-a href="nested.mapml" target="_top">
-          <polygon>
-            <coordinates>11 11 12 11 12 12 11 12</coordinates>
-          </polygon>
+          <map-polygon>
+            <map-coordinates>11 11 12 11 12 12 11 12</map-coordinates>
+          </map-polygon>
         </map-a>
-      </multipolygon>
+      </map-multipolygon>
     </map-a>
-  </geometry>
-</feature>
+  </map-geometry>
+</map-feature>
 ```
 In this advanced example there are multiple nested `<map-a>`. The simple behavior is, the closest `<map-a>` is the link
 behavior that the given location/area will adopt.
