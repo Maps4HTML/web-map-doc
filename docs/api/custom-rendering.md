@@ -9,7 +9,7 @@ HTML's domain onto the map.
 
 ## Custom Tiles
 
-To render custom tiles using JavaScript, listen for the `tileloadstart` event on a templated layer's `<link rel="tile">` element.
+To render custom tiles using JavaScript, listen for the `tileloadstart` event on a templated layer's `<map-link rel="tile">` element.
 
 ### `tileloadstart` Event
 
@@ -30,14 +30,14 @@ The map:
 ```html
 <mapml-viewer projection="OSMTILE" zoom="0" lat="45" lon="-75" controls>
   <layer- label="Custom Tiles" checked>
-    <meta name="zoom" content="min=0,max=23" />
-    <extent units="OSMTILE">
-      <input name="zoomLevel" type="zoom" min="0" max="23" value="1" />
-      <input name="row" type="location" axis="row" units="tilematrix" min="0" max="2" />
-      <input name="col" type="location" axis="column" units="tilematrix" min="0" max="2" />
+    <map-meta name="zoom" content="min=0,max=23" ></map-meta>
+    <map-extent units="OSMTILE">
+      <map-input name="zoomLevel" type="zoom" min="0" max="23" value="1" ></map-input>
+      <map-input name="row" type="location" axis="row" units="tilematrix" min="0" max="2" ><map-input>
+      <map-input name="col" type="location" axis="column" units="tilematrix" min="0" max="2" ><map-input>
       <!-- listen for the tileloadstart event on this element -->
-      <link rel="tile" title="" tref="" />
-    </extent>
+      <map-link rel="tile" title="" tref="" ></map-link>
+    </map-extent>
   </layer->
 </mapml-viewer>
 ```
@@ -45,7 +45,7 @@ The map:
 
 The JavaScript for creating custom tiles:
 ```js
-let layer = document.querySelector("body > mapml-viewer > layer- > extent > link");
+let layer = document.querySelector("body > mapml-viewer > layer- > map-extent > map-link");
     layer.addEventListener("tileloadstart", (e) => {
       let customTile = document.createElement("p");
       customTile.innerHTML = `x: {e.detail.x} y: {e.detail.y} zoom: {e.detail.zoom}`;
