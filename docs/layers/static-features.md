@@ -12,25 +12,25 @@ as you zoom in and out without distortion.
 
 ```html
 <layer- label="My Feature Layer" checked>
-  <feature zoom="2">
-    <properties>
+  <map-feature zoom="2">
+    <map-properties>
       <h1>Feature Popup Text</h1>
       <a href="http://example.org/">Feature Popup Link</a>
-    </properties>
-    <geometry cs="tilematrix">
-      <polygon>
-        <coordinates>11 11 12 11 12 12 11 12</coordinates>
-      </polygon>
-    </geometry>
-  </feature>
+    </map-properties>
+    <map-geometry cs="tilematrix">
+      <map-polygon>
+        <map-coordinates>11 11 12 11 12 12 11 12</map-coordinates>
+      </map-polygon>
+    </map-geometry>
+  </map-feature>
 </layer->
 ```
 
 ## Associated Elements
 
-### `<feature>`
+### `<map-feature>`
 
-Parent element that contains the `<properties>` and `<geometry>` elements
+Parent element that contains the `<map-properties>` and `<map-geometry>` elements
 
 #### Attributes
 
@@ -39,13 +39,13 @@ Parent element that contains the `<properties>` and `<geometry>` elements
 
 ---
 
-### `<properties>`
+### `<map-properties>`
 
 This element contains the contents of the popup associated to a given feature.
 
 ---
 
-### `<geometry>`
+### `<map-geometry>`
 
 This element contains the different points, lines and polygons that will be drawn. Details on the geometry elements and it's syntax can be found [here](http://example.org/).
 
@@ -61,52 +61,52 @@ This element contains the different points, lines and polygons that will be draw
 
 You can also provide a set of elements to further define the static feature layer. This is the list of available additions with examples.
 
-### `<link rel="license">`
+### `<map-link rel="license">`
 
 Sets the attribution link of the layer. Example:
 
 ```html
-<link rel="license" href="https://www.nrcan.gc.ca/earth-sciences/geography/topographic-information/free-data-geogratis/licence/17285" title="Canada Base Map © Natural Resources Canada">
+<map-link rel="license" href="https://www.nrcan.gc.ca/earth-sciences/geography/topographic-information/free-data-geogratis/licence/17285" title="Canada Base Map © Natural Resources Canada"></map-link>
 ```
 
 ---
 
-### `<meta name="zoom">`
+### `<map-meta name="zoom">`
 
-Sets the native minimum and maximum [native zoom](http://example.org/). It also allows you to set a value, this is the default zoom of all features in the case the `<feature>` is missing a zoom attribute.
+Sets the native minimum and maximum [native zoom](http://example.org/). It also allows you to set a value, this is the default zoom of all features in the case the `<map-feature>` is missing a zoom attribute.
 
 ```html
-<meta name="zoom" content="min=1,max=5,value=0" />
+<map-meta name="zoom" content="min=1,max=5,value=0"></map-meta>
 ```
 
 ---
 
-### `<meta name="projection">`
+### `<map-meta name="projection">`
 
 Sets the [projection](http://example.org/) of the layer. 
 
 ```html
-<meta name="projection" content="CBMTILE">
+<map-meta name="projection" content="CBMTILE"></map-meta>
 ```
 
 ---
 
-### `<meta name="cs">`
+### `<map-meta name="cs">`
 
 Sets the default [coordinate system](http://example.org/) of the layer. If a feature is missing the cs attribute, it will default to this, and if this is missing it will default to gcrs.
 
 ```html
-<meta name="cs" content="gcrs">
+<map-meta name="cs" content="gcrs"></map-meta>
 ```
 
 ---
 
-### `<meta name="extent">`
+### `<map-meta name="extent">`
 
 Sets the [extent](http://example.org/) of the layer.
 
 ```html
-<meta name="extent" content="zoom=0,top-left-column=0,top-left-row=0,bottom-right-column=5,bottom-right-row=5" />
+<map-meta name="extent" content="zoom=0,top-left-column=0,top-left-row=0,bottom-right-column=5,bottom-right-row=5"></map-meta>
 ```
 
 ---
@@ -118,62 +118,62 @@ Sets the [extent](http://example.org/) of the layer.
     controls>
 
     <layer- label="Arizona" checked>
-      <meta name="projection" content="CBMTILE" />
-      <meta name="zoom" content="min=1,max=5,value=0" />
-      <meta name="cs" content="gcrs" />
-      <meta name="extent" content="zoom=0,top-left-column=0,top-left-row=0,bottom-right-column=5,bottom-right-row=5" />
-      <link id="first" rel="stylesheet" type="text/css" href="first.css">
-      <feature zoom="2" class="refDiff">
-        <properties>
+      <map-meta name="projection" content="CBMTILE"></map-meta>
+      <map-meta name="zoom" content="min=1,max=5,value=0"></map-meta>
+      <map-meta name="cs" content="gcrs"></map-meta>
+      <map-meta name="extent" content="zoom=0,top-left-column=0,top-left-row=0,bottom-right-column=5,bottom-right-row=5"></map-meta>
+      <map-link id="first" rel="stylesheet" type="text/css" href="first.css"></map-link>
+      <map-feature zoom="2" class="refDiff">
+        <map-properties>
           <h1>Test</h1>
           <a href="http://example.org/">test</a>
-        </properties>
-        <geometry cs="tilematrix">
-          <polygon>
-            <coordinates>11 11 12 11 12 12 11 12</coordinates>
-          </polygon>
-        </geometry>
-      </feature>
+        </map-properties>
+        <map-geometry cs="tilematrix">
+          <map-polygon>
+            <map-coordinates>11 11 12 11 12 12 11 12</map-coordinates>
+          </map-polygon>
+        </map-geometry>
+      </map-feature>
 
-      <feature zoom="2" class="refDiff">
-        <properties>
+      <map-feature zoom="2" class="refDiff">
+        <map-properties>
           <h1>Test</h1>
-        </properties>
-        <geometry cs="pcrs">
-          <polygon>
-            <coordinates>257421 -3567196 -271745 1221771 -3896544 242811 -3183549 -2613313</coordinates>
-          </polygon>
-        </geometry>
-      </feature>
+        </map-properties>
+        <map-geometry cs="pcrs">
+          <map-polygon>
+            <map-coordinates>257421 -3567196 -271745 1221771 -3896544 242811 -3183549 -2613313</map-coordinates>
+          </map-polygon>
+        </map-geometry>
+      </map-feature>
 
-      <feature zoom="2" class="refDiff">
-        <properties>
+      <map-feature zoom="2" class="refDiff">
+        <map-properties>
           <h1>Test</h1>
-        </properties>
-        <geometry cs="tcrs">
-          <polygon>
-            <coordinates>2771 3106 2946 3113 2954 3210 2815 3192</coordinates>
-          </polygon>
-        </geometry>
-      </feature>
+        </map-properties>
+        <map-geometry cs="tcrs">
+          <map-polygon>
+            <map-coordinates>2771 3106 2946 3113 2954 3210 2815 3192</map-coordinates>
+          </map-polygon>
+        </map-geometry>
+      </map-feature>
 
-      <feature zoom="2" class="refDiff">
-        <properties>
+      <map-feature zoom="2" class="refDiff">
+        <map-properties>
           <h1>Arizona</h1>
-        </properties>
-        <geometry>
-          <polygon>
-            <coordinates>-109.042503 37.000263 -109.04798 31.331629 -111.074448 31.331629 -112.246513 31.704061
+        </map-properties>
+        <map-geometry>
+          <map-polygon>
+            <map-coordinates>-109.042503 37.000263 -109.04798 31.331629 -111.074448 31.331629 -112.246513 31.704061
               -114.815198 32.492741 -114.72209 32.717295 -114.524921 32.755634 -114.470151 32.843265 -114.524921
               33.029481 -114.661844 33.034958 -114.727567 33.40739 -114.524921 33.54979 -114.497536 33.697668
               -114.535874 33.933176 -114.415382 34.108438 -114.256551 34.174162 -114.136058 34.305608 -114.333228
               34.448009 -114.470151 34.710902 -114.634459 34.87521 -114.634459 35.00118 -114.574213 35.138103
               -114.596121 35.324319 -114.678275 35.516012 -114.738521 36.102045 -114.371566 36.140383 -114.251074
               36.01989 -114.152489 36.025367 -114.048427 36.195153 -114.048427 37.000263 -110.499369 37.00574
-              -109.042503 37.000263</coordinates>
-          </polygon>
-        </geometry>
-      </feature>
+              -109.042503 37.000263</map-coordinates>
+          </map-polygon>
+        </map-geometry>
+      </map-feature>
     </layer->
   </mapml-viewer>
 ```

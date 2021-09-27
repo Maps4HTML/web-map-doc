@@ -37,14 +37,14 @@ For example:
 <body>
   <mapml-viewer projection="ATLAS_POLAR_MAP" zoom="2" lat="83.48919" lon="-87.7687" controls>
     <layer- label="Atlas of Canada Polar Wall Map" checked>
-    <link rel="license" title="Canadian Federal Geospatial Platform" href="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN/MapServer/">
-      <extent units="ATLAS_POLAR_MAP">
-        <input type="zoom" name="z" min="0" max="6" value="6" >
-        <input type="location" name="x" axis="column" units="tilematrix" min="116" max="186">
-        <input type="location" name="y" axis="row" units="tilematrix" min="125" max="184">
-        <link rel="tile" tref="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN/MapServer/tile/{z}/{y}/{x}/">
-        <link rel="tile" tref="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN_A/MapServer/tile/{z}/{y}/{x}/">
-      </extent>
+    <map-link rel="license" title="Canadian Federal Geospatial Platform" href="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN/MapServer/"></map-link>
+      <map-extent units="ATLAS_POLAR_MAP">
+        <map-input type="zoom" name="z" min="0" max="6" value="6" ></map-input>
+        <map-input type="location" name="x" axis="column" units="tilematrix" min="116" max="186"></map-input>
+        <map-input type="location" name="y" axis="row" units="tilematrix" min="125" max="184"></map-input>
+        <map-link rel="tile" tref="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN/MapServer/tile/{z}/{y}/{x}/"></map-link>
+        <map-link rel="tile" tref="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN_A/MapServer/tile/{z}/{y}/{x}/"></map-link>
+      </map-extent>
     </layer->
   </mapml-viewer>
 </body>

@@ -10,32 +10,32 @@ In this section, we will learn how to create a templated tile layer. A templated
 
 ```html
 <layer- label="Templated Tile Layer" checked>
-  <extent units="my-projection">
-    <input name="zoomLevel" type="zoom" min="1" max="1" value="0" />
-    <input name="row" type="location" axis="row" units="tilematrix" min="0" max="2" />
-    <input name="col" type="location" axis="column" units="tilematrix" min="0" max="2" />
-    <link rel="tile" type="text/mapml" title="Templated Tiles" tref="tiles/{zoomLevel}/r{row}_c{col}.mapml" />
-  </extent>
+  <map-extent units="my-projection">
+    <map-input name="zoomLevel" type="zoom" min="1" max="1" value="0"></map-input>
+    <map-input name="row" type="location" axis="row" units="tilematrix" min="0" max="2"></map-input>
+    <map-input name="col" type="location" axis="column" units="tilematrix" min="0" max="2"></map-input>
+    <map-link rel="tile" type="text/mapml" title="Templated Tiles" tref="tiles/{zoomLevel}/r{row}_c{col}.mapml"></map-link>
+  </map-extent>
 </layer->
 ```
 
 ## Associated Elements
 
-### `<extent>`
+### `<map-extent>`
 
 - `units`
   - This allows you to define what the [projection](http://example.org/) of the templated tiles are.
 
 ---
 
-### `<input>`
+### `<map-input>`
 
 - `axis`
   - This attribute is only useful on inputs of type <strong>location</strong>, it sets the axis the following input defines. This value also defines what the <strong>min</strong> and <strong>max</strong> value's units.
   - Options are, row | column | easting | northing | latitude | longitude
 
 - `name`
-  - This allows you to name the input, this name is then used in the url template used in the `<link>` href attribute.
+  - This allows you to name the input, this name is then used in the url template used in the `<map-link>` href attribute.
 
 - `type`
   - Sets the <strong>type</strong> of the input.
@@ -52,7 +52,7 @@ In this section, we will learn how to create a templated tile layer. A templated
 
 ---
 
-### `<link>`
+### `<map-link>`
 
 - `rel`
   - Set this to tile in the case of a templated tile layer.
@@ -72,11 +72,11 @@ In this section, we will learn how to create a templated tile layer. A templated
 
 You can also provide a set of elements to further define the templated tile layer. This is the list of available additions with examples.
 
-### `<meta name="zoom">`
-Sets the native minimum and maximum [native zoom](http://example.org/). It also allows you to set a value, this is the default zoom of all features in the case the `<feature>` is missing a zoom attribute.
+### `<map-meta name="zoom">`
+Sets the native minimum and maximum [native zoom](http://example.org/). It also allows you to set a value, this is the default zoom of all features in the case the `<map-feature>` is missing a zoom attribute.
 
 ```html
-<meta name="zoom" content="min=1,max=5,value=0" />
+<map-meta name="zoom" content="min=1,max=5,value=0"></map-meta>
 ```
 
 ---
@@ -86,13 +86,13 @@ Sets the native minimum and maximum [native zoom](http://example.org/). It also 
 ```html
 <mapml-viewer projection="WGS84" zoom="1" lat="59.87304909" lon="-53.22587225" width="900" height="400" controls>
   <layer- label="Inline Templated Tile" checked>
-    <meta name="zoom" content="min=1,max=2" />
-    <extent units="WGS84">
-      <input name="zoomLevel" type="zoom" min="1" max="1" value="0" />
-      <input name="row" type="location" axis="row" units="tilematrix" min="0" max="2" />
-      <input name="col" type="location" axis="column" units="tilematrix" min="0" max="2" />
-      <link rel="tile" type="text/mapml" title="Templated Tile Layer" tref="data/wgs84/{zoomLevel}/r{row}_c{col}.mapml" />
-    </extent>
+    <map-meta name="zoom" content="min=1,max=2"></map-meta>
+    <map-extent units="WGS84">
+      <map-input name="zoomLevel" type="zoom" min="1" max="1" value="0"></map-input>
+      <map-input name="row" type="location" axis="row" units="tilematrix" min="0" max="2"></map-input>
+      <map-input name="col" type="location" axis="column" units="tilematrix" min="0" max="2"></map-input>
+      <map-link rel="tile" type="text/mapml" title="Templated Tile Layer" tref="data/wgs84/{zoomLevel}/r{row}_c{col}.mapml"></map-link>
+    </map-extent>
   </layer->
 </mapml-viewer>
 ```

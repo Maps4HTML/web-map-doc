@@ -57,7 +57,7 @@ the layer is hidden in the layer control.
 
 The `label` attribute is used by inline content as the displayed text label of the
 layer in the layer control.  In fetched content, the `label` attribute is ignored,
-and the fetched `<title>` element is used.
+and the fetched `<map-title>` element is used.
 
 ## API
 

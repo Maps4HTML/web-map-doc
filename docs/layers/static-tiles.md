@@ -13,14 +13,14 @@ Add an image file to your project directory. Now you can access this image in Ma
 
 ```html
 <layer- label="My Static Tile Layer" checked>
-  <tile zoom="0" row="1" col="1" src="my-tile.png"></tile>
+  <map-tile zoom="0" row="1" col="1" src="my-tile.png"></map-tile>
 </layer->
 
 ```
 
 ## Associated Elements
 
-### `<tile>`
+### `<map-tile>`
 
 #### Attributes
 
@@ -39,32 +39,32 @@ Add an image file to your project directory. Now you can access this image in Ma
 
 You can also provide a set of elements to further define the static tile layer. This is the list of available additions with examples.
 
-### `<link rel="license">` 
+### `<map-link rel="license">` 
 
 Sets the attribution link of the layer. Example:
 
 ```html
-<link rel="license" href="https://www.nrcan.gc.ca/earth-sciences/geography/topographic-information/free-data-geogratis/licence/17285" title="Canada Base Map © Natural Resources Canada">
+<map-link rel="license" href="https://www.nrcan.gc.ca/earth-sciences/geography/topographic-information/free-data-geogratis/licence/17285" title="Canada Base Map © Natural Resources Canada"></map-link>
 ```
 
 ---
 
-### `<meta name="zoom">` 
+### `<map-meta name="zoom">` 
 
 Sets the native minimum and maximum [native zoom](http://example.org/).
 
 ```html
-<meta name="zoom" content="min=1,max=4">
+<map-meta name="zoom" content="min=1,max=4"></map-meta>
 ```
 
 ---
 
-### `<meta name="projection">` 
+### `<map-meta name="projection">` 
 
 Sets the [projection](http://example.org/) of the layer. 
 
 ```html
-<meta name="projection" content="CBMTILE">
+<map-meta name="projection" content="CBMTILE"></map-meta>
 ```
 
 ---
@@ -74,15 +74,15 @@ Sets the [projection](http://example.org/) of the layer.
 ```html
 <mapml-viewer projection="CBMTILE" zoom="2" lat="59" lon="-53" width="900" height="400" controls>
   <layer- label="Static MapML with tiles" checked>
-    <meta name="zoom" content="min=1,max=4">
-    <meta name="projection" content="CBMTILE">
-    <link rel="license"
+    <map-meta name="zoom" content="min=1,max=4"></map-meta>
+    <map-meta name="projection" content="CBMTILE"></map-meta>
+    <map-link rel="license"
       href="https://www.nrcan.gc.ca/earth-sciences/geography/topographic-information/free-data-geogratis/licence/17285"
-      title="Canada Base Map © Natural Resources Canada">
-    <tile zoom="3" row="18" col="17" src="data/cbmt/3/c17_r18.png"></tile>
-    <tile zoom="2" row="10" col="11" src="data/cbmt/2/c11_r10.png"></tile>
-    <tile zoom="2" row="10" col="9" src="data/cbmt/2/c9_r10.png"></tile>
-    <tile zoom="2" row="11" col="9" src="data/cbmt/2/c9_r11.png"></tile>
+              title="Canada Base Map © Natural Resources Canada"></map-link>
+    <map-tile zoom="3" row="18" col="17" src="data/cbmt/3/c17_r18.png"></map-tile>
+    <map-tile zoom="2" row="10" col="11" src="data/cbmt/2/c11_r10.png"></map-tile>
+    <map-tile zoom="2" row="10" col="9" src="data/cbmt/2/c9_r10.png"></map-tile>
+    <map-tile zoom="2" row="11" col="9" src="data/cbmt/2/c9_r11.png"></map-tile>
   </layer->
 </mapml-viewer>
 ```
