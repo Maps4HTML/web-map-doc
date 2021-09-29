@@ -4067,7 +4067,7 @@
         this._layerClicked = undefined;
         this._showAtPoint(e.containerPoint, e, this._container);
       }
-      if(e.originalEvent.button === 0){
+      if(e.originalEvent.button === 0 || e.originalEvent.button === -1){
         this._keyboardEvent = true;
         this._container.firstChild.focus();
       }
