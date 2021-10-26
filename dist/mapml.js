@@ -298,8 +298,8 @@
         g[role="button"] path:focus,
         g[role="button"] path:hover,
         path[tabindex="0"]:focus {
-          stroke: #0000EE;
-          stroke: LinkText;
+          stroke: #0000EE!important;
+          stroke: LinkText!important;
         }
         g[role="link"]:focus:not(:focus-visible),
         g[role="link"]:focus:not(:focus-visible) path,
@@ -5210,7 +5210,7 @@
       for (let p of layer._parts) {
         if (p.rings){
           this._createPath(p, layer.options.className, layer.featureAttributes['aria-label'], layer.options.interactive, layer.featureAttributes);
-          //if(layer.outlinePath) p.path.style.stroke = "none";
+          if(layer.outlinePath) p.path.style.stroke = "none";
         }
         if (p.subrings) {
           for (let r of p.subrings) {
