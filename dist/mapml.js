@@ -3679,26 +3679,26 @@
       //setting the items in the context menu and their callback functions
       this._items = [
         {
-          text:"Back (<kbd>B</kbd>)",
+          text: M.options.locale.cmBack + " (<kbd>B</kbd>)",
           callback:this._goBack,
         },
         {
-          text:"Forward (<kbd>F</kbd>)",
+          text: M.options.locale.cmForward + " (<kbd>F</kbd>)",
           callback:this._goForward,
         },
         {
-          text:"Reload (<kbd>R</kbd>)",
+          text: M.options.locale.cmReload + " (<kbd>R</kbd>)",
           callback:this._reload,
         },
         {
           spacer:"-",
         },
         {
-          text:"Toggle Controls (<kbd>T</kbd>)",
+          text: M.options.locale.cmToggleControls + " (<kbd>T</kbd>)",
           callback:this._toggleControls,
         },
         {
-          text:"Copy Coordinates (<kbd>C</kbd>)<span></span>", 
+          text: M.options.locale.cmCopyCoords + " (<kbd>C</kbd>)<span></span>",
           callback:this._copyCoords,
           hideOnSelect:false,
           popup:true,
@@ -3737,32 +3737,32 @@
               spacer:"-",
             },
             {
-              text:"All",
+              text: M.options.locale.cmCopyAll,
               callback:this._copyAllCoords,
             }
           ]
         },
         {
-          text:"Toggle Debug Mode (<kbd>D</kbd>)",
+          text: M.options.locale.cmToggleDebug + " (<kbd>D</kbd>)",
           callback:this._toggleDebug,
         },
         {
-          text:"Copy MapML (<kbd>M</kbd>)",
+          text: M.options.locale.cmCopyMapML + " (<kbd>M</kbd>)",
           callback:this._copyMapML,
         },
         {
-          text:"View Map Source (<kbd>V</kbd>)",
+          text: M.options.locale.cmViewSource + " (<kbd>V</kbd>)",
           callback:this._viewSource,
         },
       ];
 
       this._layerItems = [
         {
-          text:"Zoom To Layer (<kbd>Z</kbd>)",
+          text: M.options.locale.lmZoomToLayer + " (<kbd>Z</kbd>)",
           callback:this._zoomToLayer
         },
         {
-          text:"Copy Extent (<kbd>C</kbd>)",
+          text: M.options.locale.lmCopyExtent + " (<kbd>C</kbd>)",
           callback:this._copyLayerExtent
         },
       ];
@@ -4186,7 +4186,7 @@
 
       if(key === 13)
         e.preventDefault();
-      if(key !== 16 && key!== 9 && !(!this._layerClicked && key === 67) && path[0].innerText !== "Copy Coordinates (C)")
+      if(key !== 16 && key!== 9 && !(!this._layerClicked && key === 67) && path[0].innerText !== (M.options.locale.cmCopyCoords + " (C)"))
         this._hide();
       switch(key){
         case 13:  //ENTER KEY
@@ -4263,7 +4263,7 @@
 
     _hideCoordMenu: function(e){
       if(e.srcElement.parentElement.classList.contains("mapml-submenu") ||
-          e.srcElement.innerText === "Copy Coordinates (C)")return;
+          e.srcElement.innerText === (M.options.locale.cmCopyCoords + " (C)"))return;
       let menu = this._coordMenu, copyEl = this._items[5].el.el;
       copyEl.setAttribute("aria-expanded","false");
       menu.style.display = "none";
@@ -4271,7 +4271,7 @@
 
     _onItemMouseOver: function (e) {
       L.DomUtil.addClass(e.target || e.srcElement, 'over');
-      if(e.srcElement.innerText === "Copy Coordinates (C)") this._showCoordMenu(e);
+      if(e.srcElement.innerText === (M.options.locale.cmCopyCoords + " (C)")) this._showCoordMenu(e);
     },
 
     _onItemMouseOut: function (e) {
@@ -4674,7 +4674,7 @@
 
       let link = L.DomUtil.create("button", "mapml-reload-button", container);
       link.innerHTML = "<span aria-hidden='true'>&#x021BA</span>";
-      link.title = "Reload";
+      link.title = M.options.locale.cmReload;
       link.setAttribute("type", "button");
       link.classList.add("mapml-button");
       link.setAttribute('aria-label', "Reload");
@@ -5599,6 +5599,27 @@
     return new FeatureGroup(layers, options);
   };
 
+  var Options = {
+    announceMovement: false,
+    locale: {
+      cmBack: "Back",
+      cmForward: "Forward",
+      cmReload: "Reload",
+      cmToggleControls: "Toggle Controls",
+      cmCopyCoords: "Copy Coordinates",
+      cmToggleDebug: "Toggle Debug Mode",
+      cmCopyMapML: "Copy MapML",
+      cmViewSource: "View Map Source",
+      cmCopyAll: "All",
+      lmZoomToLayer: "Zoom To Layer",
+      lmCopyExtent: "Copy Extent",
+      lcOpacity: "Opacity",
+      btnZoomIn: "Zoom in",
+      btnZoomOut: "Zoom out",
+      btnFullScreen: "View fullscreen"
+    }
+  };
+
   /* 
    * Copyright 2015-2016 Canada Centre for Mapping and Earth Observation, 
    * Earth Sciences Sector, Natural Resources Canada.
@@ -5669,6 +5690,11 @@
      return path;
     };
     M.mime = "text/mapml";
+
+    let mapOptions = window.document.head.querySelector("map-options");
+    M.options = Options;
+    if (mapOptions) M.options = Object.assign(M.options, JSON.parse(mapOptions.innerHTML));
+
     // see https://leafletjs.com/reference-1.5.0.html#crs-l-crs-base
     // "new classes can't inherit from (L.CRS), and methods can't be added 
     // to (L.CRS.anything) with the include function
