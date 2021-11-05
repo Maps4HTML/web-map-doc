@@ -5081,6 +5081,11 @@
       this._outline = [];
       for (let coords of this._markup.querySelectorAll('map-coordinates')) {
         let nodes = coords.childNodes, cur = 0, tempDiv = document.createElement('div'), nodeLength = nodes.length;
+        for(let i = 0; i < nodes.length; i++){
+          if(nodes[i].textContent.trim().length === 0){
+            nodes[i].remove();
+          }
+        }
         for (let n of nodes) {
           let line = [];
           if (!n.tagName) {  //no tagName means it's text content
