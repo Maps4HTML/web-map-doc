@@ -1418,6 +1418,9 @@
           })
           .catch(function (error) { console.log(error);});
       },
+      redraw: function() {
+          this._onMoveEnd();
+      },
 
       _onMoveEnd: function() {
         let mapZoom = this._map.getZoom();
@@ -1496,23 +1499,28 @@
         this._map.removeLayer(this._features);
       },
       _getfeaturesUrl: function() {
-          var pxBounds = this._map.getPixelBounds(),
-              topLeft = pxBounds.getTopLeft(),
-              topRight = pxBounds.getTopRight(),
-              bottomRight = pxBounds.getBottomRight(),
-              bottomLeft = pxBounds.getBottomLeft(),
-              bounds = this._map.getBounds();
-              bounds.extend(this._map.unproject(bottomLeft))
-                    .extend(this._map.unproject(bottomRight))
-                    .extend(this._map.unproject(topLeft))
-                    .extend(this._map.unproject(topRight));
           var obj = {};
-          // assumes gcrs at this moment
-          obj[this.options.feature.zoom.name] = this._map.getZoom();
-          obj[this.options.feature.bottom.name] = bounds.getSouth();
-          obj[this.options.feature.left.name] = bounds.getWest();
-          obj[this.options.feature.top.name] = bounds.getNorth();
-          obj[this.options.feature.right.name] = bounds.getEast();
+          if (this.options.feature.zoom) {
+            obj[this.options.feature.zoom] = this._map.getZoom();
+          }
+          if (this.options.feature.width) {
+            obj[this.options.feature.width] = this._map.getSize().x;
+          }
+          if (this.options.feature.height) {
+            obj[this.options.feature.height] = this._map.getSize().y;
+          }
+          if (this.options.feature.bottom) {
+            obj[this.options.feature.bottom] = this._TCRSToPCRS(this._map.getPixelBounds().max,this._map.getZoom()).y;
+          }
+          if (this.options.feature.left) {
+            obj[this.options.feature.left] = this._TCRSToPCRS(this._map.getPixelBounds().min, this._map.getZoom()).x;
+          }
+          if (this.options.feature.top) {
+            obj[this.options.feature.top] = this._TCRSToPCRS(this._map.getPixelBounds().min, this._map.getZoom()).y;
+          }
+          if (this.options.feature.right) {
+            obj[this.options.feature.right] = this._TCRSToPCRS(this._map.getPixelBounds().max,this._map.getZoom()).x;
+          }
           // hidden and other variables that may be associated
           for (var v in this.options.feature) {
               if (["width","height","left","right","top","bottom","zoom"].indexOf(v) < 0) {
@@ -1520,6 +1528,13 @@
                 }
           }
           return L.Util.template(this._template.template, obj);
+      },
+      _TCRSToPCRS: function(coords, zoom) {
+        // TCRS pixel point to Projected CRS point (in meters, presumably)
+        var map = this._map,
+            crs = map.options.crs,
+            loc = crs.transformation.untransform(coords,crs.scale(zoom));
+            return loc;
       },
       _setUpFeaturesTemplateVars: function(template) {
         // process the inputs and create an object named "extent"
@@ -1546,12 +1561,12 @@
               value = inputs[i].getAttribute("value"),
               select = (inputs[i].tagName.toLowerCase() === "map-select");
           if (type === "width") {
-                featuresVarNames.feature.width = {name: name};
+                featuresVarNames.feature.width = name;
           } else if ( type === "height") {
-                featuresVarNames.feature.height = {name: name};
+                featuresVarNames.feature.height = name;
           } else if (type === "zoom") {
-                featuresVarNames.feature.zoom = {name: name};
-          } else if (type === "location" && (units === "pcrs" || units ==="gcrs" || units === "tcrs")) {
+                featuresVarNames.feature.zoom = name;
+          } else if (type === "location" && (units === "pcrs" || units ==="gcrs") ) {
             //<input name="..." units="pcrs" type="location" position="top|bottom-left|right" axis="northing|easting">
             switch (axis) {
               case ('x'):
@@ -1559,9 +1574,9 @@
               case ('easting'):
                 if (position) {
                     if (position.match(/.*?-left/i)) {
-                      featuresVarNames.feature.left = { name: name, axis: axis};
+                      featuresVarNames.feature.left = name;
                     } else if (position.match(/.*?-right/i)) {
-                      featuresVarNames.feature.right = { name: name, axis: axis};
+                      featuresVarNames.feature.right = name;
                     }
                 }
                 break;
@@ -1570,9 +1585,9 @@
               case ('northing'):
                 if (position) {
                   if (position.match(/top-.*?/i)) {
-                    featuresVarNames.feature.top = { name: name, axis: axis};
+                    featuresVarNames.feature.top = name;
                   } else if (position.match(/bottom-.*?/i)) {
-                    featuresVarNames.feature.bottom = { name: name, axis: axis};
+                    featuresVarNames.feature.bottom = name;
                   }
                 }
                 break;
@@ -1584,8 +1599,12 @@
                 return parsedselect.value;
             };
            // projection is deprecated, make it hidden
-          } else if (type === "hidden" || type === "projection") {
-              featuresVarNames.feature.hidden.push({name: name, value: value});
+          } else {
+              /*jshint -W104 */
+              const input = inputs[i];
+              featuresVarNames.feature[name] = function() {
+                  return input.getAttribute("value");
+              };
           }
         }
         return featuresVarNames;
@@ -2192,100 +2211,6 @@
           }
         } 
       },
-      _setUpInputVars: function(inputs) {
-        // process the inputs and create an object named "extent"
-        // with member properties as follows:
-        // {width: {name: 'widthvarname'}, // value supplied by map if necessary
-        //  height: {name: 'heightvarname'}, // value supplied by map if necessary
-        //  left: {name: 'leftvarname', axis: 'leftaxisname'}, // axis name drives (coordinate system of) the value supplied by the map
-        //  right: {name: 'rightvarname', axis: 'rightaxisname'}, // axis name (coordinate system of) drives the value supplied by the map
-        //  top: {name: 'topvarname', axis: 'topaxisname'}, // axis name drives (coordinate system of) the value supplied by the map
-        //  bottom: {name: 'bottomvarname', axis: 'bottomaxisname'} // axis name drives (coordinate system of) the value supplied by the map
-        //  zoom: {name: 'zoomvarname'}
-        //  hidden: [{name: name, value: value}]}
-
-        var extentVarNames = {extent:{}};
-        extentVarNames.extent.hidden = [];
-        for (var i=0;i<inputs.length;i++) {
-          // this can be removed when the spec removes the deprecated inputs...
-          this._transformDeprectatedInput(inputs[i]);
-          var type = inputs[i].getAttribute("type"), 
-              units = inputs[i].getAttribute("units"), 
-              axis = inputs[i].getAttribute("axis"), 
-              name = inputs[i].getAttribute("name"), 
-              position = inputs[i].getAttribute("position"),
-              value = inputs[i].getAttribute("value");
-          if (type === "width") {
-                extentVarNames.extent.width = {name: name};
-          } else if ( type === "height") {
-                extentVarNames.extent.height = {name: name};
-          } else if (type === "zoom") {
-                extentVarNames.extent.zoom = {name: name};
-          } else if (type === "location" && (units === "pcrs" || units ==="gcrs" || units === "tcrs")) {
-            //<input name="..." units="pcrs" type="location" position="top|bottom-left|right" axis="northing|easting">
-            switch (axis) {
-              case ('easting'):
-                if (position) {
-                    if (position.match(/.*?-left/i)) {
-                      extentVarNames.extent.left = { name: name, axis: axis};
-                    } else if (position.match(/.*?-right/i)) {
-                      extentVarNames.extent.right = { name: name, axis: axis};
-                    }
-                }
-                break;
-              case ('northing'):
-                if (position) {
-                  if (position.match(/top-.*?/i)) {
-                    extentVarNames.extent.top = { name: name, axis: axis};
-                  } else if (position.match(/bottom-.*?/i)) {
-                    extentVarNames.extent.bottom = { name: name, axis: axis};
-                  }
-                }
-                break;
-              case ('x'):
-                if (position) {
-                    if (position.match(/.*?-left/i)) {
-                      extentVarNames.extent.left = { name: name, axis: axis};
-                    } else if (position.match(/.*?-right/i)) {
-                      extentVarNames.extent.right = { name: name, axis: axis};
-                    }
-                }
-                break;
-              case ('y'):
-                if (position) {
-                  if (position.match(/top-.*?/i)) {
-                    extentVarNames.extent.top = { name: name, axis: axis};
-                  } else if (position.match(/bottom-.*?/i)) {
-                    extentVarNames.extent.bottom = { name: name, axis: axis};
-                  }
-                }
-                break;
-              case ('longitude'):
-                if (position) {
-                    if (position.match(/.*?-left/i)) {
-                      extentVarNames.extent.left = { name: name, axis: axis};
-                    } else if (position.match(/.*?-right/i)) {
-                      extentVarNames.extent.right = { name: name, axis: axis};
-                    }
-                }
-                break;
-              case ('latitude'):
-                if (position) {
-                  if (position.match(/top-.*?/i)) {
-                    extentVarNames.extent.top = { name: name, axis: axis};
-                  } else if (position.match(/bottom-.*?/i)) {
-                    extentVarNames.extent.bottom = { name: name, axis: axis};
-                  }
-                }
-                break;
-            }
-            // projection is deprecated, make it hidden
-          } else if (type === "hidden" || type === "projection") {
-              extentVarNames.extent.hidden.push({name: name, value: value});
-          }
-        }
-        return extentVarNames;
-      },
       // retrieve the (projected, scaled) layer extent for the current map zoom level
       getLayerExtentBounds: function(map) {
           
@@ -2637,25 +2562,31 @@
 
                     extentFallback.zoom = 0;
                     if (metaExtent){
-                      let content = M.metaContentToObject(metaExtent.getAttribute("content")), cs;
+                      // if the extent is not in PCRS or GCRS, the user should supply
+                      // a zoom=n key within the meta content, so that the PCRS bounds
+                      // can be calculated
+                      let content = M.metaContentToObject(metaExtent.getAttribute("content"));
                       
+                      // the extentFallback.zoom is used to calculate the PCRS bounds
                       extentFallback.zoom = content.zoom || extentFallback.zoom;
       
                       let metaKeys = Object.keys(content);
                       for(let i =0;i<metaKeys.length;i++){
                         if(!metaKeys[i].includes("zoom")){
-                          cs = M.axisToCS(metaKeys[i].split("-")[2]);
+                          // deduce the CS from the first recognized axis name, quit
+                          extentFallback.cs = M.axisToCS(metaKeys[i].split("-")[2]);
                           break;
                         }
                       }
-                      let axes = M.csToAxes(cs);
+                      let axes = M.csToAxes(extentFallback.cs);
                       extentFallback.bounds = M.boundsToPCRSBounds(
                         L.bounds(L.point(+content[`top-left-${axes[0]}`],+content[`top-left-${axes[1]}`]),
                         L.point(+content[`bottom-right-${axes[0]}`],+content[`bottom-right-${axes[1]}`])),
-                        extentFallback.zoom, projection, cs);
+                        extentFallback.zoom, projection, extentFallback.cs);
                       
                     } else {
                       extentFallback.bounds = M[projection].options.crs.pcrs.bounds;
+                      extentFallback.cs = "PCRS";
                     }
                       
                     for (var i=0;i< tlist.length;i++) {
@@ -2682,12 +2613,16 @@
                         var varName = v[1],
                             inp = serverExtent.querySelector('map-input[name='+varName+'],map-select[name='+varName+']');
                         if (inp) {
-
+                          // if location input is missing min/max, force set the
+                          // fallback min/max from the extentFallback
                           if ((inp.hasAttribute("type") && inp.getAttribute("type")==="location") && 
                               (!inp.hasAttribute("min" )) && 
                               (inp.hasAttribute("axis") && !["i","j"].includes(inp.getAttribute("axis").toLowerCase()))){
                             zoomInput.setAttribute("value", extentFallback.zoom);
-                            
+                            // set location input min/max axis values based on calculated 
+                            // and potentially converted from PCRS bounds read
+                            // from the <map-meta> element.  This is a fallback, but it only
+                            // works when the file includes location inputs.
                             let axis = inp.getAttribute("axis"), 
                                 axisBounds = M.convertPCRSBounds(extentFallback.bounds, extentFallback.zoom, projection, M.axisToCS(axis));
                             inp.setAttribute("min", axisBounds.min[M.axisToXY(axis)]);
@@ -2753,6 +2688,7 @@
                           type: ttype, 
                           values: inputs, 
                           zoomBounds:zoomBounds, 
+                          extentPCRSFallback: {bounds: extentFallback.bounds}, 
                           projectionMatch: projectionMatch || selectedAlternate,
                           projection:serverExtent.getAttribute("units") || FALLBACK_PROJECTION,
                           tms:tms,
@@ -4367,8 +4303,9 @@
       if(!template) return undefined;
 
       //sets variables with their respective fallback values incase content is missing from the template
-      let inputs = template.values, projection = template.projection || FALLBACK_PROJECTION, value = 0, boundsUnit = FALLBACK_CS;
-      let bounds = this[projection].options.crs.tilematrix.bounds(0), nMinZoom = 0, nMaxZoom = this[projection].options.resolutions.length - 1;
+        let inputs = template.values, projection = template.projection || FALLBACK_PROJECTION, value = 0, boundsUnit = FALLBACK_CS;
+        let bounds = this[projection].options.crs.tilematrix.bounds(0), nMinZoom = 0, nMaxZoom = this[projection].options.resolutions.length - 1;
+        let locInputs = false, numberOfAxes = 0;
       if(!template.zoomBounds){
         template.zoomBounds ={};
         template.zoomBounds.min=0;
@@ -4392,6 +4329,7 @@
                 boundsUnit = M.axisToCS(inputs[i].getAttribute("axis").toLowerCase());
                 bounds.min.x = min;
                 bounds.max.x = max;
+                numberOfAxes++;
               break;
               case "y":
               case "latitude":
@@ -4400,10 +4338,14 @@
                 boundsUnit = M.axisToCS(inputs[i].getAttribute("axis").toLowerCase());
                 bounds.min.y = min;
                 bounds.max.y = max;
+                numberOfAxes++;
               break;
             }
           break;
         }
+      }
+      if (numberOfAxes >= 2) {
+        locInputs = true;
       }
       let zoomBoundsFormatted = {
         minZoom:+template.zoomBounds.min,
@@ -4411,9 +4353,16 @@
         minNativeZoom:nMinZoom,
         maxNativeZoom:nMaxZoom
       };
+      if(!locInputs && template.extentPCRSFallback && template.extentPCRSFallback.bounds) {
+        bounds = template.extentPCRSFallback.bounds;
+      } else if (locInputs) {
+        bounds = this.boundsToPCRSBounds(bounds,value,projection,boundsUnit);
+      } else {
+        bounds = this[projection].options.crs.pcrs.bounds;
+      }
       return {
         zoomBounds:zoomBoundsFormatted,
-        bounds:this.boundsToPCRSBounds(bounds,value,projection,boundsUnit)
+        bounds:bounds
       };
     },
 
