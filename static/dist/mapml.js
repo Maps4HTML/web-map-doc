@@ -2349,7 +2349,7 @@
           layerItemSettings = L.DomUtil.create('div', 'mapml-layer-item-settings', fieldset),
           itemToggleLabel = L.DomUtil.create('label', 'mapml-layer-item-toggle', layerItemProperty),
           layerItemControls = L.DomUtil.create('div', 'mapml-layer-item-controls', layerItemProperty),
-          opacityControl = L.DomUtil.create('details', 'mapml-layer-item-opacity', layerItemSettings),
+          opacityControl = L.DomUtil.create('details', 'mapml-layer-item-opacity mapml-control-layers', layerItemSettings),
           opacity = L.DomUtil.create('input'),
           opacityControlSummary = L.DomUtil.create('summary'),
           svgSettingsControlIcon = L.SVG.create('svg'),
@@ -2514,7 +2514,7 @@
                   // don't add it again if it is referenced > once
                   if (mapmlInput.tagName.toLowerCase() === 'map-select' && !frag.querySelector(id)) {
                     // generate a <details><summary></summary><select...></details>
-                    var selectdetails = L.DomUtil.create('details', 'mapml-control-layers', frag),
+                    var selectdetails = L.DomUtil.create('details', 'mapml-layer-item-time mapml-control-layers', frag),
                         selectsummary = L.DomUtil.create('summary'),
                         selectSummaryLabel = L.DomUtil.create('label');
                         selectSummaryLabel.innerText = mapmlInput.getAttribute('name');
@@ -2799,7 +2799,7 @@
                     };
 
                     for (var j=0;j<styleLinks.length;j++) {
-                      var styleOption = document.createElement('span'),
+                      var styleOption = document.createElement('div'),
                       styleOptionInput = styleOption.appendChild(document.createElement('input'));
                       styleOptionInput.setAttribute("type", "radio");
                       styleOptionInput.setAttribute("id", "rad-"+L.stamp(styleOptionInput));
@@ -2813,7 +2813,7 @@
                         styleOptionInput.checked = true;
                       }
                       stylesControl.appendChild(styleOption);
-                      L.DomUtil.addClass(stylesControl,'mapml-control-layers');
+                      L.DomUtil.addClass(stylesControl,'mapml-layer-item-style mapml-control-layers');
                       L.DomEvent.on(styleOptionInput,'click', changeStyle, layer);
                     }
                     layer._styles = stylesControl;
