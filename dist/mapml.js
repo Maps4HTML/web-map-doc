@@ -4087,7 +4087,8 @@
         if(!elem.layer.validProjection) return;
         this._layerClicked = elem;
         this._showAtPoint(e.containerPoint, e, this._layerMenu);
-      } else if(elem.classList.contains("leaflet-container") || elem.classList.contains("mapml-debug-extent")) {
+      } else if(elem.classList.contains("leaflet-container") || elem.classList.contains("mapml-debug-extent") ||
+        elem.tagName === "path") {
         this._layerClicked = undefined;
         this._showAtPoint(e.containerPoint, e, this._container);
       }
@@ -4910,6 +4911,7 @@
       if (link.visited) elem.classList.add("map-a-visited");
       L.DomEvent.on(elem, 'mousedown', e => dragStart = {x:e.clientX, y:e.clientY}, this);
       L.DomEvent.on(elem, "mouseup", (e) => {
+        if (e.button !== 0) return; // don't trigger when button isn't left click
         let onTop = true, nextLayer = this.options._leafletLayer._layerEl.nextElementSibling;
         while(nextLayer && onTop){
           if(nextLayer.tagName && nextLayer.tagName.toUpperCase() === "LAYER-")
