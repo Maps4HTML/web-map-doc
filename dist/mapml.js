@@ -2507,7 +2507,7 @@
                   var option = document.createElement("option");
                   var optionAttrNames = options[i].getAttributeNames();
 
-                  for (let j = 0; j < optionAttrNames; j++){
+                  for (let j = 0; j < optionAttrNames.length; j++){
                       option.setAttribute(optionAttrNames[j], options[i].getAttribute(optionAttrNames[j]));
                   }
 
