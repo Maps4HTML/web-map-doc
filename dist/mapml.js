@@ -5998,7 +5998,7 @@
               return;
           }
 
-          stop(e);
+          L.DomEvent.stop(e);
       }
   });
 
