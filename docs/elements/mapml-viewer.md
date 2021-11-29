@@ -1,6 +1,6 @@
 ---
 id: mapml-viewer
-title: <mapml-viewer>
+title: "<mapml-viewer>: The Map element"
 slug: /maps/mapml-viewer
 ---
 
@@ -30,7 +30,7 @@ The `<mapml-viewer>` element is the main element you can use to put a custom Web
 ```
 Note that for the above example to run properly on your own site, you need to get a built copy of the `<mapml-viewer>` project in your site's folder. In the example, the `<mapml-viewer>` files are copied into the folder named "web-map" in your site root folder. Your own site's path to these files will depend on how you structure your folders.
 
-`<mapml-viewer>` is an "[autonomous custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)" in HTML.  You can distinguish a custom element of any category from a "native" HTML element by the "-" anywhere in the element name. Autonomous custom elements are supported by all modern browsers, but don't work in old browsers (e.g. Internet Explorer and old Edge).
+`<mapml-viewer>` is an "[autonomous custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)" in HTML.  You can distinguish an autonomous custom element from a "native" HTML element by the "-" anywhere in the element name. Autonomous custom elements are supported by all modern browsers, but don't work in old browsers (e.g. Internet Explorer and old Edge).
 
 The `<mapml-viewer>` element has several attributes to control the presentation and initial location of the map.  
 
@@ -70,7 +70,3 @@ The default projection is `OSMTILE`.
 ### `controlslist`
 
 `controlslist` - an enumerated attribute, possible values are: "`nofullscreen`", "`nolayer`", "`noreload`" and "`nozoom`".  Occasionally, you may not want your users to have access to a particular control, so you may prune the set of controls automatically presented (when you have used the `controls` boolean attribute).
-
-## API
-
-A [`<mapml-viewer> API`](../api/mapml-viewer-api.md) is available.

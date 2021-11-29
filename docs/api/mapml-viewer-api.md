@@ -1,56 +1,38 @@
 ---
 id: mapml-viewer-api
-title: <mapml-viewer> API
+title: "HTMLMapmlViewerElement"
 slug: /api/mapml-viewer-api
 ---
 
-In this section we'll learn different API methods on the `<mapml-viewer>`. It allows you to interact with
-the viewer through JavaScript.
+# HTMLMapmlViewerElement
 
-<table>
-<tr><th>Setters and/or Getters</th><th>Methods</th></tr>
-<tr>
-<td>
+The HTMLMapmlViewerElement interface represents the `<mapml-viewer>` element.
 
-| Method       	| Functionality                                          	|
+## Properties
+
+
+| Property name      	| Description                                          	|
 |--------------	|--------------------------------------------------------	|
-| [controls](#controls)     	| Setter & getter related to the controls on the map.    	|
-| [controlslist](#controlslist) 	| Setter & getter related to the controlslist attribute. 	|
-| [extent](#extent)       	| Returns the extent of the current map view.            	|
-| [lat](#lat)          	| Setter & getter related to the map's latitude.         	|
-| [lon](#lon)          	| Setter & getter related to the map's longitude.        	|
-| [projection](#projection)   	| Setter & getter related to the map's projection.       	|
-| [zoom](#zoom)   	| Setter & getter related to the map's zoom level.       	|
-
-</td>
-<td>
-
-| Method                   	| Functionality                                                        	|
-|--------------------------	|----------------------------------------------------------------------	|
-| [back()](#back)                   	| Navigates back in the map's panning history.                         	|
-| defineCustomProjection() 	| Visit the [Custom Projections API](../api/custom-projections) for more information.                                       	|
-| [forward()](#forward)                	| Navigates forward in the map's panning history.                      	|
-| [reload()](#reload)                 	| Clear the map's panning history and return to the starting location. 	|
-| [toggleDebug()](#toggledebug)            	| Toggle the debug functionality of the map.                           	|
-| [viewSource()](#viewsource)             	| View the source of the map.                                          	|
-
-</td>
-</tr>
-
-</table>
-
-## Setters & Getters 
+| [controls](#controls)     	| Turns native map controls on or off. Reflects the controls attribute.    	|
+| [controlslist](#controlslist) 	| Allows to change the set of native controls. Reflects the controlslist attribute. 	|
+| [extent](#extent)       	| Returns the extent of the current map view. Read only.           	|
+| [lat](#lat)          	| Get the map's latitude. Reflects the lat attribute. Read only.        	|
+| [lon](#lon)          	| Get the map's longitude. Reflects the lon attribute. Read only.        	|
+| [projection](#projection)   	| The map's projection. Reflects the projection attribute.       	|
+| [zoom](#zoom)   	| The map's zoom level. Reflects the zoom attribute.      	|
 
 ### controls
 
-To set the controls simply:
+To add controls to the map:
 ```js
-<mapml-viewer>.controls = true; // or false to remove controls
+let map = document.querySelector('mapml-viewer');
+map.controls = true; // or false to remove controls
 ```
 
 To check whether the map has controls toggled on or off:
 ```js
-let controlsAdded = <mapml-viewer>.controls;
+let map = document.querySelector('mapml-viewer');
+let controlsAdded = map.controls;
 ```
 
 ---
@@ -59,12 +41,14 @@ let controlsAdded = <mapml-viewer>.controls;
 
 To set the controlslist attribute:
 ```js
-<mapml-viewer>.controlslist = "noreload"; // values can be noreload | nofullscreen | nozoom | nolayer
+let map = document.querySelector('mapml-viewer');
+map.controlslist = "noreload"; // values can be noreload | nofullscreen | nozoom | nolayer
 ```
 
 To get the value of the controlslist:
 ```js
-let controlsList = <mapml-viewer>.controlslist;
+let map = document.querySelector('mapml-viewer');
+let controlsList = map.controlslist;
 ```
 
 ---
@@ -74,7 +58,8 @@ let controlsList = <mapml-viewer>.controlslist;
 To get the map's extent:
 
 ```js
-let extent = <mapml-viewer>.extent;
+let map = document.querySelector('mapml-viewer');
+let extent = map.extent;
 ```
 <details>
 <summary>View Sample Extent</summary>
@@ -147,83 +132,103 @@ let extent = <mapml-viewer>.extent;
 
 ### lat
 
-To set the latitude simply:
+To set the latitude:
 
 :::caution
-Needs To Be Implemented, Currently doesn't pan the map on changes
+[Needs to be implemented](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues/588), currently doesn't pan the map on changes
 :::
 
 ```js
-<mapml-viewer>.lat = 21.4; // if it's an invalid value, nothing happens
+let map = document.querySelector('mapml-viewer');
+map.lat = 21.4; // if it's an invalid value, nothing happens
 ```
 
 To get the latitude:
 ```js
-let latitude = <mapml-viewer>.lat;
+let map = document.querySelector('mapml-viewer');
+let latitude = map.lat;
 ```
 
 ---
 
 ### lon
 
-To set the longitude simply:
+To set the longitude:
 
 :::caution
-Needs To Be Implemented, Currently doesn't pan the map on changes
+[Needs to be implemented](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues/588), currently doesn't pan the map on changes
 :::
 
 ```js
-<mapml-viewer>.lon = 21.4; // if it's an invalid value, nothing happens
+let map = document.querySelector('mapml-viewer');
+map.lon = 21.4; // if it's an invalid value, nothing happens
 ```
 
 To get the longitude:
 ```js
-let longitude = <mapml-viewer>.lon;
+let map = document.querySelector('mapml-viewer');
+let longitude = map.lon;
 ```
 
 ---
 
 ### projection
 
-To set/update the projection simply:
+To set/update the projection:
 
 ```js
-<mapml-viewer>.projection = "CBMTILE"; // if it's an invalid/undefined projection, nothing happens
+let map = document.querySelector('mapml-viewer');
+map.projection = "CBMTILE"; // if it's an invalid/undefined projection, nothing happens
 ```
 
 To get the projection:
 ```js
-let projection = <mapml-viewer>.projection;
+let map = document.querySelector('mapml-viewer');
+let projection = map.projection;
 ```
 
 ---
 
 ### zoom
 
-To set the zoom simply:
+To set the zoom:
 
 :::caution
-Needs To Be Implemented, Currently doesn't zoom the map on changes
+[Needs to be implemented](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues/588), currently doesn't zoom the map on changes
 :::
 
 ```js
-<mapml-viewer>.zoom = 3; // if it's an invalid value, nothing happens
+let map = document.querySelector('mapml-viewer');
+map.zoom = 3; // if it's an invalid value, nothing happens
 ```
 
 To get the longitude:
 ```js
-let zoom = <mapml-viewer>.zoom;
+let map = document.querySelector('mapml-viewer');
+let zoom = map.zoom;
 ```
 
 ---
 
 ## Methods
 
+| Method                   	| Description                                                        	|
+|--------------------------	|----------------------------------------------------------------------	|
+| [back()](#back)                   	| Navigates back one state in the map's movement history.                         	|
+| [forward()](#forward)                	| Navigates forward in the map's panning history.                      	|
+| [reload()](#reload)                 	| Clear the map's panning history and return to the starting location. 	|
+| [toggleDebug()](#toggledebug)            	| Toggle the debug functionality of the map.                           	|
+| [viewSource()](#viewsource)             	| View the source of the map.                                          	|
+| [defineCustomProjection()](../api/custom-projections) 	| Define a [custom projection](../api/custom-projections) for use by the page.                                       	|
+| [zoomTo(lat, lon, zoom)](#zoomtolat-lon-zoom) | Fly or pan the map to a (new) location and zoom level.|
+
+
 ### back()
 
 To go back in the map's history:
 ```js
-<mapml-viewer>.back();
+let map = document.querySelector('mapml-viewer');
+map.back();
 ```
 
 ---
@@ -232,7 +237,8 @@ To go back in the map's history:
 
 To go forward in the map's history:
 ```js
-<mapml-viewer>.forward();
+let map = document.querySelector('mapml-viewer');
+map.forward();
 ```
 
 ---
@@ -241,7 +247,8 @@ To go forward in the map's history:
 
 To clear the map's history and return to the initial location:
 ```js
-<mapml-viewer>.reload();
+let map = document.querySelector('mapml-viewer');
+map.reload();
 ```
 
 ---
@@ -250,7 +257,8 @@ To clear the map's history and return to the initial location:
 
 To toggle the map's debug mode:
 ```js
-<mapml-viewer>.toggleDebug();
+let map = document.querySelector('mapml-viewer');
+map.toggleDebug();
 ```
 
 ---
@@ -259,10 +267,59 @@ To toggle the map's debug mode:
 
 To view the map's view source:
 ```js
-<mapml-viewer>.viewSource();
+let map = document.querySelector('mapml-viewer');
+map.viewSource();
 ```
 
 ---
 
+### zoomTo(lat, lon, zoom)
 
+To change the map's center location and zoom level:
 
+```js
+var options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
+
+function success(pos) {
+  var crd = pos.coords;
+
+  let map = document.querySelector('mapml-viewer');
+  map.zoomTo(crd.latitude,crd.longitude, 17); // hard-coded zoom
+  // could calculate a zoom based on accuracy of position
+  console.log(`More or less ${crd.accuracy} meters.`);
+}
+
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+}
+
+navigator.geolocation.getCurrentPosition(success, error, options);
+```
+
+## Events
+
+| Event name      	| Description                                          	|
+|--------------	|--------------------------------------------------------	|
+| layerchange   | Fired when a layer changes src, usually by the user following a link. |
+| load          | Fired when all layers have finished loading content |
+| click         | Fired when the map receives both mousedown and mouseup events |
+| dblclick      | Fired when the user double clicks or taps the map |
+| mousemove     | Fired repeatedly as the mouse cursor traverses the map |
+| mouseover     | Fired once as the mouse cursor enters the map |
+| mouseout      | Fired once as the mouse cursor exits the map |
+| mousedown     | Fired when the mouse's primary key is pressed down with cursor over the map |
+| mouseup       | Fired when the mouse's primary key is released with cursor over the map |
+| movestart     | Fired before the map starts to move / viewport changes |
+| move          | Fired repeatedly as the map moves.                           |
+| moveend       | Fired after the map stops moving |
+| zoomstart     | Fired before the map changes zoom level |
+| zoom          | Fired repeatedly as the map changes zoom |
+| zoomend       | Fired after the map has changed zoom level |
+| preclick      | Fired before a click on the map is triggered.  May not be a primitive. |
+| contextmenu   | Fired when user right-clicks or long presses on map. May not be a primitive.|
+
+---

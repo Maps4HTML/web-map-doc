@@ -3,61 +3,33 @@ id: installation
 title: Installation
 ---
 
-## Download `<mapml-viewer>` Suite
-
-| Version | Description                                 |
-|---------|---------------------------------------------|
-| [master](https://github.com/Maps4HTML/Web-Map-Custom-Element/archive/master.zip)  | Latest version developed on `master` branch, needs to be built, using the [steps to clone the repository](/web-map-doc/docs/installation#clone-mapml-viewer-repository) |
-| [v0.8.0](https://github.com/Maps4HTML/Web-Map-Custom-Element/archive/v0.8.0.zip)  | Latest zip release                          |
-
-### Using a Downloaded Version
-
-#### Extract the zip file
-
-Extract the zip file downloaded from the links above, in there you will find many files, the following are needed for full functionality:
-
-- layer.js
-- leaflet-src.js
-- leaflet.css
-- leaflet.fullscreen.css
-- Leaflet.fullscreen.js
-- map-area.js
-- mapml-viewer.js
-- mapml.css
-- mapml.min.js
-- proj4-src.js
-- proj4leaflet.js
-
-#### Add the Script to a Web page
-
-Copy/move these files to your webpage's directory and add the following to the `<head>` of your HTML code:
-
-```html
-<script type="module" src="path/to/mapml-viewer.js"></script>
-```
-
-You can now use `<mapml-viewer>`, `<layer->` and the other elements that come in the `<mapml-viewer>` element suite on your webpages.
-
-## Clone `<mapml-viewer>` Repository
-
-An alternative to downloading the .zip file is to clone the github repository. This option allows you to make any modifications and view the source code more easily.
+## Install the `<mapml-viewer>` suite of custom elements
 
 ### Requirements
 
-- [Node.js](https://nodejs.org/en/download/)
-
-Run the following commands in bash:
+To install the `<mapml-viewer>` in your web site project, you use the Node Package Manager (npm), so to get that you must install [node.js](https://nodejs.org/en/download/). npm should be installed by the linked installers.  You can now obtain the latest version of the `<mapml-viewer>` suite of custom elements, by installing it in the node_modules directory of your web site directory, using the following commands:
 
 ```bash
-git clone https://github.com/Maps4HTML/Web-Map-Custom-Element
+$ cd ../test
+
+$ npm install @maps4html/web-map-custom-element
+
++ @maps4html/web-map-custom-element@0.8.3
+added 1 package from 2 contributors and audited 1 package in 1.605s
+found 0 vulnerabilities
+
+$
 ```
 
-```bash
-cd Web-Map-Custom-Element #enters root of repository
-npm install               #installs dependencies
-npm install -g grunt-cli  #installs grunt command line tool
-grunt clean copy rollup   #builds mapml
+Once installation is complete, you will have a node_modules/@maps4html/web-map-custom-element subdirectory, containing a `dist` folder with the required JavaScript, CSS and HTML files to support the `<mapml-viewer>`.  
+
+#### Add the Script to a Web page
+
+Add the following to the `<head>` of your HTML code:
+
+```html
+<script type="module" src="./node_modules/@maps4html/web-map-custom-element/dist/mapml-viewer.js"></script>
 ```
 
-After the build is complete a `dist` folder will be created with the contents.
-See [Add the Script to a Web page](/web-map-doc/docs/installation#add-the-script-to-a-web-page) on how to use the contents.
+You can now use `<mapml-viewer>`, `<layer->` and the other elements described here on your web pages.
+

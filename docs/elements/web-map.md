@@ -14,7 +14,12 @@ The web-map custom element suite provides a set of proof-of-concept "[customized
 
 Note that because [not all modern Web browsers implement HTML's customized built-in elements](https://caniuse.com/mdn-api_customelementregistry_builtin), it is not recommended to use this proof-of-concept on a public Web site, as end-user confusion may be the result.
 
-Additionally, `<map>` as a customized built-in element is not accessible to screen reader users in some browsers, due to a [Chromium bug](https://bugs.chromium.org/p/chromium/issues/detail?id=1208405).
+:::
+
+:::caution
+
+The `<map>` customized built-in element is not accessible to screen reader users in some browsers, due to a [Chromium bug](https://bugs.chromium.org/p/chromium/issues/detail?id=1208405).
+
 :::
 
 The following markup may work on Chrome and Firefox, although it may take some fine tuning:
@@ -37,4 +42,8 @@ To experiment with the `web-map` and `map-area` custom elements, you should link
 In theory, if you take steps to provide the fallback markup, a normal (progressive) Web map experience will be had by most users, while those using an older browser or perhaps even Safari may get the "fallback" client side image map experience.  
 
 An older example of such a Web map may be found in the [blog post on Progressive Web Maps](https://maps4html.org/Web-Map-Custom-Element/blog/progressive-web-maps.html).  Please raise an [issue](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues) if you have comments about how that example works for you.
+
+## Attributes
+
+The attributes of the customized built-in `<map>` element are the same as those of [`<mapml-viewer>`](mapml-viewer).
 

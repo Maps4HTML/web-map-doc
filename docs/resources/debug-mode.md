@@ -18,6 +18,8 @@ panel that display's the mouse's current location in the various coordinate syst
 
 ### Map's Context Menu
 
+Debug mode can be enabled through the map context menu (right-click or Shift-F10):
+
 ![The map in debug mode](../assets/img/toggle-debug.gif)
 
 

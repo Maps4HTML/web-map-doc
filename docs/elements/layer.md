@@ -1,12 +1,11 @@
 ---
 id: layer
-title: <layer->
+title: "<layer->: The Layer element"
 slug: /layers/layer
 ---
 
-A key abstraction in the world of mapping is that of "layer".  Maps have one or more layers.
-
-The map layer is implemented by the `<layer->` custom element.
+Maps have one or more layers. Map layers are implemented by the `<layer->` custom element.  
+All `<mapml-viewer>` content is contained by one or more `<layer->` elements, either inline or by remote fetch representing the layer's content.
 
 ```html
 <layer- label="My Layer" checked>
@@ -43,11 +42,6 @@ true, not the value of the attribute. For example, the attribute `checked="false
 actually turns out to be checked,
 [as described by MDN Web docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#boolean_attributes).
 
-### `disabled`
-
-The `<layer- disabled>` attribute and property is boolean. When present,
-sets the disabled state of the layer in the layer control.
-
 ### `hidden`
 
 The `<layer- hidden>` attribute and property is boolean. When present,
@@ -58,7 +52,3 @@ the layer is hidden in the layer control.
 The `label` attribute is used by inline content as the displayed text label of the
 layer in the layer control.  In fetched content, the `label` attribute is ignored,
 and the fetched `<map-title>` element is used.
-
-## API
-
-A [`<layer-> API`](../api/layer-api.md) is available.
