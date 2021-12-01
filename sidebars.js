@@ -3,7 +3,7 @@ module.exports = {
     'Getting Started': [
       'intro',
       'installation',
-      'building',
+      'building'
     ],
     'Mapping Elements': [
       'elements/mapml-viewer',
@@ -12,17 +12,17 @@ module.exports = {
       'elements/input',
       'elements/link',
       'elements/feature',
-      'elements/map-a',
+      'elements/map-a'
   ],
   API: [
     'api/mapml-viewer-api',
     'api/layer-api',
     'api/custom-projections',
-    'api/custom-rendering',
+    'api/custom-rendering'
   ],
   Resources: [
     'resources/debug-mode',
-    'resources/resources',
+    'resources/resources'
     ],
   },
 };

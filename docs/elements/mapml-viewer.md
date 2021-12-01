@@ -1,7 +1,7 @@
 ---
 id: mapml-viewer
 title: "<mapml-viewer>: The Map element"
-slug: /maps/mapml-viewer
+slug: /elements/mapml-viewer
 ---
 
 The `<mapml-viewer>` element is the main element you can use to put a custom Web map on your page.  To create a (really) simple Web map, you might use it like this:
