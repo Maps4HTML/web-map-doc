@@ -71,7 +71,7 @@ The URL can be absolute or relative.
 ---
 ### `hreflang`
 
-Advisory language designation about remote resource.
+Advisory [language designation](https://datatracker.ietf.org/doc/html/rfc5646) about remote resource.
 
 ---
 ### `tref`
@@ -91,36 +91,28 @@ template will be replaced with the value of the variable at the time of processi
 ---
 ### `projection`
 
-The `projection` attribute designates the projection of the remote layer resource.
+The `projection` attribute identifies the projection of the remote layer resource.
 This attribute is used in conjunction with the [`rel=alternate` rel value](#rel).
 
 Projection values [defined by the polyfill](mapml-viewer#projection) include: 
-`OSMTILE`, `WGS84`, `CBMTILE` and `APSTILE`.  
+`OSMTILE`, `WGS84`, `CBMTILE` and `APSTILE`.  Projection values are case-sensitive.
 
 ---
-
 
 
 | <!-- -->    | <!-- -->    |
 |-------------|-------------|
-| [Content categories](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories) | List of links to MDN content categories that apply |
-| Permitted content | Content / elements / nodes that can be children of this  |
-| Tag omission | Is this an existing void element or can you omit the end tag in theory? |
-| Permitted parents | Of what elements can this be a child? |
-| Implicit ARIA role   | [See example](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#properties) |
-| Permitted ARIA roles | [See example](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#properties) |
-
----
-
-## Events
+| [Content categories](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories) | [Metadata content](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#metadata_content) |
+| Permitted content | None. Like the HTML `<link>` element `<map-link>` is an empty element.  |
+| Tag omission | While the HTML `<link>` element is a void element, the polyfill must have an end tag. |
+| Permitted parents | Any element that accepts metadata element children. |
+| Implicit ARIA role   | [link](https://w3c.github.io/aria/#link) with `href` attribute. |
+| Permitted ARIA roles | No roles permitted. |
+| DOM Interface    | [HTMLLinkElement extension](api/HTMLLinkElement) |
 
 ---
 
 ## Examples
-
----
-
-## Security and privacy
 
 ---
 
@@ -132,15 +124,12 @@ Projection values [defined by the polyfill](mapml-viewer#projection) include:
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [link to MapML\#fragment](https://maps4html.org/MapML/spec/) |
+| [MapML link element](https://maps4html.org/MapML/spec/#the-link-element-0) |
+| [HTML link element](https://html.spec.whatwg.org/multipage/semantics.html#the-link-element) |
 
 ---
 
 ## Requirements
-
----
-
-## See Also
 
 ---
 
