@@ -1,7 +1,7 @@
 ---
 id: web-map
 title: <map is="web-map">
-slug: /maps/web-map
+slug: /elements/web-map
 ---
 
 The HTML `<map>` element has been deployed and in use in browsers since the mid-90's. It was used to provide visually appealing yet accessible home pages, by giving the Web developer the ability to design links as invisible yet interactive polygonal areas on top of one or more images.  Use of this facility became known as "client side image maps", and was often used to provide site navigation links.
