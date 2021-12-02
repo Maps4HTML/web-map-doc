@@ -22,7 +22,7 @@ values of `name` related to maps include:
 | projection    | Set the projection for the document |
 | extent        | Define the bounds of the document in terms of corner position keywords and axis names, potentially combined with a zoom value if necessary (depending on coordinate system). |
 | cs            | Identifies the default coordinate reference system of coordinate strings found in the document. |
-| zoom          | Specify the 'native' zoom range min, max and value for displaying the document |
+| zoom          | Specify the zoom range min, max and default zoom value for displaying the document contents. The 'native' zoom range of [templated map content](link#tref) is specified by the min/max attributes of associated [zoom inputs](input#type).  If templated content is not described by associated zoom input min/max/value attributes, the values specified in a `<map-meta name=zoom>` will be used as fallback, if it exists.  If no `<map-meta name=zoom>` exists, the corresponding min/max values from the projection will be used. |
 
 ---
 ### `content`
