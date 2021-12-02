@@ -11,6 +11,7 @@ module.exports = {
       'elements/extent',
       'elements/input',
       'elements/link',
+      'elements/meta',
       'elements/feature',
       'elements/map-a'
   ],
