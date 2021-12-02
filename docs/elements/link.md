@@ -108,7 +108,7 @@ Projection values [defined by the polyfill](mapml-viewer#projection) include:
 | Permitted parents | Any element that accepts metadata element children. |
 | Implicit ARIA role   | [link](https://w3c.github.io/aria/#link) with `href` attribute. |
 | Permitted ARIA roles | No roles permitted. |
-| DOM Interface    | [HTMLLinkElement extension](api/HTMLLinkElement) |
+| DOM Interface    | [HTMLLinkElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLinkElement) |
 
 ---
 
