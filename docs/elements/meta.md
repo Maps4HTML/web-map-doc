@@ -30,7 +30,7 @@ values of `name` related to maps include:
 | `name`          | `content` value                                          	  |
 |--------------	|--------------------------------------------------------	|
 | projection    | A case-sensitive [projection name](mapml-viewer#projection), or a [custom projection name](../api/custom-projections#details) |
-| extent        | \(\(_[position keyword](input#position)_\)-\(_[axis name\(input#axis)_\)=\(_axis value_\)\(,\)\)4\(,\)\(zoom=\(_zoom value_\)\)0,1 |
+| extent        | \(\(_[position keyword](input#position)_\)-\(_[axis name](input#axis)_\)=\(_axis value_\)\(,\)\)4\(,\)\(zoom=\(_zoom value_\)\)0,1 |
 | cs            | A case-sensitive [coordinate system abbreviation](input#units). |
 | zoom          | (min=_minimum zoom value_,max=_maximum zoom value_,)(value=_current zoom value_) |
 
@@ -49,13 +49,47 @@ values of `name` related to maps include:
 ---
 
 ## Examples
+```html
+  <layer- label="Favourite Restaurant" checked>
+    <map-meta name="projection" content="OSMTILE"></map-meta>
+    <map-meta name="zoom" content="min=0,max=22,value=3"></map-meta>
+    <map-feature>
+      <map-featurecaption>Big Daddy's Crab Shack</map-featurecaption>
+        <map-geometry cs="gcrs">
+            <map-point>
+              <map-coordinates>-75.690276 45.41868</map-coordinates>
+            </map-point>
+        </map-geometry>
+    </map-feature>
+  </layer->
+```
+Using the `<map-meta>` element to specify the native zoom and fallback zoom range 
+for a `<map-feature>`.  The coordinate encoding is narrowly determined for the feature,
+by the `<map-geometry cs="gcrs">` attribute, which tells the polyfill how to parse and
+process strings of coordinates found in descendant `<map-coordinates>` elements.
 
 ```html
   <layer- label="Favourite Restaurant" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-meta name="zoom" content="min=0,max=22,value=3"></map-meta>
-    <map-meta name="cs" content="gcrs" ></map-meta>
     <map-meta name="extent" content="top-left-easting=-8433179, top-left-northing=5689316, bottom-right-easting=-8420968, bottom-right-northing=5683139"></map-meta>
+    <map-feature>
+      <map-featurecaption>Big Daddy's Crab Shack</map-featurecaption>
+        <map-geometry cs="gcrs">
+            <map-point>
+              <map-coordinates>-75.690276 45.41868</map-coordinates>
+            </map-point>
+        </map-geometry>
+    </map-feature>
+  </layer->
+```
+Using the `<map-meta>` element to establish the pcrs (easting,northing) **extent** of 
+a map layer, the coordinates of which are encoded as gcrs pairs. 
+
+```html
+  <layer- label="Favourite Restaurant" checked>
+    <map-meta name="projection" content="OSMTILE"></map-meta>
+    <map-meta name="cs" content="gcrs" ></map-meta>
     <map-feature>
       <map-featurecaption>Big Daddy's Crab Shack</map-featurecaption>
         <map-geometry>
@@ -66,6 +100,30 @@ values of `name` related to maps include:
     </map-feature>
   </layer->
 ```
+Using the `<map-meta>` to specify a fallback coordinate encoding for geometries in
+the layer. The encoding of the coordinates is identified by the use of the 
+`<map-meta name="cs" content="gcrs">` element. Such a declaration tells the 
+polyfill how to parse and process any coordinates that don't have an ancestor 
+`<map-geometry cs="">` coordinate encoding declaration.  Note that the zoom level
+at which the feature should be displayed is not specified, nor the extent. Both
+values will fall back to the default values for the projection. 
+
+```html
+  <layer- label="Favourite Restaurant" checked>
+    <map-feature>
+      <map-featurecaption>Big Daddy's Crab Shack</map-featurecaption>
+        <map-geometry>
+            <map-point>
+              <map-coordinates>-75.690276 45.41868</map-coordinates>
+            </map-point>
+        </map-geometry>
+    </map-feature>
+  </layer->
+```
+Allowing all metadata values to default to those of the map's projection.  The 
+feature will be displayed at all zoom levels, and the coordinates are by default
+interpreted to be `gcrs` (longitude latitude).  The extent of the layer defaults 
+to that of the projection.
 
 ---
 
@@ -73,15 +131,20 @@ values of `name` related to maps include:
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [Map Markup Language](https://maps4html.org/MapML/spec/#the-meta-element-0) |
+| [MapML meta element](https://maps4html.org/MapML/spec/#the-meta-element-0) |
 | [HTML meta element](https://html.spec.whatwg.org/multipage/semantics.html#the-meta-element) |
 ---
 
 ## Requirements
 
+
+Need to be documented.
+
 ---
 
 ## See Also
+
+
 
 ---
 
