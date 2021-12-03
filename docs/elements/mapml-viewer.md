@@ -28,6 +28,9 @@ The `<mapml-viewer>` element is the main element you can use to put a custom Web
 </body>
 </html>    
 ```
+
+<iframe src="/static/demo/mapml-viewer-demo.html" title="MapML Demo" height="370" width="100%" scrolling="no" frameBorder="0"></iframe>
+
 Note that for the above example to run properly on your own site, you need to get a built copy of the `<mapml-viewer>` project in your site's folder. In the example, the `<mapml-viewer>` files are copied into the folder named "web-map" in your site root folder. Your own site's path to these files will depend on how you structure your folders.
 
 `<mapml-viewer>` is an "[autonomous custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)" in HTML.  You can distinguish an autonomous custom element from a "native" HTML element by the "-" anywhere in the element name. Autonomous custom elements are supported by all modern browsers, but don't work in old browsers (e.g. Internet Explorer and old Edge).
