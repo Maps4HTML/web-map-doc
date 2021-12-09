@@ -19,7 +19,8 @@ module.exports = {
     'api/mapml-viewer-api',
     'api/layer-api',
     'api/custom-projections',
-    'api/custom-rendering'
+    'api/custom-rendering',
+    'api/geojson-api',
   ],
   Resources: [
     'resources/debug-mode',
