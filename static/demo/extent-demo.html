@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo</title>
+    <script type="module" src="../dist/mapml-viewer.js"></script>
+
+    
+    <link rel="stylesheet" href="codemirror-5.64.0/lib/codemirror.css">
+    <script src="codemirror-5.64.0/lib/codemirror.js"></script>
+    <script src="codemirror-5.64.0/mode/xml/xml.js"></script>
+
+    <style>
+        html, body {
+            width: 100%;
+            background-color: #faf8f5;
+        }
+        #input {
+            width: 49%; 
+            display: inline-block;
+            /*background-color: rgb(67, 196, 196);*/
+        }
+        #output {
+            width:49%;
+            display: inline-block;
+            /*background-color: aqua;*/
+        }
+        mapml-viewer:defined {
+            height: 300px;
+            width: 100%;
+        }
+        button {
+            width:auto;
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 4px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            font-size: 25px;
+        }
+        h2 {
+            display:inline;
+            color: #383838;
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align: center;">
+        <h2>MapML Demo: &lt;map-extent&gt;</h2>
+        <button class="run" onclick="plot()">▶</button>
+    </div>
+    <div id="input">
+        <textarea rows="10" style="width:100%">
+<mapml-viewer projection="OSMTILE">
+    <layer- label="OpenStreetMap" checked>
+        <map-extent units="OSMTILE">
+            <map-input name="z" type="zoom" value="18" min="0" max="18"></map-input>
+            <map-input name="s" type="hidden" shard="true" list="servers"></map-input>
+            <map-datalist id="servers">
+                <map-option value="a"></map-option>
+                <map-option value="b"></map-option>
+                <map-option value="c"></map-option>
+            </map-datalist>
+            <map-input name="x" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
+            <map-input name="y" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
+            <map-link rel="tile" tref="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"></map-link>
+        </map-extent>
+    </layer->
+</mapml-viewer></textarea>
+    </div>
+    <div id="output"></div>
+
+    <script>
+        // Styling Text Editor
+        var editor = CodeMirror.fromTextArea(document.querySelector('textarea'), {
+            mode: "xml",
+            lineNumbers: true,
+            screenReaderLabel: "MapML Demo Code"
+        });
+
+        // Plot the new mapml map when run button is clicked
+        function plot() {
+            // get textarea value
+            let rawText = editor.getValue();
+
+            let mapml = new DOMParser().parseFromString(rawText, "text/html");
+            mapml = mapml.querySelector('mapml-viewer');
+            
+            let output = document.getElementById('output');
+            output.replaceChild(mapml, output.querySelector('mapml-viewer'));
+        }
+
+        // Plot map when page is loaded using the deafult text
+        window.onload = (event) => {
+            let rawText = editor.getValue();
+
+            let mapml = new DOMParser().parseFromString(rawText, "text/html");
+            mapml = mapml.querySelector('mapml-viewer');
+
+            let output = document.getElementById('output');
+            output.appendChild(mapml);
+        };
+    </script>
+</body>
+</html>

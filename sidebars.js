@@ -3,36 +3,28 @@ module.exports = {
     'Getting Started': [
       'intro',
       'installation',
+      'building'
     ],
     'Mapping Elements': [
-      'maps/mapml-viewer',
-      'maps/web-map',
-      {
-        'Layers': [
-          'layers/layer',
-          'layers/static-tiles',
-          'layers/static-features',
-          'layers/static-images',
-          'layers/templated-tiles',
-          'layers/templated-features',
-          'layers/templated-images',
-        ],
-      },
-      {
-        'Other Elements': [
-          'other-elements/map-a',
-        ],
-      },
+      'elements/mapml-viewer',
+      'elements/layer',
+      'elements/extent',
+      'elements/input',
+      'elements/link',
+      'elements/meta',
+      'elements/feature',
+      'elements/map-a'
   ],
   API: [
     'api/mapml-viewer-api',
     'api/layer-api',
     'api/custom-projections',
     'api/custom-rendering',
+    'api/geojson-api',
   ],
   Resources: [
     'resources/debug-mode',
-    'resources/resources',
+    'resources/resources'
     ],
   },
 };
