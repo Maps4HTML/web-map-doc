@@ -1,7 +1,7 @@
 module.exports = {
   title: '<mapml-viewer> documentation',
   tagline: 'Embed map viewers into your web pages, using HTML only.',
-  url: 'http://maps4html.org/',
+  url: 'http://maps4html.org/web-map-doc/',
   baseUrl: '/web-map-doc/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
