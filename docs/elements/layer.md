@@ -22,7 +22,7 @@ or fetched, from the `<layer- src="..."></layer->` source attribute URL:
 <layer- label="My Layer" src="https://example.org/mapml/mylayer" checked></layer->
 ```
 
-<iframe src="/web-map-doc/static/demo/layer-demo.html" title="MapML Demo" height="370" width="100%" scrolling="no" frameBorder="0"></iframe>
+<iframe src="../../demo/layer-demo.html" title="MapML Demo" height="370" width="100%" scrolling="no" frameBorder="0"></iframe>
 
 This documentation uses the convention of inline content mostly.  Fetched map content
 follows similar semantics, except it is parsed with the browser's XML parser and
