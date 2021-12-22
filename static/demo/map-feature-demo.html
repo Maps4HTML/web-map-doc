@@ -76,11 +76,14 @@
         .tab button.active {
             background-color: #ccc;
         }
+        .codemirror-highlighted {
+            background-color: rgba(255, 255, 119, .7);
+        }
     </style>
 </head>
 <body>
     <div style="text-align: center;">
-        <h2>MapML Demo: &lt;layer-&gt;</h2>
+        <h2>MapML Demo: &lt;map-feature&gt;</h2>
         <button class="run" onclick="plot()">▶</button>
     </div>
 
@@ -91,53 +94,88 @@
 
     <div class="tabcontent" id="HTML">
         <textarea rows="10" style="width:100%" id="htmlEditor">
-<mapml-viewer projection="OSMTILE" zoom="12" lat="45.42" lon="-75.70">
-  <layer- label="OpenStreetMap" src="data/osm.mapml" checked></layer->
-  <layer- label="Ottawa" checked>
-    <map-meta name="projection" content="OSMTILE"></map-meta>
-    <map-feature class="ottawa">
-      <map-featurecaption>Ottawa</map-featurecaption>
-      <map-geometry>
-        <map-point>
-          <map-coordinates>-75.697193 45.421530</map-coordinates>
-        </map-point>
-      </map-geometry>
+<mapml-viewer projection="CBMTILE" zoom="1" lat="45.5052040" lon="-75.2202344" controls>
+  <layer- label="Arizona" checked>
+    <map-meta name="projection" content="CBMTILE"></map-meta>
+    <map-meta name="zoom" content="min=1,max=5,value=0"></map-meta>
+    <map-meta name="cs" content="gcrs"></map-meta>
+    <map-meta name="extent" content="zoom=0,top-left-column=0,top-left-row=0,bottom-right-column=5,bottom-right-row=5"></map-meta>
+
+    <map-feature zoom="2" class="refDiff1">
+      <map-featurecaption>Feature 1</map-featurecaption>
       <map-properties>
-        <table>
-          <thead>
-            <tr>
-              <th role="columnheader" scope="col">Property name</th>
-              <th role="columnheader" scope="col">Property value</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Name</th>
-              <td itemprop="amenity">Ottawa</td>
-            </tr>
-            <tr>
-              <th scope="row">Type</th>
-              <td itemprop="name">City</td>
-            </tr>
-            <tr>
-              <th scope="row">Website</th>
-              <td itemprop="website"><a href="https://ottawa.ca/" target="_blank">Ottawa</a></td>
-            </tr>
-          </tbody>
-        </table>
+        <h1>Test</h1>
+        <a href="http://example.org/" target="_blank">test</a>
       </map-properties>
+      <map-geometry cs="tilematrix">
+        <map-polygon>
+          <map-coordinates>11 11 12 11 12 12 11 12</map-coordinates>
+        </map-polygon>
+      </map-geometry>
+    </map-feature>
+
+    <map-feature zoom="2" class="refDiff2">
+      <map-featurecaption>Feature 2</map-featurecaption>
+      <map-properties>
+        <h1>Test</h1>
+      </map-properties>
+      <map-geometry cs="pcrs">
+        <map-polygon>
+          <map-coordinates>257421 -3567196 -271745 1221771 -3896544 242811 -3183549 -2613313</map-coordinates>
+        </map-polygon>
+      </map-geometry>
+    </map-feature>
+
+    <map-feature zoom="2" class="refDiff3">
+      <map-featurecaption>Feature 3</map-featurecaption>
+      <map-properties>
+        <h1>Test</h1>
+      </map-properties>
+      <map-geometry cs="tcrs">
+        <map-polygon>
+          <map-coordinates>2771 3106 2946 3113 2954 3210 2815 3192</map-coordinates>
+        </map-polygon>
+      </map-geometry>
+    </map-feature>
+
+    <map-feature zoom="2" class="refDiff4">
+      <map-featurecaption>Feature 4</map-featurecaption>
+      <map-properties>
+        <h1>Arizona</h1>
+      </map-properties>
+      <map-geometry>
+        <map-polygon>
+          <map-coordinates>-109.042503 37.000263 -109.04798 31.331629 -111.074448 31.331629 -112.246513 31.704061
+            -114.815198 32.492741 -114.72209 32.717295 -114.524921 32.755634 -114.470151 32.843265 -114.524921
+            33.029481 -114.661844 33.034958 -114.727567 33.40739 -114.524921 33.54979 -114.497536 33.697668
+            -114.535874 33.933176 -114.415382 34.108438 -114.256551 34.174162 -114.136058 34.305608 -114.333228
+            34.448009 -114.470151 34.710902 -114.634459 34.87521 -114.634459 35.00118 -114.574213 35.138103
+            -114.596121 35.324319 -114.678275 35.516012 -114.738521 36.102045 -114.371566 36.140383 -114.251074
+            36.01989 -114.152489 36.025367 -114.048427 36.195153 -114.048427 37.000263 -110.499369 37.00574
+            -109.042503 37.000263</map-coordinates>
+        </map-polygon>
+      </map-geometry>
     </map-feature>
   </layer->
 </mapml-viewer></textarea>
     </div>
     <div class="tabcontent" id="CSS">
         <textarea rows="10" style="width:100%" id="cssEditor">
-.ottawa {
-  fill: #ea4335;
-  stroke: #b21511;
+.refDiff1 {
+  fill: #A0DDE6;
+  stroke: #80C2AF;
 }
-.ottawa:hover {
-  fill: green;
+.refDiff2 {
+  fill: #FFD639;
+  stroke: #FBAF00;
+}
+.refDiff3 {
+  fill: #E1AA7D;
+  stroke: #B6D094;
+}
+.refDiff4 {
+  fill: #D8A47F;
+  stroke: #EF8354;
 }</textarea>
     </div>
 
@@ -182,6 +220,8 @@
             for (i=0; i<layers.length; ++i) {
                 layers[i].appendChild(mapmlCSS);
             }
+
+            console.log(layers);
 
             // Adding code to output div
             let output = document.getElementById('output');
