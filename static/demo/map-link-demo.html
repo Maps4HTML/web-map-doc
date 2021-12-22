@@ -83,6 +83,7 @@
 </head>
 <body>
     <div style="text-align: center;">
+        <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
         <h2>MapML Demo: &lt;map-link&gt;</h2>
         <button class="run" onclick="plot()">▶</button>
     </div>
@@ -93,6 +94,7 @@
     </div>
 
     <div class="tabcontent" id="HTML">
+        <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
         <textarea rows="10" style="width:100%" id="htmlEditor">
 <mapml-viewer projection="OSMTILE" zoom="1" lat="60.0" lon="-100.0" controls>
   <layer- label="OpenStreetMap" src="data/osm.mapml" checked></layer->
@@ -111,6 +113,7 @@
 </mapml-viewer></textarea>
     </div>
     <div class="tabcontent" id="CSS">
+        <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
         <textarea rows="10" style="width:100%" id="cssEditor">
 .ottawa {
   fill: #ea4335;
@@ -130,6 +133,7 @@
             autoCloseTags: true
         });
 
+        // ------------------------------------------------- CHANGE THIS ------------------------------------------------->
         // Highlighting code 
         htmlEditor.markText({line: 3, ch: 0}, {line: 4, ch: -1}, {className: "codemirror-highlighted"});
 
