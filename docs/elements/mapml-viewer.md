@@ -1,7 +1,7 @@
 ---
 id: mapml-viewer
 title: "<mapml-viewer>: The Map element"
-slug: /elements/mapml-viewer
+slug: /elements/mapml-viewer/
 ---
 
 The `<mapml-viewer>` element is the main element you can use to put a custom Web map on your page.  To create a (really) simple Web map, you might use it like this:
@@ -29,7 +29,7 @@ The `<mapml-viewer>` element is the main element you can use to put a custom Web
 </html>    
 ```
 
-<iframe src="../../demo/mapml-viewer-demo.html" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
+<iframe src="../../../demo/mapml-viewer-demo.html" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
 Note that for the above example to run properly on your own site, you need to get a built copy of the `<mapml-viewer>` project in your site's folder. In the example, the `<mapml-viewer>` files are copied into the folder named "web-map" in your site root folder. Your own site's path to these files will depend on how you structure your folders.
 
@@ -52,7 +52,7 @@ The default projection is `OSMTILE`.
 
   - `APSTILE` is based on the Alaska Polar Stereographic (EPSG:5936) projected coordinate reference system, and has 20 zoom levels (0 to 19).
 
-  - other projections are possible, using the [Custom Projections API](../api/custom-projections).
+  - other projections are possible, using the [Custom Projections API](../../api/custom-projections).
 
 ### `zoom`
 

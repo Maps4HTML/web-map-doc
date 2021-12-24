@@ -1,7 +1,7 @@
 ---
 id: extent
 title: "<map-extent>: The Extent element"
-slug: /elements/extent
+slug: /elements/extent/
 ---
 
 The `<map-extent>` element is a hypertext control that is associated to and represents the 
@@ -35,7 +35,7 @@ URL template.
 </layer->
 ```
 
-<iframe src="../../demo/extent-demo.html" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
+<iframe src="../../../demo/extent-demo.html" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
 ## Attributes
 
@@ -54,7 +54,7 @@ Defined values of `units` include:
 | WGS84         | Pseudo plate carrée, with 256px x 256px tiles. Zoom = 0 contains two tiles in two columns, with their origin at -180,90. False easting and northing (pcrs) values inside the projection bounds correspond to longitude and latitude, respectively. |
 | CBMTILE       | Lambert Conformal Conic, with 256px x 256px tiles.  Zoom levels chosen by scale denominator, so tiles do not nest.|
 
-Author-defined values of `units` are possible, using the [Custom projections API](../api/custom-projections/)
+Author-defined values of `units` are possible, using the [Custom projections API](../../api/custom-projections/)
 
 ---
 
