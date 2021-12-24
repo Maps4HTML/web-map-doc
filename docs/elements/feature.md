@@ -1,7 +1,7 @@
 ---
 id: feature
 title: "<map-feature>: The Feature element"
-slug: /elements/feature
+slug: /elements/feature/
 ---
 Map [features](https://en.wikipedia.org/wiki/Geographical_feature) are real or imaginary location objects represented in 2D according to a standard model, called the [Simple Features model](https://en.wikipedia.org/wiki/Simple_Features). There exists a wide variety of formats that allow the encoding of the Simple Features model, famously including: GeoJSON, Keyhole Markup Language (KML), and shape files (.shp), among many others.
 
@@ -9,7 +9,7 @@ Map features are represented in HTML MapML using a `<map-feature>` element, whic
 
 A `<map-feature>` element is a container for a feature's accessible name (`<map-featurecaption>`), scalar properties (`<map-properties>`) and its geometry (`<map-geometry>`).  The `<map-feature>` element can be modeled as inline HTML content as a child of the `<layer->` element, or in an XHTML MapML document, as a child of the `<map-body>` element.
 
-<iframe src="../../demo/map-feature-demo.html" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
+<iframe src="../../../demo/map-feature-demo.html" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
 ## An inline HTML map-feature
 

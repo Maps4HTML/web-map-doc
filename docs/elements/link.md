@@ -1,7 +1,7 @@
 ---
 id: link
 title: "<map-link>: The Link element"
-slug: /elements/link
+slug: /elements/link/
 ---
 
 The `<map-link>` element is an extended HTML `link` element, for use in Web 
@@ -18,7 +18,7 @@ maps.  Most of the extensions center on proposed new values of the `rel` attribu
 - provide links to layers at next native zoom level via `zoomin`, `zoomout` rel values.  Such links are automatically followed by the polyfill when appropriate.
 
 <!-- demo / example -->
-<iframe src="../../demo/map-link-demo.html" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
+<iframe src="../../../demo/map-link-demo.html" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
 
 ## Attributes
@@ -95,7 +95,7 @@ template will be replaced with the value of the variable at the time of processi
 The `projection` attribute identifies the projection of the remote layer resource.
 This attribute is used in conjunction with the [`rel=alternate` rel value](#rel).
 
-Projection values [defined by the polyfill](mapml-viewer#projection) include: 
+Projection values [defined by the polyfill](../mapml-viewer#projection) include: 
 `OSMTILE`, `WGS84`, `CBMTILE` and `APSTILE`.  Projection values are case-sensitive.
 
 ---
