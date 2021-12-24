@@ -52,7 +52,7 @@ The default projection is `OSMTILE`.
 
   - `APSTILE` is based on the Alaska Polar Stereographic (EPSG:5936) projected coordinate reference system, and has 20 zoom levels (0 to 19).
 
-  - other projections are possible, using the [Custom Projections API](../api/custom-projections).
+  - other projections are possible, using the [Custom Projections API](../../api/custom-projections).
 
 ### `zoom`
 
