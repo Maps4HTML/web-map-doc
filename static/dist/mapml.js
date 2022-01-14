@@ -383,10 +383,10 @@
       },
 
       _getNativeVariables: function(mapml){
-        let nativeZoom = mapml.querySelector("map-meta[name=zoom]") &&
-            +M.metaContentToObject(mapml.querySelector("map-meta[name=zoom]").getAttribute("content")).value || 0;
-        let nativeCS = mapml.querySelector("map-meta[name=cs]") &&
-            M.metaContentToObject(mapml.querySelector("map-meta[name=cs]").getAttribute("content")).content || "GCRS";
+        let nativeZoom = (mapml.querySelector && mapml.querySelector("map-meta[name=zoom]") &&
+            +M.metaContentToObject(mapml.querySelector("map-meta[name=zoom]").getAttribute("content")).value) || 0;
+        let nativeCS = (mapml.querySelector && mapml.querySelector("map-meta[name=cs]") &&
+            M.metaContentToObject(mapml.querySelector("map-meta[name=cs]").getAttribute("content")).content) || "PCRS";
         return {zoom:nativeZoom, cs: nativeCS};
       },
 
@@ -606,24 +606,26 @@
       },
     geometryToLayer: function (mapml, vectorOptions, nativeCS, zoom, title) {
       let geometry = mapml.tagName.toUpperCase() === 'MAP-FEATURE' ? mapml.getElementsByTagName('map-geometry')[0] : mapml,
-          cs = geometry.getAttribute("cs") || nativeCS, group = [], svgGroup = L.SVG.create('g'), copyOptions = Object.assign({}, vectorOptions);
-      for(let geo of geometry.querySelectorAll('map-polygon, map-linestring, map-multilinestring, map-point, map-multipoint')){
-        group.push(M.feature(geo, Object.assign(copyOptions,
-          { nativeCS: cs,
-            nativeZoom: zoom,
-            projection: this.options.projection,
-            featureID: mapml.id,
-            group: svgGroup,
-            wrappers: this._getGeometryParents(geo.parentElement),
-            featureLayer: this,
-            _leafletLayer: this.options._leafletLayer,
-          })));
-      }
-      let groupOptions = {group:svgGroup, featureID: mapml.id, accessibleTitle: title, onEachFeature: vectorOptions.onEachFeature, properties: vectorOptions.properties, _leafletLayer: this.options._leafletLayer,},
-        collections = geometry.querySelector('map-multipolygon') || geometry.querySelector('map-geometrycollection');
-      if(collections) groupOptions.wrappers = this._getGeometryParents(collections.parentElement);
+          cs = geometry?.getAttribute("cs") || nativeCS, group = [], svgGroup = L.SVG.create('g'), copyOptions = Object.assign({}, vectorOptions);
+      if (geometry) {
+        for(let geo of geometry.querySelectorAll('map-polygon, map-linestring, map-multilinestring, map-point, map-multipoint')){
+          group.push(M.feature(geo, Object.assign(copyOptions,
+            { nativeCS: cs,
+              nativeZoom: zoom,
+              projection: this.options.projection,
+              featureID: mapml.id,
+              group: svgGroup,
+              wrappers: this._getGeometryParents(geo.parentElement),
+              featureLayer: this,
+              _leafletLayer: this.options._leafletLayer,
+            })));
+        }
+        let groupOptions = {group:svgGroup, featureID: mapml.id, accessibleTitle: title, onEachFeature: vectorOptions.onEachFeature, properties: vectorOptions.properties, _leafletLayer: this.options._leafletLayer,},
+          collections = geometry.querySelector('map-multipolygon') || geometry.querySelector('map-geometrycollection');
+          if(collections) groupOptions.wrappers = this._getGeometryParents(collections.parentElement);
 
-      return M.featureGroup(group, groupOptions);
+        return M.featureGroup(group, groupOptions);
+      }
     },
 
     _getGeometryParents: function(subType, elems = []){
@@ -1943,6 +1945,10 @@
           // above.  Not going to change this, but failing to understand ATM.
           // may revisit some time.
           this.validProjection = true; 
+          
+          // _mapmlLayerItem is set to the root element representing this layer
+          // in the layer control, iff the layer is not 'hidden' 
+          this._mapmlLayerItem = {};
       },
       setZIndex: function (zIndex) {
           this.options.zIndex = zIndex;
@@ -2347,7 +2353,7 @@
           extentsettingsButton.setAttribute('aria-expanded', false);
           extentsettingsButton.classList.add('mapml-button');
           L.DomEvent.on(extentsettingsButton, 'click', (e)=>{
-            if(extentSettings.hidden == true){
+            if(extentSettings.hidden === true){
               extentsettingsButton.setAttribute('aria-expanded', true);
               extentSettings.hidden = false;
             } else {
@@ -2473,6 +2479,7 @@
           extentsFieldset = L.DomUtil.create('fieldset', 'mapml-layer-grouped-extents'),
           mapEl = this._layerEl.parentNode;
           this.opacityEl = opacity;
+          this._mapmlLayerItem = fieldset;
 
           // append the paths in svg for the remove layer and toggle icons
           svgSettingsControlIcon.setAttribute('viewBox', '0 0 24 24');
@@ -2518,7 +2525,7 @@
           itemSettingControlButton.setAttribute('aria-expanded', false);
           itemSettingControlButton.classList.add('mapml-button');
           L.DomEvent.on(itemSettingControlButton, 'click', (e)=>{
-            if(layerItemSettings.hidden == true){
+            if(layerItemSettings.hidden === true){
               itemSettingControlButton.setAttribute('aria-expanded', true);
               layerItemSettings.hidden = false;
             } else {
@@ -2673,7 +2680,7 @@
             if(!allHidden) layerItemSettings.appendChild(extentsFieldset);
           }
 
-          return fieldset;
+          return this._mapmlLayerItem;
       },
       _initialize: function(content) {
           if (!this._href && !content) {return;}
@@ -3097,13 +3104,28 @@
       getQueryTemplates: function(pcrsClick) {
           if (this._extent && this._extent._queries) {
             var templates = [];
-            // only return queries that are in bound
-            for(let i = 0; i < this._extent._queries.length; i++){
-              if(this._extent._queries[i].extentBounds.contains(pcrsClick)){
-                templates.push(this._extent._queries[i]);
+            // only return queries that are in bounds
+            if (this._layerEl.checked && !this._layerEl.hidden && this._mapmlLayerItem) {
+              let layerAndExtents = this._mapmlLayerItem.querySelectorAll(".mapml-layer-item-name");
+              for(let i = 0; i < layerAndExtents.length; i++){
+                if (layerAndExtents[i].extent || this._extent._mapExtents.length === 1) { // the layer won't have an .extent property, this is kind of a hack
+                  let extent = layerAndExtents[i].extent || this._extent._mapExtents[0];
+                  for (let j = 0; j < extent._templateVars.length; j++) {
+                    if (extent.checked) {
+                      let template = extent._templateVars[j];
+                      // for each template in the extent, see if it corresponds to one in the this._extent._queries array
+                      for (let k = 0; k < this._extent._queries.length; k++) {
+                        let queryTemplate = this._extent._queries[k];
+                        if (template === queryTemplate && queryTemplate.extentBounds.contains(pcrsClick)) {
+                          templates.push(queryTemplate);
+                        }
+                      }
+                    }
+                  }
+                }
               }
+              return templates;
             }
-            return templates;
           }
       },
       _attachSkipButtons: function(e){
@@ -3587,32 +3609,39 @@
 
         let point = this._map.project(e.latlng),
             scale = this._map.options.crs.scale(this._map.getZoom()),
-            pcrsClick = this._map.options.crs.transformation.untransform(point,scale),
-            contenttype;
-        var templates = layer.getQueryTemplates(pcrsClick);
+            pcrsClick = this._map.options.crs.transformation.untransform(point,scale);
+        let templates = layer.getQueryTemplates(pcrsClick);
 
         var fetchFeatures = function(template, obj, lastOne) {
-          fetch(L.Util.template(template.template, obj), { redirect: 'follow' }).then((response) => {
-          contenttype = response.headers.get("Content-Type");
-          if (response.status >= 200 && response.status < 300) {
-            return response.text();
-          } else {
-            throw new Error(response.status);
-          }
-        }).then((mapml) => {
-          if (contenttype.startsWith("text/mapml")) {
-            //if(!this.mapml) this.mapml = "";
-            //this.mapml = this.mapml.concat(mapml);
-            if(!layer._mapmlFeatures) layer._mapmlFeatures = [];
-            let parser = new DOMParser(),
-                mapmldoc = parser.parseFromString(mapml, "application/xml"),
+          const parser = new DOMParser();
+          fetch(L.Util.template(template.template, obj), { redirect: 'follow' })
+            .then((response) => {
+              if (response.status >= 200 && response.status < 300) {
+                return response.text().then( text => {
+                  return {
+                    contenttype: response.headers.get("Content-Type"),
+                    text: text
+                  };
+                });
+              } else {
+                throw new Error(response.status);
+              }
+        }).then((response) => {
+          if(!layer._mapmlFeatures) layer._mapmlFeatures = [];
+          if (response.contenttype.startsWith("text/mapml")) {
+            // the mapmldoc could have <map-meta> elements that are important, perhaps
+            // also, the mapmldoc can have many features
+            let mapmldoc = parser.parseFromString(response.text, "application/xml"),
                 features = Array.prototype.slice.call(mapmldoc.querySelectorAll("map-feature"));
-                if(features.length) layer._mapmlFeatures = layer._mapmlFeatures.concat(features);
-                mapmldoc.features = layer._mapmlFeatures;
-            if(lastOne) return handleMapMLResponse(mapmldoc, e.latlng);
+            if(features.length) layer._mapmlFeatures = layer._mapmlFeatures.concat(features);
           } else {
-            return handleOtherResponse(mapml, layer, e.latlng);
+            // synthesize a single feature from text or html content
+            let geom = "<map-geometry cs='gcrs'>"+e.latlng.lng+" "+e.latlng.lat+"</map-geometry>",
+                feature = parser.parseFromString("<map-feature><map-properties>"+
+                  response.text+"</map-properties>"+geom+"</map-feature>", "text/html").querySelector("map-feature");
+            layer._mapmlFeatures.push(feature);
           }
+          if(lastOne) return displayFeaturesPopup(layer._mapmlFeatures, e.latlng);
         }).catch((err) => {
           console.log('Looks like there was a problem. Status: ' + err.message);
         });
@@ -3674,21 +3703,9 @@
           fetchFeatures(template, obj, lastOne);
         }
       }
-        function handleMapMLResponse(mapmldoc, loc) {
+        function displayFeaturesPopup(features, loc) {
 
-          for(let feature of mapmldoc.features){
-            if(!feature.querySelector('map-geometry')){
-              let geo = document.createElement('map-geometry'), point = document.createElement('map-point'),
-                coords = document.createElement('map-coordinates');
-              geo.setAttribute("cs", "gcrs");
-              coords.innerHTML = `${loc.lng} ${loc.lat}`;
-              point.appendChild(coords);
-              geo.appendChild(point);
-              feature.appendChild(geo);
-            }
-          }
-
-          let f = M.mapMlFeatures(mapmldoc, {
+          let f = M.mapMlFeatures(features, {
               // pass the vector layer a renderer of its own, otherwise leaflet
               // puts everything into the overlayPane
               renderer: M.featureRenderer(),
@@ -3709,27 +3726,18 @@
           let div = L.DomUtil.create("div", "mapml-popup-content"),
               c = L.DomUtil.create("iframe");
           c.style = "border: none";
-          c.srcdoc = mapmldoc.querySelector('map-feature map-properties').innerHTML;
+          c.srcdoc = features[0].querySelector('map-feature map-properties').innerHTML;
           c.setAttribute("sandbox","allow-same-origin allow-forms");
           div.appendChild(c);
           // passing a latlng to the popup is necessary for when there is no
           // geometry / null geometry
-          layer._totalFeatureCount = mapmldoc.features.length;
+          layer._totalFeatureCount = features.length;
           layer.bindPopup(div, popupOptions).openPopup(loc);
           layer.on('popupclose', function() {
               map.removeLayer(f);
           });
           f.showPaginationFeature({i: 0, popup: layer._popup});
 
-        }
-        function handleOtherResponse(text, layer, loc) {
-          let div = L.DomUtil.create("div", "mapml-popup-content"),
-              c = L.DomUtil.create("iframe");
-          c.style = "border: none";
-          c.srcdoc = text;
-          c.setAttribute("sandbox","allow-same-origin allow-forms");
-          div.appendChild(c);
-          layer.bindPopup(div, popupOptions).openPopup(loc);
         }
       }
   });
