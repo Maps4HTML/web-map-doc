@@ -6,83 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo</title>
     <script type="module" src="../dist/mapml-viewer.js"></script>
+    <link rel="stylesheet" href="embeded-demo-style.css"/>
 
-    
     <link rel="stylesheet" href="codemirror-5.64.0/lib/codemirror.css">
     <script src="codemirror-5.64.0/lib/codemirror.js"></script>
     <script src="codemirror-5.64.0/mode/xml/xml.js"></script>
     <script src="codemirror-5.64.0/mode/css/css.js"></script>
     <script src="codemirror-5.64.0/mode/javascript/javascript.js"></script>
-    <scrip src="codemirror-5.64.0/addon/edit/closetag.js"></scrip>
-
-    <style>
-        html, body {
-            width: 100%;
-            background-color: #faf8f5;
-        }
-        .tabcontent {
-            width: 50%; 
-            display: none;
-            border-top: none;
-            /*background-color: rgb(67, 196, 196);*/
-        }
-        #output {
-            width:48%;
-            display: inline-block;
-            background-color: #ffffff;
-        }
-        mapml-viewer:defined {
-            height: 300px;
-            width: 100%;
-            border-style: none;
-        }
-        button {
-            width:auto;
-            background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 4px 10px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            font-size: 25px;
-        }
-        h2 {
-            display:inline;
-            color: #383838;
-        }
-        /* Style the tab */
-        .tab {
-            overflow: hidden;
-        }
-        /* Style the buttons that are used to open the tab content */
-        .tab button {
-
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 5px 10px;
-            transition: 0.3s;
-        }
-        /* Change background color of buttons on hover */
-        .tab button:hover {
-            background-color: #ddd;
-        }
-        /* Create an active/current tablink class */
-        .tab button.active {
-            background-color: #ccc;
-        }
-    </style>
+    <script src="codemirror-5.64.0/addon/edit/closetag.js"></script>
+    
 </head>
 <body>
     <div style="text-align: center;">
         <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
         <h2>MapML Demo: &lt;mapml-viewer&gt;</h2>
-        <button class="run" onclick="plot()">▶</button>
+        <button class="run" onclick="plot()" aria-label="run code"><span aria-hidden="true">▶</span></button>
     </div>
 
     <div class="tab">
