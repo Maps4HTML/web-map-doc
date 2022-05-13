@@ -8,7 +8,7 @@ The `<map-meta>` element is an extended HTML `meta` element, for use in Web
 maps.
 
 <!-- demo / example -->
-<iframe src="../../../demo/map-meta-demo.html" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
+<iframe src="../../../demo/map-meta-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
 
 ## Attributes

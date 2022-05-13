@@ -18,7 +18,7 @@ maps.  Most of the extensions center on proposed new values of the `rel` attribu
 - provide links to layers at next native zoom level via `zoomin`, `zoomout` rel values.  Such links are automatically followed by the polyfill when appropriate.
 
 <!-- demo / example -->
-<iframe src="../../../demo/map-link-demo.html" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
+<iframe src="../../../demo/map-link-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
 
 ## Attributes

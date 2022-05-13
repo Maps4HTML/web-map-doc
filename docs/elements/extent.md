@@ -35,7 +35,7 @@ URL template.
 </layer->
 ```
 
-<iframe src="../../../demo/extent-demo.html" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
+<iframe src="../../../demo/extent-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
 ## Attributes
 

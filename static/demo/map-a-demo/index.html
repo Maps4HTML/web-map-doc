@@ -5,21 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo</title>
-    <script type="module" src="../dist/mapml-viewer.js"></script>
-    <link rel="stylesheet" href="embeded-demo-style.css"/>
-
-    <link rel="stylesheet" href="codemirror-5.64.0/lib/codemirror.css">
-    <script src="codemirror-5.64.0/lib/codemirror.js"></script>
-    <script src="codemirror-5.64.0/mode/xml/xml.js"></script>
-    <script src="codemirror-5.64.0/mode/css/css.js"></script>
-    <script src="codemirror-5.64.0/mode/javascript/javascript.js"></script>
-    <script src="codemirror-5.64.0/addon/edit/closetag.js"></script>
+    <script type="module" src="../../dist/mapml-viewer.js"></script>
+    <link rel="stylesheet" href="../embeded-demo-style.css"/>
+    
+    <link rel="stylesheet" href="../codemirror-5.64.0/lib/codemirror.css">
+    <script src="../codemirror-5.64.0/lib/codemirror.js"></script>
+    <script src="../codemirror-5.64.0/mode/xml/xml.js"></script>
+    <script src="../codemirror-5.64.0/mode/css/css.js"></script>
+    <script src="../codemirror-5.64.0/mode/javascript/javascript.js"></script>
+    <script src="../codemirror-5.64.0/addon/edit/closetag.js"></script>
 
 </head>
 <body>
     <div style="text-align: center;">
         <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
-        <h2>MapML Demo: &lt;map-feature&gt;</h2>
+        <h2>MapML Demo: &lt;map-a&gt;</h2>
         <button class="run" onclick="plot()" aria-label="run code"><span aria-hidden="true">▶</span></button>
     </div>
 
@@ -31,42 +31,58 @@
     <div class="tabcontent" id="HTML">
         <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
         <textarea rows="10" style="width:100%" id="htmlEditor">
-<mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
-  <layer- label="OpenStreetMap" src="data/osm.mapml" checked></layer->
+<mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls="">
+  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
 
-  <layer- label="Features" checked>
+  <layer- label="Polygon" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
+    <map-meta name="zoom" content="min=10,max=11"></map-meta>
     <map-feature>
-      <map-featurecaption>Polygon</map-featurecaption>
+      <map-featurecaption>Click me!</map-featurecaption>
       <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
       <map-geometry cs="gcrs">
-        <map-polygon class="polygon">
-          <map-coordinates>-75.5859375 45.4656690 -75.6813812 45.4533876 -75.6961441 45.4239978 -75.7249832 45.4083331 -75.7792282 45.3772317 -75.7534790 45.3294614 -75.5831909 45.3815724 -75.6024170 45.4273712 -75.5673981 45.4639834 -75.5859375 45.4656690</map-coordinates>
-        </map-polygon>
+        <map-a href="#15, -75.699, 45.420">
+          <map-polygon class="polygon">
+            <map-coordinates>-75.8242035 45.3526278 -75.6793213 45.4572409 -75.5680847 45.4692806 -75.6092834 45.4215881 -75.5756378 45.3810901 -75.7946777 45.3120804</map-coordinates>
+          </map-polygon>
+        </map-a>
       </map-geometry>
-      <map-properties><h2>This is a Polygon</h2></map-properties>
+      <map-properties></map-properties>
     </map-feature>
+  </layer->
 
+  <layer- label="Points" checked>
+    <map-meta name="projection" content="OSMTILE"></map-meta>
+    <map-meta name="zoom" content="min=14,max=24"></map-meta>
     <map-feature>
-      <map-featurecaption>Line</map-featurecaption>
-      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
-      <map-geometry cs="gcrs">
-        <map-linestring class="line">
-          <map-coordinates>-75.6168365 45.471929 -75.6855011 45.458445 -75.7016373 45.4391764 -75.7030106 45.4259255 -75.7236099 45.4208652 -75.7565689 45.4117074 -75.7833481 45.384225 -75.8197403 45.3714435 -75.8516693 45.377714</map-coordinates>
-        </map-linestring>
-      </map-geometry>
-      <map-properties><h2>This is a Line</h2></map-properties>
-    </map-feature>
-
-    <map-feature>
-      <map-featurecaption>Point</map-featurecaption>
+      <map-featurecaption>Point 1</map-featurecaption>
       <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
       <map-geometry cs="gcrs">
         <map-point class="point">
-          <map-coordinates>-75.6916809 45.4186964</map-coordinates>
+          <map-coordinates>-75.6978285 45.4202251</map-coordinates>
         </map-point>
       </map-geometry>
-      <map-properties><h2>This is a Point</h2></map-properties>
+      <map-properties></map-properties>
+    </map-feature>
+    <map-feature>
+      <map-featurecaption>Point 2</map-featurecaption>
+      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
+      <map-geometry cs="gcrs">
+        <map-point class="point">
+          <map-coordinates>-75.7002854 45.4199465</map-coordinates>
+        </map-point>
+      </map-geometry>
+      <map-properties></map-properties>
+    </map-feature>
+    <map-feature>
+      <map-featurecaption>point 3</map-featurecaption>
+      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
+      <map-geometry cs="gcrs">
+        <map-point class="point">
+          <map-coordinates>-75.6984723 45.4179207</map-coordinates>
+        </map-point>
+      </map-geometry>
+      <map-properties></map-properties>
     </map-feature>
   </layer->
 </mapml-viewer></textarea>
@@ -74,16 +90,17 @@
     <div class="tabcontent" id="CSS">
         <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
         <textarea rows="10" style="width:100%" id="cssEditor">
-.polygon {
-  fill: #80C2AF;
-  stroke: #1167b1;
+.map-a {
+  stroke: red;
 }
-.line {
-  stroke: #dc143c;
+.map-a-visited {
+  stroke: green;
 }
 .point {
-  fill: #D8A47F;
-  stroke: #EF8354;
+  
+}
+.polygon {
+  
 }</textarea>
     </div>
 
@@ -98,6 +115,11 @@
             tabSize: 2,
             autoCloseTags: true
         });
+
+        // ------------------------------------------------- CHANGE THIS ------------------------------------------------->
+        // Highlighting code 
+        htmlEditor.markText({line: 7, ch: 0}, {line: 8, ch: -1}, {className: "codemirror-highlighted"});
+        htmlEditor.markText({line: 19, ch: 0}, {line: 20, ch: -1}, {className: "codemirror-highlighted"});
 
         // Styling CSS Text Editor
         var cssEditor = CodeMirror.fromTextArea(document.getElementById('cssEditor'), {

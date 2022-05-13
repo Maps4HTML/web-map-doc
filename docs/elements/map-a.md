@@ -8,7 +8,7 @@ The `<map-a>` element is a proposal to extend the Web to include links between m
 This element allows you to wrap parts of coordinates or entire geometries, making a link out of the location/area that is wrapped. When a feature geometry or geometry part is 
 wrapped in a `<map-a>` element, it creates a blue outline that is 1 pixel wide around the feature (by default), that lets the user know it's a "linked feature".
 
-<iframe src="../../../demo/map-a-demo.html" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
+<iframe src="../../../demo/map-a-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
 ## Attributes
 
