@@ -5,83 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo</title>
-    <script type="module" src="../dist/mapml-viewer.js"></script>
-
+    <script type="module" src="../../dist/mapml-viewer.js"></script>
+    <link rel="stylesheet" href="../embeded-demo-style.css"/>
     
-    <link rel="stylesheet" href="codemirror-5.64.0/lib/codemirror.css">
-    <script src="codemirror-5.64.0/lib/codemirror.js"></script>
-    <script src="codemirror-5.64.0/mode/xml/xml.js"></script>
-    <script src="codemirror-5.64.0/mode/css/css.js"></script>
-    <script src="codemirror-5.64.0/mode/javascript/javascript.js"></script>
-    <scrip src="codemirror-5.64.0/addon/edit/closetag.js"></scrip>
-
-    <style>
-        html, body {
-            width: 100%;
-            background-color: #faf8f5;
-        }
-        .tabcontent {
-            width: 50%; 
-            display: none;
-            border-top: none;
-            /*background-color: rgb(67, 196, 196);*/
-        }
-        #output {
-            width:48%;
-            display: inline-block;
-            background-color: #ffffff;
-        }
-        mapml-viewer:defined {
-            height: 300px;
-            width: 100%;
-            border-style: none;
-        }
-        button {
-            width:auto;
-            background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            padding: 4px 10px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            font-size: 25px;
-        }
-        h2 {
-            display:inline;
-            color: #383838;
-        }
-        /* Style the tab */
-        .tab {
-            overflow: hidden;
-        }
-        /* Style the buttons that are used to open the tab content */
-        .tab button {
-
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 5px 10px;
-            transition: 0.3s;
-        }
-        /* Change background color of buttons on hover */
-        .tab button:hover {
-            background-color: #ddd;
-        }
-        /* Create an active/current tablink class */
-        .tab button.active {
-            background-color: #ccc;
-        }
-    </style>
+    <link rel="stylesheet" href="../codemirror-5.64.0/lib/codemirror.css">
+    <script src="../codemirror-5.64.0/lib/codemirror.js"></script>
+    <script src="../codemirror-5.64.0/mode/xml/xml.js"></script>
+    <script src="../codemirror-5.64.0/mode/css/css.js"></script>
+    <script src="../codemirror-5.64.0/mode/javascript/javascript.js"></script>
+    <script src="../codemirror-5.64.0/addon/edit/closetag.js"></script>
+    
 </head>
 <body>
     <div style="text-align: center;">
-        <h2>MapML Demo: &lt;mapml-viewer&gt;</h2>
-        <button class="run" onclick="plot()">▶</button>
+      <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
+      <h2>MapML Demo: &lt;layer-&gt;</h2>
+      <button class="run" onclick="plot()" aria-label="run code"><span aria-hidden="true">▶</span></button>
     </div>
 
     <div class="tab">
@@ -90,14 +29,58 @@
     </div>
 
     <div class="tabcontent" id="HTML">
+      <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
         <textarea rows="10" style="width:100%" id="htmlEditor">
-<mapml-viewer projection="OSMTILE" zoom="1" lat="60.0" lon="-100.0" controls>
-  <layer- label="OpenStreetMap" src="https://geogratis.gc.ca/mapml/en/osmtile/osm/" checked></layer->
+<mapml-viewer projection="OSMTILE" zoom="12" lat="45.42" lon="-75.70">
+  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
+  <layer- label="Ottawa" checked>
+    <map-meta name="projection" content="OSMTILE"></map-meta>
+    <map-meta name="cs" content="gcrs"></map-meta>
+    <map-feature>
+      <map-featurecaption>Ottawa</map-featurecaption>
+      <map-geometry>
+        <map-point class="ottawa">
+          <map-coordinates>-75.697193 45.421530</map-coordinates>
+        </map-point>
+      </map-geometry>
+      <map-properties>
+        <table>
+          <thead>
+            <tr>
+              <th role="columnheader" scope="col">Property name</th>
+              <th role="columnheader" scope="col">Property value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Name</th>
+              <td itemprop="amenity">Ottawa</td>
+            </tr>
+            <tr>
+              <th scope="row">Type</th>
+              <td itemprop="name">City</td>
+            </tr>
+            <tr>
+              <th scope="row">Website</th>
+              <td itemprop="website"><a href="https://ottawa.ca/" target="_blank">Ottawa</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </map-properties>
+    </map-feature>
+  </layer->
 </mapml-viewer></textarea>
     </div>
     <div class="tabcontent" id="CSS">
+      <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
         <textarea rows="10" style="width:100%" id="cssEditor">
-</textarea>
+.ottawa {
+  fill: #ea4335;
+  stroke: #b21511;
+}
+.ottawa:hover {
+  fill: green;
+}</textarea>
     </div>
 
     <div id="output"></div>
@@ -141,8 +124,6 @@
             for (i=0; i<layers.length; ++i) {
                 layers[i].appendChild(mapmlCSS);
             }
-
-            console.log(layers);
 
             // Adding code to output div
             let output = document.getElementById('output');
