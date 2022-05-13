@@ -1,13 +1,14 @@
 ---
 id: meta
 title: "<map-meta>: The metadata element"
-slug: /elements/meta
+slug: /elements/meta/
 ---
 
 The `<map-meta>` element is an extended HTML `meta` element, for use in Web 
 maps.
 
 <!-- demo / example -->
+<iframe src="../../../demo/map-meta-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
 
 ## Attributes
@@ -22,16 +23,16 @@ values of `name` related to maps include:
 | projection    | Set the projection for the document |
 | extent        | Define the bounds of the document in terms of corner position keywords and axis names, potentially combined with a zoom value if necessary (depending on coordinate system). |
 | cs            | Identifies the default coordinate reference system of coordinate strings found in the document. |
-| zoom          | Specify the zoom range min, max and default zoom value for displaying the document contents. The 'native' zoom range of [templated map content](link#tref) is specified by the min/max attributes of associated [zoom inputs](input#type).  If templated content is not described by associated zoom input min/max/value attributes, the values specified in a `<map-meta name=zoom>` will be used as fallback, if it exists.  If no `<map-meta name=zoom>` exists, the corresponding min/max values from the projection will be used. |
+| zoom          | Specify the zoom range min, max and default zoom value for displaying the document contents. The 'native' zoom range of [templated map content](../link#tref) is specified by the min/max attributes of associated [zoom inputs](../input#type).  If templated content is not described by associated zoom input min/max/value attributes, the values specified in a `<map-meta name=zoom>` will be used as fallback, if it exists.  If no `<map-meta name=zoom>` exists, the corresponding min/max values from the projection will be used. |
 
 ---
 ### `content`
 
 | `name`          | `content` value                                          	  |
 |--------------	|--------------------------------------------------------	|
-| projection    | A case-sensitive [projection name](mapml-viewer#projection), or a [custom projection name](../api/custom-projections#details) |
-| extent        | \(\(_[position keyword](input#position)_\)-\(_[axis name](input#axis)_\)=\(_axis value_\)\(,\)\)4\(,\)\(zoom=\(_zoom value_\)\)0,1 |
-| cs            | A case-sensitive [coordinate system abbreviation](input#units). |
+| projection    | A case-sensitive [projection name](../mapml-viewer#projection), or a [custom projection name](../../api/custom-projections#details) |
+| extent        | \(\(_[position keyword](../input#position)_\)-\(_[axis name](../input#axis)_\)=\(_axis value_\)\(,\)\)4\(,\)\(zoom=\(_zoom value_\)\)0,1 |
+| cs            | A case-sensitive [coordinate system abbreviation](../input#units). |
 | zoom          | (min=_minimum zoom value_,max=_maximum zoom value_,)(value=_current zoom value_) |
 
 ---
