@@ -31,9 +31,17 @@
     <div class="tabcontent" id="HTML">
         <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
         <textarea rows="10" style="width:100%" id="htmlEditor">
-<mapml-viewer projection="OSMTILE">
-  <layer- label="OpenStreetMap" checked>
-    <map-extent units="OSMTILE">
+<mapml-viewer projection="OSMTILE" zoom="12" lat="45.42" lon="-75.70" controls>
+
+  <!-- Change Basemap using the three dots menu for the basemap layer -->
+  <layer- label="Basemap" checked="">
+    <map-extent label="Nat Geo" units="OSMTILE">
+      <map-input name="TileMatrix" type="zoom" value="18" min="0" max="18"></map-input>
+      <map-input name="TileCol" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
+      <map-input name="TileRow" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
+      <map-link rel="tile" tref="https://server.arcgisonline.com/arcgis/rest/services/NatGeo_World_Map/MapServer/WMTS/tile/1.0.0/NatGeo_World_Map/default/default028mm/{TileMatrix}/{TileRow}/{TileCol}.jpg"></map-link>
+    </map-extent>
+    <map-extent label="OSM" units="OSMTILE">
       <map-input name="z" type="zoom" value="18" min="0" max="18"></map-input>
       <map-input name="s" type="hidden" shard="true" list="servers"></map-input>
       <map-datalist id="servers">
@@ -45,6 +53,29 @@
       <map-input name="y" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
       <map-link rel="tile" tref="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"></map-link>
     </map-extent>
+    <map-extent label="Imagery" units="OSMTILE">
+      <map-input name="TileMatrix" type="zoom" value="18" min="0" max="18"></map-input>
+      <map-input name="TileCol" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
+      <map-input name="TileRow" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
+      <map-link rel="tile" tref="https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS/tile/1.0.0/World_Imagery/default/default028mm/{TileMatrix}/{TileRow}/{TileCol}.jpg"></map-link>
+    </map-extent>
+  </layer->
+
+  <!-- Change Restaurant cuisine using the three dots menu for the Restaurants layer -->
+  <layer- label="Restaurants" checked="">
+   <map-meta name="extent" content="top-left-easting=-8433179, top-left-northing=5689316, bottom-right-easting=-8420968, bottom-right-northing=5683139"></map-meta>
+     <map-extent units="OSMTILE">
+       <map-select id="restaurants" name="cusine">
+         <map-option value="restaurants" selected="selected">All cuisines</map-option>
+         <map-option value="african">African</map-option>
+         <map-option value="asian">Asian</map-option>
+         <map-option value="cajun">Cajun</map-option>
+         <map-option value="indian">Indian</map-option>
+         <map-option value="italian">Italian</map-option>
+         <map-option value="mexican">Mexican</map-option>
+       </map-select>
+       <map-link tref="../data/restaurants/{cusine}.mapml" rel="features"></map-link>
+     </map-extent>
   </layer->
 </mapml-viewer></textarea>
     </div>
