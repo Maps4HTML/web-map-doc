@@ -64,6 +64,8 @@ Author-defined values of `units` are possible, using the [Custom projections API
 |--------------	|--------------------------------------------------------	|
 | extentload    | Fires when a layer's extent is loaded and parsed. The intent is that this event is analagous to the [media element loadedmetadata event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loadedmetadata_event), but for map layers.              |
 
+---
+
 ## Examples
 
 ### Multiple Extent
