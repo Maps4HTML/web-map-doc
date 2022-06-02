@@ -56,6 +56,10 @@ Defined values of `units` include:
 
 Author-defined values of `units` are possible, using the [Custom projections API](../../api/custom-projections/)
 
+### `label`
+
+Specifies a label for an extent which is displayed in the layer control. When a `label` is not provided, the extent is hidden by default in the layer control.
+
 ---
 
 ## Events
@@ -63,3 +67,13 @@ Author-defined values of `units` are possible, using the [Custom projections API
 | Event name    | Description                                             |
 |--------------	|--------------------------------------------------------	|
 | extentload    | Fires when a layer's extent is loaded and parsed. The intent is that this event is analagous to the [media element loadedmetadata event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loadedmetadata_event), but for map layers.              |
+
+---
+
+## Examples
+
+### Multiple Extent
+
+The following example shows multiple `<map-extent>` elements in a layer. The different elements can be selected from the three dots menu of the Basemap layer.
+
+<iframe src="../../../demo/multiple-extent-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
