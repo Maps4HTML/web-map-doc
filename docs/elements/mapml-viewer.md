@@ -74,10 +74,10 @@ The default projection is `OSMTILE`.
 
 `controlslist` - an enumerated attribute, possible values are: "`nofullscreen`", "`nolayer`", "`noreload`" and "`nozoom`".  Occasionally, you may not want your users to have access to a particular control, so you may prune the set of controls automatically presented (when you have used the `controls` boolean attribute).
 
-## Capabilities Matrix
+## Requirements
 
 |[**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation)| MapML spec | MapML-Viewer | MapML API |
-|:---------------------------------------------------------------------------------: |:------: |:-----: |:---: |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
 |            Zoom the map independently from the rest of the page (5.4.1)            | full    | full   | |
 |                            Pan the map display (5.4.2)                             | full    | full   | |
 |             Load additional map tiles when they pan into view (5.4.3)              | full    | full   | |

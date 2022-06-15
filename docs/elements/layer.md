@@ -55,10 +55,10 @@ The `label` attribute is used by inline content as the displayed text label of t
 layer in the layer control.  In fetched content, the `label` attribute is ignored,
 and the fetched `<map-title>` element is used.
 
-## Capabilities Matrix
+## Requirements
 
 |[**Vector features and overlays (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors)| MapML spec | MapML-Viewer | MapML API |
-|:----------------------------------------------------------------------------------------------------------: |:---: |:---: |:---: |
+|:----------------------------------------------------------------------------------------------------------|:---: |:---: |:---: |
 |                         Show pinpoint locations or custom markers on the map (5.2.1)                        | full | full |	|
 | Draw polygons or polylines as stylable, interactive vector graphics (separate from the image tiles) (5.2.2) | full | full | |
 |                            Support hyperlinks from markers or vector features (5.2.3)                       | full | full | |
