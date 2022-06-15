@@ -76,4 +76,51 @@ Specifies a label for an extent which is displayed in the layer control. When a 
 
 The following example shows multiple `<map-extent>` elements in a layer. The different elements can be selected from the three dots menu of the Basemap layer.
 
-<iframe src="../../../demo/multiple-extent-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
+```html
+<mapml-viewer projection="OSMTILE" zoom="2" lat="53.331" lon="-91.667" controls>
+  <!-- Change Basemap using the three dots menu of the basemap layer -->
+  <layer- label="Basemap" checked="">
+    <!-- This extent will be hidden in the layer control since no label is provided -->
+    <map-extent units="OSMTILE">
+      <map-input name="TileMatrix" type="zoom" value="18" min="0" max="18"></map-input>
+      <map-input name="TileCol" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
+      <map-input name="TileRow" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
+      <map-link rel="tile" tref="https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS/tile/1.0.0/World_Imagery/default/default028mm/{TileMatrix}/{TileRow}/{TileCol}.jpg"></map-link>
+    </map-extent>
+      <map-extent label="Nat Geo" units="OSMTILE">
+      <map-input name="TileMatrix" type="zoom" value="18" min="0" max="18"></map-input>
+      <map-input name="TileCol" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
+      <map-input name="TileRow" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
+      <map-link rel="tile" tref="https://server.arcgisonline.com/arcgis/rest/services/NatGeo_World_Map/MapServer/WMTS/tile/1.0.0/NatGeo_World_Map/default/default028mm/{TileMatrix}/{TileRow}/{TileCol}.jpg"></map-link>
+    </map-extent>
+    <map-extent label="Imagery" units="OSMTILE">
+      <map-input name="TileMatrix" type="zoom" value="18" min="0" max="18"></map-input>
+      <map-input name="TileCol" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
+      <map-input name="TileRow" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
+      <map-link rel="tile" tref="https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS/tile/1.0.0/World_Imagery/default/default028mm/{TileMatrix}/{TileRow}/{TileCol}.jpg"></map-link>
+      <map-link rel="tile" tref="https://services.arcgisonline.com/arcgis/rest/services/Reference/World_Boundaries_and_Places/MapServer/WMTS/tile/1.0.0/Reference_World_Boundaries_and_Places/default/default028mm/{TileMatrix}/{TileRow}/{TileCol}.png"></map-link>
+    </map-extent>
+  </layer->
+</mapml-viewer>
+```
+
+### WMS Request
+
+The following example shows a WMS Request using `<map-link>` to request image tiles.
+
+```html
+<mapml-viewer projection="OSMTILE" zoom="4" lat="53.331" lon="-91.667" controls>
+  <layer- label="Toporama" checked="">
+    <map-extent xmlns="http://www.w3.org/1999/xhtml" units="OSMTILE">
+      <map-input name="z" type="zoom" value="18" min="4" max="18"></map-input>
+      <map-input name="w" type="width"></map-input>
+      <map-input name="h" type="height"></map-input>
+      <map-input name="xmin" type="location" units="pcrs" position="top-left" axis="easting" min="-2.003750834E7" max="2.003750834E7"></map-input>
+      <map-input name="ymin" type="location" units="pcrs" position="bottom-left" axis="northing" min="-2.003750834E7" max="2.003750834E7"></map-input>
+      <map-input name="xmax" type="location" units="pcrs" position="top-right" axis="easting" min="-2.003750834E7" max="2.003750834E7"></map-input>
+      <map-input name="ymax" type="location" units="pcrs" position="top-left" axis="northing" min="-2.003750834E7" max="2.003750834E7"></map-input>
+      <map-link rel="image" tref="http://wms.ess-ws.nrcan.gc.ca/wms/toporama_en?SERVICE=WMS&amp;REQUEST=GetMap&amp;FORMAT=image/jpeg&amp;TRANSPARENT=FALSE&amp;STYLES=&amp;VERSION=1.3.0&amp;LAYERS=WMS-Toporama&amp;WIDTH={w}&amp;HEIGHT={h}&amp;CRS=EPSG:3857&amp;BBOX={xmin},{ymin},{xmax},{ymax}&amp;m4h=t"></map-link>
+    </map-extent>
+  </layer->
+</mapml-viewer>
+```
