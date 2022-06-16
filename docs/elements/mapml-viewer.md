@@ -85,3 +85,9 @@ The default projection is `OSMTILE`.
 |         Maintain reasonable scale of labels and lines when zooming (5.4.5)         | limited | full   | |
 |           Dynamically load different resolution map tile on zoom (5.4.6)           | full    | full   | |
 |Hide or show (and maybe dynamically load) vector features and labels on zoom (5.4.7)| limited | full 	| |
+
+---
+
+> - [Report Issue on **Github**](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues/new?labels=mapml-viewer,bug&title=MapML-Viewer+Bug)
+> - [Source on **Github**](https://github.com/Maps4HTML/Web-Map-Custom-Element)
+> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
