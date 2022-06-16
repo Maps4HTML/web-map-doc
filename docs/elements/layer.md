@@ -55,7 +55,11 @@ The `label` attribute is used by inline content as the displayed text label of t
 layer in the layer control.  In fetched content, the `label` attribute is ignored,
 and the fetched `<map-title>` element is used.
 
+---
+
 ## Requirements
+
+[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
 
 |[**Vector features and overlays (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors)| MapML spec | MapML-Viewer | MapML API |
 |:----------------------------------------------------------------------------------------------------------|:---: |:---: |:---: |
@@ -63,3 +67,9 @@ and the fetched `<map-title>` element is used.
 | Draw polygons or polylines as stylable, interactive vector graphics (separate from the image tiles) (5.2.2) | full | full | |
 |                            Support hyperlinks from markers or vector features (5.2.3)                       | full | full | |
 |                                  Display map data attribution and links (5.2.4)                             | full | full | |
+
+---
+
+> - [Report Issue on **Github**](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues/new?labels=mapml-viewer,bug&title=MapML-Viewer+Bug)
+> - [Source on **Github**](https://github.com/Maps4HTML/Web-Map-Custom-Element)
+> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
