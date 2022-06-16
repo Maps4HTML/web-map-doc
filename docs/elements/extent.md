@@ -106,12 +106,13 @@ The following example shows multiple `<map-extent>` elements in a layer. The dif
 
 ### WMS Request
 
-The following example shows a WMS Request using `<map-link>` to request image tiles.
+The following example shows a Web Map Service Request using `<map-link>` to request map images.
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="4" lat="53.331" lon="-91.667" controls>
   <layer- label="Toporama" checked="">
     <map-extent xmlns="http://www.w3.org/1999/xhtml" units="OSMTILE">
+      <!-- URL parameters for WMS Request -->
       <map-input name="z" type="zoom" value="18" min="4" max="18"></map-input>
       <map-input name="w" type="width"></map-input>
       <map-input name="h" type="height"></map-input>
@@ -119,6 +120,7 @@ The following example shows a WMS Request using `<map-link>` to request image ti
       <map-input name="ymin" type="location" units="pcrs" position="bottom-left" axis="northing" min="-2.003750834E7" max="2.003750834E7"></map-input>
       <map-input name="xmax" type="location" units="pcrs" position="top-right" axis="easting" min="-2.003750834E7" max="2.003750834E7"></map-input>
       <map-input name="ymax" type="location" units="pcrs" position="top-left" axis="northing" min="-2.003750834E7" max="2.003750834E7"></map-input>
+      <!-- Web Map Service requesting image -->
       <map-link rel="image" tref="http://wms.ess-ws.nrcan.gc.ca/wms/toporama_en?SERVICE=WMS&amp;REQUEST=GetMap&amp;FORMAT=image/jpeg&amp;TRANSPARENT=FALSE&amp;STYLES=&amp;VERSION=1.3.0&amp;LAYERS=WMS-Toporama&amp;WIDTH={w}&amp;HEIGHT={h}&amp;CRS=EPSG:3857&amp;BBOX={xmin},{ymin},{xmax},{ymax}&amp;m4h=t"></map-link>
     </map-extent>
   </layer->
