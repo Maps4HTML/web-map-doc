@@ -28,7 +28,7 @@ Change directories, into the cloned directory and run "npm install" to install t
 ```bash
 prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/web-map-custom-element (main)
 $ cd web-map-custom-element
-$ npm install
+$ npm install --legacy-peer-deps
 ...
 added 976 packages from 513 contributors and audited 978 packages in 33.576s
 
