@@ -80,18 +80,19 @@ The default projection is `OSMTILE`.
 
 [Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
 
-|[**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation)| MapML spec | MapML-Viewer | MapML API |
+|  | Spec | Viewer | API |
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
-|            Zoom the map independently from the rest of the page (5.4.1)            | full    | full   | |
-|                            Pan the map display (5.4.2)                             | full    | full   | |
-|             Load additional map tiles when they pan into view (5.4.3)              | full    | full   | |
-|          Wrap/duplicate data tiles when panning around the globe (5.4.4)           | none    | partial| |
-|         Maintain reasonable scale of labels and lines when zooming (5.4.5)         | limited | full   | |
-|           Dynamically load different resolution map tile on zoom (5.4.6)           | full    | full   | |
-|Hide or show (and maybe dynamically load) vector features and labels on zoom (5.4.7)| limited | full 	| |
+| [**Rendering base layers (5.1)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-rendering) |  |  |  |
+|              <div class="requirement">Embed an interactive map viewer, using HTML markup (5.1.1)</div>           | full | full | [full](https://maps4html.org/MapML/spec/#webidl-1442763376) |
+|              <div class="impractical">Generate a default map for a given area (5.1.2)</div>           | none | none | none |
+|            <div class="requirement">Display a basic map without JavaScript (5.1.5)</div>             | full | [limited](http://maps4html.org/experiments/progressive-enhancement/) |  |
+|            <div class="requirement">Display map content in a users preferred language (5.1.6)</div>            | full | [full](https://github.com/Maps4HTML/mapml-extension) |  |
+| [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
+|            <div class="requirement">Zoom the map independently from the rest of the page (5.4.1)</div>            | full    | full   | |
+|                            <div class="requirement">Pan the map display (5.4.2)</div>                             | full    | full   | |
+|          <div class="undecided">Wrap/duplicate data tiles when panning around the globe (5.4.4)</div>           | none    | partial| |
 
 ---
 
-> - [Report Issue on **Github**](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues/new?labels=mapml-viewer,bug&title=MapML-Viewer+Bug)
 > - [Source on **Github**](https://github.com/Maps4HTML/Web-Map-Custom-Element)
 > - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
