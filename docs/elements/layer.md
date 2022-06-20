@@ -65,11 +65,6 @@ and the fetched `<map-title>` element is used.
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
 | [**Rendering base layers (5.1)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-rendering) |  |  |  |
 | <div class="enhancement">Display an image file as a map layer (5.1.3)</div> | [full](https://maps4html.org/MapML/spec/#the-image-element-0) | [limited](http://maps4html.org/experiments/painting/) |  |
-| [**Vector features and overlays (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors) |  |  |  |
-|                         Show pinpoint locations or custom markers on the map (5.2.1)                        | full | full |	 |
-| Draw polygons or polylines as stylable, interactive vector graphics (separate from the image tiles) (5.2.2) | full | full |  |
-|                            Support hyperlinks from markers or vector features (5.2.3)                       | full | full |  |
-|                                  Display map data attribution and links (5.2.4)                             | full | full |  |
 | [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
 | Maintain reasonable scale of labels and lines when zooming (5.4.5) | limited | full |  |
 | Hide or show (and maybe dynamically load) vector features and labels on zoom (5.4.7) | limited | full |  |

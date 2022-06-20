@@ -132,5 +132,14 @@ Projection values [defined by the polyfill](../mapml-viewer#projection) include:
 
 ## Requirements
 
+[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+|  | Spec | Viewer | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Vector features and overlays (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors) |  |  |  |
+|                        <div class="requirement">Display map data attribution and links (5.2.4)</div>                   | full | full |  |
+
 ---
 
+> - [Source on **Github**](https://github.com/Maps4HTML/Web-Map-Custom-Element)
+> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)

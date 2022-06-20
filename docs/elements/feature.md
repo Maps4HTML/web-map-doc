@@ -254,6 +254,9 @@ Sets the [extent](http://example.org/) of the layer.
 
 |  | Spec | Viewer | API |
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Vector features and overlays (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors) |  |  |  |
+|                         <div class="requirement">Show pinpoint locations or custom markers on the map (5.2.1)</div>                        | full | full |	 |
+| <div class="requirement">Draw polygons or polylines as stylable, interactive vector graphics (separate from the image tiles) (5.2.2)</div> | full | full |  |
 | [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
 | Hide or show (and maybe dynamically load) vector features and labels on zoom (5.4.7) | limited | full |  |
 

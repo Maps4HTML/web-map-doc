@@ -151,3 +151,19 @@ In this example, a point will be created at (2954, 3210) which, once clicked, ad
 ```
 In this advanced example there are multiple nested `<map-a>`. The simple behavior is, the closest `<map-a>` is the link
 behavior that the given location/area will adopt.
+
+---
+
+## Requirements
+
+[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+|  | Spec | Viewer | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Vector features and overlays (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors) |  |  |  |
+|                 <div class="requirement"> Support hyperlinks from markers or vector features (5.2.3)</div>             | full | full |  |
+
+---
+
+> - [Source on **Github**](https://github.com/Maps4HTML/Web-Map-Custom-Element)
+> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
