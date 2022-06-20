@@ -88,6 +88,14 @@ references.  Processing will remove variable references that are valid. That is,
 all variables that have been created by `<map-input>`s that are referenced in the
 template will be replaced with the value of the variable at the time of processing.
 
+---
+### `tms`
+
+The `tms` boolean attribute tells the polyfill that the row (vertical) axis of the
+remote tile server follows [the tms convention](https://wiki.osgeo.org/wiki/Tile_Map_Service_Specification)
+of the origin of the tcrs being at the (0,0) coordinate of the gcrs, with the 
+positive direction of tile row values being up/north.  This convention is not a 
+standard, yet has unfortunately become popular among open source GIS professionals.
 
 ---
 ### `projection`
@@ -114,6 +122,24 @@ Projection values [defined by the polyfill](../mapml-viewer#projection) include:
 ---
 
 ## Examples
+
+### Tile Mapping Specification (tms)
+
+```html
+<mapml-viewer  projection="OSMTILE" zoom="1" lat="0" lon="0" controls>
+ <layer- label="OpenStreetMap" src="https://geogratis.gc.ca/mapml/en/osmtile/osm/" checked hidden  ></layer->
+ <layer- label="TMS COG Source" checked>
+   <map-extent units="OSMTILE">
+       <map-input name="zoom" type="zoom"  min="1" max="12"></map-input>
+       <map-input name="row" type="location" axis="row" units="tilematrix" ></map-input>
+       <map-input name="col" type="location" axis="column" units="tilematrix"></map-input>
+       <!-- use the tms attribute to indicate that remote tile cache follows tms conventions -->
+       <map-link tms rel="tile" tref="https://s3-eu-west-1.amazonaws.com/vito-lcv/global/2019/cog-grass-colored-fraction_grass/{zoom}/{col}/{row}.png">
+   </map-link>
+   </map-extent>
+   </layer->
+</mapml-viewer>
+```
 
 ---
 
