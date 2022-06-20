@@ -86,7 +86,7 @@ The default projection is `OSMTILE`.
 |              <div class="requirement">Embed an interactive map viewer, using HTML markup (5.1.1)</div>           | full | full | [full](https://maps4html.org/MapML/spec/#webidl-1442763376) |
 |              <div class="impractical">Generate a default map for a given area (5.1.2)</div>           | none | none | none |
 |            <div class="requirement">Display a basic map without JavaScript (5.1.5)</div>             | full | [limited](http://maps4html.org/experiments/progressive-enhancement/) |  |
-|            <div class="requirement">Display map content in a users preferred language (5.1.6)</div>            | full | [full](https://github.com/Maps4HTML/mapml-extension) |  |
+|            <div class="requirement">Display map content in a users preferred language (5.1.6)</div>            | [full](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/136) | [full](https://github.com/Maps4HTML/mapml-extension) |  |
 | [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
 |            <div class="requirement">Zoom the map independently from the rest of the page (5.4.1)</div>            | full    | full   | |
 |                            <div class="requirement">Pan the map display (5.4.2)</div>                             | full    | full   | |
