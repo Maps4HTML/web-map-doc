@@ -126,3 +126,22 @@ The following example shows a Web Map Service Request using `<map-link>` to requ
   </layer->
 </mapml-viewer>
 ```
+
+---
+
+## Requirements
+
+[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+|  | Spec | Viewer | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Rendering base layers (5.1)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-rendering) |  |  |  |
+| <div class="requirement">Display a map using tile data from an author-specified web map service (5.1.4)</div> | full | full |  |
+| [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
+| <div class="undecided">Load additional map tiles when they pan into view (5.4.3)</div> | full | full |  |
+| Dynamically load different resolution map tile on zoom (5.4.6) | full | full |  |
+
+---
+
+> - [Source on **Github**](https://github.com/Maps4HTML/Web-Map-Custom-Element)
+> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)

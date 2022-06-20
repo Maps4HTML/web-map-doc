@@ -246,3 +246,18 @@ Sets the [extent](http://example.org/) of the layer.
 ```
 [ADD MAP HERE]
 
+---
+
+## Requirements
+
+[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+|  | Spec | Viewer | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
+| Hide or show (and maybe dynamically load) vector features and labels on zoom (5.4.7) | limited | full |  |
+
+---
+
+> - [Source on **Github**](https://github.com/Maps4HTML/Web-Map-Custom-Element)
+> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
