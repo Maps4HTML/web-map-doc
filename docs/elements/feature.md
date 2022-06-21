@@ -259,7 +259,8 @@ Sets the [extent](http://example.org/) of the layer.
 | <div class="requirement">Draw polygons or polylines as stylable, interactive vector graphics (separate from the image tiles) (5.2.2)</div> | full | full |  |
 | [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
 | Hide or show (and maybe dynamically load) vector features and labels on zoom (5.4.7) | limited | full |  |
-
+| [**Custom styling (5.5)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-custom-styling) |  |  |  |
+|          <div class="undecided">Apply custom styling to map markers and vector features (5.5.1)</div>              | [full](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/15) | limited |  |
 ---
 
 > - [Source on **Github**](https://github.com/Maps4HTML/Web-Map-Custom-Element)
