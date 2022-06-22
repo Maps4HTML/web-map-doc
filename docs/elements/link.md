@@ -93,8 +93,8 @@ template will be replaced with the value of the variable at the time of processi
 
 The `tms` boolean attribute tells the polyfill that the row (vertical) axis of the
 remote tile server follows [the tms convention](https://wiki.osgeo.org/wiki/Tile_Map_Service_Specification)
-of the origin of the tcrs being at the (0,0) coordinate of the gcrs, with the 
-positive direction of tile row values being up/north.  This convention is not a 
+of the y (row) axis being reversed (compared with [convention](https://gist.github.com/tmcw/4954720#converting)), 
+with the positive direction of tile row values being up/north.  This convention is not a 
 standard, yet has unfortunately become popular among open source GIS professionals.
 
 ---
