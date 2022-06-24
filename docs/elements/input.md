@@ -18,7 +18,7 @@ user gestures.
 
 ### `name`
 Sets the name of the variable created by the input. The variable can then be 
-referenced by the URL template `<map-link>` [tref attribute](./link#tref), 
+referenced by the URL template `<map-link>` [tref attribute](../link#tref), 
 using the `{name}` variable reference notation.
 
 ---
@@ -36,7 +36,7 @@ using the `{name}` variable reference notation.
 
 ### `value`
 In general, the `value` is set and used by the polyfill when generating URLs from
-[URL templates](./link#tref), for fetching server resources such as tiles, images 
+[URL templates](../link#tref), for fetching server resources such as tiles, images 
 and map documents.
 
 In particular, `value` is used by authors  to specify values for inputs of 
