@@ -154,6 +154,14 @@ behavior that the given location/area will adopt.
 
 ---
 
+## Specifications
+
+| Specification                                                |
+|--------------------------------------------------------------|
+| [HTML a element](https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-a-element) |
+
+---
+
 ## Requirements
 
 [Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)

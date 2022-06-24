@@ -129,6 +129,14 @@ The following example shows a Web Map Service Request using `<map-link>` to requ
 
 ---
 
+## Specifications
+
+| Specification                                                |
+|--------------------------------------------------------------|
+| [MapML extent element](https://maps4html.org/MapML/spec/#the-extent-element-0) |
+
+---
+
 ## Requirements
 
 [Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)

@@ -76,6 +76,15 @@ The default projection is `OSMTILE`.
 
 ---
 
+## Specifications
+
+| Specification                                                |
+|--------------------------------------------------------------|
+| [MapML map element](https://maps4html.org/MapML/spec/#the-map-element-0) |
+| [HTML map element](https://html.spec.whatwg.org/multipage/image-maps.html#the-map-element) |
+
+---
+
 ## Requirements
 
 [Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)

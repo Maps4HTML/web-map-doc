@@ -57,6 +57,14 @@ and the fetched `<map-title>` element is used.
 
 ---
 
+## Specifications
+
+| Specification                                                |
+|--------------------------------------------------------------|
+| [MapML layer element](https://maps4html.org/MapML/spec/#the-layer-element-0) |
+
+---
+
 ## Requirements
 
 [Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)

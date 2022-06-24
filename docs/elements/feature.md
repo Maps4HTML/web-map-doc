@@ -178,10 +178,10 @@ Sets the [extent](http://example.org/) of the layer.
 
 ---
 
-## Full Examples
+## Examples
 
 ```html
-  <mapml-viewer style="height: 500px;width:500px;" projection="CBMTILE" zoom="2" lat="45.5052040" lon="-75.2202344"
+  <mapml-viewer projection="CBMTILE" zoom="2" lat="45.5052040" lon="-75.2202344"
     controls>
 
     <layer- label="Arizona" checked>
@@ -244,7 +244,14 @@ Sets the [extent](http://example.org/) of the layer.
     </layer->
   </mapml-viewer>
 ```
-[ADD MAP HERE]
+
+---
+
+## Specifications
+
+| Specification                                                |
+|--------------------------------------------------------------|
+| [MapML feature element](https://maps4html.org/MapML/spec/#the-feature-element-0) |
 
 ---
 
