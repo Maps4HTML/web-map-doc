@@ -366,7 +366,6 @@
           };
         }
         return {
-          'moveend':this._removeCSS
         };
       },
 
@@ -1085,7 +1084,20 @@
                 pcrs2tilematrix(pcrsBounds.max,z)) :
                         L.bounds(L.point([-1,-1]),L.point([-1,-1])));
         }
-      }
+      },
+      _clampZoom: function (zoom) {
+          let clamp = L.GridLayer.prototype._clampZoom.call(this, zoom);
+          if(this._template.step > this.zoomBounds.maxNativeZoom) this._template.step = this.zoomBounds.maxNativeZoom;
+
+          if(zoom !== clamp){
+              zoom = clamp;
+          } else {
+              if(zoom % this._template.step !== 0){
+                  zoom = Math.floor(zoom / this._template.step) * this._template.step;
+              }
+          }
+          return zoom;
+      },
   });
   var templatedTileLayer = function(template, options) {
     return new TemplatedTileLayer(template, options);
@@ -1423,6 +1435,10 @@
                 }
               }));
             };
+          if(map.getZoom() % this._template.step !== 0) {
+              this._onMoveEnd();
+              return;
+          }
         _pullFeatureFeed(this._getfeaturesUrl(), 10)
           .then(function() { 
                 map.addLayer(features);
@@ -1434,14 +1450,44 @@
           this._onMoveEnd();
       },
 
+      _removeCSS: function () {
+          let toDelete = this._container.querySelectorAll("link[rel=stylesheet],style");
+          for(let i = 0; i < toDelete.length;i++){
+              let parent = toDelete[i].parentNode;
+              parent.removeChild(toDelete[i]);
+          }
+      },
+
       _onMoveEnd: function() {
+        let history = this._map.options.mapEl._history;
+        let current = history[history.length - 1];
+        let previous = history[history.length - 2] ?? current;
+        let step = this._template.step;
         let mapZoom = this._map.getZoom();
+        let steppedZoom = mapZoom;
+        //If zooming out from one step interval into a lower one or panning, set the stepped zoom
+        if (((step !== "1") && ((mapZoom + 1) % step === 0) && current.zoom === previous.zoom - 1) ||
+            (current.zoom === previous.zoom) ||
+            (Math.floor(mapZoom / step) * step !== Math.floor(previous.zoom / step) * step)) {
+            steppedZoom = Math.floor(mapZoom / step) * step;
+        }
+        //No request needed if in a step interval (unless panning)
+        else if(mapZoom % this._template.step !== 0) return;
+
+        let scaleBounds = this._map.getPixelBounds(this._map.getCenter(), steppedZoom);
+        let url = this._getfeaturesUrl(steppedZoom, scaleBounds);
+        //No request needed if the current template url is the same as the url to request
+        if(url === this._url) return;
+
         let mapBounds = M.pixelToPCRSBounds(this._map.getPixelBounds(),mapZoom,this._map.options.projection);
         this.isVisible = mapZoom <= this.zoomBounds.maxZoom && mapZoom >= this.zoomBounds.minZoom && 
                           this.extentBounds.overlaps(mapBounds);
         
         this._features.clearLayers();
-        if(!(this.isVisible)){
+        this._removeCSS();
+        //Leave the layers cleared if the layer is not visible
+        if(!(this.isVisible) && steppedZoom === mapZoom){
+          this._url = "";
           return;
         }
 
@@ -1472,9 +1518,12 @@
               }
             }));
           };
-        _pullFeatureFeed(this._getfeaturesUrl(), MAX_PAGES)
+
+        this._url = url;
+        _pullFeatureFeed(url, MAX_PAGES)
           .then(function() { 
             map.addLayer(features);
+            //Fires event for feature index overlay
             map.fire("templatedfeatureslayeradd");
             M.TemplatedFeaturesLayer.prototype._updateTabIndex(context);
           })
@@ -1511,10 +1560,12 @@
       onRemove: function () {
         this._map.removeLayer(this._features);
       },
-      _getfeaturesUrl: function() {
+      _getfeaturesUrl: function(zoom, bounds) {
+          if(zoom === undefined) zoom = this._map.getZoom();
+          if(bounds === undefined) bounds = this._map.getPixelBounds();
           var obj = {};
           if (this.options.feature.zoom) {
-            obj[this.options.feature.zoom] = this._map.getZoom();
+            obj[this.options.feature.zoom] = zoom;
           }
           if (this.options.feature.width) {
             obj[this.options.feature.width] = this._map.getSize().x;
@@ -1523,16 +1574,16 @@
             obj[this.options.feature.height] = this._map.getSize().y;
           }
           if (this.options.feature.bottom) {
-            obj[this.options.feature.bottom] = this._TCRSToPCRS(this._map.getPixelBounds().max,this._map.getZoom()).y;
+            obj[this.options.feature.bottom] = this._TCRSToPCRS(bounds.max, zoom).y;
           }
           if (this.options.feature.left) {
-            obj[this.options.feature.left] = this._TCRSToPCRS(this._map.getPixelBounds().min, this._map.getZoom()).x;
+            obj[this.options.feature.left] = this._TCRSToPCRS(bounds.min, zoom).x;
           }
           if (this.options.feature.top) {
-            obj[this.options.feature.top] = this._TCRSToPCRS(this._map.getPixelBounds().min, this._map.getZoom()).y;
+            obj[this.options.feature.top] = this._TCRSToPCRS(bounds.min, zoom).y;
           }
           if (this.options.feature.right) {
-            obj[this.options.feature.right] = this._TCRSToPCRS(this._map.getPixelBounds().max,this._map.getZoom()).x;
+            obj[this.options.feature.right] = this._TCRSToPCRS(bounds.max, zoom).x;
           }
           // hidden and other variables that may be associated
           for (var v in this.options.feature) {
@@ -1649,7 +1700,7 @@
       onAdd: function () {
           this._map._addZoomLimit(this);  //used to set the zoom limit of the map
           this.setZIndex(this.options.zIndex);
-          this._onMoveEnd();
+          this._onAdd();
       },
       redraw: function() {
           this._onMoveEnd();
@@ -1662,26 +1713,90 @@
         }
       },
 
-      _onMoveEnd: function() {
-        let mapZoom = this._map.getZoom();
-        let mapBounds = M.pixelToPCRSBounds(this._map.getPixelBounds(),mapZoom,this._map.options.projection);
-        this.isVisible = mapZoom <= this.zoomBounds.maxZoom && mapZoom >= this.zoomBounds.minZoom && 
-                          this.extentBounds.overlaps(mapBounds);
-        if(!(this.isVisible)){
-          this._clearLayer();
-          return;
-        }
-        var map = this._map,
-          loc = map.getPixelBounds().min.subtract(map.getPixelOrigin()),
-          size = map.getSize(),
-          src = this.getImageUrl(),
-          overlayToRemove = this._imageOverlay;
-          this._imageOverlay = M.imageOverlay(src,loc,size,0,this._container);
-            
-        this._imageOverlay.addTo(map);
-        if (overlayToRemove) {
-          this._imageOverlay.on('load error', function () {map.removeLayer(overlayToRemove);});
-        }
+      _addImage: function (bounds, zoom, loc) {
+          let map = this._map;
+          let overlayToRemove = this._imageOverlay;
+          let src = this.getImageUrl(bounds, zoom);
+          let size = map.getSize();
+          this._imageOverlay = M.imageOverlay(src, loc, size, 0, this._container);
+          this._imageOverlay._step = this._template.step;
+          this._imageOverlay.addTo(map);
+          if (overlayToRemove) {
+              this._imageOverlay._overlayToRemove = overlayToRemove._url;
+              this._imageOverlay.on('load error', function () {map.removeLayer(overlayToRemove);});
+          }
+      },
+
+      _scaleImage: function (bounds, zoom) {
+          let obj = this;
+          setTimeout(function () {
+              let step = obj._template.step;
+              let steppedZoom = Math.floor(zoom / step) * step;
+              let scale = obj._map.getZoomScale(zoom, steppedZoom);
+              let translate = bounds.min.multiplyBy(scale)
+                  .subtract(obj._map._getNewPixelOrigin(obj._map.getCenter(), zoom)).round();
+              L.DomUtil.setTransform(obj._imageOverlay._image, translate, scale);
+          });
+      },
+
+      _onAdd: function () {
+          let zoom = this._map.getZoom();
+          let steppedZoom = zoom;
+          let step = this._template.step;
+
+          if (zoom % step !== 0) steppedZoom = Math.floor(zoom / step) * step;
+          let bounds = this._map.getPixelBounds(this._map.getCenter(), steppedZoom);
+          this._addImage(bounds, steppedZoom, L.point(0,0));
+          this._pixelOrigins = {};
+          this._pixelOrigins[steppedZoom] = bounds.min;
+          if(zoom !== steppedZoom) {
+              this._scaleImage(bounds, zoom);
+          }
+      },
+
+      _onMoveEnd: function(e) {
+          let mapZoom = this._map.getZoom();
+          let history = this._map.options.mapEl._history;
+          let current = history[history.length - 1];
+          let previous = history[history.length - 2];
+          if(!previous) previous = current;
+          let step = this._template.step;
+          let steppedZoom =   Math.floor(mapZoom / step) * step;
+          let bounds = this._map.getPixelBounds(this._map.getCenter(), steppedZoom);
+          //Zooming from one step increment into a lower one
+          if((step !== "1") && ((mapZoom + 1) % step === 0) &&
+              current.zoom === previous.zoom - 1){
+              this._addImage(bounds, steppedZoom, L.point(0,0));
+              this._scaleImage(bounds, mapZoom);
+          //Zooming or panning within a step increment
+          } else if (e && mapZoom % step !== 0) {
+              this._imageOverlay._overlayToRemove = this._imageOverlay._url;
+              if (current.zoom !== previous.zoom) {
+                  //Zoomed from within one step increment into another
+                  if(steppedZoom !== Math.floor(previous.zoom / step) * step){
+                      this._addImage(bounds, steppedZoom, L.point(0,0));
+                      this._pixelOrigins[steppedZoom] = bounds.min;
+                  }
+                  this._scaleImage(bounds, mapZoom);
+              } else {
+                  let pixelOrigin = this._pixelOrigins[steppedZoom];
+                  let loc = bounds.min.subtract(pixelOrigin);
+                  if(this.getImageUrl(bounds, steppedZoom) === this._imageOverlay._url) return;
+                  this._addImage(bounds, steppedZoom, loc);
+                  this._scaleImage(bounds, mapZoom);
+              }
+          } else {
+              let mapBounds = M.pixelToPCRSBounds(this._map.getPixelBounds(),mapZoom,this._map.options.projection);
+              this.isVisible = mapZoom <= this.zoomBounds.maxZoom && mapZoom >= this.zoomBounds.minZoom &&
+              this.extentBounds.overlaps(mapBounds);
+              if(!(this.isVisible)){
+                  this._clearLayer();
+                  return;
+              }
+              var map = this._map, loc = map.getPixelBounds().min.subtract(map.getPixelOrigin());
+              this._addImage(map.getPixelBounds(), mapZoom, loc);
+              this._pixelOrigins[mapZoom] = map.getPixelOrigin();
+          }
       },
       setZIndex: function (zIndex) {
           this.options.zIndex = zIndex;
@@ -1699,14 +1814,14 @@
         map._removeZoomLimit(this);
         this._container = null;
       },
-      getImageUrl: function() {
+      getImageUrl: function(pixelBounds, zoom) {
           var obj = {};
           obj[this.options.extent.width] = this._map.getSize().x;
           obj[this.options.extent.height] = this._map.getSize().y;
-          obj[this.options.extent.bottom] = this._TCRSToPCRS(this._map.getPixelBounds().max,this._map.getZoom()).y;
-          obj[this.options.extent.left] = this._TCRSToPCRS(this._map.getPixelBounds().min, this._map.getZoom()).x;
-          obj[this.options.extent.top] = this._TCRSToPCRS(this._map.getPixelBounds().min, this._map.getZoom()).y;
-          obj[this.options.extent.right] = this._TCRSToPCRS(this._map.getPixelBounds().max,this._map.getZoom()).x;
+          obj[this.options.extent.bottom] = this._TCRSToPCRS(pixelBounds.max, zoom).y;
+          obj[this.options.extent.left] = this._TCRSToPCRS(pixelBounds.min, zoom).x;
+          obj[this.options.extent.top] = this._TCRSToPCRS(pixelBounds.min, zoom).y;
+          obj[this.options.extent.right] = this._TCRSToPCRS(pixelBounds.max, zoom).x;
           // hidden and other variables that may be associated
           for (var v in this.options.extent) {
               if (["width","height","left","right","top","bottom"].indexOf(v) < 0) {
@@ -1811,7 +1926,7 @@
   			viewreset: this._reset
   		};
 
-  		if (this._zoomAnimated) {
+  		if (this._zoomAnimated && this._step <= 1) {
   			events.zoomanim = this._animateZoom;
   		}
 
@@ -1856,18 +1971,21 @@
   			L.DomUtil.setPosition(this._image, translate);
   		}
   	},
-          _reset: function () {
+      _reset: function (e) {
   		var image = this._image,
   		    location = this._location,
                       size = this._size;
+  		// TBD use the angle to establish the image rotation in CSS
 
-                  // TBD use the angle to establish the image rotation in CSS
-
+  		if(e && this._step > 1 &&
+  			(this._overlayToRemove === undefined || this._url === this._overlayToRemove)) {
+  			return;
+  		}
   		L.DomUtil.setPosition(image, location);
 
   		image.style.width  = size.x + 'px';
   		image.style.height = size.y + 'px';
-          },
+      },
   	_updateOpacity: function () {
   		if (!this._map) { return; }
 
@@ -2862,6 +2980,8 @@
                 if(!includesZoom && zoomInput) {
                   inputs.push(zoomInput);
                 }
+                let step = zoomInput ? zoomInput.getAttribute("step") : 1;
+                if(!step || step === "0" || isNaN(step)) step = 1;
                 // template has a matching input for every variable reference {varref}
                 templateVars.push({
                   template:decodeURI(new URL(template, base)), 
@@ -2875,6 +2995,7 @@
                   projectionMatch: projectionMatch,
                   projection:serverExtent.getAttribute("units") || FALLBACK_PROJECTION,
                   tms:tms,
+                  step:step,
                 });
               }
             }
