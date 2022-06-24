@@ -84,7 +84,7 @@ The default projection is `OSMTILE`.
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
 | [**Rendering base layers (5.1)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-rendering) |  |  |  |
 |              <div class="requirement">Embed an interactive map viewer, using HTML markup (5.1.1)</div>           | [full](https://maps4html.org/MapML/spec/#the-map-element-0) | full | [full](https://maps4html.org/MapML/spec/#webidl-1442763376) |
-|              <div class="impractical">Generate a default map for a given area (5.1.2)</div>           | none | none | none |
+|              <div class="enhancement">Generate a default map for a given area (5.1.2)</div>           | none | none | none |
 |            <div class="requirement">Display a basic map without JavaScript (5.1.5)</div>             | full | [limited](http://maps4html.org/experiments/progressive-enhancement/) |  |
 |            <div class="requirement">Display map content in a users preferred language (5.1.6)</div>            | [full](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/136) | [full](https://github.com/Maps4HTML/mapml-extension) |  |
 | [**Interpreting locations and map positions (5.3)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-locations) |  |  |  |
@@ -99,6 +99,9 @@ The default projection is `OSMTILE`.
 | [**Custom styling (5.5)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-custom-styling) |  |  |  |
 |          <div class="undecided">Apply custom styling to map controls (5.5.2)</div>              | none | none |  |
 |          <div class="undecided">Toggle whether default controls are displayed (5.5.3)</div>              | full | full |  |
+| [**Controlling the displayed map view and responding to user actions (6.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#client-apis-map-viewport) |  |  |  |
+|          <div class="requirement">Subscribe to notifications of map events (6.2.3)</div>              | none | limited | [full](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#events) |
+|          <div class="requirement">Move the map to display a given location (6.2.5)</div>              | full | full |  |
 ---
 
 > - [Source on **Github**](https://github.com/Maps4HTML/Web-Map-Custom-Element)
