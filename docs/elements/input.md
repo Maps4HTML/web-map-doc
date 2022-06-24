@@ -191,20 +191,20 @@ elements).  See [shard](#shard) for more details.
 ### Input step
 
 ```html
-    <mapml-viewer projection="OSMTILE" zoom="0" lat="45.409071" lon="-75.703411" controls>
-      <layer- label="OpenStreetMap" checked>
-        <map-extent units="OSMTILE" >
-          <map-input name="z" type="zoom"  value="18" min="0" max="18" step="3"></map-input>
-          <map-input name="s" type="hidden" shard="true" list="servers"></map-input>
-          <map-datalist id="servers">
-            <map-option value="a"></map-option>
-            <map-option value="b"></map-option>
-            <map-option value="c"></map-option>
-          </map-datalist>
-          <map-input name="x" type="location" units="tilematrix" axis="column" min="0"  max="262144" ></map-input>
-          <map-input name="y" type="location" units="tilematrix" axis="row" min="0"  max="262144" ></map-input>
-          <map-link rel="tile" tref="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-        </map-extent>
-      </layer->
-    </mapml-viewer>
+<mapml-viewer projection="OSMTILE" zoom="0" lat="45.409071" lon="-75.703411" controls>
+  <layer- label="OpenStreetMap" checked>
+    <map-extent units="OSMTILE" >
+      <map-input name="z" type="zoom"  value="18" min="0" max="18" step="3"></map-input>
+      <map-input name="s" type="hidden" shard="true" list="servers"></map-input>
+      <map-datalist id="servers">
+        <map-option value="a"></map-option>
+        <map-option value="b"></map-option>
+        <map-option value="c"></map-option>
+      </map-datalist>
+      <map-input name="x" type="location" units="tilematrix" axis="column" min="0"  max="262144" ></map-input>
+      <map-input name="y" type="location" units="tilematrix" axis="row" min="0"  max="262144" ></map-input>
+      <map-link rel="tile" tref="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+    </map-extent>
+  </layer->
+</mapml-viewer>
 ```
