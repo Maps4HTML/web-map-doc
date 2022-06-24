@@ -1,7 +1,7 @@
 ---
 id: input
 title: "<map-input>: The Input element"
-slug: /elements/input
+slug: /elements/input/
 ---
 
 The `<map-input>` element is an extended HTML `input` by `type` for use in Web 
@@ -12,12 +12,13 @@ The `<map-input>` declares a variable that will be set and used by the polyfill
 according to its attributes, as the map changes viewport extent in response to 
 user gestures.
 
+<iframe src="../../../demo/map-input-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
 ## Attributes
 
 ### `name`
 Sets the name of the variable created by the input. The variable can then be 
-referenced by the URL template `<map-link>` [tref attribute](./link#tref), 
+referenced by the URL template `<map-link>` [tref attribute](../link#tref), 
 using the `{name}` variable reference notation.
 
 ---
@@ -35,7 +36,7 @@ using the `{name}` variable reference notation.
 
 ### `value`
 In general, the `value` is set and used by the polyfill when generating URLs from
-[URL templates](./link#tref), for fetching server resources such as tiles, images 
+[URL templates](../link#tref), for fetching server resources such as tiles, images 
 and map documents.
 
 In particular, `value` is used by authors  to specify values for inputs of 
@@ -148,6 +149,17 @@ Establishes the maximum of the axis on the server.  Requests for coordinates gre
 this value will not be created by the polyfill.
 
 ---
+### `step`
+Sets the zoom interval according to which resources will be requested within the
+zoom range. The step is always calculated from a base value of 0.  At zoom values 
+that fall within a step interval, resources will be requested as required, and
+scaled to the current zoom level.  For example, with a min=0 and a max=7 for 
+a given zoom input with a step=4, tiles will be requested at only zoom=0 and scaled
+to zoom values of 1, 2 and 3 as the map is rendered at those levels.  Use of this
+attribute can conserve user bandwidth while having little visual effect, depending
+on the nature of the content.
+
+---
 ### `shard`
 
 The boolean `shard` attribute is used with a `hidden` variable.
@@ -174,3 +186,25 @@ provides the values to be used (via the `<map-datalist>`'s child `<map-option>`
 elements).  See [shard](#shard) for more details.
 
 ---
+## Examples
+
+### Input step
+
+```html
+<mapml-viewer projection="OSMTILE" zoom="0" lat="45.409071" lon="-75.703411" controls>
+  <layer- label="OpenStreetMap" checked>
+    <map-extent units="OSMTILE" >
+      <map-input name="z" type="zoom"  value="18" min="0" max="18" step="3"></map-input>
+      <map-input name="s" type="hidden" shard="true" list="servers"></map-input>
+      <map-datalist id="servers">
+        <map-option value="a"></map-option>
+        <map-option value="b"></map-option>
+        <map-option value="c"></map-option>
+      </map-datalist>
+      <map-input name="x" type="location" units="tilematrix" axis="column" min="0"  max="262144" ></map-input>
+      <map-input name="y" type="location" units="tilematrix" axis="row" min="0"  max="262144" ></map-input>
+      <map-link rel="tile" tref="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+    </map-extent>
+  </layer->
+</mapml-viewer>
+```
