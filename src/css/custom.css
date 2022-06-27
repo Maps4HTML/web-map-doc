@@ -81,6 +81,7 @@ body {
   line-height: 1;
   padding: 0.3em 0.5em;
   border-radius: 0.5em;
+  margin-right: 5px;
 }
 .enhancement {
   color: black;
@@ -90,6 +91,7 @@ body {
   line-height: 1;
   padding: 0.3em 0.5em;
   border-radius: 0.5em;
+  margin-right: 5px;
 }
 .impractical {
   color: black;
@@ -99,6 +101,7 @@ body {
   line-height: 1;
   padding: 0.3em 0.5em;
   border-radius: 0.5em;
+  margin-right: 5px;
 }
 .undecided {
   color: black;
@@ -108,4 +111,5 @@ body {
   line-height: 1;
   padding: 0.3em 0.5em;
   border-radius: 0.5em;
+  margin-right: 5px;
 }
