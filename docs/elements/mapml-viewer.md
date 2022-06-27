@@ -113,5 +113,5 @@ The default projection is `OSMTILE`.
 |          <div class="requirement">Move the map to display a given location (6.2.5)</div>              | full | full |  |
 ---
 
-> - [Source on **Github**](https://github.com/Maps4HTML/Web-Map-Custom-Element)
+> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/mapml-viewer.md)
 > - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)

@@ -246,3 +246,8 @@ labels, which may be duplicated on adjacent tiles many times over.
 |--------------------------------------------------------------|
 | [MapML input element](https://maps4html.org/MapML/spec/#the-input-element-0) |
 | [HTML input element](https://html.spec.whatwg.org/multipage/input.html#the-input-element) |
+
+---
+
+> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/input.md)
+> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)

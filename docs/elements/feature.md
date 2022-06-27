@@ -270,5 +270,5 @@ Sets the [extent](http://example.org/) of the layer.
 |          <div class="undecided">Apply custom styling to map markers and vector features (5.5.1)</div>              | [full](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/15) | limited |  |
 ---
 
-> - [Source on **Github**](https://github.com/Maps4HTML/Web-Map-Custom-Element)
+> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/feature.md)
 > - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)

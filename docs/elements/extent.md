@@ -151,5 +151,5 @@ The following example shows a Web Map Service Request using `<map-link>` to requ
 
 ---
 
-> - [Source on **Github**](https://github.com/Maps4HTML/Web-Map-Custom-Element)
+> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/extent.md)
 > - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
