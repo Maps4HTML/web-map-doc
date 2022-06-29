@@ -144,7 +144,8 @@ The following example shows a Web Map Service Request using `<map-link>` to requ
 <p><b><span class="requirement">requirement</span>
 <span class="enhancement">enhancement</span>
 <span class="impractical">impractical</span>
-<span class="undecided">undecided</span></b></p>
+<span class="undecided">undecided</span>
+<span class="discussion">under discussion</span></b></p>
 
 |  | Spec | Viewer | API |
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
@@ -152,7 +153,7 @@ The following example shows a Web Map Service Request using `<map-link>` to requ
 | <div class="requirement">Display a map using tile data from an author-specified web map service (5.1.4)</div> | full | full |  |
 | [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
 | <div class="undecided">Load additional map tiles when they pan into view (5.4.3)</div> | full | full |  |
-| Dynamically load different resolution map tile on zoom (5.4.6) | full | full |  |
+| <div class="discussion">Dynamically load different resolution map tile on zoom (5.4.6)</div> | full | full |  |
 
 ---
 

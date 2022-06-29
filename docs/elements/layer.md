@@ -72,15 +72,16 @@ and the fetched `<map-title>` element is used.
 <p><b><span class="requirement">requirement</span>
 <span class="enhancement">enhancement</span>
 <span class="impractical">impractical</span>
-<span class="undecided">undecided</span></b></p>
+<span class="undecided">undecided</span>
+<span class="discussion">under discussion</span></b></p>
 
 |  | Spec | Viewer | API |
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
 | [**Rendering base layers (5.1)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-rendering) |  |  |  |
 | <div class="enhancement">Display an image file as a map layer (5.1.3)</div> | [full](https://maps4html.org/MapML/spec/#the-image-element-0) | [limited](http://maps4html.org/experiments/painting/) |  |
 | [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
-| Maintain reasonable scale of labels and lines when zooming (5.4.5) | limited | full |  |
-| Hide or show (and maybe dynamically load) vector features and labels on zoom (5.4.7) | limited | full |  |
+| <div class="discussion">Maintain reasonable scale of labels and lines when zooming (5.4.5)</div> | limited | full |  |
+| <div class="discussion">Hide or show (and maybe dynamically load) vector features and labels on zoom (5.4.7)</div> | limited | full |  |
 
 ---
 

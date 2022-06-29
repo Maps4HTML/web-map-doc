@@ -113,3 +113,13 @@ body {
   border-radius: 0.5em;
   margin-right: 5px;
 }
+.discussion {
+  color: black;
+  background-color:#FFF;
+  display: inline-block;
+  font-style: normal;
+  line-height: 1;
+  padding: 0.3em 0.5em;
+  border-radius: 0.5em;
+  margin-right: 5px;
+}

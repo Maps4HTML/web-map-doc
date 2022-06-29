@@ -92,7 +92,8 @@ The default projection is `OSMTILE`.
 <p><b><span class="requirement">requirement</span>
 <span class="enhancement">enhancement</span>
 <span class="impractical">impractical</span>
-<span class="undecided">undecided</span></b></p>
+<span class="undecided">undecided</span>
+<span class="discussion">under discussion</span></b></p>
 
 |  | Spec | Viewer | API |
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
