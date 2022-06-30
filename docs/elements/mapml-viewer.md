@@ -104,8 +104,8 @@ The default projection is `OSMTILE`.
 |            <div class="requirement">Display map content in a users preferred language (5.1.6)</div>            | [full](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/136) | [full](https://github.com/Maps4HTML/mapml-extension) |  |
 | [**Interpreting locations and map positions (5.3)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-locations) |  |  |  |
 |           <div class="requirement">Select map view from latitude and longitude point (5.3.1)</div>             | full | full | [full](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#zoomtolat-lon-zoom) |
-|           <div class="undecided">Display map tiles defined in various common coordinate systems (5.3.3)</div>             | [full](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/14) | full |  |
-|           <div class="undecided">Reproject map tile data into a new projection or globe view (5.3.4)</div>             | [none](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/3) | none |  |
+|           <div class="undecided">Display map tiles defined in various common coordinate systems (5.3.3)</div>             | [full](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/14) | full | [full](https://maps4html.org/web-map-doc/docs/api/custom-projections) |
+|           <div class="undecided">Reproject map tile data into a new projection or globe view (5.3.4)</div>             | [under discussion](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/3) | none |  |
 |           <div class="undecided">Save the location or export to other application (5.3.5)</div>             | limited | limited |  |
 | [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
 |            <div class="requirement">Zoom the map independently from the rest of the page (5.4.1)</div>            | full    | full   | |
@@ -115,7 +115,7 @@ The default projection is `OSMTILE`.
 |          <div class="undecided">Apply custom styling to map controls (5.5.2)</div>              | none | none |  |
 |          <div class="undecided">Toggle whether default controls are displayed (5.5.3)</div>              | full | full |  |
 | [**Controlling the displayed map view and responding to user actions (6.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#client-apis-map-viewport) |  |  |  |
-|          <div class="requirement">Subscribe to notifications of map events (6.2.3)</div>              | none | limited | [full](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#events) |
+|          <div class="requirement">Subscribe to notifications of map events (6.2.3)</div>              | [pending](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#events) | limited | [full](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#events) |
 |          <div class="requirement">Move the map to display a given location (6.2.5)</div>              | full | full |  |
 ---
 
