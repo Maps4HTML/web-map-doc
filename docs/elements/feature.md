@@ -178,10 +178,10 @@ Sets the [extent](http://example.org/) of the layer.
 
 ---
 
-## Full Examples
+## Examples
 
 ```html
-  <mapml-viewer style="height: 500px;width:500px;" projection="CBMTILE" zoom="2" lat="45.5052040" lon="-75.2202344"
+  <mapml-viewer projection="CBMTILE" zoom="2" lat="45.5052040" lon="-75.2202344"
     controls>
 
     <layer- label="Arizona" checked>
@@ -244,5 +244,37 @@ Sets the [extent](http://example.org/) of the layer.
     </layer->
   </mapml-viewer>
 ```
-[ADD MAP HERE]
 
+---
+
+## Specifications
+
+| Specification                                                |
+|--------------------------------------------------------------|
+| [MapML feature element](https://maps4html.org/MapML/spec/#the-feature-element-0) |
+
+---
+
+## Requirements
+
+[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+<p><b><span class="requirement">requirement</span>
+<span class="enhancement">enhancement</span>
+<span class="impractical">impractical</span>
+<span class="undecided">undecided</span>
+<span class="discussion">under discussion</span></b></p>
+
+|  | Spec | Viewer | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Vector features and overlays (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors) |  |  |  |
+|                         <div class="requirement">Show pinpoint locations or custom markers on the map (5.2.1)</div>                        | full | full |	 |
+| <div class="requirement">Draw polygons or polylines as stylable, interactive vector graphics (separate from the image tiles) (5.2.2)</div> | full | full |  |
+| [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
+| <div class="discussion">Hide or show (and maybe dynamically load) vector features and labels on zoom (5.4.7)</div> | [full](https://maps4html.org/MapML/spec/#the-feature-element-0) | [experimental](https://maps4html.org/web-map-doc/docs/elements/feature/#full-examples) |  |
+| [**Custom styling (5.5)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-custom-styling) |  |  |  |
+|          <div class="undecided">Apply custom styling to map markers and vector features (5.5.1)</div>              | [full](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/15) | limited |  |
+---
+
+> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/feature.md)
+> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)

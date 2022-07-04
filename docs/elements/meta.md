@@ -149,4 +149,6 @@ Need to be documented.
 
 ---
 
+> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/meta.md)
+> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
 

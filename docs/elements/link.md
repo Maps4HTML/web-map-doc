@@ -36,7 +36,7 @@ defines several uses of existing and new `rel` keyword values.
 | `style`      | The `style` link relation by itself designates that link as an alternate or different style of the current layer style. This is often used to switch between, for example, satellite and cartographic views of the same layer. When used in conjunction with the `self` link relation, i.e. `rel="self style"`, the current document is identified as a member of the set of alternate styles, and is selected in the layer control affordance for changing styles. |
 | `tile`       | This link relation is used in conjunction with the `tref="..."` attribute to define a URL template that identifies native (server) tile resources. Can be used in conjunction with the `type="..."` attribute to indicate the media type of the remote resource, for example: `type="text/mapml"` tells the polyfill to parse and render the fetched resource as map feature content. This link relation is used with standard Web Map Tile Services (WMTS), and its non-standard equivalents. |
 | `image`      | The `image` link relation is used similarly to the `tile` link relation, except it tells the polyfill that the remote resources to be fetched are images that will be trimmed (by the server) to exactly match the width and height of the map viewport.  This link relation is used with standard Web Map Services (WMS) and its non-standard equivalents. |
-| `features`    | The `feature` link relation tells the polyfill to parse and render the fetched resource as map feature content.  It is conceptually equivalent to a link relation of `image` combined with a `type="text/mapml"` media type (which is not actually implemented). |
+| `features`    | The `features` link relation tells the polyfill to parse and render the fetched resource as map feature content. |
 | `zoomin`     | The link `href` is followed automatically by the polyfill when the map is zoomed in by the user to a value greater than the maximimum value of the zoom range of the current layer.  The referenced map layer resource replaces the current map layer.  The polyfill does not represent this link as a user-visible affordance, it is followed automatically. If the remote resource does not contain a reciprocal `zoomout` link, the map state change is one-way i.e. the layer is permanently replaced. |
 | `zoomout`    | The link `href` is followed automatically by the polyfill when the map is zoomed out by the user to a value less than the minimum value of the zoom range of the current layer.  The referenced map layer resource replaces the current map layer.  The polyfill does not represent this link as a user-visible affordance, it is followed automatically.  If the remote resource does not contain a reciprocal `zoomin` link, the map state change is one-way i.e. the layer is permanently replaced.  |
 | `legend`     | The `legend` link relation designates a link to metadata, typically an image, describing the symbology used by the current layer.  Currently, the polyfill creates a hyperlink for the label of the layer in the layer control, which opens in a new browsing context. |
@@ -158,5 +158,22 @@ Projection values [defined by the polyfill](../mapml-viewer#projection) include:
 
 ## Requirements
 
+[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+<p><b><span class="requirement">requirement</span>
+<span class="enhancement">enhancement</span>
+<span class="impractical">impractical</span>
+<span class="undecided">undecided</span>
+<span class="discussion">under discussion</span></b></p>
+
+|  | Spec | Viewer | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Vector features and overlays (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors) |  |  |  |
+|                        <div class="requirement">Display map data attribution and links (5.2.4)</div>                   | full | full |  |
+| [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
+| <div class="discussion">Hide or show (and maybe dynamically load) vector features and labels on zoom (5.4.7)</div> | [full](https://maps4html.org/MapML/spec/#link-rel-features) | [full](https://maps4html.org/web-map-doc/docs/elements/link/#rel) |  |
+
 ---
 
+> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/link.md)
+> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)

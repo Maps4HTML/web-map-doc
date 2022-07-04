@@ -54,3 +54,35 @@ the layer is hidden in the layer control.
 The `label` attribute is used by inline content as the displayed text label of the
 layer in the layer control.  In fetched content, the `label` attribute is ignored,
 and the fetched `<map-title>` element is used.
+
+---
+
+## Specifications
+
+| Specification                                                |
+|--------------------------------------------------------------|
+| [MapML layer element](https://maps4html.org/MapML/spec/#the-layer-element-0) |
+
+---
+
+## Requirements
+
+[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+<p><b><span class="requirement">requirement</span>
+<span class="enhancement">enhancement</span>
+<span class="impractical">impractical</span>
+<span class="undecided">undecided</span>
+<span class="discussion">under discussion</span></b></p>
+
+|  | Spec | Viewer | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Rendering base layers (5.1)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-rendering) |  |  |  |
+| <div class="enhancement">Display an image file as a map layer (5.1.3)</div> | [under review](https://github.com/Maps4HTML/MapML/issues/216) | [limited](http://maps4html.org/experiments/painting/) |  |
+| [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
+| <div class="discussion">Maintain reasonable scale of labels and lines when zooming (5.4.5)</div> | limited | full |  |
+
+---
+
+> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/layer.md)
+> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)

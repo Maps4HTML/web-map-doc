@@ -151,3 +151,35 @@ In this example, a point will be created at (2954, 3210) which, once clicked, ad
 ```
 In this advanced example there are multiple nested `<map-a>`. The simple behavior is, the closest `<map-a>` is the link
 behavior that the given location/area will adopt.
+
+---
+
+## Specifications
+
+| Specification                                                |
+|--------------------------------------------------------------|
+| [HTML a element](https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-a-element) |
+
+---
+
+## Requirements
+
+[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+<p><b><span class="requirement">requirement</span>
+<span class="enhancement">enhancement</span>
+<span class="impractical">impractical</span>
+<span class="undecided">undecided</span>
+<span class="discussion">under discussion</span></b></p>
+
+|  | Spec | Viewer | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Vector features and overlays (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors) |  |  |  |
+|                 <div class="requirement"> Support hyperlinks from markers or vector features (5.2.3)</div>             | full | full |  |
+| [**Interpreting locations and map positions (5.3)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-locations) |  |  |  |
+|           <div class="requirement">Select map view from latitude and longitude point (5.3.1)</div>             | full | full | [full](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#zoomtolat-lon-zoom) |
+
+---
+
+> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/map-a.md)
+> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)

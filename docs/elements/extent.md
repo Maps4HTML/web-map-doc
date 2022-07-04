@@ -126,3 +126,36 @@ The following example shows a Web Map Service Request using `<map-link>` to requ
   </layer->
 </mapml-viewer>
 ```
+
+---
+
+## Specifications
+
+| Specification                                                |
+|--------------------------------------------------------------|
+| [MapML extent element](https://maps4html.org/MapML/spec/#the-extent-element-0) |
+
+---
+
+## Requirements
+
+[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+<p><b><span class="requirement">requirement</span>
+<span class="enhancement">enhancement</span>
+<span class="impractical">impractical</span>
+<span class="undecided">undecided</span>
+<span class="discussion">under discussion</span></b></p>
+
+|  | Spec | Viewer | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Rendering base layers (5.1)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-rendering) |  |  |  |
+| <div class="requirement">Display a map using tile data from an author-specified web map service (5.1.4)</div> | full | full |  |
+| [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
+| <div class="undecided">Load additional map tiles when they pan into view (5.4.3)</div> | full | full |  |
+| <div class="discussion">Dynamically load different resolution map tile on zoom (5.4.6)</div> | full | full |  |
+
+---
+
+> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/extent.md)
+> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
