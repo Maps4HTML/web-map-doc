@@ -12,10 +12,10 @@ By default, the extension uses the language set in the browser to translate Maps
 
 ### Feature Indexing
 
-When toggeled through the extension, enables a square in the middle of the map to allow indexing of features located inside the square. 
+When toggled through the extension, enables a square in the middle of the map to allow indexing of features located inside the square. 
 
 ![Feature Index Example](../assets/img/feature-index.png)
 
 ### Announce Move and Zoom
 
-When toggeled through the extension, announces the map movement and zoom through screen readers.
+When toggled through the extension, announces the map movement and zoom through screen readers.
