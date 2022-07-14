@@ -22,6 +22,10 @@ module.exports = {
     'api/custom-rendering',
     'api/geojson-api',
   ],
+  'Browser Extension': [
+    'extension/installation',
+    'extension/features'
+  ],
   Resources: [
     'resources/debug-mode',
     'resources/resources'
