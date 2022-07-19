@@ -13,6 +13,7 @@ module.exports = {
       'elements/link',
       'elements/meta',
       'elements/feature',
+      'elements/geometry',
       'elements/map-a'
   ],
   API: [
@@ -23,6 +24,7 @@ module.exports = {
     'api/geojson-api',
   ],
   'Browser Extension': [
+    'extension/about',
     'extension/installation',
     'extension/features'
   ],

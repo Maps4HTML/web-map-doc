@@ -97,12 +97,18 @@ A `<map-feature>` element is a container for a feature's accessible name (`<map-
 
 ### `<map-feature>`
 
-Parent element that contains the `<map-properties>` and `<map-geometry>` elements
+Parent element that contains the `<map-properties>`, `<map-geometry>` and `<map-featurecaption>`elements
 
 #### Attributes
 
 - `zoom`
   - This allows you to set the zoom level the feature is rendered at. The zoom value should fall within the range of 0 to the maximum zoom level of the map's [projection](http://example.org/).
+
+---
+
+### `<map-featurecaption>`
+
+This element contains the feature's accessible name, which is displayed when the feature is in focus or hovered.
 
 ---
 
@@ -114,7 +120,7 @@ This element contains the contents of the popup associated to a given feature.
 
 ### `<map-geometry>`
 
-This element contains the different points, lines and polygons that will be drawn. Details on the geometry elements and it's syntax can be found [here](http://example.org/).
+This element contains the different points, lines and polygons that will be drawn. Details on the geometry elements and it's syntax can be found [here](../geometry/).
 
 #### Attributes
 
