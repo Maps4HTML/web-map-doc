@@ -14,6 +14,7 @@ module.exports = {
       'elements/meta',
       'elements/feature',
       'elements/geometry',
+      'elements/span',
       'elements/map-a'
   ],
   API: [

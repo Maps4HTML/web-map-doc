@@ -37,35 +37,35 @@ Parent element that contains the `<map-point>`,  `<map-linestring>`, `<map-polyg
 
 ### `<map-point>`
 
-This element contains a `map-coordinates` element containing a single position. Axis order - x followed by y, separated by whitespace.
+This element contains a `<map-coordinates>` element containing a single position. Axis order - x followed by y, separated by whitespace.
 
 ---
 
 ### `<map-linestring>`
 
-This element contains a `map-coordinates` element containing two or more positions. Axis order - x followed by y, separated by whitespace.
+This element contains a `<map-coordinates>` element containing two or more positions. Axis order - x followed by y, separated by whitespace.
 
 ---
 
 ### `<map-polygon>`
 
-This element contains one or more `map-coordinates` elements, each containing three or more positions. Axis order - x followed by y, separated by whitespace.
+This element contains one or more `<map-coordinates>` elements, each containing three or more positions. Axis order - x followed by y, separated by whitespace.
 
-The first and last positions in every child `map-coordinates` element are equal / at the same position.
+The first and last positions in every child `<map-coordinates>` element are equal / at the same position.
 
-The first `map-coordinates` element represents the outside of the polygon, and subsequent `map-coordinates` elements represent holes. The "winding order" of positions in child `map-coordinates` should depend on the axis orientation of the coordinate reference system in use, and whether the `map-coordinates` element represents the exterior of a polygon, or a hole. For WGS84, the exterior should be counterclockwise and holes should be clockwise.
+The first `<map-coordinates>` element represents the outside of the polygon, and subsequent `<map-coordinates>` elements represent holes. The "winding order" of positions in child `<map-coordinates>` should depend on the axis orientation of the coordinate reference system in use, and whether the `<map-coordinates>` element represents the exterior of a polygon, or a hole. For WGS84, the exterior should be counterclockwise and holes should be clockwise.
 
 ---
 
 ### `<map-multipoint>`
 
-This element contains a `map-coordinates` element, containing one or more positions. Axis order - x followed by y, separated by whitespace.
+This element contains a `<map-coordinates>` element, containing one or more positions. Axis order - x followed by y, separated by whitespace.
 
 ---
 
 ### `<map-multilinestring>`
 
-This element contains one or more `map-coordinates` elements, each containing two or more positions. Axis order - x followed by y, separated by whitespace.
+This element contains one or more `<map-coordinates>` elements, each containing two or more positions. Axis order - x followed by y, separated by whitespace.
 
 ---
 
@@ -73,7 +73,7 @@ This element contains one or more `map-coordinates` elements, each containing tw
 
 This element contains the contents one or more `<map-polygon>` elements. Axis order - x followed by y, separated by whitespace.
 
-For each member polygon, the same non-schema constraints apply to multipolygon descendant `map-coordinates` elements, as for polygon `map-coordinates` descendant elements.
+For each member polygon, the same non-schema constraints apply to multipolygon descendant `<map-coordinates>` elements, as for polygon `<map-coordinates>` descendant elements.
 
 ---
 
@@ -142,7 +142,7 @@ For each member geometry, the same non-schema constraints apply as to the unique
       <map-geometry cs="gcrs">
         <map-polygon class="polygon">
           <map-coordinates>-75.5859375 45.4656690 -75.6813812 45.4533876 -75.6961441 45.4239978 -75.7249832 45.4083331 -75.7792282 45.3772317 -75.7534790 45.3294614 -75.5831909 45.3815724 -75.6024170 45.4273712 -75.5673981 45.4639834 -75.5859375 45.4656690</map-coordinates>
-        	<map-coordinates>-75.6596588 45.4211062 -75.6338958 45.4254436 -75.6277127 45.4066458 -75.6572542 45.4097792 -75.6593153 45.4203832</map-coordinates>
+          <map-coordinates>-75.6596588 45.4211062 -75.6338958 45.4254436 -75.6277127 45.4066458 -75.6572542 45.4097792 -75.6596588 45.4211062</map-coordinates>
         </map-polygon>
       </map-geometry>
       <map-properties><h2>This is a Polygon</h2></map-properties>
@@ -208,10 +208,10 @@ For each member geometry, the same non-schema constraints apply as to the unique
         <map-multipolygon class="polygon">
           <map-polygon>
           	<map-coordinates>-75.5859375 45.4656690 -75.6813812 45.4533876 -75.6961441 45.4239978 -75.7249832 45.4083331 -75.7792282 45.3772317 -75.7534790 45.3294614 -75.5831909 45.3815724 -75.6024170 45.4273712 -75.5673981 45.4639834 -75.5859375 45.4656690</map-coordinates>
-        	</map-polygon>
+          </map-polygon>
           <map-polygon>
-          	<map-coordinates>-75.6744295 45.4728920 -75.7053451 45.4439942 -75.7063756 45.4249616 -75.7489704 45.4177324 -75.7788555 45.4003785 -75.7943133 45.4321899</map-coordinates>
-        	</map-polygon>
+          	<map-coordinates>-75.6744295 45.4728920 -75.7053451 45.4439942 -75.7063756 45.4249616 -75.7489704 45.4177324 -75.7788555 45.4003785 -75.7943133 45.4321899 -75.6744295 45.4728920</map-coordinates>
+          </map-polygon>
         </map-multipolygon>
       </map-geometry>
       <map-properties><h2>This is a MultiPolygon</h2></map-properties>
@@ -232,15 +232,15 @@ For each member geometry, the same non-schema constraints apply as to the unique
       <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
       <map-geometry cs="gcrs">
         <map-geometrycollection>
-        	<map-polygon class="polygon">
-          	<map-coordinates>-75.5859375 45.4656690 -75.6813812 45.4533876 -75.6961441 45.4239978 -75.7249832 45.4083331 -75.7792282 45.3772317 -75.7534790 45.3294614 -75.5831909 45.3815724 -75.6024170 45.4273712 -75.5673981 45.4639834 -75.5859375 45.4656690</map-coordinates>
-        	</map-polygon>
-        	<map-linestring class="line">
-          	<map-coordinates>-75.6168365 45.471929 -75.6855011 45.458445 -75.7016373 45.4391764 -75.7030106 45.4259255 -75.7236099 45.4208652 -75.7565689 45.4117074 -75.7833481 45.384225 -75.8197403 45.3714435 -75.8516693 45.377714</map-coordinates>
-        	</map-linestring>
-        	<map-point class="point">
-          	<map-coordinates>-75.6916809 45.4186964</map-coordinates>
-        	</map-point>
+          <map-polygon class="polygon">
+            <map-coordinates>-75.5859375 45.4656690 -75.6813812 45.4533876 -75.6961441 45.4239978 -75.7249832 45.4083331 -75.7792282 45.3772317 -75.7534790 45.3294614 -75.5831909 45.3815724 -75.6024170 45.4273712 -75.5673981 45.4639834 -75.5859375 45.4656690</map-coordinates>
+          </map-polygon>
+          <map-linestring class="line">
+            <map-coordinates>-75.6168365 45.471929 -75.6855011 45.458445 -75.7016373 45.4391764 -75.7030106 45.4259255 -75.7236099 45.4208652 -75.7565689 45.4117074 -75.7833481 45.384225 -75.8197403 45.3714435 -75.8516693 45.377714</map-coordinates>
+          </map-linestring>
+          <map-point class="point">
+            <map-coordinates>-75.6916809 45.4186964</map-coordinates>
+          </map-point>
         </map-geometrycollection>
       </map-geometry>
       <map-properties><h2>This is a Geometry Collection</h2></map-properties>
