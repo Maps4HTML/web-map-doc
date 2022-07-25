@@ -4,11 +4,13 @@ title: Extension Features
 slug: /extension/features
 ---
 
-There are many additional features offered through the extension
+There are several additional requirements that are addressed by the extension.
+
+![Extension popup](../assets/img/render-mapml.png)
 
 ### Localization
 
-By default, the extension uses the browser's locale to display the `<mapml-viewer>` UI in the user's locale. 
+By default, the extension uses the browser's locale to display any `<mapml-viewer>` UI in the user's locale. Note that if the UI is not localized to your browser's language, it is likely because there currently exists no translation of the UI strings for your locale.  Localization contributions are welcome.  Languages that are available at the time of writing are english, french and swedish.
 
 ### Feature Indexing
 
@@ -20,9 +22,9 @@ When turned on through the extension, enables a square in the middle of the map 
 
 When toggled through the extension, announces the map movement and zoom through screen readers.
 
-### Rendering text/mapml resources
+### Render MapML resources
 
-When turned on through the extension popup, the extension enables the rendering of map documents that have no host document, just as browsers can render image resources (image/*) that have no host document.
+When turned on through the extension popup (it is on by default as shown above, but can be turned off), the extension enables the rendering of map documents that have no host document, just as browsers can render image resources (image/*) that have no host document, by synthesizing a host document at run time.  The feature will recognize documents that are served to a browser tab (a top level browsing context) that are served with the "text/mapml" or "application/xml" Content-Type header. In the latter case, the extension will "sniff" for a root `<mapml- xmlns="http://www.w3.org/1999/xhtml">` element.
 
 ## Requirements
 
