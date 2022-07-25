@@ -13,7 +13,7 @@ A `<map-geometry>` element has one child element, which can be a `<map-point>`, 
 
 ### `cs`
 
-Defines the Coordinate System of the geometry. When no `cs` is provided, the default `pcrs` is used.
+Defines the Coordinate System of the geometry. When no `cs` is provided, the coordinate system of descendant `<map-coordinates>` elements is determined by a fallback to any in-scope `<map-meta name="cs" content="...">`.  If no fallback coordinate system is identified by a `<map-meta>` element, the default value of `pcrs` (projected coordinates) is used.
 
 
 | CRS | Description |
@@ -29,15 +29,10 @@ Defines the Coordinate System of the geometry. When no `cs` is provided, the def
 
 ## Associated Elements
 
-### `<map-geometry>`
-
-Parent element that contains the `<map-point>`,  `<map-linestring>`, `<map-polygon>`, `<map-multipoint>`, `<map-multilinestring>`, `<map-multipolygon>`, and `<map-geometrycollection>` elements
-
----
 
 ### `<map-point>`
 
-This element contains a `<map-coordinates>` element containing a single position. Axis order - x followed by y, separated by whitespace.
+This element contains a `<map-coordinates>` element containing a single position. Axis order - x followed by y, separated by whitespace. Note that longitude and latitude (gcrs coordinates) are listed in that order, always, in all geometry types.
 
 ---
 

@@ -4,7 +4,7 @@ title: "<map-span>: The Span element"
 slug: /other-elements/span/
 ---
 
-The `<map-span>` element is useful when used together with html global attributes such as [class](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class). This element allows you to wrap the coordinates in `<map-coordinates>`, impacting the location/area that is wrapped.
+The `<map-span>` element is useful when used together with html global attributes such as [class](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class). This element allows you to wrap the coordinate pairs in a `<map-coordinates>` element, allowing the wrapped coordinates to be targeted by CSS selectors, and thus independently styled.
 
 <iframe src="../../../demo/map-span-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
@@ -12,7 +12,7 @@ The `<map-span>` element is useful when used together with html global attribute
 
 ## Examples
 
-### Syling Polygon Holes
+### Styling Polygon Holes
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>

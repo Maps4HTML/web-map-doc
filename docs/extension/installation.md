@@ -4,7 +4,7 @@ title: Extension Installation
 slug: /extension/installation
 ---
 
-The MapML Browser Extension is used to add additional accessibility features to Maps4HTML. It can be installed from the Maps4HTML Github Repository:
+The MapML browser extension is used to add additional features to chromium browsers. It can be installed from the Maps4HTML Github Repository:
 
 [https://github.com/Maps4HTML/mapml-extension](https://github.com/Maps4HTML/mapml-extension)
 
@@ -12,7 +12,7 @@ The source code can be downloaded by clicking Code -> Download ZIP.
 
 ![Downloading Source Code](../assets/img/download-extension.gif)
 
-Once the source code is downloaded and extracted, it can be loaded as an extension through browsers:
+Once the source code is downloaded and extracted, it can be loaded as an extension through chromium browsers:
 
 ## Loading Extension to Browser
 
