@@ -8,12 +8,14 @@ module.exports = {
     'Mapping Elements': [
       'elements/mapml-viewer',
       'elements/layer',
+      'elements/mapml',
       'elements/extent',
       'elements/input',
       'elements/link',
       'elements/meta',
       'elements/feature',
       'elements/geometry',
+      'elements/properties',
       'elements/span',
       'elements/map-a'
   ],

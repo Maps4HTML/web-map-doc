@@ -1,6 +1,6 @@
 ---
 id: mapml-viewer
-title: "<mapml-viewer>: The Map element"
+title: "<mapml-viewer>"
 slug: /elements/mapml-viewer/
 ---
 

@@ -1,6 +1,6 @@
 ---
 id: span
-title: "<map-span>: The Span element"
+title: "<map-span>"
 slug: /other-elements/span/
 ---
 

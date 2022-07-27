@@ -1,6 +1,6 @@
 ---
 id: feature
-title: "<map-feature>: The Feature element"
+title: "<map-feature>"
 slug: /elements/feature/
 ---
 Map [features](https://en.wikipedia.org/wiki/Geographical_feature) are real or imaginary location objects represented in 2D according to a standard model, called the [Simple Features model](https://en.wikipedia.org/wiki/Simple_Features). There exists a wide variety of formats that allow the encoding of the Simple Features model, famously including: GeoJSON, Keyhole Markup Language (KML), and shape files (.shp), among many others.
@@ -28,7 +28,7 @@ This element contains the feature's accessible name, which is displayed when the
 
 ### `<map-properties>`
 
-This element contains the contents of the popup associated to a given feature.
+This element contains the contents of the popup associated to a given feature. Details on the properties elements and it's syntax can be found [here](../properties/).
 
 ---
 

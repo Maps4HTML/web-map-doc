@@ -1,6 +1,6 @@
 ---
 id: meta
-title: "<map-meta>: The metadata element"
+title: "<map-meta>"
 slug: /elements/meta/
 ---
 

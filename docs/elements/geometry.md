@@ -1,6 +1,6 @@
 ---
 id: geometry
-title: "<map-geometry>: The Geometry element"
+title: "<map-geometry>"
 slug: /elements/geometry/
 ---
 A `<map-geometry>` element is a child of `<map-feature>` and is used to describe the geometry of the feature.
@@ -27,7 +27,7 @@ Defines the Coordinate System of the geometry. When no `cs` is provided, the coo
 
 ---
 
-## Associated Elements
+## Child Elements
 
 
 ### `<map-point>`

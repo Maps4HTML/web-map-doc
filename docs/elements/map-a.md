@@ -1,6 +1,6 @@
 ---
 id: map-a
-title: "<map-a>: The Anchor element"
+title: "<map-a>"
 slug: /other-elements/map-a/
 ---
 

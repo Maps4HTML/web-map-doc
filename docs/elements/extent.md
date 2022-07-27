@@ -1,6 +1,6 @@
 ---
 id: extent
-title: "<map-extent>: The Extent element"
+title: "<map-extent>"
 slug: /elements/extent/
 ---
 

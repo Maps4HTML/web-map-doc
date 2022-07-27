@@ -1,6 +1,6 @@
 ---
 id: layer
-title: "<layer->: The Layer element"
+title: "<layer->"
 slug: /layers/layer/
 ---
 

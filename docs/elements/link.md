@@ -1,6 +1,6 @@
 ---
 id: link
-title: "<map-link>: The Link element"
+title: "<map-link>"
 slug: /elements/link/
 ---
 

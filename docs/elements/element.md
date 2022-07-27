@@ -1,6 +1,6 @@
 ---
 id: element
-title: "<map->: The foo element"
+title: "<map->"
 slug: /elements/element
 ---
 
