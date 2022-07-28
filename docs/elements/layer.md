@@ -1,6 +1,6 @@
 ---
 id: layer
-title: "<layer->: The Layer element"
+title: "<layer->"
 slug: /layers/layer/
 ---
 
@@ -35,6 +35,8 @@ so must follow both MapML document conventions as well as
 
 Contains the path to a MapML document.
 
+---
+
 ### `checked`
 
 The `<layer- checked>` attribute and property is boolean. When present,
@@ -44,10 +46,14 @@ true, not the value of the attribute. For example, the attribute `checked="false
 actually turns out to be checked,
 [as described by MDN Web docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#boolean_attributes).
 
+---
+
 ### `hidden`
 
 The `<layer- hidden>` attribute and property is boolean. When present,
 the layer is hidden in the layer control.
+
+---
 
 ### `label`
 

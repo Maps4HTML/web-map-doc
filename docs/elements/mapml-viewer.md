@@ -1,6 +1,6 @@
 ---
 id: mapml-viewer
-title: "<mapml-viewer>: The Map element"
+title: "<mapml-viewer>"
 slug: /elements/mapml-viewer/
 ---
 
@@ -54,21 +54,31 @@ The default projection is `OSMTILE`.
 
   - other projections are possible, using the [Custom Projections API](../../api/custom-projections).
 
+---
+
 ### `zoom`
 
 `zoom` - a non-negative integer.  The value establishes the initial zoom level of the map.  For a small scale view of the world, use a lower value.  Use larger values for larger scales (smaller area maps). The maximum value depends on the particular `projection` and data source. Many map data sources have limited zoom levels available.
+
+---
 
 ### `lat`
 
 `lat` - a real number latitude. The value establishes the initial latitude of the of the center of the map. Latitudes on Earth range from -90.0 (south) to 90.0 (north).  Many projections are not able to display all latitudes, and most projections have a limited range of locations where distortion is controlled or limited. In particular, OSMTILE (Web Mercator) can only display content between the latitude range -84 to 84.
 
+---
+
 ### `lon`
 
 `lon` - a real number longitude. The value establishes the initial longitude of the of the center of the map.Longitudes on Earth range from -180.0 (west) to 180.0 (east). Similar comments related to distortion apply to those for latitude. Be careful, this attribute is named "lon" NOT "long", and if you use "long" your map won't work properly.
 
+---
+
 ### `controls`
 
 `controls` - a "boolean" attribute. Turns map controls on (if present) or off (if omitted). In HTML "boolean" attributes don't have values of "true" or "false" per se - they have the implied value of "true" if the attribute exists, and an implied value of "false" if the attribute is not present.  Sometimes the default map controls may not be useful for your map, so you may turn them off and design your own.
+
+---
 
 ### `controlslist`
 

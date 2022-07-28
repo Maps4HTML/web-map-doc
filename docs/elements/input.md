@@ -1,6 +1,6 @@
 ---
 id: input
-title: "<map-input>: The Input element"
+title: "<map-input>"
 slug: /elements/input/
 ---
 

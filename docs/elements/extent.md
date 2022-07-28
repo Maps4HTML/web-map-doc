@@ -1,6 +1,6 @@
 ---
 id: extent
-title: "<map-extent>: The Extent element"
+title: "<map-extent>"
 slug: /elements/extent/
 ---
 
@@ -55,6 +55,8 @@ Defined values of `units` include:
 | CBMTILE       | Lambert Conformal Conic, with 256px x 256px tiles.  Zoom levels chosen by scale denominator, so tiles do not nest.|
 
 Author-defined values of `units` are possible, using the [Custom projections API](../../api/custom-projections/)
+
+---
 
 ### `label`
 

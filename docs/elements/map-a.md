@@ -1,6 +1,6 @@
 ---
 id: map-a
-title: "<map-a>: The Anchor element"
+title: "<map-a>"
 slug: /other-elements/map-a/
 ---
 
@@ -12,18 +12,23 @@ wrapped in a `<map-a>` element, it creates a blue outline that is 1 pixel wide a
 
 ## Attributes
 
-- `href`
+### `href`
   - The URL that the wrapped location points to. Note - If the `type` of the `<map-a>` is text/mapml
   you can provide fragments, more on fragments below.
 
-- `target`
+---
+
+### `target`
   - This is where the linked URL will be displayed. See table below for more details.
   - Defaults to `_self`, in the absence of a valid value.
 
-- `type`
+---
+
+### `type`
   - This is the mime type of the linked URL's format. Options are `text/html` & `text/mapml`.
   - Defaults to `text/mapml`, in the absence of a valid type value.
-  
+
+---
 
 ## Target Behavior for `text/mapml`
 
@@ -34,6 +39,8 @@ wrapped in a `<map-a>` element, it creates a blue outline that is 1 pixel wide a
 | _parent      	| Replace all the layers with the linked URL layer.     	|
 | _top         	| Navigate the webpage to the linked URL.               	|
 
+---
+
 ## Target Behavior for `text/html`
 
 | Target Value 	| Behavior                                	|
@@ -42,6 +49,8 @@ wrapped in a `<map-a>` element, it creates a blue outline that is 1 pixel wide a
 | _blank       	| Open the linked URL in a new tab.       	|
 | _parent      	| Navigate the webpage to the linked URL. 	|
 | _top         	| Navigate the webpage to the linked URL. 	|
+
+---
 
 ## Location fragments
 
@@ -86,8 +95,6 @@ To style linked features simply target the `map-a` class in your CSS, once a lin
   </map-feature>
 </layer->
 ```
-
----
 
 ### Wrapping a Feature Type + Location Fragment 
 
