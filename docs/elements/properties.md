@@ -9,6 +9,7 @@ A `<map-properties>` element can contain any HTML Element to describe the featur
 
 <iframe src="../../../demo/map-properties-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
+---
 
 ## Examples
 

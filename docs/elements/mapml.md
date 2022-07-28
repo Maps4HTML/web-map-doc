@@ -15,7 +15,7 @@ A `<mapml->` element must contain one `<map-head>` element, followed by one `<ma
 <iframe src="../../../demo/mapml-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
 <details>
-<summary>Click to view the content of "../data/osm.mapml" from the demo above</summary>
+<summary>Click to view the contents of "../data/osm.mapml" from the demo above</summary>
 
 ``` html
 <mapml- xmlns="http://www.w3.org/1999/xhtml/">

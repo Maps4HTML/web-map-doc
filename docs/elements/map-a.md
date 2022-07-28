@@ -12,15 +12,15 @@ wrapped in a `<map-a>` element, it creates a blue outline that is 1 pixel wide a
 
 ## Attributes
 
-- `href`
+### `href`
   - The URL that the wrapped location points to. Note - If the `type` of the `<map-a>` is text/mapml
   you can provide fragments, more on fragments below.
 
-- `target`
+### `target`
   - This is where the linked URL will be displayed. See table below for more details.
   - Defaults to `_self`, in the absence of a valid value.
 
-- `type`
+### `type`
   - This is the mime type of the linked URL's format. Options are `text/html` & `text/mapml`.
   - Defaults to `text/mapml`, in the absence of a valid type value.
   
