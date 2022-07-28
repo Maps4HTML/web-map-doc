@@ -10,7 +10,6 @@ maps.
 <!-- demo / example -->
 <iframe src="../../../demo/map-meta-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
-
 ## Attributes
 
 ### `name`
@@ -50,57 +49,52 @@ values of `name` related to maps include:
 ---
 
 ## Examples
-```html
-  <layer- label="Favourite Restaurant" checked>
-    <map-meta name="projection" content="OSMTILE"></map-meta>
-    <map-meta name="zoom" content="min=0,max=22,value=3"></map-meta>
-    <map-feature>
-      <map-featurecaption>Big Daddy's Crab Shack</map-featurecaption>
-        <map-geometry cs="gcrs">
-            <map-point>
-              <map-coordinates>-75.690276 45.41868</map-coordinates>
-            </map-point>
-        </map-geometry>
-    </map-feature>
-  </layer->
-```
+
+### Setting zoom
+
 Using the `<map-meta>` element to specify the native zoom and fallback zoom range 
 for a `<map-feature>`.  The coordinate encoding is narrowly determined for the feature,
 by the `<map-geometry cs="gcrs">` attribute, which tells the polyfill how to parse and
 process strings of coordinates found in descendant `<map-coordinates>` elements.
 
 ```html
-  <layer- label="Favourite Restaurant" checked>
-    <map-meta name="projection" content="OSMTILE"></map-meta>
-    <map-meta name="zoom" content="min=0,max=22,value=3"></map-meta>
-    <map-meta name="extent" content="top-left-easting=-8433179, top-left-northing=5689316, bottom-right-easting=-8420968, bottom-right-northing=5683139"></map-meta>
-    <map-feature>
-      <map-featurecaption>Big Daddy's Crab Shack</map-featurecaption>
-        <map-geometry cs="gcrs">
-            <map-point>
-              <map-coordinates>-75.690276 45.41868</map-coordinates>
-            </map-point>
-        </map-geometry>
-    </map-feature>
-  </layer->
+<layer- label="Favourite Restaurant" checked>
+  <map-meta name="projection" content="OSMTILE"></map-meta>
+  <map-meta name="zoom" content="min=0,max=22,value=3"></map-meta>
+  <map-feature>
+    <map-featurecaption>Big Daddy's Crab Shack</map-featurecaption>
+      <map-geometry cs="gcrs">
+          <map-point>
+            <map-coordinates>-75.690276 45.41868</map-coordinates>
+          </map-point>
+      </map-geometry>
+  </map-feature>
+</layer->
 ```
+
+### Setting extent
+
 Using the `<map-meta>` element to establish the pcrs (easting,northing) **extent** of 
 a map layer, the coordinates of which are encoded as gcrs pairs. 
 
 ```html
-  <layer- label="Favourite Restaurant" checked>
-    <map-meta name="projection" content="OSMTILE"></map-meta>
-    <map-meta name="cs" content="gcrs" ></map-meta>
-    <map-feature>
-      <map-featurecaption>Big Daddy's Crab Shack</map-featurecaption>
-        <map-geometry>
-            <map-point>
-              <map-coordinates>-75.690276 45.41868</map-coordinates>
-            </map-point>
-        </map-geometry>
-    </map-feature>
-  </layer->
+<layer- label="Favourite Restaurant" checked>
+  <map-meta name="projection" content="OSMTILE"></map-meta>
+  <map-meta name="zoom" content="min=0,max=22,value=3"></map-meta>
+  <map-meta name="extent" content="top-left-easting=-8433179, top-left-northing=5689316, bottom-right-easting=-8420968,bottom-right-northing=5683139"></map-meta>
+  <map-feature>
+    <map-featurecaption>Big Daddy's Crab Shack</map-featurecaption>
+      <map-geometry cs="gcrs">
+          <map-point>
+            <map-coordinates>-75.690276 45.41868</map-coordinates>
+          </map-point>
+      </map-geometry>
+  </map-feature>
+</layer->
 ```
+
+### Fallback cs for &lt;map-geometry&gt;
+
 Using the `<map-meta>` to specify a fallback coordinate encoding for geometries in
 the layer. The encoding of the coordinates is identified by the use of the 
 `<map-meta name="cs" content="gcrs">` element. Such a declaration tells the 
@@ -110,21 +104,39 @@ at which the feature should be displayed is not specified, nor the extent. Both
 values will fall back to the default values for the projection. 
 
 ```html
-  <layer- label="Favourite Restaurant" checked>
-    <map-feature>
-      <map-featurecaption>Big Daddy's Crab Shack</map-featurecaption>
-        <map-geometry>
-            <map-point>
-              <map-coordinates>-75.690276 45.41868</map-coordinates>
-            </map-point>
-        </map-geometry>
-    </map-feature>
-  </layer->
+<layer- label="Favourite Restaurant" checked>
+  <map-meta name="projection" content="OSMTILE"></map-meta>
+  <map-meta name="cs" content="gcrs" ></map-meta>
+  <map-feature>
+    <map-featurecaption>Big Daddy's Crab Shack</map-featurecaption>
+      <map-geometry>
+          <map-point>
+            <map-coordinates>-75.690276 45.41868</map-coordinates>
+          </map-point>
+      </map-geometry>
+  </map-feature>
+</layer->
 ```
+
+### Default metadata
+
 Allowing all metadata values to default to those of the map's projection.  The 
 feature will be displayed at all zoom levels, and the coordinates are by default
 interpreted to be `gcrs` (longitude latitude).  The extent of the layer defaults 
 to that of the projection.
+
+```html
+<layer- label="Favourite Restaurant" checked>
+  <map-feature>
+    <map-featurecaption>Big Daddy's Crab Shack</map-featurecaption>
+      <map-geometry>
+          <map-point>
+            <map-coordinates>-75.690276 45.41868</map-coordinates>
+          </map-point>
+      </map-geometry>
+  </map-feature>
+</layer->
+```
 
 ---
 

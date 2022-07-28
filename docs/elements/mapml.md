@@ -4,7 +4,7 @@ title: "<mapml->"
 slug: /elements/mapml/
 ---
 
-The `<mapml->` element is the root of a MapML document (with a .mapml file extension) representing a layer. A MapML document allows itself to be fetched as a remote resource, from the `<layer- src="..."></layer->` source attribute URL:
+The `<mapml->` element is the root of a MapML document (with a .mapml file extension) representing a layer. A MapML document allows itself to be fetched as a remote resource from the `<layer- src="..."></layer->` source attribute URL:
 
 ```html
 <layer- label="My Layer" src="https://example.org/mapml/mylayer" checked></layer->
@@ -45,8 +45,6 @@ A `<mapml->` element must contain one `<map-head>` element, followed by one `<ma
 </details> 
 
 
-
-
 ## Attributes
 
 ### `lang`
@@ -77,10 +75,6 @@ The `<map-head>` element is the first child of the `<mapml->` element. It contai
 ### `<map-body>`
 
 The `<map-body>` element is the second child of the `<mapml->` element. It represents the content of the MapML document. This element contains the [features](../feature/) and metadata of the MapML document.
-
----
-
-## Examples
 
 ---
 

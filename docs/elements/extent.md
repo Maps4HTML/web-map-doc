@@ -56,6 +56,8 @@ Defined values of `units` include:
 
 Author-defined values of `units` are possible, using the [Custom projections API](../../api/custom-projections/)
 
+---
+
 ### `label`
 
 Specifies a label for an extent which is displayed in the layer control. When a `label` is not provided, the extent is hidden by default in the layer control.
