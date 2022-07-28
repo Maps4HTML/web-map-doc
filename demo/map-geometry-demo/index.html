@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo</title>
+    <script type="module" src="../../dist/mapml-viewer.js"></script>
+    <link rel="stylesheet" href="../embeded-demo-style.css"/>
+
+    <link rel="stylesheet" href="../codemirror-5.64.0/lib/codemirror.css">
+    <script src="../codemirror-5.64.0/lib/codemirror.js"></script>
+    <script src="../codemirror-5.64.0/mode/xml/xml.js"></script>
+    <script src="../codemirror-5.64.0/mode/css/css.js"></script>
+    <script src="../codemirror-5.64.0/mode/javascript/javascript.js"></script>
+    <script src="../codemirror-5.64.0/addon/edit/closetag.js"></script>
+
+</head>
+<body>
+    <div style="text-align: center;">
+        <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
+        <h2>MapML Demo: &lt;map-geometry&gt;</h2>
+        <button class="run" onclick="plot()" aria-label="run code"><span aria-hidden="true">▶</span></button>
+    </div>
+
+    <div class="tab">
+        <button id="default" class="tablinks" onclick="switchTab(event, 'HTML')">HTML</button>
+        <button class="tablinks" onclick="switchTab(event, 'CSS')">CSS</button>
+    </div>
+
+    <div class="tabcontent" id="HTML">
+        <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
+        <textarea rows="10" style="width:100%" id="htmlEditor">
+<mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
+  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
+  <layer- label="Point Geometry" checked>
+    <map-meta name="projection" content="OSMTILE"></map-meta>
+    <map-feature>
+      <map-featurecaption>Point</map-featurecaption>
+      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
+      <map-geometry cs="gcrs">
+        <map-point class="point">
+          <map-coordinates>-75.6916809 45.4186964</map-coordinates>
+        </map-point>
+      </map-geometry>
+      <map-properties><h2>This is a Point</h2></map-properties>
+    </map-feature>
+  </layer->
+</mapml-viewer></textarea>
+    </div>
+    <div class="tabcontent" id="CSS">
+        <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
+        <textarea rows="10" style="width:100%" id="cssEditor">
+.polygon {
+  fill: #80C2AF;
+  stroke: #1167b1;
+}
+.line {
+  stroke: #dc143c;
+}
+.point {
+  fill: #D8A47F;
+  stroke: #EF8354;
+}</textarea>
+    </div>
+
+    <div id="output"></div>
+
+    <script>
+        // Styling HTML Text Editor
+        var htmlEditor = CodeMirror.fromTextArea(document.getElementById('htmlEditor'), {
+            mode: "xml",
+            //lineNumbers: true,
+            screenReaderLabel: "MapML Demo Code",
+            tabSize: 2,
+            autoCloseTags: true
+        });
+
+        // Styling CSS Text Editor
+        var cssEditor = CodeMirror.fromTextArea(document.getElementById('cssEditor'), {
+            mode: "css",
+            //lineNumbers: true,
+            screenReaderLabel: "MapML Demo Code",
+            tabSize: 2,
+            autoCloseTags: true
+        });
+
+        // Plot the new mapml map when run button is clicked
+        function plot() {
+            let parser = new DOMParser();
+
+            // HTML Parsing and implementing
+            let rawText = htmlEditor.getValue();
+
+            let mapml = parser.parseFromString(rawText, "text/html");
+            mapml = mapml.querySelector('mapml-viewer');
+
+            // CSS Parsing and implementing
+            let rawTextCSS = cssEditor.getValue();
+
+            let mapmlCSS = parser.parseFromString("<map-style>" + rawTextCSS + "</map-style>", "text/xml").querySelector('map-style');
+
+            // Adding the CSS to each layer
+            let layers = mapml.querySelectorAll('layer-');
+            for (i=0; i<layers.length; ++i) {
+                layers[i].appendChild(mapmlCSS);
+            }
+
+            console.log(layers);
+
+            // Adding code to output div
+            let output = document.getElementById('output');
+            output.replaceChild(mapml, output.querySelector('mapml-viewer'));
+        }
+
+        // Plot map when page is loaded using the deafult text
+        window.onload = (event) => {
+            let parser = new DOMParser();
+
+            // HTML Parsing and implementing
+            let rawText = htmlEditor.getValue();
+            let mapml = parser.parseFromString(rawText, "text/html");
+            mapml = mapml.querySelector('mapml-viewer');
+            
+            // CSS Parsing and implementing
+            let rawTextCSS = cssEditor.getValue();
+            let mapmlCSS = parser.parseFromString("<map-style>" + rawTextCSS + "</map-style>", "text/xml").querySelector('map-style');
+            // Adding the CSS to each layer
+            let layers = mapml.querySelectorAll('layer-');
+            for (i=0; i<layers.length; ++i) {
+                layers[i].appendChild(mapmlCSS);
+            }
+            // Adding code to output div
+            let output = document.getElementById('output');
+            output.appendChild(mapml);
+        };
+
+        // Function for switching between HTML and CSS
+        function switchTab(evt, tab) {
+            // Declare all variables
+            let i, tabcontent, tablinks;
+
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(tab).style.display = "inline-block";
+            htmlEditor.refresh();
+            cssEditor.refresh();
+            evt.currentTarget.className += " active";
+        }
+        
+        // Select The HTML Tab as the default
+        document.getElementById('default').click();
+    </script>
+</body>
+</html>
