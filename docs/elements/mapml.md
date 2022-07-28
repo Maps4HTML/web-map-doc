@@ -10,7 +10,8 @@ The `<mapml->` element is the root of a MapML document (with a .mapml file exten
 <layer- label="My Layer" src="https://example.org/mapml/mylayer" checked></layer->
 ```
 
-A `<mapml->` element must contain one `<map-head>` element, followed by one `<map-body>` element.
+A `<mapml->` element declare the document to be in the xhtml namespace, and 
+must contain one `<map-head>` element, followed by one `<map-body>` element.
 
 <iframe src="../../../demo/mapml-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
@@ -18,7 +19,7 @@ A `<mapml->` element must contain one `<map-head>` element, followed by one `<ma
 <summary>Click to view the contents of "../data/osm.mapml" from the demo above</summary>
 
 ``` html
-<mapml- xmlns="http://www.w3.org/1999/xhtml/">
+<mapml- xmlns="http://www.w3.org/1999/xhtml">
   <map-head>
     <map-title>OpenStreetMap</map-title>
     <meta http-equiv="Content-Type" content="text/mapml;projection=OSMTILE"/>
@@ -50,6 +51,10 @@ A `<mapml->` element must contain one `<map-head>` element, followed by one `<ma
 ### `lang`
 
 The `lang` attribute defines the primary language of the MapML document. as defined by HTML [here](https://html.spec.whatwg.org/multipage/dom.html#attr-lang).
+
+### `xmlns`
+
+The `xmlns` attribute is **required**, and must have the value `"http://www.w3.org/1999/xhtml"`.
 
 ---
 
