@@ -19,20 +19,16 @@ An example of a `<map-extent>` element being used to load image tiles for a sing
 URL template.
 
 ```html
-<layer- label="OpenStreetMap" checked>
-  <map-extent units="OSMTILE">
-    <map-input name="z" type="zoom" value="18" min="0" max="18"></map-input>
-    <map-input name="s" type="hidden" shard="true" list="servers"></map-input>
-    <map-datalist id="servers">
-      <map-option value="a"></map-option>
-      <map-option value="b"></map-option>
-      <map-option value="c"></map-option>
-    </map-datalist>
-    <map-input name="x" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
-    <map-input name="y" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
-    <map-link rel="tile" tref="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"></map-link>
-  </map-extent>
-</layer->
+<mapml-viewer projection="OSMTILE" lat="10" lon="0" zoom="1">
+  <layer- label="OpenStreetMap" checked>
+    <map-extent units="OSMTILE">
+      <map-input name="z" type="zoom" value="18" min="0" max="18"></map-input>
+      <map-input name="x" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
+      <map-input name="y" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
+      <map-link rel="tile" tref="https://tile.openstreetmap.org/{z}/{x}/{y}.png"></map-link>
+    </map-extent>
+  </layer->
+</mapml-viewer>
 ```
 
 <iframe src="../../../demo/extent-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
