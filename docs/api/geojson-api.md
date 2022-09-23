@@ -6,8 +6,20 @@ slug: /api/geojson-api
 
 ## Introduction
 
-The proposed **GeoJSON API** described by this page is not implemented yet. This
-page will serve as specification and documentation, until development is complete.
+The **GeoJSON API** is provided as a library which can be added to any document as long as it preceded by the mampl-viewer module, i.e.
+
+```html
+<!doctype html>
+<html lang="en">
+    <head>
+        <script type="module" src="mapml-viewer.js"></script>
+        <script src="lib/geojson.js"></script>
+    </head>
+    <body>
+        ...
+    </body>
+</html>    
+```
 
 ---
 
