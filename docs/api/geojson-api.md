@@ -36,6 +36,8 @@ The **GeoJSON API** is provided as a library which can be added to any document 
 | <String \| Object> json | A GeoJSON string or object |
 | &ltObject&gt options | A set of key/value pairs that customize the output MapML layer. All options are optional and described below. |
 
+---
+
 ### Options
 
 &ltObject&gt A set of key/value pairs that customize the output MapML layer. All options are optional and detailed below.
@@ -55,7 +57,7 @@ geojson2mapml(json, {projection: "CBMTILE"});
 ```
 
 #### `caption`
-&ltFunction | String&gt Specifies the [feature caption](http://localhost:3000/web-map-doc/docs/elements/feature/#map-featurecaption) of the feature(s).
+&ltFunction | String&gt Specifies the [feature caption](http://localhost:3000/web-map-doc/docs/elements/feature/#map-featurecaption) of the feature(s). Uses `label` as default.
 - Function - Accepts one argument being the feature JSON and returns a String.
 - String - A string that is the name of the property that will be mapped to featurecaption.
 
@@ -71,15 +73,15 @@ geojson2mapml(json, {caption: "desc"});
 
 #### `properties`
 &ltFunction | String | HTMLElement&gt Specifies how the properties are mapped. By default, properties will be mapped to an HTML [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table). 
-- Function - A function that maps the GeoJSON features' properties member to an HTMLElement. Accepts one argument being the JSON feature properties and returns an HTMLElement.
+- Function - A function that maps the GeoJSON feature to an HTMLElement. Accepts one argument being the JSON feature and returns an HTMLElement.
 - String - A sanitized string that will be parsed as an HTMLElement.
 - HTMLElement - an HTMLElement. 
 
 ```js
 // properties function
-geojson2mapml(json, {properties: function(properties) {
+geojson2mapml(json, {properties: function(feature) {
     let parser = new DOMParser();
-    return parser.parseFromString("<h1>" + properties.desc + "'s property</h1>", "text/html").body.firstChild;
+    return parser.parseFromString("<h1>" + feature.properties.desc + "'s property</h1>", "text/html").body.firstChild;
     }
 });
 // properties string
@@ -95,6 +97,8 @@ perform custom markup on the geometry element:
 
 - styling: tag `<map-geometry>` elements with class names
 - linking: add links and spans into geometry coordinates
+
+---
 
 ### Examples
 
@@ -160,7 +164,7 @@ let cap = function c(j) {
 // function to set properties
 let prop = function f(p) {
   let parser = new DOMParser();
-  return parser.parseFromString("<h1>" + p.desc + "'s property</h1>", "text/html").body.firstChild;
+  return parser.parseFromString("<h1>" + p.properties.desc + "'s property</h1>", "text/html").body.firstChild;
 }
 
 // GeoJSON To MapML
@@ -250,9 +254,11 @@ let output = geojson2mapml(json);
 
 </details> 
 
+---
+
 ## MapML To GeoJSON
 
-`mapml2geojson` - serialize a MapML `<layer->` or `<map-feature>` element as a GeoJSON feature collection object. Returns - a JavaScript (GeoJSON) object
+`mapml2geojson` - serialize a MapML `<layer->` element as a GeoJSON feature collection object. Returns - a JavaScript (GeoJSON) object
 
 ### Parameters
 
