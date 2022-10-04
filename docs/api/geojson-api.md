@@ -36,6 +36,8 @@ The **GeoJSON API** is provided as a library which can be added to any document 
 | <String \| Object> json | A GeoJSON string or object |
 | &ltObject&gt options | A set of key/value pairs that customize the output MapML layer. All options are optional and described below. |
 
+---
+
 ### Options
 
 &ltObject&gt A set of key/value pairs that customize the output MapML layer. All options are optional and detailed below.
@@ -81,7 +83,7 @@ geojson2mapml(json, {caption: "desc"});
 // properties function
 geojson2mapml(json, {properties: function(feature) {
     let parser = new DOMParser();
-    return parser.parseFromString("<h1>" + properties.desc + "'s property</h1>", "text/html").body.firstChild;
+    return parser.parseFromString("<h1>" + feature.properties.desc + "'s property</h1>", "text/html").body.firstChild;
     }
 });
 // properties option - string valued - make sure you sanitize user-supplied strings
@@ -161,7 +163,7 @@ let cap = function c(j) {
 // function to set properties
 let prop = function f(p) {
   let parser = new DOMParser();
-  return parser.parseFromString("<h1>" + p.desc + "'s property</h1>", "text/html").body.firstChild;
+  return parser.parseFromString("<h1>" + p.properties.desc + "'s property</h1>", "text/html").body.firstChild;
 }
 
 // GeoJSON To MapML
@@ -251,9 +253,11 @@ let output = geojson2mapml(json);
 
 </details> 
 
+---
+
 ## MapML To GeoJSON
 
-`mapml2geojson` - serialize a MapML `<layer->` or `<map-feature>` element as a GeoJSON feature collection object. Returns - a JavaScript (GeoJSON) object
+`mapml2geojson` - serialize a MapML `<layer->` element as a GeoJSON feature collection object. Returns - a JavaScript (GeoJSON) object
 
 ### Parameters
 
