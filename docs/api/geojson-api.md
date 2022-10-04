@@ -40,63 +40,64 @@ The **GeoJSON API** is provided as a library which can be added to any document 
 
 &ltObject&gt A set of key/value pairs that customize the output MapML layer. All options are optional and detailed below.
 
-#### `label`
-&ltString&gt Specifies the layer's [label](http://localhost:3000/web-map-doc/docs/layers/layer/#label). Default is json.name, json.title or "Layer".
+| Parameter | Type | Default | Description |
+|------|------|---------------|--------|
+| `label` | <String\> | `json.name`, `json.title` or "Layer" | Sets the output layer's [label](http://localhost:3000/web-map-doc/docs/layers/layer/#label). |
+| `projection` |  <String\> | `OSMTILE` | Sets the output layer's [projection](http://localhost:3000/web-map-doc/docs/elements/mapml-viewer/#projection). Defined values include: `OSMTILE`, `CBMTILE`, `WGS84`, and `APSTILE`.|
+| `caption` | <String&nbsp;\|&nbsp;Function\> | _No caption_ | A function that accepts the feature JSON and returns a string, OR a string that is the name of a property to be mapped to the [featurecaption](http://localhost:3000/web-map-doc/docs/elements/feature/#map-featurecaption). If a matching property is not found, the string provided will be used as the feature caption value. See [caption option <Function\> example](#caption-option)|
+| `properties` | <Function&nbsp;\|&nbsp;String&nbsp;\|&nbsp;HTMLElement\> | _Properties will be mapped to an HTML [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table)._ | Specifies how the properties are mapped. <Function\> - A function that accepts one argument - the GeoJSON feature object - and which must return an HTMLElement that becomes the single child element of the <properties\> element. <String\> - A string that will be parsed and used as the single child element of the `<properties>` element for all features. <HTMLElement\> - an element that will be used as the single child element of `<properties>` element for all features. See [properties option <Function\> example](#properties-option)|
+| `geometryFunction` | <Function\> | _MapML geometry will mirror the GeoJSON geometry value_ | <Function\> A function to modify the generated [descendants](http://localhost:3000/web-map-doc/docs/elements/geometry/#child-elements) of `<map-geometry>` which can add classes, [hyperlinks](http://localhost:3000/web-map-doc/docs/other-elements/map-a/) and [span's](http://localhost:3000/web-map-doc/docs/other-elements/span/) to the instance. Plain `<map-geometry>` element will be created by default. The function accepts two arguments: The generated [child element](http://localhost:3000/web-map-doc/docs/elements/geometry/#child-elements) of `<map-geometry>` and the [feature json object](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) to return a modified child element of the `<map-geometry>` element. See the [geometryFunction example](#geometry-option) |
 
-```js
+
+### Examples
+
+<div id="label-option"></div>
+
+```js title="geojson2mapml label option"
 geojson2mapml(json, {label: "Downtown Ottawa"});
 ```
 
-#### `projection`
-&ltString&gt Specifies the [projection](http://localhost:3000/web-map-doc/docs/elements/mapml-viewer/#projection) of the layer (OSMTILE, WGS84, CBMTILE, APSTILE). Default is "OSMTILE".
+<div id="projection-option"></div>
 
-```js
+```js  title="geojson2mapml projection option"
 geojson2mapml(json, {projection: "CBMTILE"});
 ```
 
-#### `caption`
-&ltFunction | String&gt Specifies the [feature caption](http://localhost:3000/web-map-doc/docs/elements/feature/#map-featurecaption) of the feature(s).
-- Function - Accepts one argument being the feature JSON and returns a String.
-- String - A string that is the name of the property that will be mapped to featurecaption.
+<div id="caption-option"></div>
 
-```js
+```js title="geojson2mapml caption option - function-valued"
 // caption function
 geojson2mapml(json, {caption: function(feature) {
     return feature.properties.desc + ", not a Polygon";
     }
 });
-// caption string referencing a property name
+// caption option string value referencing a property name
 geojson2mapml(json, {caption: "desc"});
 ```
 
-#### `properties`
-&ltFunction | String | HTMLElement&gt Specifies how the properties are mapped. By default, properties will be mapped to an HTML [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table). 
-- Function - A function that maps the GeoJSON features' properties member to an HTMLElement. Accepts one argument being the JSON feature properties and returns an HTMLElement.
-- String - A sanitized string that will be parsed as an HTMLElement.
-- HTMLElement - an HTMLElement. 
+<div id="properties-option"></div>
 
-```js
+```js  title="geojson2mapml properties option - function-valued"
 // properties function
-geojson2mapml(json, {properties: function(properties) {
+geojson2mapml(json, {properties: function(feature) {
     let parser = new DOMParser();
     return parser.parseFromString("<h1>" + properties.desc + "'s property</h1>", "text/html").body.firstChild;
     }
 });
-// properties string
+// properties option - string valued - make sure you sanitize user-supplied strings
 geojson2mapml(json, {properties: "<p>This property was inserted using a properties string</p>"});
 ```
-#### `geometryFunction`
-&ltFunction&gt A function to modify the generated [children](http://localhost:3000/web-map-doc/docs/elements/geometry/#child-elements) of `<map-geometry>` which can add classes, [hyperlinks](http://localhost:3000/web-map-doc/docs/other-elements/map-a/) and [span's](http://localhost:3000/web-map-doc/docs/other-elements/span/) to the instance. Plain `<map-geometry>` element will be created by default. The function accepts two arguments: The generated [child element](http://localhost:3000/web-map-doc/docs/elements/geometry/#child-elements) of `<map-geometry>` and the [feature json object](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) to return a modified child element of the `<map-geometry>` element.
-###### Design notes
 
-geometryFunction - a user supplied function that is handed the generated child of the 
-`<map-geometry>` element, and the input GeoJSON feature. Such a function can 
-perform custom markup on the geometry element:
+<div id="geometry-option"></div>
 
-- styling: tag `<map-geometry>` elements with class names
-- linking: add links and spans into geometry coordinates
-
-### Examples
+```js title="geojson2mapml geometryFunction option"
+let options = {
+                geometryFunction: function (g, f) {
+                  g.setAttribute("class", f.properties.class);
+                  return g;}
+              };
+geojson2mapml(json, options);
+```
 
 #### Options string
 An example showcasing how strings can be used to set `label`, `projection`, `caption` and `properties` options.
