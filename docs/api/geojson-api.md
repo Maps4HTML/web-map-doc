@@ -29,7 +29,7 @@ The **GeoJSON API** is provided as a library which can be added to any document 
 
 | Function | Returns | Description |
 |----------|---------|-------------|
-|`geojson2mapml(json,options)` | A MapML `<layer->` element. | Convert a GeoJSON feature or feature collection string or object to MapML `<layer->` containing one or more `<map-feature>` elements.|
+|<code>geojson2mapml(<Object&nbsp;\|&nbsp;String\>&nbsp;json,&nbsp;<Object\>&nbsp;options)</code> | A MapML `<layer->` element. | Convert a GeoJSON feature or feature collection string or object to MapML `<layer->` containing one or more `<map-feature>` elements.|
 
 ### Parameters
 
@@ -261,7 +261,7 @@ let output = geojson2mapml(json);
 
 | Function | Returns | Description |
 |----------|---------|-------------|
-|`mapml2geojson(<HTMLLayerElement> element, <Object> options)` | A JavaScript (GeoJSON) feature collection object | This function transforms the `<feature>` element children of a `<layer->` element to a GeoJSON FeatureCollection object. You supply [options](#options-1) to control the transformation.
+| <code>mapml2geojson(<HTMLLayerElement\>&nbsp;element,&nbsp;<Object\>&nbsp;options)</code> | A JavaScript (GeoJSON) feature collection object | This function transforms the `<feature>` element children of a `<layer->` element to a GeoJSON FeatureCollection object. You supply [options](#options-1) to control the transformation.
 
 ### Parameters
 
