@@ -27,7 +27,9 @@ The **GeoJSON API** is provided as a library which can be added to any document 
 
 ## GeoJSON To MapML
 
-`geojson2mapml` - convert a GeoJSON feature or feature collection string or object  to a MapML `<layer->` element. Returns - a HTMLLayerElement node
+| Function | Returns | Description |
+|----------|---------|-------------|
+|`geojson2mapml(json,options)` | A MapML `<layer->` element. | Convert a GeoJSON feature or feature collection string or object to MapML `<layer->` containing one or more `<map-feature>` elements.|
 
 ### Parameters
 
