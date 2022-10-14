@@ -18,7 +18,8 @@ module.exports = {
       'elements/geometry',
       'elements/properties',
       'elements/span',
-      'elements/map-a'
+      'elements/map-a',
+      'elements/style'
   ],
   API: [
     'api/mapml-viewer-api',

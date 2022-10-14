@@ -57,3 +57,62 @@ h2 {
 .tab button.active {
     background-color: #ccc;
 }
+/* dark theme colors */
+/* Buttons + Headings */
+[data-theme='dark'], [data-theme='dark'] body{ background-color: #1e1e1e; }
+[data-theme='dark'] h2 { color: #f5f6f7; }
+[data-theme='dark'] button { background-color: #5992e8; /* Blue */ }
+[data-theme='dark'] .tab button:hover { background-color: #9d9d9d; }
+[data-theme='dark'] .tab button.active { background-color: #9d9d9d; }
+[data-theme='dark'] { color-scheme: dark; }
+[data-theme='dark'] .CodeMirror-scrollbar-filler { background-color: #686868; }
+
+/*
+
+    Name:       3024 night
+    Author:     Jan T. Sott (http://github.com/idleberg)
+
+    CodeMirror template by Jan T. Sott (https://github.com/idleberg/base16-codemirror)
+    Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16)
+
+*/
+[data-theme='dark'] .cm-s-default.CodeMirror { background: #1f2430; color: #cbccc6; }
+[data-theme='dark'] .cm-s-default div.CodeMirror-selected { background: #34455a; }
+[data-theme='dark'] .cm-s-default .CodeMirror-line::selection, [data-theme='dark'] .cm-s-default .CodeMirror-line > span::selection, [data-theme='dark'] .cm-s-default .CodeMirror-line > span > span::selection { background: #34455a; }
+[data-theme='dark'] .cm-s-default .CodeMirror-line::-moz-selection, [data-theme='dark'] .cm-s-default .CodeMirror-line > span::-moz-selection, [data-theme='dark'] .cm-s-default .CodeMirror-line > span > span::-moz-selection { background: rgba(25, 30, 42, 99); }
+[data-theme='dark'] .cm-s-default .CodeMirror-gutters { background: #1f2430; border-right: 0px; }
+[data-theme='dark'] .cm-s-default .CodeMirror-guttermarker { color: white; }
+[data-theme='dark'] .cm-s-default .CodeMirror-guttermarker-subtle { color:  rgba(112, 122, 140, 66); }
+[data-theme='dark'] .cm-s-default .CodeMirror-linenumber { color: rgba(61, 66, 77, 99); }
+[data-theme='dark'] .cm-s-default .CodeMirror-cursor { border-left: 1px solid #ffcc66;  }
+[data-theme='dark'] .cm-s-default.cm-fat-cursor .CodeMirror-cursor {background-color: #a2a8a175 !important;}
+[data-theme='dark'] .cm-s-default .cm-animate-fat-cursor { background-color: #a2a8a175 !important; }
+
+[data-theme='dark'] .cm-s-default span.cm-comment { color: #5c6773; font-style:italic; }
+[data-theme='dark'] .cm-s-default span.cm-atom { color: #ae81ff; }
+[data-theme='dark'] .cm-s-default span.cm-number { color: #ffcc66; }
+
+[data-theme='dark'] .cm-s-default span.cm-comment.cm-attribute { color: #ffd580; }
+[data-theme='dark'] .cm-s-default span.cm-comment.cm-def { color: #d4bfff; }
+[data-theme='dark'] .cm-s-default span.cm-comment.cm-tag { color: #5ccfe6; }
+[data-theme='dark'] .cm-s-default span.cm-comment.cm-type { color: #5998a6; }
+
+[data-theme='dark'] .cm-s-default span.cm-property { color: #f29e74; }
+[data-theme='dark'] .cm-s-default span.cm-attribute { color: #ffd580; }  
+[data-theme='dark'] .cm-s-default span.cm-keyword { color: #ffa759; } 
+[data-theme='dark'] .cm-s-default span.cm-builtin { color: #ffcc66; }
+[data-theme='dark'] .cm-s-default span.cm-string { color: #bae67e; }
+
+[data-theme='dark'] .cm-s-default span.cm-variable { color: #cbccc6; }
+[data-theme='dark'] .cm-s-default span.cm-variable-2 { color: #f28779; }
+[data-theme='dark'] .cm-s-default span.cm-variable-3 { color: #5ccfe6; }
+[data-theme='dark'] .cm-s-default span.cm-type { color: #ffa759; }
+[data-theme='dark'] .cm-s-default span.cm-def { color: #ffd580; }
+[data-theme='dark'] .cm-s-default span.cm-bracket { color: rgba(92, 207, 230, 80); }
+[data-theme='dark'] .cm-s-default span.cm-tag { color: #5ccfe6; }
+[data-theme='dark'] .cm-s-default span.cm-header { color: #bae67e; }
+[data-theme='dark'] .cm-s-default span.cm-link { color: #5ccfe6; }
+[data-theme='dark'] .cm-s-default span.cm-error { color: #ff3333; } 
+
+[data-theme='dark'] .cm-s-default .CodeMirror-activeline-background { background: #191e2a; }
+[data-theme='dark'] .cm-s-default .CodeMirror-matchingbracket { text-decoration: underline; color: white !important; }
