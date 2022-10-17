@@ -18,7 +18,7 @@ All the Demo's on the documentation pages contain a "CSS" tab which adds the CSS
 
 ## Examples
 
-### Styling Polygon Holes
+### Styling using `<map-span>`
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
@@ -36,6 +36,7 @@ All the Demo's on the documentation pages contain a "CSS" tab which adds the CSS
       </map-geometry>
       <map-properties><h2>This is a Polygon</h2></map-properties>
     </map-feature>
+    <map-style>.hole {stroke: #73A9AD;stroke-width: 4px;fill: none;fill-opacity: 1;}</map-style>
   </layer->
 </mapml-viewer>
 ```
