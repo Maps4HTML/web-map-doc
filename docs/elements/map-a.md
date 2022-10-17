@@ -30,6 +30,12 @@ wrapped in a `<map-a>` element, it creates a blue outline that is 1 pixel wide a
 
 ---
 
+### `inplace`
+  - The `inplace` attribute is a boolean attribute - `<map-a inplace href="..."><map-a>`
+  - When present, the default view-changing behavior is overridden and the map view does not change.
+
+---
+
 ## Target Behavior for `text/mapml`
 
 | Target Value 	| Behavior                                              	|
