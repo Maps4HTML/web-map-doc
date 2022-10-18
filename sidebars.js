@@ -12,6 +12,7 @@ module.exports = {
       'elements/extent',
       'elements/input',
       'elements/datalist',
+      'elements/select',
       'elements/link',
       'elements/meta',
       'elements/feature',

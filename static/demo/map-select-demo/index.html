@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo</title>
+    <script type="module" src="../../dist/mapml-viewer.js"></script>
+    <link rel="stylesheet" href="../embeded-demo-style.css"/>
+    
+    <link rel="stylesheet" href="../codemirror-5.64.0/lib/codemirror.css">
+    <script src="../codemirror-5.64.0/lib/codemirror.js"></script>
+    <script src="../codemirror-5.64.0/mode/xml/xml.js"></script>
+    <script src="../codemirror-5.64.0/mode/css/css.js"></script>
+    <script src="../codemirror-5.64.0/mode/javascript/javascript.js"></script>
+    <script src="../codemirror-5.64.0/addon/edit/closetag.js"></script>
+    
+</head>
+<body>
+    <div style="text-align: center;">
+        <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
+        <h2>MapML Demo: &lt;map-select&gt;</h2>
+        <button class="run" onclick="plot()" aria-label="run code"><span aria-hidden="true">▶</span></button>
+    </div>
+
+    <div class="tab">
+        <button id="default" class="tablinks" onclick="switchTab(event, 'HTML')">HTML</button>
+        <button class="tablinks" onclick="switchTab(event, 'CSS')">CSS</button>
+    </div>
+
+    <div class="tabcontent" id="HTML">
+        <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
+        <textarea rows="10" style="width:100%" id="htmlEditor">
+<mapml-viewer projection="CBMTILE" zoom="2" lat="65" lon="-90" controls="">
+  <layer- label="CBMT" src="../data/cbmtile-cbmt.mapml" checked="" hidden=""></layer->
+  <layer- label="Permanent snow and ice (prob. 94% or more)" checked="">
+    <map-link href="https://datacube.services.geo.ca/ows/msi?SERVICE=WMS&amp;REQUEST=GetCapabilities&amp;VERSION=1.3.0" rel="license" title="Open Government License"/>
+    <map-link rel="legend" href="https://datacube.services.geo.ca/assets/legend/legend_msi_binary.png" sizes="150x33" height="33" width="150" title="legend" type="image/png" />
+    <map-extent units="CBMTILE">
+      <map-input name="z" type="zoom" value="25" min="4" max="25"/>
+      <map-input name="xmin" type="location" rel="map" position="top-left" axis="easting" units="pcrs" min="-6105785.728719063" max="6174630.753072981"/>
+      <map-input name="ymin" type="location" rel="map" position="bottom-left" axis="northing" units="pcrs" min="-1692155.9568245453" max="4482681.2054050295"/>
+      <map-input name="xmax" type="location" rel="map" position="top-right" axis="easting" units="pcrs" min="-6105785.728719063" max="6174630.753072981"/>
+      <map-input name="ymax" type="location" rel="map" position="top-left" axis="northing" units="pcrs" min="-1692155.9568245453" max="4482681.2054050295"/>
+      <map-input name="w" type="width" min="0" max="10000"/>
+      <map-input name="h" type="height" min="0" max="10000"/>
+      <map-select id="timeID" name="time">
+        <map-option>2000-08-15T00:00:00Z</map-option>
+        <map-option>2001-08-15T00:00:00Z</map-option>
+        <map-option>2002-08-15T00:00:00Z</map-option>
+        <map-option>2003-08-15T00:00:00Z</map-option>
+        <map-option>2004-08-15T00:00:00Z</map-option>
+        <map-option>2005-08-15T00:00:00Z</map-option>
+        <map-option>2006-08-15T00:00:00Z</map-option>
+        <map-option>2007-08-15T00:00:00Z</map-option>
+        <map-option>2008-08-15T00:00:00Z</map-option>
+        <map-option>2009-08-15T00:00:00Z</map-option>
+        <map-option>2010-08-15T00:00:00Z</map-option>
+        <map-option>2011-08-15T00:00:00Z</map-option>
+        <map-option>2012-08-15T00:00:00Z</map-option>
+        <map-option>2013-08-15T00:00:00Z</map-option>
+        <map-option>2014-08-15T00:00:00Z</map-option>
+        <map-option>2015-08-15T00:00:00Z</map-option>
+        <map-option>2016-08-15T00:00:00Z</map-option>
+        <map-option>2017-08-15T00:00:00Z</map-option>
+        <map-option>2018-08-15T00:00:00Z</map-option>
+        <map-option>2019-08-15T00:00:00Z</map-option>
+        <map-option>2020-08-15T00:00:00Z</map-option>        
+      </map-select>
+      <map-link tref="https://datacube.services.geo.ca/ows/msi?SERVICE=WMS&amp;REQUEST=GetMap&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;STYLES=msi-binary&amp;VERSION=1.3.0&amp;LAYERS=msi-94-or-more&amp;WIDTH={w}&amp;HEIGHT={h}&amp;CRS=EPSG:3978&amp;BBOX={xmin},{ymin},{xmax},{ymax}&amp;TIME={time}" rel="image"/>
+      <map-link tref="legend_query_msi-94-plus.mapml?BBOX={xmin},{ymin},{xmax},{ymax}&amp;TIME={time}" rel="query"/>
+    </map-extent>
+  </layer->
+</mapml-viewer></textarea>
+    </div>
+    <div class="tabcontent" id="CSS">
+        <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
+        <textarea rows="10" style="width:100%" id="cssEditor">
+</textarea>
+    </div>
+
+    <div id="output"></div>
+
+    <script src="../embeded-demo.js"></script>
+</body>
+</html>
