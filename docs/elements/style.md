@@ -52,5 +52,26 @@ All the Demo's on the documentation pages contain a "CSS" tab which adds the CSS
 
 ---
 
+## Requirements
+
+[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+<p><b><span class="requirement">requirement</span>
+<span class="enhancement">enhancement</span>
+<span class="impractical">impractical</span>
+<span class="undecided">undecided</span>
+<span class="discussion">under discussion</span></b></p>
+
+|  | Spec | Viewer | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Vector features and overlays (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors) |  |  |  |
+| <div class="undecided">Draw polygons or polylines as stylable, interactive vector graphics (separate from the image tiles) (5.2.2)</div> | full | full |  |
+| [**Custom styling (5.5)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-custom-styling) |  |  |  |
+| <div class="undecided">Apply custom styling to map markers and vector features (5.5.1)</div> | full | full |  |
+| [**Creating maps and map components (6.1)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#client-apis-creation) |  |  |  |
+|            <div class="undecided"> Specify the style of a map (6.1.9)</div>        | full | full |  |
+
+---
+
 > - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/style.md)
 > - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
