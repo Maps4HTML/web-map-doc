@@ -14,12 +14,12 @@
     <script src="../codemirror-5.64.0/mode/css/css.js"></script>
     <script src="../codemirror-5.64.0/mode/javascript/javascript.js"></script>
     <script src="../codemirror-5.64.0/addon/edit/closetag.js"></script>
-    
+
 </head>
 <body>
     <div style="text-align: center;">
         <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
-        <h2>MapML Demo: &lt;map-extent&gt;</h2>
+        <h2>MapML Demo: &lt;map-style&gt;</h2>
         <button class="run" onclick="plot()" aria-label="run code"><span aria-hidden="true">▶</span></button>
     </div>
 
@@ -31,21 +31,33 @@
     <div class="tabcontent" id="HTML">
         <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
         <textarea rows="10" style="width:100%" id="htmlEditor">
-<mapml-viewer projection="OSMTILE" lat="10" lon="0" zoom="1">
-  <layer- label="OpenStreetMap" checked>
-    <map-extent units="OSMTILE">
-      <map-input name="z" type="zoom" value="18" min="0" max="18"></map-input>
-      <map-input name="x" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
-      <map-input name="y" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
-      <map-link rel="tile" tref="https://tile.openstreetmap.org/{z}/{x}/{y}.png"></map-link>
-    </map-extent>
+<mapml-viewer projection="OSMTILE" zoom="15" lon="-75.7" lat="45.42" controls="">
+  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
+  <layer- label="Points" checked>
+    <map-meta name="projection" content="OSMTILE"></map-meta>
+    <map-feature>
+      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
+      <map-geometry cs="gcrs">
+        <map-geometrycollection>
+          <map-point class="class1">
+            <map-coordinates>-75.6978285 45.4202251</map-coordinates>
+          </map-point>
+          <map-point class="class2">
+            <map-coordinates>-75.7002854 45.4199465</map-coordinates>
+          </map-point>
+          <map-point class="class3">
+            <map-coordinates>-75.6984723 45.4179207</map-coordinates>
+          </map-point>
+        </map-geometrycollection>
+      </map-geometry>
+    </map-feature>
+    <map-style>.class1{stroke: #73A9AD;stroke-width: 4px;fill: none;fill-opacity: 1;} .class2{stroke: #000000;stroke-width: 2px;fill: #6b6a6a;fill-opacity: 1;} .class3{stroke: #5392bd;fill: #5392bd;fill-opacity: 0.7;}</map-style>
   </layer->
 </mapml-viewer></textarea>
     </div>
     <div class="tabcontent" id="CSS">
         <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
-        <textarea rows="10" style="width:100%" id="cssEditor">
-</textarea>
+        <textarea rows="10" style="width:100%" id="cssEditor"></textarea>
     </div>
 
     <div id="output"></div>

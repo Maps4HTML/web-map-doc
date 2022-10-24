@@ -8,7 +8,7 @@ slug: /api/custom-projections
 
 MapML defines a few built-in tiled CRS projections, including Web Mercator (OSMTILE), pseudo-plate carrée (WGS84), and  Canada's base map tile grid (CBMTILE). 
 
-The `<mapml-viewer>` and `<map is="web-map">` custom elements provide the custom projections API, which gives you the ability to create custom projections and use them in the `<mapml-viewer>` or `<map is="web-map">` elements, defined using extended JSON-based "proj4" syntax, supported by the proj4js library.
+The `<mapml-viewer>` custom element provides the custom projections API, which gives you the ability to create custom projections and use them in the `<mapml-viewer>` element, defined using extended JSON-based "proj4" syntax, supported by the proj4js library.
 
 For example:
 
@@ -53,9 +53,9 @@ For example:
 
 ### Details
 
-We won't discuss the actual `<mapml-viewer>` or `<map is="web-map">` elements here, except to say that the map `projection` attribute should have the exact same value of the `projection` member of the JSON object you pass to the custom projections API's `defineCustomProjection` method, and every `<layer->` element in the map must declare and be encoded in that coordinate system, in order to display correctly.
+We won't discuss the actual `<mapml-viewer>` element here, except to say that the map `projection` attribute should have the exact same value of the `projection` member of the JSON object you pass to the custom projections API's `defineCustomProjection` method, and every `<layer->` element in the map must declare and be encoded in that coordinate system, in order to display correctly.
 
-The custom projections API is provided by the `<mapml-viewer>` or `<map is="web-map">` element.  In a browser implementation, the API might be defined on the window object, but because of the ES6 modules used by custom elements, it is convenient to locate it on the mapping element which uses it.
+The custom projections API is provided by the `<mapml-viewer>` element.  In a browser implementation, the API might be defined on the window object, but because of the ES6 modules used by custom elements, it is convenient to locate it on the mapping element which uses it.
 
 To successfully call the `defineCustomProjection` method, you need to encode the projection method and parameters as members of a JSON string.  The process of doing this is not always simple, but is helped by resources such as https://spatialreference.org, where you can obtain the proj4 version of virtually any CRS definition. 
 

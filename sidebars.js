@@ -12,13 +12,15 @@ module.exports = {
       'elements/extent',
       'elements/input',
       'elements/datalist',
+      'elements/select',
       'elements/link',
       'elements/meta',
       'elements/feature',
       'elements/geometry',
       'elements/properties',
       'elements/span',
-      'elements/map-a'
+      'elements/map-a',
+      'elements/style'
   ],
   API: [
     'api/mapml-viewer-api',

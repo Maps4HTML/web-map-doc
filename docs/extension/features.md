@@ -45,5 +45,5 @@ When turned on through the extension popup (it is on by default as shown above, 
 
 ---
 
-> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/extent.md)
+> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/extension/features.md)
 > - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
