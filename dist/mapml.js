@@ -3923,6 +3923,10 @@
           callback:this._copyMapML,
         },
         {
+          text: M.options.locale.cmPasteLayer + " (<kbd>P</kbd>)",
+          callback:this._pasteLayer,
+        },
+        {
           text: M.options.locale.cmViewSource + " (<kbd>V</kbd>)",
           callback:this._viewSource,
         },
@@ -3936,6 +3940,10 @@
         {
           text: M.options.locale.lmCopyExtent + " (<kbd>C</kbd>)",
           callback:this._copyLayerExtent
+        },
+        {
+          text: M.options.locale.lmCopyLayer + " (<kbd>L</kbd>)",
+          callback:this._copyLayer
         },
       ];
       this._mapMenuVisible = false;
@@ -3961,6 +3969,7 @@
       this._items[6].el = this._createItem(this._container, this._items[6]);
       this._items[7].el = this._createItem(this._container, this._items[7]);
       this._items[8].el = this._createItem(this._container, this._items[8]);
+      this._items[9].el = this._createItem(this._container, this._items[9]);
 
       this._layerMenu = L.DomUtil.create("div", "mapml-contextmenu mapml-layer-menu", map._container);
       this._layerMenu.setAttribute('hidden', '');
@@ -4030,6 +4039,12 @@
       context._layerClicked.layer._layerEl.focus();
     },
 
+    _copyLayer: function (e) {
+      let context = e instanceof KeyboardEvent ? this._map.contextMenu : this.contextMenu,
+        layerElem = context._layerClicked.layer._layerEl;
+      context._copyData(layerElem.outerHTML);
+    },
+
     _goForward: function(e){
       let mapEl = e instanceof KeyboardEvent?this._map.options.mapEl:this.options.mapEl;
       mapEl.forward();
@@ -4054,6 +4069,22 @@
       let context = e instanceof KeyboardEvent ? this._map.contextMenu : this.contextMenu,
         mapEl = e instanceof KeyboardEvent?this._map.options.mapEl:this.options.mapEl;
       context._copyData(mapEl.outerHTML.replace(/<div class="mapml-web-map">.*?<\/div>|<style>\[is="web-map"].*?<\/style>|<style>mapml-viewer.*?<\/style>/gm, ""));
+    },
+
+    // Add support for pasting GeoJSON in the future
+    _pasteLayer: function(e){
+      let context = e instanceof KeyboardEvent ? this._map.contextMenu : this.contextMenu,
+        mapEl = e instanceof KeyboardEvent?this._map.options.mapEl:this.options.mapEl;
+      navigator.clipboard
+        .readText()
+        .then(
+            (layer) => {
+              layer = layer.replace(/(<!--.*?-->)|(<!--[\S\s]+?-->)|(<!--[\S\s]*?$)/g, '').trim();
+              if ((layer.slice(0,7) === "<layer-") && (layer.slice(-9) === "</layer->")) {
+                mapEl.insertAdjacentHTML("beforeend", layer);
+              }
+          }
+        );
     },
 
     _viewSource: function(e){
@@ -4388,7 +4419,7 @@
         } else {
           this._layerMenuTabs += 1;
         }
-        if(this._layerMenuTabs === 0 || this._layerMenuTabs === 3 || key === 27){
+        if(this._layerMenuTabs === 0 || this._layerMenuTabs === 4 || key === 27){
           L.DomEvent.stop(e);
           this._focusOnLayerControl();
         } 
@@ -4421,6 +4452,13 @@
           break;
         case 70: //F KEY
           this._goForward(e);
+          break;
+        case 76: //L KEY
+          if(this._layerClicked)
+            this._copyLayer(e);
+          break;
+        case 80: //P KEY
+          this._pasteLayer(e);
           break;
         case 82: //R KEY
           this._reload(e);
@@ -6300,10 +6338,12 @@
       cmCopyCoords: "Copy Coordinates",
       cmToggleDebug: "Toggle Debug Mode",
       cmCopyMapML: "Copy MapML",
+      cmPasteLayer: "Paste",
       cmViewSource: "View Map Source",
       cmCopyAll: "All",
       lmZoomToLayer: "Zoom To Layer",
       lmCopyExtent: "Copy Extent",
+      lmCopyLayer: "Copy Layer",
       lcOpacity: "Opacity",
       btnZoomIn: "Zoom in",
       btnZoomOut: "Zoom out",
