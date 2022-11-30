@@ -1,6 +1,6 @@
 ---
 id: custom-rendering
-title: Custom Rendering API
+title: API de rendu personnalisé
 slug: /api/custom-rendering
 ---
 

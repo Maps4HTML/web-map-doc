@@ -1,6 +1,6 @@
 ---
 id: features
-title: Extension Features 
+title: Fonctionnalités de l'extension 
 slug: /extension/features
 ---
 

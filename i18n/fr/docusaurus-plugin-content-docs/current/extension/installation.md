@@ -1,6 +1,6 @@
 ---
 id: installation
-title: Extension Installation 
+title: Installation de l'extension 
 slug: /extension/installation
 ---
 

@@ -1,6 +1,6 @@
 ---
 id: custom-projections
-title: Custom Projections API
+title: API de projections personnalisées
 slug: /api/custom-projections
 ---
 
