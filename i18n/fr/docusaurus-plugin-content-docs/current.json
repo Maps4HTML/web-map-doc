@@ -1,0 +1,26 @@
+{
+  "version.label": {
+    "message": "Prochaine",
+    "description": "The label for version current"
+  },
+  "sidebar.sidebar.category.Getting Started": {
+    "message": "Pour commençer",
+    "description": "The label for category Getting Started in sidebar sidebar"
+  },
+  "sidebar.sidebar.category.Mapping Elements": {
+    "message": "Éléments de cartographie",
+    "description": "The label for category Mapping Elements in sidebar sidebar"
+  },
+  "sidebar.sidebar.category.API": {
+    "message": "API",
+    "description": "The label for category API in sidebar sidebar"
+  },
+  "sidebar.sidebar.category.Browser Extension": {
+    "message": "Extension du navigateur",
+    "description": "The label for category Browser Extension in sidebar sidebar"
+  },
+  "sidebar.sidebar.category.Resources": {
+    "message": "Ressources",
+    "description": "The label for category Resources in sidebar sidebar"
+  }
+}

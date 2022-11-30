@@ -5,30 +5,39 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
+import Translate from '@docusaurus/Translate';
+import {translate} from '@docusaurus/Translate';
 
 const features = [
   {
-    title: 'Minimum Code',
+    title: translate({"message":"Minimum Code","id":"mapml.HomePageContent.minCode.title"}),
     description: (
-      <>
-        <a href="https://maps4html.org/MapML/spec/"><abbr title="Map Markup Language">MapML</abbr></a> prioritizes minimum code needed to create elaborate maps. No Javascript required, everything can be done using HTML + custom elements.
-      </>
+        <>
+          <a href="https://maps4html.org/MapML/spec/"><abbr title="Map Markup Language">MapML</abbr></a>
+          <Translate id='mapml.HomePageContent.minCode.description'>
+            prioritizes minimum code needed to create elaborate maps. No Javascript required, everything can be done using HTML + custom elements.
+          </Translate>
+        </>
     ),
   },
   {
-    title: 'Accessible Maps',
+    title: translate({"message":"Accessible Maps","id":"mapml.HomePageContent.a11y.title"}),
     description: (
       <>
+        <Translate id='mapml.HomePageContent.a11y.description'>
         This suite of elements enables fast and easy use of functions in an accessible manner.
         Keyboard interaction and screen reader compatibility is constantly being improved.
+        </Translate>
       </>
     ),
   },
   {
-    title: 'Future Standard',
+    title: translate({"message":"Future Standard","id":"mapml.HomePageContent.Future.title"}),
     description: (
       <>
-        With the goal of one day being part of browsers natively, MapML provides the ability for all maps created using this custom suite to work once MapML is integrated with HTML.
+      <Translate id='mapml.HomePageContent.Future.description'>
+        With the goal of one day being part of browsers natively, MapML provides the ability for all maps created using this suite of custom elements to be easily adapted to the standard HTML syntax.
+      </Translate>
       </>
     ),
   },
@@ -44,6 +53,9 @@ function Feature({ title, description }) {
 }
 
 function Home() {
+  const mapUrl = 
+    translate({"message":"https://geogratis.gc.ca/mapml/en/cbmtile/cbmt/"
+      ,"id":"mapml.HomePageContent.mapUrl"})
   const mapiframe = `<script type="module" src="dist/mapml-viewer.js"></script>
   <style>
   html,
@@ -59,30 +71,34 @@ function Home() {
   }
   </style>
   <mapml-viewer projection="CBMTILE" zoom="5" lat="58" lon="-90" frameborder="0" controls>
-    <layer- label="CBMT" src="https://geogratis.gc.ca/mapml/en/cbmtile/cbmt/" checked></layer->
+    <layer- label="CBMT" src="${mapUrl}" checked></layer->
   </mapml-viewer>`;
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
+  const home = translate({"message":"Home","id":"mapml.HomePageContent.Home"});
+  const description = translate({"message":"Documentation for mapml-viewer and layer element suite","id":"mapml.HomePageContent.Description"});
   return (
     <Layout
-      title="Home"
-      description="Documentation for mapml-viewer and layer element suite">
+      title={home}
+      description={description}>
 
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <iframe tabIndex="-1" height="500px" width="100%" frameBorder="0" scrolling="no" title="MapML-viewer" srcDoc={mapiframe}></iframe>
         <div className="container">
 
-          <h1 className="hero__title">{siteConfig.title}</h1>
-          <p className="hero__subtitle">{siteConfig.tagline}</p>
+    <h1 className="hero__title"><Translate id="mapml.HomePageContent.Hero.title">{siteConfig.title}</Translate></h1>
+    <p className="hero__subtitle"><Translate id="mapml.HomePageContent.Hero.tagline">{siteConfig.tagline}</Translate></p>
           <div className={styles.buttons}>
-            <Link
-              className={clsx(
-                'button button--lg',
-                styles.getStarted,
-              )}
-              to={useBaseUrl('docs/')}>
-              Get Started
-            </Link>
+              <Link
+                className={clsx(
+                  'button button--lg',
+                  styles.getStarted,
+                )}
+                to={useBaseUrl('docs/')}>
+                <Translate id="mapml.HomePageContent.getStarted">
+                    Get Started
+                </Translate>            
+              </Link>
           </div>
         </div>
       </header>
@@ -99,17 +115,29 @@ function Home() {
           </section>
         )}
         <div className="container">
-          <h2>Capabilities</h2>
+          <h2><Translate id="mapml.HomePageContent.Capabilities.title">Capabilities</Translate></h2>
           <p>
-          A thorough breakdown of the capabilities compared to other web map solutions can be found in the <a href="https://maps4html.org/UCR-MapML-Matrix/mapml-ucrs-fulfillment-matrix.html">MapML UCR Fulfillment Matrix</a>.
+          
+            <Translate id="mapml.HomePageContent.Capabilities.text">A thorough breakdown of the capabilities compared to other web map solutions can be found in the </Translate>
+          <Link to="https://maps4html.org/UCR-MapML-Matrix/mapml-ucrs-fulfillment-matrix.html">
+          <Translate id="mapml.HomePageContent.Capabilities.MapMLUCR.linkText">MapML UCR Fulfillment Matrix</Translate>
+          </Link>.
           </p>
           
-          <h2>Getting Involved</h2>
+            <h2><Translate id="mapml.HomePageContent.GetInvolved.title">Getting Involved</Translate></h2>
           <p>
-          The custom element suite is an open source project. Anyone who wants to submit changes/fixes is welcomed to doing so through Pull Requests to our <a href="https://github.com/Maps4HTML/Web-Map-Custom-Element">Github Repository</a>.
+          <Translate id="mapml.HomePageContent.GetInvolved.PullRequests">
+            The custom element suite is an open source project. Anyone who wants to submit changes/fixes is welcomed to doing so through Pull Requests to our </Translate>
+          <Link to="https://github.com/Maps4HTML/Web-Map-Custom-Element">
+          <Translate id="mapml.HomePageContent.GetInvolved.GitHub.PullRequests.linkText"> Github Repository</Translate></Link>.
           </p>
           <p>
-          You can also contribute by reporting any bugs or issues while using the element suite in the form of one or more <a href="https://github.com/Maps4HTML/Web-Map-Custom-Element/issues">issues</a> on the same repository.
+          <Translate id="mapml.HomePageContent.GetInvolved.GitHub.Issues.1">
+          You can also contribute by reporting any bugs or issues while using the element suite in the form of one or more </Translate>
+          <Link to="https://github.com/Maps4HTML/Web-Map-Custom-Element/issues"> 
+            <Translate id="mapml.HomePageContent.GetInvolved.GitHub.Issues.linkText"> issues</Translate>
+          </Link> 
+          <Translate id="mapml.HomePageContent.GetInvolved.GitHub.Issues.2"> on the same repository</Translate>.
           </p>
         </div>
       </main>
