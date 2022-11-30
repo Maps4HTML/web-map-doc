@@ -32,6 +32,10 @@ module.exports = {
           label: 'GitHub',
           position: 'right',
         },
+        {
+          type: 'localeDropdown',
+          position: 'right',
+        },
       ],
     },
     footer: {
@@ -66,12 +70,12 @@ module.exports = {
               href: 'https://discourse.wicg.io/c/web-mapping',
             },
             {
-              label: 'Twitter',
-              href: 'https://twitter.com/maps4html',
+              label: 'Mastodon',
+              href: 'https://mapstodon.space/@maps4html',
             },
             {
               label: 'YouTube',
-              href: 'https://www.youtube.com/channel/UCKIv6IGwzxPF2HNhvq-VhKA',
+              href: 'https://www.youtube.com/@maps4html',
             },
           ],
         },
@@ -112,4 +116,8 @@ module.exports = {
       },
     ],
   ],
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'fr'],
+  }
 };
