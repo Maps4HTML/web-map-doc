@@ -1,6 +1,6 @@
 ---
 id: debug-mode
-title: Debug Mode
+title: Mode débogage
 slug: /resources/debug-mode
 ---
 

@@ -1,6 +1,6 @@
 ---
 id: about
-title: About Extension
+title: À propos de l'extension
 slug: /extension/about
 ---
 

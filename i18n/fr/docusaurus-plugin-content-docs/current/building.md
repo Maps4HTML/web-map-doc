@@ -1,6 +1,6 @@
 ---
 id: building
-title: Building from source
+title: Construire à partir de la source
 ---
 
 ## Build the project from source code
