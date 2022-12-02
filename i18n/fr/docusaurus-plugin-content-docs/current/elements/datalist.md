@@ -15,7 +15,7 @@ The `<map-datalist>` element is an extension of HTML `<datalist>`. It is a child
 </map-datalist>
 ```
 
-The `<map-datalist>` is used alongside the `shard` attribute of `<map-input>`. It can list a set of values that will be used in a round-robin fashion for template variable substitution. This is useful for [domain sharding](https://developer.mozilla.org/en-US/docs/Glossary/Domain_sharding) to increase parallelism of tile requests. Read more about it [here](http://localhost:3000/web-map-doc/docs/elements/input/#shard).
+The `<map-datalist>` is used alongside the `shard` attribute of `<map-input>`. It can list a set of values that will be used in a round-robin fashion for template variable substitution. This is useful for [domain sharding](https://developer.mozilla.org/en-US/docs/Glossary/Domain_sharding) to increase parallelism of tile requests. Read more about it [here](https://maps4html.org/web-map-doc/docs/elements/input/#shard).
 
 The `<map-datalist>` element contains one or more `<map-option>` elements.
 

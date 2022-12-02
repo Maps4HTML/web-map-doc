@@ -4,8 +4,7 @@ title: API de rendu personnalisé
 slug: /api/custom-rendering
 ---
 
-The Custom Rendering API allows developers to circumvent MapML's rendering and draw anything within
-HTML's domain onto the map.
+The Custom Rendering API allows developers to circumvent MapML's rendering and draw anything within HTML's domain onto the map.
 
 ## Custom Tiles
 
