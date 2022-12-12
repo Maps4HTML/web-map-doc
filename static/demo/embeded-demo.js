@@ -3,8 +3,8 @@ var htmlEditor = CodeMirror.fromTextArea(document.getElementById('htmlEditor'), 
     mode: "xml",
     //lineNumbers: true,
     screenReaderLabel: "MapML Demo Code",
-    tabSize: 2,
-    autoCloseTags: true
+    autoCloseTags: true,
+    extraKeys: {Tab: false, "Shift-Tab": false}
 });
 
 // Styling CSS Text Editor
@@ -12,8 +12,8 @@ var cssEditor = CodeMirror.fromTextArea(document.getElementById('cssEditor'), {
     mode: "css",
     //lineNumbers: true,
     screenReaderLabel: "MapML Demo Code",
-    tabSize: 2,
-    autoCloseTags: true
+    autoCloseTags: true,
+    extraKeys: {Tab: false, "Shift-Tab": false}
 });
 
 // Plot the new mapml map when run button is clicked
