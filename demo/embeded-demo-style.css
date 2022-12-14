@@ -57,6 +57,9 @@ h2 {
 .tab button.active {
     background-color: #ccc;
 }
+.tab button:focus {
+    outline: 2px solid black;
+}
 /* dark theme colors */
 /* Buttons + Headings */
 [data-theme='dark'], [data-theme='dark'] body{ background-color: #1e1e1e; }
@@ -64,6 +67,7 @@ h2 {
 [data-theme='dark'] button { background-color: #5992e8; /* Blue */ }
 [data-theme='dark'] .tab button:hover { background-color: #9d9d9d; }
 [data-theme='dark'] .tab button.active { background-color: #9d9d9d; }
+[data-theme='dark'] .tab button:focus { outline: 2px solid white; }
 [data-theme='dark'] { color-scheme: dark; }
 [data-theme='dark'] .CodeMirror-scrollbar-filler { background-color: #686868; }
 
