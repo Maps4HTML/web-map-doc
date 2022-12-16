@@ -25,4 +25,4 @@ Debug mode can be enabled through the map context menu (right-click or Shift-F10
 
 ### Map's API
 
-Toggling debug mode can also be done through the viewer's API, see the [`toggleDebug()` method](../api/mapml-viewer-api.md#toggledebug) for more.
+Toggling debug mode can also be done through the viewer's API, see the [`toggleDebug()` method](../api/mapml-viewer-api.mdx#toggledebug) for more.
