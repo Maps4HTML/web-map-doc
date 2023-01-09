@@ -104,7 +104,7 @@ Sets the [extent](../meta/#attributes) of the layer.
       <map-feature zoom="2" class="refDiff">
         <map-properties>
           <h1>Test</h1>
-          <a href="http://example.org/">test</a>
+          <a href="https://example.org/">test</a>
         </map-properties>
         <map-geometry cs="tilematrix">
           <map-polygon>
@@ -197,14 +197,14 @@ Sets the [extent](../meta/#attributes) of the layer.
 ### 35059.mapml:
 
 ```html
-<mapml- lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<mapml- lang="en" xmlns="https://www.w3.org/1999/xhtml">
   <map-head>
     <map-title>The Man With Two Hats</map-title>
     <map-meta http-equiv="Content-Type" content="text/mapml"></map-meta>
     <map-meta charset="utf-8"></map-meta>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-meta name="cs" content="gcrs"></map-meta>
-    <map-link rel="license" href="http://open.canada.ca/en/open-government-licence-canada" title="Open Government License"/>
+    <map-link rel="license" href="https://open.canada.ca/en/open-government-licence-canada" title="Open Government License"/>
   </map-head>
   <map-body>
     <map-feature id="mem35059">

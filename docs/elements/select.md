@@ -49,7 +49,7 @@ This element contains the options for the `<map-select>` element. A `<map-select
       <map-input name="x" type="location" units="tilematrix" axis="column" min="0"  max="262144" ></map-input>
       <map-input name="y" type="location" units="tilematrix" axis="row" min="0"  max="262144" ></map-input>
       <map-link rel="license" href="https://www.openstreetmap.org/copyright" title="OpenStreetMap"/>
-      <map-link rel="license" href="http://www.openstreetmap.bzh/" title="Breton OpenStreetMap Team"/>
+      <map-link rel="license" href="https://www.openstreetmap.bzh/" title="Breton OpenStreetMap Team"/>
       
       <map-select id="urlOptions" name="source">
         <map-option value="tile.openstreetmap.bzh/br">OpenStreetMap_BZH</map-option>

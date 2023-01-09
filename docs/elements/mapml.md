@@ -19,7 +19,7 @@ must contain one `<map-head>` element, followed by one `<map-body>` element.
 <summary>Click to view the contents of "../data/osm.mapml" from the demo above</summary>
 
 ``` html
-<mapml- xmlns="http://www.w3.org/1999/xhtml">
+<mapml- xmlns="https://www.w3.org/1999/xhtml">
   <map-head>
     <map-title>OpenStreetMap</map-title>
     <meta http-equiv="Content-Type" content="text/mapml;projection=OSMTILE"/>
@@ -54,7 +54,7 @@ The `lang` attribute defines the primary language of the MapML document. as defi
 
 ### `xmlns`
 
-The `xmlns` attribute is **required**, and must have the value `"http://www.w3.org/1999/xhtml"`.
+The `xmlns` attribute is **required**, and must have the value `"https://www.w3.org/1999/xhtml"`.
 
 ---
 
