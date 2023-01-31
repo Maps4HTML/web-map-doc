@@ -28,6 +28,9 @@ module.exports = {
     'api/custom-projections',
     'api/custom-rendering'
   ],
+  'Tutorials': [
+    'tutorials/getting-started'
+  ],
   'Browser Extension': [
     'extension/about',
     'extension/installation',
