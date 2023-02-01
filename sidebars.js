@@ -29,7 +29,15 @@ module.exports = {
     'api/custom-rendering'
   ],
   'Tutorials': [
-    'tutorials/getting-started'
+    {
+      'Getting Started': [
+        'tutorials/getting-started',
+        'tutorials/modifying-map'
+      ],
+      'Advanced': [
+        'tutorials/mapml-files',
+      ],
+    }
   ],
   'Browser Extension': [
     'extension/about',

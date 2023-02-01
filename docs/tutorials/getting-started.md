@@ -1,6 +1,6 @@
 ---
 id: getting-started
-title: Maps for HTML - Tutorial
+title: Maps for HTML
 slug: /tutorials/getting-started
 ---
 
@@ -64,7 +64,7 @@ You have learned how to include resources like images in your web page, and now 
     <head>
        <title>My First Web Map</title>
 	   // highlight-next-line
-       <script type="module" src="https://geogratis.gc.ca/mapml/client/web-map/mapml-viewer.js" crossorigin></script>
+       <script type="module" src="https://cdn.jsdelivr.net/npm/@maps4html/web-map-custom-element/dist/mapml-viewer.js" crossorigin></script>
     </head>
     <body>
       <p>Web pages are easy-peasy</p>
@@ -82,12 +82,12 @@ The next step in our lesson is to remove the image and replace it with a map, us
 <html>
       <head>
           <title>My First Web Map</title>
-          <script type="module" src="https://geogratis.gc.ca/mapml/client/web-map/mapml-viewer.js" crossorigin></script>
+          <script type="module" src="https://cdn.jsdelivr.net/npm/@maps4html/web-map-custom-element/dist/mapml-viewer.js" crossorigin></script>
       </head>
       <body>
          <p>Web <s>pages</s> maps are easy-peasy</p>
 		 // highlight-start
-         <mapml-viewer zoom="2" lat="67.6" lon="-100.9" width="400" height="300" controls>
+         <mapml-viewer projection="OSMTILE" zoom="2" lat="67.6" lon="-100.9" width="400" height="300" controls>
              <layer- src="https://geogratis.gc.ca/mapml/en/osmtile/osm/" label="Open Street Map" checked ></layer->
          </mapml-viewer>
 		 // highlight-end
@@ -98,6 +98,12 @@ The next step in our lesson is to remove the image and replace it with a map, us
 If you save, and then press the 'Refresh' button, you should see a simple map that looks something like this:
 
 ![Web maps are easy peasy](../assets/img/web_maps_are_easy_peasy_en.png)
+
+:::tip
+
+View the final page [here](https://maps4html.org/web-map-doc/demo/Tutorial/Getting%20Started/).
+
+:::
 
 You will notice that if you use the mouse or keyboard on the map that you can zoom and pan, as well as turn the layer off and on.
 
