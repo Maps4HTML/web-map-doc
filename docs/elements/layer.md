@@ -82,6 +82,7 @@ The following example sets the initial `opacity` for a `<layer->`.
       <layer- opacity = "0.5" label="CBMT" src="https://geogratis.gc.ca/mapml/en/cbmtile/cbmt/" checked></layer->
 </mapml-viewer>
 ```
+
 ---
 
 ## Specifications
