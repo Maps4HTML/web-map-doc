@@ -63,6 +63,26 @@ and the fetched `<map-title>` element is used.
 
 ---
 
+### `opacity`
+
+The `opacity` attribute is used to set the opacity of the `<layer->` element. Just
+like the opacity slider on the map, adding this attribute can change the initial
+opacity of any layer.
+
+---
+
+## Examples
+
+### Layer Opacity
+
+The following example shows `opacity` attribute in a `<layer->`. 
+
+```html
+<mapml-viewer projection="CBMTILE" zoom="2" lat="45" lon="-90" controls>
+      <layer- opacity = "0.5" label="CBMT" src="https://geogratis.gc.ca/mapml/en/cbmtile/cbmt/" checked></layer->
+</mapml-viewer>
+```
+
 ## Specifications
 
 | Specification                                                |
