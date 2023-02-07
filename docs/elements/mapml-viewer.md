@@ -86,6 +86,20 @@ The default projection is `OSMTILE`.
 
 ---
 
+## Child Elements
+
+### `<layer->`
+
+This element contains the contents of `<mapml-viewer>` associated to a given map. Details on the layer elements and it's syntax can be found [here](/docs/layers/layer).
+
+---
+
+### `<map-caption>`
+
+This element contains an invisible caption to `<mapml-viewer>`, which is adapted by screen readers when the map is in focus.   
+
+---
+
 ## Specifications
 
 | Specification                                                |
