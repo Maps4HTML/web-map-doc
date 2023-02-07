@@ -86,6 +86,18 @@ The default projection is `OSMTILE`.
 
 ---
 
+### `height`
+
+`height` - the intrinsic height of the map, in pixels. Must be an integer without a unit.
+
+---
+
+### `width`
+
+`width` - the intrinsic width of the map, in pixels. Must be an integer without a unit.
+
+---
+
 ## Specifications
 
 | Specification                                                |
