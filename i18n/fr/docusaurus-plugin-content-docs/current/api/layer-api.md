@@ -50,6 +50,7 @@ let isHidden = layer.hidden;
 
 ### disabled
 HTMLLayerElement.disabled donne un accès en lecture seule à l’état désactivé de la couche. Une couche est désactivée si son contenu n’est pas rendu, soit parce qu’il sort complètement de l’étendue de la carte affichée ou parce qu’une erreur est associée au traitement de la couche, par exemple lorsque celle-ci se trouve dans un projection incompatible avec celle de la carte. Lorsqu’une couche est désactivée, l’utilisateur ne peut interagir avec elle au niveau du contrôle de la couche, et elle n’est pas visible dans la fenêtre d’affichage de la carte. Si la couche devient activée, par exemple à la suite d’une manipulation de la carte, l’utilisateur peut interagir avec elle au niveau du contrôle de la couche, et elle est visible dans la fenêtre d’affichage de la carte.
+
 ---
 
 HTMLLayerElement.label donne un accès en lecture et en écriture à l’étiquette utilisée au niveau du contrôle de la couche.
