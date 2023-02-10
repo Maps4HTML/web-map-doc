@@ -109,8 +109,7 @@ let url = layer.src;
 ```
 ---
 ### opacity
-HTMLLayerElement.opacity read/write access to the opacity % value, reflected in
-the layer control opacity input slider control.
+HTMLLayerElement.opacity provides read/write access to the `opacity` value, and is reflected in the layer control for each layer, under "Opacity".
 
 To set/update the `<layer->`'s opacity:
 

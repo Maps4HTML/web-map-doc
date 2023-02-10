@@ -90,13 +90,13 @@ let url = layer.src;
 ```
 ---
 ### opacity
-HTMLLayerElement.opacity donne accès en lecture ou en écriture au pourcentage (%) d’opacité, qui correspond à la position du curseur dans le contrôle de la couche.
+HTMLLayerElement.opacity donne accès en lecture ou en écriture à la valeur d’`opacity`, qui correspond dans le contrôle de couche pour chaque couche, sous "Opacité".
 
 Pour définir ou mettre à jour l’opacité de `<layer->` :
 
 ```js
 let layer = document.querySelector('layer-');
-layer.opacity = 0.5; // les valeurs valides vont de 0 à 1
+layer.opacity = 0.5; // les valeurs valides vont de 0.0 à 1.0
 ```
 
 Pour obtenir la valeur de l’opacité de `<layer->` :
