@@ -3,101 +3,101 @@ id: geometry
 title: "<map-geometry>"
 slug: /elements/geometry/
 ---
-A `<map-geometry>` element is a child of `<map-feature>` and is used to describe the geometry of the feature.
+Un élément `<map-geometry>` est l’élément-enfant de `<map-feature>` et sert à décrire la géométrie de la caractéristique.
 
-A `<map-geometry>` element has one child element, which can be a `<map-point>`, `<map-linestring>`, `<map-polygon>`, `<map-multipoint>`, `<map-multilinestring>`, `<map-multipolygon>`, or `<map-geometrycollection>`.
+Un élément `<map-geometry>` a un élément-enfant qui peut être `<map-point>`, `<map-linestring>`, `<map-polygon>`, `<map-multipoint>`, `<map-multilinestring>`, `<map-multipolygon>` ou `<map-geometrycollection>`.
 
 <iframe src="../../../demo/map-geometry-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
-## Attributes
+## Attributs 
 
 ### `cs`
 
-Defines the Coordinate System of the geometry. When no `cs` is provided, the coordinate system of descendant `<map-coordinates>` elements is determined by a fallback to any in-scope `<map-meta name="cs" content="...">`.  If no fallback coordinate system is identified by a `<map-meta>` element, the default value of `pcrs` (projected coordinates) is used.
+Définit le système de coordonnées de la géométrie. Si aucun `cs` n’est fourni, le système de coordonnées des éléments descendants `<map-coordinates>` est déterminé par un retour vers n’importe `<map-meta name="cs" content="...">` dans la portée. Si aucun système de coordonnées n’est identifié par un élément `<map-meta>`, la valeur par défaut de `pcrs` (coordonnées projetées) est utilisée.
 
-
+Système de référence de coordonnées
 | CRS | Description |
 |------|-------------|
-| tcrs | For each zoom level (i.e. at a pre-defined scale denominator value), locations are expressed in terms of scaled pixels, with the origin of pixel space at the upper left corner.  The pixel coordinates of a location at a single zoom level are independent of the pixel coordinates of a location any other zoom level.  In other words, you need to know the zoom level of a tcrs coordinate in order to locate it on a map or otherwise process it. |
-| tilematrix | Each zoom level has an array of tiles, called a tilematrix.  The individual tiles constitute the coordinates in this CRS, and the axes are know as `row` and `column`.  The tiles are defined as squares of 256 pixels in the associated tcrs of the particular zoom level. |
-| pcrs | Projected CRS (pcrs) are defined by a mathematical relationship with an underlying gcrs, using a technique called "projection". pcrs coordinates are scale- and zoom level-independent, and are designed to represent geographic coordinates on a planar surface, such as a device screen. The measurement units of pcrs coordinates is _usually_ meters (a notable exception being pcrs coordinates in the `WGS84` projection). |
-| gcrs | Geographic coordinates are referenced to various ellipsoids, and are not necessarily comparable across projections.  A common ellipsoid today is WGS 84, which is defined and used by the global positioning satellite (GPS) constellation. |
-| map | The map CRS is dynamic, in the sense that it has its origin at the upper left of the user's viewport, with scaled pixels as units.  This is used to identify image coordinates for use, typically by WMS and similar services which use a virtual image to enable query of map feature property information, without necessarily transferring the features over the network. |
-| tile | Each tile in any zoom level has an implicit scaled-pixel coordinate system ranging from 0 to 255 in both horizontal and vertical directions. These coordinates are used by WMTS and similar services to identify a pixel for query of feature property values, without transferring the feature geometry over the network. |
+| tcrs | Pour chaque niveau de zoom (c.-à-d. à une valeur prédéfinie du dénominateur d’échelle), les emplacements sont exprimés en termes de pixels mis à l’échelle, dont l’origine de l’espace se situe dans le coin supérieur gauche. Les coordonnées des pixels d’un emplacement affiché à un niveau de zoom quelconque sont indépendantes de celles d’un emplacement affiché à tout autre niveau de zoom. Autrement dit, vous devez connaître le niveau de zoom d’une coordonnée du système de références des coordonnées en pavés tcrs pour la localiser sur la carte ou la traiter d’une façon ou d’une autre. |
+| tilematrix | Chaque niveau de zoom a un tableau de pavés appelé tilematrix. Chaque pavé constitue les coordonnées dans ce crs (système de référence des coordonnées), et les axes sont appelés `row` et `column`. Les pavés sont déinis comme étant des carrés de 256 pixels d’arête dans le tcrs connexe, au niveau de zoom donné. |
+| pcrs | Le système de référence des coordonnées projetées (pcrs) est défini par une relation mathématique avec un système de référence des données géodésique gcrs sous-jacent au moyen d’une technique dite « de projection ». Les coordonnées du pcrs sont indépendantes de l’échelle et du niveau de zoom, et sont conçues pour représenter des coordonnées géographiques sur une surface plane, comme l’écran d’un appareil. Les unités de mesure des coordonnées pcrs sont habituellement des mètres (à l’exception notable des coordonnées pcrs dans la projection `WGS84`). |
+| gcrs | Les coordonnées géographiques sont référencées à divers ellipsoïdes et ne sont pas nécessairement comparables d’une projection à l’autre. WGS 84 constitue un ellipsoïde courant à l’heure actuelle, et est défini et utilisé par la constellation des satellites de positionnement mondial (GPS). |
+| map | Le crs de la carte est dynamique, en ce sens que son origine se situe en ahut à gauche dans la fenêtre d’affichage de l’utilisateur, avec des pixels mis à l’échelle comme unités. Cela permet d’identifier les coordonnées d’image à utiliser, habituellement par les services de cartes Web et d’autre services semblables, qui utilisent une image viruelle pour permettre la recherche de données sur les propriétés d’une caractéristique présente sur la carte, sans nécessairement transférer les caractéristiques sur le réseau. |
+| tile | Peu importe le niveau de zoom, chaque pavé a un système implicite de référence des coordonnées à pavés (tcrs) mis à l’échelle allant de 0 à 255, tant dans le sens horizontal que vertical. Ces coordonnées sont utilisées par le Service Web des pavés cartographiques (WMTS) et d’autres services semblables pour identifier un pixel qui servira à rechercher les valeurs des propriétés de la caractéristique, sans transférer la géométrie de cette dernière sur le réseau. |
 
 ---
 
-## Child Elements
+## Éléments-enfants
 
 
 ### `<map-point>`
 
-This element contains a `<map-coordinates>` element containing a single position. Axis order - x followed by y, separated by whitespace. Note that longitude and latitude (gcrs coordinates) are listed in that order, always, in all geometry types.
+Cet élément contient un élément `<map-coordinates>` qui contient lui-même une unique position. L’ordre des axes est - x, suivi de y et séparé par une espace typographique. Prenez note que la longitude et la latitude (coordonnées gcrs) sont toujours présentées dans cet ordre, quel que soit le type de géométrie.
 
 ---
 
 ### `<map-linestring>`
 
-This element contains a `<map-coordinates>` element containing two or more positions. Axis order - x followed by y, separated by whitespace.
+Cet élément contient un élément `<map-coordinates>` qui contient lui-même deux positions ou plus. L’ordre des axes est - x, suivi de y et séparé par une espace typographique.
 
 ---
 
 ### `<map-polygon>`
 
-This element contains one or more `<map-coordinates>` elements, each containing three or more positions. Axis order - x followed by y, separated by whitespace.
+Cet élément contient un ou plusieurs éléments `<map-coordinates>`, chacun contenant lui-même trois positions ou plus. L’ordre des axes est - x, suivi de y et séparé par une espace typographique.
 
-The first and last positions in every child `<map-coordinates>` element are equal / at the same position.
+Les premières et dernières positions de chaque élément-enfant `<map-coordinates>` sont égales ou à la même position.
 
-The first `<map-coordinates>` element represents the outside of the polygon, and subsequent `<map-coordinates>` elements represent holes. The "winding order" of positions in child `<map-coordinates>` should depend on the axis orientation of the coordinate reference system in use, and whether the `<map-coordinates>` element represents the exterior of a polygon, or a hole. For WGS84, the exterior should be counterclockwise and holes should be clockwise.
+Le premier élément `<map-coordinates>` représente l’extérieur du polygone, et les éléments `<map-coordinates>` subséquents représentent des trous. L’ordre d’enroulement des positions dans l’élément-enfant `<map-coordinates>` doit dépendre de l’orientation des axes du système de référence des coordonnées utilisé, et si l’élément `<map-coordinates>` représente l’extérieur d’un polygone ou un trou. Avec WGS84, l’extérieur doit avoir un ordre d’enroulement antihoraire, et les trous, un ordre d’enroulement horaire.
 
 ---
 
 ### `<map-multipoint>`
 
-This element contains a `<map-coordinates>` element, containing one or more positions. Axis order - x followed by y, separated by whitespace.
+Ceet élément contient un élément `<map-coordinates>` qui contient lui-même une ou plusieurs positions. L’ordre des axes est - x, suivi de y et séparé par une espace typographique.
 
 ---
 
 ### `<map-multilinestring>`
 
-This element contains one or more `<map-coordinates>` elements, each containing two or more positions. Axis order - x followed by y, separated by whitespace.
+Cet élément contient un ou plusieurs éléments `<map-coordinates>`, chacun contenant lui-même deux positions ou plus. L’ordre des axes est - x, suivi de y et séparé par une espace typographique.
 
 ---
 
 ### `<map-multipolygon>`
 
-This element contains the contents one or more `<map-polygon>` elements. Axis order - x followed by y, separated by whitespace.
+Cet élément contient un ou plusieurs éléments `<map-polygon>`. L’ordre des axes est - x, suivi de y et séparé par une espace typographique.
 
-For each member polygon, the same non-schema constraints apply to multipolygon descendant `<map-coordinates>` elements, as for polygon `<map-coordinates>` descendant elements.
+Pour chaque polygone membre, les mêmes contraintes non schéma s’appliquent aux éléments descendants `<map-coordinates>` des multipolygones et aux éléments descendants `<map-coordinates>` des polygones.
 
 ---
 
 ### `<map-geometrycollection>`
 
-This element contains one or more `<map-point>`, `<map-linestring>`, `<map-polygon>`, `<map-multipoint>`, `<map-multilinestring>`, `<map-multipolygon>` elements.
+Cet élément contient un ou plusieurs éléments `<map-point>`, `<map-linestring>`, `<map-polygon>`, `<map-multipoint>`, `<map-multilinestring>`, `<map-multipolygon>`.
 
-For each member geometry, the same non-schema constraints apply as to the unique geometry type above.
+Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquent qu’au type unique de géométrie dont il a été question précédemment.
 
 ---
 
 
-## Examples
+## Exemples
 
 ### Point
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
   <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Point Geometry" checked>
+  <layer- label="Géométrie en mode point" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Point</map-featurecaption>
-      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
+      <!—Les coordonnées de la géométrie sont celles du gcrs, puisque le système de référence des coordonnées par défaut est pcrs -->
       <map-geometry cs="gcrs">
         <map-point class="point">
           <map-coordinates>-75.6916809 45.4186964</map-coordinates>
         </map-point>
       </map-geometry>
-      <map-properties><h2>This is a Point</h2></map-properties>
+      <map-properties><h2>Ceci est un point</h2></map-properties>
     </map-feature>
   </layer->
 </mapml-viewer>
@@ -108,17 +108,17 @@ For each member geometry, the same non-schema constraints apply as to the unique
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
   <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Line Geometry" checked>
+  <layer- label="Géométrie en mode ligne" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
-      <map-featurecaption>Line</map-featurecaption>
-      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
+      <map-featurecaption>Ligne</map-featurecaption>
+      <!—Les coordonnées de la géométrie sont celles de gcrs, puisque le système de référence des coordonnées par défaut est pcrs -->
       <map-geometry cs="gcrs">
         <map-linestring class="line">
           <map-coordinates>-75.6168365 45.471929 -75.6855011 45.458445 -75.7016373 45.4391764 -75.7030106 45.4259255 -75.7236099 45.4208652 -75.7565689 45.4117074 -75.7833481 45.384225 -75.8197403 45.3714435 -75.8516693 45.377714</map-coordinates>
         </map-linestring>
       </map-geometry>
-      <map-properties><h2>This is a Line</h2></map-properties>
+      <map-properties><h2>Ceci est une ligne</h2></map-properties>
     </map-feature>
   </layer->
 </mapml-viewer>
@@ -129,18 +129,18 @@ For each member geometry, the same non-schema constraints apply as to the unique
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
   <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Polygon Geometry" checked>
+  <layer- label="Géométrie en mode polygone" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
-      <map-featurecaption>Polygon</map-featurecaption>
-      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
+      <map-featurecaption>Polygone</map-featurecaption>
+      <!-- Les coordonnées de la géométrie sont celles de gcrs, puisque le système de référence des coordonnées par défaut est pcrs -->
       <map-geometry cs="gcrs">
         <map-polygon class="polygon">
           <map-coordinates>-75.5859375 45.4656690 -75.6813812 45.4533876 -75.6961441 45.4239978 -75.7249832 45.4083331 -75.7792282 45.3772317 -75.7534790 45.3294614 -75.5831909 45.3815724 -75.6024170 45.4273712 -75.5673981 45.4639834 -75.5859375 45.4656690</map-coordinates>
           <map-coordinates>-75.6596588 45.4211062 -75.6338958 45.4254436 -75.6277127 45.4066458 -75.6572542 45.4097792 -75.6596588 45.4211062</map-coordinates>
         </map-polygon>
       </map-geometry>
-      <map-properties><h2>This is a Polygon</h2></map-properties>
+      <map-properties><h2>Ceci est un polygone</h2></map-properties>
     </map-feature>
   </layer->
 </mapml-viewer>
@@ -151,17 +151,17 @@ For each member geometry, the same non-schema constraints apply as to the unique
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
   <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="MultiPoint Geometry" checked>
+  <layer- label="Géométrie en mode multipoint" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>MultiPoint</map-featurecaption>
-      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
+      <!-- Les coordonnées de la géométrie sont celles de gcrs, puisque le système de référence des coordonnées par défaut est pcrs -->
       <map-geometry cs="gcrs">
         <map-multipoint class="point">
           <map-coordinates>-75.7016373 45.4391764 -75.7236099 45.4208652 -75.7833481 45.384225</map-coordinates>
         </map-multipoint>
       </map-geometry>
-      <map-properties><h2>This is a multipoint</h2></map-properties>
+      <map-properties><h2>Ceci est un multipoint</h2></map-properties>
     </map-feature>
   </layer->
 </mapml-viewer>
@@ -172,18 +172,18 @@ For each member geometry, the same non-schema constraints apply as to the unique
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
   <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="MultiLineString Geometry" checked>
+  <layer- label="Géométrie en mode multiligne" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>MultiLineString</map-featurecaption>
-      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
+      <!-- Les coordonnées de la géométrie sont celles de gcrs, puisque le système de référence des coordonnées par défaut est pcrs -->
       <map-geometry cs="gcrs">
         <map-multilinestring class="line">
           <map-coordinates>-75.6168365 45.471929 -75.6855011 45.458445 -75.7016373 45.4391764 -75.7030106 45.4259255</map-coordinates>
           <map-coordinates>-75.7565689 45.4117074 -75.7833481 45.384225 -75.8197403 45.3714435 -75.8516693 45.377714</map-coordinates>
         </map-multilinestring>
       </map-geometry>
-      <map-properties><h2>This is a MultiLineString</h2></map-properties>
+      <map-properties><h2>Ceci est une multiligne</h2></map-properties>
     </map-feature>
   </layer->
 </mapml-viewer>
@@ -194,11 +194,11 @@ For each member geometry, the same non-schema constraints apply as to the unique
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
   <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="MultiPolygon Geometry" checked>
+  <layer- label="Géométrie en mode multipolygone" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>MultiPolygon</map-featurecaption>
-      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
+      <!-- Les coordonnées de la géométrie sont celles de gcrs, puisque le système de référence des coordonnées par défaut est pcrs -->
       <map-geometry cs="gcrs">
         <map-multipolygon class="polygon">
           <map-polygon>
@@ -209,7 +209,7 @@ For each member geometry, the same non-schema constraints apply as to the unique
           </map-polygon>
         </map-multipolygon>
       </map-geometry>
-      <map-properties><h2>This is a MultiPolygon</h2></map-properties>
+      <map-properties><h2>Ceci est un multipolygone</h2></map-properties>
     </map-feature>
   </layer->
 </mapml-viewer>
@@ -220,11 +220,11 @@ For each member geometry, the same non-schema constraints apply as to the unique
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
   <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Geometry Collection" checked>
+  <layer- label="Collection de géométries" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
-      <map-featurecaption>Geometry Collection</map-featurecaption>
-      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
+      <map-featurecaption>Collection de géométries</map-featurecaption>
+      <!-- Les coordonnées de la géométrie sont celles de gcrs, puisque le système de référence des coordonnées par défaut est pcrs -->
       <map-geometry cs="gcrs">
         <map-geometrycollection>
           <map-polygon class="polygon">
@@ -238,7 +238,7 @@ For each member geometry, the same non-schema constraints apply as to the unique
           </map-point>
         </map-geometrycollection>
       </map-geometry>
-      <map-properties><h2>This is a Geometry Collection</h2></map-properties>
+      <map-properties><h2>Ceci est une collection de géométries</h2></map-properties>
     </map-feature>
   </layer->
 </mapml-viewer>
@@ -246,13 +246,13 @@ For each member geometry, the same non-schema constraints apply as to the unique
 
 ---
 
-## Specifications
+## Spécifications
 
-| Specification                                                |
+| Spécification                                                |
 |--------------------------------------------------------------|
-| [MapML geometry element](https://maps4html.org/MapML/spec/#the-geometry-element-0) |
+| [Élément geometry de MapML](https://maps4html.org/MapML/spec/#the-geometry-element-0) |
 
 ---
 
-> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/geometry.md)
-> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
+> - [Modifiez le contenu de cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/geometry.md)
+> - [Clavardez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

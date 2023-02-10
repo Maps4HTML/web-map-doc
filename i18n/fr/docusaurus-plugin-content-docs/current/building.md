@@ -3,11 +3,11 @@ id: building
 title: Construire à partir de la source
 ---
 
-## Build the project from source code
+## Créer le projet à partir du code source 
 
-As an alternative to installing a published version of the library with npm, you may wish to build the latest changes from the project from a clone of the source code. You will first require a working installation of node.js and npm. 
+Plutôt que d’installer la version publiée de la bibliothèque avec npm, vous pouvez apporter les dernières modifications au projet à partir d’un clone du code source. Pour ce faire, vous devez d’abord installer node.js et npm.
 
-Clone the project using git:
+Clonez le projet à l’aide du logiciel Git :
 
 ```bash
 $ git clone https://github.com/Maps4HTML/Web-Map-Custom-Element.git web-map-custom-element
@@ -23,7 +23,7 @@ Updating files: 100% (217/217), done.
 $
 ```
 
-Change directories, into the cloned directory and run "npm install" to install the project's development dependencies:
+Changez les répertoires dans le répertoire cloné et exécutez la commande « npm install » pour installer les dépendances relatives au développement du projet :
 
 ```bash
 prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/web-map-custom-element (main)
@@ -68,7 +68,7 @@ prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/web-map-custom-element (main)
 $
 ```
 
-As reported by the last command, you should now have a folder named 'dist' in your project directory, containing the build artifacts that are necessary to create Web pages containing maps. You can copy the `dist` folder into your Web site, where you create HTML pages that refer to the root JavaScript module that encompasses the `<mapml-viewer>` custom elements. For example:
+Comme indiqué par la dernière commande, votre répertoire de projet devrait maintenant contenir un dossier intitulé ‘dist’, lequel contient les artéfacts de compilation nécessaires à la création de pages Web contenant des cartes. Vous pouvez copier le dossier `dist` dans votre site Web où vous créez les pages HTML qui renvoient au module JavaScript racine comprenant les éléments personnalisés `<mapml-viewer>`. Par exemple :
 
 ```bash
 prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/web-map-custom-element/mysite (main)
@@ -100,4 +100,4 @@ prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/web-map-custom-element/mysite (main
 $ 
 ```
 
-You can serve your mysite directory with any Web server. If you load index.html in a Web browser, you should see a full-size interactive Web map of Canada.
+Vous pouvez gérer votre répertoire « mysite » avec n’importe quel serveur Web. Si vous chargez la page index.html dans un navigateur Web, vous devriez voir une carte Web interactive pleine grandeur du Canada.

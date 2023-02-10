@@ -4,37 +4,37 @@ title: API de rendu personnalisé
 slug: /api/custom-rendering
 ---
 
-The Custom Rendering API allows developers to circumvent MapML's rendering and draw anything within HTML's domain onto the map.
+L’interface de programmation d’applications (API) de rendu personnalisé permet aux développeurs de contourner la fonction de rendu de MapML et de dessiner ce qu’ils veulent sur la carte, à condition que cela fasse partie du domaine HTML.
 
-## Custom Tiles
+## Pavés personnalisés
 
-To render custom tiles using JavaScript, listen for the `tileloadstart` event on a templated layer's `<map-link rel="tile">` element.
+Pour effectuer le rendu de pavés personnalisés avec JavaScript, écoutez l’événement `tileloadstart` sur un élément `<map-link rel="tile">` d’une couche produite suivant un modèle.
 
-### `tileloadstart` Event
+### Événement `tileloadstart` 
 
-This event is fired when a tile is first being created, the event contains the following structure in its detail property:
+Cet événement est déclenché à la création d’un pavé, et contient la structure suivante dans sa propriété des détails :
 ```js
 {
-  x: 1,    // tilematrix x value of the tile loaded
-  y: 2,    // tilematrix y value of the tile loaded
-  zoom: 3, // zoom level of the tile loaded
-  appendTile: function appendTile ( customTile ) {...} // pass custom tile as an argument to function
+  x: 1,    // valeur x de tilematrix du pavé chargé
+  y: 2,    // valeur y de tilematrix du pavé chargé
+  zoom: 3, // niveau de zoom du pavé chargé
+  appendTile: function appendTile ( customTile ) {...} // transmet le pavé personnalisé comme un argument de fonction
 }
 ```
 
 
-### Example
+### Exemple :
 
-The map:
+La carte :
 ```html
 <mapml-viewer projection="OSMTILE" zoom="0" lat="45" lon="-75" controls>
-  <layer- label="Custom Tiles" checked>
+  <layer- label="pavés personnalisés" checked>
     <map-meta name="zoom" content="min=0,max=23" ></map-meta>
     <map-extent units="OSMTILE">
       <map-input name="zoomLevel" type="zoom" min="0" max="23" value="1" ></map-input>
       <map-input name="row" type="location" axis="row" units="tilematrix" min="0" max="2" ></map-input>
       <map-input name="col" type="location" axis="column" units="tilematrix" min="0" max="2" ></map-input>
-      <!-- listen for the tileloadstart event on this element -->
+      <!—écoutez l’événement tileloadstart sur cet élément -->
       <map-link rel="tile" title="" tref="" ></map-link>
     </map-extent>
   </layer->
@@ -42,7 +42,7 @@ The map:
 ```
 
 
-The JavaScript for creating custom tiles:
+Script Java pour créer des pavés personnalisés :
 ```js
 let layer = document.querySelector("body > mapml-viewer > layer- > map-extent > map-link");
     layer.addEventListener("tileloadstart", (e) => {
@@ -52,12 +52,11 @@ let layer = document.querySelector("body > mapml-viewer > layer- > map-extent > 
     });
 ```
 
-In this example the `customTile` is an HTML `<p>`, but you can use any HTML Element. Simply append the 
-created element using the `(tileloadstart event).detail.appendTile()` function, passing the custom tile as an argument of the function.
+Dans cet exemple, `customTile` est une balise HTML `<p>`, mais vous  pouvez utiliser n’importe quel élément HTML. Il suffit d’ajouter l’élément créé avec la fonction `(tileloadstart event).detail.appendTile()`, ce qui transmet le pavé personnalisé en argument de la fonction.
 
 
-## Custom Image
+## Image personnalisée
 
 :::important
-Needs to be implemented.
+À mettre en œuvre.
 :::

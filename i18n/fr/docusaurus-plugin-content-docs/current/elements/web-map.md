@@ -4,25 +4,25 @@ title: <map is="web-map">
 slug: /elements/web-map
 ---
 
-The HTML `<map>` element has been deployed and in use in browsers since the mid-90's. It was used to provide visually appealing yet accessible home pages, by giving the Web developer the ability to design links as invisible yet interactive polygonal areas on top of one or more images.  Use of this facility became known as "client side image maps", and was often used to provide site navigation links.
+L’élément HTML `<map>` a été déployé dans le milieu des années 1990 et est utilisé dans les navigateurs depuis. Il sert à créer des pages d’accueil à la fois attrayantes sur le plan visuel et accessibles, et il permet aux développeurs Web de concevoir des liens sous forme de polygones invisibles, mais interactifs superposés à une ou à plusieurs images. Cette fonction, appelée « image cliquable côté client », a souvent été utilisée pour fournir des liens de navigation sur le site.
 
-In recent years, client side image maps have fallen out of wide use, due to improvements in other areas of the Web platform.  However, some sites still use image maps to provide a simple, accessible, but simultaneously visual user experience.
+Au cours des dernières années, les images cliquables côté client ont perdu de leur popularité en raison des améliorations apportées aux autres volets de la plateforme Web. Cependant, certains sites utilisent toujours les images cliquables pour fournir une expérience utilisateur à la fois simple, accessible et visuelle.
 
-The web-map custom element suite provides a set of proof-of-concept "[customized built-in](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)" elements based on `<map>`, `<area>` and `<img>` that will "fall back" to a client side image map in older browsers, or in the absence of JavaScript (scripting disabled).
+Les éléments personnalisés de cartes Web fournissent un ensemble d’éléments de validation de principe « [personnalisés et intégrés](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) » fondés sur les éléments `<map>`, `<area>` et `<img>` qui seront « ramenés » à une une image cliquable côté client dans les anciens navigateurs ou en l’absence de JavaScript (script désactivé).
 
-:::caution
+:::avertissement
 
-Note that because [not all modern Web browsers implement HTML's customized built-in elements](https://caniuse.com/mdn-api_customelementregistry_builtin), it is not recommended to use this proof-of-concept on a public Web site, as end-user confusion may be the result.
-
-:::
-
-:::caution
-
-The `<map>` customized built-in element is not accessible to screen reader users in some browsers, due to a [Chromium bug](https://bugs.chromium.org/p/chromium/issues/detail?id=1208405).
+Il est à noter qu’étant donné que [tous les navigateurs Web récents ne prennent pas en charge les éléments intégrés personnalisés en HTML](https://caniuse.com/mdn-api_customelementregistry_builtin), il n’est pas recommandé d’utiliser cette validation de principe sur un site Web public puisque cela pourrait entraîner de la confusion chez les utilisateurs.
 
 :::
 
-The following markup may work on Chrome and Firefox, although it may take some fine tuning:
+:::avertissement
+
+Dans certains navigateurs, l’élément intégré personnalisé `<map>` n’est pas accessible aux utilisateurs de lecteur d’écran en raison d’un [bogue de Chromium](https://bugs.chromium.org/p/chromium/issues/detail?id=1208405).
+
+:::
+
+Le balisage suivant pourrait fonctionner dans Chrome et Firefox, mais il pourrait nécessiter quelques mises au point :
 
 ```html
 <img usemap="#mymap" src="../map1.png" width="700" height="400" alt="Map area">
@@ -37,13 +37,13 @@ The following markup may work on Chrome and Firefox, although it may take some f
 </map>
 ```
 
-To experiment with the `web-map` and `map-area` custom elements, you should link your `<script type="module" src="web-map.js"></script>` to the `web-map.js` file that is built by the web-map custom element suite build process.
+Pour expérimenter les éléments personnalisés `web-map` et `map-area`, vous devriez lier votre `<script type="module" src="web-map.js"></script>` au fichier `web-map.js` créé par le processus de génération des éléments personnalisés de cartes Web.
 
-In theory, if you take steps to provide the fallback markup, a normal (progressive) Web map experience will be had by most users, while those using an older browser or perhaps even Safari may get the "fallback" client side image map experience.  
+En théorie, si vous prenez des mesures pour fournir un balisage alternatif, la plupart des utilisateurs auront une expérience normale (progressive) avec la carte Web, tandis que ceux qui utilisent un ancien navigateur ou même Safari pourraient obtenir une expérience inverse avec l’image cliquable côté client. 
 
-An older example of such a Web map may be found in the [blog post on Progressive Web Maps](https://maps4html.org/Web-Map-Custom-Element/blog/progressive-web-maps.html).  Please raise an [issue](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues) if you have comments about how that example works for you.
+Pour obtenir un exemple antérieur d’une telle carte Web, veuillez consulter cet [article de blogue sur les cartes Web progressives](https://maps4html.org/Web-Map-Custom-Element/blog/progressive-web-maps.html). Veuillez soulever un [problème](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues) si vous souhaitez faire part de vos commentaires sur le fonctionnement de cet exemple.
 
-## Attributes
+## Attributs 
 
-The attributes of the customized built-in `<map>` element are the same as those of [`<mapml-viewer>`](mapml-viewer).
+Les attributs de l’élément intégré personnalisé `<map>` sont identiques à ceux de l’élément [`<mapml-viewer>`](mapml-viewer).
 

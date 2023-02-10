@@ -8,7 +8,7 @@ toc_max_heading_level: 4
 
 ## Introduction
 
-The **GeoJSON API** is provided as a library to convert GeoJSON to and from MapML. The GeoJSON API can be added to any document as long as it is preceded by the mampl-viewer module, i.e.
+L’**interface de programmation d’applications (API) GeoJSON** est fournie sous forme de bibliothèque pour convertir MapML en GeoJSON et vice versa. L’API GeoJSON peut être ajoutée à n’importe quel document, à condition qu’elle soit précédée du module mampl-viewer, comme suit :
 
 ```html
 <!doctype html>
@@ -25,43 +25,43 @@ The **GeoJSON API** is provided as a library to convert GeoJSON to and from MapM
 
 ---
 
-## GeoJSON To MapML
+## GeoJSON à MapML
 
-| Function | Returns | Description |
+| Fonction | Retours| Description |
 |----------|---------|-------------|
-|<code>geojson2mapml(<Object&nbsp;\|&nbsp;String\>&nbsp;json,&nbsp;<Object\>&nbsp;options)</code> | A MapML `<layer->` element. | Convert a GeoJSON feature or feature collection string or object to MapML `<layer->` containing one or more `<map-feature>` elements.|
+|<code>geojson2mapml(<Object&nbsp;\|&nbsp;String\>&nbsp;json,&nbsp;<Object\>&nbsp;options)</code> | Élément  MapML `<layer->`. | Convertit une caractéristique GeoJSON ou une chaîne ou un objet de collection de caractéristiques en élément MapML `<layer->` contenant un ou plusieurs éléments `<map-feature>`.|
 
-:::tip
+:::Conseil
 
-Check out [this application](https://maps4html.org/experiments/api/custom-map-ui/geoname-search-ui.html) using the geojson2mapml API!
+Jetez un coup d’œil à [cette application](https://maps4html.org/experiments/api/custom-map-ui/geoname-search-ui.html) au moyen de l’API geojson2mapml!
 
 :::
 
-### Parameters
+### Paramètres
 
-| Parameter | Description |
+| Paramètre | Description |
 |------|---------------------|
-| <String&nbsp;\|&nbsp;Object>&nbsp;json | A GeoJSON string or object. |
-| &ltObject&gt options | A set of key/value pairs that customize the output MapML layer. All options are optional and described below. |
+| <String&nbsp;\|&nbsp;Object>&nbsp;json | Chaîne ou objet GeoJSON |
+| Options &ltObject&gt | Ensemble de paires de clés ou de valeurs qui personnalise la couche de sortie MapML. Toutes les options sont facultatives et décrites ci-après. |
 
 ### Options
 
-&ltObject&gt A set of key/value pairs that customize the output MapML layer. All options are optional and detailed below.
+&ltObject&gt Ensemble de paires de clés ou de valeurs qui personnalise la couche de sortie MapML. Toutes les options sont facultatives et décrites ci-après.
 
 | Option | Type | Default | Description |
 |------|------|---------------|--------|
-| `label` | <String\> | `json.name`, `json.title` or "Layer" | Sets the output layer's [label](https://maps4html.org/web-map-doc/docs/layers/layer/#label). |
-| `projection` |  <String\> | `OSMTILE` | Sets the output layer's [projection](https://maps4html.org/web-map-doc/docs/elements/mapml-viewer/#projection). Defined values include: `OSMTILE`, `CBMTILE`, `WGS84`, and `APSTILE`.|
-| `caption` | <String&nbsp;\|&nbsp;Function\> | Uses the `label` value | A function that accepts the feature JSON and returns a string, OR a string that is the name of a property to be mapped to the [featurecaption](https://maps4html.org/web-map-doc/docs/elements/feature/#map-featurecaption). If a matching property is not found, the string provided will be used as the feature caption value. See [basic options usage](#basic-options-usage) for an example. |
-| <span id="option-properties">`properties`</span> | <Function&nbsp;\|&nbsp;String&nbsp;\|&nbsp;HTMLElement\> | _Properties will be mapped to an HTML [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table)._ | Specifies how the properties are mapped. <Function\> - A function that accepts one argument - the GeoJSON feature object - and which must return an HTMLElement that becomes the single child element of the <properties\> element. <String\> - A string that will be parsed and used as the single child element of the `<properties>` element for all features. <HTMLElement\> - an element that will be used as the single child element of `<properties>` element for all features. See [basic options usage](#basic-options-usage) for an example.|
-| `geometryFunction` | <Function\> | _MapML geometry will mirror the GeoJSON geometry value_ | <Function\> A function to modify the generated [descendants](https://maps4html.org/web-map-doc/docs/elements/geometry/#child-elements) of `<map-geometry>` which can add classes, [hyperlinks](https://maps4html.org/web-map-doc/docs/other-elements/map-a/) and [span's](https://maps4html.org/web-map-doc/docs/other-elements/span/) to the instance. Plain `<map-geometry>` element will be created by default. The function accepts two arguments: The generated [child element](https://maps4html.org/web-map-doc/docs/elements/geometry/#child-elements) of `<map-geometry>` and the [feature json object](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) to return a modified child element of the `<map-geometry>` element. See [basic options usage](#basic-options-usage) for an example. |
+| `label` | <String\> | `json.name`, `json.title` ou "Layer" | Définit la [label](https://maps4html.org/web-map-doc/docs/layers/layer/#label) de la couche de sortie. |
+| `projection` |  <String\> | `OSMTILE` | Définit la [projection]  (https://maps4html.org/web-map-doc/docs/elements/mapml-viewer/#projection) de la couche de sortie. Les valeurs définies incluent : `OSMTILE`, `CBMTILE`, `WGS84`, and `APSTILE`.|
+| `caption` | <String&nbsp;\|&nbsp;Function\> | Utilise la valeur `label` | Fonction qui accepte la caractéristique JSON et retourne une chaîne, OU une chaîne qui est le nom d’une propriété à mapper sur [featurecaption](https://maps4html.org/web-map-doc/docs/elements/feature/#map-featurecaption). Si aucune propriété associée n’est trouvée, la chaîne fournie sert de valeur de la légende de la caractéristique. Voir la section [Utilisation des options de base](#basic-options-usage) pour un exemple. |
+| <span id="option-properties">`properties`</span> | <Function&nbsp;\|&nbsp;String&nbsp;\|&nbsp;HTMLElement\> | _Les propriétés seront mappées à un [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) HTML._ | Précise la façon dont les propriétés sont mappées. <Function\> - Fonction qui accepte un argument – l’objet GeoJSON feature – et qui doit retourner un HTMLElement qui devient l’unique élément-enfant de <properties\>. <String\> - Chaîne qui sera analysée syntaxiquement et utilisée comme unique élément-enfant de `<properties>` avec toutes les caractéristiques. <HTMLElement\> - Élément qui servira d’unique élément- enfant de `<properties>` avec toutes les caractéristiques. Voir la section [utilisation des options de base](#basic-options-usage) pour un exemple.|
+| `geometryFunction` | <Function\> | La géométrie _MapML reproduit la valeur géométrique GeoJSON_ | <Function\> Fonction pour modifier les [descendants] générés (https://maps4html.org/web-map-doc/docs/elements/geometry/#child-elements) de `<map-geometry>` qui peut ajouter des classes, [hyperlinks](https://maps4html.org/web-map-doc/docs/other-elements/map-a/) et des [spans](https://maps4html.org/web-map-doc/docs/other-elements/span/) à l’instance. Un élément `<map-geometry>` simple est créé par défaut. La fonction accepte deux arguments : l’[élément-enfant] généré (https://maps4html.org/web-map-doc/docs/elements/geometry/#child-elements) de `<map-geometry>` et [l’objet de la caractéristique JSON](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) pour retourner un élément-enfant modifié de `<map-geometry>`. Voir la section [Utilisation des options de base](#basic-options-usage) pour un exemple. |
 
 ---
-### Examples
+### Exemples
 
-#### Basic options usage
+#### Utilisation des options de base
 
-Showcasing how use each option.
+Utilisation de chaque option en contexte
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -69,8 +69,8 @@ import TabItem from '@theme/TabItem';
 <Tabs>
 <TabItem value="label" label="label">
 
-```js title="geojson2mapml label option"
-geojson2mapml(json, {label: "Downtown Ottawa"});
+```js title="option d’étiquette geojson2mapml"
+geojson2mapml(json, {label: "Centre-ville d’Ottawa"});
 ```
 
 </TabItem>
@@ -83,13 +83,13 @@ geojson2mapml(json, {projection: "CBMTILE"});
 </TabItem>
 <TabItem value="caption" label="caption">
 
-```js title="geojson2mapml caption option - function-valued"
-// caption function
+```js title="option de légende geojson2mapml – valeur contenant une fonction"
+// fonction de légende
 geojson2mapml(json, {caption: function(feature) {
     return feature.properties.desc + ", not a Polygon";
     }
 });
-// caption option string value referencing a property name
+// valeur de la chaîne de l’option de légende qui renvoie à un nom de propriété
 geojson2mapml(json, {caption: "desc"});
 ```
 
@@ -97,14 +97,14 @@ geojson2mapml(json, {caption: "desc"});
 <TabItem value="properties" label="properties">
 
 ```js title="geojson2mapml properties option - function-valued"
-// properties function
+// fonction de propriétés
 geojson2mapml(json, {properties: function(feature) {
     let parser = new DOMParser();
-    return parser.parseFromString("<h1>" + feature.properties.desc + "'s property</h1>", "text/html").body.firstChild;
+    return parser.parseFromString("<h1>" + feature.properties.desc + "propriété de</h1>", "text/html").body.firstChild;
     }
 });
-// properties option - string valued - make sure you sanitize user-supplied strings
-geojson2mapml(json, {properties: "<p>This property was inserted using a properties string</p>"});
+// option de propriétés – valeur contenant une chaîne – assurez-vous de nettoyer les chaînes fournies par les utilisateurs
+geojson2mapml(json, {properties: "<p>Cette propriété a été ajoutée à l’aide d’une chaîne de propriétés </p>"});
 ```
 
 </TabItem>
@@ -122,39 +122,39 @@ geojson2mapml(json, options);
 </TabItem>
 </Tabs>
 
-#### Options string
-An example showcasing how strings can be used to set `label`, `projection`, `caption` and `properties` options.
+#### Chaîne d’options
+Exemple montrant comment utiliser des chaînes pour définir les options `label`, `projection`, `caption` et `properties`.
 ```js
 let json = {
-    "name": "Default Name",
+    "name": "Nom par défaut",
     "type": "Feature",
     "geometry": {
         "type": "Point",
         "coordinates": [-75.6916809,45.4186964]
     },
-    "properties": {"desc": "This is a Point"}
+    "properties": {"desc": "Ceci est un point"}
 };
 
-// GeoJSON To MapML
-let output = geojson2mapml(json, {label: "Example 1", projection: "CBMTILE", caption: "desc", properties: "<h3>This is a property heading</h3>"});
+// GeoJSON à MapML
+let output = geojson2mapml(json, {label: "Exemple 1", projection: "CBMTILE", caption: "desc", properties: "<h3>Ceci est un en-tête de propriété</h3>"});
 ```
 
 <details>
-<summary>Click to view the output HTMLElement</summary>
+<summary>Cliquez pour afficher la sortie HTMLElement</summary>
 
 ``` html
 <layer- label="Example 1" checked="">
    <map-meta name="projection" content="CBMTILE"></map-meta>
    <map-meta name="cs" content="gcrs"></map-meta>
    <map-feature>
-      <map-featurecaption>This is a Point</map-featurecaption>
+      <map-featurecaption>Ceci est un point</map-featurecaption>
       <map-geometry>
          <map-point>
             <map-coordinates>-75.6916809 45.4186964</map-coordinates>
          </map-point>
       </map-geometry>
       <map-properties>
-         <h3>This is a property heading</h3>
+         <h3>Ceci est un en-tête de propriété</h3>
       </map-properties>
    </map-feature>
 </layer->
@@ -162,51 +162,51 @@ let output = geojson2mapml(json, {label: "Example 1", projection: "CBMTILE", cap
 
 </details> 
 
-#### Options function
-An example showcasing how functions can be used to set `caption` and `properties` options.
+#### Fonction d’options
+Exemple montrant comment les fonctions peuvent servir à définir les options `caption` et `properties`.
 ```js
 let json = {
-    "name": "Default Name",
+    "name": "Nom par défaut",
     "type": "Feature",
     "geometry": {
         "type": "Point",
         "coordinates": [-75.6916809,45.4186964]
     },
-    "properties": {"desc": "This is a Point"}
+    "properties": {"desc": "Ceci est un point"}
 };
 
 // function to set caption
 let cap = function c(j) {
-  let str = "This point is located at: (" + j.geometry.coordinates[0] + ", " + j.geometry.coordinates[1] + ").";
+  let str = "Ce point se trouve à : (" + j.geometry.coordinates[0] + ", " + j.geometry.coordinates[1] + ").";
   return str;
 }
 
-// function to set properties
+// fonction pour définir des propriétés
 let prop = function f(p) {
   let parser = new DOMParser();
   return parser.parseFromString("<h1>" + p.properties.desc + "'s property</h1>", "text/html").body.firstChild;
 }
 
-// GeoJSON To MapML
-let output = geojson2mapml(json, {label: "Example 2", caption: cap, properties: prop});
+// GeoJSON à MapML
+let output = geojson2mapml(json, {label: "Exemple 2", caption: cap, properties: prop});
 ```
 
 <details>
-<summary>Click to view the output HTMLElement</summary>
+<summary>Cliquez pour afficher la sortie HTMLElement</summary>
 
 ``` html
 <layer- label="Example 2" checked="">
    <map-meta name="projection" content="OSMTILE"></map-meta>
    <map-meta name="cs" content="gcrs"></map-meta>
    <map-feature>
-      <map-featurecaption>This point is located at: (-75.6916809, 45.4186964).</map-featurecaption>
+      <map-featurecaption>Ce point se trouve à : (-75.6916809, 45.4186964).</map-featurecaption>
       <map-geometry>
          <map-point>
             <map-coordinates>-75.6916809 45.4186964</map-coordinates>
          </map-point>
       </map-geometry>
       <map-properties>
-         <h1>This is a Point's property</h1>
+         <h1>Ceci est une propriété du point</h1>
       </map-properties>
    </map-feature>
 </layer->
@@ -214,11 +214,11 @@ let output = geojson2mapml(json, {label: "Example 2", caption: cap, properties: 
 
 </details> 
 
-#### Default options
-An example showcasing default output when no options are provided.
+#### Options par défaut
+Exemple montrant la sortie par défaut lorsqu’aucune option n’est fournie.
 ```js
 let json = {
- "title": "Point Geometry",
+ "title": "Géométrie du point",
  "bbox": [-75.916809, 45.886964, -75.516809, 45.26964],
  "type": "FeatureCollection",
  "features": [{
@@ -228,25 +228,25 @@ let json = {
          "coordinates": [-75.6916809, 45.4186964]
      },
      "properties": {
-         "prop0": "This is a Point"
+         "prop0": "Ceci est un point"
      }
  }]
 };
 
-// GeoJSON To MapML
+// GeoJSON à MapML
 let output = geojson2mapml(json);
 ```
 
 <details>
-<summary>Click to view the output HTMLElement</summary>
+<summary>Cliquez pour afficher la sortie HTMLElement</summary>
 
 ``` html
-<layer- label="Point Geometry" checked="">
+<layer- label="Géométrie du point" checked="">
    <map-meta name="extent" content="top-left-longitude=-75.916809, top-left-latitude=45.886964, bottom-right-longitude=-75.516809,bottom-right-latitude=45.26964"></map-meta>
    <map-meta name="projection" content="OSMTILE"></map-meta>
    <map-meta name="cs" content="gcrs"></map-meta>
    <map-feature>
-      <map-featurecaption>Point Geometry</map-featurecaption>
+      <map-featurecaption>Géométrie du point</map-featurecaption>
       <map-geometry>
          <map-point>
             <map-coordinates>-75.6916809 45.4186964</map-coordinates>
@@ -276,15 +276,15 @@ let output = geojson2mapml(json);
 
 ---
 
-## MapML To GeoJSON
+## MapML à GeoJSON
 
-| Function | Returns | Description |
+| Fonction | Retours | Description |
 |----------|---------|-------------|
-| <code>mapml2geojson(<HTMLLayerElement\>&nbsp;element,&nbsp;<Object\>&nbsp;options)</code> | A JavaScript (GeoJSON) feature collection object | This function transforms the `<feature>` element children of a `<layer->` element to a GeoJSON FeatureCollection object. You supply [options](#options-1) to control the transformation. This function must be used inside a windows.onload event.
+| <code>mapml2geojson(<HTMLLayerElement\>&nbsp;element,&nbsp;<Object\>&nbsp;options)</code> | Objet de collection de caractéristiques JavaScript (GeoJSON) | Cette fonction transforme l’élément- enfant `<feature>` d’un élément `<layer->` en un objet GeoJSON FeatureCollection. Vous fournissez les [options](#options-1) pour contrôler la transformation. Cette fonction doit servir dans un événement windows.onload.
 
-:::caution
+:::Mise en garde
 
-`mapml2geojson` must be called inside a windows.onload event to work properly. i.e.
+`mapml2geojson` doit être appelé dans un événement windows.onload pour fonctionner correctement, comme suit :
 
 ``` js
 window.onload = (event) => {
@@ -294,45 +294,37 @@ window.onload = (event) => {
 
 :::
 
-### Parameters
+### Paramètres
 
-| Parameter | Description |
+| Paramètre | Description |
 |------|--------------|
-| <HTMLLayerElement\> element | A `<layer->` element. |
-| <Object\>&nbsp;options | You supply parameters via an options object with [predefined option names](#options-1). |
+| Élément <HTMLLayerElement\> | Élément `<layer->` |
+| <Object\>&nbsp;options | Vous fournissez des paramètres au moyen d’un objet d’options avec des  [noms d’option prédéfinis](#options-1). |
 
 ### Options
 
-<Object\> A set of key/value pairs that customize the output GeoJSON object. All are optional and detailed below.
+<Object\> Ensemble de paires de clés ou de valeurs qui personnalise l’objet de sortie GeoJSON. Toutes les options sont facultatives et décrites ci-après.
 
-| Option | Type | Default | Description |
+| Option | Type | Défaut | Description |
 |------|------|---------------|--------|
-| `propertyFunction` | <Function\> | _n/a_ | A function you supply that maps the features' `<map-properties>` element to a [GeoJSON "properties" member](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2), since only you know the markup design in your `<map-properties>` value. If you don't supply this option, a default function will attempt to reverse a `<table>` child of the `<map-properties>` element, as if that table was generated by the [default properties option function from geojson2mapml](#option-properties). |
-| `transform` | <Boolean\> | `true` | Transform `<map-coordinates>` values to `gcrs` (longitude,latitude) values, if they are not already so. GeoJSON [recommends](https://www.rfc-editor.org/rfc/rfc7946.html#section-4) using WGS 84 longitude,latitude coordinates, so this is the default behaviour. |
-###### Notes
+| `propertyFunction` | <Function\> | _n/a_ | Fonction que vous fournissez et qui mappe l’élément `<map-properties>` de la caractéristique à un [membre GeoJSON "properties"](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2), puisque qu’il n’y a que vous qui connaît la conception du balisage dans votre valeur `<map-properties>`. Si vous ne fournissez pas cette option, une fonction par défaut essaiera de renverser un élément-enfant `<table>` de `<map-properties>`, comme si ce tableau était généré par la [fonction d’option de propriétés par défaut de geojson2mapml](#option-properties). |
+| `transform` | <Boolean\> | `true` | Transforme des valeurs `<map-coordinates>` en valeurs `gcrs` (longitude, latitude), si elles ne le sont pas déjà. GeoJSON [recommande](https://www.rfc-editor.org/rfc/rfc7946.html#section-4) d’utiliser les coordonnées de longitude et de latitude WGS 84, il s’agit donc là du comportement par défaut. |
+###### Remarques
 
-`mapml2geojson`, by default, will transform coordinates to `gcrs` before serialization, if 
-necessary. Note that all geographic CRS are not equivalent, and the interpretation
-of such coordinates is not guaranteed to conform to WGS 84 / GPS coordinates, 
-and therefore may not conform to [the GeoJSON recommendation](https://datatracker.ietf.org/doc/html/rfc7946#section-4),
-which requires longitude,latitude coordinates that
-are encoded as WGS 84.  The projection engine used to implement this conversion
-is not capable of transforming coordinates from one ellipsoid to another, and 
-so the resulting JSON SHOULD (somehow, tbd) be tagged with the datum in use by the projection of
-the layer.
+Au besoin, `mapml2geojson` transforme des coordonnées en `gcrs` par défaut avant la sérialisation. Prenez note que toutes les projections géographiques CRS (système de référence des coordonnées) ne sont pas équivalentes, et que l’interprétation de telles coordonnées n’est pas garantie conforme aux coordonnées WGS 84 ou GPS, et que, par conséquent, elles ne suivent pas nécessairement la [recommandation GeoJSON](https://datatracker.ietf.org/doc/html/rfc7946#section-4), qui requiert des coordonnées de longitude et de latitude codées conformément au système géodésique WGS 84. Le moteur de projection utilisé pour mettre en œuvre cette conversion est incapable de transformer des coordonnées d’un ellipsoïde à un autre. Par conséquent, le JSON résultant DOIT (d’une manière qui reste à déterminer) être étiqueté avec la donnée qu’utilise la projection de la couche.
 
 ---
-### Examples
+### Exemples
 
-#### Default options
-An example showcasing default GeoJSON output when no options are provided.
+#### Options par défaut
+Exemple montrant la sortie GeoJSON par défaut lorsqu’aucune option n’est fournie. 
 ``` html
-<layer- label="Point Geometry" checked="">
+<layer- label="Géometrie du point" checked="">
    <map-meta name="extent" content="top-left-longitude=-75.916809, top-left-latitude=45.886964, bottom-right-longitude=-75.516809,bottom-right-latitude=45.26964"></map-meta>
    <map-meta name="projection" content="OSMTILE"></map-meta>
    <map-meta name="cs" content="gcrs"></map-meta>
    <map-feature>
-      <map-featurecaption>Point Geometry</map-featurecaption>
+      <map-featurecaption>Géometrie du point</map-featurecaption>
       <map-geometry>
          <map-point>
             <map-coordinates>-75.6916809 45.4186964</map-coordinates>
@@ -342,14 +334,14 @@ An example showcasing default GeoJSON output when no options are provided.
          <table>
             <thead>
                <tr>
-                  <th role="columnheader" scope="col">Property name</th>
-                  <th role="columnheader" scope="col">Property value</th>
+                  <th role="columnheader" scope="col">Nom de la propriété </th>
+                  <th role="columnheader" scope="col">Nom de la propriété</th>
                </tr>
             </thead>
             <tbody>
                <tr>
                   <th scope="row">prop0</th>
-                  <td itemprop="prop0">This is a Point</td>
+                  <td itemprop="prop0">Ceci est un point</td>
                </tr>
             </tbody>
          </table>
@@ -364,11 +356,11 @@ window.onload = (event) => {
 ```
 
 <details>
-<summary>Click to view the output GeoJSON</summary>
+<summary>Cliquez pour afficher la sortie GeoJSON</summary>
 
 ``` js
 {
- "title": "Point Geometry",
+ "title": "Géométrie du point",
  "bbox": [-75.916809, 45.886964, -75.516809, 45.26964],
  "type": "FeatureCollection",
  "features": [{
@@ -378,7 +370,7 @@ window.onload = (event) => {
          "coordinates": [-75.6916809, 45.4186964]
      },
      "properties": {
-         "prop0": "This is a Point"
+         "prop0": "Ceci est un point"
      }
  }]
 }

@@ -3,19 +3,19 @@ id: properties
 title: "<map-properties>"
 slug: /elements/properties/
 ---
-A `<map-properties>` element is a child of `<map-feature>` and is used to define the content of the popup associated to a given feature.
+L’élément `<map-properties>` est l’enfant de l’élément `<map-feature>`. Il sert à définir le contenu de la fenêtre contextuelle associée à une entité donnée.
 
-A `<map-properties>` element can contain any HTML Element to describe the feature's content. 
+Un élément `<map-properties>` peut contenir un élément HTML pour décrire le contenu de l’entité.
 
-<iframe src="../../../demo/map-properties-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
+<iframe src="../../../demo/map-properties-demo/" title="Démo en MapML" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
 ---
 
-## Examples
+## Exemples 
 
-### Properties Table
+### Tableau des propriétés 
 
-The following example displays the popup as an HTML [table](https://html.spec.whatwg.org/multipage/tables.html#the-table-element).
+Dans l’exemple suivant, la fenêtre contextuelle s’affiche sous forme de [tableau] HTML (https://html.spec.whatwg.org/multipage/tables.html#the-table-element).
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="12" lat="45.42" lon="-75.70">
@@ -45,10 +45,10 @@ The following example displays the popup as an HTML [table](https://html.spec.wh
             </tr>
             <tr>
               <th scope="row">Type</th>
-              <td itemprop="name">City</td>
+              <td itemprop="name">Ville</td>
             </tr>
             <tr>
-              <th scope="row">Website</th>
+              <th scope="row">Site Web</th>
               <td itemprop="website"><a href="https://ottawa.ca/" target="_blank">Ottawa</a></td>
             </tr>
           </tbody>
@@ -61,13 +61,13 @@ The following example displays the popup as an HTML [table](https://html.spec.wh
 
 ---
 
-## Specifications
+## Spécifications
 
-| Specification                                                |
+| Spécification                                                |
 |--------------------------------------------------------------|
-| [MapML properties element](https://maps4html.org/MapML/spec/#the-properties-element-0) |
+| [Élément MapML « properties » ](https://maps4html.org/MapML/spec/#the-properties-element-0) |
 
 ---
 
-> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/properties.md)
-> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
+> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/properties.md)
+> - [Discutez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

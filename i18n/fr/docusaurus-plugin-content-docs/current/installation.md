@@ -3,11 +3,11 @@ id: installation
 title: Installation
 ---
 
-## Install the `<mapml-viewer>` suite of custom elements
+## Installer les éléments personnalisés `<mapml-viewer>`.
 
-### Requirements
+### Exigences
 
-To install the `<mapml-viewer>` in your web site project, you use the Node Package Manager (npm), so to get that you must install [node.js](https://nodejs.org/en/download/). npm should be installed by the linked installers.  You can now obtain the latest version of the `<mapml-viewer>` suite of custom elements, by installing it in the node_modules directory of your web site directory, using the following commands:
+Pour installer les éléments `<mapml-viewer>` dans votre projet de site Web, vous devez utiliser Node Package Manager (npm). Pour ce faire, vous devez installer [node.js](https://nodejs.org/en/download/). Le gestionnaire npm devrait être installé par les installateurs liés. Vous pouvez maintenant obtenir la version la plus récente des éléments personnalisés `<mapml-viewer>`, en les installant dans le répertoire node_modules du répertoire de votre site Web à l’aide des commandes suivantes :
 
 ```bash
 $ cd ../test
@@ -21,15 +21,15 @@ found 0 vulnerabilities
 $
 ```
 
-Once installation is complete, you will have a node_modules/@maps4html/web-map-custom-element subdirectory, containing a `dist` folder with the required JavaScript, CSS and HTML files to support the `<mapml-viewer>`.  
+Une fois l’installation terminée, le sous-répertoire node_modules/@maps4html/web-map-custom-element sera créé, lequel contient un dossier `dist` avec les fichiers JavaScript, CSS et HTML requis pour prendre en charge les éléments `<mapml-viewer>`.
 
-#### Add the Script to a Web page
+#### Ajouter le script à une page Web 
 
-Add the following to the `<head>` of your HTML code:
+Ajoutez ce qui suit à l’élément `<head>` de votre code HTML :
 
 ```html
 <script type="module" src="./node_modules/@maps4html/web-map-custom-element/dist/mapml-viewer.js"></script>
 ```
 
-You can now use `<mapml-viewer>`, `<layer->` and the other elements described here on your web pages.
+Vous pouvez maintenant utiliser dans vos pages Web les éléments `<mapml-viewer>` et `<layer->` ainsi que les autres éléments décrits dans le présent document.
 

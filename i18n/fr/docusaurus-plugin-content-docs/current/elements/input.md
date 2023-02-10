@@ -4,189 +4,125 @@ title: "<map-input>"
 slug: /elements/input/
 ---
 
-The `<map-input>` element is an extended HTML `input` by `type` for use in Web 
-map `<map-extent>` elements.  The attributes that apply to the input depend on
-the `type` attribute.  There are several types of `<map-input>` that can be used.
+L’élément `<map-input>` est une entrée HTML `input` étendue par `type`, utilisée dans les éléments `<map-extent>` d’une carte en ligne. Les attributs qui s’appliquent à l’entrée dépendent de l’attribut `type`. Nous avons plusieurs types d’éléments `<map-input>` à notre disposition.
 
-The `<map-input>` declares a variable that will be set and used by the polyfill 
-according to its attributes, as the map changes viewport extent in response to 
-user gestures.
+L’élément `<map-input>` déclare une variable que le code polyfill définit pour son usage en fonction de ses attributs, puisque la carte modifie l’étendue de la fenêtre d’affichage en réaction à ce que fait l’utilisateur.
 
 <iframe src="../../../demo/map-input-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
-## Attributes
+## Attributs
 
 ### `name`
-Sets the name of the variable created by the input. The variable can then be 
-referenced by the URL template `<map-link>` [tref attribute](../link#tref), 
-using the `{name}` variable reference notation.
+Définit le nom de la variable créée par l’entrée. Le modèle d’adresse URL `<map-link>` [tref attribute](../link#tref) peut ensuite référencer la variable avec la notation de référence des variables `{name}`.
 
 ---
 ### `type`
-  Sets the **type** of the input.
+Définit le **type** de l’entrée.
 
 | Type          | Description                                          	|
 |--------------	|--------------------------------------------------------	|
-| zoom          | Integer value that ranges from 0 to some fixed number of values, depending on the projection, less than or equal to 25.|
-| location      | A location input captures **one** `axis` value of a two-dimensional point ( represented by a coordinate pair) from the map extent, e.g. `top-right`, or, for server queries, the location in the map where the user clicks or touches. |
-| width         | A width input captures the width of the map viewport's extent in standardized pixels  |
-| height        | A height input captures the height of the map viewport's extent in standardized pixels |
-| hidden        | Establishes a variable that may be used to pass a fixed or [fixed domain of values](#shard) to the server when requesting map resources. |
+| zoom          | Cette valeur entière varie de 0 à un nombre entier quelconque qui ne peut excéder 25, selon la projection.|
+| location      | L’entrée d’un emplacement capture **une** valeur d’`axis` d’un point à deux dimensions (représenté par une paire de coordonnées) dans l’étendue de la carte – p. exe., l’emplacement `top-right`, ou, lorsqu’il interroge un serveur, celui où l’utilisateur clique ou qu’il touche sur la carte. |
+| width         | L’entrée de la largeur capture la largeur de l’étendue de la fenêtre d’affichage de la carte en pixels normalisés  |
+| height        | L’entrée de la hauteur capture la hauteur de l’étendue de la fenêtre d’affichage de la carte en pixels normalisés |
+| hidden        | Cet attribut établit une variable pouvant servir à transmettre un (#shard)  fixe ou [un domaine fixe de valeurs] au serveur lorsque l’utilisateur demande des ressources cartographiques. |
 ---
 
 ### `value`
-In general, the `value` is set and used by the polyfill when generating URLs from
-[URL templates](../link#tref), for fetching server resources such as tiles, images 
-and map documents.
+En règle générale, le code polyfill définit l’attribut `value` qu’il utilise pour générer des adresses URL à partir de [modèles d’adresses URL](../link#tref) pour récupérer des ressources du serveur, comme des pavés, des images ou des cartes.
 
-In particular, `value` is used by authors  to specify values for inputs of 
-`type="zoom"`. In the case of `type="zoom"`, `value` defines the zoom level of 
-_associated_ **sibling** `<map-input type="location">` elements' `min` and `max`
-attribute values.  Allows authors to establish native / server resource bounds, 
-on a per-`<map-link tref="...">` basis.
+En particulier, les auteurs utilisent `value` pour préciser la valeurs d’entrée `type="zoom"`. Lorsque `type="zoom"`, `value` définit la valeur des attributs `min` et `max` du niveau de zoom des éléments **sibling** `<map-input type="location">` connexes. Permet aux auteurs d’établir des limites de ressources natives / du serveur sur la base de `<map-link tref="...">`.
 
-Inputs are _associated_ by their variables being referenced by a 
-`<map-link tref="https://example.org/{z}/{col}/{row}/" ...>` value.  The `{z}`, 
-`{row}`, and `{col}` variable references in the above example associate the 
-variables (`<map-input>`'s) named **z**, **row** and **col**.
+Les entrées sont  associées par leurs variables référencées par une valeur `<map-link tref="https://example.org/{z}/{col}/{row}/"...>`. Dans l’exemple ci-dessus, les références de variable `{z}`, `{row}` et `{col}` associent les variables (`<map-input>`'s) appelées **z**, **row** et **col**.
 
 ---
 ### `axis`
-This attribute applies only to inputs of `type="location"`. It establishes the axis 
-of the coordinate to be serialized as [a named variable](#). This value also 
-identifies the axis that the `min` and `max` attributes apply to, so that the 
-polyfill will not make requests for spatial resources (tiles etc) outside the 
-native axis bounds. Possible values of `axis` are:
+Cet attribut ne s’appliquent qu’aux entrées `type="location"`. Il établit l’axe de la coordonnée à sérialiser  sous forme de [variable nommée](#). Cette valeur identifie l’axe auquel s’appliquent les attributs `min` et `max`, de façon à ce que le code polyfill ne produise pas de requêtes visant des ressources spatiales (pavés, etc.) hors des limites de l’axe natif. `axis` peut prendre les valeurs suivantes :
 
-| Axis name | CRS | Description                                          	|
+| Nom de l’axe | CRS | Description                                          	|
 |-----------|-----|------------------------------------------------------	|
-|`row`      | tilematrix |Vertical axis, positive down the screen. The origin is at the upper left. Units are tiles. Each zoom level is a distinct tilematrix crs, so coordinate values apply only to that zoom level. |
-|`column`   | tilematrix |Horizontal axis, positive to the right. The origin is at the upper left. Units are tiles. Each zoom level is a distinct tilematrix crs, so coordinate values apply only to that zoom level.|
-|`easting`  | pcrs |Horizontal axis, positive to the right. The origin is defined a geographic location. Units are ususally meters, although for some projections (specifically WGS84), the transformation from geographic CRS, i.e. from longitude to easting is the [identity transformation](https://www.thefreedictionary.com/Identity+transformation), in which case the easting values could be _said_ to be in decimal degrees. **pcrs** stands for "projected coordinate reference system". Note that because pcrs is an 'infinite canvas', there exist locations for which a transformation from pcrs coordinates to gcrs coordinates is undefined. |
-|`northing` | pcrs |Vertical axis, positive to the right. The origin is defined a geographic location. Units are ususally meters, although for some projections (specifically WGS84), the transformation from geographic CRS, i.e. from latitude to northing is the [identity transformation](https://www.thefreedictionary.com/Identity+transformation), in which case the northing values could be _said_ to be decimal degrees. Note that because pcrs is an 'infinite canvas', there exist locations for which a transformation from pcrs coordinates to gcrs coordinates is undefined.|
-|`latitude` | gcrs | The latitude of a point on an ellipsoid is the angle between a line perpendicular to the surface of the ellipsoid at the given point and the plane of the equator. **gcrs** stands for "geographic coordinate reference system".|
-|`longitude`| gcrs | The longitude of a point specifies its east–west position on the reference body's (Earth's) surface.| 
-|`x`        | tcrs | Horizontal axis, positive to the right. The origin is at the upper left. Units are defined-size pixels. Each zoom level is a distinct tcrs, so coordinate values apply only to that zoom level. **tcrs** stands for "tiled coordinate reference system".  The tiles of each **tilematrix** crs are defined as aggregations of pixels in the corresponding zoom level **tcrs**.|
-|`y`        | tcrs | Vertical axis, positive down the screen. The origin is at the upper left. Units are defined-size pixels. The origin is at the upper left. Units are scaled pixels. Each zoom level is a distinct tcrs, so coordinate values apply only to that zoom level.|
-|`i`        | tile, map | Horizontal axis, positive to the right. Each tile, and the map viewport, has a defined-size pixel-based crs that has its origin at the upper left (of each tile in the case of the **tile** crs, and of the map viewport, in the case of the **map** crs). |
-|`j`        | tile, map | Vertical axis, positive down the screen. Each individual tile, and the map viewport has a defined-size pixel-based crs that has its origin at the upper left (of each tile in the case of the **tile** crs, and of the map viewport, in the case of the **map** crs).|
+|`row`      | tilematrix |Axe vertical positif, orienté vers le bas de l’écran et dont l’origine est en haut à gauche. Les unités de l’axe sont des pavés. Chaque niveau de zoom étant un système distinct de référence des coordonnées crs d’un tableau de pavés, les valeurs de coordonnées ne s’appliquent donc qu’à lui. |
+|`column`   | tilematrix |Axe horizontal positif, orienté vers la droite de l’écran et dont l’origine est en haut à gauche. Les unités de l’axe sont des pavés. Chaque niveau de zoom étant un système distinct de référence des coordonnées crs d’un tableau de pavés, les valeurs de coordonnées ne s’appliquent donc qu’à lui.|   
+|`easting`  | pcrs |Axe horizontal positif, orienté vers la droite de l’écran et dont l’origine est un emplacement géographique défini. Ses unités sont habituellement des mètres, mais avec certaines projections (WGS84 en particulier), la transformation à partir d’un CRS géographique, c’est-à-dire de la longitude, en abscisse constitue la [transformation de l’identité] (https://www.thefreedictionary.com/Identity+transformation). Dans ce cas, les valeurs en abscisse pourraient être exprimées en degrés décimaux. **pcrs** signifie projected coordinate reference system (système de référence des coordonnées projetées). Prenez note que, puisque le pcrs constitue un « canevas infini », il existe des emplacements pour lesquels la transformation des coordonnées pcrs en coordonnées gcrs n’est pas définie. | 
+|`northing` | pcrs |Axe vertical positif, orienté vers la droite de l’écran et dont l’origine est un emplacement géographique défini. Ses unités sont habituellement des mètres, mais avec certaines projections (WGS84 en particulier), la transformation à partir d’un CRS géographique, c’est-à-dire de la latitude, vers une valeur nulle constitue la [transformation de l’identité] (https://www.thefreedictionary.com/Identity+transformation). Dans ce cas, les valeurs nulles pourraient être exprimées en degrés décimaux. Prenez note que, puisque le pcrs constitue un « canevas infini », il existe des emplacements pour lesquels la transformation des coordonnées pcrs en coordonnées gcrs n’est pas définie.|
+|`latitude` | gcrs | La latitude d’un point situé sur un ellipsoïde est l’angle entre une ligne perpendiculaire à la surface de l’ellipsoïde en un point quelconque et le plan de l’équateur. **gcrs** signifie geographic coordinate reference system (système de références des coordonnées géographiques).|
+|`longitude`| gcrs | Longitude d’un point précis de la position est-ouest sur la surface de l’objet de référence (la Terre).| 
+|`x`        | tcrs | Axe horizontal positif, orienté vers la droite de l’écran et dont l’origine est en haut à gauche. Les unités sont des pixels de dimensions définies. Chaque niveau de zoom tcrs étant unique, les valeurs de coordonnées ne s’appliquent qu’à lui. **tcrs** signifie système de références des coordonnées en pavés. Les pavés de chaque crs **tilematrix** (tableau de pavés) sont définis comme étant l’agrégation de pixels dans le niveaux de zoom **tcrs** correspondants.|
+|`y`        | tcrs | Axe vertical positif, orienté vers le bas de l’écran et dont l’origine est en haut à gauche. Les unités sont des pixels de dimensions définies. Chaque niveau de zoom tcrs étant unique, les valeurs de coordonnées ne s’appliquent qu’à lui.|
+|`i`        | tile, map | Axe horizontal positif, orienté vers la droite de l’écran. Chaque pavé, tout comme la fenêtre d’affichage de la carte, a un crs de pavés de dimensions définies et dont l’origine est en haut à gauche (de chaque pavé dans le cas d’un crs **tile** – le système de référence des coordonnées en pavés – et de la fenêtre d’affichage de la carte dans le cas du crs **map**). |
+|`j`        | tile, map | Axe vertical positif, orienté vers le base de l’écran. Chaque pavé, tout comme la fenêtre d’affichage de la carte, a un crs de pavés de dimensions définies et dont l’origine est en haut à gauche (de chaque pavé dans le cas d’un crs **tile** et de la fenêtre d’affichage de la carte dans le cas du crs **map**).|
 
-When requesting a the coordinate axis of whole tile in the `OSMTILE` projection, 
-a location input might use a `<map-input name="y" type="location" units="tilematrix" axis="row">` 
-input to establish a variable named **y**, referenced by `{y}` in an associated URL template, 
-which would serialize the **tilematrix** crs `row` axis values.  A series of 
-location events is genereated by the polyfill as required by the map to cover 
-the viewport in tiles.  
+Lorsque l’utilisateur veut obtenir l’axe de coordonnées du pavé en entier dans la projection `OSMTILE`, il peut entrer l’emplacement avec `<map-input name="y" type="location" units="tilematrix" axis="row">` pour définir la variable **y** référencée par `{y}` dans un modèle d’adresses URL connexe qui sérialise les valeurs de l’axe `row` du crs **tilematrix**. Une série d’événements d’entrée d’emplacement est générée par le code polyfill, comme en a besoin la carte pour couvrir de pavés la fenêtre d’affichage de la carte.  
 
 ---
-### `units`
+### `units` 
 
-Identifies the associated specific coordinate reference system that a location 
-input event is referred to.  The term "projection" in MapML is synonymous with the set
-of CRS that are related together by the projection name. In all cases for any projection,
-there exist a set of CRS that are related mathematically. These CRS are known
-and identified within the namespace of the projection name by the following
-table of keyword values:
+Identifie le système de référence des coordonnées connexe spécifique auquel l’événement d’entrée d’emplacement est référencée. Dans MapML, le terme « projection » est synonyme de l’ensemble de crs reliés entre eux par le nom de la projection. Dans tous les cas et quelle que soit la projection, il existe un ensemble de crs dont chacun est reliés mathématiquement à l’autre. Ces crs sont connus et identifiés dans l’espace de nommage du nom de la projection par le tableau des valeurs de mots-clés suivant :
 
 
 | CRS | Description |
 |------|-------------|
-| tcrs | For each zoom level (i.e. at a pre-defined scale denominator value), locations are expressed in terms of scaled pixels, with the origin of pixel space at the upper left corner.  The pixel coordinates of a location at a single zoom level are independent of the pixel coordinates of a location any other zoom level.  In other words, you need to know the zoom level of a tcrs coordinate in order to locate it on a map or otherwise process it. |
-| tilematrix | Each zoom level has an array of tiles, called a tilematrix.  The individual tiles constitute the coordinates in this CRS, and the axes are know as `row` and `column`.  The tiles are defined as squares of 256 pixels in the associated tcrs of the particular zoom level. |
-| pcrs | Projected CRS (pcrs) are defined by a mathematical relationship with an underlying gcrs, using a technique called "projection". pcrs coordinates are scale- and zoom level-independent, and are designed to represent geographic coordinates on a planar surface, such as a device screen. The measurement units of pcrs coordinates is _usually_ meters (a notable exception being pcrs coordinates in the `WGS84` projection). |
-| gcrs | Geographic coordinates are referenced to various ellipsoids, and are not necessarily comparable across projections.  A common ellipsoid today is WGS 84, which is defined and used by the global positioning satellite (GPS) constellation. |
-| map | The map CRS is dynamic, in the sense that it has its origin at the upper left of the user's viewport, with scaled pixels as units.  This is used to identify image coordinates for use, typically by WMS and similar services which use a virtual image to enable query of map feature property information, without necessarily transferring the features over the network. |
-| tile | Each tile in any zoom level has an implicit scaled-pixel coordinate system ranging from 0 to 255 in both horizontal and vertical directions. These coordinates are used by WMTS and similar services to identify a pixel for query of feature property values, without transferring the feature geometry over the network. |
+| tcrs | Pour chaque niveau de zoom (c.-à-d. à une valeur prédéfinie du dénominateur d’échelle), les emplacements sont exprimés en termes de pixels mis à l’échelle, avec l’origine de l’espace des pixels se situant dans le coin supérieur gauche. Les coordonnées des pixels d’un emplacement affiché à un niveau de zoom quelconque sont indépendantes de celles d’un emplacement affiché à tout autre niveau de zoom. Autrement dit, vous devez connaître le niveau de zoom d’une coordonnée du système de références des coordonnées en pavés tcrs pour la localiser sur la carte ou la traiter d’une façon ou d’une autre. |
+| tilematrix | Chaque niveau de zoom a un tableau de pavés appelé tilematrix. Chaque pavé constitue les coordonnées dans ce crs (système de référence des coordonnées), et les axes sont appelés `row` et `column`. Les pavés sont définis comme étant des carrés de 256 pixels d’arête dans le tcrs connexe, au niveau de zoom donné. |
+| pcrs | Le système de référence des coordonnées projetées (pcrs) est défini par une relation mathématique avec un système de référence des données géodésique gcrs sous-jacent au moyen d’une technique dite « de projection ». Les coordonnées du pcrs sont indépendantes de l’échelle et du niveau de zoom, et sont conçues pour représenter des coordonnées géographiques sur une surface plane, comme l’écran d’un appareil. Les unités de mesure des coordonnées pcrs sont habituellement des mètres (à l’exception notable des coordonnées pcrs dans la projection `WGS84`). |
+| gcrs | Les coordonnées géographiques sont référencées à divers ellipsoïdes et ne sont pas nécessairement comparables d’une projection à l’autre. WGS 84 constitue un ellipsoïde courant à l’heure actuelle, et est défini et utilisé par la constellation des satellites de positionnement mondial (GPS). |
+| map | Le CRS de la carte est dynamique, en ce sens que son origine se situe en haut à gauche dans la fenêtre d’affichage de l’utilisateur, avec des pixels mis à l’échelle comme unités. Cela permet d’identifier les coordonnées d’image à utiliser, habituellement par les services de cartes Web et d’autre services semblables, qui utilisent une image virtuelle pour permettre la recherche de données sur les propriétés d’une caractéristique présente sur la carte, sans nécessairement transférer les caractéristiques sur le réseau. |
+| tile | Peu importe le niveau de zoom, chaque pavé a un système implicite de coordonnées à pavés mis à l’échelle allant de 0 à 255, tant dans le sens horizontal que vertical. Ces coordonnées sont utilisées par le Service Web des pavés cartographiques (WMTS) et d’autres services semblables pour identifier un pixel qui servira à rechercher les valeurs des propriétés de la caractéristique, sans transférer la géométrie de cette dernière sur le réseau. |
 
-Sometimes, location inputs are used to generate "brownie-cutter" (square) requests 
-for tiles from WMS and similar un-tiled services.  In such a case, it is possible 
-for the `units` to be specified as `tilematrix`, implying that the location event 
-expected is that of a tile, and the `position` keyword is then used to describe
-the corner of the tile for which the coordinate should be serialized.  In such a
-case, the `axis` value may be specified as `easting` or other axis name  
-associated with the projection, to obtain coordinate of the corner of the tile 
-that is being processed by the polyfill: 
+Il arrive parfois qu’on utilise des entrées d’emplacement pour générer des demandes de découpage en carrés des pavés à partir des services de cartes Web (WMS) ou des services semblables qui n’utilisent pas les pavés. Dans un tel cas, on peut préciser les `units` comme un tableau de pavés `tilematrix`, ce qui implique que l’événement d’entrée d’emplacement attendu est celui d’un pavé, et le mot-clé `position` est ensuite utilisé pour décrire le coin du pavé, coin à partir duquel la coordonnée doit être sérialisée. Dans ce cas, la valeur `axis` peut être précisée comme `easting` (abscisse), ou un autre nom d’axe associé à la projection, pour obtenir la coordonnée du coin du pavé qui est traité par le code polyfill : 
 
 `<map-input name="xmin" type="location" units="tilematrix" position="top-left" axis="easting">`
 
-Internally, the crs of the requested coordinate is deduced from the axis 
-name, instead of requiring the author to explicitly specify the axis' crs as an 
-additional attribute of the `<map-input>`. 
+Intrinsèquement, le crs de la coordonnée demandée est déduit du nom de l’axe plutôt qu’en demandant à l’auteur de préciser explicitement le crs de l’axe comm un autre attribut de `<map-input>`. 
 
 ---
 
 ### `position`
 
-Allows the author to specify a predefined corner of the viewport or tile to be used
-as the location value to be serialized. If `position` is not present, the input
-location coordinates will be generated by user click or touch on the map, which 
-is used to generate interactive server queries.
+Permet à l’auteur de préciser un coin prédéfini de la fenêtre d’affichage ou du pavé, qui est utilisé comme valeur d’emplacement à sérialiser. S’il n’y a pas de `position`, les coordonnées d’entrée de l’emplacement sont générées lorsque l’utilisateur clique sur la carte ou touche celle-ci, et qui servent à générer des requêtes interactives destinées au serveur.
 
-| position keyword | keyword description|
+| Mot-clé de position| description du mot-clé |
 |------------------|--------------------|
-| top-left | Identifies the location at the top left corner of the tile or viewport |
-| top-right | Identifies the location at the top right corner of the tile or viewport |
-| bottom-left | Identifies the location at the bottom left corner of the tile or viewport |
-| bottom-right | Identifies the location at the bottom right corner of the tile or viewport |
+| top-left | Identifie l’emplacement dans le coin supérieur gauche du pavé ou de la fenêtre d’affichage |
+| top-right | Identifie l’emplacement dans le coin supérieur droit du pavé ou de la fenêtre d’affichage |
+| bottom-left | Identifie l’emplacement dans le coin inférieur gauche du pavé ou de la fenêtre d’affichage |
+| bottom-right | Identifie l’emplacement dans le coin inférieur droit du pavé ou de la fenêtre d’affichage |
 
-Other values of `position` are possible, but are not implemented yet.
+`position` peut prendre d’autres valeurs, mais aucune n’est mise en œuvre pour le moment.
 
 ---
 ### `rel`
 
-Specifies the entity to which the `position` applies. Possible values are `tile` and `image`.
-The default value, if unspecified, is `image`.  It is used to help identify what crs the 
-coordinate serialized by the input exists in. 
+Précise l’entité à laquelle s’applique la `position`. Les valeurs possibles sont `tile` et `image`. Si l’on ne précise pas de valeur, `image` est utilisée par défaut. `rel`  permet d’identifier plus facilement le crs qui contient la coordonnées sérialisée par l’entrée. 
 
 ---
 ### `min`
-Establishes the minimum of the axis on the server .  Requests for coordinates less than
-this value will not be created by the polyfill. 
+Établit la valeur minimale de l’axe dans le serveur. Le code polyfill ne crée aucune demande pour obtenir des coordonnées dont la valeur est inférieure à `min`. 
 
 ---
 ### `max`
-Establishes the maximum of the axis on the server.  Requests for coordinates greater than
-this value will not be created by the polyfill.
+Établit la valeur maximale de l’axe dans le serveur. Le code polyfill ne crée pas les demandes pour obtenir des coordonnées dont la valeur est supérieure à `max`.
 
 ---
 ### `step`
-Sets the zoom interval according to which resources will be requested within the
-zoom range. The step is always calculated from a base value of 0.  At zoom values 
-that fall within a step interval, resources will be requested as required, and
-scaled to the current zoom level.  For example, with a min=0 and a max=7 for 
-a given zoom input with a step=4, tiles will be requested at only zoom=0 and scaled
-to zoom values of 1, 2 and 3 as the map is rendered at those levels.  Use of this
-attribute can conserve user bandwidth while having little visual effect, depending
-on the nature of the content.
+Définit la plage de zoom en fonction des ressources qui sont demandées à l’intérieur de cette plage. `step` est toujours calculé à partir d’une valeur de base de 0.  Lorsque la valeur du niveau de zoom se situe à l’intérieur de l’intervalle `step`, les ressources sont demandées lorsque nécessaire et mises à l’échelle au niveau de zoom utilisé. Par exemple, si min=0 et que max=7 pour le niveau de zoom entré avec step=4, les pavés ne sont demandés que qu’au niveau de zoom=0 et mis à l’échelle avec les niveaux de zoom 1, 2 et 3 alors que la carte est rendue à ces niveaux. Utiliser cet attribut permet d’économiser la largeur de bande dont profite l’utilisateur et n’introduit qu’un léger effet visuel qui varie avec la nature du contenu.
 
 ---
 ### `shard`
 
-The boolean `shard` attribute is used with a `hidden` variable.
+L’attribut booléen `shard` est utilisé avec une variable `hidden`.
 
-A `<map-input shard list="datalist-id>` indicates that a set of values specified 
-by an associated `map-datalist` element will be used in a round-robin fashion for 
-template variable substitution and submission in map requests.  This is useful for 
-[domain sharding](https://developer.mozilla.org/en-US/docs/Glossary/Domain_sharding), 
-implemented by OpenStreetMap (for example), to increase parallelism of tile requests
-and thereby to improve performance. 
+`<map-input shard list="datalist-id>` indique que chacune des valeurs précisées dans un élément `map-datalist` connexe sera utilisée à tout de rôle (round robin) pour substituer et soumettre les variables d’un modèle dans les demandes pour obtenir une carte. Cela s’avère utile avec la [fragmentation de domaine] (https://developer.mozilla.org/en-US/docs/Glossary/Domain_sharding), mise en œuvre (notemment) par OpenStreetMap, pour accroître le parallélisme des demandes de pavés et donc améliorer le rendement.
 
-When specifying a boolean attribute such as `shard` in MapML,
-care must be taken to encode the attribute according to the document / media type in
-which the element is being used.  In XML documents, boolean attributes must be
-encoded as `shard="anything"`, so as to respect XML parsing rules. In the
-HTML document, i.e. as inline layer content, the attribute should be encoded per
-HTML's [boolean attribute rules](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#boolean_attributes).
+Lorsque l’utilisateur précise un attribut booléen, comme `shard`, dans MapML, il doit faire attention de le coder en fonction du type de document ou de média dans lequel sert l’élément. Dans le cas d’un document XML, il faut coder l’attribut booléen `shard="anything"` en appliquant les règles d’analyse syntaxique de ce format. S’il s’agit d’un document HTML, c.-à-d. que le contenu de la couche est en ligne, l’utilisateur doit encoder l’attribut en suivant les [règles concernant les attributs booléens] (https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#boolean_attributes) du langage HTML.
 
 ---
 ### `list`
   
-The `<map-input list="...">` attribute associates a `<map-datalist>` element that
-provides the values to be used (via the `<map-datalist>`'s child `<map-option>`
-elements).  See [shard](#shard) for more details.
+L’attribut `<map-input list="...">` associe un élément `<map-datalist>` qui fournit les valeurs à utiliser par l’intermédiaire des éléments `<map-option>` de l’élément-enfant `<map-datalist>`. Voir la section [shard](#shard) pour plus de détails.
 
 ---
-## Examples
+## Exemples
 
 ### Input step
 
@@ -209,28 +145,23 @@ elements).  See [shard](#shard) for more details.
 </mapml-viewer>
 ```
 
-### Input rel=tile to generate WMS requests for tiles
+### L’entrée rel=tile génère une demande soumise aux services de cartes Web (WMS) pour obtenir des pavés.
 
-WMS behaviour can seem slow, even when it is fast. Painting the map using tiles
-generated by individual WMS GetMap requests can improve users' impression of your
-map, although it is not advisable when the layer being requested contains text
-labels, which may be duplicated on adjacent tiles many times over.
+Les WMS peuvent être lents à réagir, même s’ils le font rapidement en réalité. Dessiner la carte à partir de pavés générés par autant de demandes GetMap soumises aux WMS peut améliorer la qualité de votre carte aux yeux de l’utilisateur. En revanche, il est déconseillé de procéder ainsi lorsque la couche demandée contient des étiquettes susceptibles d’être reproduites dans chacun des nombreux pavés adjacents.
 
 ```html
 <mapml-viewer projection="CBMTILE" lat="60" lon="-95" zoom="2" controls>
-  <layer- label="Tiled WMS GetMap" checked>
+  <layer- label="Demande de pavés WMS GetMap" checked>
     <map-extent units="CBMTILE">
-      <!-- the units and axis attributes here appear at odds --> 
-      <!-- however for rel="tile" and units="tilematrix" together tell the map that
-           the event being serialized is relative to a tile in a tilematrix coordinate
-           system (tcrs) -->
+      <!—ici, les unités et les attributs d’axe semblent contradictoires --> 
+      <!—cependant, rel="tile" et units="tilematrix" informent tous les deux la carte que l’événement sérialisé a trait à un pavé dans le tcrs -->
       <map-input name="txmin" type="location" rel="tile" position="top-left" axis="easting" units="tilematrix" ></map-input>
-      <!-- in this case, position refers to a position on the tile that is to be fetched -->
+      <!—dans ce cas, position renvoie à une position sur le pavé à récupérer -->
       <map-input name="tymin" type="location" rel="tile" position="bottom-left" axis="northing" units="tilematrix" ></map-input>
       <map-input name="txmax" type="location" rel="tile" position="top-right" axis="easting" units="tilematrix" ></map-input>
       <map-input name="tymax" type="location" rel="tile" position="top-left" axis="northing" units="tilematrix" ></map-input>
       <map-link rel="tile" tref="https://datacube.services.geo.ca/ows/msi?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/png&TRANSPARENT=TRUE&STYLES=msi-color&VERSION=1.3.0&LAYERS=msi&WIDTH=256&HEIGHT=256&CRS=EPSG:3978&BBOX={txmin},{tymin},{txmax},{tymax}" ></map-link>
-      <!-- a zoom input is necessary, but that's a bug: 
+      <!—il faut préciser un niveau de zoom, mais il s’agit d’un bogue : 
            https://github.com/Maps4HTML/Web-Map-Custom-Element/issues/669 -->
       <map-input name="z" type="zoom" value="25" min="0" max="25"/>
     </map-extent>
@@ -240,14 +171,14 @@ labels, which may be duplicated on adjacent tiles many times over.
 
 ---
 
-## Specifications
+## Spécifications
 
-| Specification                                                |
+| Spécification                                                |
 |--------------------------------------------------------------|
-| [MapML input element](https://maps4html.org/MapML/spec/#the-input-element-0) |
-| [HTML input element](https://html.spec.whatwg.org/multipage/input.html#the-input-element) |
+| [Élément input de MapML] (https://maps4html.org/MapML/spec/#the-input-element-0) |
+| [Élément input en HTML] (https://html.spec.whatwg.org/multipage/input.html#the-input-element) |
 
 ---
 
-> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/input.md)
-> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
+> - [Modifiez cette page sur **Github**] (https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/input.md)
+> - [Clavardez avec nous sur **Gitter**] (https://gitter.im/Maps4HTML/chat)

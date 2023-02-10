@@ -4,48 +4,48 @@ title: "<map-select>"
 slug: /elements/select/
 ---
 
-The `<map-select>` element is an extension of HTML `<select>` and is used as a child of the `<map-extent>` element. The `<map-select>` element declares a variable with predefined `<map-option>'s` which are selected through the layer control and used by the polyfill.
+L’élément `<map-select>` est une extension de l’élément HTML `<select>`. Il est utilisé comme enfant de l’élément `<map-extent>`. L’élément `<map-select>` déclare une variable avec des éléments prédéfinis `<map-option>’s`, lesquels sont sélectionnés dans le contrôle des couches et utilisés par le polyfill.
 
-The `<map-select>` element contains one or more `<map-option>` elements.
+L’élément `<map-select>` contient un ou plusieurs éléments `<map-option>`.
 
-<iframe src="../../../demo/map-select-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
+<iframe src="../../../demo/map-select-demo/" title="Démo en MapML" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
-:::tip
+:::astuce
 
-Change the `<map-select>` option through the layer control (top-right of the map) to view data for different timestamps.
+Pour visualiser les données selon différents horodatages, modifiez l’option `<map-select>` dans le contrôle des couches.
 
 :::
 
-## Attributes
+## Attributs 
 
 ### `name`
-Sets the name of the variable created by the input. The variable can then be 
-referenced by the URL template `<map-link>` [tref attribute](../link#tref), 
-using the `{name}` variable reference notation.
+Définit le nom de la variable créée par l’entrée. La variable peut ensuite être référencée par le modèle URL `<map-link>` [tref attribute](../link#tref), à l’aide de la notation de référence de la variable `{name}`. 
+ 
+
 
 ---
 
 ### `id`
-Sets the id of the `<map-select>` element, identifies the select within the current document.
+Définit l’ID de l’élément `<map-select>`, lequel indique l’élément sélectionné dans le document actuel.
 
 ---
 
-## Child Elements
+## Éléments enfants 
 
 ### `<map-option>`
 
-This element contains the options for the `<map-select>` element. A `<map-select>` element can contain one or more `<map-option>` elements.
+Cet élément contient les options de l’élément `<map-select>`. Un élément `<map-select>` peut contenir un ou plusieurs éléments `<map-option>`.
 
 ---
 
-## Specifications
+## Spécifications
 
-| Specification                                                |
+| Spécification                                                |
 |--------------------------------------------------------------|
-| [MapML style element](https://maps4html.org/MapML/spec/#the-select-element-0) |
-| [HTML style element](https://html.spec.whatwg.org/multipage/form-elements.html#the-select-element) |
+| [Élément MapML « style »](https://maps4html.org/MapML/spec/#the-select-element-0) |
+| [Élément HTML « style »](https://html.spec.whatwg.org/multipage/form-elements.html#the-select-element) |
 
 ---
 
-> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/select.md)
-> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
+> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/select.md)
+> - [Discutez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

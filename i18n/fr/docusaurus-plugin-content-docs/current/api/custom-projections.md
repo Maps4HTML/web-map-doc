@@ -6,11 +6,11 @@ slug: /api/custom-projections
 
 ## Introduction
 
-MapML defines a few built-in tiled CRS projections, including Web Mercator (OSMTILE), pseudo-plate carrée (WGS84), and  Canada's base map tile grid (CBMTILE). 
+MapML définit quelques projections CRS (Système de référence des coordonnées) intégrées en pavés, dont la projection Web Mercator (OSMTILE), la projection pseudo-plate carrée (WGS84) et la grille de pavés de base du Canada (CBMTILE). 
 
-The `<mapml-viewer>` custom element provides the custom projections API, which gives you the ability to create custom projections and use them in the `<mapml-viewer>` element, defined using extended JSON-based "proj4" syntax, supported by the proj4js library.
+L’élément personnalisé `<mapml-viewer>` fournit l’interface de programmation d’applications (API) personnalisée des projections, qui vous permet de créer vos propres projections et de les utiliser dans l’élément `<mapml-viewer>`, défini avec la syntaxe "proj4" étendue du langage JSON et prise en charge par la bibliothèque proj4js.
 
-For example:
+Exemple :
 
 ```html
 <!doctype html>
@@ -36,8 +36,8 @@ For example:
 </head>
 <body>
   <mapml-viewer projection="ATLAS_POLAR_MAP" zoom="2" lat="83.48919" lon="-87.7687" controls>
-    <layer- label="Atlas of Canada Polar Wall Map" checked>
-    <map-link rel="license" title="Canadian Federal Geospatial Platform" href="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN/MapServer/"></map-link>
+    <layer- label="Carte polaire murale de l’Atlas du Canada" checked>
+    <map-link rel="license" title="Plateforme géospatiale fédérale canadienne" href="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN/MapServer/"></map-link>
       <map-extent units="ATLAS_POLAR_MAP">
         <map-input type="zoom" name="z" min="0" max="6" value="6" ></map-input>
         <map-input type="location" name="x" axis="column" units="tilematrix" min="116" max="186"></map-input>
@@ -51,22 +51,22 @@ For example:
 </html>
 ```
 
-### Details
+### Détails
 
-We won't discuss the actual `<mapml-viewer>` element here, except to say that the map `projection` attribute should have the exact same value of the `projection` member of the JSON object you pass to the custom projections API's `defineCustomProjection` method, and every `<layer->` element in the map must declare and be encoded in that coordinate system, in order to display correctly.
+Nous n’examinerons pas l’élément `<mapml-viewer>` lui-même ici, sauf pour dire que l’attribut `projection` de la carte doit avoir la même valeur que le membre `projection` de l’objet JSON que vous transmettez à la méthode `defineCustomProjection` de l’API personnalisée des projections, et que chaque élément `<layer->` présent dans la carte doit comporter une déclaration et être programmé dans ce système de coordonnées pour s’afficher correctement.
 
-The custom projections API is provided by the `<mapml-viewer>` element.  In a browser implementation, the API might be defined on the window object, but because of the ES6 modules used by custom elements, it is convenient to locate it on the mapping element which uses it.
+L’API personnalisée des projections est fournie par l’élément `<mapml-viewer>`. Dans un navigateur, elle peut être définie sur l’objet de fenêtre. Toutefois, parce que des éléments personnalisés utilisent des modules ES6, il est pratique de la placer sur l’élément de mappage qui l’utilise.
 
-To successfully call the `defineCustomProjection` method, you need to encode the projection method and parameters as members of a JSON string.  The process of doing this is not always simple, but is helped by resources such as https://spatialreference.org, where you can obtain the proj4 version of virtually any CRS definition. 
+Pour que l’appel de la méthode `defineCustomProjection` réussisse, vous devez coder la méthode de projection et les paramètres de projection sous la forme de membres d’une chaîne JSON. La marche à suivre pour ce faire n’est pas toujours simple, mais diverses ressources peuvent vous faciliter la vie, comme https://spatialreference.org où vous pouvez obtenir la version proj4 de pratiquement n’importe quelle définition SRC.
 
-Remember to enclose member names in quotes followed by a colon: e.g. "projection": "MY_PROJECTION_NAME".  String values are also enclosed in quotes, and numbers and arrays following normal [JSON syntax](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON).
+N’oubliez pas de mettre le nom du membre entre guillemets, suivi d’un deux-points. Par exemple, "projection": "NOM_DE_MA_PROJECTION". Les valeurs comportant une chaîne sont également insérées dans des guillemets, et les nombres et tableaux suivent la [syntaxe JSON] normale (https://developer.mozilla.org/fr/docs/Learn/JavaScript/Objects/JSON).
 
-There are several required members to a custom projection definition:
+La définition d’une projection personnalisée requiert plusieurs membres.
 
-- `projection` - this is a string name you give to your projection. We recommend using UPPERCASE to make projection names stand out. Colon ":" characters in the name are not permitted, because these names should not be confused with EPSG: or ogc: URI code lists, because what is being defined here is a CRS that has Web mapping specific parameters, discussed below.
-- `proj4string` - This string is processed by [proj4js](http://proj4js.org/), so needs to provide parameters of a projection method supported by that library, in the format that it supports.
-- `origin` - an array of two numbers representing the origin of the tile grid in coordinates of the projected coordinate system, typically meters.  The origin is always at the upper left of the tile grid space, and the column and row numbers increase to the right and down, respectively, following the WMTS standard.  If your tile source is configured according to the "TMS" community standard, you
-- `resolutions` - an array of numbers, sorted in descending order of size in meters, of the "real-world" dimensions of a square pixel. The resolution is calculated using a nominal pixel size of 0.28mm, defined by the WMTS standard. NOTE THIS IS NOT TYPICALLY THE SAME VALUE THAT IS USED BY ESRI TILE SERVICES, WHICH USE 96 DPI AS THE NOMINAL SIZE (settable). Because scale varies over the extent of any projected coordinate system, the pixel resolution is usually valid only in limited locations, for example in Web Mercator, along the equator. The locations where pixel resolution is valid depend on the projection method and parameters.  The set of resolutions must match the set of resolutions of tiles in a cache, if you intend to use your custom projection with an existing tile service.
-- `bounds` - an array of two arrays of coordinate pairs, defining a bounding box around part of the projected coordinate system, in meters typically. Requests should be valid and latitude / longitude are defined within these bounds.  Requests for maps, tiles and coordinate transformations that fall completely outside these bounds will not execute, preventing redundant traffic and errors.  
-- `tilesize` - tiles are always square, and usually 256 pixels on a side.  You can specify another size here as an integer value.  Values of 256, 512, 1024, 2048 or 4096 should work.
+- `projection` - Nom (chaîne de caractères) donné à votre projection. Nous recommandons d’utiliser uniquement des majuscules pour mettre en évidence le nom des projections. Vous ne pouvez pas mettre un deux-points (":") dans le nom, car ceci créerait une confusion avec celui des listes de codes URI EPSG: ou ogc:. En effet, nous définissons ici une projection CRS qui comporte des paramètres propres au mappage en ligne, dont nous parlerons plus loin.
+- `proj4string` - Cette chaîne étant traitée par [proj4js](http://proj4js.org/), il faut fournir les paramètres d’une méthode de projection prise en charge par cette bibliothèque et dans un format compatible avec celle-ci.
+- `origin` - Tableau à deux nombres qui représentent l’origine de la grille de pavés en coordonnées du système de coordonnées projetées, dont les unités sont habituellement des mètres. L’origine se trouve toujours dans le coin supérieur gauche de la grille de pavés, et les numéros de colonnes et de rangées augmentent de façon séquentielle, respectivement vers la droite et vers le bas, comme le prévoit la norme du service Web des pavés cartographiques (SWPC).  
+- `resolutions` - Tableau de nombres, triés selon leur taille en mètres en ordre décroissant, des dimensions « réelles » d’un pixel carré. La résolution est calculée sur la base d’une taille de pixel nominale établie à 0,28 mm, telle que définie par la norme SWPC. PRENEZ NOTE QUE LES SERVICES DE PAVÉS DE L’ENVIRONMENTAL SYSTEMS RESEARCH INSTITUTE (ESRI) NE SE SERVENT HABITUELLEMENT PAS DE CETTE VALEUR PARCE QU’ILS UTILISENT UNE TAILLE NOMINALE DE 96 POINTS PAR POUCES (PPP) (réglable). Puisque l’échelle varie dans l’étendue de tout système de coordonnées projetées, la résolution en pixels n’est habituellement valide que là où les dimensions sont limitées, par exemple le long de l’équateur dans la projection Web Mercator. Les endroits où la résolution en pixels est valide changent en fonction de la méthode et des paramètres de la projection. Si vous voulez utiliser votre projection personnalisée avec un service de pavés existants, l’ensemble de résolutions doit correspondre à celui des pavés dans un cache.
+- `bounds` - Tableau composé de deux tableaux de paires de coordonnées, qui définit une zone de délimitation autour d’une partie du système de référence des coordonnées projetées, habituellement en mètres. Les requêtes doivent être valides, la latitude et la longitude étant définies à l’intérieur de ces limites. Les requêtes visant des cartes, des pavés et des transformations de coordonnées qui dépassent ces limites ne seront pas exécutées pour éliminer le trafic redondant et les erreurs.  
+- `tilesize` - Les pavés sont toujours carrés et ont habituellement 256 pixels d’arête, mais vous pouvez ajuster cette dimension par un nombre entier. Les nombres 256, 512, 1024, 2048 ou 4096 devraient tous fonctionner.
 
