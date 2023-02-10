@@ -23,4 +23,4 @@ Le mode de débogage peut être activé dans le menu contextuel de la carte (rig
 
 ### API de la carte 
 
-Le mode de débogage peut aussi être activé à partir de l’API du visualiseur. Voir la méthode [`toggleDebug()` ](../api/mapml-viewer-api.md#toggledebug) pour en savoir plus.
+Le mode de débogage peut aussi être activé à partir de l’API du visualiseur. Voir la méthode [`toggleDebug()` ](../api/mapml-viewer-api.mdx#toggledebug) pour en savoir plus.
