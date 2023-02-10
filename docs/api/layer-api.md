@@ -65,6 +65,7 @@ in the layer control, and it will not be visible in the map viewport.  If a laye
 becomes not-disabled, through manipulation of the map, for example, the layer
 will become interactable in the layer control, and should be visible in the 
 map viewport.
+
 ---
 
 HTMLLayerElement.label provides read/write access to the label used in the layer control for
