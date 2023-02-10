@@ -4,25 +4,23 @@ title: Mode débogage
 slug: /resources/debug-mode
 ---
 
-This function allows users to debug both the map and the coordinate system of the map. It adds 
-the following visuals to the map; tile outlines, projection center, layer extents, and a debug
-panel that display's the mouse's current location in the various coordinate systems.
+Cette fonction permet de déboguer la carte et le système de coordonnées de la carte. Elle permet d’ajouter les éléments visuels suivants à une carte : contours de pavés, centre de projection et étendues des couches. Elle contient aussi un volet de débogage qui indique l’emplacement actuel du pointeur de la souris dans les différents systèmes de coordonnées.
 
-![The map in debug mode](../assets/img/debug.png)
+![Carte en mode débogage](../assets/img/debug.png)
 
-- The dotted red line represents the tile boundaries at the current zoom level
-- the solid red line represents the layer's extent, if there are multiple layers the solid line may be a variety of colours
-- The bottom left panel displays the current mouse's position
+- Le trait pointillé rouge représente les limites de pavés selon le niveau de zoom actuel.
+- Le trait plein rouge représente l’étendue de la couche. Si la carte contient plusieurs couches, le trait plein peut être de différentes couleurs.
+- Le volet inférieur gauche indique l’emplacement actuel du pointeur de la souris.
 
-## Accessing Debug Mode
+## Accès au mode de débogage 
 
-### Map's Context Menu
+### Menu contextuel de la carte
 
-Debug mode can be enabled through the map context menu (right-click or Shift-F10):
+Le mode de débogage peut être activé dans le menu contextuel de la carte (right-click or Shift-F10):
 
-![The map in debug mode](../assets/img/toggle-debug.gif)
+![La carte en mode débogage](../assets/img/toggle-debug.gif)
 
 
-### Map's API
+### API de la carte 
 
-Toggling debug mode can also be done through the viewer's API, see the [`toggleDebug()` method](../api/mapml-viewer-api.md#toggledebug) for more.
+Le mode de débogage peut aussi être activé à partir de l’API du visualiseur. Voir la méthode [`toggleDebug()` ](../api/mapml-viewer-api.md#toggledebug) pour en savoir plus.

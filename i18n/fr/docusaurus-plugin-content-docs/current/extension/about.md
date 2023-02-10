@@ -4,6 +4,6 @@ title: À propos de l'extension
 slug: /extension/about
 ---
 
-As MapML is currently not part of the native browser behaviour, the MapML extension was created to simulate the browser UI features that may be required to natively support maps. 
+Puisque MapML ne fait actuellement pas partie du comportement du navigateur natif, l’extension MapML a été créée pour simuler les fonctionnalités de l’interface utilisateur qui pourraient être nécessaires pour prendre en charge les cartes de façon native. 
 
-The extension features are described [here](./features.md).
+Les fonctionnalités de cette extension sont décrites [ici](./features.md).

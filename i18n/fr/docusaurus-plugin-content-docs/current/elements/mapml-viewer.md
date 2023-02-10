@@ -4,7 +4,7 @@ title: "<mapml-viewer>"
 slug: /elements/mapml-viewer/
 ---
 
-The `<mapml-viewer>` element is the main element you can use to put a custom Web map on your page.  To create a (really) simple Web map, you might use it like this:
+L’élément `<mapml-viewer>` est le principal élément à utiliser pour ajouter une carte Web dans une page. Voici comment l’utiliser pour créer une carte Web (très) simple :
 
 ```html
 <!doctype html>
@@ -12,12 +12,11 @@ The `<mapml-viewer>` element is the main element you can use to put a custom Web
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>A Simple Web Map[tm]</title>
+  <title>Carte Web simple [carte topographique]</title>
   <script type="module" src="web-map/mapml-viewer.js"></script>
   <style>
     html, body {
-    height: 100%; /* These styles are required if you wish to use a % based
-                     height value on the mapml-viewer element. */
+    height: 100%; /* Ces styles sont nécessaires si vous souhaitez utiliser une valeur de hauteur basée sur un pourcentage pour l’élément « mapml-viewer ». */
     }
   </style>
 </head>
@@ -31,103 +30,103 @@ The `<mapml-viewer>` element is the main element you can use to put a custom Web
 
 <iframe src="../../../demo/mapml-viewer-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
-Note that for the above example to run properly on your own site, you need to get a built copy of the `<mapml-viewer>` project in your site's folder. In the example, the `<mapml-viewer>` files are copied into the folder named "web-map" in your site root folder. Your own site's path to these files will depend on how you structure your folders.
+Notez que pour que l’exemple ci-dessus s’exécute correctement dans votre propre site, vous devez intégrer une copie du projet `<mapml-viewer>` dans le dossier de votre site. Dans cet exemple, les fichiers `<mapml-viewer>` sont copiés dans le dossier intitulé « web-map » du dossier racine du site. Le chemin d’accès vers ces fichiers depuis votre site dépendra de la façon dont vous structurez vos dossiers.
 
-`<mapml-viewer>` is an "[autonomous custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)" in HTML.  You can distinguish an autonomous custom element from a "native" HTML element by the "-" anywhere in the element name. Autonomous custom elements are supported by all modern browsers, but don't work in old browsers (e.g. Internet Explorer and old Edge).
+`<mapml-viewer>` est un "[élément personnalisé autonome](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements)" en HTML. La présence d’un tiret (-) dans le nom de l’élément permet de distinguer un élément personnalisé autonome d’un élément HTML natif. Les éléments personnalisés autonomes sont pris en charge par tous les navigateurs récents, mais ils ne fonctionnent pas dans les anciens navigateurs (p. ex., Internet Explorer et anciennes versions d’Edge).
 
-The `<mapml-viewer>` element has several attributes to control the presentation and initial location of the map.  
+L’élément `<mapml-viewer>` contient plusieurs attributs permettant de déterminer la présentation et l’emplacement initial de la carte.
 
-## Attributes
+## Attributs
 
 ### `projection`
 
-`projection` - an enumerated attribute. Case-sensitive values are: "`OSMTILE`", "`WGS84`", "`CBMTILE`" and "`APSTILE`".  
-The default projection is `OSMTILE`.
+`projection` - attribut énuméré. Les valeurs sensibles à la casse sont les suivantes : "`OSMTILE`", "`WGS84`", "`CBMTILE`" et "`APSTILE`".  
+La projection par défaut est `OSMTILE`.
 
-  - `OSMTILE` corresponds to the widely-used "Web Mercator" projected coordinate reference system, implying a "tile pyramid" zoom range from 0 to 23 (minimum tile size ~2.4m).
+  - `OSMTILE` correspond à Web Mercator, un système de référence des coordonnées projetées largement utilisé, ce qui signifie que la plage de zoom de la « pyramide de pavés » va de 0 à 23 (pavé d’une taille minimale d’environ 2,4 m).
 
-  - `WGS84` provides an implementation of the "pseudo plate carrée" projected coordinate reference system, wherein the easting and northing axis units are decimal degrees (not meters). In `WGS84`, zoom level 0 contains two tiles that each cover a hemisphere of Earth's surface. `WGS84` is defined with 21 zoom levels (0 to 20).  
+  - `WGS84` représente le système de référence de coordonnées projetées « pseudo-plate carrée », où les unités des axes horizontal et vertical sont exprimées en degrés décimaux (et non en mètres). Dans le système `WGS84`, le niveau de zoom 0 contient deux pavés couvrant chacun un hémisphère de la Terre. Le système `WGS84` compte 21 niveaux de zoom (de 0 à 20).
 
-  - `CBMTILE` is the de facto standard grid layout for the Canadian Geospatial Data Infrastructure (CGDI), defined by Natural Resources Canada, and is based on the Lambert Conformal Conic projection (EPSG:3978). Zoom levels are based on a numeric map scale denominator (e.g. 10000 corresponding to a map scale of 1:10,000), with a particular pixel resolution selected, and as a result, successive zoom levels' tiles do not nest exactly (as they do in `OSMTILE`, `WGS84` and `APSTILE`). 
+  - `CBMTILE` désigne le modèle de disposition en grille standard de fait de l’Infrastructure canadienne de données géospatiales (ICDG) définie par Ressources naturelles Canada; ce modèle est fondé sur la projection conique conforme de Lambert (EPSG:3978). Les niveaux de zoom sont fondés sur un dénominateur d’échelle cartographique numérique (p. ex., 10 000 correspond à une échelle cartographique de 1:10 000), selon une résolution en pixels sélectionnée. Par conséquent, les pavés de niveaux de zoom successifs ne s’imbriquent pas exactement (comme c’est le cas dans `OSMTILE`, `WGS84` et `APSTILE`).
 
-  - `APSTILE` is based on the Alaska Polar Stereographic (EPSG:5936) projected coordinate reference system, and has 20 zoom levels (0 to 19).
+  - `APSTILE` est basé sur le système de projection stéréographique polaire de l’Alaska (EPSG:5936), et compte 20 niveaux de zoom (de 0 à 19).
 
-  - other projections are possible, using the [Custom Projections API](../../api/custom-projections).
+  - D’autres projections sont possibles, au moyen d’[API de projections personnalisées](../../api/custom-projections).
 
 ---
 
 ### `zoom`
 
-`zoom` - a non-negative integer.  The value establishes the initial zoom level of the map.  For a small scale view of the world, use a lower value.  Use larger values for larger scales (smaller area maps). The maximum value depends on the particular `projection` and data source. Many map data sources have limited zoom levels available.
+`zoom` - entier non négatif. Cette valeur établit le niveau de zoom initial de la carte. Pour obtenir une vue du monde à petite échelle, utilisez une valeur faible. Utilisez des valeurs supérieures pour obtenir une vue à grande échelle (cartes de petites zones). La valeur maximale dépend de la `projection` en question et de la source des données. Bon nombre des sources de données cartographiques offrent des niveaux de zoom limités.
 
 ---
 
 ### `lat`
 
-`lat` - a real number latitude. The value establishes the initial latitude of the of the center of the map. Latitudes on Earth range from -90.0 (south) to 90.0 (north).  Many projections are not able to display all latitudes, and most projections have a limited range of locations where distortion is controlled or limited. In particular, OSMTILE (Web Mercator) can only display content between the latitude range -84 to 84.
+`lat` - nombre réel de la latitude. Cette valeur établit la latitude initiale du centre de la carte. Sur Terre, les latitudes vont de -90.0 (Sud) à 90.0 (Nord).  De nombreuses projections ne permettent pas d’afficher toutes les latitudes et la plupart permettent de contrôler ou de limiter la distorsion dans un certain nombre d’emplacements. En particulier, OSMTILE (Web Mercator) peut afficher seulement le contenu compris entre les latitudes -84 à 84.
 
 ---
 
 ### `lon`
 
-`lon` - a real number longitude. The value establishes the initial longitude of the of the center of the map.Longitudes on Earth range from -180.0 (west) to 180.0 (east). Similar comments related to distortion apply to those for latitude. Be careful, this attribute is named "lon" NOT "long", and if you use "long" your map won't work properly.
+`lon` - nombre réel de la longitude. Cette valeur établit la longitude initiale du centre de la carte. Sur Terre, les longitudes vont de -180.0 (Ouest) à 180.0 (Est). Les mêmes commentaires formulés précédemment concernant la distorsion s’appliquent. Faites attention, le nom de cet attribut est « lon » et non « long »; votre carte ne fonctionnera pas correctement si vous utilisez « long ».
 
 ---
 
 ### `controls`
 
-`controls` - a "boolean" attribute. Turns map controls on (if present) or off (if omitted). In HTML "boolean" attributes don't have values of "true" or "false" per se - they have the implied value of "true" if the attribute exists, and an implied value of "false" if the attribute is not present.  Sometimes the default map controls may not be useful for your map, so you may turn them off and design your own.
+`controls` - attribut booléen. Permet d’activer (s’il est présent) ou de désactiver (s’il est omis) les commandes de la carte. Dans le langage HTML, les attributs booléens n’ont pas les valeurs « true » ou « false » comme tel. Ils ont la valeur implicite « true » si l’attribut existe, et la valeur implicite « false » si l’attribut n’existe pas. Les commandes par défaut peuvent ne pas être utiles pour votre carte, vous pouvez donc les désactiver et créer vos propres commandes.
 
 ---
 
 ### `controlslist`
 
-`controlslist` - an enumerated attribute, possible values are: "`nofullscreen`", "`nolayer`", "`noreload`" and "`nozoom`".  Occasionally, you may not want your users to have access to a particular control, so you may prune the set of controls automatically presented (when you have used the `controls` boolean attribute).
+`controlslist` - attribut énuméré. Les valeurs possibles sont les suivantes : "`nofullscreen`", "`nolayer`", "`noreload`" et "`nozoom`". Il se peut qu’à l’occasion, vous ne souhaitiez pas que les utilisateurs aient accès à une commande en particulier. Vous pouvez alors réduire l’ensemble des commandes offertes automatiquement (si vous avez utilisé l’attribut booléen `controls` ).
 
 ---
 
-## Specifications
+## Spécifications
 
-| Specification                                                |
+| Spécification                                                |
 |--------------------------------------------------------------|
-| [MapML map element](https://maps4html.org/MapML/spec/#the-map-element-0) |
-| [HTML map element](https://html.spec.whatwg.org/multipage/image-maps.html#the-map-element) |
+| [Élément MapML « map »](https://maps4html.org/MapML/spec/#the-map-element-0) |
+| [Élément HTML « map »](https://html.spec.whatwg.org/multipage/image-maps.html#the-map-element) |
 
 ---
 
-## Requirements
+## Exigences
 
-[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+[Signaler les problèmes liés à ces exigences sur GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
 
-<p><b><span class="requirement">requirement</span>
-<span class="enhancement">enhancement</span>
-<span class="impractical">impractical</span>
-<span class="undecided">undecided</span>
-<span class="discussion">under discussion</span></b></p>
+<p><b><span class="requirement">exigence</span>
+<span class="enhancement">amélioration</span>
+<span class="impractical">peu pratique</span>
+<span class="undecided">indécis</span>
+<span class="discussion">en cours de discussion</span></b></p>
 
-|  | Spec | Viewer | API |
+|  | Spéc. | Visualiseur | API |
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
-| [**Rendering base layers (5.1)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-rendering) |  |  |  |
-|              <div class="requirement">Embed an interactive map viewer, using HTML markup (5.1.1)</div>           | [full](https://maps4html.org/MapML/spec/#the-map-element-0) | full | [full](https://maps4html.org/MapML/spec/#webidl-1442763376) |
-|              <div class="enhancement">Generate a default map for a given area (5.1.2)</div>           | Not Planned | Not Planned | Not Planned |
-|            <div class="requirement">Display a basic map without JavaScript (5.1.5)</div>             | full | [limited](http://maps4html.org/experiments/progressive-enhancement/) |  |
-|            <div class="requirement">Display map content in a users preferred language (5.1.6)</div>            | [full](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/136) | [full](https://github.com/Maps4HTML/mapml-extension) |  |
-| [**Interpreting locations and map positions (5.3)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-locations) |  |  |  |
-|           <div class="requirement">Select map view from latitude and longitude point (5.3.1)</div>             | full | full | [full](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#zoomtolat-lon-zoom) |
-|           <div class="undecided">Display map tiles defined in various common coordinate systems (5.3.3)</div>             | [full](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/14) | full | [full](https://maps4html.org/web-map-doc/docs/api/custom-projections) |
-|           <div class="undecided">Reproject map tile data into a new projection or globe view (5.3.4)</div>             | [under discussion](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/3) | none |  |
-|           <div class="undecided">Save the location or export to other application (5.3.5)</div>             | limited | limited |  |
-| [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
-|            <div class="requirement">Zoom the map independently from the rest of the page (5.4.1)</div>            | full    | full   | |
-|                            <div class="requirement">Pan the map display (5.4.2)</div>                             | full    | full   | |
-|          <div class="undecided">Wrap/duplicate data tiles when panning around the globe (5.4.4)</div>             | none    | partial| | |
+| [**Rendu des couches de base (5.1)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-rendering) |  |  |  |
+|              <div class="requirement">Intégrer un visualiseur de cartes interactives, à l’aide du balisage HTML (5.1.1)</div>           | [complet](https://maps4html.org/MapML/spec/#the-map-element-0) | complet | [complet](https://maps4html.org/MapML/spec/#webidl-1442763376) |
+|              <div class="enhancement">Gérer une carte par défaut pour une région donnée (5.1.2)</div>           | Non prévu | Non prévu | Non prévu |
+|            <div class="requirement">Afficher une carte de base sans JavaScript (5.1.5)</div>             | complet | [limité](http://maps4html.org/experiments/progressive-enhancement/) |  |
+|            <div class="requirement">Afficher le contenu d’une carte dans la langue préférée de l’utilisateur (5.1.6)</div>            | [complet](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/136) | [complet](https://github.com/Maps4HTML/mapml-extension) |  |
+| [**Interpréter les lieux et les positions sur une carte (5.3)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-locations) |  |  |  |
+|           <div class="requirement">Sélectionner la vue d’une carte à partir d’un point de latitude et de longitude (5.3.1)</div>             | complet | complet | [complet](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#zoomtolat-lon-zoom) |
+|           <div class="undecided">Afficher les pavés de carte définis dans divers systèmes de coordonnées courants (5.3.3)</div>             | [complet](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/14) | complet | [complet](https://maps4html.org/web-map-doc/docs/api/custom-projections) |
+|           <div class="undecided">Reprojeter les données des pavés de carte dans une nouvelle projection ou dans la vue Globe (5.3.4)</div>             | [en cours de discussion](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/3) | aucun |  |
+|           <div class="undecided">Sauvegarder l’emplacement ou l’exporter dans une autre application (5.3.5)</div>             | limité | limité |  |
+| [**Navigation des utilisateurs (vue panoramique et zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
+|            <div class="requirement">Faire un zoom sur la carte indépendamment du reste de la page (5.4.1)</div>            | complet    | complet   | |
+|                            <div class="requirement">Afficher une vue panoramique de la carte (5.4.2)</div>                             | complet    | complet   | |
+|          <div class="undecided">Encapsuler ou dupliquer des pavés de données au moment d’afficher une vue panoramique du monde (5.4.4)</div>             | none    | partial| | |
 | [**Custom styling (5.5)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-custom-styling) |  |  |  |
-|          <div class="undecided">Apply custom styling to map controls (5.5.2)</div>              | none | none |  |
-|          <div class="undecided">Toggle whether default controls are displayed (5.5.3)</div>              | full | full |  |
-| [**Controlling the displayed map view and responding to user actions (6.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#client-apis-map-viewport) |  |  |  |
-|          <div class="requirement">Subscribe to notifications of map events (6.2.3)</div>              | [pending](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#events) | limited | [full](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#events) |
-|          <div class="requirement">Move the map to display a given location (6.2.5)</div>              | full | full |  |
+|          <div class="undecided">Appliquer un style personnalisé aux commandes d’une carte (5.5.2)</div>              | aucun | aucun |  |
+|          <div class="undecided">Choisir d’afficher les commandes par défaut ou non (5.5.3)</div>              | complet | complet |  |
+| [**Contrôler la vue de la carte affichée et répondre aux actions de l’utilisateur (6.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#client-apis-map-viewport) |  |  |  |
+|          <div class="requirement">S’abonner aux avis concernant les événements liés à une carte (6.2.3)</div>              | [en attente](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#events) | limité | [complet](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#events) |
+|          <div class="requirement">Déplacer la carte pour afficher un emplacement donné (6.2.5)</div>              | complet | complet |  |
 ---
 
-> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/mapml-viewer.md)
-> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
+> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/mapml-viewer.md)
+> - [Discutez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

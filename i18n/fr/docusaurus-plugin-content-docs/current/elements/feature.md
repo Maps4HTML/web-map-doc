@@ -3,55 +3,55 @@ id: feature
 title: "<map-feature>"
 slug: /elements/feature/
 ---
-Map [features](https://en.wikipedia.org/wiki/Geographical_feature) are real or imaginary location objects represented in 2D according to a standard model, called the [Simple Features model](https://en.wikipedia.org/wiki/Simple_Features). There exists a wide variety of formats that allow the encoding of the Simple Features model, famously including: GeoJSON, Keyhole Markup Language (KML), and shape files (.shp), among many others.
+Les [caractéristiques](https://en.wikipedia.org/wiki/Geographical_feature) de la carte sont des objets de localisation, réels ou imaginaires, représentés en deux dimensions selon le modèle normalisé [Simple Features (caractéristiques simples)](https://en.wikipedia.org/wiki/Simple_Features). Il existe un large éventail de formats qui permettent de coder ce modèle, en particulier GeoJSON, Keyhole Markup Language (KML) et les fichiers Shapefile (.shp), pour ne nommer que ceux-là.
 
-Map features are represented in HTML MapML using a `<map-feature>` element, which is rendered on the map through translation to SVG. This allows the feature to scale without distortion, as you zoom in and out. 
+Les caractéristiques de la carte sont représentées dans HTML MapML par l’élément `<map-feature>` qui est rendu sur la carte par conversion en format SVG. Cela permet de mettre la caractéristique à l’échelle sans distorsion si l’utilisateur effectue un zoom avant ou arrière. 
 
-A `<map-feature>` element is a container for a feature's accessible name (`<map-featurecaption>`), scalar properties (`<map-properties>`) and its geometry (`<map-geometry>`).  The `<map-feature>` element can be modeled as inline HTML content as a child of the `<layer->` element, or in an XHTML MapML document, as a child of the `<map-body>` element.
+Un élément `<map-feature>` est le conteneur du nom accessible de la caractéristique (`<map-featurecaption>`), de ses propriétés scalaires (`<map-properties>`)  et de sa géométrie (`<map-geometry>`).  L’élément `<map-feature>` peut être modélisé sous forme de contenu HTML en ligne et comme élément-enfant de `<layer->` ou encore dans un document XHTML MapML comme élément- enfant de `<map-body>`.
 
 <iframe src="../../../demo/map-feature-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
-## Attributes
+## Attributs
 
 ### `zoom`
-  - This allows you to set the zoom level the feature is rendered at. The zoom value should fall within the range of 0 to the maximum zoom level of the map's [projection](../meta/#attributes).
+  - Cet attribut permet de définir le niveau de zoom auquel la caractéristique est rendue. La valeur du zoom doit se situer dans une plage allant de 0 au niveau de zoom maximal de la [projection](../meta/#attributes) de la carte.
 
 ---
 
-## Child Elements
+## Éléments-enfants
 
 ### `<map-featurecaption>`
 
-This element contains the feature's accessible name, which is displayed when the feature is in focus or hovered.
+Cet élément contient le nom accessible de la caractéristique, affiché lorsque celle-ci est active à l’écran ou que l’on y place le pointeur de la souris.
 
 ---
 
 ### `<map-properties>`
 
-This element contains the contents of the popup associated to a given feature. Details on the properties elements and it's syntax can be found [here](../properties/).
+Cet élément contient l’information contextuelle d’une caractéristique donnée. Les détails sur les éléments de propriété et leur syntaxe se trouvent [ici](../properties/).
 
 ---
 
 ### `<map-geometry>`
 
-This element contains the different points, lines and polygons that will be drawn. Details on the geometry elements and it's syntax can be found [here](../geometry/).
+Cet élément contient divers points, lignes et polygones qui seront dessinés. Les détails sur les éléments de géométrie et leur syntaxe se trouvent [ici](../geometry/).
 
-#### Attributes
+#### Attributs
 
 - `cs`
-  - This allows you to set the [coordinate system](../meta/#attributes) of geometries.
-  - Defaults to pcrs (projected coordinates), but can be set to tilematrix | pcrs | gcrs explicitly.
+  - Cet attribut permet de définir le [système de coordonnées](../meta/#attributes) des géométries.
+  - Prend la valeur pcrs (coordonnées projetées) par défaut, mais peut être défini explicitement avec les valeurs tilematrix | pcrs | gcrs.
 
 ---
 
-## Related Elements
+## Éléments connexes
 
-Other elements may be important to provide context for feature data:
+D’autres éléments peuvent s’avérer importants pour fournir le contexte des données de la caractéristique :
 
 
 ### `<map-meta name="zoom">`
 
-Sets the native minimum and maximum [native zoom](../meta/#attributes). It also allows you to set a value, this is the default zoom of all features in the case the `<map-feature>` is missing a zoom attribute.
+Établit le minimum et le maximum natifs [zoom natif](../meta/#attributes). Permet également de définir une valeur; il s’agit du niveau de zoom par défaut de toutes les caractéristiques lorsque l’élément  `<map-feature>` n’a pas d’attribut de zoom.
 
 ```html
 <map-meta name="zoom" content="min=1,max=5,value=0"></map-meta>
@@ -61,7 +61,7 @@ Sets the native minimum and maximum [native zoom](../meta/#attributes). It also 
 
 ### `<map-meta name="projection">`
 
-Sets the [projection](../meta/#attributes) of the layer. 
+Définit la [projection](../meta/#attributes) de la couche. 
 
 ```html
 <map-meta name="projection" content="CBMTILE"></map-meta>
@@ -71,7 +71,7 @@ Sets the [projection](../meta/#attributes) of the layer.
 
 ### `<map-meta name="cs">`
 
-Sets the default [coordinate system](../meta/#attributes) of the layer. If a feature is missing the cs attribute it will 'fall back' to the value provided by a `map-meta` element, or `pcrs` if no `map-meta` element is in scope.
+Définit le [système de coordonnées](../meta/#attributes) par défaut de la couche. S’il manque l’attribut cs à une caractéristique, il « reprend » la valeur fournie par un élément `map-meta` ou `pcrs` s’il n’y a pas d’élément `map-meta` dans la portée.
 
 ```html
 <map-meta name="cs" content="gcrs"></map-meta>
@@ -81,7 +81,7 @@ Sets the default [coordinate system](../meta/#attributes) of the layer. If a fea
 
 ### `<map-meta name="extent">`
 
-Sets the [extent](../meta/#attributes) of the layer.
+Définit l’[extent](../meta/#attributes) de la couche.
 
 ```html
 <map-meta name="extent" content="zoom=0,top-left-column=0,top-left-row=0,bottom-right-column=5,bottom-right-row=5"></map-meta>
@@ -89,7 +89,7 @@ Sets the [extent](../meta/#attributes) of the layer.
 
 ---
 
-## Examples
+## Exemples
 
 ```html
   <mapml-viewer projection="CBMTILE" zoom="2" lat="45.5052040" lon="-75.2202344"
@@ -155,7 +155,7 @@ Sets the [extent](../meta/#attributes) of the layer.
     </layer->
   </mapml-viewer>
 ```
-### An inline HTML map-feature
+### Une caractéristique de la carte HTML en ligne
 
 ```html
 <layer- label="My Feature Layer" checked>
@@ -173,9 +173,9 @@ Sets the [extent](../meta/#attributes) of the layer.
               </a>
             </td>
           </tr>
-          <tr><th>theme</th><td>FO</td></tr>
+          <tr><th>thème</th><td>FO</td></tr>
           <tr><th>type</th><td>2</td></tr>
-          <tr><th>elevation</th><td>61</td></tr>
+          <tr><th>élévation</th><td>61</td></tr>
           <tr><th>altiaccu</th><td>5</td></tr>
         </table>
       </map-properties>
@@ -188,10 +188,10 @@ Sets the [extent](../meta/#attributes) of the layer.
 </layer->
 ```
 
-### A map-feature in a fetched XHTML MapML document
+### Une caractéristique de la carte dans un document XHTML MapML récupéré
 
 ```html
-<layer- label="My Feature Layer" src="https://example.org/mem/35059.mapml"></layer->
+<layer- label="Ma couche de caractéristiques" src="https://example.org/mem/35059.mapml"></layer->
 ```
 
 ### 35059.mapml:
@@ -199,20 +199,20 @@ Sets the [extent](../meta/#attributes) of the layer.
 ```html
 <mapml- lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <map-head>
-    <map-title>The Man With Two Hats</map-title>
+    <map-title>L’homme aux deux chapeaux</map-title>
     <map-meta http-equiv="Content-Type" content="text/mapml"></map-meta>
     <map-meta charset="utf-8"></map-meta>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-meta name="cs" content="gcrs"></map-meta>
-    <map-link rel="license" href="http://open.canada.ca/en/open-government-licence-canada" title="Open Government License"/>
+    <map-link rel="license" href="http://open.canada.ca/fr/open-government-licence-canada" title="Licence du gouvernement ouvert"/>
   </map-head>
   <map-body>
     <map-feature id="mem35059">
       <map-properties>
         <table>
           <tr><th>code</th><td>1200020</td></tr>
-          <tr><th>accuracy</th><td>26</td></tr>
-          <tr><th>valdate</th><td>1995</td></tr>          
+          <tr><th>précision</th><td>26</td></tr>
+          <tr><th>valider</th><td>1995</td></tr>          
           <tr>
             <th>image</th>
             <td>
@@ -221,9 +221,9 @@ Sets the [extent](../meta/#attributes) of the layer.
               </a>
             </td>
           </tr>
-          <tr><th>theme</th><td>FO</td></tr>
+          <tr><th>thème</th><td>FO</td></tr>
           <tr><th>type</th><td>2</td></tr>
-          <tr><th>elevation</th><td>61</td></tr>
+          <tr><th>élévation</th><td>61</td></tr>
           <tr><th>altiaccu</th><td>5</td></tr>
         </table>
       </map-properties>
@@ -239,34 +239,34 @@ Sets the [extent](../meta/#attributes) of the layer.
 
 ---
 
-## Specifications
+## Spécifications
 
-| Specification                                                |
+| Spécification                                                |
 |--------------------------------------------------------------|
-| [MapML feature element](https://maps4html.org/MapML/spec/#the-feature-element-0) |
+| [Élément feature de MapML](https://maps4html.org/MapML/spec/#the-feature-element-0) |
 
 ---
 
-## Requirements
+## Exigences
 
-[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+[Signalez tout problème avec ces exigences sur GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
 
-<p><b><span class="requirement">requirement</span>
-<span class="enhancement">enhancement</span>
-<span class="impractical">impractical</span>
-<span class="undecided">undecided</span>
-<span class="discussion">under discussion</span></b></p>
+<p><b><span class="requirement">exigence</span>
+<span class="enhancement">amélioration</span>
+<span class="impractical">inefficace</span>
+<span class="undecided">indécis</span>
+<span class="discussion">en discussion</span></b></p>
 
-|  | Spec | Viewer | API |
+|  | Spéc | Visionneuse | API |
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
-| [**Vector features and overlays (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors) |  |  |  |
-|                         <div class="requirement">Show pinpoint locations or custom markers on the map (5.2.1)</div>                        | full | full |	 |
-| <div class="requirement">Draw polygons or polylines as stylable, interactive vector graphics (separate from the image tiles) (5.2.2)</div> | full | full |  |
-| [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
-| <div class="discussion">Hide or show (and maybe dynamically load) vector features and labels on zoom (5.4.7)</div> | [full](https://maps4html.org/MapML/spec/#the-feature-element-0) | [experimental](https://maps4html.org/web-map-doc/docs/elements/feature/#full-examples) |  |
-| [**Custom styling (5.5)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-custom-styling) |  |  |  |
-|          <div class="undecided">Apply custom styling to map markers and vector features (5.5.1)</div>              | [full](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/15) | limited |  |
+| [**Caractéristiques vectorielles et calques (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors) |  |  |  |
+|                         <div class="requirement">Montrer des emplacements précis ou des marqueurs personnalisés sur la carte (5.2.1)</div>                        | complet | complet |	 |
+| <div class="requirement">Dessiner des polygones ou des polylignes sous la forme d’images vectorielles auxquelles on peut appliquer un style (distinctes des pavés de l’image) (5.2.2)</div> | complet | complet |  |
+| [**Navigation de l’utilisateur (panoramique et zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
+| <div class="discussion">Masquer ou afficher (et peut-être charger dynamiquement) les caractéristiques vectorielles et les étiquettes quand on effectue un zoom (5.4.7)</div> | [complet](https://maps4html.org/MapML/spec/#the-feature-element-0) | [expérimental](https://maps4html.org/web-map-doc/docs/elements/feature/#full-examples) |  |
+| [**Application de styles personnalisés (5.5)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-custom-styling) |  |  |  |
+|          <div class="undecided">Appliquer un style personnalisé pour mapper les marqueurs et les caractéristiques vectorielles (5.5.1)</div>              | [complet](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/15) | limité |  |
 ---
 
-> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/feature.md)
-> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
+> - [Modifiez le contenu de cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/feature.md)
+> - [Clavardez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

@@ -4,46 +4,46 @@ title: Fonctionnalités de l'extension
 slug: /extension/features
 ---
 
-There are several additional requirements that are addressed by the extension.
+L’extension répond à plusieurs autres exigences.
 
-![Extension popup](../assets/img/render-mapml.png)
+![Fenêtre contextuelle d’extension](../assets/img/render-mapml.png)
 
-### Localization
+### Localisation 
 
-By default, the extension uses the browser's locale to display any `<mapml-viewer>` UI in the user's locale. Note that if the UI is not localized to your browser's language, it is likely because there currently exists no translation of the UI strings for your locale.  Localization contributions are welcome.  Languages that are available at the time of writing are english, french and swedish.
+Par défaut, l’extension utilise les paramètres de lieu du navigateur pour afficher une interface utilisateur `<mapml-viewer>` dans les paramètres de lieu de l’utilisateur. Notez que si la langue de l’interface utilisateur ne correspond pas à celle de votre navigateur, il est probable que les chaînes de l’interface utilisateur ne soient actuellement pas traduites pour vos paramètres de lieu. Les contributions en matière de localisation sont les bienvenues. Au moment de la rédaction du présent document, les langues disponibles sont l’anglais, le français et le suédois.
 
-### Feature Indexing
+### Indexation d’entités
 
-When turned on through the extension, enables a square in the middle of the map to enable a keyboard index menu of features located inside the square. 
+Lorsque cette fonction est activée au moyen de l’extension, elle affiche un carré au centre de la carte afin d’ouvrir le menu de l’index des entités situées dans le carré, lequel menu est accessible par le clavier.
 
-![Feature Index Example](../assets/img/feature-index.png)
+![Exemple d’index des entités](../assets/img/feature-index.png)
 
-### Announce Move and Zoom
+### Annonce des déplacements et du zoom
 
-When toggled through the extension, announces the map movement and zoom through screen readers.
+L'activation de cette fonction dans l’extension permet d'annoncer les déplacements et les zooms dans la carte au moyen de lecteurs d’écran.
 
-### Render MapML resources
+### Rendu des ressources en MapML
 
-When turned on through the extension popup (it is on by default as shown above, but can be turned off), the extension enables the rendering of map documents that have no host document, just as browsers can render image resources (image/*) that have no host document, by synthesizing a host document at run time.  The feature will recognize documents that are served to a browser tab (a top level browsing context) that are served with the "text/mapml" or "application/xml" Content-Type header. In the latter case, the extension will "sniff" for a root `<mapml- xmlns="http://www.w3.org/1999/xhtml">` element.
+L'activation de cette fonction dans la fenêtre contextuelle d'extension (elle est activée par défaut comme le montre l'image ci-dessus, mais elle peut être désactivée) permet d'afficher des documents cartographiques qui n'ont pas de document hôte, tout comme les navigateurs peuvent présenter des ressources d'image  (image/*) qui n'ont pas de document hôte en synthétisant un document hôte au moment de l'exécution. Cette fonctionnalité reconnaîtra les documents qui sont servis à un onglet de navigateur (ou contexte de navigation général) ou qui sont servis avec l'en-tête  "text/mapml" ou "application/xml" Content-Type. Dans le dernier cas, l'extension recherchera un élément racine `<mapml- xmlns="http://www.w3.org/1999/xhtml">`.
 
-## Requirements
+## Exigences 
 
-[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+[Signaler les problèmes liés à ces exigences sur GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
 
-<p><b><span class="requirement">requirement</span>
-<span class="enhancement">enhancement</span>
-<span class="impractical">impractical</span>
-<span class="undecided">undecided</span>
-<span class="discussion">under discussion</span></b></p>
+<p><b><span class="requirement">exigence</span>
+<span class="enhancement">amélioration</span>
+<span class="impractical">peu pratique</span>
+<span class="undecided">indécis</span>
+<span class="discussion">en cours de discussion</span></b></p>
 
-|  | Spec | Viewer | API |
+|  | Spéc. | Visualiseur | API |
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
-| [**The GeoWeb - proposed Epic**](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/172) |  |  |  |
-| <div class="discussion">[Enable federation via links](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/19)</div> | full | full |  |
-| [**Client-side Mapping API Capabilities (6.0)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#client-apis) |  |  |  |
-| <div class="discussion">[Create, initialise, and display a map from a map document resource](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/259)</div> | full | full |  |
+| [**Le GeoWeb – Modèle Epic proposé**](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/172) |  |  |  |
+| <div class="discussion">[Permettre la fédération au moyen de liens](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/19)</div> | complet | complet |  |
+| [**Capacités de cartographie de l'API côté client (6.0)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#client-apis) |  |  |  |
+| <div class="discussion">[Créer, initialiser et afficher une carte à partir d'une ressource d'un document de carte](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/259)</div> | complet | complet |  |
 
 ---
 
-> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/extension/features.md)
-> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
+> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/extension/features.md)
+> - [Discutez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

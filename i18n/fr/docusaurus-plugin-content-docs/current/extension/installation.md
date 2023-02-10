@@ -4,33 +4,33 @@ title: Installation de l'extension
 slug: /extension/installation
 ---
 
-The MapML browser extension is used to add additional features to chromium browsers. It can be installed from the Maps4HTML Github Repository:
+L’extension de navigateur MapML permet d’ajouter de nouvelles fonctionnalités au navigateur Chromium. Elle peut être installée à partir du dépôt Maps4HTML dans Github :
 
 [https://github.com/Maps4HTML/mapml-extension](https://github.com/Maps4HTML/mapml-extension)
 
-The source code can be downloaded by clicking Code -> Download ZIP. 
+Pour télécharger le code source, cliquez sur Code, puis sur Download ZIP.
 
-![Downloading Source Code](../assets/img/download-extension.gif)
+![Téléchargement du code source](../assets/img/download-extension.gif)
 
-Once the source code is downloaded and extracted, it can be loaded as an extension through chromium browsers:
+Une fois que vous avez téléchargé et extrait le code source, vous pouvez le charger sous forme d’extension dans un navigateur Chromium.
 
-## Loading Extension to Browser
+## Charger l’extension dans un navigateur
 
-Since the extension has not yet been released to web stores, it can currently be loaded in the following browsers by loading the downloaded extension to the broweser.
+Puisque l’extension n’est pas encore disponible dans les boutiques en ligne, il est possible de la télécharger afin de la charger dans les navigateurs indiqués ci-après.
 
-### Google Chrome
+### Google Chrome 
 
-- Open Chrome and go to `chrome://extensions/`
-- Turn on Developer Mode
-- Click the `Load unpacked` button, and navigate to the `/src` folder found in the root of the downloaded source code
+- Ouvrez Chrome et allez à  `chrome://extensions/`.
+- Activez le Mode développeur.
+- Cliquez sur le bouton `Load unpacked` et accédez au dossier `/src` qui se trouve à la racine du code source téléchargé.
 
-![Loading Extension on Google Chrome](../assets/img/Load-Chrome.gif)
+![Chargement d’une extension dans Google Chrome](../assets/img/Load-Chrome.gif)
 
 ### Microsoft Edge
 
-- Open Edge and go to `edge://extensions/`
-- Turn on Developer Mode
-- Click the `Load unpacked` button, and navigate to the `/src` folder found in the root of the downloaded source code
+- Ouvrez Edge et allez à `edge://extensions/`
+- Activez le Mode développeur.
+- Cliquez sur le bouton `Load unpacked` et accédez au dossier `/src` qui se trouve à la racine du code source téléchargé.
 
-![Loading Extension on Edge](../assets/img/Load-Edge.gif)
+![Chargement d’une extension dans Edge](../assets/img/Load-Edge.gif)
 

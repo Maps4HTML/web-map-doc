@@ -6,30 +6,30 @@ slug: /api/mapml-viewer-api
 
 # HTMLMapmlViewerElement
 
-The HTMLMapmlViewerElement interface represents the `<mapml-viewer>` element.
+L’interface HTMLMapmlViewerElement représente l’élément `<mapml-viewer>`.
 
-## Properties
+## Propriétés
 
 
-| Property name      	| Description                                          	|
+| Nom de la propriété      	| Description                                          	|
 |--------------	|--------------------------------------------------------	|
-| [controls](#controls)     	| Turns native map controls on or off. Reflects the controls attribute.    	|
-| [controlslist](#controlslist) 	| Allows to change the set of native controls. Reflects the controlslist attribute. 	|
-| [extent](#extent)       	| Returns the extent of the current map view. Read only.           	|
-| [lat](#lat)          	| Get the map's latitude. Reflects the lat attribute. Read only.        	|
-| [lon](#lon)          	| Get the map's longitude. Reflects the lon attribute. Read only.        	|
-| [projection](#projection)   	| The map's projection. Reflects the projection attribute.       	|
-| [zoom](#zoom)   	| The map's zoom level. Reflects the zoom attribute.      	|
+| [controls](#controls)     	| Active ou désactive les contrôles natifs de la carte. Reproduit l’attribut controls.    	|
+| [controlslist](#controlslist) 	| Permet de changer l’ensemble des contrôles natifs. Reproduit l’attribut controlslist. 	|
+| [extent](#extent)       	| Retourne l’étendue de la carte affichée. En lecture seule.           	|
+| [lat](#lat)          	| Permet d’obtenir la latitude de la carte. Reproduit l’attribut lat. En lecture seule.        	|
+| [lon](#lon)          	| Permet d’obtenir la longitude de la carte. Reproduit l’attribut lon. En lecture seule.        	|
+| [projection](#projection)   	| Projection de la carte. Reproduit l’attribut projection.       	|
+| [zoom](#zoom)   	| Niveau de zoom de la carte. Reproduit l’attribut zoom.      	|
 
 ### controls
 
-To add controls to the map:
+Pour ajouter des contrôles à la carte :
 ```js
 let map = document.querySelector('mapml-viewer');
-map.controls = true; // or false to remove controls
+map.controls = true; // ou false pour supprimer des contrôles
 ```
 
-To check whether the map has controls toggled on or off:
+Pour vérifier si les contrôles de la carte sont activés ou désactivés :
 ```js
 let map = document.querySelector('mapml-viewer');
 let controlsAdded = map.controls;
@@ -39,13 +39,13 @@ let controlsAdded = map.controls;
 
 ### controlslist
 
-To set the controlslist attribute:
+Pour définir l’attribut controlslist :
 ```js
 let map = document.querySelector('mapml-viewer');
-map.controlslist = "noreload"; // values can be noreload | nofullscreen | nozoom | nolayer
+map.controlslist = "noreload"; // les valeurs peuvent être noreload | nofullscreen | nozoom | nolayer
 ```
 
-To get the value of the controlslist:
+Pour obtenir la valeur de controlslist :
 ```js
 let map = document.querySelector('mapml-viewer');
 let controlsList = map.controlslist;
@@ -55,14 +55,14 @@ let controlsList = map.controlslist;
 
 ### extent
 
-To get the map's extent:
+Pour obtenir l’étendue de la carte :
 
 ```js
 let map = document.querySelector('mapml-viewer');
 let extent = map.extent;
 ```
 <details>
-<summary>View Sample Extent</summary>
+<summary>Afficher un exemple d’étendue</summary>
 
 ```js
 /**
@@ -132,18 +132,18 @@ let extent = map.extent;
 
 ### lat
 
-To set the latitude:
+Pour définir la latitude : 
 
-:::caution
-[Needs to be implemented](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues/588), currently doesn't pan the map on changes
+:::Mise en garde
+[À mettre en œuvre](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues/588), à l’heure actuelle, n’effectue pas de mouvements panoramiques vers les modifications de la carte
 :::
 
 ```js
 let map = document.querySelector('mapml-viewer');
-map.lat = 21.4; // if it's an invalid value, nothing happens
+map.lat = 21.4; // rien ne se produit si la valeur n’est pas valide
 ```
 
-To get the latitude:
+Pour obtenir la latitude :
 ```js
 let map = document.querySelector('mapml-viewer');
 let latitude = map.lat;
@@ -153,18 +153,18 @@ let latitude = map.lat;
 
 ### lon
 
-To set the longitude:
+Pour définir la longitude :
 
-:::caution
-[Needs to be implemented](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues/588), currently doesn't pan the map on changes
+:::Mise en garde
+[À mettre en œuvre](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues/588), à l’heure actuelle, n’effectue pas de mouvements panoramiques vers les modifications de la carte
 :::
 
 ```js
 let map = document.querySelector('mapml-viewer');
-map.lon = 21.4; // if it's an invalid value, nothing happens
+map.lon = 21.4; // rien ne se produit si la valeur n’est pas valide
 ```
 
-To get the longitude:
+Pour obtenir la longitude :
 ```js
 let map = document.querySelector('mapml-viewer');
 let longitude = map.lon;
@@ -174,14 +174,14 @@ let longitude = map.lon;
 
 ### projection
 
-To set/update the projection:
+Pour fixer ou modifier la projection:
 
 ```js
 let map = document.querySelector('mapml-viewer');
-map.projection = "CBMTILE"; // if it's an invalid/undefined projection, nothing happens
+map.projection = "CBMTILE"; // rien ne se produit si la projection n’est pas valide ou définie
 ```
 
-To get the projection:
+Pour obtenir la projection :
 ```js
 let map = document.querySelector('mapml-viewer');
 let projection = map.projection;
@@ -191,18 +191,18 @@ let projection = map.projection;
 
 ### zoom
 
-To set the zoom:
+Pour définir le niveau de zoom :
 
-:::caution
-[Needs to be implemented](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues/588), currently doesn't zoom the map on changes
+:::Mise en garde
+[À mettre en œuvre](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues/588), à l’heure actuelle, n’effectue pas un zoom sur les changements apportés à la carte
 :::
 
 ```js
 let map = document.querySelector('mapml-viewer');
-map.zoom = 3; // if it's an invalid value, nothing happens
+map.zoom = 3; // rien ne se produit si la valeur n’est pas valide
 ```
 
-To get the longitude:
+Pour obtenir la longitude :
 ```js
 let map = document.querySelector('mapml-viewer');
 let zoom = map.zoom;
@@ -210,22 +210,22 @@ let zoom = map.zoom;
 
 ---
 
-## Methods
+## Méthodes
 
-| Method                   	| Description                                                        	|
+| Méthode                   	| Description                                                        	|
 |--------------------------	|----------------------------------------------------------------------	|
-| [back()](#back)                   	| Navigates back one state in the map's movement history.                         	|
-| [forward()](#forward)                	| Navigates forward in the map's panning history.                      	|
-| [reload()](#reload)                 	| Clear the map's panning history and return to the starting location. 	|
-| [toggleDebug()](#toggledebug)            	| Toggle the debug functionality of the map.                           	|
-| [viewSource()](#viewsource)             	| View the source of the map.                                          	|
-| [defineCustomProjection()](../api/custom-projections) 	| Define a [custom projection](../api/custom-projections) for use by the page.                                       	|
-| [zoomTo(lat, lon, zoom)](#zoomtolat-lon-zoom) | Fly or pan the map to a (new) location and zoom level.|
+| [back()](#back)                   	| Revient à l’état précédent dans l’historique des mouvements de la carte.                         	|
+| [forward()](#forward)                	| Passe au mouvement panoramique suivant dans l’historique de la carte.                      	|
+| [reload()](#reload)                 	| Efface l’historique des mouvements panoramiques de la carte et retourne à l’emplacement de départ. 	|
+| [toggleDebug()](#toggledebug)            	| Active ou désactive le débogage de la carte.                           	|
+| [viewSource()](#viewsource)             	| Affiche la source de la carte.                                          	|
+| [defineCustomProjection()](../api/custom-projections) 	| Définit une [projection personnalisée](../api/custom-projections) for use by the page.                                       	|
+| [zoomTo(lat, lon, zoom)](#zoomtolat-lon-zoom) | Survole la carte ou effectue un mouvement panoramique vers un (nouvel) emplacement et à un autre niveau de zoom.|
 
 
 ### back()
 
-To go back in the map's history:
+Pour reculer dans l’historique de la carte :
 ```js
 let map = document.querySelector('mapml-viewer');
 map.back();
@@ -235,7 +235,7 @@ map.back();
 
 ### forward()
 
-To go forward in the map's history:
+Pour avancer dans l’historique de la carte :
 ```js
 let map = document.querySelector('mapml-viewer');
 map.forward();
@@ -245,7 +245,7 @@ map.forward();
 
 ### reload()
 
-To clear the map's history and return to the initial location:
+Pour effacer l’historique de la carte et retourner à l’emplacement initial :
 ```js
 let map = document.querySelector('mapml-viewer');
 map.reload();
@@ -255,7 +255,7 @@ map.reload();
 
 ### toggleDebug()
 
-To toggle the map's debug mode:
+Pour activer ou désactiver le débogage de la carte :
 ```js
 let map = document.querySelector('mapml-viewer');
 map.toggleDebug();
@@ -265,7 +265,7 @@ map.toggleDebug();
 
 ### viewSource()
 
-To view the map's view source:
+Pour afficher la source de la carte affichée :
 ```js
 let map = document.querySelector('mapml-viewer');
 map.viewSource();
@@ -275,7 +275,7 @@ map.viewSource();
 
 ### zoomTo(lat, lon, zoom)
 
-To change the map's center location and zoom level:
+Pour déplacer le centre de la carte et modifier le niveau de zoom :
 
 ```js
 var options = {
@@ -288,9 +288,9 @@ function success(pos) {
   var crd = pos.coords;
 
   let map = document.querySelector('mapml-viewer');
-  map.zoomTo(crd.latitude,crd.longitude, 17); // hard-coded zoom
-  // could calculate a zoom based on accuracy of position
-  console.log(`More or less ${crd.accuracy} meters.`);
+  map.zoomTo(crd.latitude,crd.longitude, 17); // zoom codé en dur
+  // peut calculer le niveau de zoom en fonction du degré de précision de la position
+  console.log(`Plus ou moins ${crd.accuracy} mètres.`);
 }
 
 function error(err) {
@@ -300,26 +300,26 @@ function error(err) {
 navigator.geolocation.getCurrentPosition(success, error, options);
 ```
 
-## Events
+## Événements
 
-| Event name      	| Description                                          	|
+| Nom de l’événement      	| Description                                          	|
 |--------------	|--------------------------------------------------------	|
-| layerchange   | Fired when a layer changes src, usually by the user following a link. |
-| load          | Fired when all layers have finished loading content |
-| click         | Fired when the map receives both mousedown and mouseup events |
-| dblclick      | Fired when the user double clicks or taps the map |
-| mousemove     | Fired repeatedly as the mouse cursor traverses the map |
-| mouseover     | Fired once as the mouse cursor enters the map |
-| mouseout      | Fired once as the mouse cursor exits the map |
-| mousedown     | Fired when the mouse's primary key is pressed down with cursor over the map |
-| mouseup       | Fired when the mouse's primary key is released with cursor over the map |
-| movestart     | Fired before the map starts to move / viewport changes |
-| move          | Fired repeatedly as the map moves.                           |
-| moveend       | Fired after the map stops moving |
-| zoomstart     | Fired before the map changes zoom level |
-| zoom          | Fired repeatedly as the map changes zoom |
-| zoomend       | Fired after the map has changed zoom level |
-| preclick      | Fired before a click on the map is triggered.  May not be a primitive. |
-| contextmenu   | Fired when user right-clicks or long presses on map. May not be a primitive.|
+| layerchange   | Déclenché lorsqu’une couche change de src, habituellement lorsque l’utilisateur clique sur un lien. |
+| load          | Déclenché après que le contenu de toutes les couches a été chargé |
+| click         | Déclenché lorsque la carte reçoit les événements mousedown et mouseup |
+| dblclick      | Déclenché lorsque l’utilisateur double-clique sur la carte ou touche celle-ci |
+| mousemove     | Déclenché à répétition lorsque le pointeur de la souris est déplacé sur la carte |
+| mouseover     | Déclenché une fois lorsque le pointeur de la souris est placé sur la carte |
+| mouseout      | Déclenché une fois lorsque le pointeur de la souris sort de la carte |
+| mousedown     | Déclenché lorsque l’utilisateur appuie sur le bouton principal de la souris alors que le pointeur de la souris se trouve sur la carte |
+| mouseup       | Déclenché lorsque l’utilisateur relâche le bouton principal de la souris alors que le pointeur de la souris se trouve sur la carte |
+| movestart     | Déclenché avant que la carte commence à bouger ou que la fenêtre d’affichage change |
+| move          | Déclenché à répétition lorsque la carte bouge                           |
+| moveend       | Déclenché lorsque la carte ne bouge plus |
+| zoomstart     | Déclenché avant que le niveau de zoom de la carte change |
+| zoom          | Déclenché à répétition lorsque le niveau de zoom de la carte change |
+| zoomend       | Déclenché après que le niveau de zoom de la carte a changé |
+| preclick      | Déclenché avant que l’utilisateur clique sur la carte  |
+| contextmenu   | Déclenché lorsque l’utilisateur fait un clic droit sur la carte ou touche celle-ci |
 
 ---

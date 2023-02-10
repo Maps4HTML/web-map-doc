@@ -4,19 +4,19 @@ title: "<mapml->"
 slug: /elements/mapml/
 ---
 
-The `<mapml->` element is the root of a MapML document (with a .mapml file extension) representing a layer. A MapML document allows itself to be fetched as a remote resource from the `<layer- src="..."></layer->` source attribute URL:
+L’élément `<mapml->` est la racine d’un document MapML (avec une extension de fichier .mapml) et il représente une couche. Un document MapML peut être extrait comme ressource distante à partir de l’URL de l’attribut source `<layer- src="..."></layer->` :
 
 ```html
-<layer- label="My Layer" src="https://example.org/mapml/mylayer" checked></layer->
+<layer- label="Ma couche" src="https://example.org/mapml/mylayer" checked></layer->
 ```
 
-A `<mapml->` element declare the document to be in the xhtml namespace, and 
-must contain one `<map-head>` element, followed by one `<map-body>` element.
+Un élément `<mapml->` indique que le document se trouve dans l’espace de noms xhtml, et 
+il doit contenir un élément `<map-head>`, suivi d’un élément `<map-body>`.
 
-<iframe src="../../../demo/mapml-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
+<iframe src="../../../demo/mapml-demo/" title="Démo en MapML" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
 <details>
-<summary>Click to view the contents of "../data/osm.mapml" from the demo above</summary>
+<summary>Cliquez pour voir le contenu de « ../data/osm.mapml » dans la démonstration au-dessus de </summary>
 
 ``` html
 <mapml- xmlns="http://www.w3.org/1999/xhtml">
@@ -50,46 +50,46 @@ must contain one `<map-head>` element, followed by one `<map-body>` element.
 
 ### `lang`
 
-The `lang` attribute defines the primary language of the MapML document. as defined by HTML [here](https://html.spec.whatwg.org/multipage/dom.html#attr-lang).
+L’attribut `lang` définit le langage principal du document MapML, comme le définit l'élément HTML [ici](https://html.spec.whatwg.org/multipage/dom.html#attr-lang).
 
 ### `xmlns`
 
-The `xmlns` attribute is **required**, and must have the value `"http://www.w3.org/1999/xhtml"`.
+L’attribut `xmlns` est **requis**, et il doit avoir la valeur `"http://www.w3.org/1999/xhtml"`.
 
 ---
 
-## Child Elements
+## Éléments enfants
 
 ### `<map-head>`
 
-The `<map-head>` element is the first child of the `<mapml->` element. It contains metadata for the MapML document. 
+L’élément `<map-head>` est le premier élément enfant de l’élément `<mapml->`. Il contient les métadonnées du document MapML.
 
-#### Child Elements
+#### Éléments enfants
   - `<map-title>`
-    - The title element should exist as the one and only title element in the head element. Its content should be a text string describing the document. It is conceivably used as a bookmark title.
+    - L’élément titre devrait constituer le seul et unique élément de titre compris dans l’élément de tête. Il devrait contenir une chaîne de texte fournissant une description du document. Il peut être utilisé comme titre de signet.
   - `<map-base>`
-    - The base element is used to identify a URL to be used to act as a base URL in order to resolve relative URLs later in the document.
-    - There must be only one `<map-base>` element in a MapML document, and it must be in the content of the `<map-head>` element, before any MapML elements which potentially carry a URL for resolution, notably the `<map-link>` element.
+    - L’élément « base » sert à déterminer l’URL qui servira d’URL de base afin de résoudre les URL relatives plus loin dans le document.
+    - Un document MapML doit contenir un seul élément `<map-base>`  et celui-ci doit être inclus dans le contenu de l’élément `<map-head>` avant tout élément MapML susceptible de porter une URL aux fins de résolution, notamment l’élément `<map-link>`.
   - `<map-meta>`
-    - The meta element describes the metadata in a MapML document. Details on the meta element and it's syntax can be found [here](../meta/).
+    - L’élément « meta » décrit les métadonnées comprises dans un document MapML. Vous trouverez plus de détails sur l’élément « meta » et sa syntaxe [ici](../meta/).
   - `<map-link>`
-    - The link element describes the metadata links in a MapML document. Details on the link element and it's syntax can be found [here](../link/).
+    - L'élément « link » décrit les liens de métadonnées dans un document MapML. Vous trouverez plus de détails sur l’élément « link » et sa syntaxe [ici](../link/).
 
 ---
 
 ### `<map-body>`
 
-The `<map-body>` element is the second child of the `<mapml->` element. It represents the content of the MapML document. This element contains the [features](../feature/) and metadata of the MapML document.
+L’élément `<map-body>` est le deuxième enfant de l’élément `<mapml->`. Il représente le contenu de l’élément MapML. Cet élément contient les [entités](../feature/) et les métadonnées du document MapML.
 
 ---
 
-## Specifications
+## Spécifications
 
-| Specification                                                |
+| Spécification                                                |
 |--------------------------------------------------------------|
-| [MapML mapml element](https://maps4html.org/MapML/spec/#the-mapml-element-0) |
-
+| [Élément MapML « mapml »](https://maps4html.org/MapML/spec/#the-mapml-element-0) |
+ 
 ---
 
-> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/mapml.md)
-> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
+> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/mapml.md)
+> - [Discutez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

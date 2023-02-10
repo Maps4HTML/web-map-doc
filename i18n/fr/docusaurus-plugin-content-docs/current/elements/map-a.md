@@ -4,78 +4,74 @@ title: "<map-a>"
 slug: /other-elements/map-a/
 ---
 
-The `<map-a>` element is a proposal to extend the Web to include links between maps and locations.
-This element allows you to wrap parts of coordinates or entire geometries, making a link out of the location/area that is wrapped. When a feature geometry or geometry part is 
-wrapped in a `<map-a>` element, it creates a blue outline that is 1 pixel wide around the feature (by default), that lets the user know it's a "linked feature".
+L'élément `<map-a>` propose d'étendre la page Web afin d'inclure des liens entre les cartes et les emplacements.
+Cet élément permet d’encapsuler des portions de coordonnées ou des géométries complètes, de manière à créer un lien à partir de la zone ou du lieu encapsulé. Si une géométrie d’entité ou une partie de géométrie est encapsulée dans un élément `<map-a>`, un trait bleu d’une largeur d’un pixel est tracé autour de l’entité (par défaut) pour indiquer à l’utilisateur qu’il s’agit d’une « entité liée ».
 
-<iframe src="../../../demo/map-a-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
+<iframe src="../../../demo/map-a-demo/" title="Démonstration en MapML" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
-## Attributes
+## Attributs
 
 ### `href`
-  - The URL that the wrapped location points to. Note - If the `type` of the `<map-a>` is text/mapml
-  you can provide fragments, more on fragments below.
+  - L’URL vers laquelle mènent les points de localisation encapsulés. Note : Si l’attribut `type` de l’élément `<map-a>` correspond à text/mapml, vous pouvez fournir des fragments (voir plus bas pour en savoir plus sur les fragments).
 
 ---
 
 ### `target`
-  - This is where the linked URL will be displayed. See table below for more details.
-  - Defaults to `_self`, in the absence of a valid value.
+  - L’URL liée s’affichera ici. Voir le tableau ci-dessous pour obtenir plus de détails.
+  - Affiche par défaut la valeur `_self` en l’absence d’une valeur valide.
 
 ---
 
 ### `type`
-  - This is the mime type of the linked URL's format. Options are `text/html` & `text/mapml`.
-  - Defaults to `text/mapml`, in the absence of a valid type value.
+  - Type MIME du format de l’URL liée. Les choix possibles sont `text/html` et `text/mapml`.
+  - Affiche par défaut la valeur `text/mapml` en l’absence d’une valeur `type` valide.
 
 ---
 
 ### `inplace`
-  - The `inplace` attribute is a boolean attribute - `<map-a inplace href="..."><map-a>`
-  - When present, the default view-changing behavior is overridden and the map view does not change.
+  - L’attribut `inplace` est un attribut booléen  - `<map-a inplace href="..."><map-a>`
+  - S’il est utilisé, le comportement de modification de la vue par défaut est ignoré et la vue de la carte n’est pas modifiée.
 
 ---
 
-## Target Behavior for `text/mapml`
+## Comportement cible pour `text/mapml`
 
-| Target Value 	| Behavior                                              	|
+| Valeur cible 	| Comportement                                              	|
 |--------------	|-------------------------------------------------------	|
-| _self        	| Replaces the current layer with the linked URL layer. 	|
-| _blank       	| Adds the linked URL layer to the map.                 	|
-| _parent      	| Replace all the layers with the linked URL layer.     	|
-| _top         	| Navigate the webpage to the linked URL.               	|
+| _self        	| Remplace la couche actuelle par la couche de l’URL liée.	|
+| _blank       	| Ajoute la couche de l’URL liée à la carte.                 	|
+| _parent      	| Remplace toutes les couches par la couche de l’URL liée.     	|
+| _top         	| Sert à parcourir la page Web jusqu’à l’URL liée.               	|
 
 ---
 
-## Target Behavior for `text/html`
+## Comportement cible pour `text/html`
 
-| Target Value 	| Behavior                                	|
+| Valeur cible 	| Comportement                                	|
 |--------------	|-----------------------------------------	|
-| _self        	| Navigate the webpage to the linked URL. 	|
-| _blank       	| Open the linked URL in a new tab.       	|
-| _parent      	| Navigate the webpage to the linked URL. 	|
-| _top         	| Navigate the webpage to the linked URL. 	|
+| _self        	| Sert à parcourir la page Web jusqu’à l’URL liée. 	|
+| _blank       	| Sert à ouvrir l’URL liée dans un nouvel onglet.       	|
+| _parent      	| Sert à parcourir la page Web jusqu’à l’URL liée. 	|
+| _top         	| Sert à parcourir la page Web jusqu’à l’URL liée. 	|
 
 ---
 
-## Location fragments
+## Fragments de lieu
 
-If the `type` attribute's value is `text/mapml`, you have the ability add a location fragment
-to the URL. This will pan & zoom the map to the given location.
+Si la valeur de l’attribut `type` correspond à `text/mapml`, vous pouvez ajouter un fragment de lieu à l’URL. Ce fragment permet d’afficher une vue panoramique du lieu donné et de faire un zoom sur celui­ci.
 
-Fragments are in the following format `#zoom, longitude, latitude`.
+Les formats des fragments sont les suivants : `#zoom, longitude, latitude`.
 
-URL's solely defined in terms of location fragments pan and zoom the map to the given location regardless of the target value.
-i.e. `<map-a href="#1, 20, 30">...</map-a>` will pan to latitude: 30, longitude: 20 and zoom to level 1.
+Les URL définies uniquement en fonction des fragments de lieu permettent d’afficher une vue panoramique de la carte et de faire un zoom sur le lieu donné, peu importe la valeur cible.
+C.-à-d. `<map-a href="#1, 20, 30">...</map-a>` déplacera la carte vers la latitude 30 et la longitude 20, et effectuera un zoom jusqu’au niveau 1.
 
 ---
 
-## Examples
+## Exemples
 
-### Styling Linked Features
+### Modifier le style d’une entité liée
 
-To style linked features simply target the `map-a` class in your CSS, once a link is clicked you can target the
-`map-a-visited` class. See the example below:
+Pour modifier le style d’entités liées, ciblez simplement la classe `map-a` dans votre feuille de style en cascade (CSS). Après avoir cliqué sur un lien, vous pouvez cibler la classe `map-a-visited`. Voir l’exemple ci-dessous :
 
 ```html
 <layer->
@@ -102,12 +98,12 @@ To style linked features simply target the `map-a` class in your CSS, once a lin
 </layer->
 ```
 
-### Wrapping a Feature Type + Location Fragment 
+### Encapsuler un type d’entités + un fragment de lieu
 
 ```html
 <map-feature>
   <map-properties>
-    <h1>Basic</h1>
+    <h1>Élémentaire</h1>
   </map-properties>
   <map-geometry>
     <map-a href="../externalMapML.mapml#2,-98,37">
@@ -119,15 +115,14 @@ To style linked features simply target the `map-a` class in your CSS, once a lin
 </map-feature>
 ```
 
-This will replace the current layer with the layer within externalMapML.mapml, once it's added the map will then goto
-zoomlevel: 2, longitude: -98, latitude: 37.
+Permet de remplacer la couche actuelle par la couche contenue dans externalMapML.mapml. Une fois que cette couche est ajoutée, la carte effectuera un zoom jusqu’au niveau 2 et se déplacera à la longitude -98 et à la latitude 37.
 
-### Wrapping a point coordinate with `target="_blank"` 
+### Encapsuler des coordonnées de point avec `target="_blank"` 
 
 ```html
 <map-feature>
   <map-properties>
-    <h1>_blank target</h1>
+    <h1>_blank cible</h1>
   </map-properties>
   <map-geometry>
     <map-polygon>
@@ -137,14 +132,14 @@ zoomlevel: 2, longitude: -98, latitude: 37.
 </map-feature>
 ```
 
-In this example, a point will be created at (2954, 3210) which, once clicked, adds a new layer to the map.
+Dans cet exemple, un point sera créé à (2954, 3210). Une fois que vous aurez cliqué sur ce point, une nouvelle couche sera ajoutée à la carte.
 
-### Nested `<map-a>` definition and behavior
+### Définition et comportement d’un élément `<map-a>` imbriqué.
 
 ```html
 <map-feature>
   <map-properties>
-    <h1>Advanced Example</h1>
+    <h1>Exemple avancé</h1>
   </map-properties>
   <map-geometry>
     <map-a href="parent.mapml" target="_blank">
@@ -162,37 +157,36 @@ In this example, a point will be created at (2954, 3210) which, once clicked, ad
   </map-geometry>
 </map-feature>
 ```
-In this advanced example there are multiple nested `<map-a>`. The simple behavior is, the closest `<map-a>` is the link
-behavior that the given location/area will adopt.
+Cet exemple avancé contient plusieurs éléments `<map-a>` imbriqués. Le comportement simple est le suivant : l’élément  `<map-a>` le plus près constitue le comportement du lien qui sera adopté par le lieu/la zone.
 
 ---
 
-## Specifications
+## Spécifications
 
-| Specification                                                |
+| Spécification                                                |
 |--------------------------------------------------------------|
 | [HTML a element](https://html.spec.whatwg.org/multipage/text-level-semantics.html#the-a-element) |
 
 ---
 
-## Requirements
+## Exigences
 
-[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+[Signaler les problèmes liés à ces exigences sur GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
 
-<p><b><span class="requirement">requirement</span>
-<span class="enhancement">enhancement</span>
-<span class="impractical">impractical</span>
-<span class="undecided">undecided</span>
-<span class="discussion">under discussion</span></b></p>
+<p><b><span class="requirement">exigence</span>
+<span class="enhancement">amélioration</span>
+<span class="impractical">peu pratique</span>
+<span class="undecided">indécis</span>
+<span class="discussion">en cours de discussion</span></b></p>
 
-|  | Spec | Viewer | API |
+|  | Spéc. | Visualiseur | API |
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
-| [**Vector features and overlays (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors) |  |  |  |
-|                 <div class="requirement"> Support hyperlinks from markers or vector features (5.2.3)</div>             | full | full |  |
-| [**Interpreting locations and map positions (5.3)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-locations) |  |  |  |
-|           <div class="requirement">Select map view from latitude and longitude point (5.3.1)</div>             | full | full | [full](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#zoomtolat-lon-zoom) |
+| [**Entités vectorielles et superpositions (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors) |  |  |  |
+|                 <div class="requirement"> Prend en charge les hyperliens des marqueurs ou des entités vectorielles (5.2.3)</div>             | complet | complet |  |
+| [**Interpréter les lieux et les positions sur une carte (5.3)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-locations) |  |  |  |
+|           <div class="requirement">Sélectionner la vue d’une carte à partir d’un point de latitude et de longitude (5.3.1)</div>             | complet | complet | [full](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#zoomtolat-lon-zoom) |
 
 ---
 
-> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/map-a.md)
-> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
+> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/map-a.md)
+> - [Discutez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)
