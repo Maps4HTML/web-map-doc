@@ -28,7 +28,7 @@ When turned on through the extension popup (it is on by default as shown above, 
 
 ### Set a coordinate system for copy operations
 
-By default, the coordinate system (cs) for copying extent is PCRS, and the cs for copying location is GCRS. When changed to another cs through the extension, the cs will be set to the selected cs accordingly for the following copy operations.
+By default, the coordinate system (cs) for copying extent is PCRS, and the cs for copying location is GCRS. When changed to another cs through the extension, the cs will be set to the selected cs for the following copy operations.
 
 ## Requirements
 
