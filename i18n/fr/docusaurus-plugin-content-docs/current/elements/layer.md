@@ -51,6 +51,27 @@ Le contenu en ligne utilise l’attribut  `label` comme étiquette de texte affi
 
 ---
 
+### `opacity`
+
+L'attribut `opacity` définit l'opacité initiale de l'élément `<layer->`. Les valeurs d'`opacity` valides vont de "0.0" à "1.0" et sont reflétées dans le contrôle de couche
+sous "Opacité" pour chaque couche. Lorsque l'attribut `opacity` n'est pas présent, l'opacité est fixée à "1.0" par défaut.
+
+---
+
+## Exemples
+
+### Opacité de couche
+
+L'exemple suivant définit l'`opacity` initiale d'un élément `<layer->`, à 0,5 sur 1,0. 
+
+```html
+<mapml-viewer projection="CBMTILE" zoom="2" lat="45" lon="-90" controls>
+      <layer- opacity="0.5" label="CBMT" src="https://geogratis.gc.ca/mapml/en/cbmtile/cbmt/" checked></layer->
+</mapml-viewer>
+```
+
+---
+
 ## Spécifications
 
 | Spécification                                                |
