@@ -96,7 +96,7 @@ This element contains the contents of `<mapml-viewer>` associated to a given map
 
 ### `<map-caption>`
 
-This element contains an invisible caption to `<mapml-viewer>`, which is adapted by screen readers when the map is in focus.   
+This element contains an invisible caption to `<mapml-viewer>`, which is adapted by screen readers when the map is in focus. Only one `<map-caption>` should be created for each map. 
 
 ---
 
