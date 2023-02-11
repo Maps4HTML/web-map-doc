@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo</title>
+    <script type="module" src="../../dist/mapml-viewer.js"></script>
+    <link rel="stylesheet" href="../embeded-demo-style.css"/>
+
+    <link rel="stylesheet" href="../codemirror-5.64.0/lib/codemirror.css">
+    <script src="../codemirror-5.64.0/lib/codemirror.js"></script>
+    <script src="../codemirror-5.64.0/mode/xml/xml.js"></script>
+    <script src="../codemirror-5.64.0/mode/css/css.js"></script>
+    <script src="../codemirror-5.64.0/mode/javascript/javascript.js"></script>
+    <script src="../codemirror-5.64.0/addon/edit/closetag.js"></script>
+    
+</head>
+<body>
+    <div style="text-align: center;">
+        <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
+        <h2>MapML Demo: &lt;mapml-&gt;</h2>
+        <button class="run" onclick="plot()" aria-label="run code"><span aria-hidden="true">▶</span></button>
+    </div>
+
+    <div class="tab">
+        <button id="default" class="tablinks" onclick="switchTab(event, 'HTML')">HTML</button>
+        <button class="tablinks" onclick="switchTab(event, 'CSS')">CSS</button>
+    </div>
+
+    <div class="tabcontent" id="HTML">
+        <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
+        <textarea rows="10" style="width:100%" id="htmlEditor">
+<mapml-viewer projection="OSMTILE" zoom="1" lat="60.0" lon="-100.0" controls>
+  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
+</mapml-viewer></textarea>
+    </div>
+    <div class="tabcontent" id="CSS">
+        <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
+        <textarea rows="10" style="width:100%" id="cssEditor">
+</textarea>
+    </div>
+
+    <div id="output"></div>
+
+    <script src="../embeded-demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmapml_viewer_doc=self.webpackChunkmapml_viewer_doc||[]).push([[6794],{2726:e=>{e.exports=JSON.parse('{"permalink":"/web-map-doc/fr/blog/tags/docusaurus","page":1,"postsPerPage":10,"totalPages":1,"totalCount":3,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmapml_viewer_doc=self.webpackChunkmapml_viewer_doc||[]).push([[8217],{9521:e=>{e.exports=JSON.parse('{"label":"hello","permalink":"/web-map-doc/fr/blog/tags/hello","allTagsPath":"/web-map-doc/fr/blog/tags","count":2}')}}]);

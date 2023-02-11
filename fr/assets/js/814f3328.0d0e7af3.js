@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmapml_viewer_doc=self.webpackChunkmapml_viewer_doc||[]).push([[2535],{5641:e=>{e.exports=JSON.parse('{"title":"Postes r\xe9cents","items":[{"title":"Welcome","permalink":"/web-map-doc/fr/blog/welcome"},{"title":"Hello","permalink":"/web-map-doc/fr/blog/hello-world"},{"title":"Hola","permalink":"/web-map-doc/fr/blog/hola"}]}')}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmapml_viewer_doc=self.webpackChunkmapml_viewer_doc||[]).push([[2535],{5641:function(e){e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Welcome","permalink":"/web-map-doc/blog/welcome"},{"title":"Hello","permalink":"/web-map-doc/blog/hello-world"},{"title":"Hola","permalink":"/web-map-doc/blog/hola"}]}')}}]);
