@@ -10,7 +10,7 @@ L’élément `<map-select>` contient un ou plusieurs éléments `<map-option>`.
 
 <iframe src="../../../demo/map-select-demo/" title="Démo en MapML" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
-:::astuce
+:::tip
 
 Pour visualiser les données selon différents horodatages, modifiez l’option `<map-select>` dans le contrôle des couches.
 

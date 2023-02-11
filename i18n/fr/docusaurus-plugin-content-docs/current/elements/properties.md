@@ -15,7 +15,7 @@ Un élément `<map-properties>` peut contenir un élément HTML pour décrire le
 
 ### Tableau des propriétés 
 
-Dans l’exemple suivant, la fenêtre contextuelle s’affiche sous forme de [tableau] HTML (https://html.spec.whatwg.org/multipage/tables.html#the-table-element).
+Dans l’exemple suivant, la fenêtre contextuelle s’affiche sous forme de [tableau HTML](https://html.spec.whatwg.org/multipage/tables.html#the-table-element).
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="12" lat="45.42" lon="-75.70">

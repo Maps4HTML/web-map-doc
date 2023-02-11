@@ -126,7 +126,7 @@ layer.focus();
 
 | Fonction | Retours | Description |
 |----------|---------|-------------|
-| <code>mapml2geojson(<HTMLLayerElement\>&nbsp;element,&nbsp;<Object\>&nbsp;options)</code> | Objet de collection de caractéristiques JavaScript (GeoJSON) | Cette fonction transforme l’élément- enfant `<feature>` d’un élément `<layer->` en un objet GeoJSON FeatureCollection. Vous fournissez les [options](#options-1) pour contrôler la transformation. Cette fonction doit servir dans un événement windows.onload.
+| <code>mapml2geojson(<Object\>&nbsp;options)</code> | Objet de collection de caractéristiques JavaScript (GeoJSON) | Cette fonction transforme l’élément- enfant `<feature>` d’un élément `<layer->` en un objet GeoJSON FeatureCollection. Vous fournissez les [options](#options-1) pour contrôler la transformation. Cette fonction doit servir dans un événement windows.onload.
 
 :::caution
 

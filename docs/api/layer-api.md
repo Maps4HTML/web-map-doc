@@ -148,7 +148,7 @@ HTMLLayerElement.mapml2geojson(options) returns the layer in GeoJSON format.
 
 | Function | Returns | Description |
 |----------|---------|-------------|
-| <code>mapml2geojson(&nbsp;<Object\>&nbsp;options)</code> | A JavaScript (GeoJSON) feature collection object | This function transforms the `<feature>` element children of a `<layer->` element to a GeoJSON FeatureCollection object. You supply [options](#options) to control the transformation. This function must be used inside a windows.onload event.
+| <code>mapml2geojson(<Object\>&nbsp;options)</code> | A JavaScript (GeoJSON) feature collection object | This function transforms the `<feature>` element children of a `<layer->` element to a GeoJSON FeatureCollection object. You supply [options](#options) to control the transformation. This function must be used inside a windows.onload event.
 
 :::caution
 
