@@ -52,5 +52,26 @@ Toutes les démonstrations comprises dans les pages de documentation contiennent
 
 ---
 
+## Exigences
+
+[Signalez tout problème avec ces exigences sur GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+<p><b><span class="requirement">exigence</span>
+<span class="enhancement">amélioration</span>
+<span class="impractical">inefficace</span>
+<span class="undecided">incertain</span>
+<span class="discussion">en discussion</span></b></p>
+
+|  | Spéc | Visionneuse | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Entités vectorielles et superpositions (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors) |  |  |  |
+| <div class="requirement">Dessiner des polygones ou des polylignes sous la forme d’images vectorielles auxquelles on peut appliquer un style (distinctes des pavés de l’image) (5.2.2)</div> | complet | complet |  |
+| [**Application de styles personnalisés (5.5)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-custom-styling) |  |  |  |
+| <div class="undecided">Appliquer un style personnalisé pour mapper les marqueurs et les caractéristiques vectorielles (5.5.1)</div>              | [complet](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/15) | complet |  |
+| [**Création de cartes et de composants de cartes (6.1)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#client-apis-creation) |  |  |  |
+| <div class="undecided"> Spécifier le style de la carte (6.1.9)</div>        | complet | complet |  |
+
+---
+
 > - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/style.md)
 > - [Discutez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)
