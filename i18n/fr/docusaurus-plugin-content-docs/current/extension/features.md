@@ -26,6 +26,10 @@ L'activation de cette fonction dans l’extension permet d'annoncer les déplace
 
 L'activation de cette fonction dans la fenêtre contextuelle d'extension (elle est activée par défaut comme le montre l'image ci-dessus, mais elle peut être désactivée) permet d'afficher des documents cartographiques qui n'ont pas de document hôte, tout comme les navigateurs peuvent présenter des ressources d'image  (image/*) qui n'ont pas de document hôte en synthétisant un document hôte au moment de l'exécution. Cette fonctionnalité reconnaîtra les documents qui sont servis à un onglet de navigateur (ou contexte de navigation général) ou qui sont servis avec l'en-tête  "text/mapml" ou "application/xml" Content-Type. Dans le dernier cas, l'extension recherchera un élément racine `<mapml- xmlns="http://www.w3.org/1999/xhtml">`.
 
+### Définir un système de coordonnées pour les opérations de copie
+
+Par défaut, le système de coordonnées (cs) pour l'étendue de la copie est PCRS, et le cs pour l'emplacement de la copie est GCRS. Lorsque vous changez de système de coordonnées par le biais de l'extension, le système de coordonnées sera défini comme le système de coordonnées sélectionné pour les opérations de copie suivantes.
+
 ## Exigences 
 
 [Signaler les problèmes liés à ces exigences sur GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
