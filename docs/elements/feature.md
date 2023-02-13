@@ -197,7 +197,7 @@ Sets the [extent](../meta/#attributes) of the layer.
 ### 35059.mapml:
 
 ```html
-<mapml- lang="en" xmlns="https://www.w3.org/1999/xhtml">
+<mapml- lang="en" xmlns="http://www.w3.org/1999/xhtml">
   <map-head>
     <map-title>The Man With Two Hats</map-title>
     <map-meta http-equiv="Content-Type" content="text/mapml"></map-meta>
