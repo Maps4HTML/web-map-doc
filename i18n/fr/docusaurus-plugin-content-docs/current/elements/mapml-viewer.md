@@ -85,6 +85,20 @@ La projection par défaut est `OSMTILE`.
 
 ---
 
+## Éléments-enfants
+
+### `<layer->`
+
+Cet élément contient le contenu de `<mapml-viewer>` associé à une carte donnée. Des détails sur les éléments de couche et leur syntaxe peuvent être trouvés [ici](/docs/layers/layer).
+
+---
+
+### `<map-caption>`
+
+Cet élément contient une légende invisible pour `<mapml-viewer>`, qui est adaptée par les lecteurs d'écran lorsque la carte est en focus. Un seul `<map-caption>` doit être créé pour chaque carte. 
+
+---
+
 ## Spécifications
 
 | Spécification                                                |
