@@ -26,6 +26,13 @@ When toggled through the extension, announces the map movement and zoom through 
 
 When turned on through the extension popup (it is on by default as shown above, but can be turned off), the extension enables the rendering of map documents that have no host document, just as browsers can render image resources (image/*) that have no host document, by synthesizing a host document at run time.  The feature will recognize documents that are served to a browser tab (a top level browsing context) that are served with the "text/mapml" or "application/xml" Content-Type header. In the latter case, the extension will "sniff" for a root `<mapml- xmlns="http://www.w3.org/1999/xhtml">` element.
 
+### Set a coordinate system for copy operations
+
+By default, the coordinate system (cs) for copying the map extent using the map
+context menu is projected coordinates (PCRS), and that for copying locations is 
+by default geodetic (GCRS). When changed to another through the extension 
+user interface, the selected cs will be used for subsequent copy operations.
+
 ## Requirements
 
 [Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
