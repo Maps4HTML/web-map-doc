@@ -85,6 +85,18 @@ La projection par défaut est `OSMTILE`.
 
 ---
 
+### `height`
+
+`height` - la hauteur de la carte, en pixels. Doit être un nombre entier sans unités.
+
+---
+
+### `width`
+
+`width` - la largeur de la carte, en pixels. Doit être un nombre entier sans unités.
+
+---
+
 ## Spécifications
 
 | Spécification                                                |
