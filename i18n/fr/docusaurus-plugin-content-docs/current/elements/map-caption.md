@@ -4,7 +4,8 @@ title: "<map-caption>"
 slug: /elements/map-caption/
 ---
 
-L'élément `<map-caption>` est un enfant de `<mapml-viewer>` et est utilisé pour définir une légende invisible qui est adaptée par les lecteurs d'écran lorsque la carte est en focus. Un seul élément `<map-caption>` doit être créé pour chaque carte.
+L'élément `<map-caption>` est un enfant de `<mapml-viewer>` et est utilisé pour définir une simple chaîne de texte qui n'est pas rendue visuellement, 
+mais le contenu devrait être lu par les lecteurs d'écran lorsque le `<mapml-viewer>` est focalisé, car il est utilisé pour générer la valeur de l'attribut `<mapml-viewer aria-label="...">`. `<map-caption>` peut être le premier ou le dernier élément enfant de `<mapml-viewer>`.
 
 <iframe src="../../../demo/map-caption-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 ---
