@@ -28,7 +28,11 @@ L'activation de cette fonction dans la fenêtre contextuelle d'extension (elle e
 
 ### Définir un système de coordonnées pour les opérations de copie
 
-Par défaut, le système de coordonnées (cs) pour l'étendue de la copie est PCRS, et le cs pour l'emplacement de la copie est GCRS. Lorsque vous changez de système de coordonnées par le biais de l'extension, le système de coordonnées sera défini comme le système de coordonnées sélectionné pour les opérations de copie suivantes.
+Par défaut, le système de coordonnées (cs) pour copier l'étendue de la carte à 
+l'aide du menu contextuel de la carte est celui des coordonnées projetées (PCRS), 
+et celui pour copier les endroits est par défaut géodésique (GCRS). Lorsqu'il est 
+changé par l'interface utilisateur de l'extension, le système de coordonnées 
+sélectionné sera utilisé pour les opérations de copie ultérieures.
 
 ## Exigences 
 
