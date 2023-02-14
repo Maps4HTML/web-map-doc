@@ -96,7 +96,10 @@ This element contains the contents of `<mapml-viewer>` associated to a given map
 
 ### `<map-caption>`
 
-This element contains an invisible caption to `<mapml-viewer>`, which is adapted by screen readers when the map is in focus. Only one `<map-caption>` should be created for each map. 
+`<map-caption>` may be the first or last element child of `<mapml-viewer>`. 
+Its content is a simple text string that is not visually rendered (at this time), 
+but the caption should be read by screen readers when the `<mapml-viewer>` is 
+focused, as it is used to generate the `<mapml-viewer aria-label="...">` attribute value.
 
 ---
 
