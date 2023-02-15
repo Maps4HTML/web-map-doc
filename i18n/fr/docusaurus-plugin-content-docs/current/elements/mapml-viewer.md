@@ -99,7 +99,7 @@ Cet élément contient le contenu de `<mapml-viewer>` associé à une carte donn
 Son contenu est une simple chaîne de texte qui n'est pas rendue visuellement actuellement, 
 mais le contenu devrait être lu par les lecteurs d'écran lorsque le `<mapml-viewer>` 
 est focalisé, car il est utilisé pour générer la valeur de l'attribut 
-`<mapml-viewer aria-label="...">`.
+`<mapml-viewer aria-label="...">`. Plus de détails et sa syntaxe sont disponibles [ici](../map-caption/).
 
 ---
 
