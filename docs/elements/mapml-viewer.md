@@ -98,24 +98,6 @@ The default projection is `OSMTILE`.
 
 ---
 
-## Child Elements
-
-### `<layer->`
-
-This element contains the contents of `<mapml-viewer>` associated to a given map. Details on the layer elements and it's syntax can be found [here](/docs/layers/layer).
-
----
-
-### `<map-caption>`
-
-`<map-caption>` may be the first or last element child of `<mapml-viewer>`. 
-Its content is a simple text string that is not visually rendered (at this time), 
-but the caption should be read by screen readers when the `<mapml-viewer>` is 
-focused, as it is used to generate the `<mapml-viewer aria-label="...">` attribute value.
-Further details and it's syntax can be found [here](../map-caption/).
-
----
-
 ## Specifications
 
 | Specification                                                |
