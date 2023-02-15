@@ -8,6 +8,7 @@ The `<map-caption>` element is a child of `<mapml-viewer>` and is used to define
 but the caption should be read by screen readers when the `<mapml-viewer>` is focused, as it is used to generate the `<mapml-viewer aria-label="...">` attribute value. `<map-caption>` may be the first or last element child of `<mapml-viewer>`. 
 
 <iframe src="../../../demo/map-caption-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
+
 ---
 
 ## Specifications
