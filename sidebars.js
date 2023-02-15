@@ -7,6 +7,7 @@ module.exports = {
     ],
     'Mapping Elements': [
       'elements/mapml-viewer',
+      'elements/map-caption',
       'elements/layer',
       'elements/mapml',
       'elements/extent',
