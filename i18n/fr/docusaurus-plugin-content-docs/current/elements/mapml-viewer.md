@@ -97,13 +97,6 @@ La projection par défaut est `OSMTILE`.
 
 ---
 
-### `static`
-
-`static` - un attribut "booléen". Il désactive l'interaction avec le clavier, ainsi que les fonctions de zoom et de déplacement de la 
-carte lorsqu'il est présent. Lorsqu'il n'est pas présent ou qu'il est supprimé, ces fonctions sont à nouveau activées.
-
----
-
 ## Spécifications
 
 | Spécification                                                |
