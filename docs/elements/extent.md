@@ -109,7 +109,7 @@ The following example shows a Web Map Service Request using `<map-link>` to requ
 ```html
 <mapml-viewer projection="OSMTILE" zoom="4" lat="53.331" lon="-91.667" controls>
   <layer- label="Toporama" checked="">
-    <map-extent xmlns="https://www.w3.org/1999/xhtml" units="OSMTILE">
+    <map-extent xmlns="http://www.w3.org/1999/xhtml" units="OSMTILE">
       <!-- URL parameters for WMS Request -->
       <map-input name="z" type="zoom" value="18" min="4" max="18"></map-input>
       <map-input name="w" type="width"></map-input>

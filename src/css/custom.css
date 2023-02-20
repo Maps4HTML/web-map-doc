@@ -56,7 +56,7 @@ p, li, dt, dd, figcaption {
 }
 
 /* Fix Docusaurus tabbing issues */
-@media (max-width: 996px) {
+/*@media (max-width: 996px) {
   .navbar--fixed-top:not(.navbar-sidebar--show) .navbar-sidebar__items {
     display: none;
   }
@@ -69,7 +69,7 @@ p, li, dt, dd, figcaption {
   .navbar-sidebar {
     display: none;
   }
-}
+}*/
 body {
   overflow-y: auto!important;
 }

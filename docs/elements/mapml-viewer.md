@@ -86,6 +86,25 @@ The default projection is `OSMTILE`.
 
 ---
 
+### `height`
+
+`height` - the height of the map, in pixels. Must be an integer without a unit.
+
+---
+
+### `width`
+
+`width` - the width of the map, in pixels. Must be an integer without a unit.
+
+---
+
+### `static`
+
+`static` - a "boolean" attribute. It disables the keyboard interaction, and the zooming and dragging features with the map when it is 
+present. When it is not present or removed, these features are enabled again.
+
+---
+
 ## Specifications
 
 | Specification                                                |

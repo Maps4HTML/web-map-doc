@@ -65,6 +65,7 @@ in the layer control, and it will not be visible in the map viewport.  If a laye
 becomes not-disabled, through manipulation of the map, for example, the layer
 will become interactable in the layer control, and should be visible in the 
 map viewport.
+
 ---
 
 HTMLLayerElement.label provides read/write access to the label used in the layer control for
@@ -108,8 +109,7 @@ let url = layer.src;
 ```
 ---
 ### opacity
-HTMLLayerElement.opacity read/write access to the opacity % value, reflected in
-the layer control opacity input slider control.
+HTMLLayerElement.opacity provides read/write access to the `opacity` value, and is reflected in the layer control for each layer, under "Opacity".
 
 To set/update the `<layer->`'s opacity:
 
@@ -148,7 +148,7 @@ HTMLLayerElement.mapml2geojson(options) returns the layer in GeoJSON format.
 
 | Function | Returns | Description |
 |----------|---------|-------------|
-| <code>mapml2geojson(&nbsp;<Object\>&nbsp;options)</code> | A JavaScript (GeoJSON) feature collection object | This function transforms the `<feature>` element children of a `<layer->` element to a GeoJSON FeatureCollection object. You supply [options](#options) to control the transformation. This function must be used inside a windows.onload event.
+| <code>mapml2geojson(<Object\>&nbsp;options)</code> | A JavaScript (GeoJSON) feature collection object | This function transforms the `<feature>` element children of a `<layer->` element to a GeoJSON FeatureCollection object. You supply [options](#options) to control the transformation. This function must be used inside a windows.onload event.
 
 :::caution
 
