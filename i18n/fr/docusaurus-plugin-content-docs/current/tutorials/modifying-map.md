@@ -1,9 +1,9 @@
 ---
 id: modifying-map
-title: Modifying the Map
+title: Modifier la carte
 slug: /tutorials/modifying-map
 ---
 
 :::info
-Under construction
+En construction
 :::
