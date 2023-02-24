@@ -31,7 +31,7 @@ using the `{name}` variable reference notation.
 | location      | A location input captures **one** `axis` value of a two-dimensional point ( represented by a coordinate pair) from the map extent, e.g. `top-right`, or, for server queries, the location in the map where the user clicks or touches. |
 | width         | A width input captures the width of the map viewport's extent in standardized pixels  |
 | height        | A height input captures the height of the map viewport's extent in standardized pixels |
-| hidden        | Establishes a variable that may be used to pass a fixed or [fixed domain of values](#shard) to the server when requesting map resources. |
+| hidden        | Establishes a variable that may be used to pass a fixed value to the server when requesting map resources. |
 ---
 
 ### `value`
@@ -160,32 +160,6 @@ attribute can conserve user bandwidth while having little visual effect, dependi
 on the nature of the content.
 
 ---
-### `shard`
-
-The boolean `shard` attribute is used with a `hidden` variable.
-
-A `<map-input shard list="datalist-id>` indicates that a set of values specified 
-by an associated `map-datalist` element will be used in a round-robin fashion for 
-template variable substitution and submission in map requests.  This is useful for 
-[domain sharding](https://developer.mozilla.org/en-US/docs/Glossary/Domain_sharding), 
-implemented by OpenStreetMap (for example), to increase parallelism of tile requests
-and thereby to improve performance. 
-
-When specifying a boolean attribute such as `shard` in MapML,
-care must be taken to encode the attribute according to the document / media type in
-which the element is being used.  In XML documents, boolean attributes must be
-encoded as `shard="anything"`, so as to respect XML parsing rules. In the
-HTML document, i.e. as inline layer content, the attribute should be encoded per
-HTML's [boolean attribute rules](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#boolean_attributes).
-
----
-### `list`
-  
-The `<map-input list="...">` attribute associates a `<map-datalist>` element that
-provides the values to be used (via the `<map-datalist>`'s child `<map-option>`
-elements).  See [shard](#shard) for more details.
-
----
 ## Examples
 
 ### Input step
@@ -195,15 +169,9 @@ elements).  See [shard](#shard) for more details.
   <layer- label="OpenStreetMap" checked>
     <map-extent units="OSMTILE" >
       <map-input name="z" type="zoom"  value="18" min="0" max="18" step="3"></map-input>
-      <map-input name="s" type="hidden" shard="true" list="servers"></map-input>
-      <map-datalist id="servers">
-        <map-option value="a"></map-option>
-        <map-option value="b"></map-option>
-        <map-option value="c"></map-option>
-      </map-datalist>
       <map-input name="x" type="location" units="tilematrix" axis="column" min="0"  max="262144" ></map-input>
       <map-input name="y" type="location" units="tilematrix" axis="row" min="0"  max="262144" ></map-input>
-      <map-link rel="tile" tref="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <map-link rel="tile" tref="https://tile.openstreetmap.org/{z}/{x}/{y}.png" />
     </map-extent>
   </layer->
 </mapml-viewer>
