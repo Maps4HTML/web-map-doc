@@ -25,6 +25,7 @@ Définit le **type** de l’entrée.
 | location      | L’entrée d’un emplacement capture **une** valeur d’`axis` d’un point à deux dimensions (représenté par une paire de coordonnées) dans l’étendue de la carte – p. exe., l’emplacement `top-right`, ou, lorsqu’il interroge un serveur, celui où l’utilisateur clique ou qu’il touche sur la carte. |
 | width         | L’entrée de la largeur capture la largeur de l’étendue de la fenêtre d’affichage de la carte en pixels normalisés  |
 | height        | L’entrée de la hauteur capture la hauteur de l’étendue de la fenêtre d’affichage de la carte en pixels normalisés |
+| hidden        | Cet attribut établit une variable pouvant servir à transmettre un valeur fixe au serveur lorsque l’utilisateur demande des ressources cartographiques. |
 ---
 
 ### `value`

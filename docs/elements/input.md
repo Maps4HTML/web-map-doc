@@ -31,6 +31,7 @@ using the `{name}` variable reference notation.
 | location      | A location input captures **one** `axis` value of a two-dimensional point ( represented by a coordinate pair) from the map extent, e.g. `top-right`, or, for server queries, the location in the map where the user clicks or touches. |
 | width         | A width input captures the width of the map viewport's extent in standardized pixels  |
 | height        | A height input captures the height of the map viewport's extent in standardized pixels |
+| hidden        | Establishes a variable that may be used to pass a fixed value to the server when requesting map resources. |
 ---
 
 ### `value`
