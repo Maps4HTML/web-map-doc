@@ -63,7 +63,7 @@ Specifies a label for an extent which is displayed in the layer control. When a 
 ### `opacity`
 
 The `opacity` attribute is used to set the initial opacity of the `<map-extent>` element.
-Valid `opacity` values range from from "0.0" to "1.0" and are reflected in the extent settings
+Valid `opacity` values range from from "0.0" to "1.0" with strictly one demical place and are reflected in the extent settings
 opacity input slider control. When the `opacity` attribute is not present, the opacity is set to "1.0" by default.
 
 ---
