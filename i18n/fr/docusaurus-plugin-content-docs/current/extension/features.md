@@ -18,9 +18,9 @@ Lorsque cette fonction est activée au moyen de l’extension, elle affiche un c
 
 ![Exemple d’index des entités](../assets/img/feature-index.png)
 
-### Annonce des déplacements et du zoom
+### Annonce du niveau de zoom
 
-L'activation de cette fonction dans l’extension permet d'annoncer les déplacements et les zooms dans la carte au moyen de lecteurs d’écran.
+L'activation de cette fonction dans l’extension permet d'annoncer le niveau de zoom dans la carte au moyen de lecteurs d’écran (cette option est activée par défaut).
 
 ### Rendu des ressources en MapML
 
