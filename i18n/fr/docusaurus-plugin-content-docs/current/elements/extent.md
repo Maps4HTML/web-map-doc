@@ -49,6 +49,14 @@ Précise l’étiquette d’une étendue affichée au niveau du contrôle de la 
 
 ---
 
+### `opacity`
+
+L'attribut `opacity` est utilisé pour définir l'opacité initiale de l'élément `<map-extent>`.
+Les valeurs d'opacité valides vont de "0.0" à "1.0" avec strictement une décimale et sont reflétées dans les paramètres d'étendue.
+opacity input slider control. Lorsque l'attribut `opacity` n'est pas présent, l'opacité est fixée à "1.0" par défaut.
+
+---
+
 ## Événements
 
 | Nom de l’événement    | Description                                             |
