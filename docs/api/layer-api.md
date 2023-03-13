@@ -128,16 +128,13 @@ let opacity = layer.opacity;
 ---
 ## Methods
 
-### focus()
-HTMLLayerElement.focus() Zoom to the layer's extent. Note: this method is mis-named. It will
-be renamed, per [this issue](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues/587).        
-
-
-To fit the layer's extent in the map as much as possible:
+### zoomTo()
+HTMLLayerElement.zoomTo() Zoom to the layer's extent in the map, at the maximum
+zoom level in which the extent fits completely.
 
 ```js
 let layer = document.querySelector('layer-');
-layer.focus();
+layer.zoomTo();
 ```
 
 ---

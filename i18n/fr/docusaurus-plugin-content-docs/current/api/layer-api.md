@@ -109,15 +109,13 @@ let opacity = layer.opacity;
 ---
 ## Méthodes
 
-### focus()
-HTMLLayerElement.focus() effectue un zoom sur l’étendue de la couche. Remarque : le nom de cette méthode est erroné et sera corrigé, conformément à [ce problème](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues/587).
-
-
-Pour que l’étendue de la couche corresponde le plus possible à celle de la carte :
+### zoomTo()
+HTMLLayerElement.focus() Zoom sur l'étendue de la couche dans la carte, 
+au niveau de zoom maximum dans lequel l'étendue s'inscrit complètement.
 
 ```js
 let layer = document.querySelector('layer-');
-layer.focus();
+layer.zoomTo();
 ```
 
 ---
