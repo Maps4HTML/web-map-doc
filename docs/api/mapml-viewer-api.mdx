@@ -14,7 +14,7 @@ The HTMLMapmlViewerElement interface represents the `<mapml-viewer>` element.
 | Property name      	| Description                                          	|
 |--------------	|--------------------------------------------------------	|
 | [controls](#controls)     	| Turns native map controls on or off. Reflects the controls attribute.    	|
-| [controlslist](#controlslist) 	| Allows to change the set of native controls. Reflects the controlslist attribute. 	|
+| [controlsList](#controlslist) 	| Allows to change the set of native controls. Reflects the controlslist attribute. 	|
 | [extent](#extent)       	| Returns the extent of the current map view. Read only.           	|
 | [lat](#lat)          	| Get the map's latitude. Reflects the lat attribute. Read only.        	|
 | [lon](#lon)          	| Get the map's longitude. Reflects the lon attribute. Read only.        	|
@@ -37,18 +37,24 @@ let controlsAdded = map.controls;
 
 ---
 
-### controlslist
+### controlsList
+
+The `controlsList` property returns a [DomTokenList](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList) 
+that helps the user select what controls to display on the `mapml-viewer` element based on the [possible values](../elements/mapml-viewer/#controlslist).
 
 To set the controlslist attribute:
 ```js
 let map = document.querySelector('mapml-viewer');
-map.controlslist = "noreload"; // values can be noreload | nofullscreen | nozoom | nolayer
+map.controlsList.value = "noreload nozoom"; // values can be noreload | nofullscreen | nozoom | nolayer
+map.controlsList.add("nofullscreen"); // can also add using the 'add' method
+map.controlsList.toggle("nolayer"); // can also toggle using the 'toggle' method
+// view all methods here - https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList
 ```
 
 To get the value of the controlslist:
 ```js
 let map = document.querySelector('mapml-viewer');
-let controlsList = map.controlslist;
+let controlsList = map.controlsList.value;
 ```
 
 ---

@@ -14,7 +14,7 @@ L’interface HTMLMapmlViewerElement représente l’élément `<mapml-viewer>`.
 | Nom de la propriété      	| Description                                          	|
 |--------------	|--------------------------------------------------------	|
 | [controls](#controls)     	| Active ou désactive les contrôles natifs de la carte. Reproduit l’attribut controls.    	|
-| [controlslist](#controlslist) 	| Permet de changer l’ensemble des contrôles natifs. Reproduit l’attribut controlslist. 	|
+| [controlsList](#controlslist) 	| Permet de changer l’ensemble des contrôles natifs. Reproduit l’attribut controlslist. 	|
 | [extent](#extent)       	| Retourne l’étendue de la carte affichée. En lecture seule.           	|
 | [lat](#lat)          	| Permet d’obtenir la latitude de la carte. Reproduit l’attribut lat. En lecture seule.        	|
 | [lon](#lon)          	| Permet d’obtenir la longitude de la carte. Reproduit l’attribut lon. En lecture seule.        	|
@@ -37,18 +37,24 @@ let controlsAdded = map.controls;
 
 ---
 
-### controlslist
+### controlsList
+
+La propriété `controlsList` renvoie une [DomTokenList](https://developer.mozilla.org/fr/docs/Web/API/DOMTokenList)
+qui aide l'utilisateur à sélectionner les contrôles à afficher sur l'élément `mapml-viewer` en fonction des [valeurs possibles](../elements/mapml-viewer/#controlslist).
 
 Pour définir l’attribut controlslist :
 ```js
 let map = document.querySelector('mapml-viewer');
-map.controlslist = "noreload"; // les valeurs peuvent être noreload | nofullscreen | nozoom | nolayer
+map.controlsList.value = "noreload nozoom"; // les valeurs peuvent être noreload | nofullscreen | nozoom | nolayer
+map.controlsList.add("nofullscreen"); // peut également être ajouté à l'aide de la méthode 'add'
+map.controlsList.toggle("nolayer"); // peut également être basculé à l'aide de la méthode 'toggle.
+// Voir toutes les méthodes ici - https://developer.mozilla.org/fr/docs/Web/API/DOMTokenList
 ```
 
 Pour obtenir la valeur de controlslist :
 ```js
 let map = document.querySelector('mapml-viewer');
-let controlsList = map.controlslist;
+let controlsList = map.controlsList.value;
 ```
 
 ---

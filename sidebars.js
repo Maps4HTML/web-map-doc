@@ -12,7 +12,6 @@ module.exports = {
       'elements/mapml',
       'elements/extent',
       'elements/input',
-      'elements/datalist',
       'elements/select',
       'elements/link',
       'elements/meta',
