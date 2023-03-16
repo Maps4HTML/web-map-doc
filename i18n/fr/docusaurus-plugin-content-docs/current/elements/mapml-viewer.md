@@ -57,19 +57,19 @@ La projection par défaut est `OSMTILE`.
 
 ### `zoom`
 
-`zoom` - entier non négatif. Cette valeur établit le niveau de zoom initial de la carte. Pour obtenir une vue du monde à petite échelle, utilisez une valeur faible. Utilisez des valeurs supérieures pour obtenir une vue à grande échelle (cartes de petites zones). La valeur maximale dépend de la `projection` en question et de la source des données. Bon nombre des sources de données cartographiques offrent des niveaux de zoom limités.
+`zoom` - entier non négatif. Cette valeur définit le niveau de zoom initial de la carte et est obligatoire. La valeur est mise à jour lorsque la carte cesse de se déplacer. Pour obtenir une vue du monde à petite échelle, utilisez une valeur faible. Utilisez des valeurs supérieures pour obtenir une vue à grande échelle (cartes de petites zones). La valeur maximale dépend de la `projection` en question et de la source des données. Bon nombre des sources de données cartographiques offrent des niveaux de zoom limités.
 
 ---
 
 ### `lat`
 
-`lat` - nombre réel de la latitude. Cette valeur établit la latitude initiale du centre de la carte. Sur Terre, les latitudes vont de -90.0 (Sud) à 90.0 (Nord).  De nombreuses projections ne permettent pas d’afficher toutes les latitudes et la plupart permettent de contrôler ou de limiter la distorsion dans un certain nombre d’emplacements. En particulier, OSMTILE (Web Mercator) peut afficher seulement le contenu compris entre les latitudes -84 à 84.
+`lat` - nombre réel de la latitude. Cette valeur établit la latitude initiale du centre de la carte. La valeur est mise à jour lorsque la carte cesse de se déplacer. Sur Terre, les latitudes vont de -90.0 (Sud) à 90.0 (Nord).  De nombreuses projections ne permettent pas d’afficher toutes les latitudes et la plupart permettent de contrôler ou de limiter la distorsion dans un certain nombre d’emplacements. En particulier, OSMTILE (Web Mercator) peut afficher seulement le contenu compris entre les latitudes -84 à 84.
 
 ---
 
 ### `lon`
 
-`lon` - nombre réel de la longitude. Cette valeur établit la longitude initiale du centre de la carte. Sur Terre, les longitudes vont de -180.0 (Ouest) à 180.0 (Est). Les mêmes commentaires formulés précédemment concernant la distorsion s’appliquent. Faites attention, le nom de cet attribut est « lon » et non « long »; votre carte ne fonctionnera pas correctement si vous utilisez « long ».
+`lon` - nombre réel de la longitude. Cette valeur établit la longitude initiale du centre de la carte. La valeur est mise à jour lorsque la carte cesse de se déplacer. Sur Terre, les longitudes vont de -180.0 (Ouest) à 180.0 (Est). Les mêmes commentaires formulés précédemment concernant la distorsion s’appliquent. Faites attention, le nom de cet attribut est « lon » et non « long »; votre carte ne fonctionnera pas correctement si vous utilisez « long ».
 
 ---
 
