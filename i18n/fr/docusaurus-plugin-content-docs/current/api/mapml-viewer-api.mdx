@@ -16,10 +16,10 @@ L’interface HTMLMapmlViewerElement représente l’élément `<mapml-viewer>`.
 | [controls](#controls)     	| Active ou désactive les contrôles natifs de la carte. Reproduit l’attribut controls.    	|
 | [controlsList](#controlslist) 	| Permet de changer l’ensemble des contrôles natifs. Reproduit l’attribut controlslist. 	|
 | [extent](#extent)       	| Retourne l’étendue de la carte affichée. En lecture seule.           	|
-| [lat](#lat)          	| Permet d’obtenir la latitude de la carte. Reproduit l’attribut lat. En lecture seule.        	|
-| [lon](#lon)          	| Permet d’obtenir la longitude de la carte. Reproduit l’attribut lon. En lecture seule.        	|
+| [lat](#lat)          	| Obtient ou définit la latitude de la carte. Reproduit dans l’attribut de contenu lat. Aucun effet sur l'état dynamique de la carte. |
+| [lon](#lon)          	| Obtient ou définit la longitude de la carte. Reproduit dans l’attribut de contenu lon. Aucun effet sur l'état dynamique de la carte.|
 | [projection](#projection)   	| Projection de la carte. Reproduit l’attribut projection.       	|
-| [zoom](#zoom)   	| Niveau de zoom de la carte. Reproduit l’attribut zoom.      	|
+| [zoom](#zoom)   	| Obtient ou définit le niveau de zoom de la carte. Reproduit dans l’attribut de contenu zoom. Aucun effet sur l'état dynamique de la carte.|
 
 ### controls
 
@@ -143,6 +143,10 @@ Pour définir la latitude :
 let map = document.querySelector('mapml-viewer');
 map.lat = 21.4; // rien ne se produit si la valeur n’est pas valide
 ```
+Notez que la valeur fournie n'affecte pas l'état de la visionneuse de carte, 
+sauf au chargement du document, ou lorsqu'une instance d'un élément `<mapml-viewer>` 
+est construite et ajoutée par programme au DOM. Pour modifier la valeur, utilisez 
+[zoomTo()](#zoomTo)
 
 Pour obtenir la latitude :
 ```js
@@ -159,6 +163,10 @@ Pour définir la longitude :
 let map = document.querySelector('mapml-viewer');
 map.lon = 21.4; // rien ne se produit si la valeur n’est pas valide
 ```
+Notez que la valeur fournie n'affecte pas l'état de la visionneuse de carte, 
+sauf au chargement du document, ou lorsqu'une instance d'un élément `<mapml-viewer>` 
+est construite et ajoutée par programme au DOM. Pour modifier la valeur, utilisez 
+[zoomTo()](#zoomTo)
 
 Pour obtenir la longitude :
 ```js
@@ -192,6 +200,10 @@ Pour définir le niveau de zoom :
 let map = document.querySelector('mapml-viewer');
 map.zoom = 3; // rien ne se produit si la valeur n’est pas valide
 ```
+Notez que la valeur fournie n'affecte pas l'état de la visionneuse de carte, 
+sauf au chargement du document, ou lorsqu'une instance d'un élément `<mapml-viewer>` 
+est construite et ajoutée par programme au DOM. Pour modifier la valeur, utilisez 
+[zoomTo()](#zoomTo)
 
 Pour obtenir la longitude :
 ```js

@@ -58,19 +58,19 @@ The default projection is `OSMTILE`.
 
 ### `zoom`
 
-`zoom` - a non-negative integer.  The value establishes the initial zoom level of the map.  For a small scale view of the world, use a lower value.  Use larger values for larger scales (smaller area maps). The maximum value depends on the particular `projection` and data source. Many map data sources have limited zoom levels available.
+`zoom` - a non-negative integer.  The value establishes the _initial_ zoom level of the map, and is required. The value is updated when the map stops moving. For a smaller scale view of the world, use a lower value.  Use larger values for larger scales (smaller area maps). The maximum value depends on the particular `projection` and data source. Many map data sources have limited zoom levels available.
 
 ---
 
 ### `lat`
 
-`lat` - a real number latitude. The value establishes the initial latitude of the of the center of the map. Latitudes on Earth range from -90.0 (south) to 90.0 (north).  Many projections are not able to display all latitudes, and most projections have a limited range of locations where distortion is controlled or limited. In particular, OSMTILE (Web Mercator) can only display content between the latitude range -84 to 84.
+`lat` - a real number latitude. The value establishes the _initial_ latitude of the of the center of the map, and is required. The value is updated when the map stops moving. Latitudes on Earth range from -90.0 (south) to 90.0 (north).  Many projections are not able to display all latitudes, and most projections have a limited range of locations where distortion is controlled or limited. In particular, OSMTILE (Web Mercator) can only display content between the latitude range -84 to 84.
 
 ---
 
 ### `lon`
 
-`lon` - a real number longitude. The value establishes the initial longitude of the of the center of the map.Longitudes on Earth range from -180.0 (west) to 180.0 (east). Similar comments related to distortion apply to those for latitude. Be careful, this attribute is named "lon" NOT "long", and if you use "long" your map won't work properly.
+`lon` - a real number longitude. The value establishes the _initial_ longitude of the of the center of the map, and is required. The value is updated when the map stops moving. Longitudes on Earth range from -180.0 (west) to 180.0 (east). Similar comments related to distortion apply to those for latitude. Be careful, this attribute is named "lon" NOT "long", and if you use "long" your map won't work properly.
 
 ---
 

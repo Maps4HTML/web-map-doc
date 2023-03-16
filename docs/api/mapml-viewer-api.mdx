@@ -16,10 +16,10 @@ The HTMLMapmlViewerElement interface represents the `<mapml-viewer>` element.
 | [controls](#controls)     	| Turns native map controls on or off. Reflects the controls attribute.    	|
 | [controlsList](#controlslist) 	| Allows to change the set of native controls. Reflects the controlslist attribute. 	|
 | [extent](#extent)       	| Returns the extent of the current map view. Read only.           	|
-| [lat](#lat)          	| Get the map's latitude. Reflects the lat attribute. Read only.        	|
-| [lon](#lon)          	| Get the map's longitude. Reflects the lon attribute. Read only.        	|
+| [lat](#lat)          	| Get or set the map's latitude. Reflects to the lat content attribute. No effect on map dynamic state. |
+| [lon](#lon)          	| Get or set the map's longitude. Reflects to the lon content attribute. No effect on map dynamic state. |
 | [projection](#projection)   	| The map's projection. Reflects the projection attribute.       	|
-| [zoom](#zoom)   	| The map's zoom level. Reflects the zoom attribute.      	|
+| [zoom](#zoom)   	| Get or set the map's zoom level. Reflects to the zoom content attribute. No effect on map dynamic state. |
 
 ### controls
 
@@ -143,6 +143,9 @@ To set the latitude:
 let map = document.querySelector('mapml-viewer');
 map.lat = 21.4; // if it's an invalid value, nothing happens
 ```
+Note that the value supplied does not affect the map viewer state, except at 
+document load, or when an instance of a `<mapml-viewer>` element is constructed
+and programmatically added to the DOM. To change the value, use [zoomTo()](#zoomTo);
 
 To get the latitude:
 ```js
@@ -159,6 +162,9 @@ To set the longitude:
 let map = document.querySelector('mapml-viewer');
 map.lon = 21.4; // if it's an invalid value, nothing happens
 ```
+Note that the value supplied does not affect the map viewer state, except at 
+document load, or when an instance of a `<mapml-viewer>` element is constructed
+and programmatically added to the DOM. To change the value, use [zoomTo()](#zoomTo);
 
 To get the longitude:
 ```js
@@ -190,8 +196,11 @@ let projection = map.projection;
 To set the zoom:
 ```js
 let map = document.querySelector('mapml-viewer');
-map.zoom = 3; // if it's an invalid value, nothing happens
+map.zoom = 3; // if it's an invalid value, will default to 0
 ```
+Note that the value supplied does not affect the map viewer state, except at 
+document load, or when an instance of a `<mapml-viewer>` element is constructed
+and programmatically added to the DOM. To change the value, use [zoomTo()](#zoomTo);
 
 To get the longitude:
 ```js
