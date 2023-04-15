@@ -37,12 +37,12 @@ Not implemented yet
 
 ### extent
 
-Read-only.  Calculates and returns the upper left and lower right coordinates of the 
-feature as an object value.  
+Read-only.  Returns the upper left and lower right coordinates of the 
+feature's minimum bounding rectangle as an object value.  
 
 For point features (which have a zero-area extent), an `extent` is calculated 
 to fit the corners of a single tile centred on that location,
-at an integral zoom equal to the feature's [zoom](#zoom) property value, if set, or at the 
+at an integral zoom level equal to the feature's [zoom](#zoom) property value, if set, or at the 
 fallback (calculated) zoom value if no [zoom](#zoom) property is set. 
 
 ```console
@@ -133,6 +133,7 @@ The extent object is structured as follows:
 ## Methods
 
 ### zoomTo()
+
 `HTMLFeatureElement.zoomTo()` Move the viewport to be centred on the feature's [`extent`](#extent).
 The zoom of the map displayed depends on the native [zoom](#zoom) property of the feature.
 If the feature has no specified [zoom](#zoom) property, the [`extent`](#extent) will be 'fit' into the
@@ -140,37 +141,90 @@ viewport at the largest integral zoom possible. If a [zoom](#zoom) property is a
 the viewport will be centred on the centre of the feature's [`extent`](#extent) at that zoom
 value, whether or not the [`extent`](#extent) fits completely within the viewport.
 
+#### Syntax
+
 ```js
 let f = document.querySelector('map-feature');
-f.zoomTo();
+f.zoomTo(); // re-center the map on the feature at its native zoom
 ```
+#### Parameters
+
+None.
+
+#### Return value
+
+None ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
 
 ---
 
-### click(tbd event)
+### click(tbd: event)
+
+The `click` method simulates a mouse click on the feature.
+
+#### Syntax:
 
 ```js
 let f = document.querySelector('map-feature');
 f.click();
 ```
+#### Parameters:
+
+None.
+
+#### Return value:
+
+None ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
+
 
 ---
 
-### focus(tbd event)
+### focus(tbd event, options)
+
+#### Syntax:
 
 ```js
 let f = document.querySelector('map-feature');
 f.focus();
 ```
 
+#### Parameters:
+
+`options` <span class="badge">Optional</span>
+
+An optional object for controlling aspects of the focusing process. 
+This object may contain the following properties:
+
+##### preventScroll
+
+Copy from [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus#preventscroll)
+
+##### focusVisible
+
+Copy from [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus#focusvisible)
+
+#### Return value:
+
+None ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
+
 ---
 
 ### blur(tbd event)
+
+#### Syntax
 
 ```js
 let f = document.querySelector('map-feature');
 f.blur();
 ```
+
+#### Parameters
+
+None.
+
+#### Return value
+
+None ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
+
 
 ---
 
@@ -186,6 +240,10 @@ f.blur();
 
 `mapml2geojson` must be called inside a windows.onload event to work properly. i.e.
 
+:::
+
+#### Syntax
+
 ``` js
 window.onload = (event) => {
   let layer = document.querySelector('layer-');
@@ -193,15 +251,13 @@ window.onload = (event) => {
 };
 ```
 
-:::
-
 #### Parameters
 
 | Parameter | Description |
 |------|--------------|
 | <Object\>&nbsp;options | Optional. You supply parameters via an options object with [predefined option names](#options). |
 
-#### Options
+##### Options
 
 <Object\> A set of key/value pairs that customize the output GeoJSON object. All are optional and detailed below.
 
@@ -211,26 +267,63 @@ window.onload = (event) => {
 | `transform` | <Boolean\> | `true` | Transform `<map-coordinates>` values to `gcrs` (longitude,latitude) values, if they are not already so. GeoJSON [recommends](https://www.rfc-editor.org/rfc/rfc7946.html#section-4) using WGS 84 longitude,latitude coordinates, so this is the default behaviour. |
 ###### Notes
 
-`mapml2geojson`, by default, will transform coordinates to `gcrs` before serialization, if 
-necessary. Note that all geographic CRS are not equivalent, and the interpretation
+:::caution
+
+`mapml2geojson`, by default, will transform feature coordinates to `gcrs` before serialization, if 
+necessary. Note that all geographic CRS are <u>**not**</u> equivalent, and the interpretation
 of such coordinates is not guaranteed to conform to WGS 84 / GPS coordinates, 
 and therefore may not conform to [the GeoJSON recommendation](https://datatracker.ietf.org/doc/html/rfc7946#section-4),
-which requires longitude,latitude coordinates that
-are encoded as WGS 84.  The projection engine used to implement this conversion
-is not capable of transforming coordinates from one ellipsoid to another, and 
+which requires longitude,latitude coordinates to be
+encoded as WGS 84.  The projection engine used to implement this conversion
+is not capable of transforming coordinates from one [ellipsoid](https://en.wikipedia.org/wiki/Earth_ellipsoid) to another, and 
 so the resulting JSON SHOULD (somehow, tbd) be tagged with the datum in use by the projection of the layer.
+:::
+
+#### Return value
+
+A GeoJSON object representing the feature
 
 ---
 ## Events
 
 | Event name      	| Description                                          	|
 |--------------	|--------------------------------------------------------	|
-| changestyle     | Fired before the layer changes src due to user selecting alternate style in layer control |
-| changeprojection | Fired before the layer changes projection due to its declared projection being not equal to that of the map |
-| extentload | Fired when the metadata for a layer has loaded, but before loading tiles, features and other content |
+| click | These event names were copied from [Leaflet Interactive Layer](https://leafletjs.com/reference.html#interactive-layer-event) and are subject to discussion. They are not implemented by map-feature. |
+| dblclick | Actually, it's probably worth going through MDN's [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element) interface and events for inspiration. |
+| mousedown | |
+| mouseup | |
+| mouseover | |
+| mouseout | |
+| contextmenu | |
 ---
 
 ## Examples
+
+### zoomTo
+
+An example of how to use the zoomTo() method to move the map to a feature.
+
+---
+
+### click
+
+An example of how to use the click() method to programmatically open a feature's 
+popup.
+
+---
+
+### focus
+
+An example of how to use the focus() method to move the document focus to a feature
+
+---
+
+### blur
+
+An example of removing the focus from a feature and putting it on the map container, 
+effectively starting the map tab sequence over for keyboard users.
+
+---
 
 ### mapml2geojson
 #### Default options
