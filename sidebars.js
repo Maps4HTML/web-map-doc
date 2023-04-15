@@ -25,6 +25,7 @@ module.exports = {
   API: [
     'api/mapml-viewer-api',
     'api/layer-api',
+    'api/map-feature-api',
     'api/custom-projections',
     'api/custom-rendering'
   ],

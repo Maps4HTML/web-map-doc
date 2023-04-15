@@ -1,151 +1,186 @@
 ---
-id: layer-api
-title: "HTMLLayerElement"
-slug: /api/layer-api
+id: map-feature-api
+title: "HTMLFeatureElement"
+slug: /api/map-feature-api
 ---
 
-# HTMLLayerElement
+# HTMLFeatureElement
 
 ## Properties
 
-### checked
+### zoom
 
-`HTMLLayerElement.checked` is a boolean read/write value that turns the layer on and off,
-and reflects the checked attribute. The checked state is reflected in the layer 
-control user interface for the layer via a checkbox next to the layer name.  The 
-checked property can be used to programatically change the checked state of the layer.
-The checked property can't be changed if the disabled property is set.
-
-To set the checked state of a layer to on:
-
-```js
-let layer = document.querySelector('layer-');
-layer.checked = true; // valid values are true | false
-```
-
-To read the checked state of the layer:
-
-```js
-let layer = document.querySelector('layer-');
-let isChecked = layer.checked;
-```
----
-
-### hidden
-HTMLLayerElement.hidden is a boolean  read/write value that hides or unhides the
-layer in the layer control only.  The hidden state has no bearing on the presence
-of layer content on the map, it only affects the layer presence layer control. 
-This can be useful for managing short-lived layers, such as search results, to the map without 
-forcing the user to manage the layer state, which is done by your application.
-It can also be useful for managing a permanent base layer without cluttering the
-user interface.
-
-To set/update whether the layer is "hidden":
-
-```js
-let layer = document.querySelector('layer-');
-layer.hidden = true; // valid values are true | false
-```
-
-To get the `<layer->`'s hidden value:
-
-```js
-let layer = document.querySelector('layer-');
-let isHidden = layer.hidden;
-```
----
-
-### disabled
-HTMLLayerElement.disabled provides READ-ONLY access to the disabled state of the
-layer.  A layer becomes disabled if its contents are not rendered, either by being
-completely outside the current map extent or by having an error associated to the
-layer processing, such as being in a projection that is incompatible with the
-projection of the map. When a layer is disabled, the user can't interact with it
-in the layer control, and it will not be visible in the map viewport.  If a layer
-becomes not-disabled, through manipulation of the map, for example, the layer
-will become interactable in the layer control, and should be visible in the 
-map viewport.
+`HTMLFeatureElement.zoom` gets or sets the 'native' zoom of the feature; `zoom` 
+[reflects](https://html.spec.whatwg.org/#example-reflect-incantation) the
+content attribute of the same name. Map features' geometry and other properties 
+are scale-dependent.  It's expected that features served by HTML (MapML) services 
+will express the native or natural scale of the feature through its `zoom`, `min` 
+and `max` (zoom) content and IDL attributes.
 
 ---
 
-HTMLLayerElement.label provides read/write access to the label used in the layer control for
-the layer.
-
-To set/update the `<layer->`'s label:
+### min
 
 :::caution
-Needs To Be Implemented, Currently doesn't update the label in layer controls
+Not implemented yet
 :::
 
-```js
-let layer = document.querySelector('layer-');
-layer.label = "New Title";
-```
-
-To get the `<layer->`'s label value:
-
-```js
-let layer = document.querySelector('layer-');
-let label = layer.label;
-```
 ---
-### src
-HTMLLayerElement.src reflects the src HTML attribute, and specifies the URL of the
-MapML document for the layer.  The src property may be undefined if the layer
-contains inline content.  If the src property returns a value, any inline content 
-will be ignored.
-To set/update the `<layer->`'s src:
 
-```js
-let layer = document.querySelector('layer-');
-layer.src = "https://example.org";
-```
+### max
 
-To get the `<layer->`'s src value (URL):
-
-```js
-let layer = document.querySelector('layer-');
-let url = layer.src;
-```
----
-### opacity
-HTMLLayerElement.opacity provides read/write access to the `opacity` value, and is reflected in the layer control for each layer, under "Opacity".
-
-To set/update the `<layer->`'s opacity:
-
-```js
-let layer = document.querySelector('layer-');
-layer.opacity = 0.5; // valid values from 0 to 1
-```
-
-To get the `<layer->`'s opacity value:
-
-```js
-let layer = document.querySelector('layer-');
-let opacity = layer.opacity;
-```
+:::caution
+Not implemented yet
+:::
 
 ---
+
+### extent
+
+Read-only.  Calculates and returns the upper left and lower right coordinates of the 
+feature as an object value.  
+
+For point features (which have a zero-area extent), an `extent` is calculated 
+to fit the corners of a single tile centred on that location,
+at an integral zoom equal to the feature's [zoom](#zoom) property value, if set, or at the 
+fallback (calculated) zoom value if no [zoom](#zoom) property is set. 
+
+```console
+> let f = document.querySelector('map-feature')
+> console.log(f.extent)
+> {topLeft: {…}, bottomRight: {…}, projection: 'CBMTILE'}
+```
+
+The extent object is structured as follows:
+
+<details>
+<summary>Click to view the extent object</summary>
+
+```js
+{
+    "projection": "CBMTILE",
+    "topLeft": {
+        "tcrs": [
+            {
+                "horizontal": 942.662039991251,
+                "vertical": 1029.0945982508472
+            },
+/* an object with "horizontal" and "vertical" properties for each zoom level in the array */
+            {
+                "horizontal": 546743983.1949257,
+                "vertical": 596874866.9854914
+            }
+        ],
+        "tilematrix": [
+            {
+                "horizontal": 3.6822735937158244,
+                "vertical": 4.019900774417372
+            },
+/* an object with "horizontal" and "vertical" properties for each zoom level in the array */
+            {
+                "horizontal": 2135718.6843551784,
+                "vertical": 2331542.4491620758
+            }
+        ],
+/* gcrs stands for "geographic coordinate reference system" */
+        "gcrs": {
+            "horizontal": -75.73195696514524,
+            "vertical": 45.40761073808424
+        },
+/* pcrs stands for "projected coordinate reference system" */
+        "pcrs": {
+            "horizontal": 1509108.7182317898,
+            "vertical": -170864.4342066869
+        }
+    },
+    "bottomRight": {
+        "tcrs": [
+            {
+                "horizontal": 942.7503158533199,
+                "vertical": 1029.1828741129164
+            },
+            {
+                "horizontal": 546795183.1949255,
+                "vertical": 596926066.9854914
+            }
+        ],
+        "tilematrix": [
+            {
+                "horizontal": 3.6826184213020308,
+                "vertical": 4.0202456020035795
+            },
+            {
+                "horizontal": 2135918.684355178,
+                "vertical": 2331742.4491620758
+            }
+        ],
+        "gcrs": {
+            "horizontal": -75.67858731979081,
+            "vertical": 45.387937810298354
+        },
+        "pcrs": {
+            "horizontal": 1512495.3916717991,
+            "vertical": -174251.10764670372
+        }
+    }
+}
+```
+
+</details>
+
+---
+
 ## Methods
 
 ### zoomTo()
-HTMLLayerElement.zoomTo() Zoom to the layer's extent in the map, at the maximum
-zoom level in which the extent fits completely.
+`HTMLFeatureElement.zoomTo()` Move the viewport to be centred on the feature's [`extent`](#extent).
+The zoom of the map displayed depends on the native [zoom](#zoom) property of the feature.
+If the feature has no specified [zoom](#zoom) property, the [`extent`](#extent) will be 'fit' into the
+viewport at the largest integral zoom possible. If a [zoom](#zoom) property is available,
+the viewport will be centred on the centre of the feature's [`extent`](#extent) at that zoom
+value, whether or not the [`extent`](#extent) fits completely within the viewport.
 
 ```js
-let layer = document.querySelector('layer-');
-layer.zoomTo();
+let f = document.querySelector('map-feature');
+f.zoomTo();
+```
+
+---
+
+### click(tbd event)
+
+```js
+let f = document.querySelector('map-feature');
+f.click();
+```
+
+---
+
+### focus(tbd event)
+
+```js
+let f = document.querySelector('map-feature');
+f.focus();
+```
+
+---
+
+### blur(tbd event)
+
+```js
+let f = document.querySelector('map-feature');
+f.blur();
 ```
 
 ---
 
 ### mapml2geojson(options)
 
-HTMLLayerElement.mapml2geojson(options) returns the layer in GeoJSON format.
+`HTMLFeatureElement.mapml2geojson(options)` returns the feature in GeoJSON format.
 
 | Function | Returns | Description |
 |----------|---------|-------------|
-| <code>mapml2geojson(<Object\>&nbsp;options)</code> | A JavaScript (GeoJSON) feature collection object | This function transforms the `<feature>` element children of a `<layer->` element to a GeoJSON FeatureCollection object. You supply [options](#options) to control the transformation. This function must be used inside a windows.onload event.
+| <code>mapml2geojson(<Object\>&nbsp;options)</code> | A JavaScript (GeoJSON) feature object | This function transforms the `<feature>` element to a GeoJSON Feature object. You supply [options](#options) to control the transformation. 
 
 :::caution
 

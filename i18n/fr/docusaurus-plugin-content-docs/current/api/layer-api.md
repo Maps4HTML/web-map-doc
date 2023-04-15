@@ -152,7 +152,7 @@ window.onload = (event) => {
 
 | Option | Type | Défaut | Description |
 |------|------|---------------|--------|
-| `propertyFunction` | <Function\> | _n/a_ | Fonction que vous fournissez et qui mappe l’élément `<map-properties>` de la caractéristique à un [membre GeoJSON "properties"](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2), puisque qu’il n’y a que vous qui connaît la conception du balisage dans votre valeur `<map-properties>`. Si vous ne fournissez pas cette option, une fonction par défaut essaiera de renverser un élément-enfant `<table>` de `<map-properties>`, comme si ce tableau était généré par la [fonction d’option de propriétés par défaut de geojson2mapml](#option-properties). |
+| `propertyFunction` | <Function\> | _n/a_ | Fonction que vous fournissez et qui mappe l’élément `<map-properties>` de la caractéristique à un [membre GeoJSON "properties"](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2), puisque qu’il n’y a que vous qui connaît la conception du balisage dans votre valeur `<map-properties>`. Si vous ne fournissez pas cette option, une fonction par défaut essaiera de renverser un élément-enfant `<table>` de `<map-properties>`, comme si ce tableau était généré par la [fonction d’option de propriétés par défaut de geojson2mapml](mapml-viewer-api#options). |
 | `transform` | <Boolean\> | `true` | Transforme des valeurs `<map-coordinates>` en valeurs `gcrs` (longitude, latitude), si elles ne le sont pas déjà. GeoJSON [recommande](https://www.rfc-editor.org/rfc/rfc7946.html#section-4) d’utiliser les coordonnées de longitude et de latitude WGS 84, il s’agit donc là du comportement par défaut. |
 ###### Remarques
 
