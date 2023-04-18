@@ -21,17 +21,29 @@ and `max` (zoom) content and IDL attributes.
 
 ### min
 
-:::caution
-Not implemented yet
-:::
+The `min` (zoom) attribute gets or sets the native minimum zoom of the feature;
+`min` [reflects](https://html.spec.whatwg.org/#example-reflect-incantation) the
+content attribute of the same name. Map features' geometry and other properties 
+are scale-dependent. The `min` value is a rendering zoom value cut-off; at map 
+zoom values less than `min`, the feature will not be rendered. 
+
+If `min` is not provided, a fallback value will be calculated; the fallback value
+will be the min zoom value of the layer, or if that is not specified, of the 
+map viewer `projection`'s minimum value i.e. 0.
 
 ---
 
 ### max
 
-:::caution
-Not implemented yet
-:::
+The `max` (zoom) attribute gets or sets the native maximum zoom of the feature;
+`max` [reflects](https://html.spec.whatwg.org/#example-reflect-incantation) the
+content attribute of the same name. Map features' geometry and other properties 
+are scale-dependent. The `max` value is a rendering zoom value cut-off; at map 
+zoom values greater than `max`, the feature will not be rendered. 
+
+If `max` is not provided, a fallback value will be calculated; the fallback value
+will be the max zoom value of the layer, or if that is not specified, of the 
+map viewer `projection`'s maximum value e.g. 25 (depending on the projection).
 
 ---
 
@@ -135,11 +147,13 @@ The extent object is structured as follows:
 ### zoomTo()
 
 `HTMLFeatureElement.zoomTo()` Move the viewport to be centred on the feature's [`extent`](#extent).
-The zoom of the map displayed depends on the native [zoom](#zoom) property of the feature.
-If the feature has no specified [zoom](#zoom) property, the [`extent`](#extent) will be 'fit' into the
-viewport at the largest integral zoom possible. If a [zoom](#zoom) property is available,
-the viewport will be centred on the centre of the feature's [`extent`](#extent) at that zoom
-value, whether or not the [`extent`](#extent) fits completely within the viewport.
+The zoom of the map displayed depends on the native [zoom](#zoom) and `max` properties of the feature.
+If the feature has no specified [zoom](#zoom) property, the feature will be centred on the
+viewport at the `max` zoom value, whether that value is present on the feature, or 
+is derived from a fallback value based on the parent layer or map. 
+If a [zoom](#zoom) property is available, the viewport will be centred on the 
+centre of the feature's [`extent`](#extent) at that zoom value, whether or not 
+the [`extent`](#extent) fits completely within the viewport.
 
 #### Syntax
 
