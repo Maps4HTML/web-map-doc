@@ -18,6 +18,17 @@ caractéristiques servies par les services HTML (MapML) expriment l'échelle
 native ou naturelle de la caractéristique par le biais de ses attributs contenu 
 `zoom`, `min` et `max` (zoom) et des attributs IDL.
 
+To set the zoom:
+```js
+let feature = document.querySelector('map-feature');
+feature.zoom = 5; // set's the 'native' zoom of the feature
+```
+
+To get the zoom:
+```js
+let feature = document.querySelector('map-feature');
+let zoom = feature.zoom; 
+```
 ---
 
 ### min
@@ -33,6 +44,17 @@ Si la valeur `min` n'est pas fournie, une valeur de repli sera calculée; la val
 de repli sera la valeur de `zoom` minimale de la couche ou, si elle n'est pas spécifiée, 
 la valeur minimale de la projection du visualiseur de carte, c'est-à-dire 0.
 
+To set the min:
+```js
+let feature = document.querySelector('map-feature');
+feature.min = 5; // feature will not be rendered on zoom levels 0-4
+```
+
+To get the min:
+```js
+let feature = document.querySelector('map-feature');
+let min = feature.min;
+```
 ---
 
 ### max
@@ -49,6 +71,17 @@ sera la valeur de [`zoom`](#zoom) maximale de la couche ou, si elle n'est pas
 spécifiée, la valeur maximale de [`zoom`](#zoom) de la projection du visualiseur 
 de carte, par exemple 25 (en fonction de la projection).
 
+To set the max:
+```js
+let feature = document.querySelector('map-feature');
+feature.max = 10; // feature will not be rendered past zoom level 10
+```
+
+To get the max:
+```js
+let feature = document.querySelector('map-feature');
+let max = feature.max;
+```
 ---
 
 ### extent

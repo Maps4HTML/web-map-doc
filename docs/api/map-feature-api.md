@@ -17,6 +17,17 @@ are scale-dependent.  It's expected that features served by HTML (MapML) service
 will express the native or natural scale of the feature through its `zoom`, `min` 
 and `max` (zoom) content and IDL attributes.
 
+To set the zoom:
+```js
+let feature = document.querySelector('map-feature');
+feature.zoom = 5; // set's the 'native' zoom of the feature
+```
+
+To get the zoom:
+```js
+let feature = document.querySelector('map-feature');
+let zoom = feature.zoom; 
+```
 ---
 
 ### min
@@ -31,6 +42,17 @@ If `min` is not provided, a fallback value will be calculated; the fallback valu
 will be the min zoom value of the layer, or if that is not specified, of the 
 map viewer `projection`'s minimum value i.e. 0.
 
+To set the min:
+```js
+let feature = document.querySelector('map-feature');
+feature.min = 5; // feature will not be rendered on zoom levels 0-4
+```
+
+To get the min:
+```js
+let feature = document.querySelector('map-feature');
+let min = feature.min;
+```
 ---
 
 ### max
@@ -45,6 +67,17 @@ If `max` is not provided, a fallback value will be calculated; the fallback valu
 will be the max zoom value of the layer, or if that is not specified, of the 
 map viewer `projection`'s maximum value e.g. 25 (depending on the projection).
 
+To set the max:
+```js
+let feature = document.querySelector('map-feature');
+feature.max = 10; // feature will not be rendered past zoom level 10
+```
+
+To get the max:
+```js
+let feature = document.querySelector('map-feature');
+let max = feature.max;
+```
 ---
 
 ### extent
