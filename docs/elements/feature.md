@@ -14,7 +14,32 @@ A `<map-feature>` element is a container for a feature's accessible name (`<map-
 ## Attributes
 
 ### `zoom`
-  - This allows you to set the zoom level the feature is rendered at. The zoom value should fall within the range of 0 to the maximum zoom level of the map's [projection](../meta/#attributes).
+
+This allows you to set the zoom level the feature is rendered at. The zoom value 
+should fall within the range of 0 to the maximum zoom level of the map's 
+[projection](../meta/#attributes).
+
+### `min`
+
+The `min` (zoom) attribute gets or sets the native minimum zoom of the feature.
+Map features' geometry and other properties are scale-dependent. The `min` value 
+is a rendering zoom value cut-off; at map zoom values less than `min`, the feature 
+will not be rendered. 
+
+If `min` is not provided, a fallback value will be calculated; the fallback value
+will be the minimum zoom value of the layer, or if that is not specified, of the 
+map viewer `projection`'s minimum value i.e. 0.
+
+### `max`
+
+The `max` (zoom) attribute gets or sets the native maximum zoom of the feature.
+Map features' geometry and other properties are scale-dependent. The `max` value 
+is a rendering zoom value cut-off; at map zoom values greater than `max`, the 
+feature will not be rendered. 
+
+If `max` is not provided, a fallback value will be calculated; the fallback value
+will be the maximum zoom value of the layer, or if that is not specified, of the 
+map viewer `projection`'s maximum value e.g. 25 (depending on the projection).
 
 ---
 
