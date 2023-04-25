@@ -71,13 +71,13 @@ sera la valeur de [`zoom`](#zoom) maximale de la couche ou, si elle n'est pas
 spécifiée, la valeur maximale de [`zoom`](#zoom) de la projection du visualiseur 
 de carte, par exemple 25 (en fonction de la projection).
 
-To set the max:
+Pour définir la valeur `max` :
 ```js
 let feature = document.querySelector('map-feature');
 feature.max = 10; // feature will not be rendered past zoom level 10
 ```
 
-To get the max:
+Pour obtenir le `max` :
 ```js
 let feature = document.querySelector('map-feature');
 let max = feature.max;
@@ -209,7 +209,7 @@ Aucun.
 
 #### Valeur de retour
 
-Aucun ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
+Aucun ([undefined](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
 
 ---
 
@@ -229,7 +229,7 @@ Aucun.
 
 #### Valeur de retour
 
-Aucun ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
+Aucun ([undefined](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
 
 
 ---
@@ -239,8 +239,8 @@ Aucun ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 #### Syntaxe
 
 ```js
-let f = document.querySelector('map-feature');
 f.focus();
+f.focus(options);
 ```
 
 #### Paramètres
@@ -248,33 +248,46 @@ f.focus();
 `options` <span class="badge">Optionnel</span>
 
 Objet optionnel permettant de contrôler certains aspects du processus de focalisation.
-Cet objet peut contenir les propriétés suivantes : 
 
 :::caution
 
 Les options ne sont pas encore mises en œuvre.
 
 :::
+Cet objet peut contenir les propriétés suivantes : 
+
 ##### zoomTo
 
 L'option `zoomTo` (`false` par défaut) déplacera la fenêtre de visualisation pour 
 qu'elle soit centrée sur l'[`extent`](#extent) de la caractéristique, similaire 
 à la méthode [`zoomTo()`](#zoomto).
 
+```javascript
+let f = document.querySelector('map-feature');
+f.focus({ zoomTo: true });
+```
+
 ##### focusVisible
 
 L'option `focusVisible` (`false` par défaut) permet d'ajouter un anneau de anneau 
 de focalisation, comme si la caractéristique avait été focalisée avec le clavier.
 
+```javascript
+let f = document.querySelector('map-feature');
+f.focus({ zoom: false, focusVisible: true });
+```
+
 #### Valeur de retour
 
-Aucun ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
+Aucun ([undefined](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
 
 ---
 
 ### blur()
 
-#### Syntax
+La méthode `blur()` supprime la focalisation sur la caractéristique.
+
+#### Syntaxe
 
 ```js
 let f = document.querySelector('map-feature');
@@ -287,7 +300,7 @@ Aucun.
 
 #### Valeur de retour
 
-Aucun ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
+Aucun ([undefined](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
 
 
 ---
