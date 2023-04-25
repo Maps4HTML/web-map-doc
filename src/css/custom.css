@@ -23,6 +23,14 @@ a {
   text-decoration: underline;
 }
 
+.badge {
+    border: 1px solid #cfc5c5;
+    border-radius: 4rem;
+    font-size: 0.694rem;
+    padding: .125rem .375rem;
+    white-space: nowrap;
+    color: #1e1c1d;
+}
 .menu a,
 .navbar a,
 .pagination-nav a,

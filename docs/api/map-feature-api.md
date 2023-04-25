@@ -171,7 +171,7 @@ None ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refere
 
 ---
 
-### click(tbd: event)
+### click()
 
 The `click` method simulates a mouse click on the feature.
 
@@ -192,29 +192,47 @@ None ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refere
 
 ---
 
-### focus(tbd event, options)
+### focus(options)
 
 #### Syntax:
 
 ```js
-let f = document.querySelector('map-feature');
 f.focus();
+f.focus(options);
 ```
 
 #### Parameters:
 
-`options` <span class="badge">Optional</span>
+`options` <span className="badge">Optional</span>
 
 An optional object for controlling aspects of the focusing process. 
+
+:::caution
+
+Options are not implemented yet.
+
+:::
 This object may contain the following properties:
 
-##### preventScroll
+##### zoomTo
 
-Copy from [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus#preventscroll)
+The `zoomTo` option (`false` by default) will move the viewport to be centred on 
+the feature's [`extent`](#extent), similar to the [`zoomTo()`](#zoomto) method.
+
+```javascript
+let f = document.querySelector('map-feature');
+f.focus({ zoomTo: true });
+```
 
 ##### focusVisible
 
-Copy from [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus#focusvisible)
+The `focusVisible` option (`false` by default) will enhance the feature with a 
+focus ring, similar to as though the feature had been focused with the keyboard.
+
+```javascript
+let f = document.querySelector('map-feature');
+f.focus({ zoom: false, focusVisible: true });
+```
 
 #### Return value:
 
@@ -222,7 +240,9 @@ None ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refere
 
 ---
 
-### blur(tbd event)
+### blur()
+
+The `blur()` method removes focus from the feature.
 
 #### Syntax
 
@@ -269,7 +289,7 @@ window.onload = (event) => {
 
 | Parameter | Description |
 |------|--------------|
-| <Object\>&nbsp;options | Optional. You supply parameters via an options object with [predefined option names](#options). |
+| <Object\>&nbsp;options | <span className="badge">Optional</span> You supply parameters via an options object with [predefined option names](#options). |
 
 ##### Options
 
@@ -302,42 +322,12 @@ A GeoJSON object representing the feature
 
 | Event name      	| Description                                          	|
 |--------------	|--------------------------------------------------------	|
-| click | These event names were copied from [Leaflet Interactive Layer](https://leafletjs.com/reference.html#interactive-layer-event) and are subject to discussion. They are not implemented by map-feature. |
-| dblclick | Actually, it's probably worth going through MDN's [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element) interface and events for inspiration. |
-| mousedown | |
-| mouseup | |
-| mouseover | |
-| mouseout | |
-| contextmenu | |
+| click | The click event occurs when the user clicks or touches the feature with the keyboard or pointer, or when the [click()](#click) method is called. |
+| focus | The focus event occurs when the feature gains focus with a keyboard or pointer, or when the [focus()](#focus) method is called. |
+| blur  | The blur event occurs when the feature loses focus with a keyboard or pointer, or when the [blur()](#blur) method is called. |
 ---
 
 ## Examples
-
-### zoomTo
-
-An example of how to use the zoomTo() method to move the map to a feature.
-
----
-
-### click
-
-An example of how to use the click() method to programmatically open a feature's 
-popup.
-
----
-
-### focus
-
-An example of how to use the focus() method to move the document focus to a feature
-
----
-
-### blur
-
-An example of removing the focus from a feature and putting it on the map container, 
-effectively starting the map tab sequence over for keyboard users.
-
----
 
 ### mapml2geojson
 #### Default options

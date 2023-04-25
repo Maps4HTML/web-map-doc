@@ -10,40 +10,59 @@ slug: /api/map-feature-api
 
 ### zoom
 
-`HTMLFeatureElement.zoom` gets or sets the 'native' zoom of the feature; `zoom` 
-[reflects](https://html.spec.whatwg.org/#example-reflect-incantation) the
-content attribute of the same name. Map features' geometry and other properties 
-are scale-dependent.  It's expected that features served by HTML (MapML) services 
-will express the native or natural scale of the feature through its `zoom`, `min` 
-and `max` (zoom) content and IDL attributes.
+`HTMLFeatureElement.zoom` obtient ou définit le zoom "natif" de l'élément; `zoom` 
+[reflète](https://html.spec.whatwg.org/#example-reflect-incantation) l'attribut 
+content du même nom. La géométrie et les autres propriétés 
+des caractéristiques dépendent de l'échelle. On s'attend à ce que les 
+caractéristiques servies par les services HTML (MapML) expriment l'échelle 
+native ou naturelle de la caractéristique par le biais de ses attributs contenu 
+`zoom`, `min` et `max` (zoom) et des attributs IDL.
 
 ---
 
 ### min
 
-:::caution
-Not implemented yet
-:::
+L'attribut IDL `min` (zoom) permet d'obtenir ou de définir le zoom minimum natif de la 
+caractéristique; `min` [reflète](https://html.spec.whatwg.org/#example-reflect-incantation) 
+l'attribut contentu du même nom. La géométrie et les autres propriétés des 
+caractéristiques de la carte dépendent de l'échelle. La valeur `min` est une valeur 
+limite de zoom de rendu ; à des valeurs de zoom de carte inférieures à `min`, 
+la caractéristique ne sera pas rendue.
+
+Si la valeur `min` n'est pas fournie, une valeur de repli sera calculée; la valeur 
+de repli sera la valeur de `zoom` minimale de la couche ou, si elle n'est pas spécifiée, 
+la valeur minimale de la projection du visualiseur de carte, c'est-à-dire 0.
 
 ---
 
 ### max
 
-:::caution
-Not implemented yet
-:::
+L'attribut `max` (zoom) permet d'obtenir ou de définir le `zoom` maximal natif de la 
+caractéristique; `max` [reflète](https://html.spec.whatwg.org/#example-reflect-incantation) 
+l'attribut de contenu du même nom. La géométrie et les autres propriétés des 
+caractéristiques de la carte dépendent de l'échelle. La valeur `max` est une valeur 
+limite de [`zoom`](#zoom) de rendu; à des valeurs de [`zoom`](#zoom) de carte 
+supérieures à `max`, la caractéristique ne sera pas rendue.
+
+Si `max` n'est pas fourni, une valeur de repli sera calculée ; la valeur de repli 
+sera la valeur de [`zoom`](#zoom) maximale de la couche ou, si elle n'est pas 
+spécifiée, la valeur maximale de [`zoom`](#zoom) de la projection du visualiseur 
+de carte, par exemple 25 (en fonction de la projection).
 
 ---
 
 ### extent
 
-Read-only.  Returns the upper left and lower right coordinates of the 
-feature's minimum bounding rectangle as an object value.  
+En lecture seule. Renvoie les coordonnées en haut à gauche et en bas à droite du 
+rectangle minimal de délimitation de la caractéristique sous la forme d'une valeur 
+d'objet.
 
-For point features (which have a zero-area extent), an `extent` is calculated 
-to fit the corners of a single tile centred on that location,
-at an integral zoom level equal to the feature's [zoom](#zoom) property value, if set, or at the 
-fallback (calculated) zoom value if no [zoom](#zoom) property is set. 
+Pour les caractéristiques ponctuelles (dont l'étendue est nulle), l'étendue est 
+calculée pour correspondre aux coins d'une tuile unique centrée sur cet endroit, 
+à un niveau de [`zoom`](#zoom) intégral égal à la valeur de la propriété de 
+[`zoom`](#zoom) de la caractéristique, si elle est définie, ou à la valeur de 
+[`zoom`](#zoom) de repli (calculée) si aucune propriété de [`zoom`](#zoom) n'est 
+définie.
 
 ```console
 > let f = document.querySelector('map-feature')
@@ -51,10 +70,10 @@ fallback (calculated) zoom value if no [zoom](#zoom) property is set.
 > {topLeft: {…}, bottomRight: {…}, projection: 'CBMTILE'}
 ```
 
-The extent object is structured as follows:
+L'objet "extent" est structuré comme suit :
 
 <details>
-<summary>Click to view the extent object</summary>
+<summary>Cliquer pour visualiser l'objet de l'étendue</summary>
 
 ```js
 {
@@ -65,7 +84,7 @@ The extent object is structured as follows:
                 "horizontal": 942.662039991251,
                 "vertical": 1029.0945982508472
             },
-/* an object with "horizontal" and "vertical" properties for each zoom level in the array */
+/* un objet avec des propriétés "horizontales" et "verticales" pour chaque niveau de zoom dans le tableau */
             {
                 "horizontal": 546743983.1949257,
                 "vertical": 596874866.9854914
@@ -76,18 +95,18 @@ The extent object is structured as follows:
                 "horizontal": 3.6822735937158244,
                 "vertical": 4.019900774417372
             },
-/* an object with "horizontal" and "vertical" properties for each zoom level in the array */
+/* un objet avec des propriétés "horizontales" et "verticales" pour chaque niveau de zoom dans le tableau */
             {
                 "horizontal": 2135718.6843551784,
                 "vertical": 2331542.4491620758
             }
         ],
-/* gcrs stands for "geographic coordinate reference system" */
+/* gcrs est l'abréviation de "geographic coordinate reference system" (système de référence des coordonnées géographiques) */
         "gcrs": {
             "horizontal": -75.73195696514524,
             "vertical": 45.40761073808424
         },
-/* pcrs stands for "projected coordinate reference system" */
+/* pcrs est l'abréviation de "projected coordinate reference system" (système de référence à coordonnées projetées) */
         "pcrs": {
             "horizontal": 1509108.7182317898,
             "vertical": -170864.4342066869
@@ -130,85 +149,97 @@ The extent object is structured as follows:
 
 ---
 
-## Methods
+## Méthodes
 
 ### zoomTo()
 
-`HTMLFeatureElement.zoomTo()` Move the viewport to be centred on the feature's [`extent`](#extent).
-The zoom of the map displayed depends on the native [zoom](#zoom) property of the feature.
-If the feature has no specified [zoom](#zoom) property, the [`extent`](#extent) will be 'fit' into the
-viewport at the largest integral zoom possible. If a [zoom](#zoom) property is available,
-the viewport will be centred on the centre of the feature's [`extent`](#extent) at that zoom
-value, whether or not the [`extent`](#extent) fits completely within the viewport.
+`HTMLFeatureElement.zoomTo()` Déplace la fenêtre d'affichage pour la centrer sur 
+l'[`extent`](#extent) de la caractéristique. Le [`zoom`](#zoom) de la carte affichée 
+dépend des propriétés [`zoom`](#zoom) et [`max`](#max) natives de la caractéristique. 
+Si la caractéristique n'a pas de propriété 
+de [`zoom`](#zoom) spécifiée, la caractéristique sera centrée sur la fenêtre d'affichage à 
+la valeur de [`zoom`](#zoom) maximale, que cette valeur soit présente sur la caractéristique 
+ou qu'elle soit dérivée d'une valeur de repli basée sur la couche ou la carte 
+parente. Si une propriété de [`zoom`](#zoom) est disponible, la fenêtre d'affichage sera 
+centrée sur le centre de l'[`extent`](#extent) de la caractéristique à cette valeur de [`zoom`](#zoom), 
+que l'[`extent`](#extent) tienne ou non entièrement dans la fenêtre d'affichage.
 
-#### Syntax
+#### Syntaxe
 
 ```js
 let f = document.querySelector('map-feature');
 f.zoomTo(); // re-center the map on the feature at its native zoom
 ```
-#### Parameters
+#### Paramètres
 
-None.
+Aucun.
 
-#### Return value
+#### Valeur de retour
 
-None ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
+Aucun ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
 
 ---
 
-### click(tbd: event)
+### click()
 
-The `click` method simulates a mouse click on the feature.
+La méthode `click` simule un clic de souris sur la caractéristique.
 
-#### Syntax:
+#### Syntaxe
 
 ```js
 let f = document.querySelector('map-feature');
 f.click();
 ```
-#### Parameters:
+#### Paramètres
 
-None.
+Aucun.
 
-#### Return value:
+#### Valeur de retour
 
-None ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
+Aucun ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
 
 
 ---
 
-### focus(tbd event, options)
+### focus(options)
 
-#### Syntax:
+#### Syntaxe
 
 ```js
 let f = document.querySelector('map-feature');
 f.focus();
 ```
 
-#### Parameters:
+#### Paramètres
 
-`options` <span class="badge">Optional</span>
+`options` <span class="badge">Optionnel</span>
 
-An optional object for controlling aspects of the focusing process. 
-This object may contain the following properties:
+Objet optionnel permettant de contrôler certains aspects du processus de focalisation.
+Cet objet peut contenir les propriétés suivantes : 
 
-##### preventScroll
+:::caution
 
-Copy from [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus#preventscroll)
+Les options ne sont pas encore mises en œuvre.
+
+:::
+##### zoomTo
+
+L'option `zoomTo` (`false` par défaut) déplacera la fenêtre de visualisation pour 
+qu'elle soit centrée sur l'[`extent`](#extent) de la caractéristique, similaire 
+à la méthode [`zoomTo()`](#zoomto).
 
 ##### focusVisible
 
-Copy from [MDN](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/focus#focusvisible)
+L'option `focusVisible` (`false` par défaut) permet d'ajouter un anneau de anneau 
+de focalisation, comme si la caractéristique avait été focalisée avec le clavier.
 
-#### Return value:
+#### Valeur de retour
 
-None ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
+Aucun ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
 
 ---
 
-### blur(tbd event)
+### blur()
 
 #### Syntax
 
@@ -217,32 +248,32 @@ let f = document.querySelector('map-feature');
 f.blur();
 ```
 
-#### Parameters
+#### Paramètres
 
-None.
+Aucun.
 
-#### Return value
+#### Valeur de retour
 
-None ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
+Aucun ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined)).
 
 
 ---
 
 ### mapml2geojson(options)
 
-`HTMLFeatureElement.mapml2geojson(options)` returns the feature in GeoJSON format.
+`HTMLFeatureElement.mapml2geojson(options)` renvoie la caractéristique au format GeoJSON.
 
-| Function | Returns | Description |
+| Fonction | Retours | Description |
 |----------|---------|-------------|
-| <code>mapml2geojson(<Object\>&nbsp;options)</code> | A JavaScript (GeoJSON) feature object | This function transforms the `<feature>` element to a GeoJSON Feature object. You supply [options](#options) to control the transformation. 
+| <code>mapml2geojson(<Object\>&nbsp;options)</code> | Un objet caractéristique JavaScript (GeoJSON) | Cette fonction transforme l'élément `<feature>` en un objet GeoJSON Feature. Vous fournissez [options](#options) pour contrôler la transformation. 
 
 :::caution
 
-`mapml2geojson` must be called inside a windows.onload event to work properly. i.e.
+`mapml2geojson` doit être appelé à l'intérieur d'un événement windows.onload pour fonctionner correctement.
 
 :::
 
-#### Syntax
+#### Syntaxe
 
 ``` js
 window.onload = (event) => {
@@ -251,90 +282,63 @@ window.onload = (event) => {
 };
 ```
 
-#### Parameters
+#### Paramètres
 
-| Parameter | Description |
+| Paramètre | Description |
 |------|--------------|
-| <Object\>&nbsp;options | Optional. You supply parameters via an options object with [predefined option names](#options). |
+| <Object\>&nbsp;options | <span className="badge">Optionnel</span> Vous fournissez des paramètres via un objet options avec des [noms d'options prédéfinis](#options). |
 
 ##### Options
 
-<Object\> A set of key/value pairs that customize the output GeoJSON object. All are optional and detailed below.
+<Object\> Un ensemble de paires clé/valeur qui personnalisent l'objet GeoJSON de sortie. Tous ces éléments sont optionnels et détaillés ci-dessous.
 
-| Option | Type | Default | Description |
+| Option | Type | Défaut | Description |
 |------|------|---------------|--------|
-| `propertyFunction` | <Function\> | _n/a_ | A function you supply that maps the features' `<map-properties>` element to a [GeoJSON "properties" member](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2), since only you know the markup design in your `<map-properties>` value. If you don't supply this option, a default function will attempt to reverse a `<table>` child of the `<map-properties>` element, as if that table was generated by the [default properties option function from geojson2mapml](mapml-viewer-api#options). |
-| `transform` | <Boolean\> | `true` | Transform `<map-coordinates>` values to `gcrs` (longitude,latitude) values, if they are not already so. GeoJSON [recommends](https://www.rfc-editor.org/rfc/rfc7946.html#section-4) using WGS 84 longitude,latitude coordinates, so this is the default behaviour. |
+| `propertyFunction` | <Fonction\> | _s/o_ | Une fonction que vous fournissez qui fait correspondre l'élément `<map-properties>` de la caractéristique à un [membre GeoJSON "properties"](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2), puisque vous seul connaissez la conception du balisage dans votre valeur `<map-properties>`. Si vous ne fournissez pas cette option, une fonction par défaut tentera d'inverser un enfant `<table>` de l'élément `<map-properties>`, comme si cette table avait été générée par la fonction [default properties option function from geojson2mapml](mapml-viewer-api#options). |
+| `transform` | <Boolean\> | `true` | Transforme les valeurs `<map-coordinates>` en valeurs `gcrs` (longitude,latitude), si ce n'est pas déjà le cas. GeoJSON [recommande](https://www.rfc-editor.org/rfc/rfc7946.html#section-4) d'utiliser les coordonnées de longitude et de latitude WGS 84, c'est donc le comportement par défaut. |
 ###### Notes
 
 :::caution
 
-`mapml2geojson`, by default, will transform feature coordinates to `gcrs` before serialization, if 
-necessary. Note that all geographic CRS are <u>**not**</u> equivalent, and the interpretation
-of such coordinates is not guaranteed to conform to WGS 84 / GPS coordinates, 
-and therefore may not conform to [the GeoJSON recommendation](https://datatracker.ietf.org/doc/html/rfc7946#section-4),
-which requires longitude,latitude coordinates to be
-encoded as WGS 84.  The projection engine used to implement this conversion
-is not capable of transforming coordinates from one [ellipsoid](https://en.wikipedia.org/wiki/Earth_ellipsoid) to another, and 
-so the resulting JSON SHOULD (somehow, tbd) be tagged with the datum in use by the projection of the layer.
+`mapml2geojson`, par défaut, transformera les coordonnées des caractéristiques en
+`gcrs` avant la sérialisation, si nécessaire. Notez que tous les CRS géographiques 
+sont <u>**non**</u>-équivalents, et l'interprétation de ces coordonnées n'est pas 
+garantie conforme aux coordonnées WGS 84 / GPS, et peut donc ne pas être conforme 
+à [la recommandation GeoJSON](https://datatracker.ietf.org/doc/html/rfc7946#section-4), 
+qui exige que les coordonnées de longitude et de latitude soient encodées en WGS 84.  
+Le moteur de projection utilisé pour mettre en œuvre cette conversion n'est pas 
+capable de transformer les coordonnées d'un 
+[ellipsoïde](https://en.wikipedia.org/wiki/Earth_ellipsoid) en un autre, et le 
+JSON résultant DEVRAIT (d'une manière ou d'une autre, à déterminer) être marqué 
+avec le datum utilisé par la projection de la couche.
 :::
 
-#### Return value
+#### Valeur de retour
 
-A GeoJSON object representing the feature
+Un objet GeoJSON représentant la caractéristique
 
 ---
-## Events
+## Evénements
 
-| Event name      	| Description                                          	|
+| Nom de l'événement      	| Description                                          	|
 |--------------	|--------------------------------------------------------	|
-| click | These event names were copied from [Leaflet Interactive Layer](https://leafletjs.com/reference.html#interactive-layer-event) and are subject to discussion. They are not implemented by map-feature. |
-| dblclick | Actually, it's probably worth going through MDN's [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element) interface and events for inspiration. |
-| mousedown | |
-| mouseup | |
-| mouseover | |
-| mouseout | |
-| contextmenu | |
+| click | L'événement click se produit lorsque l'utilisateur clique ou touche la caractéristique avec le clavier ou le pointeur, ou lorsque la méthode [click()](#click) est appelée. |
+| focus | L'événement de `focus` se produit lorsque la caractéristique est ciblée par le clavier ou le pointeur, ou lorsque la méthode [focus()](#focus) est appelée. | |
+| blur | L'événement de `blur` se produit lorsque la caractéristique perd le focus avec un clavier ou un pointeur, ou lorsque la méthode [blur()](#blur) est appelée. |
 ---
 
-## Examples
-
-### zoomTo
-
-An example of how to use the zoomTo() method to move the map to a feature.
-
----
-
-### click
-
-An example of how to use the click() method to programmatically open a feature's 
-popup.
-
----
-
-### focus
-
-An example of how to use the focus() method to move the document focus to a feature
-
----
-
-### blur
-
-An example of removing the focus from a feature and putting it on the map container, 
-effectively starting the map tab sequence over for keyboard users.
-
----
+## Exemples
 
 ### mapml2geojson
 #### Default options
-An example showcasing default GeoJSON output when no options are provided.
+Un exemple montrant la sortie GeoJSON par défaut lorsqu'aucune option n'est fournie.
 ``` html
-<layer- label="Point Geometry" checked="">
+<layer- label="Géométrie de point" checked="">
    <map-meta name="extent" content="top-left-longitude=-75.916809, top-left-latitude=45.886964, bottom-right-longitude=-75.516809,bottom-right-latitude=45.26964"></map-meta>
    <map-meta name="projection" content="OSMTILE"></map-meta>
    <map-meta name="cs" content="gcrs"></map-meta>
    <map-feature>
-      <map-featurecaption>Point Geometry</map-featurecaption>
+      <map-featurecaption>Géométrie de point</map-featurecaption>
       <map-geometry>
          <map-point>
             <map-coordinates>-75.6916809 45.4186964</map-coordinates>
@@ -344,14 +348,14 @@ An example showcasing default GeoJSON output when no options are provided.
          <table>
             <thead>
                <tr>
-                  <th role="columnheader" scope="col">Property name</th>
-                  <th role="columnheader" scope="col">Property value</th>
+                  <th role="columnheader" scope="col">Nom de propriété</th>
+                  <th role="columnheader" scope="col">Valeur de la propriété</th>
                </tr>
             </thead>
             <tbody>
                <tr>
                   <th scope="row">prop0</th>
-                  <td itemprop="prop0">This is a Point</td>
+                  <td itemprop="prop0">Ceci est un point</td>
                </tr>
             </tbody>
          </table>
@@ -360,18 +364,18 @@ An example showcasing default GeoJSON output when no options are provided.
 </layer->
 <script>
 window.onload = (event) => {
-   let layer = document.querySelector('layer-');
-   let output = layer.mapml2geojson();
+   let couche = document.querySelector('layer-');
+   let sortie = layer.mapml2geojson();
 };
 </script>
 ```
 
 <details>
-<summary>Click to view the output GeoJSON</summary>
+<summary>Cliquez pour voir la sortie GeoJSON</summary>
 
 ``` js
 {
- "title": "Point Geometry",
+ "title": "Géométrie de point",
  "bbox": [-75.916809, 45.886964, -75.516809, 45.26964],
  "type": "FeatureCollection",
  "features": [{
@@ -381,7 +385,7 @@ window.onload = (event) => {
          "coordinates": [-75.6916809, 45.4186964]
      },
      "properties": {
-         "prop0": "This is a Point"
+         "prop0": "Ceci est un point"
      }
  }]
 }
