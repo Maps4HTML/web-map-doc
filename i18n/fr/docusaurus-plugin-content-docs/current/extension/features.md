@@ -22,6 +22,10 @@ Lorsque cette fonction est activée au moyen de l’extension, elle affiche un c
 
 L'activation de cette fonction dans l’extension permet d'annoncer le niveau de zoom dans la carte au moyen de lecteurs d’écran (cette option est activée par défaut).
 
+### Annoncer l'échelle
+
+Annonce l'échelle de la carte aux lecteurs d'écran en unités métriques ou impériales (les unités métriques sont sélectionnées par défaut).
+
 ### Rendu des ressources en MapML
 
 L'activation de cette fonction dans la fenêtre contextuelle d'extension (elle est activée par défaut comme le montre l'image ci-dessus, mais elle peut être désactivée) permet d'afficher des documents cartographiques qui n'ont pas de document hôte, tout comme les navigateurs peuvent présenter des ressources d'image  (image/*) qui n'ont pas de document hôte en synthétisant un document hôte au moment de l'exécution. Cette fonctionnalité reconnaîtra les documents qui sont servis à un onglet de navigateur (ou contexte de navigation général) ou qui sont servis avec l'en-tête  "text/mapml" ou "application/xml" Content-Type. Dans le dernier cas, l'extension recherchera un élément racine `<mapml- xmlns="http://www.w3.org/1999/xhtml">`.
