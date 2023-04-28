@@ -81,7 +81,7 @@ La projection par défaut est `OSMTILE`.
 
 ### `controlslist`
 
-`controlslist` - attribut énuméré. Les valeurs possibles sont les suivantes : "`nofullscreen`", "`nolayer`", "`noreload`" et "`nozoom`". Il se peut qu’à l’occasion, vous ne souhaitiez pas que les utilisateurs aient accès à une commande en particulier. Vous pouvez alors réduire l’ensemble des commandes offertes automatiquement (si vous avez utilisé l’attribut booléen `controls` ).
+`controlslist` - attribut énuméré. Les valeurs possibles sont les suivantes : "`nofullscreen`", "`nolayer`", "`noreload`", "`noscale`" et "`nozoom`". Il se peut qu’à l’occasion, vous ne souhaitiez pas que les utilisateurs aient accès à une commande en particulier. Vous pouvez alors réduire l’ensemble des commandes offertes automatiquement (si vous avez utilisé l’attribut booléen `controls` ).
 
 ---
 

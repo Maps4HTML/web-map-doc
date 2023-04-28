@@ -22,6 +22,10 @@ When turned on through the extension, enables a square in the middle of the map 
 
 When toggled through the extension, announces the zoom level through screen readers (this is on by default).
 
+### Announce Scale
+
+Announces the map scale through screen readers in metric or imperial units (metric is selected by default).
+
 ### Render MapML resources
 
 When turned on through the extension popup (it is on by default as shown above, but can be turned off), the extension enables the rendering of map documents that have no host document, just as browsers can render image resources (image/*) that have no host document, by synthesizing a host document at run time.  The feature will recognize documents that are served to a browser tab (a top level browsing context) that are served with the "text/mapml" or "application/xml" Content-Type header. In the latter case, the extension will "sniff" for a root `<mapml- xmlns="http://www.w3.org/1999/xhtml">` element.
