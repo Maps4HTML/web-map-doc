@@ -109,7 +109,7 @@ present. When it is not present or removed, these features are enabled again.
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [MapML map element](https://maps4html.org/MapML/spec/#the-map-element-0) |
+| [MapML map element](https://maps4html.org/MapML/spec/#the-mapml-viewer-element-0) |
 | [HTML map element](https://html.spec.whatwg.org/multipage/image-maps.html#the-map-element) |
 
 ---
