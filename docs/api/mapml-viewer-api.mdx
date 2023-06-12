@@ -39,7 +39,7 @@ let controlsAdded = map.controls;
 
 ### controlsList
 
-The `controlsList` property returns a [DomTokenList](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList) 
+The `controlsList` property returns a [DOMTokenList](https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList) 
 that helps the user select what controls to display on the `mapml-viewer` element based on the [possible values](../elements/mapml-viewer/#controlslist).
 
 To set the controlslist attribute:
@@ -581,3 +581,40 @@ let output = map.geojson2mapml(json);
 </details>
 
 ---
+
+## Specifications
+
+| Specification                                                |
+|--------------------------------------------------------------|
+| [HTMLMapmlViewerElement](https://maps4html.org/MapML/spec/#dom-htmlmapmlviewerelement) |
+
+---
+
+## Requirements
+
+[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+<p><b><span class="requirement">requirement</span>
+<span class="enhancement">enhancement</span>
+<span class="impractical">impractical</span>
+<span class="undecided">undecided</span>
+<span class="discussion">under discussion</span></b></p>
+
+|  | Spec | Viewer | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Properties**](#properties) | full | full | full |
+| [**Methods**](#methods) | partial * | full | partial * |
+
+<details>
+<summary>Exceptions *</summary>
+<ol>
+<li>No specification will be provided for toggleDebug() or viewSource() methods.</li>
+<li>The geojson2mapml method's <a href="#options">options</a> parameter specification is not final.</li>
+</ol>
+
+</details>
+
+---
+
+> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/api/mapml-viewer-api.mdx)
+> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
