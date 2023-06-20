@@ -262,3 +262,31 @@ window.onload = (event) => {
 </details>
 
 ---
+
+## Specifications
+
+| Specification                                                |
+|--------------------------------------------------------------|
+| [HTMLLayerElement](https://maps4html.org/MapML/spec/#dom-htmllayerelement) |
+
+---
+
+## Requirements
+
+[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+<p><b><span class="requirement">requirement</span>
+<span class="enhancement">enhancement</span>
+<span class="impractical">impractical</span>
+<span class="undecided">undecided</span>
+<span class="discussion">under discussion</span></b></p>
+
+|  | Spec | Viewer | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Properties**](#properties) | full | full | full |
+| [**Methods**](#methods) | full | full | full |
+
+---
+
+> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/api/mapml-viewer-api.mdx)
+> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
