@@ -6,7 +6,7 @@ slug: /api/map-feature-api
 
 # HTMLFeatureElement
 
-## Properties
+## Propriétés
 
 ### zoom
 
@@ -440,3 +440,41 @@ window.onload = (event) => {
 </details>
 
 ---
+
+## Spécifications
+
+| Spécification                                                |
+|--------------------------------------------------------------|
+| [HTMLFeatureElement](https://maps4html.org/MapML/spec/#the-feature-element) |
+
+---
+
+## Exigences
+
+[Signaler les problèmes liés à ces exigences sur GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+<p><b><span class="requirement">exigence</span>
+<span class="enhancement">amélioration</span>
+<span class="impractical">peu pratique</span>
+<span class="undecided">indécis</span>
+<span class="discussion">en cours de discussion</span></b></p>
+
+|  | Spéc. | Visualiseur | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Propriétés**](#propriétés) | [limité](https://github.com/Maps4HTML/MapML/issues/247) * | complet | complet |
+| [**Méthodes**](#méthodes) | [aucun](https://github.com/Maps4HTML/MapML/issues/248) * | limité * | limité *|
+
+<details>
+<summary>Exceptions *</summary>
+<ol>
+<li>Les attributs IDL et de contenu (propriétés) de map-feature min, max et extent ne sont pas encore spécifiés</li>
+<li>Les opérations (méthodes) de map-feature ne sont pas encore spécifiées</li>
+<li>L'élément personnalisé map-feature implémente les méthodes mais le paramètre options de focus(options) n'est pas encore implémenté</li>
+<li>Cette API est encore en cours de discussion</li>
+</ol>
+</details>
+
+---
+
+> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/i18n/fr/docusaurus-plugin-content-docs/current/api/map-feature-api.md)
+> - [Discutez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)
