@@ -4,6 +4,11 @@ title: HTMLLinkElement
 slug: /api/map-link-api
 ---
 
+This document is copied from the old "Custom Rendering API" page, and is under
+construction.  It will eventually describe the API of the map-link custom element;
+the "Custom Rendering API" is currently sourced from the map-link custom element,
+which may change in the future.
+
 The Custom Rendering API allows developers to circumvent MapML's rendering and draw anything within
 HTML's domain onto the map.
 
@@ -62,3 +67,40 @@ created element using the `(tileloadstart event).detail.appendTile()` function, 
 :::important
 Needs to be implemented.
 :::
+
+## Specifications
+
+| Specification                                                |
+|--------------------------------------------------------------|
+| [HTMLLinkElement - not (fully) specified yet](https://maps4html.org/MapML/spec/#the-link-element) |
+
+---
+
+## Requirements
+
+[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+<p><b><span class="requirement">requirement</span>
+<span class="enhancement">enhancement</span>
+<span class="impractical">impractical</span>
+<span class="undecided">undecided</span>
+<span class="discussion">under discussion</span></b></p>
+
+|  | Spec | Viewer | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Properties**](#properties) | n/a | n/a | n/a |
+| [**Methods**](#methods) | n/a | n/a | n/a |
+| [**Events**](#events) | none | n/a | partial * |
+
+<details>
+<summary>Exceptions *</summary>
+<ol>
+<li>The &lt;map-link&gt; element will emit the tileloadstart event, but it's behaviour is experimental and requires markup to conform to the example given above</li>
+</ol>
+
+</details>
+
+---
+
+> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/api/map-link-api.md)
+> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
