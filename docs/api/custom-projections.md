@@ -50,8 +50,13 @@ For example:
 </body>
 </html>
 ```
+## Properties
 
-### Details
+None
+
+## Methods
+
+### defineCustomProjection 
 
 We won't discuss the actual `<mapml-viewer>` element here, except to say that the map `projection` attribute should have the exact same value of the `projection` member of the JSON object you pass to the custom projections API's `defineCustomProjection` method, and every `<layer->` element in the map must declare and be encoded in that coordinate system, in order to display correctly.
 
@@ -69,4 +74,40 @@ There are several required members to a custom projection definition:
 - `resolutions` - an array of numbers, sorted in descending order of size in meters, of the "real-world" dimensions of a square pixel. The resolution is calculated using a nominal pixel size of 0.28mm, defined by the WMTS standard. NOTE THIS IS NOT TYPICALLY THE SAME VALUE THAT IS USED BY ESRI TILE SERVICES, WHICH USE 96 DPI AS THE NOMINAL SIZE (settable). Because scale varies over the extent of any projected coordinate system, the pixel resolution is usually valid only in limited locations, for example in Web Mercator, along the equator. The locations where pixel resolution is valid depend on the projection method and parameters.  The set of resolutions must match the set of resolutions of tiles in a cache, if you intend to use your custom projection with an existing tile service.
 - `bounds` - an array of two arrays of coordinate pairs, defining a bounding box around part of the projected coordinate system, in meters typically. Requests should be valid and latitude / longitude are defined within these bounds.  Requests for maps, tiles and coordinate transformations that fall completely outside these bounds will not execute, preventing redundant traffic and errors.  
 - `tilesize` - tiles are always square, and usually 256 pixels on a side.  You can specify another size here as an integer value.  Values of 256, 512, 1024, 2048 or 4096 should work.
+---
 
+## Specifications
+
+| Specification                                                |
+|--------------------------------------------------------------|
+| [Not yet specified](https://github.com/Maps4HTML/MapML/issues/249) |
+
+---
+
+## Requirements
+
+[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+<p><b><span class="requirement">requirement</span>
+<span class="enhancement">enhancement</span>
+<span class="impractical">impractical</span>
+<span class="undecided">undecided</span>
+<span class="discussion">under discussion</span></b></p>
+
+|  | Spec | Viewer | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Properties**](#properties) | none * | n/a | n/a |
+| [**Methods**](#methods) | none * | full | full |
+
+<details>
+<summary>Exceptions *</summary>
+<ol>
+<li>The custom projections API is <a href="https://github.com/Maps4HTML/MapML/issues/249">not yet specified</a></li>
+<li>The custom projections API is under discussion</li>
+</ol>
+</details>
+
+---
+
+> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/api/custom-projections.md)
+> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)

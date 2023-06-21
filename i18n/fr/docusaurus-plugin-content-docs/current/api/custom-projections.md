@@ -51,7 +51,13 @@ Exemple :
 </html>
 ```
 
-### Détails
+## Propriétés
+
+Aucun
+
+## Méthodes
+
+### defineCustomProjection
 
 Nous n’examinerons pas l’élément `<mapml-viewer>` lui-même ici, sauf pour dire que l’attribut `projection` de la carte doit avoir la même valeur que le membre `projection` de l’objet JSON que vous transmettez à la méthode `defineCustomProjection` de l’API personnalisée des projections, et que chaque élément `<layer->` présent dans la carte doit comporter une déclaration et être programmé dans ce système de coordonnées pour s’afficher correctement.
 
@@ -69,4 +75,40 @@ La définition d’une projection personnalisée requiert plusieurs membres.
 - `resolutions` - Tableau de nombres, triés selon leur taille en mètres en ordre décroissant, des dimensions « réelles » d’un pixel carré. La résolution est calculée sur la base d’une taille de pixel nominale établie à 0,28 mm, telle que définie par la norme SWPC. PRENEZ NOTE QUE LES SERVICES DE PAVÉS DE L’ENVIRONMENTAL SYSTEMS RESEARCH INSTITUTE (ESRI) NE SE SERVENT HABITUELLEMENT PAS DE CETTE VALEUR PARCE QU’ILS UTILISENT UNE TAILLE NOMINALE DE 96 POINTS PAR POUCES (PPP) (réglable). Puisque l’échelle varie dans l’étendue de tout système de coordonnées projetées, la résolution en pixels n’est habituellement valide que là où les dimensions sont limitées, par exemple le long de l’équateur dans la projection Web Mercator. Les endroits où la résolution en pixels est valide changent en fonction de la méthode et des paramètres de la projection. Si vous voulez utiliser votre projection personnalisée avec un service de pavés existants, l’ensemble de résolutions doit correspondre à celui des pavés dans un cache.
 - `bounds` - Tableau composé de deux tableaux de paires de coordonnées, qui définit une zone de délimitation autour d’une partie du système de référence des coordonnées projetées, habituellement en mètres. Les requêtes doivent être valides, la latitude et la longitude étant définies à l’intérieur de ces limites. Les requêtes visant des cartes, des pavés et des transformations de coordonnées qui dépassent ces limites ne seront pas exécutées pour éliminer le trafic redondant et les erreurs.  
 - `tilesize` - Les pavés sont toujours carrés et ont habituellement 256 pixels d’arête, mais vous pouvez ajuster cette dimension par un nombre entier. Les nombres 256, 512, 1024, 2048 ou 4096 devraient tous fonctionner.
+---
 
+## Spécifications
+
+| Spécification                                                |
+|--------------------------------------------------------------|
+| [Pas encore spécifié](https://github.com/Maps4HTML/MapML/issues/249) |
+
+---
+
+## Exigences
+
+[Signaler les problèmes liés à ces exigences sur GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+<p><b><span class="requirement">exigence</span>
+<span class="enhancement">amélioration</span>
+<span class="impractical">peu pratique</span>
+<span class="undecided">indécis</span>
+<span class="discussion">en cours de discussion</span></b></p>
+
+|  | Spéc. | Visualiseur | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Propriétés**](#propriétés) | aucun * | n/a | n/a |
+| [**Méthodes**](#méthodes) | aucun * | complet | complet |
+
+<details>
+<summary>Exceptions *</summary>
+<ol>
+<li>L'API des projections personnalisées <a href="https://github.com/Maps4HTML/MapML/issues/249">n'est pas encore spécifiée </a></li>
+<li>L'API des projections personnalisées est en cours de discussion</li>
+</ol>
+</details>
+
+---
+
+> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/i18n/fr/docusaurus-plugin-content-docs/current/api/custom-projections.md)
+> - [Discutez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)
