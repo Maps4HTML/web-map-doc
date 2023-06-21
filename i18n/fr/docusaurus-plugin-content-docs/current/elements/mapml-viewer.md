@@ -51,7 +51,7 @@ La projection par défaut est `OSMTILE`.
 
   - `APSTILE` est basé sur le système de projection stéréographique polaire de l’Alaska (EPSG:5936), et compte 20 niveaux de zoom (de 0 à 19).
 
-  - D’autres projections sont possibles, au moyen d’[API de projections personnalisées](../../api/custom-projections).
+  - D’autres projections sont possibles, au moyen d’[API de projections personnalisées](../../api/mapml-viewer-api/#definecustomprojectionoptions).
 
 ---
 

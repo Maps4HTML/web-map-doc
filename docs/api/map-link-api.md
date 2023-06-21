@@ -1,7 +1,7 @@
 ---
-id: custom-rendering
-title: Custom Rendering API
-slug: /api/custom-rendering
+id: map-link-api
+title: HTMLLinkElement
+slug: /api/map-link-api
 ---
 
 The Custom Rendering API allows developers to circumvent MapML's rendering and draw anything within
@@ -48,7 +48,7 @@ The JavaScript for creating custom tiles:
 let layer = document.querySelector("body > mapml-viewer > layer- > map-extent > map-link");
     layer.addEventListener("tileloadstart", (e) => {
       let customTile = document.createElement("p");
-      customTile.innerHTML = `x: {e.detail.x} y: {e.detail.y} zoom: {e.detail.zoom}`;
+      customTile.innerHTML = `x: ${e.detail.x} y: ${e.detail.y} zoom: ${e.detail.zoom}`;
       e.detail.appendTile(customTile);
     });
 ```

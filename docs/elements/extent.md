@@ -50,7 +50,7 @@ Defined values of `units` include:
 | WGS84         | Pseudo plate carrée, with 256px x 256px tiles. Zoom = 0 contains two tiles in two columns, with their origin at -180,90. False easting and northing (pcrs) values inside the projection bounds correspond to longitude and latitude, respectively. |
 | CBMTILE       | Lambert Conformal Conic, with 256px x 256px tiles.  Zoom levels chosen by scale denominator, so tiles do not nest.|
 
-Author-defined values of `units` are possible, using the [Custom projections API](../../api/custom-projections/)
+Author-defined values of `units` are possible, using the [Custom projections API](../../api/mapml-viewer-api/#definecustomprojectionoptions)
 
 ---
 

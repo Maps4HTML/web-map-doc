@@ -1,7 +1,7 @@
 ---
-id: custom-rendering
-title: API de rendu personnalisé
-slug: /api/custom-rendering
+id: map-link-api
+title: HTMLLinkElement
+slug: /api/map-link-api
 ---
 
 L’interface de programmation d’applications (API) de rendu personnalisé permet aux développeurs de contourner la fonction de rendu de MapML et de dessiner ce qu’ils veulent sur la carte, à condition que cela fasse partie du domaine HTML.

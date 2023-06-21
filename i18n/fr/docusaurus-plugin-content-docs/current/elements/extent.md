@@ -39,7 +39,7 @@ Les valeurs d’`units` définies comprennent :
 | WGS84         | Pseudo-plate carrée, avec des pavés de 256 pixels par 256 pixels. Un niveau de zoom égal à 0 contient deux pavés dans deux colonnes, avec vcmme origine -180,90. Les valeurs fictives d’abscisse et d’ordonnée (pcrs) à l’intérieur des limites de la projection correspondent respectivement à la longitude et à la latitude. |
 | CBMTILE       | Conique conforme de Lambert, avec des pavés de 256 pixels par 256 pixels. Les niveaux de zoom étant choisis par le dénominateur d’échelle, les pavés ne sont pas imbriqués.|
 
-L’auteur peut définir la valeur d’`units` à l’aide de l’[Custom projections API](../../api/custom-projections/)
+L’auteur peut définir la valeur d’`units` à l’aide de l’[Custom projections API](../../api/mapml-viewer-api/#definecustomprojectionoptions)
 
 ---
 

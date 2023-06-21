@@ -29,7 +29,7 @@ values of `name` related to maps include:
 
 | `name`          | `content` value                                          	  |
 |--------------	|--------------------------------------------------------	|
-| projection    | A case-sensitive [projection name](../mapml-viewer#projection), or a [custom projection name](../../api/custom-projections#details) |
+| projection    | A case-sensitive [projection name](../mapml-viewer#projection), or a [custom projection name](../../api/mapml-viewer-api#definecustomprojectionoptions) |
 | extent        | \(\(_[position keyword](../input#position)_\)-\(_[axis name](../input#axis)_\)=\(_axis value_\)\(,\)\)4\(,\)\(zoom=\(_zoom value_\)\)0,1 |
 | cs            | A case-sensitive [coordinate system abbreviation](../input#units). |
 | zoom          | (min=_minimum zoom value_,max=_maximum zoom value_,)(value=_current zoom value_) |
