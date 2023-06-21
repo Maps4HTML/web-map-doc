@@ -52,11 +52,13 @@ let isHidden = layer.hidden;
 `HTMLLayerElement.disabled` donne un accès en lecture seule à l’état désactivé de la couche. Une couche est désactivée si son contenu n’est pas rendu, soit parce qu’il sort complètement de l’étendue de la carte affichée ou parce qu’une erreur est associée au traitement de la couche, par exemple lorsque celle-ci se trouve dans un projection incompatible avec celle de la carte. Lorsqu’une couche est désactivée, l’utilisateur ne peut interagir avec elle au niveau du contrôle de la couche, et elle n’est pas visible dans la fenêtre d’affichage de la carte. Si la couche devient activée, par exemple à la suite d’une manipulation de la carte, l’utilisateur peut interagir avec elle au niveau du contrôle de la couche, et elle est visible dans la fenêtre d’affichage de la carte.
 
 ---
+
 ### label
-`HTMLLayerElement.label` reflects the `label` content attribute, and specifies a 
-fallback accessible name for the layer, if the accessible name is not provided 
-via a local `<map-title>` element child of the `<layer->` element, or in the 
-`<map-head>` of a remote MapML document, loaded via the `src` URL value, respectively.
+`HTMLLayerElement.label` reflète l'attribut de contenu `label`, et spécifie un 
+nom accessible de repli pour la couche, si le nom accessible n'est pas fourni par un 
+élément local `<map-title>` enfant de l'élément `<layer->`, ou dans l'élément 
+`<map-head>` d'un document MapML chargé via la valeur URL dans l'attribut `src`, 
+respectivement.
 
 Pour définir la label de `<layer->` ou mettre à jour celle-ci :
 
@@ -239,30 +241,30 @@ window.onload = (event) => {
 
 ---
 
-## Specifications
+## Spécifications
 
-| Specification                                                |
+| Spécification                                                |
 |--------------------------------------------------------------|
 | [HTMLLayerElement](https://maps4html.org/MapML/spec/#dom-htmllayerelement) |
 
 ---
 
-## Requirements
+## Exigences
 
-[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+[Signaler les problèmes liés à ces exigences sur GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
 
-<p><b><span class="requirement">requirement</span>
-<span class="enhancement">enhancement</span>
-<span class="impractical">impractical</span>
-<span class="undecided">undecided</span>
-<span class="discussion">under discussion</span></b></p>
+<p><b><span class="requirement">exigence</span>
+<span class="enhancement">amélioration</span>
+<span class="impractical">peu pratique</span>
+<span class="undecided">indécis</span>
+<span class="discussion">en cours de discussion</span></b></p>
 
 |  | Spec | Viewer | API |
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
-| [**Properties**](#properties) | full | full | full |
-| [**Methods**](#methods) | full | full | full |
+| [**Properties**](#properties) | complet | complet | complet |
+| [**Methods**](#methods) | complet | complet | complet |
 
 ---
 
-> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/api/layer-api.md)
-> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)
+> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/api/layer-api.md)
+> - [Discutez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

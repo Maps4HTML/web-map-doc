@@ -67,6 +67,7 @@ will become interactable in the layer control, and should be visible in the
 map viewport.
 
 ---
+
 ### label
 `HTMLLayerElement.label` reflects the `label` content attribute, and specifies a 
 fallback accessible name for the layer, if the accessible name is not provided 
@@ -91,6 +92,7 @@ let layer = document.querySelector('layer-');
 let label = layer.label;
 ```
 ---
+
 ### src
 `HTMLLayerElement.src` reflects the src HTML attribute, and specifies the URL of the
 MapML document for the layer.  The src property may be undefined if the layer
