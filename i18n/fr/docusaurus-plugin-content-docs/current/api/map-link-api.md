@@ -52,7 +52,7 @@ Script Java pour créer des pavés personnalisés :
 let layer = document.querySelector("body > mapml-viewer > layer- > map-extent > map-link");
     layer.addEventListener("tileloadstart", (e) => {
       let customTile = document.createElement("p");
-      customTile.innerHTML = `x: {e.detail.x} y: {e.detail.y} zoom: {e.detail.zoom}`;
+      customTile.innerHTML = `x: ${e.detail.x} y: ${e.detail.y} zoom: ${e.detail.zoom}`;
       e.detail.appendTile(customTile);
     });
 ```
