@@ -32,7 +32,7 @@ let isChecked = layer.checked;
 ---
 
 ### hidden
-HTMLLayerElement.hidden is a boolean  read/write value that hides or unhides the
+`HTMLLayerElement.hidden` is a boolean  read/write value that hides or unhides the
 layer in the layer control only.  The hidden state has no bearing on the presence
 of layer content on the map, it only affects the layer presence layer control. 
 This can be useful for managing short-lived layers, such as search results, to the map without 
@@ -56,7 +56,7 @@ let isHidden = layer.hidden;
 ---
 
 ### disabled
-HTMLLayerElement.disabled provides READ-ONLY access to the disabled state of the
+`HTMLLayerElement.disabled` provides READ-ONLY access to the disabled state of the
 layer.  A layer becomes disabled if its contents are not rendered, either by being
 completely outside the current map extent or by having an error associated to the
 layer processing, such as being in a projection that is incompatible with the
@@ -68,8 +68,11 @@ map viewport.
 
 ---
 
-HTMLLayerElement.label provides read/write access to the label used in the layer control for
-the layer.
+### label
+`HTMLLayerElement.label` reflects the `label` content attribute, and specifies a 
+fallback accessible name for the layer, if the accessible name is not provided 
+via a local `<map-title>` element child of the `<layer->` element, or in the 
+`<map-head>` of a remote MapML document, loaded via the `src` URL value, respectively.
 
 To set/update the `<layer->`'s label:
 
@@ -89,8 +92,9 @@ let layer = document.querySelector('layer-');
 let label = layer.label;
 ```
 ---
+
 ### src
-HTMLLayerElement.src reflects the src HTML attribute, and specifies the URL of the
+`HTMLLayerElement.src` reflects the src HTML attribute, and specifies the URL of the
 MapML document for the layer.  The src property may be undefined if the layer
 contains inline content.  If the src property returns a value, any inline content 
 will be ignored.
@@ -109,7 +113,7 @@ let url = layer.src;
 ```
 ---
 ### opacity
-HTMLLayerElement.opacity provides read/write access to the `opacity` value, and is reflected in the layer control for each layer, under "Opacity".
+`HTMLLayerElement.opacity` provides read/write access to the `opacity` value, and is reflected in the layer control for each layer, under "Opacity".
 
 To set/update the `<layer->`'s opacity:
 
@@ -129,7 +133,7 @@ let opacity = layer.opacity;
 ## Methods
 
 ### zoomTo()
-HTMLLayerElement.zoomTo() Zoom to the layer's extent in the map, at the maximum
+`HTMLLayerElement.zoomTo()` Zoom to the layer's extent in the map, at the maximum
 zoom level in which the extent fits completely.
 
 ```js
@@ -141,7 +145,7 @@ layer.zoomTo();
 
 ### mapml2geojson(options)
 
-HTMLLayerElement.mapml2geojson(options) returns the layer in GeoJSON format.
+`HTMLLayerElement.mapml2geojson(options)` returns the layer in GeoJSON format.
 
 | Function | Returns | Description |
 |----------|---------|-------------|
@@ -262,3 +266,31 @@ window.onload = (event) => {
 </details>
 
 ---
+
+## Specifications
+
+| Specification                                                |
+|--------------------------------------------------------------|
+| [HTMLLayerElement](https://maps4html.org/MapML/spec/#dom-htmllayerelement) |
+
+---
+
+## Requirements
+
+[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+<p><b><span class="requirement">requirement</span>
+<span class="enhancement">enhancement</span>
+<span class="impractical">impractical</span>
+<span class="undecided">undecided</span>
+<span class="discussion">under discussion</span></b></p>
+
+|  | Spec | Viewer | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Properties**](#properties) | full | full | full |
+| [**Methods**](#methods) | full | full | full |
+
+---
+
+> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/api/layer-api.md)
+> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)

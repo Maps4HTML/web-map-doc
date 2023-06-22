@@ -427,3 +427,41 @@ window.onload = (event) => {
 </details>
 
 ---
+
+## Specifications
+
+| Specification                                                |
+|--------------------------------------------------------------|
+| [HTMLFeatureElement](https://maps4html.org/MapML/spec/#the-feature-element) |
+
+---
+
+## Requirements
+
+[Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+<p><b><span class="requirement">requirement</span>
+<span class="enhancement">enhancement</span>
+<span class="impractical">impractical</span>
+<span class="undecided">undecided</span>
+<span class="discussion">under discussion</span></b></p>
+
+|  | Spec | Viewer | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Properties**](#properties) | [partial](https://github.com/Maps4HTML/MapML/issues/247) * | full | full |
+| [**Methods**](#methods) | [none](https://github.com/Maps4HTML/MapML/issues/248) * | partial  * | partial * |
+
+<details>
+<summary>Exceptions *</summary>
+<ol>
+<li>The map-feature min, max and extent IDL and content attributes (properties) are not yet specified</li>
+<li>The map-feature operations (methods) are not yet specified</li>
+<li>The map-feature custom element implements the methods but the options parameter of focus(options) is not implemented yet</li>
+<li>This API is still under discussion</li>
+</ol>
+</details>
+
+---
+
+> - [Edit this page on **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/api/map-feature-api.md)
+> - [Chat with us on **Gitter**](https://gitter.im/Maps4HTML/chat)

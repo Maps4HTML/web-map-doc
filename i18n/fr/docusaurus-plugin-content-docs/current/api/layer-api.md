@@ -29,7 +29,7 @@ let isChecked = layer.checked;
 ---
 
 ### hidden
-HTMLLayerElement.hidden est une valeur booléenne de lecture et d’écriture qui ne masque ou n’affiche la couche qu’au niveau du contrôle de la couche. Masquer la couche n’a aucune incidence sur la présence de son contenu sur la carte, seulement sur le contrôle de la présence de la couche. 
+`HTMLLayerElement.hidden` est une valeur booléenne de lecture et d’écriture qui ne masque ou n’affiche la couche qu’au niveau du contrôle de la couche. Masquer la couche n’a aucune incidence sur la présence de son contenu sur la carte, seulement sur le contrôle de la présence de la couche. 
 Cela peut être utile pour gérer les couches de courte durée dans la carte, comme les résultats d’une recherche, sans que l’utilisateur soit obligé de gérer l’état de la couche, ce dont se charge votre application.
 Cela est également pratique pour gérer une couche permanente sans surcharger l’interface utilisateur.
 
@@ -49,15 +49,20 @@ let isHidden = layer.hidden;
 ---
 
 ### disabled
-HTMLLayerElement.disabled donne un accès en lecture seule à l’état désactivé de la couche. Une couche est désactivée si son contenu n’est pas rendu, soit parce qu’il sort complètement de l’étendue de la carte affichée ou parce qu’une erreur est associée au traitement de la couche, par exemple lorsque celle-ci se trouve dans un projection incompatible avec celle de la carte. Lorsqu’une couche est désactivée, l’utilisateur ne peut interagir avec elle au niveau du contrôle de la couche, et elle n’est pas visible dans la fenêtre d’affichage de la carte. Si la couche devient activée, par exemple à la suite d’une manipulation de la carte, l’utilisateur peut interagir avec elle au niveau du contrôle de la couche, et elle est visible dans la fenêtre d’affichage de la carte.
+`HTMLLayerElement.disabled` donne un accès en lecture seule à l’état désactivé de la couche. Une couche est désactivée si son contenu n’est pas rendu, soit parce qu’il sort complètement de l’étendue de la carte affichée ou parce qu’une erreur est associée au traitement de la couche, par exemple lorsque celle-ci se trouve dans un projection incompatible avec celle de la carte. Lorsqu’une couche est désactivée, l’utilisateur ne peut interagir avec elle au niveau du contrôle de la couche, et elle n’est pas visible dans la fenêtre d’affichage de la carte. Si la couche devient activée, par exemple à la suite d’une manipulation de la carte, l’utilisateur peut interagir avec elle au niveau du contrôle de la couche, et elle est visible dans la fenêtre d’affichage de la carte.
 
 ---
 
-HTMLLayerElement.label donne un accès en lecture et en écriture à l’étiquette utilisée au niveau du contrôle de la couche.
+### label
+`HTMLLayerElement.label` reflète l'attribut de contenu `label`, et spécifie un 
+nom accessible de repli pour la couche, si le nom accessible n'est pas fourni par un 
+élément local `<map-title>` enfant de l'élément `<layer->`, ou dans l'élément 
+`<map-head>` d'un document MapML chargé via la valeur URL dans l'attribut `src`, 
+respectivement.
 
 Pour définir la label de `<layer->` ou mettre à jour celle-ci :
 
-:::Mise en garde
+:::caution
 Cette fonction n’est pas encore mise en œuvre. Ne met pas à jour l’étiquette au niveau du contrôle de la couche à l’heure actuelle.
 :::
 
@@ -74,7 +79,7 @@ let label = layer.label;
 ```
 ---
 ### src
-HTMLLayerElement.src reproduit l’attribut HTML src et précise l’adresse URL du document MapML de la couche. La propriété src peut ne pas être définie si la couche contient du contenu en ligne. Si la propriété src retourne une valeur, tout contenu en ligne est omis.
+`HTMLLayerElement.src` reproduit l’attribut HTML src et précise l’adresse URL du document MapML de la couche. La propriété src peut ne pas être définie si la couche contient du contenu en ligne. Si la propriété src retourne une valeur, tout contenu en ligne est omis.
 Pour définir ou mettre à jour la src de `<layer->` :
 
 ```js
@@ -90,7 +95,7 @@ let url = layer.src;
 ```
 ---
 ### opacity
-HTMLLayerElement.opacity donne accès en lecture ou en écriture à la valeur d’`opacity`, qui correspond dans le contrôle de couche pour chaque couche, sous "Opacité".
+`HTMLLayerElement.opacity` donne accès en lecture ou en écriture à la valeur d’`opacity`, qui correspond dans le contrôle de couche pour chaque couche, sous "Opacité".
 
 Pour définir ou mettre à jour l’opacité de `<layer->` :
 
@@ -110,7 +115,7 @@ let opacity = layer.opacity;
 ## Méthodes
 
 ### zoomTo()
-HTMLLayerElement.focus() Zoom sur l'étendue de la couche dans la carte, 
+`HTMLLayerElement.zoomTo()` Zoom sur l'étendue de la couche dans la carte, 
 au niveau de zoom maximum dans lequel l'étendue s'inscrit complètement.
 
 ```js
@@ -235,3 +240,31 @@ window.onload = (event) => {
 </details>
 
 ---
+
+## Spécifications
+
+| Spécification                                                |
+|--------------------------------------------------------------|
+| [HTMLLayerElement](https://maps4html.org/MapML/spec/#dom-htmllayerelement) |
+
+---
+
+## Exigences
+
+[Signaler les problèmes liés à ces exigences sur GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
+
+<p><b><span class="requirement">exigence</span>
+<span class="enhancement">amélioration</span>
+<span class="impractical">peu pratique</span>
+<span class="undecided">indécis</span>
+<span class="discussion">en cours de discussion</span></b></p>
+
+|  | Spec | Viewer | API |
+|:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Properties**](#properties) | complet | complet | complet |
+| [**Methods**](#methods) | complet | complet | complet |
+
+---
+
+> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/i18n/fr/docusaurus-plugin-content-docs/current/api/layer-api.md)
+> - [Discutez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)
