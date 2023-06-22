@@ -28,7 +28,7 @@ Cet événement est déclenché à la création d’un pavé, et contient la str
 ```
 
 
-### Exemple :
+### Exemple
 
 La carte :
 ```html
@@ -39,7 +39,7 @@ La carte :
       <map-input name="zoomLevel" type="zoom" min="0" max="23" value="1" ></map-input>
       <map-input name="row" type="location" axis="row" units="tilematrix" min="0" max="2" ></map-input>
       <map-input name="col" type="location" axis="column" units="tilematrix" min="0" max="2" ></map-input>
-      <!—écoutez l’événement tileloadstart sur cet élément -->
+      <!-- écoutez l’événement tileloadstart sur cet élément -->
       <map-link rel="tile" title="" tref="" ></map-link>
     </map-extent>
   </layer->
