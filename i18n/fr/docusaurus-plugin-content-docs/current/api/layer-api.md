@@ -62,10 +62,6 @@ respectivement.
 
 Pour définir la label de `<layer->` ou mettre à jour celle-ci :
 
-:::caution
-Cette fonction n’est pas encore mise en œuvre. Ne met pas à jour l’étiquette au niveau du contrôle de la couche à l’heure actuelle.
-:::
-
 ```js
 let layer = document.querySelector('layer-');
 layer.label = "Nouveau titre";

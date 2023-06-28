@@ -76,10 +76,6 @@ via a local `<map-title>` element child of the `<layer->` element, or in the
 
 To set/update the `<layer->`'s label:
 
-:::caution
-Needs To Be Implemented, Currently doesn't update the label in layer controls
-:::
-
 ```js
 let layer = document.querySelector('layer-');
 layer.label = "New Title";
