@@ -365,7 +365,6 @@ Jetez un coup d’œil à [cette application](https://maps4html.org/experiments/
 
 | Nom de l’événement      	| Description                                          	|
 |--------------	|--------------------------------------------------------	|
-| layerchange   | Déclenché lorsqu’une couche change de src, habituellement lorsque l’utilisateur clique sur un lien. |
 | load          | Déclenché après que le contenu de toutes les couches a été chargé |
 | click         | Déclenché lorsque la carte reçoit les événements mousedown et mouseup |
 | dblclick      | Déclenché lorsque l’utilisateur double-clique sur la carte ou touche celle-ci |
@@ -374,14 +373,17 @@ Jetez un coup d’œil à [cette application](https://maps4html.org/experiments/
 | mouseout      | Déclenché une fois lorsque le pointeur de la souris sort de la carte |
 | mousedown     | Déclenché lorsque l’utilisateur appuie sur le bouton principal de la souris alors que le pointeur de la souris se trouve sur la carte |
 | mouseup       | Déclenché lorsque l’utilisateur relâche le bouton principal de la souris alors que le pointeur de la souris se trouve sur la carte |
-| movestart     | Déclenché avant que la carte commence à bouger ou que la fenêtre d’affichage change |
-| move          | Déclenché à répétition lorsque la carte bouge                           |
-| moveend       | Déclenché lorsque la carte ne bouge plus |
-| zoomstart     | Déclenché avant que le niveau de zoom de la carte change |
-| zoom          | Déclenché à répétition lorsque le niveau de zoom de la carte change |
-| zoomend       | Déclenché après que le niveau de zoom de la carte a changé |
-| preclick      | Déclenché avant que l’utilisateur clique sur la carte  |
 | contextmenu   | Déclenché lorsque l’utilisateur fait un clic droit sur la carte ou touche celle-ci |
+| layerchange   | Déclenché lorsqu’une couche change de src, habituellement lorsque l’utilisateur clique sur un lien. |
+| map-movestart     | Déclenché avant que la carte commence à bouger ou que la fenêtre d’affichage change |
+| map-move          | Déclenché à répétition lorsque la carte bouge                           |
+| map-moveend       | Déclenché lorsque la carte ne bouge plus |
+| map-zoomstart     | Déclenché avant que le niveau de zoom de la carte change |
+| map-zoom          | Déclenché à répétition lorsque le niveau de zoom de la carte change |
+| map-zoomend       | Déclenché après que le niveau de zoom de la carte a changé |
+| map-preclick      | Déclenché avant que l’utilisateur clique sur la carte  |
+| map-locationfound | Déclenché lorsque l'emplacement de l'utilisateur est trouvé par le biais du [contrôle de géolocalisation](../elements/mapml-viewer/#controlslist).|
+| map-locationerror | Déclenché lorsque la localisation de l'utilisateur n'est pas trouvée par le [contrôle de géolocalisation](../elements/mapml-viewer/#controlslist).|
 
 ---
 ## Exemples

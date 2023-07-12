@@ -362,7 +362,6 @@ Check out [this application](https://maps4html.org/experiments/api/custom-map-ui
 
 | Event name      	| Description                                          	|
 |--------------	|--------------------------------------------------------	|
-| layerchange   | Fired when a layer changes src, usually by the user following a link. |
 | load          | Fired when all layers have finished loading content |
 | click         | Fired when the map receives both mousedown and mouseup events |
 | dblclick      | Fired when the user double clicks or taps the map |
@@ -371,14 +370,17 @@ Check out [this application](https://maps4html.org/experiments/api/custom-map-ui
 | mouseout      | Fired once as the mouse cursor exits the map |
 | mousedown     | Fired when the mouse's primary key is pressed down with cursor over the map |
 | mouseup       | Fired when the mouse's primary key is released with cursor over the map |
-| movestart     | Fired before the map starts to move / viewport changes |
-| move          | Fired repeatedly as the map moves.                           |
-| moveend       | Fired after the map stops moving |
-| zoomstart     | Fired before the map changes zoom level |
-| zoom          | Fired repeatedly as the map changes zoom |
-| zoomend       | Fired after the map has changed zoom level |
-| preclick      | Fired before a click on the map is triggered.  May not be a primitive. |
 | contextmenu   | Fired when user right-clicks or long presses on map. May not be a primitive.|
+| layerchange   | Fired when a layer changes src, usually by the user following a link. |
+| map-movestart     | Fired before the map starts to move / viewport changes |
+| map-move          | Fired repeatedly as the map moves.                           |
+| map-moveend       | Fired after the map stops moving |
+| map-zoomstart     | Fired before the map changes zoom level |
+| map-zoom          | Fired repeatedly as the map changes zoom |
+| map-zoomend       | Fired after the map has changed zoom level |
+| map-preclick      | Fired before a click on the map is triggered.  May not be a primitive. |
+| map-locationfound | Fired when user's location is found through the [geolocation control](../elements/mapml-viewer/#controlslist).|
+| map-locationerror | Fired when user's location is not found through the [geolocation control](../elements/mapml-viewer/#controlslist).|
 
 ---
 
