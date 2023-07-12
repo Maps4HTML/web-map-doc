@@ -221,7 +221,8 @@ let zoom = map.zoom;
 | [viewSource()](#viewsource)             	| View the source of the map.                                          	|
 | [defineCustomProjection(options)](#definecustomprojectionoptions) 	| Define a custom projection for use by the page. |
 | [zoomTo(lat, lon, zoom)](#zoomtolat-lon-zoom) | Fly or pan the map to a (new) location and zoom level.|
-| [geojson2mapml(json, options)](#zoomtolat-lon-zoom) | Add a GeoJSON Layer to the map. |
+| [locate()](#locate) | Locate and pan/zoom to the user's location, firing the map-locationfound and/or map-locationerror [events](#events) accordingly.|
+| [geojson2mapml(json, options)](#geojson2mapmljson-options) | Add a GeoJSON Layer to the map. |
 
 
 ### back()
@@ -323,6 +324,17 @@ function error(err) {
 }
 
 navigator.geolocation.getCurrentPosition(success, error, options);
+```
+
+---
+
+### locate()
+
+Locate the user's location and pan + zoom to it. Fires the `map-locationfound` and/or `map-locationerror` [events](#events) accordingly. See Also - [geolocation control](../elements/mapml-viewer/#controlslist).
+
+```js
+let map = document.querySelector('mapml-viewer');
+map.locate();
 ```
 
 ---

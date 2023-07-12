@@ -224,7 +224,8 @@ let zoom = map.zoom;
 | [viewSource()](#viewsource)             	| Affiche la source de la carte.                                          	|
 | [defineCustomProjection(options)](#definecustomprojectionoptions)	| Définir une projection personnalisée à utiliser par la page.  |
 | [zoomTo(lat, lon, zoom)](#zoomtolat-lon-zoom) | Survole la carte ou effectue un mouvement panoramique vers un (nouvel) emplacement et à un autre niveau de zoom.|
-| [geojson2mapml(json, options)](#zoomtolat-lon-zoom) | Convertit une caractéristique GeoJSON ou une chaîne ou un objet de collection de caractéristiques en élément MapML `<layer->` contenant un ou plusieurs éléments `<map-feature>`. |
+| [locate()](#locate) | Localiser et effectuer un panoramique/zoom sur l'emplacement de l'utilisateur, en déclenchant les [événements](#événements) map-locationfound et/ou map-locationerror en conséquence.|
+| [geojson2mapml(json, options)](#geojson2mapmljson-options) | Convertit une caractéristique GeoJSON ou une chaîne ou un objet de collection de caractéristiques en élément MapML `<layer->` contenant un ou plusieurs éléments `<map-feature>`. |
 
 
 ### back()
@@ -326,6 +327,17 @@ function error(err) {
 }
 
 navigator.geolocation.getCurrentPosition(success, error, options);
+```
+
+---
+
+### locate()
+
+Localise l'emplacement de l'utilisateur et effectue un panoramique et un zoom sur celui-ci. Déclenche les [événements](#événements) `map-locationfound` et/ou `map-locationerror` en conséquence. Voir aussi - [contrôle de géolocalisation](../elements/mapml-viewer/#controlslist).
+
+```js
+let map = document.querySelector('mapml-viewer');
+map.locate();
 ```
 
 ---
