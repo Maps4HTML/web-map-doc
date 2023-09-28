@@ -36,11 +36,9 @@
 
   <layer- label="Polygon" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
-    <map-meta name="zoom" content="min=10,max=11"></map-meta>
-    <map-feature>
+    <map-feature min="10" max="11">
       <map-featurecaption>Click me!</map-featurecaption>
-      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
-      <map-geometry cs="gcrs">
+      <map-geometry>
         <map-a href="#15, -75.699, 45.420">
           <map-polygon class="polygon">
             <map-coordinates>-75.8242035 45.3526278 -75.6793213 45.4572409 -75.5680847 45.4692806 -75.6092834 45.4215881 -75.5756378 45.3810901 -75.7946777 45.3120804</map-coordinates>
@@ -53,31 +51,27 @@
 
   <layer- label="Points" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
-    <map-meta name="zoom" content="min=14,max=24"></map-meta>
-    <map-feature>
+    <map-feature min="14" max="24">
       <map-featurecaption>Point 1</map-featurecaption>
-      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
-      <map-geometry cs="gcrs">
+      <map-geometry>
         <map-point class="point">
           <map-coordinates>-75.6978285 45.4202251</map-coordinates>
         </map-point>
       </map-geometry>
       <map-properties></map-properties>
     </map-feature>
-    <map-feature>
+    <map-feature min="14" max="24">
       <map-featurecaption>Point 2</map-featurecaption>
-      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
-      <map-geometry cs="gcrs">
+      <map-geometry>
         <map-point class="point">
           <map-coordinates>-75.7002854 45.4199465</map-coordinates>
         </map-point>
       </map-geometry>
       <map-properties></map-properties>
     </map-feature>
-    <map-feature>
+    <map-feature min="14" max="24">
       <map-featurecaption>point 3</map-featurecaption>
-      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
-      <map-geometry cs="gcrs">
+      <map-geometry>
         <map-point class="point">
           <map-coordinates>-75.6984723 45.4179207</map-coordinates>
         </map-point>
