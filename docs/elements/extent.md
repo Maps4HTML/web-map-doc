@@ -56,7 +56,19 @@ Author-defined values of `units` are possible, using the [Custom projections API
 
 ### `label`
 
-Specifies a label for an extent which is displayed in the layer control. When a `label` is not provided, the extent is hidden by default in the layer control.
+Specifies a label for an extent which is displayed in the layer control. When a label is not provided, the label defaults to 'Sub-Layer' in the layer control.
+
+---
+
+### `checked`
+
+The `<map-extent checked>` attribute and property is boolean. When present, the checked property value is taken to be 'true'; when not present, the property value is 'false'. Beware that it is the *presence* of the attribute that makes it true, not the value of the attribute. For example, the attribute `checked="false"` actually turns out to be checked, [as described by MDN Web docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#boolean_attributes).
+
+---
+
+### `hidden`
+
+The `<map-extent hidden>` attribute and property is boolean. When present, the extent is hidden in the layer control. 
 
 ---
 
