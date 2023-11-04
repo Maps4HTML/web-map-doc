@@ -38,8 +38,8 @@ URL template.
 ### `units`
 
 Specifies the projection of the tiles and other content that is expected from the
-server.  If the projection value is not a case-sensitive match of the `<mapml-viewer>` 
-`projection` attribute, the layer will be disabled in the layer control, and will
+server.  If the projection value is a case-insensitive match of the `<mapml-viewer>` 
+`projection` attribute, the extent will be disabled in the layer control, and will
 not be displayed on the map, nor content fetched.
 
 Defined values of `units` include:
@@ -56,19 +56,19 @@ Author-defined values of `units` are possible, using the [Custom projections API
 
 ### `label`
 
-Specifies a label for an extent which is displayed in the layer control. When a label is not provided, the label defaults to 'Sub-Layer' in the layer control.
+Specifies a label for an extent which is displayed in the layer control. When a `label` value is not provided, the `label` value defaults to 'Sub-Layer' in the layer control.
 
 ---
 
 ### `checked`
 
-The `<map-extent checked>` attribute and property is boolean. When present, the checked property value is taken to be 'true'; when not present, the property value is 'false'. Beware that it is the *presence* of the attribute that makes it true, not the value of the attribute. For example, the attribute `checked="false"` actually turns out to be checked, [as described by MDN Web docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#boolean_attributes).
+The `checked` attribute and property is boolean. When present, the checked property value is taken to be 'true'; when not present, the property value is 'false'. The map-extent content will be fetched and rendered according to the `checked` state. Beware that it is the *presence* of the attribute that makes it true, not the value of the attribute. For example, the attribute `checked="false"` actually turns out to be checked, [as described by MDN Web docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#boolean_attributes).
 
 ---
 
 ### `hidden`
 
-The `<map-extent hidden>` attribute and property is boolean. When present, the extent is hidden in the layer control. 
+The `hidden` attribute and property is boolean. When present, the extent is hidden (not present) in the layer control.  Regardless of `hidden` state, the layer is rendered or not depending on the `checked` attribute state. 
 
 ---
 
@@ -84,7 +84,7 @@ opacity input slider control. When the `opacity` attribute is not present, the o
 
 | Event name    | Description                                             |
 |--------------	|--------------------------------------------------------	|
-| extentload    | Fires when a layer's extent is loaded and parsed. The intent is that this event is analagous to the [media element loadedmetadata event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loadedmetadata_event), but for map layers.              |
+|  map-change   | Fired when the `checked` attribute changes state            |
 
 ---
 
