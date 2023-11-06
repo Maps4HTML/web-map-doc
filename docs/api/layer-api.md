@@ -192,7 +192,7 @@ so the resulting JSON SHOULD (somehow, tbd) be tagged with the datum in use by t
 |--------------	|--------------------------------------------------------	|
 | changestyle     | Fired before the layer changes src due to user selecting alternate style in layer control |
 | changeprojection | Fired before the layer changes projection due to its declared projection being not equal to that of the map |
-| extentload | Fired when the metadata for a layer has loaded, but before loading tiles, features and other content |
+| loadedmetadata | Fired when the metadata for a layer has loaded. The intent is that this event is analagous to the [media element loadedmetadata event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loadedmetadata_event), but for map layers. |
 ---
 
 ## Examples

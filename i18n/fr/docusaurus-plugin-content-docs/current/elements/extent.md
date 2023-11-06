@@ -61,7 +61,7 @@ opacity input slider control. Lorsque l'attribut `opacity` n'est pas présent, l
 
 | Nom de l’événement    | Description                                             |
 |--------------	|--------------------------------------------------------	|
-| extentload    | Déclenché lorsque l’étendue d’une couche est chargée et analysée. L’intention est que cet événement soit analogue à l’événement [loadedmetadata de l’élément média](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loadedmetadata_event), mais avec les couches d’une carte.              |
+| map-change    | Déclenché lorsque l'attribut `checked` change d'état              |
 
 ---
 
