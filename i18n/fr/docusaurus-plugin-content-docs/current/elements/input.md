@@ -115,11 +115,11 @@ Définit la plage de zoom en fonction des ressources qui sont demandées à l’
 ```html
 <mapml-viewer projection="OSMTILE" zoom="0" lat="45.409071" lon="-75.703411" controls>
   <layer- label="OpenStreetMap" checked>
-    <map-extent units="OSMTILE" >
+    <map-extent units="OSMTILE" checked>
       <map-input name="z" type="zoom"  value="18" min="0" max="18" step="3"></map-input>
       <map-input name="x" type="location" units="tilematrix" axis="column" min="0"  max="262144" ></map-input>
       <map-input name="y" type="location" units="tilematrix" axis="row" min="0"  max="262144" ></map-input>
-      <map-link rel="tile" tref="https://tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <map-link rel="tile" tref="https://tile.openstreetmap.org/{z}/{x}/{y}.png" ></map-link>
     </map-extent>
   </layer->
 </mapml-viewer>
@@ -132,7 +132,7 @@ Les WMS peuvent être lents à réagir, même s’ils le font rapidement en réa
 ```html
 <mapml-viewer projection="CBMTILE" lat="60" lon="-95" zoom="2" controls>
   <layer- label="Demande de pavés WMS GetMap" checked>
-    <map-extent units="CBMTILE">
+    <map-extent units="CBMTILE" checked>
       <!—ici, les unités et les attributs d’axe semblent contradictoires --> 
       <!—cependant, rel="tile" et units="tilematrix" informent tous les deux la carte que l’événement sérialisé a trait à un pavé dans le tcrs -->
       <map-input name="txmin" type="location" rel="tile" position="top-left" axis="easting" units="tilematrix" ></map-input>
@@ -143,7 +143,7 @@ Les WMS peuvent être lents à réagir, même s’ils le font rapidement en réa
       <map-link rel="tile" tref="https://datacube.services.geo.ca/ows/msi?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/png&TRANSPARENT=TRUE&STYLES=msi-color&VERSION=1.3.0&LAYERS=msi&WIDTH=256&HEIGHT=256&CRS=EPSG:3978&BBOX={txmin},{tymin},{txmax},{tymax}" ></map-link>
       <!—il faut préciser un niveau de zoom, mais il s’agit d’un bogue : 
            https://github.com/Maps4HTML/Web-Map-Custom-Element/issues/669 -->
-      <map-input name="z" type="zoom" value="25" min="0" max="25"/>
+      <map-input name="z" type="zoom" value="25" min="0" max="25"></map-input>
     </map-extent>
   </layer->
 </mapml-viewer>
