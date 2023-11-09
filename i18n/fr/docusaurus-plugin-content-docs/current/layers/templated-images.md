@@ -11,7 +11,7 @@ In this section, we will learn how to create a templated image layer. A template
 ```html
 <layer- label="Toporama" checked>
   <map-meta name="zoom" content="min=4,max=5"></map-meta>
-  <map-extent units="CBMTILE">
+  <map-extent units="CBMTILE" checked hidden>
     <map-input name="z" type="zoom" value="19" min="4" max="4"></map-input>
     <map-input name="w" type="width"></map-input>
     <map-input name="h" type="height"></map-input>
@@ -95,7 +95,7 @@ Sets the zoom range of the layer, in the following example the user can zoom fro
 <mapml-viewer projection="CBMTILE" zoom="4" lat="53.331" lon="-91.667" controls>
   <layer- label="Toporama" checked>
     <map-meta name="zoom" content="min=4,max=5"></map-meta>
-    <map-extent units="CBMTILE">
+    <map-extent units="CBMTILE" checked hidden>
       <map-input name="z" type="zoom" value="19" min="4" max="4"></map-input>
       <map-input name="w" type="width"></map-input>
       <map-input name="h" type="height"></map-input>
