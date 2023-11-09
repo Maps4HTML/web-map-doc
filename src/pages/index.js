@@ -53,9 +53,7 @@ function Feature({ title, description }) {
 }
 
 function Home() {
-  const mapUrl = 
-    translate({"message":"https://geogratis.gc.ca/mapml/en/cbmtile/cbmt/"
-      ,"id":"mapml.HomePageContent.mapUrl"})
+  const mapUrl = "./demo/data/osmtile-cbmt.mapml"
   const mapiframe = `<script type="module" src="dist/mapml-viewer.js"></script>
   <style>
   html,
