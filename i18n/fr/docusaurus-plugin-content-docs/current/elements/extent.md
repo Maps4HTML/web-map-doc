@@ -29,7 +29,10 @@ Exemple d’un élément `<map-extent>` servant à charger des pavés d’images
 
 ### `units`
 
-Précise la projection des pavés et tout autre contenu que le serveur doit fournir. Si la valeur de la projection ne correspond pas lettre pour lettre en majuscules et minuscules à celle de l’attribut `projection` de l’élément `<mapml-viewer>`, la couche est désactivée au niveau de son contrôle et ne s’affiche pas sur la carte, et le contenu n’est pas récupéré dans le serveur.
+Spécifie la projection des tuiles et autres contenus attendus du serveur.  Si la 
+valeur de `units` est une correspondance insensible à la casse de l'attribut  
+`projection` de `<mapml-viewer>`, l'étendue sera désactivée dans le contrôle de 
+couche, et ne sera pas affichée sur la carte, ni le contenu récupéré du serveur.
 
 Les valeurs d’`units` définies comprennent :
 
@@ -45,7 +48,24 @@ L’auteur peut définir la valeur d’`units` à l’aide de l’[Custom projec
 
 ### `label`
 
-Précise l’étiquette d’une étendue affichée au niveau du contrôle de la couche. Si aucune `label` n’est fournie, l’étendue est masquée par défaut au niveau du contrôle de la couche.
+Spécifie un label pour une étendue qui est affichée dans le contrôle de couche. 
+Si aucune valeur `label` n'est fournie, la valeur `label` prend par défaut la 
+valeur 'Sous-couche' dans le contrôle de couche.
+
+---
+
+### `checked`
+
+L'attribut et la propriété `checked` sont des booléens. Lorsqu'il est présent, la valeur de la propriété `checked` est "true" ; lorsqu'il n'est pas présent, la valeur de la propriété est "false". Le contenu du `map-extent` sera récupéré et rendu en fonction de l'état `checked`. Attention, c'est la *présence* de l'attribut qui fait qu'il est vrai, et non la valeur de l'attribut. Par exemple, l'attribut `checked="false"` s'avère en fait être checké, [comme décrit par les docs Web du MDN] (https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#boolean_attributes).
+
+---
+
+### `hidden`
+
+L'attribut et la propriété `hidden` est un booléen. Lorsqu'il est présent, 
+l'étendue est cachée (non présente) dans le contrôle de couche.  Indépendamment 
+de l'état `hidden`, la couche est rendue ou non en fonction de l'état de 
+l'attribut `checked`. 
 
 ---
 
