@@ -21,7 +21,7 @@ URL template.
 ```html
 <mapml-viewer projection="OSMTILE" lat="10" lon="0" zoom="1">
   <layer- label="OpenStreetMap" checked>
-    <map-extent units="OSMTILE" checked hidden>
+    <map-extent units="OSMTILE">
       <map-input name="z" type="zoom" value="18" min="0" max="18"></map-input>
       <map-input name="x" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
       <map-input name="y" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
@@ -99,19 +99,19 @@ The following example shows multiple `<map-extent>` elements in a layer. The dif
   <!-- Change Basemap using the three dots menu of the basemap layer -->
   <layer- label="Basemap" checked="">
     <!-- This extent will be hidden in the layer control since no label is provided -->
-    <map-extent units="OSMTILE" checked>
+    <map-extent units="OSMTILE">
       <map-input name="TileMatrix" type="zoom" value="18" min="0" max="18"></map-input>
       <map-input name="TileCol" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
       <map-input name="TileRow" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
       <map-link rel="tile" tref="https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS/tile/1.0.0/World_Imagery/default/default028mm/{TileMatrix}/{TileRow}/{TileCol}.jpg"></map-link>
     </map-extent>
-      <map-extent label="Nat Geo" units="OSMTILE" checked>
+      <map-extent label="Nat Geo" units="OSMTILE">
       <map-input name="TileMatrix" type="zoom" value="18" min="0" max="18"></map-input>
       <map-input name="TileCol" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
       <map-input name="TileRow" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
       <map-link rel="tile" tref="https://server.arcgisonline.com/arcgis/rest/services/NatGeo_World_Map/MapServer/WMTS/tile/1.0.0/NatGeo_World_Map/default/default028mm/{TileMatrix}/{TileRow}/{TileCol}.jpg"></map-link>
     </map-extent>
-    <map-extent label="Imagery" units="OSMTILE" checked>
+    <map-extent label="Imagery" units="OSMTILE">
       <map-input name="TileMatrix" type="zoom" value="18" min="0" max="18"></map-input>
       <map-input name="TileCol" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
       <map-input name="TileRow" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
@@ -129,7 +129,7 @@ The following example shows a Web Map Service Request using `<map-link>` to requ
 ```html
 <mapml-viewer projection="OSMTILE" zoom="4" lat="53.331" lon="-91.667" controls>
   <layer- label="Toporama" checked="">
-    <map-extent xmlns="http://www.w3.org/1999/xhtml" units="OSMTILE" checked>
+    <map-extent xmlns="http://www.w3.org/1999/xhtml" units="OSMTILE">
       <!-- URL parameters for WMS Request -->
       <map-input name="z" type="zoom" value="18" min="4" max="18"></map-input>
       <map-input name="w" type="width"></map-input>

@@ -33,11 +33,11 @@
         <textarea rows="10" style="width:100%" id="htmlEditor">
 <mapml-viewer projection="OSMTILE" zoom="1" lat="45.409071" lon="-75.703411" controls>
   <layer- label="OpenStreetMap" checked>
-    <map-extent units="OSMTILE" checked hidden>
+    <map-extent units="OSMTILE" >
       <map-input name="z" type="zoom"  value="18" min="0" max="18" step="1"></map-input>
       <map-input name="x" type="location" units="tilematrix" axis="column" min="0"  max="262144" ></map-input>
       <map-input name="y" type="location" units="tilematrix" axis="row" min="0"  max="262144" ></map-input>
-      <map-link rel="tile" tref="https://tile.openstreetmap.org/{z}/{x}/{y}.png" ></map-link>
+      <map-link rel="tile" tref="https://tile.openstreetmap.org/{z}/{x}/{y}.png" />
     </map-extent>
   </layer->
 </mapml-viewer>

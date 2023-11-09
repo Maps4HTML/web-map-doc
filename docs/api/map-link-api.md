@@ -36,7 +36,7 @@ The map:
 <mapml-viewer projection="OSMTILE" zoom="0" lat="45" lon="-75" controls>
   <layer- label="Custom Tiles" checked>
     <map-meta name="zoom" content="min=0,max=23" ></map-meta>
-    <map-extent units="OSMTILE" checked hidden>
+    <map-extent units="OSMTILE">
       <map-input name="zoomLevel" type="zoom" min="0" max="23" value="1" ></map-input>
       <map-input name="row" type="location" axis="row" units="tilematrix" min="0" max="2" ></map-input>
       <map-input name="col" type="location" axis="column" units="tilematrix" min="0" max="2" ></map-input>
