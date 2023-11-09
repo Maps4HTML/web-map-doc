@@ -30,7 +30,7 @@ Exemple d’un élément `<map-extent>` servant à charger des pavés d’images
 ### `units`
 
 Spécifie la projection des tuiles et autres contenus attendus du serveur.  Si la 
-valeur de `units` est une correspondance insensible à la casse de l'attribut  
+valeur de `units` est une correspondance insensible à la casse de l'attribut 
 `projection` de `<mapml-viewer>`, l'étendue sera désactivée dans le contrôle de 
 couche, et ne sera pas affichée sur la carte, ni le contenu récupéré du serveur.
 
@@ -43,6 +43,8 @@ Les valeurs d’`units` définies comprennent :
 | CBMTILE       | Conique conforme de Lambert, avec des pavés de 256 pixels par 256 pixels. Les niveaux de zoom étant choisis par le dénominateur d’échelle, les pavés ne sont pas imbriqués.|
 
 L’auteur peut définir la valeur d’`units` à l’aide de l’[Custom projections API](../../api/mapml-viewer-api/#definecustomprojectionoptions)
+
+L'attribut `units` est obligatoire et ne peut être modifié.
 
 ---
 

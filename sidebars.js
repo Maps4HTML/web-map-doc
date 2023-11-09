@@ -26,6 +26,7 @@ module.exports = {
     'api/mapml-viewer-api',
     'api/layer-api',
     'api/map-feature-api',
+    'api/map-extent-api',
     'api/map-link-api'
   ],
   'Browser Extension': [

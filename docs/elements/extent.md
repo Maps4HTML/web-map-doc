@@ -38,7 +38,7 @@ URL template.
 ### `units`
 
 Specifies the projection of the tiles and other content that is expected from the
-server.  If the projection value is a case-insensitive match of the `<mapml-viewer>` 
+server.  If the projection value is a case-insensitive match of the `<mapml-viewer>`
 `projection` attribute, the extent will be disabled in the layer control, and will
 not be displayed on the map, nor content fetched.
 
@@ -51,6 +51,8 @@ Defined values of `units` include:
 | CBMTILE       | Lambert Conformal Conic, with 256px x 256px tiles.  Zoom levels chosen by scale denominator, so tiles do not nest.|
 
 Author-defined values of `units` are possible, using the [Custom projections API](../../api/mapml-viewer-api/#definecustomprojectionoptions)
+
+The `units` attribute is required and can't be changed.
 
 ---
 
