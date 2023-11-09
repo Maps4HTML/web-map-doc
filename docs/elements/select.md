@@ -43,20 +43,20 @@ This element contains the options for the `<map-select>` element. A `<map-select
 ### Change map source
 ```html
 <mapml-viewer projection="OSMTILE" zoom="2" lat="65" lon="-90" controls="">
-  <layer- label="Basemap" checked="">
-    <map-extent units="OSMTILE" >
+  <layer- label="Basemap" checked>
+    <map-extent units="OSMTILE" checked>
       <map-input name="z" type="zoom"  value="18" min="0" max="18"></map-input>
       <map-input name="x" type="location" units="tilematrix" axis="column" min="0"  max="262144" ></map-input>
       <map-input name="y" type="location" units="tilematrix" axis="row" min="0"  max="262144" ></map-input>
-      <map-link rel="license" href="https://www.openstreetmap.org/copyright" title="OpenStreetMap"/>
-      <map-link rel="license" href="https://www.openstreetmap.bzh/" title="Breton OpenStreetMap Team"/>
+      <map-link rel="license" href="https://www.openstreetmap.org/copyright" title="OpenStreetMap"></map-link>
+      <map-link rel="license" href="https://www.openstreetmap.bzh/" title="Breton OpenStreetMap Team"></map-link>
       
       <map-select id="urlOptions" name="source">
         <map-option value="tile.openstreetmap.bzh/br">OpenStreetMap_BZH</map-option>
         <map-option value="tile.openstreetmap.org">OpenStreetMap_Mapnik</map-option>    
       </map-select>
       
-      <map-link rel="tile" tref="https://{source}/{z}/{x}/{y}.png" />
+      <map-link rel="tile" tref="https://{source}/{z}/{x}/{y}.png" ></map-link>
     </map-extent>
   </layer->
 </mapml-viewer>

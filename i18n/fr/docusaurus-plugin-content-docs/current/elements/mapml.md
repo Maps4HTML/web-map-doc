@@ -24,7 +24,7 @@ il doit contenir un élément `<map-head>`, suivi d’un élément `<map-body>`.
     <map-title>OpenStreetMap</map-title>
     <meta http-equiv="Content-Type" content="text/mapml;projection=OSMTILE"/>
     <meta charset="utf-8"/>
-    <map-link rel="license" href="https://www.openstreetmap.org/copyright" title="© OpenStreetMap contributors CC BY-SA"/>
+    <map-link rel="license" href="https://www.openstreetmap.org/copyright" title="© OpenStreetMap contributors CC BY-SA"></map-link>
   </map-head>
   <map-body>
     <!-- Lorsque des attributs booléens tels que "checked" ou "hidden" sont utilisés dans un fichier mapml, ils doivent avoir une valeur de type chaîne de caractères, par exemple "checked="checked"". -->
@@ -32,7 +32,7 @@ il doit contenir un élément `<map-head>`, suivi d’un élément `<map-body>`.
       <map-input name="z" type="zoom"  value="18" min="0" max="18"></map-input>
       <map-input name="x" type="location" units="tilematrix" axis="column" min="0"  max="262144" ></map-input>
       <map-input name="y" type="location" units="tilematrix" axis="row" min="0"  max="262144" ></map-input>
-      <map-link rel="tile" tref="https://tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <map-link rel="tile" tref="https://tile.openstreetmap.org/{z}/{x}/{y}.png" ></map-link>
     </map-extent>
   </map-body>
 </mapml->

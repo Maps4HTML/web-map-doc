@@ -10,7 +10,7 @@ In this section, we will learn how to create a templated tile layer. A templated
 
 ```html
 <layer- label="Templated Tile Layer" checked>
-  <map-extent units="my-projection">
+  <map-extent units="my-projection" checked>
     <map-input name="zoomLevel" type="zoom" min="1" max="1" value="0"></map-input>
     <map-input name="row" type="location" axis="row" units="tilematrix" min="0" max="2"></map-input>
     <map-input name="col" type="location" axis="column" units="tilematrix" min="0" max="2"></map-input>
@@ -87,7 +87,7 @@ Sets the native minimum and maximum [native zoom](http://example.org/). It also 
 <mapml-viewer projection="WGS84" zoom="1" lat="59.87304909" lon="-53.22587225" width="900" height="400" controls>
   <layer- label="Inline Templated Tile" checked>
     <map-meta name="zoom" content="min=1,max=2"></map-meta>
-    <map-extent units="WGS84">
+    <map-extent units="WGS84" checked hidden>
       <map-input name="zoomLevel" type="zoom" min="1" max="1" value="0"></map-input>
       <map-input name="row" type="location" axis="row" units="tilematrix" min="0" max="2"></map-input>
       <map-input name="col" type="location" axis="column" units="tilematrix" min="0" max="2"></map-input>
