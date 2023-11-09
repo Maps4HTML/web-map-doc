@@ -80,14 +80,6 @@ opacity input slider control. When the `opacity` attribute is not present, the o
 
 ---
 
-## Events
-
-| Event name    | Description                                             |
-|--------------	|--------------------------------------------------------	|
-|  map-change   | Fired when the `checked` attribute changes state            |
-
----
-
 ## Examples
 
 ### Multiple Extent

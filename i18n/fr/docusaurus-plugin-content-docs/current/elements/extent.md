@@ -57,14 +57,6 @@ opacity input slider control. Lorsque l'attribut `opacity` n'est pas présent, l
 
 ---
 
-## Événements
-
-| Nom de l’événement    | Description                                             |
-|--------------	|--------------------------------------------------------	|
-| map-change    | Déclenché lorsque l'attribut `checked` change d'état              |
-
----
-
 ## Exemples
 
 ### Étendues multiples
