@@ -160,5 +160,5 @@ Les WMS peuvent être lents à réagir, même s’ils le font rapidement en réa
 
 ---
 
-> - [Modifiez cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/input.md)
+> - [Modifiez cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/i18n/fr/docusaurus-plugin-content-docs/current/elements/input.md)
 > - [Clavardez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

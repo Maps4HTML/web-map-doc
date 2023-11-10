@@ -27,6 +27,7 @@ il doit contenir un élément `<map-head>`, suivi d’un élément `<map-body>`.
     <map-link rel="license" href="https://www.openstreetmap.org/copyright" title="© OpenStreetMap contributors CC BY-SA"></map-link>
   </map-head>
   <map-body>
+    <!-- Lorsque des attributs booléens tels que "checked" ou "hidden" sont utilisés dans un fichier mapml, ils doivent avoir une valeur de type chaîne de caractères, par exemple "checked="checked"". -->
     <map-extent units="OSMTILE" checked="checked" hidden="hidden">
       <map-input name="z" type="zoom"  value="18" min="0" max="18"></map-input>
       <map-input name="x" type="location" units="tilematrix" axis="column" min="0"  max="262144" ></map-input>
@@ -85,5 +86,5 @@ L’élément `<map-body>` est le deuxième enfant de l’élément `<mapml->`. 
  
 ---
 
-> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/mapml.md)
+> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/i18n/fr/docusaurus-plugin-content-docs/current/elements/mapml.md)
 > - [Discutez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

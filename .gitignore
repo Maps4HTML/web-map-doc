@@ -22,3 +22,6 @@ yarn-error.log*
 examples.md
 
 /.idea
+
+# sync job automatically updates
+/static/dist

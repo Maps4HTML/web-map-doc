@@ -38,8 +38,8 @@ URL template.
 ### `units`
 
 Specifies the projection of the tiles and other content that is expected from the
-server.  If the projection value is not a case-sensitive match of the `<mapml-viewer>` 
-`projection` attribute, the layer will be disabled in the layer control, and will
+server.  If the projection value is a case-insensitive match of the `<mapml-viewer>`
+`projection` attribute, the extent will be disabled in the layer control, and will
 not be displayed on the map, nor content fetched.
 
 Defined values of `units` include:
@@ -52,11 +52,25 @@ Defined values of `units` include:
 
 Author-defined values of `units` are possible, using the [Custom projections API](../../api/mapml-viewer-api/#definecustomprojectionoptions)
 
+The `units` attribute is required and can't be changed.
+
 ---
 
 ### `label`
 
-Specifies a label for an extent which is displayed in the layer control. When a `label` is not provided, the extent is hidden by default in the layer control.
+Specifies a label for an extent which is displayed in the layer control. When a `label` value is not provided, the `label` value defaults to 'Sub-Layer' in the layer control.
+
+---
+
+### `checked`
+
+The `checked` attribute and property is boolean. When present, the checked property value is taken to be 'true'; when not present, the property value is 'false'. The map-extent content will be fetched and rendered according to the `checked` state. Beware that it is the *presence* of the attribute that makes it true, not the value of the attribute. For example, the attribute `checked="false"` actually turns out to be checked, [as described by MDN Web docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#boolean_attributes).
+
+---
+
+### `hidden`
+
+The `hidden` attribute and property is boolean. When present, the extent is hidden (not present) in the layer control.  Regardless of `hidden` state, the layer is rendered or not depending on the `checked` attribute state. 
 
 ---
 
@@ -65,14 +79,6 @@ Specifies a label for an extent which is displayed in the layer control. When a 
 The `opacity` attribute is used to set the initial opacity of the `<map-extent>` element.
 Valid `opacity` values range from from "0.0" to "1.0" with strictly one demical place and are reflected in the extent settings
 opacity input slider control. When the `opacity` attribute is not present, the opacity is set to "1.0" by default.
-
----
-
-## Events
-
-| Event name    | Description                                             |
-|--------------	|--------------------------------------------------------	|
-| extentload    | Fires when a layer's extent is loaded and parsed. The intent is that this event is analagous to the [media element loadedmetadata event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loadedmetadata_event), but for map layers.              |
 
 ---
 

@@ -27,6 +27,7 @@ must contain one `<map-head>` element, followed by one `<map-body>` element.
     <map-link rel="license" href="https://www.openstreetmap.org/copyright" title="© OpenStreetMap contributors CC BY-SA"></map-link>
   </map-head>
   <map-body>
+    <!-- When 'boolean' attributes such as 'checked' or 'hidden' are used in a mapml file, they must have a string value. i.e 'checked="checked"' -->
     <map-extent units="OSMTILE" checked="checked" hidden="hidden">
       <map-input name="z" type="zoom"  value="18" min="0" max="18"></map-input>
       <map-input name="x" type="location" units="tilematrix" axis="column" min="0"  max="262144" ></map-input>

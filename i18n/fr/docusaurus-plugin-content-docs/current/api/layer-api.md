@@ -166,7 +166,8 @@ Au besoin, `mapml2geojson` transforme des coordonnées en `gcrs` par défaut ava
 |--------------	|--------------------------------------------------------	|
 | changestyle     | Déclenché avant que la couche ne change de src parce que l’utilisateur a sélectionné un autre style au niveau du contrôle de la couche |
 | changeprojection | Déclenché avant que la couche ne change de projection parce que la projection déclarée n’est pas égale à celle de la carte |
-| extentload | Déclenché lorsque les métadonnées d’une couche ont été chargées, mais avant le chargement des pavés, des caractéristiques et de tout autre contenu |
+| loadedmetadata | 	Déclenché lorsque les métadonnées d'une couche ont été chargées. L’intention est que cet événement soit analogue à l’événement [loadedmetadata de l’élément média](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loadedmetadata_event), mais avec les couches d’une carte. |
+| map-change    | Déclenché lorsque l'attribut `checked` change d'état              |
 ---
 
 ## Exemples
