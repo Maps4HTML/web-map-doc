@@ -58,7 +58,7 @@ valeur 'Sous-couche' dans le contrôle de couche.
 
 ### `checked`
 
-L'attribut et la propriété `checked` sont des booléens. Lorsqu'il est présent, la valeur de la propriété `checked` est "true" ; lorsqu'il n'est pas présent, la valeur de la propriété est "false". Le contenu du `map-extent` sera récupéré et rendu en fonction de l'état `checked`. Attention, c'est la *présence* de l'attribut qui fait qu'il est vrai, et non la valeur de l'attribut. Par exemple, l'attribut `checked="false"` s'avère en fait être checké, [comme décrit par les docs Web du MDN] (https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#boolean_attributes).
+L'attribut et la propriété `checked` sont des booléens. Lorsqu'il est présent, la valeur de la propriété `checked` est "true" ; lorsqu'il n'est pas présent, la valeur de la propriété est "false". Le contenu du `map-extent` sera récupéré et rendu en fonction de l'état `checked`. Attention, c'est la *présence* de l'attribut qui fait qu'il est vrai, et non la valeur de l'attribut. Par exemple, l'attribut `checked="false"` s'avère en fait être checké, [comme décrit par les docs Web du MDN](https://developer.mozilla.org/fr/docs/Web/HTML/Attributes#attributs_bool%C3%A9ens).
 
 ---
 
@@ -166,5 +166,5 @@ L’exemple ci-dessous montre une demande de service de carte en ligne utilisant
 
 ---
 
-> - [Modifiez le contenu de cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/feature.md)
+> - [Modifiez le contenu de cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/i18n/fr/docusaurus-plugin-content-docs/current/elements/extent.md)
 > - [Clavardez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

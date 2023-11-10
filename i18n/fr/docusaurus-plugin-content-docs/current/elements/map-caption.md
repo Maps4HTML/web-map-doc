@@ -39,5 +39,5 @@ est focalisé, car il est utilisé pour générer la valeur de l'attribut
   |              <div class="discussion">Fournir un nom accessible pour une carte</div>           | [en cours de discussion](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/260) | [provisoire](https://maps4html.org/web-map-doc/docs/elements/map-caption/) | [en cours de discussion](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/260) |
 ---
 
-> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/map-caption.md)
+> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/i18n/fr/docusaurus-plugin-content-docs/current/elements/map-caption.md)
 > - [Discutez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)
