@@ -221,7 +221,8 @@ let zoom = map.zoom;
 | [viewSource()](#viewsource)             	| View the source of the map.                                          	|
 | [defineCustomProjection(options)](#definecustomprojectionoptions) 	| Define a custom projection for use by the page. |
 | [zoomTo(lat, lon, zoom)](#zoomtolat-lon-zoom) | Fly or pan the map to a (new) location and zoom level.|
-| [geojson2mapml(json, options)](#zoomtolat-lon-zoom) | Add a GeoJSON Layer to the map. |
+| [locate()](#locate) | Locate and pan/zoom to the user's location, firing the map-locationfound and/or map-locationerror [events](#events) accordingly.|
+| [geojson2mapml(json, options)](#geojson2mapmljson-options) | Add a GeoJSON Layer to the map. |
 
 
 ### back()
@@ -327,6 +328,28 @@ navigator.geolocation.getCurrentPosition(success, error, options);
 
 ---
 
+### locate(options)
+
+Locate the user's location and pan + zoom to it. Fires the `map-locationfound` and/or `map-locationerror` [events](#events) accordingly. See Also - [geolocation control](../elements/mapml-viewer/#controlslist).
+
+```js
+let map = document.querySelector('mapml-viewer');
+map.locate();
+```
+
+#### Options
+&ltObject&gt A set of key/value pairs that customize the locate method. All options are optional and detailed below.
+
+| Option | Type | Default | Description |
+|------|------|---------------|--------|
+| `setView` | <Boolean\> | true | if true, pans and zoom to the user's location, or to world view if geolocation failed. |
+| `maxZoom` | <Number\> | 16 | the maximum zoom for view setting when setView option is true. |
+| `timeout` | <Number\> | 10000 | Number of milliseconds to wait for a response from geolocation before firing a locationerror event. |
+| `maximumAge` | <Number\> | 0 | Maximum age of detected location. If less than this amount of milliseconds passed since last geolocation response, locate will return a cached location. |
+| `enableHighAccuracy` | <Boolean\> | false | 	Enables high accuracy, see [description in the W3C spec](https://w3c.github.io/geolocation-api/#enablehighaccuracy-member). |
+
+---
+
 ### geojson2mapml(json, options)
 
 Convert a GeoJSON feature or feature collection string or object to MapML [`<layer->`](/web-map-doc/docs/layers/layer/) containing one or more [`<map-feature>`](/web-map-doc/docs/elements/feature/) elements. Returns and adds the converted layer element to the map.
@@ -362,7 +385,6 @@ Check out [this application](https://maps4html.org/experiments/api/custom-map-ui
 
 | Event name      	| Description                                          	|
 |--------------	|--------------------------------------------------------	|
-| layerchange   | Fired when a layer changes src, usually by the user following a link. |
 | load          | Fired when all layers have finished loading content |
 | click         | Fired when the map receives both mousedown and mouseup events |
 | dblclick      | Fired when the user double clicks or taps the map |
@@ -371,14 +393,17 @@ Check out [this application](https://maps4html.org/experiments/api/custom-map-ui
 | mouseout      | Fired once as the mouse cursor exits the map |
 | mousedown     | Fired when the mouse's primary key is pressed down with cursor over the map |
 | mouseup       | Fired when the mouse's primary key is released with cursor over the map |
-| movestart     | Fired before the map starts to move / viewport changes |
-| move          | Fired repeatedly as the map moves.                           |
-| moveend       | Fired after the map stops moving |
-| zoomstart     | Fired before the map changes zoom level |
-| zoom          | Fired repeatedly as the map changes zoom |
-| zoomend       | Fired after the map has changed zoom level |
-| preclick      | Fired before a click on the map is triggered.  May not be a primitive. |
 | contextmenu   | Fired when user right-clicks or long presses on map. May not be a primitive.|
+| layerchange   | Fired when a layer changes src, usually by the user following a link. |
+| map-movestart     | Fired before the map starts to move / viewport changes |
+| map-move          | Fired repeatedly as the map moves.                           |
+| map-moveend       | Fired after the map stops moving |
+| map-zoomstart     | Fired before the map changes zoom level |
+| map-zoom          | Fired repeatedly as the map changes zoom |
+| map-zoomend       | Fired after the map has changed zoom level |
+| map-preclick      | Fired before a click on the map is triggered.  May not be a primitive. |
+| map-locationfound | Fired when user's location is found through the [geolocation control](../elements/mapml-viewer/#controlslist).|
+| map-locationerror | Fired when user's location is not found through the [geolocation control](../elements/mapml-viewer/#controlslist).|
 
 ---
 

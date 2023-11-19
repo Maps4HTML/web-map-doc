@@ -81,7 +81,14 @@ La projection par défaut est `OSMTILE`.
 
 ### `controlslist`
 
-`controlslist` - attribut énuméré. Les valeurs possibles sont les suivantes : "`nofullscreen`", "`nolayer`", "`noreload`", "`noscale`" et "`nozoom`". Il se peut qu’à l’occasion, vous ne souhaitiez pas que les utilisateurs aient accès à une commande en particulier. Vous pouvez alors réduire l’ensemble des commandes offertes automatiquement (si vous avez utilisé l’attribut booléen `controls` ).
+`controlslist` - attribut énuméré. Les valeurs possibles sont énumérées ci-dessous: "`nofullscreen`", "`nolayer`", "`noreload`", "`noscale`", "`nozoom`" et "`geolocation`". Il peut arriver que vous souhaitiez ou non que vos utilisateurs aient accès à un contrôle particulier ; vous pouvez donc élaguer l'ensemble des contrôles présentés automatiquement (si vous avez utilisé l’attribut booléen `controls`).
+
+ - `nofullscreen` - n'affiche pas le contrôle plein écran sur la carte.
+ - `nolayer` - n'affiche pas le contrôle de couche sur la carte.
+ - `noreload` - n'affiche pas le contrôle de rechargement sur la carte.
+ - `noscale` - n'affiche pas le contrôle de l'échelle sur la carte.
+ - `nozoom` - n'affiche pas la commande de zoom sur la carte.
+ - `geolocation` - affiche le contrôle de la géolocalisation sur la carte.
 
 ---
 

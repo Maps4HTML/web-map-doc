@@ -82,7 +82,14 @@ The default projection is `OSMTILE`.
 
 ### `controlslist`
 
-`controlslist` - an enumerated attribute, possible values are: "`nofullscreen`", "`nolayer`", "`noreload`", "`noscale`" and "`nozoom`".  Occasionally, you may not want your users to have access to a particular control, so you may prune the set of controls automatically presented (when you have used the `controls` boolean attribute).
+`controlslist` - an enumerated attribute, possible values are listed below.  Occasionally, you may or may not want your users to have access to a particular control, so you may prune the set of controls automatically presented (when you have used the `controls` boolean attribute).
+
+ - `nofullscreen` - does not display the fullscreen control on map, it is displayed by default.
+ - `nolayer` - does not display the layer control on map, it is displayed by default.
+ - `noreload` - does not display the reload control on map, it is displayed by default.
+ - `noscale` - does not display the scale control on map, it is displayed by default.
+ - `nozoom` - does not display the zoom control on map, it is displayed by default.
+ - `geolocation` - display's the geolocation control on map.
 
 ---
 
