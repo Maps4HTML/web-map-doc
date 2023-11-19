@@ -331,7 +331,7 @@ navigator.geolocation.getCurrentPosition(success, error, options);
 
 ---
 
-### locate()
+### locate(options)
 
 Localise l'emplacement de l'utilisateur et effectue un panoramique et un zoom sur celui-ci. Déclenche les [événements](#événements) `map-locationfound` et/ou `map-locationerror` en conséquence. Voir aussi - [contrôle de géolocalisation](../elements/mapml-viewer/#controlslist).
 
@@ -339,6 +339,17 @@ Localise l'emplacement de l'utilisateur et effectue un panoramique et un zoom su
 let map = document.querySelector('mapml-viewer');
 map.locate();
 ```
+
+#### Options
+&ltObject&gt Un ensemble de paires clé/valeur qui personnalisent la méthode de localisation. Toutes les options sont facultatives et détaillées ci-dessous.
+
+| Option | Type | Default | Description |
+|------|------|---------------|--------|
+| `setView` | <Boolean\> | true | si true, effectue un panoramique et un zoom sur la position de l'utilisateur, ou sur la vue du monde si la géolocalisation a échoué. |
+| `maxZoom` | <Number\> | 16 | le zoom maximum pour la vue lorsque l'option setView est vraie. |
+| `timeout` | <Number\> | 10000 | Nombre de millisecondes à attendre pour une réponse de la géolocalisation avant de déclencher un événement "locationerror". |
+| `maximumAge` | <Number\> | 0 | Âge maximum de la localisation détectée. Si moins de ce nombre de millisecondes se sont écoulées depuis la dernière réponse de géolocalisation, locate renverra une localisation mise en cache. |
+| `enableHighAccuracy` | <Boolean\> | false | 	Permet une grande précision, voir [description dans la spécification W3C](https://w3c.github.io/geolocation-api/#enablehighaccuracy-member). |
 
 ---
 
