@@ -191,7 +191,6 @@ so the resulting JSON SHOULD (somehow, tbd) be tagged with the datum in use by t
 | Event name      	| Description                                          	|
 |--------------	|--------------------------------------------------------	|
 | changestyle     | Fired before the layer changes src due to user selecting alternate style in layer control |
-| changeprojection | Fired before the layer changes projection due to its declared projection being not equal to that of the map |
 | extentload | Fired when the metadata for a layer has loaded, but before loading tiles, features and other content |
 ---
 

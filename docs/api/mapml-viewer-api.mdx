@@ -388,20 +388,22 @@ Check out [this application](https://maps4html.org/experiments/api/custom-map-ui
 | load          | Fired when all layers have finished loading content |
 | click         | Fired when the map receives both mousedown and mouseup events |
 | dblclick      | Fired when the user double clicks or taps the map |
+| focus         | Fired when the map has recieved focus |
 | mousemove     | Fired repeatedly as the mouse cursor traverses the map |
 | mouseover     | Fired once as the mouse cursor enters the map |
 | mouseout      | Fired once as the mouse cursor exits the map |
 | mousedown     | Fired when the mouse's primary key is pressed down with cursor over the map |
 | mouseup       | Fired when the mouse's primary key is released with cursor over the map |
 | contextmenu   | Fired when user right-clicks or long presses on map. May not be a primitive.|
-| layerchange   | Fired when a layer changes src, usually by the user following a link. |
+| layerchange   | Fired when a layer changes src, usually by the user following a link |
+| fullscreenchange| Fired when the map switches into or out of fullscreen mode |
+| map-projectionchange| Fired when the map's projection is changed |
 | map-movestart     | Fired before the map starts to move / viewport changes |
 | map-move          | Fired repeatedly as the map moves.                           |
 | map-moveend       | Fired after the map stops moving |
 | map-zoomstart     | Fired before the map changes zoom level |
 | map-zoom          | Fired repeatedly as the map changes zoom |
 | map-zoomend       | Fired after the map has changed zoom level |
-| map-preclick      | Fired before a click on the map is triggered.  May not be a primitive. |
 | map-locationfound | Fired when user's location is found through the [geolocation control](../elements/mapml-viewer/#controlslist).|
 | map-locationerror | Fired when user's location is not found through the [geolocation control](../elements/mapml-viewer/#controlslist).|
 
