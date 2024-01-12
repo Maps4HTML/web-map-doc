@@ -15,6 +15,14 @@
     "message": "API",
     "description": "The label for category API in sidebar sidebar"
   },
+  "sidebar.sidebar.category.Tutorials": {
+    "message": "Tutoriels",
+    "description": "The label for Tutorials in sidebar sidebar"
+  },
+  "sidebar.sidebar.category.Advanced": {
+    "message": "Avancé",
+    "description": "The label for Advanced Tutorials in sidebar sidebar"
+  },
   "sidebar.sidebar.category.Browser Extension": {
     "message": "Extension du navigateur",
     "description": "The label for category Browser Extension in sidebar sidebar"

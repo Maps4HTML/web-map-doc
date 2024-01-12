@@ -29,6 +29,17 @@ module.exports = {
     'api/map-extent-api',
     'api/map-link-api'
   ],
+  'Tutorials': [
+    {
+      'Getting Started': [
+        'tutorials/getting-started',
+        'tutorials/modifying-map'
+      ],
+      'Advanced': [
+        'tutorials/mapml-files',
+      ],
+    }
+  ],
   'Browser Extension': [
     'extension/about',
     'extension/installation',
