@@ -33,6 +33,27 @@ L’attribut `name` indique le type de métadonnées définies. Les valeurs poss
 | cs            | [Abréviation du système de coordonnées] sensible à la casse](../input#units). |
 | zoom          | (min=_valeur de zoom minimale_,max=_valeur de zoom maximale_,)(value=_valeur de zoom actuelle_) |
 
+:::tip
+
+Les règles de grammaire de l'attribut `<map-meta name="extent" content="..."></map-meta>` 
+`content` exigent que vous spécifiiez les coordonnées des coins supérieur gauche 
+et inférieur droit de l'étendue à marquer. Vous devez spécifier les valeurs d'axe 
+de l'étendue en tant que valeurs pour un ensemble de quatre clés séparées par des 
+virgules qui identifient le système de coordonnées utilisé (c'est-à-dire pcrs, gcrs, 
+tile, tilematrix, map ou tcrs) en vertu des noms d'axe suivants des noms d'axes. 
+Par exemple, `top-left-easting=-8433179` indique que le système de coordonnées 
+utilisé est pcrs.
+
+Vous ne pouvez pas confondre les systèmes de coordonnées dans une même valeur 
+d'attribut `content`, par exemple `top-left-easting=-8433179, top-left-latitude=49.02174,...` 
+n'est pas légal. Vous pouvez copier une valeur `<map-meta name="extent" content="...">` 
+correctement marquée dans la planchette à pince pour la fenêtre de visualisation 
+actuelle de la carte, en coordonnées pcrs (par défaut), grâce au menu contextuel 
+de la carte Copier > Étendue, comme indiqué ci-dessous :
+
+![Copy extent context menu](../assets/img/map-context-menu-copy-extent.png)
+
+:::
 ---
 
 | <!-- -->    | <!-- -->    |
