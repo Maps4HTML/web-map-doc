@@ -29,4 +29,4 @@ Apprenez à créer rapidement votre première carte.
 ```
 </details>
 
-Passez au tutoriel suivant (Introduction) pour une présentation plus détaillée.
+Passez au tutoriel suivant (Introduction à MapML) pour une présentation plus détaillée.

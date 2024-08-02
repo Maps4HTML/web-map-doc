@@ -1,6 +1,6 @@
 ---
 id: getting-started
-title: Introduction
+title: Introduction à MapML
 slug: /tutorials/getting-started
 ---
 

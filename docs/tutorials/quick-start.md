@@ -29,4 +29,4 @@ Learn how to quickly create your first map.
 ```
 </details>
 
-Continue with the next tutorial (Introduction) for a more detailed look.
+Continue with the next tutorial (MapML Introduction) for a more detailed look.

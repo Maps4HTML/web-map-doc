@@ -7,7 +7,7 @@ title: Installation
 
 ### CDN
 
-To include the `<mapml-viewer>` suite of elements on your page, you can add one of the following [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) to the `<head>` of your HTML code:
+To include the `<mapml-viewer>` suite of elements on your page, you can add one of the following [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) links to the `<head>` of your HTML code:
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
