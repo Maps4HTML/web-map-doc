@@ -21,7 +21,7 @@ URL template.
 ```html
 <mapml-viewer projection="OSMTILE" lat="10" lon="0" zoom="1">
   <layer- label="OpenStreetMap" checked>
-    <map-extent units="OSMTILE">
+    <map-extent units="OSMTILE" checked hidden>
       <map-input name="z" type="zoom" value="18" min="0" max="18"></map-input>
       <map-input name="x" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
       <map-input name="y" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
@@ -38,8 +38,8 @@ URL template.
 ### `units`
 
 Specifies the projection of the tiles and other content that is expected from the
-server.  If the projection value is not a case-sensitive match of the `<mapml-viewer>` 
-`projection` attribute, the layer will be disabled in the layer control, and will
+server.  If the projection value is a case-insensitive match of the `<mapml-viewer>`
+`projection` attribute, the extent will be disabled in the layer control, and will
 not be displayed on the map, nor content fetched.
 
 Defined values of `units` include:
@@ -50,21 +50,35 @@ Defined values of `units` include:
 | WGS84         | Pseudo plate carrée, with 256px x 256px tiles. Zoom = 0 contains two tiles in two columns, with their origin at -180,90. False easting and northing (pcrs) values inside the projection bounds correspond to longitude and latitude, respectively. |
 | CBMTILE       | Lambert Conformal Conic, with 256px x 256px tiles.  Zoom levels chosen by scale denominator, so tiles do not nest.|
 
-Author-defined values of `units` are possible, using the [Custom projections API](../../api/custom-projections/)
+Author-defined values of `units` are possible, using the [Custom projections API](../../api/mapml-viewer-api/#definecustomprojectionoptions)
+
+The `units` attribute is required and can't be changed.
 
 ---
 
 ### `label`
 
-Specifies a label for an extent which is displayed in the layer control. When a `label` is not provided, the extent is hidden by default in the layer control.
+Specifies a label for an extent which is displayed in the layer control. When a `label` value is not provided, the `label` value defaults to 'Sub-Layer' in the layer control.
 
 ---
 
-## Events
+### `checked`
 
-| Event name    | Description                                             |
-|--------------	|--------------------------------------------------------	|
-| extentload    | Fires when a layer's extent is loaded and parsed. The intent is that this event is analagous to the [media element loadedmetadata event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loadedmetadata_event), but for map layers.              |
+The `checked` attribute and property is boolean. When present, the checked property value is taken to be 'true'; when not present, the property value is 'false'. The map-extent content will be fetched and rendered according to the `checked` state. Beware that it is the *presence* of the attribute that makes it true, not the value of the attribute. For example, the attribute `checked="false"` actually turns out to be checked, [as described by MDN Web docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#boolean_attributes).
+
+---
+
+### `hidden`
+
+The `hidden` attribute and property is boolean. When present, the extent is hidden (not present) in the layer control.  Regardless of `hidden` state, the layer is rendered or not depending on the `checked` attribute state. 
+
+---
+
+### `opacity`
+
+The `opacity` attribute is used to set the initial opacity of the `<map-extent>` element.
+Valid `opacity` values range from from "0.0" to "1.0" with strictly one demical place and are reflected in the extent settings
+opacity input slider control. When the `opacity` attribute is not present, the opacity is set to "1.0" by default.
 
 ---
 
@@ -79,19 +93,19 @@ The following example shows multiple `<map-extent>` elements in a layer. The dif
   <!-- Change Basemap using the three dots menu of the basemap layer -->
   <layer- label="Basemap" checked="">
     <!-- This extent will be hidden in the layer control since no label is provided -->
-    <map-extent units="OSMTILE">
+    <map-extent units="OSMTILE" checked>
       <map-input name="TileMatrix" type="zoom" value="18" min="0" max="18"></map-input>
       <map-input name="TileCol" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
       <map-input name="TileRow" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
       <map-link rel="tile" tref="https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS/tile/1.0.0/World_Imagery/default/default028mm/{TileMatrix}/{TileRow}/{TileCol}.jpg"></map-link>
     </map-extent>
-      <map-extent label="Nat Geo" units="OSMTILE">
+      <map-extent label="Nat Geo" units="OSMTILE" checked>
       <map-input name="TileMatrix" type="zoom" value="18" min="0" max="18"></map-input>
       <map-input name="TileCol" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
       <map-input name="TileRow" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
       <map-link rel="tile" tref="https://server.arcgisonline.com/arcgis/rest/services/NatGeo_World_Map/MapServer/WMTS/tile/1.0.0/NatGeo_World_Map/default/default028mm/{TileMatrix}/{TileRow}/{TileCol}.jpg"></map-link>
     </map-extent>
-    <map-extent label="Imagery" units="OSMTILE">
+    <map-extent label="Imagery" units="OSMTILE" checked>
       <map-input name="TileMatrix" type="zoom" value="18" min="0" max="18"></map-input>
       <map-input name="TileCol" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
       <map-input name="TileRow" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
@@ -109,7 +123,7 @@ The following example shows a Web Map Service Request using `<map-link>` to requ
 ```html
 <mapml-viewer projection="OSMTILE" zoom="4" lat="53.331" lon="-91.667" controls>
   <layer- label="Toporama" checked="">
-    <map-extent xmlns="http://www.w3.org/1999/xhtml" units="OSMTILE">
+    <map-extent xmlns="http://www.w3.org/1999/xhtml" units="OSMTILE" checked>
       <!-- URL parameters for WMS Request -->
       <map-input name="z" type="zoom" value="18" min="4" max="18"></map-input>
       <map-input name="w" type="width"></map-input>

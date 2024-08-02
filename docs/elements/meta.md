@@ -29,10 +29,30 @@ values of `name` related to maps include:
 
 | `name`          | `content` value                                          	  |
 |--------------	|--------------------------------------------------------	|
-| projection    | A case-sensitive [projection name](../mapml-viewer#projection), or a [custom projection name](../../api/custom-projections#details) |
+| projection    | A case-sensitive [projection name](../mapml-viewer#projection), or a [custom projection name](../../api/mapml-viewer-api#definecustomprojectionoptions) |
 | extent        | \(\(_[position keyword](../input#position)_\)-\(_[axis name](../input#axis)_\)=\(_axis value_\)\(,\)\)4\(,\)\(zoom=\(_zoom value_\)\)0,1 |
 | cs            | A case-sensitive [coordinate system abbreviation](../input#units). |
 | zoom          | (min=_minimum zoom value_,max=_maximum zoom value_,)(value=_current zoom value_) |
+
+:::tip
+
+The grammar rules for the `<map-meta name="extent" content="..."></map-meta>`
+`content` attribute require that you specify coordinates of the top-left and 
+bottom-right corners of the extent being marked up. You must specify the axis values of the 
+extent as values for a set of four comma-separated keys which identify the coordinate
+system being used (i.e. pcrs, gcrs, tile, tilematrix, map or tcrs) by virtue of 
+the axis names. For example `top-left-easting=-8433179` identifies that the 
+coordinate system being used is pcrs.  You cannot mix coordinate systems within 
+a single `content` attribute value, for example `top-left-easting=-8433179, top-left-latitude=49.02174,...`
+is not legal.
+
+You can copy a correctly marked-up `<map-meta name="extent" content="...">` value 
+onto the clipboard for the current map viewport, in pcrs coordinates (by default), 
+via the map context menu Copy > Extent item as shown below:
+
+![Copy extent context menu](../assets/img/map-context-menu-copy-extent.png)
+
+:::
 
 ---
 

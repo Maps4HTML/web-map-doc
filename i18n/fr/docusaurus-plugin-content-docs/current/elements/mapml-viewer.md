@@ -51,25 +51,25 @@ La projection par défaut est `OSMTILE`.
 
   - `APSTILE` est basé sur le système de projection stéréographique polaire de l’Alaska (EPSG:5936), et compte 20 niveaux de zoom (de 0 à 19).
 
-  - D’autres projections sont possibles, au moyen d’[API de projections personnalisées](../../api/custom-projections).
+  - D’autres projections sont possibles, au moyen d’[API de projections personnalisées](../../api/mapml-viewer-api/#definecustomprojectionoptions).
 
 ---
 
 ### `zoom`
 
-`zoom` - entier non négatif. Cette valeur établit le niveau de zoom initial de la carte. Pour obtenir une vue du monde à petite échelle, utilisez une valeur faible. Utilisez des valeurs supérieures pour obtenir une vue à grande échelle (cartes de petites zones). La valeur maximale dépend de la `projection` en question et de la source des données. Bon nombre des sources de données cartographiques offrent des niveaux de zoom limités.
+`zoom` - entier non négatif. Cette valeur définit le niveau de zoom initial de la carte et est obligatoire. La valeur est mise à jour lorsque la carte cesse de se déplacer. Pour obtenir une vue du monde à petite échelle, utilisez une valeur faible. Utilisez des valeurs supérieures pour obtenir une vue à grande échelle (cartes de petites zones). La valeur maximale dépend de la `projection` en question et de la source des données. Bon nombre des sources de données cartographiques offrent des niveaux de zoom limités.
 
 ---
 
 ### `lat`
 
-`lat` - nombre réel de la latitude. Cette valeur établit la latitude initiale du centre de la carte. Sur Terre, les latitudes vont de -90.0 (Sud) à 90.0 (Nord).  De nombreuses projections ne permettent pas d’afficher toutes les latitudes et la plupart permettent de contrôler ou de limiter la distorsion dans un certain nombre d’emplacements. En particulier, OSMTILE (Web Mercator) peut afficher seulement le contenu compris entre les latitudes -84 à 84.
+`lat` - nombre réel de la latitude. Cette valeur établit la latitude initiale du centre de la carte. La valeur est mise à jour lorsque la carte cesse de se déplacer. Sur Terre, les latitudes vont de -90.0 (Sud) à 90.0 (Nord).  De nombreuses projections ne permettent pas d’afficher toutes les latitudes et la plupart permettent de contrôler ou de limiter la distorsion dans un certain nombre d’emplacements. En particulier, OSMTILE (Web Mercator) peut afficher seulement le contenu compris entre les latitudes -84 à 84.
 
 ---
 
 ### `lon`
 
-`lon` - nombre réel de la longitude. Cette valeur établit la longitude initiale du centre de la carte. Sur Terre, les longitudes vont de -180.0 (Ouest) à 180.0 (Est). Les mêmes commentaires formulés précédemment concernant la distorsion s’appliquent. Faites attention, le nom de cet attribut est « lon » et non « long »; votre carte ne fonctionnera pas correctement si vous utilisez « long ».
+`lon` - nombre réel de la longitude. Cette valeur établit la longitude initiale du centre de la carte. La valeur est mise à jour lorsque la carte cesse de se déplacer. Sur Terre, les longitudes vont de -180.0 (Ouest) à 180.0 (Est). Les mêmes commentaires formulés précédemment concernant la distorsion s’appliquent. Faites attention, le nom de cet attribut est « lon » et non « long »; votre carte ne fonctionnera pas correctement si vous utilisez « long ».
 
 ---
 
@@ -81,7 +81,7 @@ La projection par défaut est `OSMTILE`.
 
 ### `controlslist`
 
-`controlslist` - attribut énuméré. Les valeurs possibles sont les suivantes : "`nofullscreen`", "`nolayer`", "`noreload`" et "`nozoom`". Il se peut qu’à l’occasion, vous ne souhaitiez pas que les utilisateurs aient accès à une commande en particulier. Vous pouvez alors réduire l’ensemble des commandes offertes automatiquement (si vous avez utilisé l’attribut booléen `controls` ).
+`controlslist` - attribut énuméré. Les valeurs possibles sont les suivantes : "`nofullscreen`", "`nolayer`", "`noreload`", "`noscale`" et "`nozoom`". Il se peut qu’à l’occasion, vous ne souhaitiez pas que les utilisateurs aient accès à une commande en particulier. Vous pouvez alors réduire l’ensemble des commandes offertes automatiquement (si vous avez utilisé l’attribut booléen `controls` ).
 
 ---
 
@@ -138,7 +138,7 @@ carte lorsqu'il est présent. Lorsqu'il n'est pas présent ou qu'il est supprim�
 | [**Navigation des utilisateurs (vue panoramique et zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
 |            <div class="requirement">Faire un zoom sur la carte indépendamment du reste de la page (5.4.1)</div>            | complet    | complet   | |
 |                            <div class="requirement">Afficher une vue panoramique de la carte (5.4.2)</div>                             | complet    | complet   | |
-|          <div class="undecided">Encapsuler ou dupliquer des pavés de données au moment d’afficher une vue panoramique du monde (5.4.4)</div>             | none    | partial| | |
+|          <div class="undecided">Encapsuler ou dupliquer des pavés de données au moment d’afficher une vue panoramique du monde (5.4.4)</div>             | aucun    | limité| | |
 | [**Custom styling (5.5)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-custom-styling) |  |  |  |
 |          <div class="undecided">Appliquer un style personnalisé aux commandes d’une carte (5.5.2)</div>              | aucun | aucun |  |
 |          <div class="undecided">Choisir d’afficher les commandes par défaut ou non (5.5.3)</div>              | complet | complet |  |
@@ -147,5 +147,5 @@ carte lorsqu'il est présent. Lorsqu'il n'est pas présent ou qu'il est supprim�
 |          <div class="requirement">Déplacer la carte pour afficher un emplacement donné (6.2.5)</div>              | complet | complet |  |
 ---
 
-> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/mapml-viewer.md)
+> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/i18n/fr/docusaurus-plugin-content-docs/current/elements/mapml-viewer.md)
 > - [Discutez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

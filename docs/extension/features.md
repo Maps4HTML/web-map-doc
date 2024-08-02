@@ -18,9 +18,13 @@ When turned on through the extension, enables a square in the middle of the map 
 
 ![Feature Index Example](../assets/img/feature-index.png)
 
-### Announce Move and Zoom
+### Announce Zoom Level
 
-When toggled through the extension, announces the map movement and zoom through screen readers.
+When toggled through the extension, announces the zoom level through screen readers (this is on by default).
+
+### Announce Scale
+
+Announces the map scale through screen readers in metric or imperial units (metric is selected by default).
 
 ### Render MapML resources
 

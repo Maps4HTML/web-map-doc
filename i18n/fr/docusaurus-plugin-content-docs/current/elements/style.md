@@ -73,5 +73,5 @@ Toutes les démonstrations comprises dans les pages de documentation contiennent
 
 ---
 
-> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/style.md)
+> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/i18n/fr/docusaurus-plugin-content-docs/current/elements/style.md)
 > - [Discutez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

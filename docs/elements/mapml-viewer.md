@@ -52,25 +52,25 @@ The default projection is `OSMTILE`.
 
   - `APSTILE` is based on the Alaska Polar Stereographic (EPSG:5936) projected coordinate reference system, and has 20 zoom levels (0 to 19).
 
-  - other projections are possible, using the [Custom Projections API](../../api/custom-projections).
+  - other projections are possible, using the [Custom Projections API](../../api/mapml-viewer-api/#definecustomprojectionoptions).
 
 ---
 
 ### `zoom`
 
-`zoom` - a non-negative integer.  The value establishes the initial zoom level of the map.  For a small scale view of the world, use a lower value.  Use larger values for larger scales (smaller area maps). The maximum value depends on the particular `projection` and data source. Many map data sources have limited zoom levels available.
+`zoom` - a non-negative integer.  The value establishes the _initial_ zoom level of the map, and is required. The value is updated when the map stops moving. For a smaller scale view of the world, use a lower value.  Use larger values for larger scales (smaller area maps). The maximum value depends on the particular `projection` and data source. Many map data sources have limited zoom levels available.
 
 ---
 
 ### `lat`
 
-`lat` - a real number latitude. The value establishes the initial latitude of the of the center of the map. Latitudes on Earth range from -90.0 (south) to 90.0 (north).  Many projections are not able to display all latitudes, and most projections have a limited range of locations where distortion is controlled or limited. In particular, OSMTILE (Web Mercator) can only display content between the latitude range -84 to 84.
+`lat` - a real number latitude. The value establishes the _initial_ latitude of the of the center of the map, and is required. The value is updated when the map stops moving. Latitudes on Earth range from -90.0 (south) to 90.0 (north).  Many projections are not able to display all latitudes, and most projections have a limited range of locations where distortion is controlled or limited. In particular, OSMTILE (Web Mercator) can only display content between the latitude range -84 to 84.
 
 ---
 
 ### `lon`
 
-`lon` - a real number longitude. The value establishes the initial longitude of the of the center of the map.Longitudes on Earth range from -180.0 (west) to 180.0 (east). Similar comments related to distortion apply to those for latitude. Be careful, this attribute is named "lon" NOT "long", and if you use "long" your map won't work properly.
+`lon` - a real number longitude. The value establishes the _initial_ longitude of the of the center of the map, and is required. The value is updated when the map stops moving. Longitudes on Earth range from -180.0 (west) to 180.0 (east). Similar comments related to distortion apply to those for latitude. Be careful, this attribute is named "lon" NOT "long", and if you use "long" your map won't work properly.
 
 ---
 
@@ -82,7 +82,7 @@ The default projection is `OSMTILE`.
 
 ### `controlslist`
 
-`controlslist` - an enumerated attribute, possible values are: "`nofullscreen`", "`nolayer`", "`noreload`" and "`nozoom`".  Occasionally, you may not want your users to have access to a particular control, so you may prune the set of controls automatically presented (when you have used the `controls` boolean attribute).
+`controlslist` - an enumerated attribute, possible values are: "`nofullscreen`", "`nolayer`", "`noreload`", "`noscale`" and "`nozoom`".  Occasionally, you may not want your users to have access to a particular control, so you may prune the set of controls automatically presented (when you have used the `controls` boolean attribute).
 
 ---
 
@@ -109,7 +109,7 @@ present. When it is not present or removed, these features are enabled again.
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [MapML map element](https://maps4html.org/MapML/spec/#the-map-element-0) |
+| [MapML map element](https://maps4html.org/MapML/spec/#the-mapml-viewer-element-0) |
 | [HTML map element](https://html.spec.whatwg.org/multipage/image-maps.html#the-map-element) |
 
 ---

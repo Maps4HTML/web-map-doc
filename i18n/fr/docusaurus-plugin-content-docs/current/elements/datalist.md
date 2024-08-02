@@ -65,5 +65,5 @@ Cet élément contient les valeurs de datalist. Un élément `<map-datalist>` pe
 
 ---
 
-> - [Modifiez le contenu de cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/feature.md)
+> - [Modifiez le contenu de cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/i18n/fr/docusaurus-plugin-content-docs/current/elements/datalist.md)
 > - [Clavardez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

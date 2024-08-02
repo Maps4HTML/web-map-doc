@@ -43,20 +43,20 @@ Cet élément contient les options de l’élément `<map-select>`. Un élément
 ### Changer de source de carte
 ```html
 <mapml-viewer projection="OSMTILE" zoom="2" lat="65" lon="-90" controls="">
-  <layer- label="Carte de base" checked="">
-    <map-extent units="OSMTILE" >
+  <layer- label="Carte de base" checked>
+    <map-extent units="OSMTILE" checked>
       <map-input name="z" type="zoom"  value="18" min="0" max="18"></map-input>
       <map-input name="x" type="location" units="tilematrix" axis="column" min="0"  max="262144" ></map-input>
       <map-input name="y" type="location" units="tilematrix" axis="row" min="0"  max="262144" ></map-input>
-      <map-link rel="license" href="https://www.openstreetmap.org/copyright" title="OpenStreetMap"/>
-      <map-link rel="license" href="https://www.openstreetmap.bzh/" title="Équipe OpenStreetMap Breton"/>
+      <map-link rel="license" href="https://www.openstreetmap.org/copyright" title="OpenStreetMap"></map-link>
+      <map-link rel="license" href="https://www.openstreetmap.bzh/" title="Équipe OpenStreetMap Breton"></map-link>
       
       <map-select id="urlOptions" name="source">
         <map-option value="tile.openstreetmap.bzh/br">OpenStreetMap_BZH</map-option>
         <map-option value="tile.openstreetmap.org">OpenStreetMap_Mapnik</map-option>    
       </map-select>
       
-      <map-link rel="tile" tref="https://{source}/{z}/{x}/{y}.png" />
+      <map-link rel="tile" tref="https://{source}/{z}/{x}/{y}.png" ></map-link>
     </map-extent>
   </layer->
 </mapml-viewer>
@@ -90,5 +90,5 @@ Cet élément contient les options de l’élément `<map-select>`. Un élément
 
 ---
 
-> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/select.md)
+> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/i18n/fr/docusaurus-plugin-content-docs/current/elements/select.md)
 > - [Discutez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

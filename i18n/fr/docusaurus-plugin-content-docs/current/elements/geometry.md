@@ -254,5 +254,5 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
 
 ---
 
-> - [Modifiez le contenu de cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/geometry.md)
+> - [Modifiez le contenu de cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/i18n/fr/docusaurus-plugin-content-docs/current/elements/geometry.md)
 > - [Clavardez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

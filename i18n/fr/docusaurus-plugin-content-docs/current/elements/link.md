@@ -108,7 +108,7 @@ Les valeurs de projection [définies par le polyfill](../mapml-viewer#projection
 <mapml-viewer  projection="OSMTILE" zoom="1" lat="0" lon="0" controls>
  <layer- label="OpenStreetMap" src="https://geogratis.gc.ca/mapml/en/osmtile/osm/" checked hidden  ></layer->
  <layer- label="Source des fichiers GeoTIFF optimisés pour l’infonuagique (COG) du service des pavés cartographiques (TMS)" checked>
-   <map-extent units="OSMTILE">
+   <map-extent units="OSMTILE" checked>
        <map-input name="zoom" type="zoom"  min="1" max="12"></map-input>
        <map-input name="row" type="location" axis="row" units="tilematrix" ></map-input>
        <map-input name="col" type="location" axis="column" units="tilematrix"></map-input>
@@ -154,5 +154,5 @@ Les valeurs de projection [définies par le polyfill](../mapml-viewer#projection
 
 ---
 
-> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/link.md)
+> - [Modifier cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/i18n/fr/docusaurus-plugin-content-docs/current/elements/link.md)
 > - [Discutez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

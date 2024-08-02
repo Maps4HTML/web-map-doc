@@ -14,7 +14,35 @@ Un élément `<map-feature>` est le conteneur du nom accessible de la caractéri
 ## Attributs
 
 ### `zoom`
-  - Cet attribut permet de définir le niveau de zoom auquel la caractéristique est rendue. La valeur du zoom doit se situer dans une plage allant de 0 au niveau de zoom maximal de la [projection](../meta/#attributes) de la carte.
+
+Cet attribut permet de définir le niveau de zoom auquel la caractéristique est rendue. 
+La valeur du zoom doit se situer dans une plage allant de 0 au niveau de zoom 
+maximal de la [projection](../meta/#attributes) de la carte.
+
+### `min`
+
+L'attribut `min` (zoom) permet d'obtenir ou de définir le zoom minimum natif de la 
+caractéristique. La géométrie et les autres propriétés des caractéristiques de 
+la carte dépendent de l'échelle. La valeur `min` est une valeur limite de zoom de 
+rendu ; à des valeurs de zoom de carte inférieures à `min`, la caractéristique 
+ne sera pas rendue.
+
+Si la valeur `min` n'est pas fournie, une valeur de repli sera calculée; la valeur 
+de repli sera la valeur de `zoom` minimale de la couche ou, si elle n'est pas spécifiée, 
+la valeur minimale de la projection du visualiseur de carte, c'est-à-dire 0.
+
+### `max`
+
+L'attribut `max` (zoom) permet d'obtenir ou de définir le `zoom` maximal natif de la 
+caractéristique. La géométrie et les autres propriétés des caractéristiques de la 
+carte dépendent de l'échelle. La valeur `max` est une valeur limite de 
+[`zoom`](#zoom) de rendu; à des valeurs de [`zoom`](#zoom) de carte supérieures à 
+`max`, la caractéristique ne sera pas rendue.
+
+Si `max` n'est pas fourni, une valeur de repli sera calculée ; la valeur de repli 
+sera la valeur de [`zoom`](#zoom) maximale de la couche ou, si elle n'est pas 
+spécifiée, la valeur maximale de [`zoom`](#zoom) de la projection du visualiseur 
+de carte, par exemple 25 (en fonction de la projection).
 
 ---
 
@@ -268,5 +296,5 @@ Définit l’[extent](../meta/#attributes) de la couche.
 |          <div class="undecided">Appliquer un style personnalisé pour mapper les marqueurs et les caractéristiques vectorielles (5.5.1)</div>              | [complet](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/15) | limité |  |
 ---
 
-> - [Modifiez le contenu de cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/feature.md)
+> - [Modifiez le contenu de cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/i18n/fr/docusaurus-plugin-content-docs/current/elements/feature.md)
 > - [Clavardez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

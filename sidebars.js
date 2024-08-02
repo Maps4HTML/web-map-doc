@@ -12,7 +12,6 @@ module.exports = {
       'elements/mapml',
       'elements/extent',
       'elements/input',
-      'elements/datalist',
       'elements/select',
       'elements/link',
       'elements/meta',
@@ -26,8 +25,9 @@ module.exports = {
   API: [
     'api/mapml-viewer-api',
     'api/layer-api',
-    'api/custom-projections',
-    'api/custom-rendering'
+    'api/map-feature-api',
+    'api/map-extent-api',
+    'api/map-link-api'
   ],
   'Tutorials': [
     {

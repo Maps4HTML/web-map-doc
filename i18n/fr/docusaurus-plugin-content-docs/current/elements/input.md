@@ -25,7 +25,7 @@ Définit le **type** de l’entrée.
 | location      | L’entrée d’un emplacement capture **une** valeur d’`axis` d’un point à deux dimensions (représenté par une paire de coordonnées) dans l’étendue de la carte – p. exe., l’emplacement `top-right`, ou, lorsqu’il interroge un serveur, celui où l’utilisateur clique ou qu’il touche sur la carte. |
 | width         | L’entrée de la largeur capture la largeur de l’étendue de la fenêtre d’affichage de la carte en pixels normalisés  |
 | height        | L’entrée de la hauteur capture la hauteur de l’étendue de la fenêtre d’affichage de la carte en pixels normalisés |
-| hidden        | Cet attribut établit une variable pouvant servir à transmettre un (#shard)  fixe ou [un domaine fixe de valeurs] au serveur lorsque l’utilisateur demande des ressources cartographiques. |
+| hidden        | Cet attribut établit une variable pouvant servir à transmettre un valeur fixe au serveur lorsque l’utilisateur demande des ressources cartographiques. |
 ---
 
 ### `value`
@@ -108,20 +108,6 @@ Précise l’entité à laquelle s’applique la `position`. Les valeurs possibl
 Définit la plage de zoom en fonction des ressources qui sont demandées à l’intérieur de cette plage. `step` est toujours calculé à partir d’une valeur de base de 0.  Lorsque la valeur du niveau de zoom se situe à l’intérieur de l’intervalle `step`, les ressources sont demandées lorsque nécessaire et mises à l’échelle au niveau de zoom utilisé. Par exemple, si min=0 et que max=7 pour le niveau de zoom entré avec step=4, les pavés ne sont demandés que qu’au niveau de zoom=0 et mis à l’échelle avec les niveaux de zoom 1, 2 et 3 alors que la carte est rendue à ces niveaux. Utiliser cet attribut permet d’économiser la largeur de bande dont profite l’utilisateur et n’introduit qu’un léger effet visuel qui varie avec la nature du contenu.
 
 ---
-### `shard`
-
-L’attribut booléen `shard` est utilisé avec une variable `hidden`.
-
-`<map-input shard list="datalist-id>` indique que chacune des valeurs précisées dans un élément `map-datalist` connexe sera utilisée à tout de rôle (round robin) pour substituer et soumettre les variables d’un modèle dans les demandes pour obtenir une carte. Cela s’avère utile avec la [fragmentation de domaine](https://developer.mozilla.org/fr/docs/Glossary/Domain_sharding), mise en œuvre (notemment) par OpenStreetMap, pour accroître le parallélisme des demandes de pavés et donc améliorer le rendement.
-
-Lorsque l’utilisateur précise un attribut booléen, comme `shard`, dans MapML, il doit faire attention de le coder en fonction du type de document ou de média dans lequel sert l’élément. Dans le cas d’un document XML, il faut coder l’attribut booléen `shard="anything"` en appliquant les règles d’analyse syntaxique de ce format. S’il s’agit d’un document HTML, c.-à-d. que le contenu de la couche est en ligne, l’utilisateur doit encoder l’attribut en suivant les [règles concernant les attributs booléens](https://developer.mozilla.org/fr/docs/Web/HTML/Attributes#boolean_attributes) du langage HTML.
-
----
-### `list`
-  
-L’attribut `<map-input list="...">` associe un élément `<map-datalist>` qui fournit les valeurs à utiliser par l’intermédiaire des éléments `<map-option>` de l’élément-enfant `<map-datalist>`. Voir la section [shard](#shard) pour plus de détails.
-
----
 ## Exemples
 
 ### Input step
@@ -129,17 +115,11 @@ L’attribut `<map-input list="...">` associe un élément `<map-datalist>` qui 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="0" lat="45.409071" lon="-75.703411" controls>
   <layer- label="OpenStreetMap" checked>
-    <map-extent units="OSMTILE" >
+    <map-extent units="OSMTILE" checked>
       <map-input name="z" type="zoom"  value="18" min="0" max="18" step="3"></map-input>
-      <map-input name="s" type="hidden" shard="true" list="servers"></map-input>
-      <map-datalist id="servers">
-        <map-option value="a"></map-option>
-        <map-option value="b"></map-option>
-        <map-option value="c"></map-option>
-      </map-datalist>
       <map-input name="x" type="location" units="tilematrix" axis="column" min="0"  max="262144" ></map-input>
       <map-input name="y" type="location" units="tilematrix" axis="row" min="0"  max="262144" ></map-input>
-      <map-link rel="tile" tref="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <map-link rel="tile" tref="https://tile.openstreetmap.org/{z}/{x}/{y}.png" ></map-link>
     </map-extent>
   </layer->
 </mapml-viewer>
@@ -152,7 +132,7 @@ Les WMS peuvent être lents à réagir, même s’ils le font rapidement en réa
 ```html
 <mapml-viewer projection="CBMTILE" lat="60" lon="-95" zoom="2" controls>
   <layer- label="Demande de pavés WMS GetMap" checked>
-    <map-extent units="CBMTILE">
+    <map-extent units="CBMTILE" checked>
       <!—ici, les unités et les attributs d’axe semblent contradictoires --> 
       <!—cependant, rel="tile" et units="tilematrix" informent tous les deux la carte que l’événement sérialisé a trait à un pavé dans le tcrs -->
       <map-input name="txmin" type="location" rel="tile" position="top-left" axis="easting" units="tilematrix" ></map-input>
@@ -163,7 +143,7 @@ Les WMS peuvent être lents à réagir, même s’ils le font rapidement en réa
       <map-link rel="tile" tref="https://datacube.services.geo.ca/ows/msi?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/png&TRANSPARENT=TRUE&STYLES=msi-color&VERSION=1.3.0&LAYERS=msi&WIDTH=256&HEIGHT=256&CRS=EPSG:3978&BBOX={txmin},{tymin},{txmax},{tymax}" ></map-link>
       <!—il faut préciser un niveau de zoom, mais il s’agit d’un bogue : 
            https://github.com/Maps4HTML/Web-Map-Custom-Element/issues/669 -->
-      <map-input name="z" type="zoom" value="25" min="0" max="25"/>
+      <map-input name="z" type="zoom" value="25" min="0" max="25"></map-input>
     </map-extent>
   </layer->
 </mapml-viewer>
@@ -180,5 +160,5 @@ Les WMS peuvent être lents à réagir, même s’ils le font rapidement en réa
 
 ---
 
-> - [Modifiez cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/input.md)
+> - [Modifiez cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/i18n/fr/docusaurus-plugin-content-docs/current/elements/input.md)
 > - [Clavardez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

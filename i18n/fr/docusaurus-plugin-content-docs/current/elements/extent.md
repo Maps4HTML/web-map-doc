@@ -13,7 +13,7 @@ Exemple d’un élément `<map-extent>` servant à charger des pavés d’images
 ```html
 <mapml-viewer projection="OSMTILE" lat="10" lon="0" zoom="1">
   <layer- label="OpenStreetMap" checked>
-    <map-extent units="OSMTILE">
+    <map-extent units="OSMTILE" checked hidden>
       <map-input name="z" type="zoom" value="18" min="0" max="18"></map-input>
       <map-input name="x" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
       <map-input name="y" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
@@ -29,7 +29,10 @@ Exemple d’un élément `<map-extent>` servant à charger des pavés d’images
 
 ### `units`
 
-Précise la projection des pavés et tout autre contenu que le serveur doit fournir. Si la valeur de la projection ne correspond pas lettre pour lettre en majuscules et minuscules à celle de l’attribut `projection` de l’élément `<mapml-viewer>`, la couche est désactivée au niveau de son contrôle et ne s’affiche pas sur la carte, et le contenu n’est pas récupéré dans le serveur.
+Spécifie la projection des tuiles et autres contenus attendus du serveur.  Si la 
+valeur de `units` est une correspondance insensible à la casse de l'attribut 
+`projection` de `<mapml-viewer>`, l'étendue sera désactivée dans le contrôle de 
+couche, et ne sera pas affichée sur la carte, ni le contenu récupéré du serveur.
 
 Les valeurs d’`units` définies comprennent :
 
@@ -39,21 +42,40 @@ Les valeurs d’`units` définies comprennent :
 | WGS84         | Pseudo-plate carrée, avec des pavés de 256 pixels par 256 pixels. Un niveau de zoom égal à 0 contient deux pavés dans deux colonnes, avec vcmme origine -180,90. Les valeurs fictives d’abscisse et d’ordonnée (pcrs) à l’intérieur des limites de la projection correspondent respectivement à la longitude et à la latitude. |
 | CBMTILE       | Conique conforme de Lambert, avec des pavés de 256 pixels par 256 pixels. Les niveaux de zoom étant choisis par le dénominateur d’échelle, les pavés ne sont pas imbriqués.|
 
-L’auteur peut définir la valeur d’`units` à l’aide de l’[Custom projections API](../../api/custom-projections/)
+L’auteur peut définir la valeur d’`units` à l’aide de l’[Custom projections API](../../api/mapml-viewer-api/#definecustomprojectionoptions)
+
+L'attribut `units` est obligatoire et ne peut être modifié.
 
 ---
 
 ### `label`
 
-Précise l’étiquette d’une étendue affichée au niveau du contrôle de la couche. Si aucune `label` n’est fournie, l’étendue est masquée par défaut au niveau du contrôle de la couche.
+Spécifie un label pour une étendue qui est affichée dans le contrôle de couche. 
+Si aucune valeur `label` n'est fournie, la valeur `label` prend par défaut la 
+valeur 'Sous-couche' dans le contrôle de couche.
 
 ---
 
-## Événements
+### `checked`
 
-| Nom de l’événement    | Description                                             |
-|--------------	|--------------------------------------------------------	|
-| extentload    | Déclenché lorsque l’étendue d’une couche est chargée et analysée. L’intention est que cet événement soit analogue à l’événement [loadedmetadata de l’élément média](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loadedmetadata_event), mais avec les couches d’une carte.              |
+L'attribut et la propriété `checked` sont des booléens. Lorsqu'il est présent, la valeur de la propriété `checked` est "true" ; lorsqu'il n'est pas présent, la valeur de la propriété est "false". Le contenu du `map-extent` sera récupéré et rendu en fonction de l'état `checked`. Attention, c'est la *présence* de l'attribut qui fait qu'il est vrai, et non la valeur de l'attribut. Par exemple, l'attribut `checked="false"` s'avère en fait être checké, [comme décrit par les docs Web du MDN](https://developer.mozilla.org/fr/docs/Web/HTML/Attributes#attributs_bool%C3%A9ens).
+
+---
+
+### `hidden`
+
+L'attribut et la propriété `hidden` est un booléen. Lorsqu'il est présent, 
+l'étendue est cachée (non présente) dans le contrôle de couche.  Indépendamment 
+de l'état `hidden`, la couche est rendue ou non en fonction de l'état de 
+l'attribut `checked`. 
+
+---
+
+### `opacity`
+
+L'attribut `opacity` est utilisé pour définir l'opacité initiale de l'élément `<map-extent>`.
+Les valeurs d'opacité valides vont de "0.0" à "1.0" avec strictement une décimale et sont reflétées dans les paramètres d'étendue.
+opacity input slider control. Lorsque l'attribut `opacity` n'est pas présent, l'opacité est fixée à "1.0" par défaut.
 
 ---
 
@@ -68,19 +90,19 @@ L’exemple ci-dessous montre plusieurs éléments `<map-extent>` dans un couche
   <!—Modifier la carte de base en cliquant sur les points de suspension (…) de la couche de la carte de base -->
   <layer- label="Carte de base" checked="">
     <!—Cette étendue est masquée au niveau du contrôle de la couche, puisqu’aucune étiquette n’est fournie -->
-    <map-extent units="OSMTILE">
+    <map-extent units="OSMTILE" checked>
       <map-input name="TileMatrix" type="zoom" value="18" min="0" max="18"></map-input>
       <map-input name="TileCol" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
       <map-input name="TileRow" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
       <map-link rel="tile" tref="https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS/tile/1.0.0/World_Imagery/default/default028mm/{TileMatrix}/{TileRow}/{TileCol}.jpg"></map-link>
     </map-extent>
-      <map-extent label="Nat Geo" units="OSMTILE">
+      <map-extent label="Nat Geo" units="OSMTILE" checked>
       <map-input name="TileMatrix" type="zoom" value="18" min="0" max="18"></map-input>
       <map-input name="TileCol" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
       <map-input name="TileRow" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
       <map-link rel="tile" tref="https://server.arcgisonline.com/arcgis/rest/services/NatGeo_World_Map/MapServer/WMTS/tile/1.0.0/NatGeo_World_Map/default/default028mm/{TileMatrix}/{TileRow}/{TileCol}.jpg"></map-link>
     </map-extent>
-    <map-extent label="Imagery" units="OSMTILE">
+    <map-extent label="Imagery" units="OSMTILE" checked>
       <map-input name="TileMatrix" type="zoom" value="18" min="0" max="18"></map-input>
       <map-input name="TileCol" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
       <map-input name="TileRow" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
@@ -98,7 +120,7 @@ L’exemple ci-dessous montre une demande de service de carte en ligne utilisant
 ```html
 <mapml-viewer projection="OSMTILE" zoom="4" lat="53.331" lon="-91.667" controls>
   <layer- label="Toporama" checked="">
-    <map-extent xmlns="http://www.w3.org/1999/xhtml" units="OSMTILE">
+    <map-extent xmlns="http://www.w3.org/1999/xhtml" units="OSMTILE" checked>
       <!—Paramètres URL de la demande de service de carte en ligne -->
       <map-input name="z" type="zoom" value="18" min="4" max="18"></map-input>
       <map-input name="w" type="width"></map-input>
@@ -144,5 +166,5 @@ L’exemple ci-dessous montre une demande de service de carte en ligne utilisant
 
 ---
 
-> - [Modifiez le contenu de cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/docs/elements/feature.md)
+> - [Modifiez le contenu de cette page sur **Github**](https://github.com/Maps4HTML/web-map-doc/edit/main/i18n/fr/docusaurus-plugin-content-docs/current/elements/extent.md)
 > - [Clavardez avec nous sur **Gitter**](https://gitter.im/Maps4HTML/chat)

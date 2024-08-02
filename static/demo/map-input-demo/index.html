@@ -33,7 +33,7 @@
         <textarea rows="10" style="width:100%" id="htmlEditor">
 <mapml-viewer projection="CBMTILE" lat="60" lon="-95" zoom="2" controls>
     <layer- label="Toporama" checked>
-      <map-extent units="CBMTILE" >
+      <map-extent units="CBMTILE" checked hidden>
         <!-- width and height inputs capture the dimensions of the map in pixels -->
         <!-- width and height parameters are required by many types of map service -->
         <map-input name="w" type="width"></map-input>
@@ -49,7 +49,7 @@
       </map-extent>
     </layer->
     <layer- label="Canada Base Map Tiles">
-      <map-extent units="CBMTILE">
+      <map-extent units="CBMTILE" checked hidden>
         <!-- the zoom input is required for accessing tile caches -->
         <map-input name="z" type="zoom" value="17" min="0" max="17"></map-input>
         <!-- min max are specified in the units of the axis' coordinate system, 

@@ -5,7 +5,31 @@ title: Installation
 
 ## Install the `<mapml-viewer>` suite of custom elements
 
-### Requirements
+### CDN
+
+To include the `<mapml-viewer>` suite of elements on your page, you can add one of the following [Content Delivery Network](https://en.wikipedia.org/wiki/Content_delivery_network) to the `<head>` of your HTML code:
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+<TabItem value="jsDelivr" label="jsDelivr">
+
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/@maps4html/web-map-custom-element/dist/mapml-viewer.js"></script>
+```
+
+</TabItem>
+<TabItem value="unpkg" label="unpkg">
+
+```html
+<script type="module" src="https://unpkg.com/@maps4html/web-map-custom-element/dist/mapml-viewer.js"></script>
+```
+
+</TabItem>
+</Tabs>
+
+### Node.js / NPM
 
 To install the `<mapml-viewer>` in your web site project, you use the Node Package Manager (npm), so to get that you must install [node.js](https://nodejs.org/en/download/). npm should be installed by the linked installers.  You can now obtain the latest version of the `<mapml-viewer>` suite of custom elements, by installing it in the node_modules directory of your web site directory, using the following commands:
 
