@@ -1,6 +1,6 @@
 ---
 id: getting-started
-title: Maps for HTML
+title: Introduction
 slug: /tutorials/getting-started
 ---
 
@@ -50,7 +50,7 @@ Let us include an image in our document now:
 </html>
 ```
 
-Once you save the change highlighted in pink above, you can refresh the document (by clicking on the browser refresh button) you will see a page that looks like this:
+Once you save the change highlighted above, you can refresh the document (by clicking on the browser refresh button) you will see a page that looks like this:
 
 ![Web images are easy peasy](../assets/img/web_images_are_easy_peasy_en.png)
 
@@ -75,7 +75,7 @@ You have learned how to include resources like images in your web page, and now 
 
 It is worth noting that in the future, we are hopeful that browsers will begin to support web maps with the new `<mapml-viewer>` element syntax, but for now we can accomplish everything we need to without waiting for that day to come.
 
-The next step in our lesson is to remove the image and replace it with a map, using the `<mapml-viewer>` element with a single layer. To create a dynamic web map in our page now is as easy as including the lines highlighted in pink below, and saving:
+The next step in our lesson is to remove the image and replace it with a map, using the `<mapml-viewer>` element with a single layer. To create a dynamic web map in our page now is as easy as including the lines highlighted below, and saving:
 
 ```html
 <!DOCTYPE html>

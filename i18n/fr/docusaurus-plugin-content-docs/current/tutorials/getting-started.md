@@ -1,6 +1,6 @@
 ---
 id: getting-started
-title: Cartes pour HTML
+title: Introduction
 slug: /tutorials/getting-started
 ---
 
@@ -50,13 +50,13 @@ Nous allons maintenant inclure une image dans notre document:
 </html>
 ```
 
-Une fois que vous avez sauvegardé le changement surligné en rose ci-dessus, vous pouvez actualiser le document (en cliquant sur le bouton d'actualisation du navigateur) et vous obtiendrez une page qui ressemble à ceci:
+Une fois que vous avez sauvegardé le changement surligné ci-dessus, vous pouvez actualiser le document (en cliquant sur le bouton d'actualisation du navigateur) et vous obtiendrez une page qui ressemble à ceci:
 
 ![c'est si facile](../assets/img/web_images_are_easy_peasy_fr.png)
 
 Jusqu'ici tout va bien. Remplaçons maintenant cette image avec une carte.
 
-Maintenant que vous avez appris comment inclure des ressources telles que des images dans votre page Web, nous allons faire quelque chose de similaire avec une carte. Les navigateurs d'aujourd'hui ne supportent pas encore les cartes directement, mais ils supportent les « éléments personnalisés ». Les éléments personnalisés sont comme les éléments HTML que nous avons déjà vu (par exemple, l'élément `<p>`), excepté que leurs fonctionnalités sont fournies par les programmes JavaScript. Pour que votre navigateur utilise l'élément personnalisé `<mapml-viewer>`, nous devons inclure des ressources Web (programmes JavaScript) dans notre document HTML. C'est assez facile, car la façon de l'obtenir est assez semblable à la technique que vous avez déjà utilisée pour inclure une image. Inclure les lignes surlignées en rose ci-dessous au même endroit (élément `<head>`) dans votre document HTML:
+Maintenant que vous avez appris comment inclure des ressources telles que des images dans votre page Web, nous allons faire quelque chose de similaire avec une carte. Les navigateurs d'aujourd'hui ne supportent pas encore les cartes directement, mais ils supportent les « éléments personnalisés ». Les éléments personnalisés sont comme les éléments HTML que nous avons déjà vu (par exemple, l'élément `<p>`), excepté que leurs fonctionnalités sont fournies par les programmes JavaScript. Pour que votre navigateur utilise l'élément personnalisé `<mapml-viewer>`, nous devons inclure des ressources Web (programmes JavaScript) dans notre document HTML. C'est assez facile, car la façon de l'obtenir est assez semblable à la technique que vous avez déjà utilisée pour inclure une image. Inclure les lignes surlignées ci-dessous au même endroit (élément `<head>`) dans votre document HTML:
 
 ```html
 <!DOCTYPE html>
@@ -75,7 +75,7 @@ Maintenant que vous avez appris comment inclure des ressources telles que des im
 
 Nous espérons que les navigateurs offriront bientôt des cartes Web avec la nouvelle syntaxe de l'élément `<mapml-viewer>`, mais nous pouvons quand même accomplir cette tâche sans attendre ce jour.
 
-La prochaine étape est de supprimer et remplacer l'image par une carte, en utilisant l'élément `<mapml-viewer>` avec une seule couche. Créer une carte Web dynamique dans notre page est maintenant aussi facile que d'ajouter les lignes surlignées en rose ci-dessous et de sauvegarder le fichier:
+La prochaine étape est de supprimer et remplacer l'image par une carte, en utilisant l'élément `<mapml-viewer>` avec une seule couche. Créer une carte Web dynamique dans notre page est maintenant aussi facile que d'ajouter les lignes surlignées ci-dessous et de sauvegarder le fichier:
 
 ```html
 <!DOCTYPE html>

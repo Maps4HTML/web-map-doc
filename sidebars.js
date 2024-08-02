@@ -32,6 +32,7 @@ module.exports = {
   'Tutorials': [
     {
       'Getting Started': [
+        'tutorials/quick-start',
         'tutorials/getting-started',
         'tutorials/modifying-map'
       ],
