@@ -41,7 +41,7 @@ Pour expérimenter les éléments personnalisés `web-map` et `map-area`, vous d
 
 En théorie, si vous prenez des mesures pour fournir un balisage alternatif, la plupart des utilisateurs auront une expérience normale (progressive) avec la carte Web, tandis que ceux qui utilisent un ancien navigateur ou même Safari pourraient obtenir une expérience inverse avec l’image cliquable côté client. 
 
-Pour obtenir un exemple antérieur d’une telle carte Web, veuillez consulter cet [article de blogue sur les cartes Web progressives](https://maps4html.org/Web-Map-Custom-Element/blog/progressive-web-maps.html). Veuillez soulever un [problème](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues) si vous souhaitez faire part de vos commentaires sur le fonctionnement de cet exemple.
+Pour obtenir un exemple antérieur d’une telle carte Web, veuillez consulter cet [article de blogue sur les cartes Web progressives](https://maps4html.org/MapML.js/blog/progressive-web-maps.html). Veuillez soulever un [problème](https://github.com/Maps4HTML/MapML.js/issues) si vous souhaitez faire part de vos commentaires sur le fonctionnement de cet exemple.
 
 ## Attributs 
 
