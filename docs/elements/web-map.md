@@ -41,7 +41,7 @@ To experiment with the `web-map` and `map-area` custom elements, you should link
 
 In theory, if you take steps to provide the fallback markup, a normal (progressive) Web map experience will be had by most users, while those using an older browser or perhaps even Safari may get the "fallback" client side image map experience.  
 
-An older example of such a Web map may be found in the [blog post on Progressive Web Maps](https://maps4html.org/Web-Map-Custom-Element/blog/progressive-web-maps.html).  Please raise an [issue](https://github.com/Maps4HTML/Web-Map-Custom-Element/issues) if you have comments about how that example works for you.
+An older example of such a Web map may be found in the [blog post on Progressive Web Maps](https://maps4html.org/MapML.js/blog/progressive-web-maps.html).  Please raise an [issue](https://github.com/Maps4HTML/MapML.js/issues) if you have comments about how that example works for you.
 
 ## Attributes
 

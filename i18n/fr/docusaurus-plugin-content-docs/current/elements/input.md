@@ -142,7 +142,7 @@ Les WMS peuvent être lents à réagir, même s’ils le font rapidement en réa
       <map-input name="tymax" type="location" rel="tile" position="top-left" axis="northing" units="tilematrix" ></map-input>
       <map-link rel="tile" tref="https://datacube.services.geo.ca/ows/msi?SERVICE=WMS&REQUEST=GetMap&FORMAT=image/png&TRANSPARENT=TRUE&STYLES=msi-color&VERSION=1.3.0&LAYERS=msi&WIDTH=256&HEIGHT=256&CRS=EPSG:3978&BBOX={txmin},{tymin},{txmax},{tymax}" ></map-link>
       <!—il faut préciser un niveau de zoom, mais il s’agit d’un bogue : 
-           https://github.com/Maps4HTML/Web-Map-Custom-Element/issues/669 -->
+           https://github.com/Maps4HTML/MapML.js/issues/669 -->
       <map-input name="z" type="zoom" value="25" min="0" max="25"></map-input>
     </map-extent>
   </layer->

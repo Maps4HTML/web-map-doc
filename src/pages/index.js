@@ -126,13 +126,13 @@ function Home() {
           <p>
           <Translate id="mapml.HomePageContent.GetInvolved.PullRequests">
             The custom element suite is an open source project. Anyone who wants to submit changes/fixes is welcomed to doing so through Pull Requests to our </Translate>
-          <Link to="https://github.com/Maps4HTML/Web-Map-Custom-Element">
+          <Link to="https://github.com/Maps4HTML/MapML.js">
           <Translate id="mapml.HomePageContent.GetInvolved.GitHub.PullRequests.linkText"> Github Repository</Translate></Link>.
           </p>
           <p>
           <Translate id="mapml.HomePageContent.GetInvolved.GitHub.Issues.1">
           You can also contribute by reporting any bugs or issues while using the element suite in the form of one or more </Translate>
-          <Link to="https://github.com/Maps4HTML/Web-Map-Custom-Element/issues"> 
+          <Link to="https://github.com/Maps4HTML/MapML.js/issues"> 
             <Translate id="mapml.HomePageContent.GetInvolved.GitHub.Issues.linkText"> issues</Translate>
           </Link> 
           <Translate id="mapml.HomePageContent.GetInvolved.GitHub.Issues.2"> on the same repository</Translate>.

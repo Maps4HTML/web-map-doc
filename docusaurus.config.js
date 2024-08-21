@@ -28,7 +28,7 @@ module.exports = {
           position: 'right'
         },
         {
-          href: 'https://github.com/Maps4HTML/Web-Map-Custom-Element',
+          href: 'https://github.com/Maps4HTML/MapML.js',
           label: 'GitHub',
           position: 'right',
         },

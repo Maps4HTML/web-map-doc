@@ -18,7 +18,7 @@ Learn how to quickly create your first map.
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Getting Started</title>
-	<script type="module" src="https://cdn.jsdelivr.net/npm/@maps4html/web-map-custom-element/dist/mapml-viewer.js"></script>
+	<script type="module" src="https://cdn.jsdelivr.net/npm/@maps4html/mapml/dist/mapml-viewer.js"></script>
 </head>
 <body>
 	<mapml-viewer width="800" height="400" projection="OSMTILE" zoom="1" lat="60.0" lon="-100.0" controls>

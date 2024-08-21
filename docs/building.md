@@ -10,8 +10,8 @@ As an alternative to installing a published version of the library with npm, you
 Clone the project using git:
 
 ```bash
-$ git clone https://github.com/Maps4HTML/Web-Map-Custom-Element.git web-map-custom-element
-Cloning into 'web-map-custom-element'...
+$ git clone https://github.com/Maps4HTML/MapML.js.git MapML.js
+Cloning into 'MapML.js'...
 remote: Enumerating objects: 23005, done.
 remote: Counting objects: 100% (959/959), done.
 remote: Compressing objects: 100% (472/472), done.
@@ -26,13 +26,13 @@ $
 Change directories, into the cloned directory and run "npm install" to install the project's development dependencies:
 
 ```bash
-prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/web-map-custom-element (main)
-$ cd web-map-custom-element
+prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/MapML.js (main)
+$ cd MapML.js
 $ npm install --legacy-peer-deps
 ...
 added 976 packages from 513 contributors and audited 978 packages in 33.576s
 
-prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/web-map-custom-element (main)
+prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/MapML.js (main)
 $
 ```
 
@@ -64,14 +64,14 @@ Running "uglify:dist" (uglify) task
 
 Done.
 
-prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/web-map-custom-element (main)
+prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/MapML.js (main)
 $
 ```
 
 As reported by the last command, you should now have a folder named 'dist' in your project directory, containing the build artifacts that are necessary to create Web pages containing maps. You can copy the `dist` folder into your Web site, where you create HTML pages that refer to the root JavaScript module that encompasses the `<mapml-viewer>` custom elements. For example:
 
 ```bash
-prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/web-map-custom-element/mysite (main)
+prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/MapML.js/mysite (main)
 $ mkdir mysite
 $ cp -r dist mysite
 $ cd mysite
@@ -96,7 +96,7 @@ $ cat > index.html << EOF
   </body>
 </html>
 EOF
-prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/web-map-custom-element/mysite (main)
+prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/MapML.js/mysite (main)
 $ 
 ```
 

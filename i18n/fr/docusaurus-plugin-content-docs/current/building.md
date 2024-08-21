@@ -10,8 +10,8 @@ Plutôt que d’installer la version publiée de la bibliothèque avec npm, vous
 Clonez le projet à l’aide du logiciel Git :
 
 ```bash
-$ git clone https://github.com/Maps4HTML/Web-Map-Custom-Element.git web-map-custom-element
-Cloning into 'web-map-custom-element'...
+$ git clone https://github.com/Maps4HTML/MapML.js.git MapML.js
+Cloning into 'MapML.js'...
 remote: Enumerating objects: 23005, done.
 remote: Counting objects: 100% (959/959), done.
 remote: Compressing objects: 100% (472/472), done.
@@ -26,13 +26,13 @@ $
 Changez les répertoires dans le répertoire cloné et exécutez la commande « npm install » pour installer les dépendances relatives au développement du projet :
 
 ```bash
-prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/web-map-custom-element (main)
-$ cd web-map-custom-element
+prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/MapML.js (main)
+$ cd MapML.js
 $ npm install --legacy-peer-deps
 ...
 added 976 packages from 513 contributors and audited 978 packages in 33.576s
 
-prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/web-map-custom-element (main)
+prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/MapML.js (main)
 $
 ```
 
@@ -64,14 +64,14 @@ Running "uglify:dist" (uglify) task
 
 Done.
 
-prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/web-map-custom-element (main)
+prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/MapML.js (main)
 $
 ```
 
 Comme indiqué par la dernière commande, votre répertoire de projet devrait maintenant contenir un dossier intitulé ‘dist’, lequel contient les artéfacts de compilation nécessaires à la création de pages Web contenant des cartes. Vous pouvez copier le dossier `dist` dans votre site Web où vous créez les pages HTML qui renvoient au module JavaScript racine comprenant les éléments personnalisés `<mapml-viewer>`. Par exemple :
 
 ```bash
-prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/web-map-custom-element/mysite (main)
+prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/MapML.js/mysite (main)
 $ mkdir mysite
 $ cp -r dist mysite
 $ cd mysite
@@ -96,7 +96,7 @@ $ cat > index.html << EOF
   </body>
 </html>
 EOF
-prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/web-map-custom-element/mysite (main)
+prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/MapML.js/mysite (main)
 $ 
 ```
 
