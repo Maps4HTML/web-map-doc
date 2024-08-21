@@ -68,7 +68,7 @@ Cet élément contient les options de l’élément `<map-select>`. Un élément
 
 | Spécification                                                |
 |--------------------------------------------------------------|
-| [Élément MapML « style »](https://maps4html.org/MapML/spec/#the-select-element-0) |
+| [Élément MapML « style »](https://maps4html.org/MapML-Specification/spec/#the-select-element-0) |
 | [Élément HTML « style »](https://html.spec.whatwg.org/multipage/form-elements.html#the-select-element) |
 
 ---

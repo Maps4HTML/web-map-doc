@@ -130,7 +130,7 @@ Les valeurs de projection [définies par le polyfill](../mapml-viewer#projection
 
 | Spécification                                                |
 |--------------------------------------------------------------|
-| [élément MapML « link »](https://maps4html.org/MapML/spec/#the-link-element-0) |
+| [élément MapML « link »](https://maps4html.org/MapML-Specification/spec/#the-link-element-0) |
 | [élément HTML « link »](https://html.spec.whatwg.org/multipage/semantics.html#the-link-element) |
 
 ---
@@ -150,7 +150,7 @@ Les valeurs de projection [définies par le polyfill](../mapml-viewer#projection
 | [**Entités vectorielles et superpositions (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors) |  |  |  |
 |                        <div class="requirement">Affiche l’attribution des données cartographiques et les liens (5.2.4)</div>                   | complet | complet |  |
 | [**Navigation des utilisateurs (vue panoramique et zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
-| <div class="discussion">Masque ou affiche (et peut charger de façon dynamique) les entités vectorielles et les étiquettes lors du zoom (5.4.7)</div> | [complet](https://maps4html.org/MapML/spec/#link-rel-features) | [complet](https://maps4html.org/web-map-doc/docs/elements/link/#rel) |  |
+| <div class="discussion">Masque ou affiche (et peut charger de façon dynamique) les entités vectorielles et les étiquettes lors du zoom (5.4.7)</div> | [complet](https://maps4html.org/MapML-Specification/spec/#link-rel-features) | [complet](https://maps4html.org/web-map-doc/docs/elements/link/#rel) |  |
 
 ---
 

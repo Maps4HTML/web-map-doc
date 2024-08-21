@@ -65,7 +65,7 @@ The following example displays the popup as an HTML [table](https://html.spec.wh
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [MapML properties element](https://maps4html.org/MapML/spec/#the-properties-element-0) |
+| [MapML properties element](https://maps4html.org/MapML-Specification/spec/#the-properties-element-0) |
 
 ---
 

@@ -19,7 +19,7 @@ est focalisé, car il est utilisé pour générer la valeur de l'attribut
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [Pas encore spécifié](https://github.com/Maps4HTML/MapML/issues/234) |
+| [Pas encore spécifié](https://github.com/Maps4HTML/MapML-Specification/issues/234) |
 
 ---
 

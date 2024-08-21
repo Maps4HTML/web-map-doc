@@ -13,7 +13,7 @@ const features = [
     title: translate({"message":"Minimum Code","id":"mapml.HomePageContent.minCode.title"}),
     description: (
         <>
-          <a href="https://maps4html.org/MapML/spec/"><abbr title="Map Markup Language">MapML</abbr></a>
+          <a href="https://maps4html.org/MapML-Specification/spec/"><abbr title="Map Markup Language">MapML</abbr></a>
           <Translate id='mapml.HomePageContent.minCode.description'>
             prioritizes minimum code needed to create elaborate maps. No Javascript required, everything can be done using HTML + custom elements.
           </Translate>

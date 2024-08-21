@@ -145,7 +145,7 @@ The following example shows a Web Map Service Request using `<map-link>` to requ
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [MapML extent element](https://maps4html.org/MapML/spec/#the-extent-element-0) |
+| [MapML extent element](https://maps4html.org/MapML-Specification/spec/#the-extent-element-0) |
 
 ---
 

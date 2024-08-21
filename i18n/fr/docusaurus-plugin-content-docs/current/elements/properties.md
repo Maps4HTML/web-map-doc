@@ -65,7 +65,7 @@ Dans l’exemple suivant, la fenêtre contextuelle s’affiche sous forme de [ta
 
 | Spécification                                                |
 |--------------------------------------------------------------|
-| [Élément MapML « properties » ](https://maps4html.org/MapML/spec/#the-properties-element-0) |
+| [Élément MapML « properties » ](https://maps4html.org/MapML-Specification/spec/#the-properties-element-0) |
 
 ---
 

@@ -164,7 +164,7 @@ to that of the projection.
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [MapML meta element](https://maps4html.org/MapML/spec/#the-meta-element-0) |
+| [MapML meta element](https://maps4html.org/MapML-Specification/spec/#the-meta-element-0) |
 | [HTML meta element](https://html.spec.whatwg.org/multipage/semantics.html#the-meta-element) |
 ---
 

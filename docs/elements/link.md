@@ -151,7 +151,7 @@ Projection values [defined by the polyfill](../mapml-viewer#projection) include:
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [MapML link element](https://maps4html.org/MapML/spec/#the-link-element-0) |
+| [MapML link element](https://maps4html.org/MapML-Specification/spec/#the-link-element-0) |
 | [HTML link element](https://html.spec.whatwg.org/multipage/semantics.html#the-link-element) |
 
 ---
@@ -171,7 +171,7 @@ Projection values [defined by the polyfill](../mapml-viewer#projection) include:
 | [**Vector features and overlays (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors) |  |  |  |
 |                        <div class="requirement">Display map data attribution and links (5.2.4)</div>                   | full | full |  |
 | [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
-| <div class="discussion">Hide or show (and maybe dynamically load) vector features and labels on zoom (5.4.7)</div> | [full](https://maps4html.org/MapML/spec/#link-rel-features) | [full](https://maps4html.org/web-map-doc/docs/elements/link/#rel) |  |
+| <div class="discussion">Hide or show (and maybe dynamically load) vector features and labels on zoom (5.4.7)</div> | [full](https://maps4html.org/MapML-Specification/spec/#link-rel-features) | [full](https://maps4html.org/web-map-doc/docs/elements/link/#rel) |  |
 
 ---
 

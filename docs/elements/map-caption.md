@@ -19,7 +19,7 @@ element child of `<mapml-viewer>`.
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [MapML caption element](https://maps4html.org/MapML/spec/#the-map-caption-element-0) |
+| [MapML caption element](https://maps4html.org/MapML-Specification/spec/#the-map-caption-element-0) |
 
 ---
 

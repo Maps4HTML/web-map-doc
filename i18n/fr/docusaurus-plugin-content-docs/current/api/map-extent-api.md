@@ -148,7 +148,7 @@ let opacity = extent.opacity;
 
 | Spécification                                                |
 |--------------------------------------------------------------|
-| [HTMLExtentElement](https://maps4html.org/MapML/spec/#dom-htmlextentelement) |
+| [HTMLExtentElement](https://maps4html.org/MapML-Specification/spec/#dom-htmlextentelement) |
 
 ---
 

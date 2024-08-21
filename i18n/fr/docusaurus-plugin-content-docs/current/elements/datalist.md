@@ -60,7 +60,7 @@ Cet élément contient les valeurs de datalist. Un élément `<map-datalist>` pe
 
 | Spécification                                                |
 |--------------------------------------------------------------|
-| [Élément datalist de MapML](https://maps4html.org/MapML/spec/#the-datalist-element-0) |
+| [Élément datalist de MapML](https://maps4html.org/MapML-Specification/spec/#the-datalist-element-0) |
 | [Élément datalist en HTML](https://html.spec.whatwg.org/dev/form-elements.html#the-datalist-element) |
 
 ---

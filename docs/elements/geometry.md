@@ -250,7 +250,7 @@ For each member geometry, the same non-schema constraints apply as to the unique
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [MapML geometry element](https://maps4html.org/MapML/spec/#the-geometry-element-0) |
+| [MapML geometry element](https://maps4html.org/MapML-Specification/spec/#the-geometry-element-0) |
 
 ---
 

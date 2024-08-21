@@ -72,7 +72,7 @@ Needs to be implemented.
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [HTMLLinkElement - not (fully) specified yet](https://maps4html.org/MapML/spec/#the-link-element) |
+| [HTMLLinkElement - not (fully) specified yet](https://maps4html.org/MapML-Specification/spec/#the-link-element) |
 
 ---
 

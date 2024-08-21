@@ -432,7 +432,7 @@ window.onload = (event) => {
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [HTMLFeatureElement](https://maps4html.org/MapML/spec/#the-feature-element) |
+| [HTMLFeatureElement](https://maps4html.org/MapML-Specification/spec/#the-feature-element) |
 
 ---
 
@@ -448,8 +448,8 @@ window.onload = (event) => {
 
 |  | Spec | Viewer | API |
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
-| [**Properties**](#properties) | [partial](https://github.com/Maps4HTML/MapML/issues/247) * | full | full |
-| [**Methods**](#methods) | [none](https://github.com/Maps4HTML/MapML/issues/248) * | partial  * | partial * |
+| [**Properties**](#properties) | [partial](https://github.com/Maps4HTML/MapML-Specification/issues/247) * | full | full |
+| [**Methods**](#methods) | [none](https://github.com/Maps4HTML/MapML-Specification/issues/248) * | partial  * | partial * |
 
 <details>
 <summary>Exceptions *</summary>

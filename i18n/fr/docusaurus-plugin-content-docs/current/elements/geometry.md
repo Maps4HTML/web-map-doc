@@ -250,7 +250,7 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
 
 | Spécification                                                |
 |--------------------------------------------------------------|
-| [Élément geometry de MapML](https://maps4html.org/MapML/spec/#the-geometry-element-0) |
+| [Élément geometry de MapML](https://maps4html.org/MapML-Specification/spec/#the-geometry-element-0) |
 
 ---
 

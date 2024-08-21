@@ -56,7 +56,7 @@ Description of attribute (repeat as required)
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [link to MapML\#fragment](https://maps4html.org/MapML/spec/) |
+| [link to MapML\#fragment](https://maps4html.org/MapML-Specification/spec/) |
 
 ---
 

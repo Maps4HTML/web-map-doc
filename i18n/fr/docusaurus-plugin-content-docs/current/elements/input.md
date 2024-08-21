@@ -155,7 +155,7 @@ Les WMS peuvent être lents à réagir, même s’ils le font rapidement en réa
 
 | Spécification                                                |
 |--------------------------------------------------------------|
-| [Élément input de MapML](https://maps4html.org/MapML/spec/#the-input-element-0) |
+| [Élément input de MapML](https://maps4html.org/MapML-Specification/spec/#the-input-element-0) |
 | [Élément input en HTML](https://html.spec.whatwg.org/multipage/input.html#the-input-element) |
 
 ---
