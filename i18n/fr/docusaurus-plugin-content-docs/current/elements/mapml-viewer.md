@@ -108,7 +108,7 @@ carte lorsqu'il est présent. Lorsqu'il n'est pas présent ou qu'il est supprim�
 
 | Spécification                                                |
 |--------------------------------------------------------------|
-| [Élément MapML « map »](https://maps4html.org/MapML/spec/#the-map-element-0) |
+| [Élément MapML « map »](https://maps4html.org/MapML-Specification/spec/#the-map-element-0) |
 | [Élément HTML « map »](https://html.spec.whatwg.org/multipage/image-maps.html#the-map-element) |
 
 ---
@@ -126,7 +126,7 @@ carte lorsqu'il est présent. Lorsqu'il n'est pas présent ou qu'il est supprim�
 |  | Spéc. | Visualiseur | API |
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
 | [**Rendu des couches de base (5.1)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-rendering) |  |  |  |
-|              <div class="requirement">Intégrer un visualiseur de cartes interactives, à l’aide du balisage HTML (5.1.1)</div>           | [complet](https://maps4html.org/MapML/spec/#the-map-element-0) | complet | [complet](https://maps4html.org/MapML/spec/#webidl-1442763376) |
+|              <div class="requirement">Intégrer un visualiseur de cartes interactives, à l’aide du balisage HTML (5.1.1)</div>           | [complet](https://maps4html.org/MapML-Specification/spec/#the-map-element-0) | complet | [complet](https://maps4html.org/MapML-Specification/spec/#webidl-1442763376) |
 |              <div class="enhancement">Gérer une carte par défaut pour une région donnée (5.1.2)</div>           | Non prévu | Non prévu | Non prévu |
 |            <div class="requirement">Afficher une carte de base sans JavaScript (5.1.5)</div>             | complet | [limité](http://maps4html.org/experiments/progressive-enhancement/) |  |
 |            <div class="requirement">Afficher le contenu d’une carte dans la langue préférée de l’utilisateur (5.1.6)</div>            | [complet](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/136) | [complet](https://github.com/Maps4HTML/mapml-extension) |  |

@@ -76,7 +76,7 @@ L'exemple suivant définit l'`opacity` initiale d'un élément `<layer->`, à 0,
 
 | Spécification                                                |
 |--------------------------------------------------------------|
-| [Élément MapML « layer »](https://maps4html.org/MapML/spec/#the-layer-element-0) |
+| [Élément MapML « layer »](https://maps4html.org/MapML-Specification/spec/#the-layer-element-0) |
 
 ---
 
@@ -93,7 +93,7 @@ L'exemple suivant définit l'`opacity` initiale d'un élément `<layer->`, à 0,
 |  | Spéc. | Visualiseur | API |
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
 | [**Rendu des couches de base (5.1)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-rendering) |  |  |  |
-| <div class="enhancement">Afficher un fichier image en tant que couche d’une carte (5.1.3)</div> | [en cours d’examen](https://github.com/Maps4HTML/MapML/issues/216) | [limité](http://maps4html.org/experiments/painting/) |  |
+| <div class="enhancement">Afficher un fichier image en tant que couche d’une carte (5.1.3)</div> | [en cours d’examen](https://github.com/Maps4HTML/MapML-Specification/issues/216) | [limité](http://maps4html.org/experiments/painting/) |  |
 | [**Navigation des utilisateurs (vue panoramique et zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
 | <div class="discussion">Maintenir une échelle raisonnable pour les étiquettes et les lignes lors d’un zoom (5.4.5)</div> | limité | complet |  |
 

@@ -47,7 +47,7 @@ Toutes les démonstrations comprises dans les pages de documentation contiennent
 
 | Spécification                                                |
 |--------------------------------------------------------------|
-| [Élément MapML « style »](https://maps4html.org/MapML/spec/#styling) |
+| [Élément MapML « style »](https://maps4html.org/MapML-Specification/spec/#styling) |
 | [Élément HTML « style »](https://html.spec.whatwg.org/#the-style-element) |
 
 ---

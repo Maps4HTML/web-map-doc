@@ -89,7 +89,7 @@ The following example sets the initial `opacity` for a `<layer->`.
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [MapML layer element](https://maps4html.org/MapML/spec/#the-layer-element-0) |
+| [MapML layer element](https://maps4html.org/MapML-Specification/spec/#the-layer-element-0) |
 
 ---
 
@@ -106,7 +106,7 @@ The following example sets the initial `opacity` for a `<layer->`.
 |  | Spec | Viewer | API |
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
 | [**Rendering base layers (5.1)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-rendering) |  |  |  |
-| <div class="enhancement">Display an image file as a map layer (5.1.3)</div> | [under review](https://github.com/Maps4HTML/MapML/issues/216) | [limited](https://maps4html.org/experiments/painting/) |  |
+| <div class="enhancement">Display an image file as a map layer (5.1.3)</div> | [under review](https://github.com/Maps4HTML/MapML-Specification/issues/216) | [limited](https://maps4html.org/experiments/painting/) |  |
 | [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
 | <div class="discussion">Maintain reasonable scale of labels and lines when zooming (5.4.5)</div> | limited | full |  |
 

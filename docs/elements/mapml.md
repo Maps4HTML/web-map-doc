@@ -82,7 +82,7 @@ The `<map-body>` element is the second child of the `<mapml->` element. It repre
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [MapML mapml element](https://maps4html.org/MapML/spec/#the-mapml-element-0) |
+| [MapML mapml element](https://maps4html.org/MapML-Specification/spec/#the-mapml-element-0) |
 
 ---
 

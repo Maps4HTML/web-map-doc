@@ -142,7 +142,7 @@ L’exemple ci-dessous montre une demande de service de carte en ligne utilisant
 
 | Spécification                                                |
 |--------------------------------------------------------------|
-| [Élément extent de MapML](https://maps4html.org/MapML/spec/#the-extent-element-0) |
+| [Élément extent de MapML](https://maps4html.org/MapML-Specification/spec/#the-extent-element-0) |
 
 ---
 

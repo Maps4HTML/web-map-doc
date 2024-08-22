@@ -70,7 +70,7 @@ Dans cet exemple, `customTile` est une balise HTML `<p>`, mais vous  pouvez util
 
 | Spécification                                                |
 |--------------------------------------------------------------|
-| [HTMLLinkElement - pas encore (complètement) spécifié](https://maps4html.org/MapML/spec/#the-link-element) |
+| [HTMLLinkElement - pas encore (complètement) spécifié](https://maps4html.org/MapML-Specification/spec/#the-link-element) |
 
 ---
 

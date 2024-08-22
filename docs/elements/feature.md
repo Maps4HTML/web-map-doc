@@ -268,7 +268,7 @@ Sets the [extent](../meta/#attributes) of the layer.
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [MapML feature element](https://maps4html.org/MapML/spec/#the-feature-element-0) |
+| [MapML feature element](https://maps4html.org/MapML-Specification/spec/#the-feature-element-0) |
 
 ---
 
@@ -288,7 +288,7 @@ Sets the [extent](../meta/#attributes) of the layer.
 |                         <div class="requirement">Show pinpoint locations or custom markers on the map (5.2.1)</div>                        | full | full |	 |
 | <div class="requirement">Draw polygons or polylines as stylable, interactive vector graphics (separate from the image tiles) (5.2.2)</div> | full | full |  |
 | [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
-| <div class="discussion">Hide or show (and maybe dynamically load) vector features and labels on zoom (5.4.7)</div> | [full](https://maps4html.org/MapML/spec/#the-feature-element-0) | [experimental](https://maps4html.org/web-map-doc/docs/elements/feature/#full-examples) |  |
+| <div class="discussion">Hide or show (and maybe dynamically load) vector features and labels on zoom (5.4.7)</div> | [full](https://maps4html.org/MapML-Specification/spec/#the-feature-element-0) | [experimental](https://maps4html.org/web-map-doc/docs/elements/feature/#full-examples) |  |
 | [**Custom styling (5.5)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-custom-styling) |  |  |  |
 |          <div class="undecided">Apply custom styling to map markers and vector features (5.5.1)</div>              | [full](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/15) | limited |  |
 ---

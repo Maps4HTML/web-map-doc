@@ -271,7 +271,7 @@ Définit l’[extent](../meta/#attributes) de la couche.
 
 | Spécification                                                |
 |--------------------------------------------------------------|
-| [Élément feature de MapML](https://maps4html.org/MapML/spec/#the-feature-element-0) |
+| [Élément feature de MapML](https://maps4html.org/MapML-Specification/spec/#the-feature-element-0) |
 
 ---
 
@@ -291,7 +291,7 @@ Définit l’[extent](../meta/#attributes) de la couche.
 |                         <div class="requirement">Montrer des emplacements précis ou des marqueurs personnalisés sur la carte (5.2.1)</div>                        | complet | complet |	 |
 | <div class="requirement">Dessiner des polygones ou des polylignes sous la forme d’images vectorielles auxquelles on peut appliquer un style (distinctes des pavés de l’image) (5.2.2)</div> | complet | complet |  |
 | [**Navigation de l’utilisateur (panoramique et zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
-| <div class="discussion">Masquer ou afficher (et peut-être charger dynamiquement) les caractéristiques vectorielles et les étiquettes quand on effectue un zoom (5.4.7)</div> | [complet](https://maps4html.org/MapML/spec/#the-feature-element-0) | [expérimental](https://maps4html.org/web-map-doc/docs/elements/feature/#full-examples) |  |
+| <div class="discussion">Masquer ou afficher (et peut-être charger dynamiquement) les caractéristiques vectorielles et les étiquettes quand on effectue un zoom (5.4.7)</div> | [complet](https://maps4html.org/MapML-Specification/spec/#the-feature-element-0) | [expérimental](https://maps4html.org/web-map-doc/docs/elements/feature/#full-examples) |  |
 | [**Application de styles personnalisés (5.5)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-custom-styling) |  |  |  |
 |          <div class="undecided">Appliquer un style personnalisé pour mapper les marqueurs et les caractéristiques vectorielles (5.5.1)</div>              | [complet](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/15) | limité |  |
 ---

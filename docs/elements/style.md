@@ -47,7 +47,7 @@ All the Demo's on the documentation pages contain a "CSS" tab which adds the CSS
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [MapML style element](https://maps4html.org/MapML/spec/#styling) |
+| [MapML style element](https://maps4html.org/MapML-Specification/spec/#styling) |
 | [HTML style element](https://html.spec.whatwg.org/#the-style-element) |
 
 ---

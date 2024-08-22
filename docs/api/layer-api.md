@@ -268,7 +268,7 @@ window.onload = (event) => {
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [HTMLLayerElement](https://maps4html.org/MapML/spec/#dom-htmllayerelement) |
+| [HTMLLayerElement](https://maps4html.org/MapML-Specification/spec/#dom-htmllayerelement) |
 
 ---
 
