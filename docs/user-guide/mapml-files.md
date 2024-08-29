@@ -1,7 +1,7 @@
 ---
 id: mapml-files
 title: Working with MapML Files
-slug: /tutorials/mapml-files
+slug: /user-guide/mapml-files
 ---
 
 :::info

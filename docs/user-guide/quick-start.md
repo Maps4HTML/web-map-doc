@@ -1,7 +1,7 @@
 ---
 id: quick-start
 title: MapML Quick Start Guide
-slug: /tutorials/quick-start
+slug: /user-guide/quick-start
 ---
 
 Learn how to quickly create your first map.

@@ -1,7 +1,7 @@
 ---
 id: getting-started
 title: MapML Introduction
-slug: /tutorials/getting-started
+slug: /user-guide/getting-started
 ---
 
 To make a web map, all you need is a little bit of knowledge of HTML, some of which you can find here.  You will find that HTML is a language that fills a bigger role for you as your knowledge of it grows.  There are many excellent free resources available on the web for learning HTML in all its richness.  We will try to give you what you need to get started with maps here.

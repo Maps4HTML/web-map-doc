@@ -28,7 +28,7 @@ module.exports = {
           position: 'right'
         },
         {
-          href: 'https://github.com/Maps4HTML/MapML.js',
+          href: 'https://github.com/Maps4HTML/web-map-doc',
           label: 'GitHub',
           position: 'right',
         },
@@ -88,7 +88,7 @@ module.exports = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/Maps4HTML/MapML.js',
+              href: 'https://github.com/Maps4HTML/web-map-doc',
             },
           ],
         },

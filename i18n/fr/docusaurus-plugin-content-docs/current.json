@@ -7,21 +7,25 @@
     "message": "Pour commençer",
     "description": "The label for category Getting Started in sidebar sidebar"
   },
-  "sidebar.sidebar.category.Mapping Elements": {
-    "message": "Éléments de cartes Web",
+  "sidebar.sidebar.category.Element Reference": {
+    "message": "Guide de référence des éléments",
     "description": "The label for category Mapping Elements in sidebar sidebar"
   },
-  "sidebar.sidebar.category.API": {
-    "message": "API",
+  "sidebar.sidebar.category.Element API Reference": {
+    "message": "Guide de référence de l'API des éléments",
     "description": "The label for category API in sidebar sidebar"
+  },
+  "sidebar.sidebar.category.User Guide": {
+    "message": "Guide d'utilisateur",
+    "description": "The label for the user guides in sidebar sidebar"
+  },
+  "sidebar.sidebar.category.Styling": {
+    "message": "Les styles",
+    "description": "The label for styling in sidebar sidebar"
   },
   "sidebar.sidebar.category.Tutorials": {
     "message": "Tutoriels",
     "description": "The label for Tutorials in sidebar sidebar"
-  },
-  "sidebar.sidebar.category.Advanced": {
-    "message": "Avancé",
-    "description": "The label for Advanced Tutorials in sidebar sidebar"
   },
   "sidebar.sidebar.category.Browser Extension": {
     "message": "Extension du navigateur",

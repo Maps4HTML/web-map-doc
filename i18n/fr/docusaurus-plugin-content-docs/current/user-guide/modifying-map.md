@@ -1,7 +1,7 @@
 ---
 id: modifying-map
 title: Modifier la carte
-slug: /tutorials/modifying-map
+slug: /user-guide/modifying-map
 ---
 
 :::info
