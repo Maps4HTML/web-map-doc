@@ -5,7 +5,7 @@ module.exports = {
       'installation',
       'building'
     ],
-    'Mapping Elements': [
+    'Element Reference': [
       'elements/mapml-viewer',
       'elements/map-caption',
       'elements/layer',
@@ -22,23 +22,26 @@ module.exports = {
       'elements/map-a',
       'elements/style'
   ],
-  API: [
+  'Element API Reference': [
     'api/mapml-viewer-api',
     'api/layer-api',
     'api/map-feature-api',
     'api/map-extent-api',
     'api/map-link-api'
   ],
-  'Tutorials': [
+  'User Guide': [
     {
       'Getting Started': [
-        'tutorials/quick-start',
-        'tutorials/getting-started',
-        'tutorials/modifying-map'
+        'user-guide/quick-start'
       ],
-      'Advanced': [
-        'tutorials/mapml-files',
+      'Styling': [
+        'user-guide/creating-styles',
+        'user-guide/using-styles'
       ],
+      'Tutorials': [
+        'user-guide/getting-started',
+        'user-guide/modifying-map'
+      ]
     }
   ],
   'Browser Extension': [

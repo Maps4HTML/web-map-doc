@@ -1,7 +1,7 @@
 ---
 id: getting-started
 title: Introduction à MapML
-slug: /tutorials/getting-started
+slug: /user-guide/getting-started
 ---
 
 Pour faire une carte Web, vous n'avez besoin que des connaissances de base en langage HTML. Il y a beaucoup d'excellentes ressources disponibles sur le Web pour apprendre le langage HTML. En espérant que vous trouverez ici ce dont vous avez besoin pour commencer.

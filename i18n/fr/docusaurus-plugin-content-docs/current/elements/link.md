@@ -13,7 +13,7 @@ L'élément `<map-link>` a plusieurs usages :
 - fournir des liens vers d’autres projections d’une couche, en utilisant la valeur rel `alternate`, conjointement avec l’attribut `projection="..."`. Ces liens sont automatiquement suivis par le polyfill, s’il y a lieu;
 - fournir un modèle URL traité et converti en URL et extrait par le polyfill chaque fois que la carte requiert le rendu d’un nouveau contenu, comme un pavé, en utilisant les valeurs rel `tile`, `image`, `feature` et `query`, conjointement avec l’attribut  `tref="..."`. Ces liens sont automatiquement créés et suivis/importés, s’il y a lieu;
 - inclure des liens vers des graphiques de légende pour une couche. À l’heure actuelle, ces liens sont présentés comme des hyperliens, et non comme des graphiques;
-- fournir des liens vers des feuilles de style en cascade (CSS) en utilisant la valeur rel `stylesheet`, lesquelles sont importées automatiquement par le polyfill;
+- fournir des liens vers des feuilles de style en cascade (CSS) et pmtiles en utilisant la valeur rel `stylesheet`, lesquelles sont importées automatiquement par le polyfill;
 - fournir des liens vers les couches au niveau de zoom natif suivant, en utilisant les valeurs rel `zoomin`, `zoomout`. Ces liens sont automatiquement suivis par le polyfill, s’il y a lieu.
 
 <!-- démo/exemple -->
@@ -39,16 +39,25 @@ L’attribut `rel` désigne le type de ressource auquel il est lié. MapML défi
 | `zoomout`    | Le polyfill suit automatiquement le lien `href` si l’utilisateur effectue dans la carte un zoom arrière dont la valeur est inférieure à la valeur de zoom minimale de la couche actuelle. La couche de carte actuelle est alors remplacée par la ressource de la couche de carte référencée. Le polyfill ne représente pas ce lien comme une affordance visible par l’utilisateur; ce lien est suivi automatiquement. Si la ressource distante ne contient pas de lien réciproque `zoomin`, le changement d’état de la carte est unidirectionnel, c’est-à-dire que la couche est remplacée de façon permanente. |
 | `legend`     | La relation de lien `legend` désigne un lien vers des métadonnées, habituellement une image, décrivant les symboles utilisés dans la couche actuelle. Actuellement, le polyfill crée un hyperlien pour l’étiquette de la couche dans le contrôle des couches, lequel hyperlien s’ouvre dans un nouveau contexte de navigation. |
 | `query`      | La relation de lien `query` est utilisée conjointement avec l’attribut `tref="..."` pour établir un modèle URL permettant de créer une URL de requête de carte en fonction des gestes de l’utilisateur dans la carte, par exemple cliquer ou appuyer sur la carte. Ces URL sont extraites et la réponse est présentée dans une fenêtre contextuelle dans le haut de la carte. Ces requêtes peuvent retourner des réponses text/html ou text/mapml. Dans ce dernier cas, la réponse peut contenir plus d’une entité. Le cas échéant, une fenêtre contextuelle paginée est générée pour permettre à l’utilisateur de parcourir les métadonnées de chaque entité. |
-| `stylesheet` | Ce lien permet d’importer une feuille de style en cascade (CSS) à partir de la valeur `href`. |
+| `stylesheet` | Le lien importe une feuille de style en cascade (CSS) ou pmtiles à partir de la valeur `href`. |
 
 
 ---
 
 ### `type`
 
-L’attribut `type` définit le type [MIME media type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) prévu de la ressource distante. Selon la valeur [`rel` value](#rel), l’attribut `type` peut jouer un rôle important dans la détermination du comportement du polyfill.
+L’attribut `type` définit le type [MIME media type](https://developer.mozilla.org/fr/docs/Web/HTTP/Basics_of_HTTP/MIME_types) prévu de la ressource distante. Selon la valeur [`rel` value](#rel), l’attribut `type` peut jouer un rôle important dans la détermination du comportement du polyfill.
 
-Les valeurs communes de l’attribut `type` comprennent **text/html**, **text/mapml** et **image/\***.
+Valeurs supportées pour `type` et fonction :
+
+| Valeur | Description |
+|-------------- |-------------------------------------------------------- |
+| `text/mapml` | A utiliser en combinaison avec `rel=tile` ou `rel=features`, où `tref` fait référence à une source de données au format [MapML](https://docs.geoserver.org/latest/en/user/extensions/mapml/index.html).
+| `text/mapml` | A utiliser en combinaison avec `rel=self`, `rel=style` et `rel=« self style »`, où `href` fait référence à un style alternatif ou courant du document MapML actuel. Supporté par [GeoServer](https://docs.geoserver.org/latest/en/user/extensions/mapml/installation.html#styles), mais peut être facilement créé dans des documents MapML statiques (uniquement à distance). 
+| `image/*` | A utiliser en combinaison avec `rel=image` et `rel=tile` pour charger des images de cartes et des tuiles d'images, respectivement, lorsque `tref` fait référence à une source de données basée sur l'image, comme n'importe quel Service de Carte Web ou Service de Tuiles de Carte Web. Voir [Mozilla Developer Network](https://developer.mozilla.org/fr/docs/Web/Media/Formats/Image_types) pour une liste des types supportés.
+| `application/pmtiles` | A utiliser en combinaison avec `rel=tile`, où `tref` fait référence à [pmtiles format](https://docs.protomaps.com/pmtiles/) ou à des ressources cartographiques| 
+| `application/pmtiles+stylesheet` | A utiliser en combinaison avec `rel=stylesheet`, où `href` fait référence à un module JavaScript structuré d'une manière spécifique|
+| `application/vnd.mapbox-vector-tile` | A utiliser en combinaison avec `rel=tile`, où `tref` fait référence à un format [Mapbox Vector Tiles](https://github.com/mapbox/vector-tile-spec) dit « {z}{x}{y} » [Web Map Tile Service](https://docs.geoserver.org/latest/en/user/extensions/vectortiles/tutorial.html) ou [API](https://protomaps.com/other)
 
 ---
 ### `title`

@@ -1,7 +1,7 @@
 ---
 id: modifying-map
 title: Modifying the Map
-slug: /tutorials/modifying-map
+slug: /user-guide/modifying-map
 ---
 
 :::info
