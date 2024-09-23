@@ -37,7 +37,7 @@ Le balisage suivant pourrait fonctionner dans Chrome et Firefox, mais il pourrai
 </map>
 ```
 
-Pour expérimenter les éléments personnalisés `web-map` et `map-area`, vous devriez lier votre `<script type="module" src="web-map.js"></script>` au fichier `web-map.js` créé par le processus de génération des éléments personnalisés de cartes Web.
+Pour expérimenter les éléments personnalisés `web-map` et `map-area`, vous devriez lier votre `<script type="module" src="mapml-viewer.js"></script>` au fichier `mapml-viewer.js` créé par le processus de génération des éléments personnalisés de cartes Web / MapML.js.
 
 En théorie, si vous prenez des mesures pour fournir un balisage alternatif, la plupart des utilisateurs auront une expérience normale (progressive) avec la carte Web, tandis que ceux qui utilisent un ancien navigateur ou même Safari pourraient obtenir une expérience inverse avec l’image cliquable côté client. 
 
