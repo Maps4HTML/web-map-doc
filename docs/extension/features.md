@@ -37,6 +37,22 @@ context menu is projected coordinates (PCRS), and that for copying locations is
 by default geodetic (GCRS). When changed to another through the extension 
 user interface, the selected cs will be used for subsequent copy operations.
 
+### Select map content preferences
+
+By default, no preference is expressed by the user as to what their preferred
+content type for maps may be.  Some users may prefer focusable feature
+data in the map where possible; others may opt for image-based or tiled-image
+based map content.  Others may wish to experience only textual feature data in 
+the form of an accessibility technology (AT)-friendly table that is by default 
+sorted in ascending order of distance from map center, but that may be 
+sorted by different column headings selected by the user. To establish a set of
+preferences, select the applicable combination of entries from the "Content Preferences"
+list (select more than one entry by holding Ctrl or Shift while selecting).
+
+Such preferences may be honoured by a map author via inclusion in [map 'media' queries](../api/mapml-viewer-api#matchmediamediaquerystring).
+
+![Content Preferences](../assets/img/render-mapml.png)
+
 ## Requirements
 
 [Report problems with these requirements on GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)
