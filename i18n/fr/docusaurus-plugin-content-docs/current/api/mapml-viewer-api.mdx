@@ -225,6 +225,7 @@ let zoom = map.zoom;
 | [defineCustomProjection(options)](#definecustomprojectionoptions)	| Définir une projection personnalisée à utiliser par la page.  |
 | [zoomTo(lat, lon, zoom)](#zoomtolat-lon-zoom) | Survole la carte ou effectue un mouvement panoramique vers un (nouvel) emplacement et à un autre niveau de zoom.|
 | [geojson2mapml(json, options)](#zoomtolat-lon-zoom) | Convertit une caractéristique GeoJSON ou une chaîne ou un objet de collection de caractéristiques en élément MapML `<map-layer>` contenant un ou plusieurs éléments `<map-feature>`. |
+| [matchMedia(mediaQueryString)](#matchmediamediaquerystring)        | Renvoie un objet similaire à [MediaQueryList](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList). |
 
 
 ### back()
@@ -359,6 +360,28 @@ Jetez un coup d’œil à [cette application](https://maps4html.org/experiments/
 | `caption` | \<String \| Function\> | Utilise la valeur `label` | Fonction qui accepte la caractéristique JSON et retourne une chaîne, OU une chaîne qui est le nom d’une propriété à mapper sur [featurecaption](https://maps4html.org/web-map-doc/docs/elements/feature/#map-featurecaption). Si aucune propriété associée n’est trouvée, la chaîne fournie sert de valeur de la légende de la caractéristique. Voir la section [Utilisation des options de base](#utilisation-des-options-de-base) pour un exemple. |
 | <span id="option-properties">`properties`</span> | \<Function \| String \| HTMLElement\> | _Les propriétés seront mappées à un [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) HTML._ | Précise la façon dont les propriétés sont mappées. \<Function\> - Fonction qui accepte un argument – l’objet GeoJSON feature – et qui doit retourner un HTMLElement qui devient l’unique élément-enfant de \<properties\>. \<String\> - Chaîne qui sera analysée syntaxiquement et utilisée comme unique élément-enfant de `<properties>` avec toutes les caractéristiques. \<HTMLElement\> - Élément qui servira d’unique élément- enfant de `<properties>` avec toutes les caractéristiques. Voir la section [utilisation des options de base](#utilisation-des-options-de-base) pour un exemple.|
 | `geometryFunction` | \<Function\> | La géométrie _MapML reproduit la valeur géométrique GeoJSON_ | \<Function\> Fonction pour modifier les [descendants générés](https://maps4html.org/web-map-doc/docs/elements/geometry/#child-elements) de `<map-geometry>` qui peut ajouter des classes, [hyperlinks](https://maps4html.org/web-map-doc/docs/elements/map-a/) et des [spans](https://maps4html.org/web-map-doc/docs/elements/span/) à l’instance. Un élément `<map-geometry>` simple est créé par défaut. La fonction accepte deux arguments : l’[élément-enfant généré](https://maps4html.org/web-map-doc/docs/elements/geometry/#child-elements) de `<map-geometry>` et [l’objet de la caractéristique JSON](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) pour retourner un élément-enfant modifié de `<map-geometry>`. Voir la section [Utilisation des options de base](#utilisation-des-options-de-base) pour un exemple. |
+
+---
+
+### matchMedia(mediaQueryString)
+
+Bien que cela ne soit pas strictement des fonctionnalités "média", certaines propriétés dynamiques de la carte peuvent être combinées dans des requêtes avec des fonctionnalités média standard, comme la fonctionnalité 'prefers-color-scheme', pour permettre une interface de type conteneur de carte / requête média.
+
+`matchMedia(mediaQueryString)` renvoie un [objet similaire à MediaQueryList](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList).  La propriété booléenne `matches` de l'objet peut être utilisée pour déterminer immédiatement si la carte répond aux conditions des fonctionnalités requises.  Pour réagir aux changements dans l'état de la carte ou des conditions média, utilisez `MediaQueryList.addEventListener('change', callbackFn)` pour ajouter un écouteur d'événements aux événements `change` déclenchés par les modifications de l'état des propriétés de la carte interrogées (projection, zoom, étendue).  Tout changement de la carte qui entraîne une modification de l'état de la propriété booléenne `matches` de [MediaQueryListEvent](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList/change_event) déclenche l'événement `change` et appelle la fonction `callbackFn`.
+
+## Fonctionnalités de requête "média" prises en charge pour la carte
+
+| Nom de la fonctionnalité    | Description                                                                 |
+|-----------------------------|-----------------------------------------------------------------------------|
+| map-zoom                   | Gamme d'entiers utilisée pour évaluer si `map-zoom` a une certaine valeur ou se situe dans une plage |
+| map-projection             | Valeurs discrètes de chaîne - les valeurs connues incluent `OSMTILE`, `CBMTILE`, `WGS84`, `APSTILE`. Peut être étendu avec des [projections personnalisées](#definecustomprojectionoptions). |
+| map-top-left-easting       | Gamme d'entiers - **Les valeurs décimales ne sont pas prises en charge.**   |
+| map-top-left-northing      | Gamme d'entiers - **Les valeurs décimales ne sont pas prises en charge.**   |
+| map-bottom-right-easting   | Gamme d'entiers - **Les valeurs décimales ne sont pas prises en charge.**   |
+| map-bottom-right-northing  | Gamme d'entiers - **Les valeurs décimales ne sont pas prises en charge.**   |
+| prefers-map-content        | Valeurs discrètes de chaîne - les valeurs prises en charge incluent : `image`, `tile`, `feature`, `table`. Les préférences peuvent être définies via une multi-sélection dans [l'extension navigateur MapML](../extension/features#sélectionner-les-préférences-de-contenu-de-la-carte). |
+| prefers-color-scheme       | Valeurs discrètes de chaîne - les valeurs prises en charge sont `light` et `dark`. |
+| prefers-lang               | Code de langue à 2 caractères renvoyé par `navigator.language`, basé sur le paramètre de langue d'affichage du navigateur de l'utilisateur |
 
 ---
 ## Événements
@@ -619,7 +642,7 @@ let output = map.geojson2mapml(json);
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Exemple d'un projection personnalisée</title>
-  <script type="module" src="web-map/mapml.js"></script>
+  <script type="module" src="./mapml.js"></script>
   <script type="module">
     let customProjectionDefinition = `{
       "projection": "ATLAS_POLAR_MAP",
@@ -650,6 +673,75 @@ let output = map.geojson2mapml(json);
 </body>
 </html>
 ```
+
+### matchMedia
+
+```html
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>Exemple de requête média pour une carte</title>
+    // ajustez le chemin vers l'endroit où se trouve l'artéfact distribué mapml.js
+    <script type="module" src="./mapml.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const map = document.querySelector('mapml-viewer');
+        map.whenReady().then(() => {
+          const extent = map.extent;
+          const topLeftEasting = Math.trunc(extent.topLeft.pcrs.horizontal);
+          const topLeftNorthing = Math.trunc(extent.topLeft.pcrs.vertical);
+          const bottomRightEasting = Math.trunc(extent.bottomRight.pcrs.horizontal);
+          const bottomRightNorthing = Math.trunc(extent.bottomRight.pcrs.vertical);
+          // Formater la chaîne de requête média pour détecter les chevauchements :
+          // (xminm < xmaxq) et (xmaxm > xminq) et (yminm < ymaxq) et (ymaxm > yminq)
+          const query = `(map-projection: OSMTILE) and (7 < map-zoom < 14) and (map-top-left-easting < ${bottomRightEasting}) and (map-bottom-right-easting > ${topLeftEasting}) and (map-bottom-right-northing < ${topLeftNorthing}) and (map-top-left-northing > ${bottomRightNorthing})`;
+          const matcher = map.matchMedia(query);
+          // créer une couche pour représenter visuellement la requête lorsque la carte se déplace
+          const f = `<map-layer checked label="test media query"><map-meta name="projection" content="OSMTILE"></map-meta>
+              <map-meta name="cs" content="pcrs"></map-meta><map-feature><map-properties>${query}</map-properties>
+              <map-geometry><map-polygon><map-coordinates>${topLeftEasting} ${topLeftNorthing}
+              ${bottomRightEasting} ${topLeftNorthing} ${bottomRightEasting} ${bottomRightNorthing} ${topLeftEasting} ${bottomRightNorthing}
+              ${topLeftEasting} ${topLeftNorthing}</map-coordinates</map-polygon></map-geometry></map-feature></map-layer>`;
+          const parser = new DOMParser();
+          const layer = parser
+              .parseFromString(f, 'text/html')
+              .querySelector('map-layer');
+          map.appendChild(layer);
+          const changeDisplayLayer = () => {
+              if (matcher.matches) {
+                  layer.checked = true;
+                  layer.hidden = false;
+                  alert('La fonctionnalité chevauche la carte');
+              } else {
+                  layer.checked = false;
+                  layer.hidden = true;
+                  alert('La fonctionnalité ne chevauche pas la carte');
+              }
+          };
+          changeDisplayLayer();
+          matcher.addEventListener('change', changeDisplayLayer);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <mapml-viewer projection="OSMTILE" zoom="14" lat="45.406314" lon="-75.6883335" controls>
+        <map-layer label="OpenStreetMap" checked>
+            <map-link rel="license" title="© Contributeurs OpenStreetMap CC BY-SA"
+                href="https://www.openstreetmap.org/copyright"></map-link>
+            <map-extent units="OSMTILE" checked hidden>
+                <map-input name="z" type="zoom" value="18" min="0" max="18"></map-input>
+                <map-input name="x" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
+                <map-input name="y" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
+                <map-link rel="tile" tref="https://tile.openstreetmap.org/{z}/{x}/{y}.png"></map-link>
+            </map-extent>
+        </map-layer>
+    </mapml-viewer>
+  </body>
+</html>
+```
+
 ---
 
 ## Spécifications

@@ -38,6 +38,16 @@ et celui pour copier les endroits est par défaut géodésique (GCRS). Lorsqu'il
 changé par l'interface utilisateur de l'extension, le système de coordonnées 
 sélectionné sera utilisé pour les opérations de copie ultérieures.
 
+### Sélectionner les préférences de contenu de la carte
+
+Par défaut, aucun utilisateur n'exprime de préférence quant au type de contenu de carte qu'il privilégie.  Certains utilisateurs peuvent préférer des données de fonctionnalités focalisables dans la carte lorsque cela est possible ; d'autres peuvent opter pour un contenu de carte basé sur des images ou des images en mosaïque.  D'autres encore peuvent souhaiter accéder uniquement à des données textuelles de fonctionnalités sous la forme d'un tableau adapté aux technologies d'assistance (AT) et trié par défaut dans l'ordre croissant de la distance depuis le centre de la carte.  Ce tableau peut également être trié par différentes en-têtes de colonnes sélectionnées par l'utilisateur.  
+
+Pour établir un ensemble de préférences, sélectionnez la combinaison applicable d'entrées depuis la liste "Préférences de Contenu" (sélectionnez plus d'une entrée en maintenant Ctrl ou Shift tout en sélectionnant).
+
+Ces préférences peuvent être prises en compte par un auteur de carte via une inclusion dans les [requêtes média de la carte](../api/mapml-viewer-api#matchmediamediaquerystring).
+
+![Préférences de Contenu](../assets/img/render-mapml.png)
+
 ## Exigences 
 
 [Signaler les problèmes liés à ces exigences sur GitHub](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/new?title=-SUMMARIZE+THE+PROBLEM-&body=-DESCRIBE+THE+PROBLEM-)

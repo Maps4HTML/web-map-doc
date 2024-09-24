@@ -222,6 +222,7 @@ let zoom = map.zoom;
 | [defineCustomProjection(options)](#definecustomprojectionoptions) 	| Define a custom projection for use by the page. |
 | [zoomTo(lat, lon, zoom)](#zoomtolat-lon-zoom) | Fly or pan the map to a (new) location and zoom level.|
 | [geojson2mapml(json, options)](#zoomtolat-lon-zoom) | Add a GeoJSON Layer to the map. |
+| [matchMedia(mediaQueryString)](#matchmediamediaquerystring)        | Returns a [MediaQueryList](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList)-like object.
 
 
 ### back()
@@ -355,6 +356,32 @@ Check out [this application](https://maps4html.org/experiments/api/custom-map-ui
 | `caption` | \<String \| Function\> | `json.features[i].id` or the `label` value | A function that accepts the feature JSON and returns a string, OR a string that is the name of a property to be mapped to the [featurecaption](/web-map-doc/docs/elements/feature/#map-featurecaption). If a matching property is not found, the string provided will be used as the feature caption value. See [basic options usage](#basic-options-usage) for an example. |
 | <span id="option-properties">`properties`</span> | \<Function&nbsp;\|&nbsp;String&nbsp;\|&nbsp;HTMLElement\> | _Properties will be mapped to an HTML [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table)._ | Specifies how the properties are mapped. \<Function\> - A function that accepts one argument - the GeoJSON feature object - and which must return an HTMLElement that becomes the single child element of the \<map-properties\> element. \<String\> - A string that will be parsed and used as the single child element of the `<map-properties>` element for all features. \<HTMLElement\> - an element that will be used as the single child element of `<map-properties>` element for all features. See [basic options usage](#basic-options-usage) for an example.|
 | `geometryFunction` | \<Function\> | _MapML geometry will mirror the GeoJSON geometry value_ | \<Function\> A function to modify the generated [descendants](/web-map-doc/docs/elements/geometry/#child-elements) of `<map-geometry>` which can add classes, [hyperlinks](/web-map-doc/docs/elements/map-a/) and [span's](/web-map-doc/docs/elements/span/) to the instance. Plain `<map-geometry>` element will be created by default. The function accepts two arguments: The generated [child element](/web-map-doc/docs/elements/geometry/#child-elements) of `<map-geometry>` and the [feature json object](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) to return a modified child element of the `<map-geometry>` element. See [basic options usage](#basic-options-usage) for an example. |
+
+---
+
+### matchMedia(mediaQueryString)
+
+While not strictly 'media' features, some dynamic map properties can be combined in queries with standard media features, for example the 'prefers-color-scheme' feature,
+to enable a map container / media-query-like interface.
+
+`matchMedia(mediaQueryString)` returns a [MediaQueryList-like object](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList).
+The `matches` boolean-valued property of the object can be used for an immediate determination of whether the map meets the queried feature conditions.  To react to changes in
+the map state / media conditions, use MediaQueryList.addEventListener('change', callbackFn) to add an event listener for `change` events that are triggered by changes in the 
+state of the queried map properties (projection, zoom, extent); any change to the map that results in a change in state of the [MediaQueryListEvent `matches` boolean property](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList/change_event)triggers the `change` event and calls the callbackFn.
+
+## Supported map 'media' query features
+
+| Feature name     | Description |
+|------------------|-------------|
+| map-zoom         | Range of integers Used to evaluate if map-zoom is of a certain value or within a range |
+| map-projection   | Discrete string values - known values include `OSMTILE`, `CBMTILE`, `WGS84`, `APSTILE`. Can be extended with [custom projections](#definecustomprojectionoptions). |
+| map-top-left-easting | Range of integers - **Decimal values are not supported.**  |
+| map-top-left-northing | Range of integers - **Decimal values are not supported.** |
+| map-bottom-right-easting | Range of integers - **Decimal values are not supported.** |
+| map-bottom-right-northing | Range of integers - **Decimal values are not supported.** |
+| prefers-map-content | Discrete string values - supported values include: `image`, `tile`, `feature`, `table`.  Preferences can be established via multi-select in the [MapML browser extension](../extension/features#select-map-content-preferences) |
+| prefers-color-scheme | Discrete string values - supported values are `light` and `dark` |
+| prefers-lang | 2-character language code returned by `navigator.language`, based on user's browser display language setting |
 
 ---
 
@@ -617,7 +644,7 @@ let output = map.geojson2mapml(json);
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Example Custom Projection</title>
-  <script type="module" src="web-map/mapml.js"></script>
+  <script type="module" src="./mapml.js"></script>
   <script type="module">
     let customProjectionDefinition = `{
       "projection": "ATLAS_POLAR_MAP",
@@ -649,6 +676,78 @@ let output = map.geojson2mapml(json);
 </html>
 ```
 
+### matchMedia
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Example map media query</title>
+    // adjust the path to where you can find the distributed mapml.js artifact
+    <script type="module" src="./mapml.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const map = document.querySelector('mapml-viewer');
+        map.whenReady().then(() => {
+          const extent = map.extent;
+
+          const topLeftEasting = Math.trunc(extent.topLeft.pcrs.horizontal);
+          const topLeftNorthing = Math.trunc(extent.topLeft.pcrs.vertical);
+          const bottomRightEasting = Math.trunc(extent.bottomRight.pcrs.horizontal);
+          const bottomRightNorthing = Math.trunc(extent.bottomRight.pcrs.vertical);
+
+          // Format the media query string to detect overlap:
+          // (xminm < xmaxq) and (xmaxm > xminq) and (yminm < ymaxq) and (ymaxm > yminq)
+          const query = `(map-projection: OSMTILE) and (7 < map-zoom < 14) and (map-top-left-easting < ${bottomRightEasting}) and (map-bottom-right-easting > ${topLeftEasting}) and (map-bottom-right-northing < ${topLeftNorthing}) and (map-top-left-northing > ${bottomRightNorthing})`;
+
+          const matcher = map.matchMedia(query);
+
+          // create a layer to visually represent the query as the map moves
+          const f = `<map-layer checked label="test media query"><map-meta name="projection" content="OSMTILE"></map-meta>
+              <map-meta name="cs" content="pcrs"></map-meta><map-feature><map-properties>${query}</map-properties>
+              <map-geometry><map-polygon><map-coordinates>${topLeftEasting} ${topLeftNorthing}
+              ${bottomRightEasting} ${topLeftNorthing} ${bottomRightEasting} ${bottomRightNorthing} ${topLeftEasting} ${bottomRightNorthing}
+              ${topLeftEasting} ${topLeftNorthing}</map-coordinates</map-polygon></map-geometry></map-feature></map-layer>`;
+
+          const parser = new DOMParser();
+          const layer = parser
+              .parseFromString(f, 'text/html')
+              .querySelector('map-layer');
+          map.appendChild(layer);
+          const changeDisplayLayer = () => {
+              if (matcher.matches) {
+                  layer.checked = true;
+                  layer.hidden = false;
+                  alert('Feature overlaps the map');
+              } else {
+                  layer.checked = false;
+                  layer.hidden = true;
+                  alert('Feature does not overlap the map');
+              }
+          };
+          changeDisplayLayer();
+          matcher.addEventListener('change', changeDisplayLayer);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <mapml-viewer projection="OSMTILE" zoom="14" lat="45.406314" lon="-75.6883335" controls>
+        <map-layer label="OpenStreetMap" checked>
+            <map-link rel="license" title="© OpenStreetMap contributors CC BY-SA"
+                href="https://www.openstreetmap.org/copyright"></map-link>
+            <map-extent units="OSMTILE" checked hidden>
+                <map-input name="z" type="zoom" value="18" min="0" max="18"></map-input>
+                <map-input name="x" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
+                <map-input name="y" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
+                <map-link rel="tile" tref="https://tile.openstreetmap.org/{z}/{x}/{y}.png"></map-link>
+            </map-extent>
+        </map-layer>
+    </mapml-viewer>
+  </body>
+</html>
+```
 
 ---
 
