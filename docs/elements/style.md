@@ -6,9 +6,25 @@ slug: /elements/style/
 
 The `<map-style>` element allows map authors to embed CSS into map layers. The CSS can be used to style the geometry of the layer using [`<map-span>`](../../elements/span/), and by setting the class attribute to the [child elements](../geometry/#child-elements) of the geometry.
 
+## Attributes
+
+### `media`
+
+The `media` attribute is used to express media conditions under which the contained 
+styles should be applied.  Media conditions evaluate to `true` or `false`. A map-style 
+for which the media condition evaluates to `false` is not loaded / is removed. Styles 
+contained in a `<map-style>` for which the media condition evaluates to `true` 
+are applied; when the condition subsequently evaluates to `false`, the styles are removed.
+An invalid media condition evaluates to `false`.
+
+Map media queries can include map properties including: [projection](../../api/mapml-viewer-api#projection), [zoom](../../api/mapml-viewer-api#zoom), 
+and [extent](../../api/mapml-viewer-api#extent).
+
+---
+
 :::note
 
-All the Demo's on the documentation pages contain a "CSS" tab which adds the CSS using the `<map-style>` element dynamically.
+All the demo's on the documentation pages contain a "CSS" tab which adds the CSS using the `<map-style>` element dynamically.
 
 :::
 

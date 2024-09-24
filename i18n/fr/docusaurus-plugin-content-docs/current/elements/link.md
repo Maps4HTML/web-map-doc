@@ -35,8 +35,8 @@ L’attribut `rel` désigne le type de ressource auquel il est lié. MapML défi
 | `tile`       | Cette relation de lien est utilisée conjointement avec l’attribut `tref="..."` pour définir un modèle URL qui définit les ressources natives des pavés (serveur). Elle peut être utilisée conjointement avec l’attribut `type="..."` pour indiquer le type de support de la ressource distante, par exemple : `type="text/mapml"` indique au polyfill d’analyser la ressource extraite et de la présenter sous forme d’entités de carte. Cette relation de lien est utilisée avec les services des pavés cartographiques Web (WMTS) normalisés et leurs équivalents non normalisés. |
 | `image`      | La relation de lien `image` est utilisée de façon similaire à la relation de lien `tile`, à la différence qu’elle indique au polyfill que les ressources distantes à extraire sont des images qui seront réduites (par le serveur) afin de correspondre parfaitement à la largeur et à la hauteur de la fenêtre d’affichage de la carte. Cette relation de lien est utilisée avec les services de cartes Web normalisés (SCW) et leurs équivalents non normalisés. |
 | `features`    | La relation de lien `features` indique au polyfill d’analyser la ressource extraite et de la présenter sous forme d’entités de carte. |
-| `zoomin`     | Le polyfill suit automatiquement le lien `href` si l’utilisateur effectue dans la carte un zoom avant dont la valeur est supérieure à la valeur de zoom maximale de la couche actuelle. La couche de carte actuelle est alors remplacée par la ressource de la couche de carte référencée. Le polyfill ne représente pas ce lien comme une affordance visible par l’utilisateur; ce lien est suivi automatiquement. Si la ressource distante ne contient pas de lien réciproque `zoomout`, le changement d’état de la carte est unidirectionnel, c’est-à-dire que la couche est remplacée de façon permanente. |
-| `zoomout`    | Le polyfill suit automatiquement le lien `href` si l’utilisateur effectue dans la carte un zoom arrière dont la valeur est inférieure à la valeur de zoom minimale de la couche actuelle. La couche de carte actuelle est alors remplacée par la ressource de la couche de carte référencée. Le polyfill ne représente pas ce lien comme une affordance visible par l’utilisateur; ce lien est suivi automatiquement. Si la ressource distante ne contient pas de lien réciproque `zoomin`, le changement d’état de la carte est unidirectionnel, c’est-à-dire que la couche est remplacée de façon permanente. |
+| ~~`zoomin`~~     | Déclassé. Utilisez plutôt la fonctionnalité `map-zoom` de la carte.  |
+| ~~`zoomout`~~    | Déclassé. Utilisez plutôt la fonctionnalité `map-zoom` de la carte.  |
 | `legend`     | La relation de lien `legend` désigne un lien vers des métadonnées, habituellement une image, décrivant les symboles utilisés dans la couche actuelle. Actuellement, le polyfill crée un hyperlien pour l’étiquette de la couche dans le contrôle des couches, lequel hyperlien s’ouvre dans un nouveau contexte de navigation. |
 | `query`      | La relation de lien `query` est utilisée conjointement avec l’attribut `tref="..."` pour établir un modèle URL permettant de créer une URL de requête de carte en fonction des gestes de l’utilisateur dans la carte, par exemple cliquer ou appuyer sur la carte. Ces URL sont extraites et la réponse est présentée dans une fenêtre contextuelle dans le haut de la carte. Ces requêtes peuvent retourner des réponses text/html ou text/mapml. Dans ce dernier cas, la réponse peut contenir plus d’une entité. Le cas échéant, une fenêtre contextuelle paginée est générée pour permettre à l’utilisateur de parcourir les métadonnées de chaque entité. |
 | `stylesheet` | Le lien importe une feuille de style en cascade (CSS) ou pmtiles à partir de la valeur `href`. |
@@ -69,6 +69,18 @@ L’attribut `title` de la ressource liée est habituellement rendu ou présent�
 
 L’attribut `href` d’un élément `<map-link>` doit correspondre à l’URL d’une ressource pouvant être extraite.
 L’URL peut être absolue ou relative.
+
+---
+### `disabled`
+
+L'attribut booléen en lecture-écriture `disabled` fonctionne avec `<map-link rel=stylesheet>` et 
+`<map-link rel=« tile | image | features | query »>`.  Lorsqu'il est défini, il 
+désactive et décharge la feuille de style ou le contenu de la carte, selon le cas.  
+L'attribut `disabled`des éléments`<map-layer>` et `<map-extent>` est mis à jour 
+pour refléter la nouvelle visibilité calculée du `<map-layer>` ou du `<map-extent>`.
+Lorsque l'attribut `disabled` est supprimé, la feuille de style CSS liée ou 
+le contenu (du `<map-link>`) est chargé. Si le contenu chargé est visible, 
+l'attribut `disabled` du `<map-layer>` ou `<map-extent>` est supprimé en conséquence. 
 
 ---
 ### `hreflang`
@@ -106,6 +118,14 @@ Les valeurs de projection [définies par le polyfill](../mapml-viewer#projection
 | Rôle ARIA implicite   | [link](https://w3c.github.io/aria/#link) avec l’attribut `href`. |
 | Rôles ARIA autorisés | Aucun rôle autorisé. |
 | DOM Interface    | [HTMLLinkElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLinkElement) |
+
+---
+
+### `media`
+
+L'attribut `media` est utilisé pour exprimer les conditions média dans lesquelles le contenu lié doit être chargé depuis son attribut `href`. Les conditions média s'évaluent à `true` ou `false`. Un map-link pour lequel la condition média s'évalue à `false` n'est pas chargé / est déchargé. Le contenu lié via un map-link pour lequel la condition média s'évalue à `true` est chargé depuis son attribut `href`; lorsque la condition s'évalue ensuite à `false`, le contenu est déchargé.
+
+Les requêtes média pour la carte peuvent inclure des propriétés CSS de carte étendues, notamment :  [projection](../../api/mapml-viewer-api#projection), [zoom](../../api/mapml-viewer-api#zoom), et [extent](../../api/mapml-viewer-api#extent).
 
 ---
 

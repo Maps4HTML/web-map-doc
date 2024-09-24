@@ -6,6 +6,16 @@ slug: /elements/style/
 
 L’élément `<map-style>` permet aux auteurs de cartes d’intégrer une feuille de style en cascade (CSS) dans les couches de carte. La CSS peut être utilisée pour styliser la géométrie de la couche à l’aide de [`<map-span>`](../../elements/span/), ainsi qu’en réglant l’attribut « class » d’après les [éléments enfants](../geometry/#éléments-enfants) de la géométrie.
 
+## Attributs
+
+### `media`
+
+L'attribut `media` est utilisé pour exprimer les conditions média dans lesquelles les styles contenus doivent être appliqués. Les conditions média s'évaluent à `true` ou `false`.  Un map-style pour lequel la condition média s'évalue à `false` n'est pas chargé / est supprimé.  Les styles contenus dans un `<map-style>` pour lequel la condition média s'évalue à `true` sont appliqués ; lorsque la condition s'évalue ensuite à `false`, les styles sont supprimés.  Une condition de média invalide est évaluée à `false`.
+
+Les requêtes média pour la carte peuvent inclure des propriétés de carte, notamment :  [projection](../../api/mapml-viewer-api#projection), [zoom](../../api/mapml-viewer-api#zoom), et [extent](../../api/mapml-viewer-api#extent).
+
+---
+
 :::note
 
 Toutes les démonstrations comprises dans les pages de documentation contiennent un onglet « CSS », qui permet d’ajouter une CSS en utilisant l’élément `<map-style>` de manière dynamique.

@@ -4,6 +4,20 @@ title: HTMLLinkElement
 slug: /api/map-link-api
 ---
 
+# HTMLLinkElement
+
+L'élément `<map-link>` est conçu pour implémenter une extension de l'élément HTML `<link>` 
+et de l'API `HTMLLinkElement`. Ce document reflète les modifications proposées à cette
+API et est en cours de développement.
+
+## Propriétés
+
+### media
+
+Reflète l'attribut [media](../elements/link#media) de l'élément `<map-link>`.
+
+---
+
 Ce document est une copie de l'ancienne page "Custom Rendering API", et est 
 en cours de construction.  Il décrira à terme l'API de l'élément personnalisé map-link ;
 l'"API de rendu personnalisé" provient actuellement de l'élément personnalisé map-link,

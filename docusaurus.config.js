@@ -4,7 +4,7 @@ module.exports = {
   tagline: 'Embed map viewers into your web pages, using HTML only.',
   url: 'http://maps4html.org/',
   baseUrl: '/web-map-doc/',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'https://maps4html.org/favicon.ico',
   organizationName: 'Maps4HTML', // Usually your GitHub org/user name.
