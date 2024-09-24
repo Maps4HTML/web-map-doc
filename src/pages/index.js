@@ -54,7 +54,7 @@ function Feature({ title, description }) {
 
 function Home() {
   const mapUrl = "./demo/data/osmtile-cbmt.mapml"
-  const mapiframe = `<script type="module" src="dist/mapml-viewer.js"></script>
+  const mapiframe = `<script type="module" src="dist/mapml.js"></script>
   <style>
   html,
   body {

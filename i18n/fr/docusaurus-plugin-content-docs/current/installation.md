@@ -16,14 +16,14 @@ import TabItem from '@theme/TabItem';
 <TabItem value="jsDelivr" label="jsDelivr">
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@maps4html/mapml/dist/mapml-viewer.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@maps4html/mapml/dist/mapml.js"></script>
 ```
 
 </TabItem>
 <TabItem value="unpkg" label="unpkg">
 
 ```html
-<script type="module" src="https://unpkg.com/@maps4html/mapml/dist/mapml-viewer.js"></script>
+<script type="module" src="https://unpkg.com/@maps4html/mapml/dist/mapml.js"></script>
 ```
 
 </TabItem>
@@ -52,7 +52,7 @@ Une fois l’installation terminée, le sous-répertoire node_modules/@maps4html
 Ajoutez ce qui suit à l’élément `<head>` de votre code HTML :
 
 ```html
-<script type="module" src="./node_modules/@maps4html/mapml/dist/mapml-viewer.js"></script>
+<script type="module" src="./node_modules/@maps4html/mapml/dist/mapml.js"></script>
 ```
 
 Vous pouvez maintenant utiliser dans vos pages Web les éléments `<mapml-viewer>` et `<layer->` ainsi que les autres éléments décrits dans le présent document.

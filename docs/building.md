@@ -82,7 +82,7 @@ $ cat > index.html << EOF
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>index.html</title>
-    <script type="module" src="dist/mapml-viewer.js"></script>
+    <script type="module" src="dist/mapml.js"></script>
     <style>
       html,body {height: 100%;}
       * {padding: 0;margin: 0;padding: 0;}

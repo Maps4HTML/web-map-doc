@@ -13,7 +13,7 @@ L’élément `<mapml-viewer>` est le principal élément à utiliser pour ajout
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Carte Web simple [carte topographique]</title>
-  <script type="module" src="web-map/mapml-viewer.js"></script>
+  <script type="module" src="web-map/mapml.js"></script>
   <style>
     html, body {
     height: 100%; /* Ces styles sont nécessaires si vous souhaitez utiliser une valeur de hauteur basée sur un pourcentage pour l’élément « mapml-viewer ». */
