@@ -109,6 +109,14 @@ Les valeurs de projection [définies par le polyfill](../mapml-viewer#projection
 
 ---
 
+### `media`
+
+L'attribut `media` est utilisé pour exprimer les conditions média dans lesquelles le contenu lié doit être chargé depuis son attribut `href`. Les conditions média s'évaluent à `true` ou `false`.  Un map-link pour lequel la condition média s'évalue à `false` n'est pas chargé / est déchargé.  Le contenu lié via un map-link pour lequel la condition média s'évalue à `true` est chargé depuis son attribut `href` ; lorsque la condition s'évalue ensuite à `false`, le contenu est déchargé.
+
+Les requêtes média pour la carte peuvent inclure des propriétés CSS de carte étendues, notamment :  [projection](../../api/mapml-viewer-api#projection), [zoom](../../api/mapml-viewer-api#zoom), et [extent](../../api/mapml-viewer-api#extent).
+
+---
+
 ## Exemples
 
 ### Tile Mapping Specification (tms)

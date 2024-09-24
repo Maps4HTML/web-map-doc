@@ -107,6 +107,11 @@ let layer = document.querySelector('map-layer');
 let opacity = layer.opacity;
 ```
 
+---
+### media
+
+Reflète l'attribut [media](../elements/layer#media) de l'élément `<map-layer>`.
+
 ### extent
 
 `HTMLLayerElement.extent` fournit un accès en LECTURE SEULE aux coordonnées en 
