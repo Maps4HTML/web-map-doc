@@ -27,7 +27,8 @@ module.exports = {
     'api/layer-api',
     'api/map-feature-api',
     'api/map-extent-api',
-    'api/map-link-api'
+    'api/map-link-api',
+    'api/map-style-api'
   ],
   'User Guide': [
     {

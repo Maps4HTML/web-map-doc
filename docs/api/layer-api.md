@@ -124,6 +124,10 @@ To get the `<map-layer>`'s opacity value:
 let layer = document.querySelector('map-layer');
 let opacity = layer.opacity;
 ```
+---
+### media
+
+Reflects the [media](../elements/layer#media) attribute of the `<layer->` element.
 
 ### extent
 

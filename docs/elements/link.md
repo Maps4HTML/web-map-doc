@@ -37,8 +37,8 @@ defines several uses of existing and new `rel` keyword values.
 | `tile`       | This link relation is used in conjunction with the `tref="..."` attribute to define a URL template that identifies native (server) tile resources. Can be used in conjunction with the `type="..."` attribute to indicate the media type of the remote resource, for example: `type="text/mapml"` tells the polyfill to parse and render the fetched resource as map feature content. This link relation is used with standard Web Map Tile Services (WMTS), and its non-standard equivalents. |
 | `image`      | The `image` link relation is used similarly to the `tile` link relation, except it tells the polyfill that the remote resources to be fetched are images that will be trimmed (by the server) to exactly match the width and height of the map viewport.  This link relation is used with standard Web Map Services (WMS) and its non-standard equivalents. |
 | `features`    | The `features` link relation tells the polyfill to parse and render the fetched resource as map feature content. |
-| `zoomin`     | The link `href` is followed automatically by the polyfill when the map is zoomed in by the user to a value greater than the maximimum value of the zoom range of the current layer.  The referenced map layer resource replaces the current map layer.  The polyfill does not represent this link as a user-visible affordance, it is followed automatically. If the remote resource does not contain a reciprocal `zoomout` link, the map state change is one-way i.e. the layer is permanently replaced. |
-| `zoomout`    | The link `href` is followed automatically by the polyfill when the map is zoomed out by the user to a value less than the minimum value of the zoom range of the current layer.  The referenced map layer resource replaces the current map layer.  The polyfill does not represent this link as a user-visible affordance, it is followed automatically.  If the remote resource does not contain a reciprocal `zoomin` link, the map state change is one-way i.e. the layer is permanently replaced.  |
+| ~~`zoomin`~~     | Deprecated. Use the `map-zoom` [map media feature](#media) instead. |
+| ~~`zoomout`~~    | Deprecated. Use the `map-zoom` map media feature instead.  |
 | `legend`     | The `legend` link relation designates a link to metadata, typically an image, describing the symbology used by the current layer.  Currently, the polyfill creates a hyperlink for the label of the layer in the layer control, which opens in a new browsing context. |
 | `query`      | The `query` link relation is used in combination with the `tref="..."` attribute to establish a URL template that composes a map query URL based on user map gestures such as click or touch. These URLs are fetched and the response presented on top of the map as a popup. Such queries can return text/html or text/mapml responses. In the latter case, the response may contain more than one feature, in which case a 'paged' popup is generated, allowing the user to cycle through the features' individual metadata. |
 | `stylesheet` | The link imports a CSS or [pmtiles](../../user-guide/creating-styles) stylesheet from the `href` value. |
@@ -81,6 +81,19 @@ The `href` of a `<map-link>` must be a URL value of a resource that can be fetch
 The URL can be absolute or relative.
 
 ---
+### `disabled`
+
+The read-write `disabled` boolean attribute works with `<map-link rel=stylesheet>` and 
+`<map-link rel="tile | image | features | query">`.  When set, it disables and
+unloads the stylesheet or map content as applicable.  The read-only `disabled` 
+attribute of the `<map-layer>` and `<map-extent>` elements is updated to reflect
+the new calculated visibility of the `<map-layer>` or `<map-extent>`. When the 
+`disabled` attribute is removed, the linked CSS stylesheet or map content is loaded. 
+If the layer and extent content that is loaded is visible, the `<map-layer>` or `<map-extent>` 
+`disabled` attribute is removed accordingly.
+
+---
+
 ### `hreflang`
 
 Advisory [language designation](https://datatracker.ietf.org/doc/html/rfc5646) about remote resource.
@@ -129,6 +142,20 @@ Projection values [defined by the polyfill](../mapml-viewer#projection) include:
 | Implicit ARIA role   | [link](https://w3c.github.io/aria/#link) with `href` attribute. |
 | Permitted ARIA roles | No roles permitted. |
 | DOM Interface    | [HTMLLinkElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLinkElement) |
+
+---
+### `media`
+
+The `media` attribute is used to express media conditions under which the linked 
+content should be loaded from its `href` attribute. Media conditions evaluate to `true` or `false`. 
+A map-link for which the media condition evaluates to `false` is not loaded / unloaded. 
+Content linked via a map-link for which the media condition evaluates to `true` 
+is loaded from its `href` attribute; when the condition subsequently evaluates to
+`false`, the content is unloaded.
+
+Map media queries can include extended CSS map properties including: 
+[projection](../../api/mapml-viewer-api#projection), [zoom](../../api/mapml-viewer-api#zoom), 
+and [extent](../../api/mapml-viewer-api#extent).
 
 ---
 

@@ -51,6 +51,16 @@ Le contenu en ligne utilise l’attribut  `label` comme étiquette de texte affi
 
 ---
 
+### `media`
+
+L'attribut `media` est utilisé pour exprimer les conditions de média de carte sous lesquelles le contenu de la couche doit être utilisé (si un contenu en ligne est présent) ou chargé à partir de l'URL spécifiée dans l'attribut `src`, si cet attribut est présent. Les conditions de média de carte sont évaluées à `true` ou `false`. 
+Une couche pour laquelle la condition de média de carte est évaluée à `false` est, par défaut, masquée. 
+Une couche pour laquelle la condition de média de carte est évaluée à `true` est ajoutée à la carte selon son attribut `checked` et est ajoutée au contrôle des couches en fonction de son attribut `hidden`.
+
+Les requêtes de média de carte peuvent inclure des propriétés de la carte comme documenté dans l'API [matchMedia](../../api/mapml-viewer-api#matchmedia).
+
+---
+
 ### `opacity`
 
 L'attribut `opacity` définit l'opacité initiale de l'élément `<map-layer>`. Les valeurs d'`opacity` valides vont de "0.0" à "1.0" et sont reflétées dans le contrôle de couche

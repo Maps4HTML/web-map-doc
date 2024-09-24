@@ -4,6 +4,21 @@ title: HTMLLinkElement
 slug: /api/map-link-api
 ---
 
+# HTMLLinkElement
+
+The `<map-link>` element is intended to implement an extension of the HTML `<link>` 
+element and `HTMLLinkElement` API. This document reflects proposed changes to that
+API and is a work in progress.
+
+
+## Properties
+
+### media
+
+Reflects the [media](../elements/link#media) attribute of the `<map-link>` element.
+
+---
+
 This document is copied from the old "Custom Rendering API" page, and is under
 construction.  It will eventually describe the API of the map-link custom element;
 the "Custom Rendering API" is currently sourced from the map-link custom element,
