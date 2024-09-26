@@ -125,7 +125,7 @@ layer.zoomTo();
 
 | Fonction | Retours | Description |
 |----------|---------|-------------|
-| <code>mapml2geojson(<Object\>&nbsp;options)</code> | Objet de collection de caractéristiques JavaScript (GeoJSON) | Cette fonction transforme l’élément- enfant `<feature>` d’un élément `<layer->` en un objet GeoJSON FeatureCollection. Vous fournissez les [options](#options-1) pour contrôler la transformation. Cette fonction doit servir dans un événement windows.onload.
+| <code>mapml2geojson(\<Object\> options)</code> | Objet de collection de caractéristiques JavaScript (GeoJSON) | Cette fonction transforme l’élément- enfant `<feature>` d’un élément `<layer->` en un objet GeoJSON FeatureCollection. Vous fournissez les [options](#options) pour contrôler la transformation. Cette fonction doit servir dans un événement windows.onload.
 
 :::caution
 
@@ -144,17 +144,17 @@ window.onload = (event) => {
 
 | Paramètre | Description |
 |------|--------------|
-| Élément <HTMLLayerElement\> | Élément `<layer->` |
-| <Object\>&nbsp;options | Vous fournissez des paramètres au moyen d’un objet d’options avec des  [noms d’option prédéfinis](#options-1). |
+| Élément \<HTMLLayerElement\> | Élément `<layer->` |
+| \<Object\> options | Vous fournissez des paramètres au moyen d’un objet d’options avec des  [noms d’option prédéfinis](#options). |
 
 #### Options
 
-<Object\> Ensemble de paires de clés ou de valeurs qui personnalise l’objet de sortie GeoJSON. Toutes les options sont facultatives et décrites ci-après.
+\<Object\> Ensemble de paires de clés ou de valeurs qui personnalise l’objet de sortie GeoJSON. Toutes les options sont facultatives et décrites ci-après.
 
 | Option | Type | Défaut | Description |
 |------|------|---------------|--------|
-| `propertyFunction` | <Function\> | _n/a_ | Fonction que vous fournissez et qui mappe l’élément `<map-properties>` de la caractéristique à un [membre GeoJSON "properties"](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2), puisque qu’il n’y a que vous qui connaît la conception du balisage dans votre valeur `<map-properties>`. Si vous ne fournissez pas cette option, une fonction par défaut essaiera de renverser un élément-enfant `<table>` de `<map-properties>`, comme si ce tableau était généré par la [fonction d’option de propriétés par défaut de geojson2mapml](mapml-viewer-api#options). |
-| `transform` | <Boolean\> | `true` | Transforme des valeurs `<map-coordinates>` en valeurs `gcrs` (longitude, latitude), si elles ne le sont pas déjà. GeoJSON [recommande](https://www.rfc-editor.org/rfc/rfc7946.html#section-4) d’utiliser les coordonnées de longitude et de latitude WGS 84, il s’agit donc là du comportement par défaut. |
+| `propertyFunction` | \<Function\> | _n/a_ | Fonction que vous fournissez et qui mappe l’élément `<map-properties>` de la caractéristique à un [membre GeoJSON "properties"](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2), puisque qu’il n’y a que vous qui connaît la conception du balisage dans votre valeur `<map-properties>`. Si vous ne fournissez pas cette option, une fonction par défaut essaiera de renverser un élément-enfant `<table>` de `<map-properties>`, comme si ce tableau était généré par la [fonction d’option de propriétés par défaut de geojson2mapml](mapml-viewer-api#options). |
+| `transform` | \<Boolean\> | `true` | Transforme des valeurs `<map-coordinates>` en valeurs `gcrs` (longitude, latitude), si elles ne le sont pas déjà. GeoJSON [recommande](https://www.rfc-editor.org/rfc/rfc7946.html#section-4) d’utiliser les coordonnées de longitude et de latitude WGS 84, il s’agit donc là du comportement par défaut. |
 ###### Remarques
 
 Au besoin, `mapml2geojson` transforme des coordonnées en `gcrs` par défaut avant la sérialisation. Prenez note que toutes les projections géographiques CRS (système de référence des coordonnées) ne sont pas équivalentes, et que l’interprétation de telles coordonnées n’est pas garantie conforme aux coordonnées WGS 84 ou GPS, et que, par conséquent, elles ne suivent pas nécessairement la [recommandation GeoJSON](https://datatracker.ietf.org/doc/html/rfc7946#section-4), qui requiert des coordonnées de longitude et de latitude codées conformément au système géodésique WGS 84. Le moteur de projection utilisé pour mettre en œuvre cette conversion est incapable de transformer des coordonnées d’un ellipsoïde à un autre. Par conséquent, le JSON résultant DOIT (d’une manière qui reste à déterminer) être étiqueté avec la donnée qu’utilise la projection de la couche.
@@ -258,8 +258,8 @@ window.onload = (event) => {
 
 |  | Spec | Viewer | API |
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
-| [**Properties**](#properties) | complet | complet | complet |
-| [**Methods**](#methods) | complet | complet | complet |
+| [**Propriétés**](#propriétés) | complet | complet | complet |
+| [**Méthodes**](#méthodes) | complet | complet | complet |
 
 ---
 

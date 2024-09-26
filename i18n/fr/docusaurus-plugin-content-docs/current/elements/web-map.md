@@ -10,13 +10,13 @@ Au cours des dernières années, les images cliquables côté client ont perdu d
 
 Les éléments personnalisés de cartes Web fournissent un ensemble d’éléments de validation de principe « [personnalisés et intégrés](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) » fondés sur les éléments `<map>`, `<area>` et `<img>` qui seront « ramenés » à une une image cliquable côté client dans les anciens navigateurs ou en l’absence de JavaScript (script désactivé).
 
-:::avertissement
+:::caution
 
 Il est à noter qu’étant donné que [tous les navigateurs Web récents ne prennent pas en charge les éléments intégrés personnalisés en HTML](https://caniuse.com/mdn-api_customelementregistry_builtin), il n’est pas recommandé d’utiliser cette validation de principe sur un site Web public puisque cela pourrait entraîner de la confusion chez les utilisateurs.
 
 :::
 
-:::avertissement
+:::caution
 
 Dans certains navigateurs, l’élément intégré personnalisé `<map>` n’est pas accessible aux utilisateurs de lecteur d’écran en raison d’un [bogue de Chromium](https://bugs.chromium.org/p/chromium/issues/detail?id=1208405).
 

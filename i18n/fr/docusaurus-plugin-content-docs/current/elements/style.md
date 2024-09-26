@@ -4,7 +4,7 @@ title: "<map-style>"
 slug: /elements/style/
 ---
 
-L’élément `<map-style>` permet aux auteurs de cartes d’intégrer une feuille de style en cascade (CSS) dans les couches de carte. La CSS peut être utilisée pour styliser la géométrie de la couche à l’aide de [`<map-span>`](../../other-elements/span/), ainsi qu’en réglant l’attribut « class » d’après les [éléments enfants](../geometry/#child-elements) de la géométrie.
+L’élément `<map-style>` permet aux auteurs de cartes d’intégrer une feuille de style en cascade (CSS) dans les couches de carte. La CSS peut être utilisée pour styliser la géométrie de la couche à l’aide de [`<map-span>`](../../elements/span/), ainsi qu’en réglant l’attribut « class » d’après les [éléments enfants](../geometry/#éléments-enfants) de la géométrie.
 
 :::note
 

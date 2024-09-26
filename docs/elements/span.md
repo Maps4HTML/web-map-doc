@@ -1,7 +1,7 @@
 ---
 id: span
 title: "<map-span>"
-slug: /other-elements/span/
+slug: /elements/span/
 ---
 
 The `<map-span>` element is useful when used together with html global attributes such as [class](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class). This element allows you to wrap the coordinate pairs in a `<map-coordinates>` element, allowing the wrapped coordinates to be targeted by CSS selectors, and thus independently styled.

@@ -146,7 +146,7 @@ map.lat = 21.4; // rien ne se produit si la valeur n’est pas valide
 Notez que la valeur fournie n'affecte pas l'état de la visionneuse de carte, 
 sauf au chargement du document, ou lorsqu'une instance d'un élément `<mapml-viewer>` 
 est construite et ajoutée par programme au DOM. Pour modifier la valeur, utilisez 
-[zoomTo()](#zoomTo)
+[zoomTo()](#zoomtolat-lon-zoom)
 
 Pour obtenir la latitude :
 ```js
@@ -166,7 +166,7 @@ map.lon = 21.4; // rien ne se produit si la valeur n’est pas valide
 Notez que la valeur fournie n'affecte pas l'état de la visionneuse de carte, 
 sauf au chargement du document, ou lorsqu'une instance d'un élément `<mapml-viewer>` 
 est construite et ajoutée par programme au DOM. Pour modifier la valeur, utilisez 
-[zoomTo()](#zoomTo)
+[zoomTo()](#zoomtolat-lon-zoom)
 
 Pour obtenir la longitude :
 ```js
@@ -203,7 +203,7 @@ map.zoom = 3; // rien ne se produit si la valeur n’est pas valide
 Notez que la valeur fournie n'affecte pas l'état de la visionneuse de carte, 
 sauf au chargement du document, ou lorsqu'une instance d'un élément `<mapml-viewer>` 
 est construite et ajoutée par programme au DOM. Pour modifier la valeur, utilisez 
-[zoomTo()](#zoomTo)
+[zoomTo()](#zoomtolat-lon-zoom)
 
 Pour obtenir la longitude :
 ```js
@@ -345,20 +345,20 @@ Jetez un coup d’œil à [cette application](https://maps4html.org/experiments/
 
 | Paramètre | Description |
 |------|---------------------|
-| <String&nbsp;\|&nbsp;Object>&nbsp;json | Chaîne ou objet GeoJSON |
-| Options &ltObject&gt | Ensemble de paires de clés ou de valeurs qui personnalise la couche de sortie MapML. Toutes les options sont facultatives et décrites ci-après. |
+| \<String \| Object\> json | Chaîne ou objet GeoJSON |
+| Options \<Object\> | Ensemble de paires de clés ou de valeurs qui personnalise la couche de sortie MapML. Toutes les options sont facultatives et décrites ci-après. |
 
 #### Options
 
-&ltObject&gt Ensemble de paires de clés ou de valeurs qui personnalise la couche de sortie MapML. Toutes les options sont facultatives et décrites ci-après.
+\<Object\> Ensemble de paires de clés ou de valeurs qui personnalise la couche de sortie MapML. Toutes les options sont facultatives et décrites ci-après.
 
 | Option | Type | Default | Description |
 |------|------|---------------|--------|
-| `label` | <String\> | `json.name`, `json.title` ou "Layer" | Définit la [label](https://maps4html.org/web-map-doc/docs/layers/layer/#label) de la couche de sortie. |
-| `projection` |  <String\> | `OSMTILE` | Définit la [projection](https://maps4html.org/web-map-doc/docs/elements/mapml-viewer/#projection) de la couche de sortie. Les valeurs définies incluent : `OSMTILE`, `CBMTILE`, `WGS84`, and `APSTILE`.|
-| `caption` | <String&nbsp;\|&nbsp;Function\> | Utilise la valeur `label` | Fonction qui accepte la caractéristique JSON et retourne une chaîne, OU une chaîne qui est le nom d’une propriété à mapper sur [featurecaption](https://maps4html.org/web-map-doc/docs/elements/feature/#map-featurecaption). Si aucune propriété associée n’est trouvée, la chaîne fournie sert de valeur de la légende de la caractéristique. Voir la section [Utilisation des options de base](#basic-options-usage) pour un exemple. |
-| <span id="option-properties">`properties`</span> | <Function&nbsp;\|&nbsp;String&nbsp;\|&nbsp;HTMLElement\> | _Les propriétés seront mappées à un [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) HTML._ | Précise la façon dont les propriétés sont mappées. <Function\> - Fonction qui accepte un argument – l’objet GeoJSON feature – et qui doit retourner un HTMLElement qui devient l’unique élément-enfant de <properties\>. <String\> - Chaîne qui sera analysée syntaxiquement et utilisée comme unique élément-enfant de `<properties>` avec toutes les caractéristiques. <HTMLElement\> - Élément qui servira d’unique élément- enfant de `<properties>` avec toutes les caractéristiques. Voir la section [utilisation des options de base](#basic-options-usage) pour un exemple.|
-| `geometryFunction` | <Function\> | La géométrie _MapML reproduit la valeur géométrique GeoJSON_ | <Function\> Fonction pour modifier les [descendants générés](https://maps4html.org/web-map-doc/docs/elements/geometry/#child-elements) de `<map-geometry>` qui peut ajouter des classes, [hyperlinks](https://maps4html.org/web-map-doc/docs/other-elements/map-a/) et des [spans](https://maps4html.org/web-map-doc/docs/other-elements/span/) à l’instance. Un élément `<map-geometry>` simple est créé par défaut. La fonction accepte deux arguments : l’[élément-enfant généré](https://maps4html.org/web-map-doc/docs/elements/geometry/#child-elements) de `<map-geometry>` et [l’objet de la caractéristique JSON](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) pour retourner un élément-enfant modifié de `<map-geometry>`. Voir la section [Utilisation des options de base](#basic-options-usage) pour un exemple. |
+| `label` | \<String\> | `json.name`, `json.title` ou "Layer" | Définit la [label](https://maps4html.org/web-map-doc/docs/layers/layer/#label) de la couche de sortie. |
+| `projection` |  \<String\> | `OSMTILE` | Définit la [projection](https://maps4html.org/web-map-doc/docs/elements/mapml-viewer/#projection) de la couche de sortie. Les valeurs définies incluent : `OSMTILE`, `CBMTILE`, `WGS84`, and `APSTILE`.|
+| `caption` | \<String \| Function\> | Utilise la valeur `label` | Fonction qui accepte la caractéristique JSON et retourne une chaîne, OU une chaîne qui est le nom d’une propriété à mapper sur [featurecaption](https://maps4html.org/web-map-doc/docs/elements/feature/#map-featurecaption). Si aucune propriété associée n’est trouvée, la chaîne fournie sert de valeur de la légende de la caractéristique. Voir la section [Utilisation des options de base](#utilisation-des-options-de-base) pour un exemple. |
+| <span id="option-properties">`properties`</span> | \<Function \| String \| HTMLElement\> | _Les propriétés seront mappées à un [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) HTML._ | Précise la façon dont les propriétés sont mappées. \<Function\> - Fonction qui accepte un argument – l’objet GeoJSON feature – et qui doit retourner un HTMLElement qui devient l’unique élément-enfant de \<properties\>. \<String\> - Chaîne qui sera analysée syntaxiquement et utilisée comme unique élément-enfant de `<properties>` avec toutes les caractéristiques. \<HTMLElement\> - Élément qui servira d’unique élément- enfant de `<properties>` avec toutes les caractéristiques. Voir la section [utilisation des options de base](#utilisation-des-options-de-base) pour un exemple.|
+| `geometryFunction` | \<Function\> | La géométrie _MapML reproduit la valeur géométrique GeoJSON_ | \<Function\> Fonction pour modifier les [descendants générés](https://maps4html.org/web-map-doc/docs/elements/geometry/#child-elements) de `<map-geometry>` qui peut ajouter des classes, [hyperlinks](https://maps4html.org/web-map-doc/docs/elements/map-a/) et des [spans](https://maps4html.org/web-map-doc/docs/elements/span/) à l’instance. Un élément `<map-geometry>` simple est créé par défaut. La fonction accepte deux arguments : l’[élément-enfant généré](https://maps4html.org/web-map-doc/docs/elements/geometry/#child-elements) de `<map-geometry>` et [l’objet de la caractéristique JSON](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) pour retourner un élément-enfant modifié de `<map-geometry>`. Voir la section [Utilisation des options de base](#utilisation-des-options-de-base) pour un exemple. |
 
 ---
 ## Événements

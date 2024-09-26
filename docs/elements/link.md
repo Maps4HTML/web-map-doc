@@ -62,7 +62,7 @@ Supported values of `type` and function
 | `image/*` | Use in combination with `rel=image` and `rel=tile` to load full-viewport map images and image tiles, respectively, when `tref` refers to an image-based data source, such as any Web Map Service or Web Map Tile Service. See [Mozilla Developer Network](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/Image_types) for a list of supported types.|
 | `application/pmtiles` | Use in combination with `rel=tile`, where `tref` refers to [pmtiles format](https://docs.protomaps.com/pmtiles/) or map resources. * | 
 | `application/pmtiles+stylesheet` | Use in combination with `rel=stylesheet`, where `href` refers to a JavaScript module structured in a specific way. * |
-| `application/vnd.mapbox-vector-tile` | Use in combination with `rel=tile`, where `tref` refers to a [Mapbox Vector Tiles](https://github.com/mapbox/vector-tile-spec)-format so-called "{z}{x}{y}" [Web Map Tile Service](https://docs.geoserver.org/latest/en/user/extensions/vectortiles/tutorial.html) or [API](https://protomaps.com/other). * |
+| `application/vnd.mapbox-vector-tile` | Use in combination with `rel=tile`, where `tref` refers to a [Mapbox Vector Tiles](https://github.com/mapbox/vector-tile-spec)-format so-called "\{z}\{x}\{y}" [Web Map Tile Service](https://docs.geoserver.org/latest/en/user/extensions/vectortiles/tutorial.html) or [API](https://protomaps.com/other). * |
 
 \* see [Using mvt styles](../../user-guide/using-styles) for details on how to use these `type` values
 

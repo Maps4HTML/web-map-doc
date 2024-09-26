@@ -1,7 +1,7 @@
 ---
 id: map-a
 title: "<map-a>"
-slug: /other-elements/map-a/
+slug: /elements/map-a/
 ---
 
 L'élément `<map-a>` propose d'étendre la page Web afin d'inclure des liens entre les cartes et les emplacements.

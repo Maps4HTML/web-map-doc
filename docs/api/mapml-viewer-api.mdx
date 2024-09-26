@@ -200,7 +200,7 @@ map.zoom = 3; // if it's an invalid value, will default to 0
 ```
 Note that the value supplied does not affect the map viewer state, except at 
 document load, or when an instance of a `<mapml-viewer>` element is constructed
-and programmatically added to the DOM. To change the value, use [zoomTo()](#zoomTo);
+and programmatically added to the DOM. To change the value, use [zoomTo()](#zoomtolat-lon-zoom);
 
 To get the longitude:
 ```js
@@ -341,20 +341,20 @@ Check out [this application](https://maps4html.org/experiments/api/custom-map-ui
 
 | Parameter | Description |
 |------|---------------------|
-| <String&nbsp;\|&nbsp;Object>&nbsp;json | A GeoJSON string or object. |
-| &ltObject&gt options | Optional. A set of key/value pairs that customize the output MapML layer. All options are optional and described below. |
+| \<String \| Object\> json | A GeoJSON string or object. |
+| \<Object\> options | Optional. A set of key/value pairs that customize the output MapML layer. All options are optional and described below. |
 
 #### Options
 
-&ltObject&gt A set of key/value pairs that customize the output MapML layer. All options are optional and detailed below.
+\<Object\> A set of key/value pairs that customize the output MapML layer. All options are optional and detailed below.
 
 | Option | Type | Default | Description |
 |------|------|---------------|--------|
-| `label` | <String\> | `json.name`, `json.title` or "Layer" | Sets the output layer's [label](/web-map-doc/docs/layers/layer/#label). |
-| `projection` |  <String\> | `map`.[projection](/web-map-doc/docs/elements/mapml-viewer/#projection) or `OSMTILE` | Sets the output layer's [projection](/web-map-doc/docs/elements/mapml-viewer/#projection). Defined values include: `OSMTILE`, `CBMTILE`, `WGS84`, and `APSTILE`.|
-| `caption` | <String&nbsp;\|&nbsp;Function\> | `json.features[i].id` or the `label` value | A function that accepts the feature JSON and returns a string, OR a string that is the name of a property to be mapped to the [featurecaption](/web-map-doc/docs/elements/feature/#map-featurecaption). If a matching property is not found, the string provided will be used as the feature caption value. See [basic options usage](#basic-options-usage) for an example. |
-| <span id="option-properties">`properties`</span> | <Function&nbsp;\|&nbsp;String&nbsp;\|&nbsp;HTMLElement\> | _Properties will be mapped to an HTML [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table)._ | Specifies how the properties are mapped. <Function\> - A function that accepts one argument - the GeoJSON feature object - and which must return an HTMLElement that becomes the single child element of the <properties\> element. <String\> - A string that will be parsed and used as the single child element of the `<properties>` element for all features. <HTMLElement\> - an element that will be used as the single child element of `<properties>` element for all features. See [basic options usage](#basic-options-usage) for an example.|
-| `geometryFunction` | <Function\> | _MapML geometry will mirror the GeoJSON geometry value_ | <Function\> A function to modify the generated [descendants](/web-map-doc/docs/elements/geometry/#child-elements) of `<map-geometry>` which can add classes, [hyperlinks](/web-map-doc/docs/other-elements/map-a/) and [span's](/web-map-doc/docs/other-elements/span/) to the instance. Plain `<map-geometry>` element will be created by default. The function accepts two arguments: The generated [child element](/web-map-doc/docs/elements/geometry/#child-elements) of `<map-geometry>` and the [feature json object](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) to return a modified child element of the `<map-geometry>` element. See [basic options usage](#basic-options-usage) for an example. |
+| `label` | \<String\> | `json.name`, `json.title` or "Layer" | Sets the output layer's [label](/web-map-doc/docs/layers/layer/#label). |
+| `projection` |  \<String\> | `map`.[projection](/web-map-doc/docs/elements/mapml-viewer/#projection) or `OSMTILE` | Sets the output layer's [projection](/web-map-doc/docs/elements/mapml-viewer/#projection). Defined values include: `OSMTILE`, `CBMTILE`, `WGS84`, and `APSTILE`.|
+| `caption` | \<String \| Function\> | `json.features[i].id` or the `label` value | A function that accepts the feature JSON and returns a string, OR a string that is the name of a property to be mapped to the [featurecaption](/web-map-doc/docs/elements/feature/#map-featurecaption). If a matching property is not found, the string provided will be used as the feature caption value. See [basic options usage](#basic-options-usage) for an example. |
+| <span id="option-properties">`properties`</span> | \<Function&nbsp;\|&nbsp;String&nbsp;\|&nbsp;HTMLElement\> | _Properties will be mapped to an HTML [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table)._ | Specifies how the properties are mapped. \<Function\> - A function that accepts one argument - the GeoJSON feature object - and which must return an HTMLElement that becomes the single child element of the \<map-properties\> element. \<String\> - A string that will be parsed and used as the single child element of the `<map-properties>` element for all features. \<HTMLElement\> - an element that will be used as the single child element of `<map-properties>` element for all features. See [basic options usage](#basic-options-usage) for an example.|
+| `geometryFunction` | \<Function\> | _MapML geometry will mirror the GeoJSON geometry value_ | \<Function\> A function to modify the generated [descendants](/web-map-doc/docs/elements/geometry/#child-elements) of `<map-geometry>` which can add classes, [hyperlinks](/web-map-doc/docs/elements/map-a/) and [span's](/web-map-doc/docs/elements/span/) to the instance. Plain `<map-geometry>` element will be created by default. The function accepts two arguments: The generated [child element](/web-map-doc/docs/elements/geometry/#child-elements) of `<map-geometry>` and the [feature json object](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) to return a modified child element of the `<map-geometry>` element. See [basic options usage](#basic-options-usage) for an example. |
 
 ---
 
