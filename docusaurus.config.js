@@ -1,3 +1,4 @@
+import { themes } from "prism-react-renderer"
 module.exports = {
   title: '<mapml-viewer> documentation',
   tagline: 'Embed map viewers into your web pages, using HTML only.',
@@ -83,10 +84,6 @@ module.exports = {
           title: 'More',
           items: [
             {
-              label: 'Blog',
-              to: 'blog',
-            },
-            {
               label: 'GitHub',
               href: 'https://github.com/Maps4HTML/web-map-doc',
             },
@@ -96,8 +93,8 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} Maps4HTML. Built with Docusaurus.`,
     },
     prism: {
-      theme: require('prism-react-renderer/themes/duotoneLight'),
-      darkTheme: require('prism-react-renderer/themes/vsDark'),
+      theme: themes.oneLight,
+      darkTheme: themes.oneDark
     },
   },
   presets: [

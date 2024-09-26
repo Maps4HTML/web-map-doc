@@ -4,7 +4,7 @@ title: "<map-style>"
 slug: /elements/style/
 ---
 
-The `<map-style>` element allows map authors to embed CSS into map layers. The CSS can be used to style the geometry of the layer using [`<map-span>`](../../other-elements/span/), and by setting the class attribute to the [child elements](../geometry/#child-elements) of the geometry.
+The `<map-style>` element allows map authors to embed CSS into map layers. The CSS can be used to style the geometry of the layer using [`<map-span>`](../../elements/span/), and by setting the class attribute to the [child elements](../geometry/#child-elements) of the geometry.
 
 :::note
 

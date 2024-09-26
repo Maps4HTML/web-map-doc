@@ -311,7 +311,7 @@ Aucun ([undefined](https://developer.mozilla.org/fr/docs/Web/JavaScript/Referenc
 
 | Fonction | Retours | Description |
 |----------|---------|-------------|
-| <code>mapml2geojson(<Object\>&nbsp;options)</code> | Un objet caractéristique JavaScript (GeoJSON) | Cette fonction transforme l'élément `<feature>` en un objet GeoJSON Feature. Vous fournissez [options](#options) pour contrôler la transformation. 
+| <code>mapml2geojson(\<Object\> options)</code> | Un objet caractéristique JavaScript (GeoJSON) | Cette fonction transforme l'élément `<feature>` en un objet GeoJSON Feature. Vous fournissez [options](#options) pour contrôler la transformation. 
 
 :::caution
 
@@ -332,16 +332,16 @@ window.onload = (event) => {
 
 | Paramètre | Description |
 |------|--------------|
-| <Object\>&nbsp;options | <span className="badge">Optionnel</span> Vous fournissez des paramètres via un objet options avec des [noms d'options prédéfinis](#options). |
+| \<Object\> options | <span className="badge">Optionnel</span> Vous fournissez des paramètres via un objet options avec des [noms d'options prédéfinis](#options). |
 
 ##### Options
 
-<Object\> Un ensemble de paires clé/valeur qui personnalisent l'objet GeoJSON de sortie. Tous ces éléments sont optionnels et détaillés ci-dessous.
+\<Object\> Un ensemble de paires clé/valeur qui personnalisent l'objet GeoJSON de sortie. Tous ces éléments sont optionnels et détaillés ci-dessous.
 
 | Option | Type | Défaut | Description |
 |------|------|---------------|--------|
-| `propertyFunction` | <Fonction\> | _s/o_ | Une fonction que vous fournissez qui fait correspondre l'élément `<map-properties>` de la caractéristique à un [membre GeoJSON "properties"](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2), puisque vous seul connaissez la conception du balisage dans votre valeur `<map-properties>`. Si vous ne fournissez pas cette option, une fonction par défaut tentera d'inverser un enfant `<table>` de l'élément `<map-properties>`, comme si cette table avait été générée par la fonction [default properties option function from geojson2mapml](mapml-viewer-api#options). |
-| `transform` | <Boolean\> | `true` | Transforme les valeurs `<map-coordinates>` en valeurs `gcrs` (longitude,latitude), si ce n'est pas déjà le cas. GeoJSON [recommande](https://www.rfc-editor.org/rfc/rfc7946.html#section-4) d'utiliser les coordonnées de longitude et de latitude WGS 84, c'est donc le comportement par défaut. |
+| `propertyFunction` | \<Fonction\> | _s/o_ | Une fonction que vous fournissez qui fait correspondre l'élément `<map-properties>` de la caractéristique à un [membre GeoJSON "properties"](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2), puisque vous seul connaissez la conception du balisage dans votre valeur `<map-properties>`. Si vous ne fournissez pas cette option, une fonction par défaut tentera d'inverser un enfant `<table>` de l'élément `<map-properties>`, comme si cette table avait été générée par la fonction [default properties option function from geojson2mapml](mapml-viewer-api#options). |
+| `transform` | \<Boolean\> | `true` | Transforme les valeurs `<map-coordinates>` en valeurs `gcrs` (longitude,latitude), si ce n'est pas déjà le cas. GeoJSON [recommande](https://www.rfc-editor.org/rfc/rfc7946.html#section-4) d'utiliser les coordonnées de longitude et de latitude WGS 84, c'est donc le comportement par défaut. |
 ###### Notes
 
 :::caution
@@ -369,7 +369,7 @@ Un objet GeoJSON représentant la caractéristique
 | Nom de l'événement      	| Description                                          	|
 |--------------	|--------------------------------------------------------	|
 | click | L'événement click se produit lorsque l'utilisateur clique ou touche la caractéristique avec le clavier ou le pointeur, ou lorsque la méthode [click()](#click) est appelée. |
-| focus | L'événement de `focus` se produit lorsque la caractéristique est ciblée par le clavier ou le pointeur, ou lorsque la méthode [focus()](#focus) est appelée. | |
+| focus | L'événement de `focus` se produit lorsque la caractéristique est ciblée par le clavier ou le pointeur, ou lorsque la méthode [focus()](#focusoptions) est appelée. | |
 | blur | L'événement de `blur` se produit lorsque la caractéristique perd le focus avec un clavier ou un pointeur, ou lorsque la méthode [blur()](#blur) est appelée. |
 ---
 

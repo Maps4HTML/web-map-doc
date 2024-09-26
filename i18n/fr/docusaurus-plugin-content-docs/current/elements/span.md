@@ -1,7 +1,7 @@
 ---
 id: span
 title: "<map-span>"
-slug: /other-elements/span/
+slug: /elements/span/
 ---
 
 L’élément `<map-span>` est utile lorsqu’il est utilisé avec des attributs HTML généraux comme [class](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class). Cet élément permet d’encapsuler les paires de coordonnées dans un élément `<map-coordinates>`, ce qui permet aux coordonnées encapsulées d’être ciblées par les sélecteurs des feuilles de style en cascade (CSS) et donc d’être stylisées de manière indépendante.

@@ -6,17 +6,6 @@ slug: /elements/datalist/
 
 The `<map-datalist>` element is an extension of HTML `<datalist>`. It is a child of the `<map-extent>` element and is used by the `list` attribute of the `<map-input>` element by linking the `id` of `<map-datalist>`:
 
-```html
-<map-input name="s" type="hidden" shard="true" list="servers"></map-input>
-<map-datalist id="servers">
-  <map-option value="a"></map-option>
-  <map-option value="b"></map-option>
-  <map-option value="c"></map-option>
-</map-datalist>
-```
-
-The `<map-datalist>` is used alongside the `shard` attribute of `<map-input>`. It can list a set of values that will be used in a round-robin fashion for template variable substitution. This is useful for [domain sharding](https://developer.mozilla.org/en-US/docs/Glossary/Domain_sharding) to increase parallelism of tile requests. Read more about it [here](../input/#shard).
-
 The `<map-datalist>` element contains one or more `<map-option>` elements.
 
 <iframe src="../../../demo/map-datalist-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
@@ -25,21 +14,6 @@ The `<map-datalist>` element contains one or more `<map-option>` elements.
 
 ### `id`
 Sets the id of the `<map-datalist>` element. This id is used by the `list` attribute of the `<map-input>` element, allowing it to link to the datalist.
-
-<details>
-<summary>Click to view an example of the link between &lt;map-datalist&gt; and &lt;map-input&gt;</summary>
-
-``` html
-<map-input name="s" type="hidden" shard="true" list="servers"></map-input>
-<map-datalist id="servers">
-  <map-option value="a"></map-option>
-  <map-option value="b"></map-option>
-  <map-option value="c"></map-option>
-</map-datalist>
-```
-
-</details> 
-
 
 ---
 

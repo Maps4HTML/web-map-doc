@@ -1,7 +1,7 @@
 ---
 id: map-a
 title: "<map-a>"
-slug: /other-elements/map-a/
+slug: /elements/map-a/
 ---
 
 The `<map-a>` element is a proposal to extend the Web to include links between maps and locations.

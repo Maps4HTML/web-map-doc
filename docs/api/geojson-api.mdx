@@ -29,7 +29,7 @@ The **GeoJSON API** is provided as a library to convert GeoJSON to and from MapM
 
 | Function | Returns | Description |
 |----------|---------|-------------|
-|<code>geojson2mapml(<Object&nbsp;\|&nbsp;String\>&nbsp;json,&nbsp;<Object\>&nbsp;options)</code> | A MapML `<layer->` element. | Convert a GeoJSON feature or feature collection string or object to MapML `<layer->` containing one or more `<map-feature>` elements.|
+|<code>geojson2mapml(\<Object \| String\> json, \<Object\>options)</code> | A MapML `<layer->` element. | Convert a GeoJSON feature or feature collection string or object to MapML `<layer->` containing one or more `<map-feature>` elements.|
 
 :::tip
 
@@ -41,20 +41,20 @@ Check out [this application](https://maps4html.org/experiments/api/custom-map-ui
 
 | Parameter | Description |
 |------|---------------------|
-| <String&nbsp;\|&nbsp;Object>&nbsp;json | A GeoJSON string or object. |
-| &ltObject&gt options | A set of key/value pairs that customize the output MapML layer. All options are optional and described below. |
+| \<String | Object> json | A GeoJSON string or object. |
+| \<Object> options | A set of key/value pairs that customize the output MapML layer. All options are optional and described below. |
 
 ### Options
 
-&ltObject&gt A set of key/value pairs that customize the output MapML layer. All options are optional and detailed below.
+\<Object> A set of key/value pairs that customize the output MapML layer. All options are optional and detailed below.
 
 | Option | Type | Default | Description |
 |------|------|---------------|--------|
-| `label` | <String\> | `json.name`, `json.title` or "Layer" | Sets the output layer's [label](https://maps4html.org/web-map-doc/docs/layers/layer/#label). |
-| `projection` |  <String\> | `OSMTILE` | Sets the output layer's [projection](https://maps4html.org/web-map-doc/docs/elements/mapml-viewer/#projection). Defined values include: `OSMTILE`, `CBMTILE`, `WGS84`, and `APSTILE`.|
-| `caption` | <String&nbsp;\|&nbsp;Function\> | Uses the `label` value | A function that accepts the feature JSON and returns a string, OR a string that is the name of a property to be mapped to the [featurecaption](https://maps4html.org/web-map-doc/docs/elements/feature/#map-featurecaption). If a matching property is not found, the string provided will be used as the feature caption value. See [basic options usage](#basic-options-usage) for an example. |
-| <span id="option-properties">`properties`</span> | <Function&nbsp;\|&nbsp;String&nbsp;\|&nbsp;HTMLElement\> | _Properties will be mapped to an HTML [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table)._ | Specifies how the properties are mapped. <Function\> - A function that accepts one argument - the GeoJSON feature object - and which must return an HTMLElement that becomes the single child element of the <properties\> element. <String\> - A string that will be parsed and used as the single child element of the `<properties>` element for all features. <HTMLElement\> - an element that will be used as the single child element of `<properties>` element for all features. See [basic options usage](#basic-options-usage) for an example.|
-| `geometryFunction` | <Function\> | _MapML geometry will mirror the GeoJSON geometry value_ | <Function\> A function to modify the generated [descendants](https://maps4html.org/web-map-doc/docs/elements/geometry/#child-elements) of `<map-geometry>` which can add classes, [hyperlinks](https://maps4html.org/web-map-doc/docs/other-elements/map-a/) and [span's](https://maps4html.org/web-map-doc/docs/other-elements/span/) to the instance. Plain `<map-geometry>` element will be created by default. The function accepts two arguments: The generated [child element](https://maps4html.org/web-map-doc/docs/elements/geometry/#child-elements) of `<map-geometry>` and the [feature json object](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) to return a modified child element of the `<map-geometry>` element. See [basic options usage](#basic-options-usage) for an example. |
+| `label` | \<String\> | `json.name`, `json.title` or "Layer" | Sets the output layer's [label](https://maps4html.org/web-map-doc/docs/layers/layer/#label). |
+| `projection` |  \<String\> | `OSMTILE` | Sets the output layer's [projection](https://maps4html.org/web-map-doc/docs/elements/mapml-viewer/#projection). Defined values include: `OSMTILE`, `CBMTILE`, `WGS84`, and `APSTILE`.|
+| `caption` | \<String \| Function> | Uses the `label` value | A function that accepts the feature JSON and returns a string, OR a string that is the name of a property to be mapped to the [featurecaption](https://maps4html.org/web-map-doc/docs/elements/feature/#map-featurecaption). If a matching property is not found, the string provided will be used as the feature caption value. See [basic options usage](#basic-options-usage) for an example. |
+| <span id="option-properties">`properties`</span> | \<Function \| String \| HTMLElement\> | _Properties will be mapped to an HTML [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table)._ | Specifies how the properties are mapped. \<Function\> - A function that accepts one argument - the GeoJSON feature object - and which must return an HTMLElement that becomes the single child element of the \<map-properties\> element. \<String\> - A string that will be parsed and used as the single child element of the `<map-properties>` element for all features. \<HTMLElement\> - an element that will be used as the single child element of `<map-properties>` element for all features. See [basic options usage](#basic-options-usage) for an example.|
+| `geometryFunction` | \<Function\> | _MapML geometry will mirror the GeoJSON geometry value_ | \<Function\> A function to modify the generated [descendants](https://maps4html.org/web-map-doc/docs/elements/geometry/#child-elements) of `<map-geometry>` which can add classes, [hyperlinks](https://maps4html.org/web-map-doc/docs/elements/map-a/) and [span's](https://maps4html.org/web-map-doc/docs/elements/span/) to the instance. Plain `<map-geometry>` element will be created by default. The function accepts two arguments: The generated [child element](https://maps4html.org/web-map-doc/docs/elements/geometry/#child-elements) of `<map-geometry>` and the [feature json object](https://www.rfc-editor.org/rfc/rfc7946#section-3.2) to return a modified child element of the `<map-geometry>` element. See [basic options usage](#basic-options-usage) for an example. |
 
 ---
 ### Examples
@@ -280,7 +280,7 @@ let output = geojson2mapml(json);
 
 | Function | Returns | Description |
 |----------|---------|-------------|
-| <code>mapml2geojson(<HTMLLayerElement\>&nbsp;element,&nbsp;<Object\>&nbsp;options)</code> | A JavaScript (GeoJSON) feature collection object | This function transforms the `<feature>` element children of a `<layer->` element to a GeoJSON FeatureCollection object. You supply [options](#options-1) to control the transformation. This function must be used inside a windows.onload event.
+| <code>mapml2geojson(\<HTMLLayerElement\> element, \<Object\> options)</code> | A JavaScript (GeoJSON) feature collection object | This function transforms the `<feature>` element children of a `<layer->` element to a GeoJSON FeatureCollection object. You supply [options](#options-1) to control the transformation. This function must be used inside a windows.onload event.
 
 :::caution
 
@@ -298,17 +298,17 @@ window.onload = (event) => {
 
 | Parameter | Description |
 |------|--------------|
-| <HTMLLayerElement\> element | A `<layer->` element. |
-| <Object\>&nbsp;options | You supply parameters via an options object with [predefined option names](#options-1). |
+| \<HTMLLayerElement\> element | A `<layer->` element. |
+| \<Object\> options | You supply parameters via an options object with [predefined option names](#options-1). |
 
 ### Options
 
-<Object\> A set of key/value pairs that customize the output GeoJSON object. All are optional and detailed below.
+\<Object\> A set of key/value pairs that customize the output GeoJSON object. All are optional and detailed below.
 
 | Option | Type | Default | Description |
 |------|------|---------------|--------|
-| `propertyFunction` | <Function\> | _n/a_ | A function you supply that maps the features' `<map-properties>` element to a [GeoJSON "properties" member](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2), since only you know the markup design in your `<map-properties>` value. If you don't supply this option, a default function will attempt to reverse a `<table>` child of the `<map-properties>` element, as if that table was generated by the [default properties option function from geojson2mapml](#option-properties). |
-| `transform` | <Boolean\> | `true` | Transform `<map-coordinates>` values to `gcrs` (longitude,latitude) values, if they are not already so. GeoJSON [recommends](https://www.rfc-editor.org/rfc/rfc7946.html#section-4) using WGS 84 longitude,latitude coordinates, so this is the default behaviour. |
+| `propertyFunction` | \<Function\> | _n/a_ | A function you supply that maps the features' `<map-properties>` element to a [GeoJSON "properties" member](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2), since only you know the markup design in your `<map-properties>` value. If you don't supply this option, a default function will attempt to reverse a `<table>` child of the `<map-properties>` element, as if that table was generated by the [default properties option function from geojson2mapml](#option-properties). |
+| `transform` | \<Boolean\> | `true` | Transform `<map-coordinates>` values to `gcrs` (longitude,latitude) values, if they are not already so. GeoJSON [recommends](https://www.rfc-editor.org/rfc/rfc7946.html#section-4) using WGS 84 longitude,latitude coordinates, so this is the default behaviour. |
 ###### Notes
 
 `mapml2geojson`, by default, will transform coordinates to `gcrs` before serialization, if 

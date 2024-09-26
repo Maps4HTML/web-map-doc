@@ -57,7 +57,7 @@ Valeurs supportées pour `type` et fonction :
 | `image/*` | A utiliser en combinaison avec `rel=image` et `rel=tile` pour charger des images de cartes et des tuiles d'images, respectivement, lorsque `tref` fait référence à une source de données basée sur l'image, comme n'importe quel Service de Carte Web ou Service de Tuiles de Carte Web. Voir [Mozilla Developer Network](https://developer.mozilla.org/fr/docs/Web/Media/Formats/Image_types) pour une liste des types supportés.
 | `application/pmtiles` | A utiliser en combinaison avec `rel=tile`, où `tref` fait référence à [pmtiles format](https://docs.protomaps.com/pmtiles/) ou à des ressources cartographiques| 
 | `application/pmtiles+stylesheet` | A utiliser en combinaison avec `rel=stylesheet`, où `href` fait référence à un module JavaScript structuré d'une manière spécifique|
-| `application/vnd.mapbox-vector-tile` | A utiliser en combinaison avec `rel=tile`, où `tref` fait référence à un format [Mapbox Vector Tiles](https://github.com/mapbox/vector-tile-spec) dit « {z}{x}{y} » [Web Map Tile Service](https://docs.geoserver.org/latest/en/user/extensions/vectortiles/tutorial.html) ou [API](https://protomaps.com/other)
+| `application/vnd.mapbox-vector-tile` | A utiliser en combinaison avec `rel=tile`, où `tref` fait référence à un format [Mapbox Vector Tiles](https://github.com/mapbox/vector-tile-spec) dit « \{z}\{x}\{y} » [Web Map Tile Service](https://docs.geoserver.org/latest/en/user/extensions/vectortiles/tutorial.html) ou [API](https://protomaps.com/other)
 
 ---
 ### `title`
