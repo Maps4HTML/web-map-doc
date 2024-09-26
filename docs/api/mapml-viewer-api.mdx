@@ -145,7 +145,7 @@ map.lat = 21.4; // if it's an invalid value, nothing happens
 ```
 Note that the value supplied does not affect the map viewer state, except at 
 document load, or when an instance of a `<mapml-viewer>` element is constructed
-and programmatically added to the DOM. To change the value, use [zoomTo()](#zoomTo);
+and programmatically added to the DOM. To change the value, use [zoomTo()](#zoomtolat-lon-zoom);
 
 To get the latitude:
 ```js
@@ -164,7 +164,7 @@ map.lon = 21.4; // if it's an invalid value, nothing happens
 ```
 Note that the value supplied does not affect the map viewer state, except at 
 document load, or when an instance of a `<mapml-viewer>` element is constructed
-and programmatically added to the DOM. To change the value, use [zoomTo()](#zoomTo);
+and programmatically added to the DOM. To change the value, use [zoomTo()](#zoomtolat-lon-zoom);
 
 To get the longitude:
 ```js
@@ -350,7 +350,7 @@ Check out [this application](https://maps4html.org/experiments/api/custom-map-ui
 
 | Option | Type | Default | Description |
 |------|------|---------------|--------|
-| `label` | \<String\> | `json.name`, `json.title` or "Layer" | Sets the output layer's [label](/web-map-doc/docs/layers/layer/#label). |
+| `label` | \<String\> | `json.name`, `json.title` or "Layer" | Sets the output layer's [label](/web-map-doc/docs/elements/layer/#label). |
 | `projection` |  \<String\> | `map`.[projection](/web-map-doc/docs/elements/mapml-viewer/#projection) or `OSMTILE` | Sets the output layer's [projection](/web-map-doc/docs/elements/mapml-viewer/#projection). Defined values include: `OSMTILE`, `CBMTILE`, `WGS84`, and `APSTILE`.|
 | `caption` | \<String \| Function\> | `json.features[i].id` or the `label` value | A function that accepts the feature JSON and returns a string, OR a string that is the name of a property to be mapped to the [featurecaption](/web-map-doc/docs/elements/feature/#map-featurecaption). If a matching property is not found, the string provided will be used as the feature caption value. See [basic options usage](#basic-options-usage) for an example. |
 | <span id="option-properties">`properties`</span> | \<Function&nbsp;\|&nbsp;String&nbsp;\|&nbsp;HTMLElement\> | _Properties will be mapped to an HTML [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table)._ | Specifies how the properties are mapped. \<Function\> - A function that accepts one argument - the GeoJSON feature object - and which must return an HTMLElement that becomes the single child element of the \<map-properties\> element. \<String\> - A string that will be parsed and used as the single child element of the `<map-properties>` element for all features. \<HTMLElement\> - an element that will be used as the single child element of `<map-properties>` element for all features. See [basic options usage](#basic-options-usage) for an example.|
