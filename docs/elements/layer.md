@@ -1,7 +1,7 @@
 ---
 id: layer
 title: "<layer->"
-slug: /layers/layer/
+slug: /elements/layer/
 ---
 
 Maps have one or more layers. Map layers are implemented by the `<layer->` custom element.  
