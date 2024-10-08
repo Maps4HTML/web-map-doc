@@ -63,6 +63,21 @@ and the fetched `<map-title>` element is used.
 
 ---
 
+### `media`
+
+The `media` attribute is used to express media conditions under which the layer 
+content should be used / loaded from `src`.  Media conditions evaluate to `true` or `false`.  
+A layer for which the media condition evaluates to `false` is by default hidden.  
+A layer for which the media condition evaluates to `true` is added to the map 
+according to its `checked` attribute, and is added to the layer control according
+to its `hidden` attribute.
+
+Map media queries can include extended CSS map properties including:    
+[projection](../../api/mapml-viewer-api#projection), [zoom](../../api/mapml-viewer-api#zoom), 
+and [extent](../../api/mapml-viewer-api#extent).
+
+---
+
 ### `opacity`
 
 The `opacity` attribute is used to set the initial opacity of the `<layer->` element.
