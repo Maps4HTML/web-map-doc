@@ -101,7 +101,7 @@ Lorsque vous sauvegardez et appuyez sur le bouton « Actualiser » du navigateur
 
 :::tip
 
-Voir la page finale [ici](/web-map-doc/demo/Tutorial/Getting%20Started/).
+Voir la page finale [ici](https://maps4html.org/web-map-doc/demo/Tutorial/Getting%20Started/).
 
 :::
 
