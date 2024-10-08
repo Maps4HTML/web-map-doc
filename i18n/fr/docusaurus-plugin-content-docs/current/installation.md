@@ -16,7 +16,7 @@ import TabItem from '@theme/TabItem';
 <TabItem value="jsDelivr" label="jsDelivr">
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@maps4html/mapml/dist/mapml.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@maps4html/mapml@latest/dist/mapml.js"></script>
 ```
 
 </TabItem>

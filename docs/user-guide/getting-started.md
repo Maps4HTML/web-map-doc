@@ -64,7 +64,7 @@ You have learned how to include resources like images in your web page, and now 
     <head>
        <title>My First Web Map</title>
 	   // highlight-next-line
-       <script type="module" src="https://cdn.jsdelivr.net/npm/@maps4html/mapml/dist/mapml.js" crossorigin></script>
+       <script type="module" src="https://cdn.jsdelivr.net/npm/@maps4html/mapml@latest/dist/mapml.js" crossorigin></script>
     </head>
     <body>
       <p>Web pages are easy-peasy</p>
@@ -82,7 +82,7 @@ The next step in our lesson is to remove the image and replace it with a map, us
 <html>
       <head>
           <title>My First Web Map</title>
-          <script type="module" src="https://cdn.jsdelivr.net/npm/@maps4html/mapml/dist/mapml.js" crossorigin></script>
+          <script type="module" src="https://cdn.jsdelivr.net/npm/@maps4html/mapml@latest/dist/mapml.js" crossorigin></script>
       </head>
       <body>
          <p>Web <s>pages</s> maps are easy-peasy</p>

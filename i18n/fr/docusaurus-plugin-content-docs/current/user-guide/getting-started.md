@@ -64,7 +64,7 @@ Maintenant que vous avez appris comment inclure des ressources telles que des im
     <head>
        <title>Ma première Carte Web</title>
 	   // highlight-next-line
-       <script type="module" src="https://cdn.jsdelivr.net/npm/@maps4html/mapml/dist/mapml.js" crossorigin></script>
+       <script type="module" src="https://cdn.jsdelivr.net/npm/@maps4html/mapml@latest/dist/mapml.js" crossorigin></script>
     </head>
     <body>
       <p>Les pages Web: c'est si facile</p>
@@ -82,7 +82,7 @@ La prochaine étape est de supprimer et remplacer l'image par une carte, en util
 <html>
       <head>
           <title>Ma première Carte Web</title>
-          <script type="module" src="https://cdn.jsdelivr.net/npm/@maps4html/mapml/dist/mapml.js" crossorigin></script>
+          <script type="module" src="https://cdn.jsdelivr.net/npm/@maps4html/mapml@latest/dist/mapml.js" crossorigin></script>
       </head>
       <body>
          <p>Les <s>pages</s> cartes Web : c'est si facile</p>
@@ -101,7 +101,7 @@ Lorsque vous sauvegardez et appuyez sur le bouton « Actualiser » du navigateur
 
 :::tip
 
-Voir la page finale [ici](https://maps4html.org/web-map-doc/demo/Tutorial/Getting%20Started/).
+Voir la page finale [ici](/web-map-doc/demo/Tutorial/Getting%20Started/).
 
 :::
 
