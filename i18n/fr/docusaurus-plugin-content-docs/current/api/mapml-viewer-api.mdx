@@ -224,7 +224,7 @@ let zoom = map.zoom;
 | [viewSource()](#viewsource)             	| Affiche la source de la carte.                                          	|
 | [defineCustomProjection(options)](#definecustomprojectionoptions)	| Définir une projection personnalisée à utiliser par la page.  |
 | [zoomTo(lat, lon, zoom)](#zoomtolat-lon-zoom) | Survole la carte ou effectue un mouvement panoramique vers un (nouvel) emplacement et à un autre niveau de zoom.|
-| [geojson2mapml(json, options)](#zoomtolat-lon-zoom) | Convertit une caractéristique GeoJSON ou une chaîne ou un objet de collection de caractéristiques en élément MapML `<layer->` contenant un ou plusieurs éléments `<map-feature>`. |
+| [geojson2mapml(json, options)](#zoomtolat-lon-zoom) | Convertit une caractéristique GeoJSON ou une chaîne ou un objet de collection de caractéristiques en élément MapML `<map-layer>` contenant un ou plusieurs éléments `<map-feature>`. |
 
 
 ### back()
@@ -283,7 +283,7 @@ MapML définit quelques projections CRS (Système de référence des coordonnée
 
 L’élément personnalisé `<mapml-viewer>` fournit l’interface de programmation d’applications (API) personnalisée des projections, qui vous permet de créer vos propres projections et de les utiliser dans l’élément `<mapml-viewer>`, défini avec la syntaxe "proj4" étendue du langage JSON et prise en charge par la bibliothèque proj4js.
 
-Nous n’examinerons pas l’élément `<mapml-viewer>` lui-même ici, sauf pour dire que l’attribut `projection` de la carte doit avoir la même valeur que le membre `projection` de l’objet JSON que vous transmettez à la méthode `defineCustomProjection` de l’API personnalisée des projections, et que chaque élément `<layer->` présent dans la carte doit comporter une déclaration et être programmé dans ce système de coordonnées pour s’afficher correctement.
+Nous n’examinerons pas l’élément `<mapml-viewer>` lui-même ici, sauf pour dire que l’attribut `projection` de la carte doit avoir la même valeur que le membre `projection` de l’objet JSON que vous transmettez à la méthode `defineCustomProjection` de l’API personnalisée des projections, et que chaque élément `<map-layer>` présent dans la carte doit comporter une déclaration et être programmé dans ce système de coordonnées pour s’afficher correctement.
 
 L’API personnalisée des projections est fournie par l’élément `<mapml-viewer>`. Dans un navigateur, elle peut être définie sur l’objet de fenêtre. Toutefois, parce que des éléments personnalisés utilisent des modules ES6, il est pratique de la placer sur l’élément de mappage qui l’utilise.
 
@@ -332,7 +332,7 @@ navigator.geolocation.getCurrentPosition(success, error, options);
 
 ### geojson2mapml(json, options)
 
-Convertit une caractéristique GeoJSON ou une chaîne ou un objet de collection de caractéristiques en élément MapML `<layer->` contenant un ou plusieurs éléments `<map-feature>`.
+Convertit une caractéristique GeoJSON ou une chaîne ou un objet de collection de caractéristiques en élément MapML `<map-layer>` contenant un ou plusieurs éléments `<map-feature>`.
 
 :::tip
 
@@ -473,7 +473,7 @@ let output = map.geojson2mapml(json, {label: "Exemple 1", projection: "CBMTILE",
 <summary>Cliquez pour afficher la sortie HTMLElement</summary>
 
 ``` html
-<layer- label="Example 1" checked="">
+<map-layer label="Example 1" checked="">
    <map-meta name="projection" content="CBMTILE"></map-meta>
    <map-meta name="cs" content="gcrs"></map-meta>
    <map-feature>
@@ -487,7 +487,7 @@ let output = map.geojson2mapml(json, {label: "Exemple 1", projection: "CBMTILE",
          <h3>Ceci est un en-tête de propriété</h3>
       </map-properties>
    </map-feature>
-</layer->
+</map-layer>
 ```
 
 </details> 
@@ -526,7 +526,7 @@ let output = map.geojson2mapml(json, {label: "Exemple 2", caption: cap, properti
 <summary>Cliquez pour afficher la sortie HTMLElement</summary>
 
 ``` html
-<layer- label="Example 2" checked="">
+<map-layer label="Example 2" checked="">
    <map-meta name="projection" content="OSMTILE"></map-meta>
    <map-meta name="cs" content="gcrs"></map-meta>
    <map-feature>
@@ -540,7 +540,7 @@ let output = map.geojson2mapml(json, {label: "Exemple 2", caption: cap, properti
          <h1>Ceci est une propriété du point</h1>
       </map-properties>
    </map-feature>
-</layer->
+</map-layer>
 ```
 
 </details> 
@@ -573,7 +573,7 @@ let output = map.geojson2mapml(json);
 <summary>Cliquez pour afficher la sortie HTMLElement</summary>
 
 ``` html
-<layer- label="Géométrie du point" checked="">
+<map-layer label="Géométrie du point" checked="">
    <map-meta name="extent" content="top-left-longitude=-75.916809, top-left-latitude=45.886964, bottom-right-longitude=-75.516809,bottom-right-latitude=45.26964"></map-meta>
    <map-meta name="projection" content="OSMTILE"></map-meta>
    <map-meta name="cs" content="gcrs"></map-meta>
@@ -601,7 +601,7 @@ let output = map.geojson2mapml(json);
          </table>
       </map-properties>
    </map-feature>
-</layer->
+</map-layer>
 ```
 
 </details> 
@@ -636,7 +636,7 @@ let output = map.geojson2mapml(json);
 </head>
 <body>
   <mapml-viewer projection="ATLAS_POLAR_MAP" zoom="2" lat="83.48919" lon="-87.7687" controls>
-    <layer- label="Carte polaire murale de l’Atlas du Canada" checked>
+    <map-layer label="Carte polaire murale de l’Atlas du Canada" checked>
     <map-link rel="license" title="Plateforme géospatiale fédérale canadienne" href="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN/MapServer/"></map-link>
       <map-extent units="ATLAS_POLAR_MAP" checked hidden>
         <map-input type="zoom" name="z" min="0" max="6" value="6" ></map-input>
@@ -645,7 +645,7 @@ let output = map.geojson2mapml(json);
         <map-link rel="tile" tref="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN/MapServer/tile/{z}/{y}/{x}/"></map-link>
         <map-link rel="tile" tref="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN_A/MapServer/tile/{z}/{y}/{x}/"></map-link>
       </map-extent>
-    </layer->
+    </map-layer>
   </mapml-viewer>
 </body>
 </html>

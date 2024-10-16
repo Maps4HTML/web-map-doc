@@ -12,9 +12,9 @@ to present an image at that location on the map.
 Add an image file to your project directory. Now you can access this image in MapML.
 
 ```html
-<layer- label="My Static Tile Layer" checked>
+<map-layer label="My Static Tile Layer" checked>
   <map-tile zoom="0" row="1" col="1" src="my-tile.png"></map-tile>
-</layer->
+</map-layer>
 
 ```
 
@@ -73,7 +73,7 @@ Sets the [projection](http://example.org/) of the layer.
 
 ```html
 <mapml-viewer projection="CBMTILE" zoom="2" lat="59" lon="-53" width="900" height="400" controls>
-  <layer- label="Static MapML with tiles" checked>
+  <map-layer label="Static MapML with tiles" checked>
     <map-meta name="zoom" content="min=1,max=4"></map-meta>
     <map-meta name="projection" content="CBMTILE"></map-meta>
     <map-link rel="license"
@@ -83,7 +83,7 @@ Sets the [projection](http://example.org/) of the layer.
     <map-tile zoom="2" row="10" col="11" src="data/cbmt/2/c11_r10.png"></map-tile>
     <map-tile zoom="2" row="10" col="9" src="data/cbmt/2/c9_r10.png"></map-tile>
     <map-tile zoom="2" row="11" col="9" src="data/cbmt/2/c9_r11.png"></map-tile>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 [ADD MAP HERE]

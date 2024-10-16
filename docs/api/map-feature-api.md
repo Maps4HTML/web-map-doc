@@ -313,7 +313,7 @@ None ([undefined](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refere
 
 ``` js
 window.onload = (event) => {
-  let layer = document.querySelector('layer-');
+  let layer = document.querySelector('map-layer');
   layer.mapml2geojson();
 };
 ```
@@ -366,7 +366,7 @@ A GeoJSON object representing the feature
 #### Default options
 An example showcasing default GeoJSON output when no options are provided.
 ``` html
-<layer- label="Point Geometry" checked="">
+<map-layer label="Point Geometry" checked="">
    <map-meta name="extent" content="top-left-longitude=-75.916809, top-left-latitude=45.886964, bottom-right-longitude=-75.516809,bottom-right-latitude=45.26964"></map-meta>
    <map-meta name="projection" content="OSMTILE"></map-meta>
    <map-meta name="cs" content="gcrs"></map-meta>
@@ -394,10 +394,10 @@ An example showcasing default GeoJSON output when no options are provided.
          </table>
       </map-properties>
    </map-feature>
-</layer->
+</map-layer>
 <script>
 window.onload = (event) => {
-   let layer = document.querySelector('layer-');
+   let layer = document.querySelector('map-layer');
    let output = layer.mapml2geojson();
 };
 </script>

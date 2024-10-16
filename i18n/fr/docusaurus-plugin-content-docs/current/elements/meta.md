@@ -61,7 +61,7 @@ de la carte Copier > Étendue, comme indiqué ci-dessous :
 | [Catégories de contenu](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories) | [Contenu de métadonnées](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#metadata_content) |
 | Contenu autorisé | Aucun, il s’agit d’un [élément vide](https://developer.mozilla.org/en-US/docs/Glossary/Empty_element).  |
 | Omission de balises | Bien que l’élément HTML `<meta>` soit un élément vide, le polyfill `<map-link>` doit avoir une balise de fin. |
-| Parents autorisés | En ligne : élément `<layer->`. Dans un document MapML : élément `<map-head>`. |
+| Parents autorisés | En ligne : élément `<map-layer>`. Dans un document MapML : élément `<map-head>`. |
 | Rôle ARIA implicite | [Aucun rôle correspondant](https://www.w3.org/TR/html-aria/#dfn-no-corresponding-role) |
 | Rôles ARIA autorisés | Aucun rôle autorisé |
 | DOM interface | [HTMLMetaElement extension](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMetaElement) |
@@ -78,7 +78,7 @@ Le codage des coordonnées de l’entité est strictement déterminé par l’at
 
 
 ```html
-<layer- label="Restaurant préféré" checked>
+<map-layer label="Restaurant préféré" checked>
   <map-meta name="projection" content="OSMTILE"></map-meta>
   <map-meta name="zoom" content="min=0,max=22,value=3"></map-meta>
   <map-feature>
@@ -89,7 +89,7 @@ Le codage des coordonnées de l’entité est strictement déterminé par l’at
           </map-point>
       </map-geometry>
   </map-feature>
-</layer->
+</map-layer>
 ```
 
 ### Réglage de la portée 
@@ -98,7 +98,7 @@ Utiliser l’élément `<map-meta>` pour établir la **portée** pcrs (easting,n
  
 
 ```html
-<layer- label="Restaurant préféré" checked>
+<map-layer label="Restaurant préféré" checked>
   <map-meta name="projection" content="OSMTILE"></map-meta>
   <map-meta name="zoom" content="min=0,max=22,value=3"></map-meta>
   <map-meta name="extent" content="top-left-easting=-8433179, top-left-northing=5689316, bottom-right-easting=-8420968,bottom-right-northing=5683139"></map-meta>
@@ -110,7 +110,7 @@ Utiliser l’élément `<map-meta>` pour établir la **portée** pcrs (easting,n
           </map-point>
       </map-geometry>
   </map-feature>
-</layer->
+</map-layer>
 ```
 
 ### Variable alternative cs pour &lt;map-geometry&gt;
@@ -122,7 +122,7 @@ Ces deux valeurs reviendront aux valeurs par défaut de la projection.
  
 
 ```html
-<layer- label="Restaurant préféré" checked>
+<map-layer label="Restaurant préféré" checked>
   <map-meta name="projection" content="OSMTILE"></map-meta>
   <map-meta name="cs" content="gcrs" ></map-meta>
   <map-feature>
@@ -133,7 +133,7 @@ Ces deux valeurs reviendront aux valeurs par défaut de la projection.
           </map-point>
       </map-geometry>
   </map-feature>
-</layer->
+</map-layer>
 ```
 
 ### Métadonnées par défaut
@@ -144,7 +144,7 @@ La portée de la couche correspond par défaut à celle de la projection.
 
 
 ```html
-<layer- label="Restaurant préféré" checked>
+<map-layer label="Restaurant préféré" checked>
   <map-feature>
     <map-featurecaption>Big Daddy's Crab Shack</map-featurecaption>
       <map-geometry>
@@ -153,7 +153,7 @@ La portée de la couche correspond par défaut à celle de la projection.
           </map-point>
       </map-geometry>
   </map-feature>
-</layer->
+</map-layer>
 ```
 
 ---

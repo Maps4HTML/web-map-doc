@@ -55,5 +55,5 @@ Ajoutez ce qui suit à l’élément `<head>` de votre code HTML :
 <script type="module" src="./node_modules/@maps4html/mapml/dist/mapml.js"></script>
 ```
 
-Vous pouvez maintenant utiliser dans vos pages Web les éléments `<mapml-viewer>` et `<layer->` ainsi que les autres éléments décrits dans le présent document.
+Vous pouvez maintenant utiliser dans vos pages Web les éléments `<mapml-viewer>` et `<map-layer>` ainsi que les autres éléments décrits dans le présent document.
 

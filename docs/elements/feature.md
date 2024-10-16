@@ -7,7 +7,7 @@ Map [features](https://en.wikipedia.org/wiki/Geographical_feature) are real or i
 
 Map features are represented in HTML MapML using a `<map-feature>` element, which is rendered on the map through translation to SVG. This allows the feature to scale without distortion, as you zoom in and out. 
 
-A `<map-feature>` element is a container for a feature's accessible name (`<map-featurecaption>`), scalar properties (`<map-properties>`) and its geometry (`<map-geometry>`).  The `<map-feature>` element can be modeled as inline HTML content as a child of the `<layer->` element, or in an XHTML MapML document, as a child of the `<map-body>` element.
+A `<map-feature>` element is a container for a feature's accessible name (`<map-featurecaption>`), scalar properties (`<map-properties>`) and its geometry (`<map-geometry>`).  The `<map-feature>` element can be modeled as inline HTML content as a child of the `<map-layer>` element, or in an XHTML MapML document, as a child of the `<map-body>` element.
 
 <iframe src="../../../demo/map-feature-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
@@ -120,7 +120,7 @@ Sets the [extent](../meta/#attributes) of the layer.
   <mapml-viewer projection="CBMTILE" zoom="2" lat="45.5052040" lon="-75.2202344"
     controls>
 
-    <layer- label="Arizona" checked>
+    <map-layer label="Arizona" checked>
       <map-meta name="projection" content="CBMTILE"></map-meta>
       <map-meta name="zoom" content="min=1,max=5,value=0"></map-meta>
       <map-meta name="cs" content="gcrs"></map-meta>
@@ -177,13 +177,13 @@ Sets the [extent](../meta/#attributes) of the layer.
           </map-polygon>
         </map-geometry>
       </map-feature>
-    </layer->
+    </map-layer>
   </mapml-viewer>
 ```
 ### An inline HTML map-feature
 
 ```html
-<layer- label="My Feature Layer" checked>
+<map-layer label="My Feature Layer" checked>
     <map-feature id="mem35059" zoom="17">
       <map-properties>
         <table>
@@ -210,13 +210,13 @@ Sets the [extent](../meta/#attributes) of the layer.
         </map-point>
       </map-geometry>
     </map-feature>
-</layer->
+</map-layer>
 ```
 
 ### A map-feature in a fetched XHTML MapML document
 
 ```html
-<layer- label="My Feature Layer" src="https://example.org/mem/35059.mapml"></layer->
+<map-layer label="My Feature Layer" src="https://example.org/mem/35059.mapml"></map-layer>
 ```
 
 ### 35059.mapml:

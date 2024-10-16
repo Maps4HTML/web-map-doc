@@ -22,8 +22,8 @@ All the Demo's on the documentation pages contain a "CSS" tab which adds the CSS
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
-  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Polygon" checked>
+  <map-layer label="OpenStreetMap" src="../data/osm.mapml" checked></map-layer>
+  <map-layer label="Polygon" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Polygon</map-featurecaption>
@@ -37,7 +37,7 @@ All the Demo's on the documentation pages contain a "CSS" tab which adds the CSS
       <map-properties><h2>This is a Polygon</h2></map-properties>
     </map-feature>
     <map-style>.hole {stroke: #73A9AD;stroke-width: 4px;fill: none;fill-opacity: 1;}</map-style>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 

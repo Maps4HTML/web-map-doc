@@ -27,8 +27,8 @@ The following markup may work on Chrome and Firefox, although it may take some f
 ```html
 <img usemap="#mymap" src="../map1.png" width="700" height="400" alt="Map area">
 <map name="mymap" is="web-map" zoom="17" lat="45.398043" lon="-75.70683" controls>
-  <layer- id="osm" src="https://geogratis.gc.ca/mapml/osmtile/osm/" label="Open Street Map" checked></layer->
-  <layer- id="marker" label="Marker layer" src="../marker.mapml"></layer->
+  <map-layer id="osm" src="https://geogratis.gc.ca/mapml/osmtile/osm/" label="Open Street Map" checked></map-layer>
+  <map-layer id="marker" label="Marker layer" src="../marker.mapml"></map-layer>
   <area is="map-area" href="https://example.com/marker/" alt="rectangle" coords="255,145,275,190" shape="rect">
   <area is="map-area" id="donut" alt="Circle" href='https://example.com/circle/' coords="250,250,25" shape="circle">
   <area is="map-area" id="hole" coords="250,250,7" shape="circle">

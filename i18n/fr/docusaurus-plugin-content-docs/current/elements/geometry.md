@@ -86,8 +86,8 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
 ### Point
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
-  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Géométrie en mode point" checked>
+  <map-layer label="OpenStreetMap" src="../data/osm.mapml" checked></map-layer>
+  <map-layer label="Géométrie en mode point" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Point</map-featurecaption>
@@ -99,7 +99,7 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
       </map-geometry>
       <map-properties><h2>Ceci est un point</h2></map-properties>
     </map-feature>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 
@@ -107,8 +107,8 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
-  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Géométrie en mode ligne" checked>
+  <map-layer label="OpenStreetMap" src="../data/osm.mapml" checked></map-layer>
+  <map-layer label="Géométrie en mode ligne" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Ligne</map-featurecaption>
@@ -120,7 +120,7 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
       </map-geometry>
       <map-properties><h2>Ceci est une ligne</h2></map-properties>
     </map-feature>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 
@@ -128,8 +128,8 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
-  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Géométrie en mode polygone" checked>
+  <map-layer label="OpenStreetMap" src="../data/osm.mapml" checked></map-layer>
+  <map-layer label="Géométrie en mode polygone" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Polygone</map-featurecaption>
@@ -142,7 +142,7 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
       </map-geometry>
       <map-properties><h2>Ceci est un polygone</h2></map-properties>
     </map-feature>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 
@@ -150,8 +150,8 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
-  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Géométrie en mode multipoint" checked>
+  <map-layer label="OpenStreetMap" src="../data/osm.mapml" checked></map-layer>
+  <map-layer label="Géométrie en mode multipoint" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>MultiPoint</map-featurecaption>
@@ -163,7 +163,7 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
       </map-geometry>
       <map-properties><h2>Ceci est un multipoint</h2></map-properties>
     </map-feature>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 
@@ -171,8 +171,8 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
-  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Géométrie en mode multiligne" checked>
+  <map-layer label="OpenStreetMap" src="../data/osm.mapml" checked></map-layer>
+  <map-layer label="Géométrie en mode multiligne" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>MultiLineString</map-featurecaption>
@@ -185,7 +185,7 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
       </map-geometry>
       <map-properties><h2>Ceci est une multiligne</h2></map-properties>
     </map-feature>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 
@@ -193,8 +193,8 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
-  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Géométrie en mode multipolygone" checked>
+  <map-layer label="OpenStreetMap" src="../data/osm.mapml" checked></map-layer>
+  <map-layer label="Géométrie en mode multipolygone" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>MultiPolygon</map-featurecaption>
@@ -211,7 +211,7 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
       </map-geometry>
       <map-properties><h2>Ceci est un multipolygone</h2></map-properties>
     </map-feature>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 
@@ -219,8 +219,8 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
-  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Collection de géométries" checked>
+  <map-layer label="OpenStreetMap" src="../data/osm.mapml" checked></map-layer>
+  <map-layer label="Collection de géométries" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Collection de géométries</map-featurecaption>
@@ -240,7 +240,7 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
       </map-geometry>
       <map-properties><h2>Ceci est une collection de géométries</h2></map-properties>
     </map-feature>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 

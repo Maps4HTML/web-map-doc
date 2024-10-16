@@ -9,7 +9,7 @@ In this section, we will learn how to create a templated image layer. A template
 ## Adding a templated image layer
 
 ```html
-<layer- label="Toporama" checked>
+<map-layer label="Toporama" checked>
   <map-meta name="zoom" content="min=4,max=5"></map-meta>
   <map-extent units="CBMTILE" checked hidden>
     <map-input name="z" type="zoom" value="19" min="4" max="4"></map-input>
@@ -21,7 +21,7 @@ In this section, we will learn how to create a templated image layer. A template
     <map-input name="ymax" type="location" units="pcrs" position="top-left" axis="northing" min="-3362085" max="3952277"></map-input>
     <map-link rel="image" tref="http://my-wms.ca?FORMAT=image/jpeg&amp;WIDTH={w}&amp;HEIGHT={h}&amp;BBOX={xmin},{ymin},{xmax},{ymax}"></map-link>
   </map-extent>
-</layer->
+</map-layer>
 ```
 
 ## Associated Elements
@@ -93,7 +93,7 @@ Sets the zoom range of the layer, in the following example the user can zoom fro
 
 ```html
 <mapml-viewer projection="CBMTILE" zoom="4" lat="53.331" lon="-91.667" controls>
-  <layer- label="Toporama" checked>
+  <map-layer label="Toporama" checked>
     <map-meta name="zoom" content="min=4,max=5"></map-meta>
     <map-extent units="CBMTILE" checked hidden>
       <map-input name="z" type="zoom" value="19" min="4" max="4"></map-input>
@@ -105,7 +105,7 @@ Sets the zoom range of the layer, in the following example the user can zoom fro
       <map-input name="ymax" type="location" units="pcrs" position="top-left" axis="northing" min="-3362085.3441706896" max="3952277.216154434"></map-input>
       <map-link rel="image" tref="http://wms.ess-ws.nrcan.gc.ca/wms/toporama_en?SERVICE=WMS&amp;REQUEST=GetMap&amp;FORMAT=image/jpeg&amp;TRANSPARENT=FALSE&amp;STYLES=&amp;VERSION=1.3.0&amp;LAYERS=WMS-Toporama&amp;WIDTH={w}&amp;HEIGHT={h}&amp;CRS=EPSG:3978&amp;BBOX={xmin},{ymin},{xmax},{ymax}&amp;m4h=t"></map-link>
     </map-extent>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 

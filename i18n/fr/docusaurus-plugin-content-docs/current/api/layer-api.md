@@ -16,14 +16,14 @@ La propriété vérifiée ne peut être modifiée si l’état de la propriété
 Pour activer l’état vérifié d’une couche activée :
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 layer.checked = true; // les valeurs valides sont true | false
 ```
 
 Pour lire l’état vérifié de la couche :
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 let isChecked = layer.checked;
 ```
 ---
@@ -36,14 +36,14 @@ Cela est également pratique pour gérer une couche permanente sans surcharger l
 Pour définir que la couche est masquée ou la mettre à jour avec cet état :
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 layer.hidden = true; // les valeurs valides sont true | false
 ```
 
-Pour obtenir la valeur hidden de `<layer->` :
+Pour obtenir la valeur hidden de `<map-layer>` :
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 let isHidden = layer.hidden;
 ```
 ---
@@ -56,54 +56,54 @@ let isHidden = layer.hidden;
 ### label
 `HTMLLayerElement.label` reflète l'attribut de contenu `label`, et spécifie un 
 nom accessible de repli pour la couche, si le nom accessible n'est pas fourni par un 
-élément local `<map-title>` enfant de l'élément `<layer->`, ou dans l'élément 
+élément local `<map-title>` enfant de l'élément `<map-layer>`, ou dans l'élément 
 `<map-head>` d'un document MapML chargé via la valeur URL dans l'attribut `src`, 
 respectivement.
 
-Pour définir la label de `<layer->` ou mettre à jour celle-ci :
+Pour définir la label de `<map-layer>` ou mettre à jour celle-ci :
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 layer.label = "Nouveau titre";
 ```
 
-Pour obtenir la valeur de la label de `<layer->` :
+Pour obtenir la valeur de la label de `<map-layer>` :
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 let label = layer.label;
 ```
 ---
 ### src
 `HTMLLayerElement.src` reproduit l’attribut HTML src et précise l’adresse URL du document MapML de la couche. La propriété src peut ne pas être définie si la couche contient du contenu en ligne. Si la propriété src retourne une valeur, tout contenu en ligne est omis.
-Pour définir ou mettre à jour la src de `<layer->` :
+Pour définir ou mettre à jour la src de `<map-layer>` :
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 layer.src = "https://example.org";
 ```
 
-Pour obtenir la valeur (adresse URL) de la src de `<layer->` :
+Pour obtenir la valeur (adresse URL) de la src de `<map-layer>` :
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 let url = layer.src;
 ```
 ---
 ### opacity
 `HTMLLayerElement.opacity` donne accès en lecture ou en écriture à la valeur d’`opacity`, qui correspond dans le contrôle de couche pour chaque couche, sous "Opacité".
 
-Pour définir ou mettre à jour l’opacité de `<layer->` :
+Pour définir ou mettre à jour l’opacité de `<map-layer>` :
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 layer.opacity = 0.5; // les valeurs valides vont de 0.0 à 1.0
 ```
 
-Pour obtenir la valeur de l’opacité de `<layer->` :
+Pour obtenir la valeur de l’opacité de `<map-layer>` :
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 let opacity = layer.opacity;
 ```
 
@@ -115,7 +115,7 @@ let opacity = layer.opacity;
 au niveau de zoom maximum dans lequel l'étendue s'inscrit complètement.
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 layer.zoomTo();
 ```
 
@@ -125,7 +125,7 @@ layer.zoomTo();
 
 | Fonction | Retours | Description |
 |----------|---------|-------------|
-| <code>mapml2geojson(\<Object\> options)</code> | Objet de collection de caractéristiques JavaScript (GeoJSON) | Cette fonction transforme l’élément- enfant `<feature>` d’un élément `<layer->` en un objet GeoJSON FeatureCollection. Vous fournissez les [options](#options) pour contrôler la transformation. Cette fonction doit servir dans un événement windows.onload.
+| <code>mapml2geojson(\<Object\> options)</code> | Objet de collection de caractéristiques JavaScript (GeoJSON) | Cette fonction transforme l’élément- enfant `<feature>` d’un élément `<map-layer>` en un objet GeoJSON FeatureCollection. Vous fournissez les [options](#options) pour contrôler la transformation. Cette fonction doit servir dans un événement windows.onload.
 
 :::caution
 
@@ -133,7 +133,7 @@ layer.zoomTo();
 
 ``` js
 window.onload = (event) => {
-  let layer = document.querySelector('layer-');
+  let layer = document.querySelector('map-layer');
   layer.mapml2geojson();
 };
 ```
@@ -144,7 +144,7 @@ window.onload = (event) => {
 
 | Paramètre | Description |
 |------|--------------|
-| Élément \<HTMLLayerElement\> | Élément `<layer->` |
+| Élément \<HTMLLayerElement\> | Élément `<map-layer>` |
 | \<Object\> options | Vous fournissez des paramètres au moyen d’un objet d’options avec des  [noms d’option prédéfinis](#options). |
 
 #### Options
@@ -176,7 +176,7 @@ Au besoin, `mapml2geojson` transforme des coordonnées en `gcrs` par défaut ava
 #### Options par défaut
 Exemple montrant la sortie GeoJSON par défaut lorsqu’aucune option n’est fournie. 
 ``` html
-<layer- label="Géometrie du point" checked="">
+<map-layer label="Géometrie du point" checked="">
    <map-meta name="extent" content="top-left-longitude=-75.916809, top-left-latitude=45.886964, bottom-right-longitude=-75.516809,bottom-right-latitude=45.26964"></map-meta>
    <map-meta name="projection" content="OSMTILE"></map-meta>
    <map-meta name="cs" content="gcrs"></map-meta>
@@ -204,10 +204,10 @@ Exemple montrant la sortie GeoJSON par défaut lorsqu’aucune option n’est fo
          </table>
       </map-properties>
    </map-feature>
-</layer->
+</map-layer>
 <script>
 window.onload = (event) => {
-   let layer = document.querySelector('layer-');
+   let layer = document.querySelector('map-layer');
    let output = layer.mapml2geojson();
 };
 </script>

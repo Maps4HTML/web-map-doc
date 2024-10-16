@@ -53,9 +53,9 @@ Pre-defined themes that you can use include: `light`, `dark`, `white`, `grayscal
 
 The styles for a given `<map-link>`'s URL template `tref` must be found via an associated `<map-link rel=stylesheet>`.  The MapML
 polyfill looks for the associated `<map-link rel=stylesheet>` upward in the `<map-link>` element's "ancestry", stopping at the 
-enclosing `<layer->` element. The associated stylesheet link `<map-link rel="stylesheet" type="application/pmtiles+stylesheet"...>` 
+enclosing `<map-layer>` element. The associated stylesheet link `<map-link rel="stylesheet" type="application/pmtiles+stylesheet"...>` 
 may be located within the enclosing `<map-extent>`, as a sibling of the to-be-styled `<map-link rel="tile" tref="...">` resource, or 
-within the `<map-head>` (when used in remote MapML content) or `<layer->` element (when used in local MapML content).  Only the 
+within the `<map-head>` (when used in remote MapML content) or `<map-layer>` element (when used in local MapML content).  Only the 
 **first** `<map-link rel=stylesheet>` in document order found will be associated; if no style rules or theme for the 
 `tref` URL template is found, console error messages may help clarify.
 
@@ -98,7 +98,7 @@ Example of where linked stylesheets are sought by the polyfill, local content:
 ```html
 ...
 <mapml-viewer data-testid="viewer" projection="OSMTILE" zoom="0" lat="0" lon="0" width="400" height="400">
-  <layer- data-testid="dark">
+  <map-layer data-testid="dark">
     <map-title>PMTiles test dark</map-title>
     <map-link rel="license" title="© OpenStreetMap contributors CC BY-SA" href="https://www.openstreetmap.org/copyright"></map-link>
     <map-extent units="OSMTILE" checked>
@@ -106,10 +106,10 @@ Example of where linked stylesheets are sought by the polyfill, local content:
       <map-link rel="stylesheet" type="application/pmtiles+stylesheet" href="pmtilesRulesModule.js"></map-link>
       <map-link rel="tile" type="application/pmtiles" tref="spearfish.pmtiles?theme=dark"></map-link>
     </map-extent>
-  </layer->
-  <layer- checked data-testid="light">
+  </map-layer>
+  <map-layer checked data-testid="light">
     <map-title>{z}/{x}/{y}.mvt test</map-title>
-    <!-- no map-head available, layer- element children are searched for linked stylesheets -->
+    <!-- no map-head available, map-layer element children are searched for linked stylesheets -->
     <map-link rel="stylesheet" type="application/pmtiles+stylesheet" href="pmtilesRulesModule.js"></map-link>
     <map-extent units="OSMTILE" checked="checked">
       <map-input name="beans" type="zoom" value="18" min="0" max="2"></map-input>
@@ -117,7 +117,7 @@ Example of where linked stylesheets are sought by the polyfill, local content:
       <map-input name="bar" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
       <map-link rel="tile" type="application/vnd.mapbox-vector-tile" tref="tiles/osmtile/{beans}/{foo}/{bar}.mvt?theme=light"></map-link>
     </map-extent>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 

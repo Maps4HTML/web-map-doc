@@ -323,7 +323,7 @@ Aucun ([undefined](https://developer.mozilla.org/fr/docs/Web/JavaScript/Referenc
 
 ``` js
 window.onload = (event) => {
-  let layer = document.querySelector('layer-');
+  let layer = document.querySelector('map-layer');
   layer.mapml2geojson();
 };
 ```
@@ -379,7 +379,7 @@ Un objet GeoJSON représentant la caractéristique
 #### Default options
 Un exemple montrant la sortie GeoJSON par défaut lorsqu'aucune option n'est fournie.
 ``` html
-<layer- label="Géométrie de point" checked="">
+<map-layer label="Géométrie de point" checked="">
    <map-meta name="extent" content="top-left-longitude=-75.916809, top-left-latitude=45.886964, bottom-right-longitude=-75.516809,bottom-right-latitude=45.26964"></map-meta>
    <map-meta name="projection" content="OSMTILE"></map-meta>
    <map-meta name="cs" content="gcrs"></map-meta>
@@ -407,10 +407,10 @@ Un exemple montrant la sortie GeoJSON par défaut lorsqu'aucune option n'est fou
          </table>
       </map-properties>
    </map-feature>
-</layer->
+</map-layer>
 <script>
 window.onload = (event) => {
-   let couche = document.querySelector('layer-');
+   let couche = document.querySelector('map-layer');
    let sortie = layer.mapml2geojson();
 };
 </script>
