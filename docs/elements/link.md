@@ -131,6 +131,20 @@ Projection values [defined by the polyfill](../mapml-viewer#projection) include:
 | DOM Interface    | [HTMLLinkElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLLinkElement) |
 
 ---
+### `media`
+
+The `media` attribute is used to express media conditions under which the linked 
+content should be loaded from its `href` attribute.  Media conditions evaluate to `true` or `false`.  
+A map-link for which the media condition evaluates to `false` is not loaded / unloaded.  
+Content linked via a map-link for which the media condition evaluates to `true` 
+is loaded from its `href` attribute; when the condition subsequently evaluates to
+`false`, the content is unloaded.
+
+Map media queries can include extended CSS map properties including:    
+[projection](../../api/mapml-viewer-api#projection), [zoom](../../api/mapml-viewer-api#zoom), 
+and [extent](../../api/mapml-viewer-api#extent).
+
+---
 
 ## Examples
 
