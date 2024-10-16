@@ -29,7 +29,7 @@ L’**interface de programmation d’applications (API) GeoJSON** est fournie so
 
 | Fonction | Retours| Description |
 |----------|---------|-------------|
-|<code>geojson2mapml(\<Object \| String\> json, \<Object\> options)</code> | Élément  MapML `<layer->`. | Convertit une caractéristique GeoJSON ou une chaîne ou un objet de collection de caractéristiques en élément MapML `<layer->` contenant un ou plusieurs éléments `<map-feature>`.|
+|<code>geojson2mapml(\<Object \| String\> json, \<Object\> options)</code> | Élément  MapML `<map-layer>`. | Convertit une caractéristique GeoJSON ou une chaîne ou un objet de collection de caractéristiques en élément MapML `<map-layer>` contenant un ou plusieurs éléments `<map-feature>`.|
 
 :::tip
 
@@ -143,7 +143,7 @@ let output = geojson2mapml(json, {label: "Exemple 1", projection: "CBMTILE", cap
 <summary>Cliquez pour afficher la sortie HTMLElement</summary>
 
 ``` html
-<layer- label="Example 1" checked="">
+<map-layer label="Example 1" checked="">
    <map-meta name="projection" content="CBMTILE"></map-meta>
    <map-meta name="cs" content="gcrs"></map-meta>
    <map-feature>
@@ -157,7 +157,7 @@ let output = geojson2mapml(json, {label: "Exemple 1", projection: "CBMTILE", cap
          <h3>Ceci est un en-tête de propriété</h3>
       </map-properties>
    </map-feature>
-</layer->
+</map-layer>
 ```
 
 </details> 
@@ -195,7 +195,7 @@ let output = geojson2mapml(json, {label: "Exemple 2", caption: cap, properties: 
 <summary>Cliquez pour afficher la sortie HTMLElement</summary>
 
 ``` html
-<layer- label="Example 2" checked="">
+<map-layer label="Example 2" checked="">
    <map-meta name="projection" content="OSMTILE"></map-meta>
    <map-meta name="cs" content="gcrs"></map-meta>
    <map-feature>
@@ -209,7 +209,7 @@ let output = geojson2mapml(json, {label: "Exemple 2", caption: cap, properties: 
          <h1>Ceci est une propriété du point</h1>
       </map-properties>
    </map-feature>
-</layer->
+</map-layer>
 ```
 
 </details> 
@@ -241,7 +241,7 @@ let output = geojson2mapml(json);
 <summary>Cliquez pour afficher la sortie HTMLElement</summary>
 
 ``` html
-<layer- label="Géométrie du point" checked="">
+<map-layer label="Géométrie du point" checked="">
    <map-meta name="extent" content="top-left-longitude=-75.916809, top-left-latitude=45.886964, bottom-right-longitude=-75.516809,bottom-right-latitude=45.26964"></map-meta>
    <map-meta name="projection" content="OSMTILE"></map-meta>
    <map-meta name="cs" content="gcrs"></map-meta>
@@ -269,7 +269,7 @@ let output = geojson2mapml(json);
          </table>
       </map-properties>
    </map-feature>
-</layer->
+</map-layer>
 ```
 
 </details> 
@@ -280,7 +280,7 @@ let output = geojson2mapml(json);
 
 | Fonction | Retours | Description |
 |----------|---------|-------------|
-| <code>mapml2geojson(\<HTMLLayerElement\> element, \<Object\> options)</code> | Objet de collection de caractéristiques JavaScript (GeoJSON) | Cette fonction transforme l’élément- enfant `<feature>` d’un élément `<layer->` en un objet GeoJSON FeatureCollection. Vous fournissez les [options](#options-1) pour contrôler la transformation. Cette fonction doit servir dans un événement windows.onload.
+| <code>mapml2geojson(\<HTMLLayerElement\> element, \<Object\> options)</code> | Objet de collection de caractéristiques JavaScript (GeoJSON) | Cette fonction transforme l’élément- enfant `<feature>` d’un élément `<map-layer>` en un objet GeoJSON FeatureCollection. Vous fournissez les [options](#options-1) pour contrôler la transformation. Cette fonction doit servir dans un événement windows.onload.
 
 :::caution
 
@@ -298,7 +298,7 @@ window.onload = (event) => {
 
 | Paramètre | Description |
 |------|--------------|
-| Élément \<HTMLLayerElement\> | Élément `<layer->` |
+| Élément \<HTMLLayerElement\> | Élément `<map-layer>` |
 | \<Object\> options | Vous fournissez des paramètres au moyen d’un objet d’options avec des  [noms d’option prédéfinis](#options-1). |
 
 ### Options
@@ -319,7 +319,7 @@ Au besoin, `mapml2geojson` transforme des coordonnées en `gcrs` par défaut ava
 #### Options par défaut
 Exemple montrant la sortie GeoJSON par défaut lorsqu’aucune option n’est fournie. 
 ``` html
-<layer- label="Géometrie du point" checked="">
+<map-layer label="Géometrie du point" checked="">
    <map-meta name="extent" content="top-left-longitude=-75.916809, top-left-latitude=45.886964, bottom-right-longitude=-75.516809,bottom-right-latitude=45.26964"></map-meta>
    <map-meta name="projection" content="OSMTILE"></map-meta>
    <map-meta name="cs" content="gcrs"></map-meta>
@@ -347,10 +347,10 @@ Exemple montrant la sortie GeoJSON par défaut lorsqu’aucune option n’est fo
          </table>
       </map-properties>
    </map-feature>
-</layer->
+</map-layer>
 <script>
 window.onload = (event) => {
-   let output = mapml2geojson(document.querySelector('layer-'))
+   let output = mapml2geojson(document.querySelector('map-layer'))
 };
 </script>
 ```

@@ -19,7 +19,7 @@
 <body>
     <div style="text-align: center;">
       <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
-      <h2>MapML Demo: &lt;layer-&gt;</h2>
+      <h2>MapML Demo: &lt;map-layer&gt;</h2>
       <button class="run" onclick="plot()" aria-label="run code"><span aria-hidden="true">▶</span></button>
     </div>
 
@@ -32,8 +32,8 @@
       <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
         <textarea rows="10" style="width:100%" id="htmlEditor">
 <mapml-viewer projection="OSMTILE" zoom="12" lat="45.42" lon="-75.70">
-  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Ottawa" checked>
+  <map-layer label="OpenStreetMap" src="../data/osm.mapml" checked></map-layer>
+  <map-layer label="Ottawa" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-meta name="cs" content="gcrs"></map-meta>
     <map-feature>
@@ -68,7 +68,7 @@
         </table>
       </map-properties>
     </map-feature>
-  </layer->
+  </map-layer>
 </mapml-viewer></textarea>
     </div>
     <div class="tabcontent" id="CSS">

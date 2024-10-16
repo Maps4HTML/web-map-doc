@@ -52,7 +52,7 @@ Les styles pour un modèle d'URL `<map-link>` donné doivent être trouvés via 
 recherche le `<map-link rel=stylesheet>` associé vers le haut dans la  hiérarchie de l'élément `<map-link>`, en s'arrêtant à l'élément `<layer>` 
 qui l'entoure.  Le lien de feuille de style associé `<map-link rel=« stylesheet » type=« application/pmtiles+stylesheet »...>` 
 peut être situé dans l'élément `<map-extent>`, en tant que frère de la ressource `<map-link rel=« tile » tref=« ... »>` à styliser, ou 
-dans l'élément `<map-head>` (lorsqu'il est utilisé dans un contenu MapML distant) ou `<layer->` (lorsqu'il est utilisé dans un contenu MapML local).
+dans l'élément `<map-head>` (lorsqu'il est utilisé dans un contenu MapML distant) ou `<map-layer>` (lorsqu'il est utilisé dans un contenu MapML local).
   
 Seule la **premier** `<map-link rel=stylesheet>` dans l'ordre du document trouvé sera associé ; si aucune règle de style ou thème pour le modèle d'URL 
 `tref`, les messages d'erreur de la console peuvent aider à clarifier la situation.
@@ -96,7 +96,7 @@ Exemple de cas où les feuilles de style liées sont recherchées par le polyfil
 ```html
 ...
 <mapml-viewer data-testid="viewer" projection="OSMTILE" zoom="0" lat="0" lon="0" width="400" height="400">
-  <layer- data-testid="dark">
+  <map-layer data-testid="dark">
     <map-title>PMTiles test dark</map-title>
     <map-link rel="license" title="© OpenStreetMap contributors CC BY-SA" href="https://www.openstreetmap.org/copyright"></map-link>
     <map-extent units="OSMTILE" checked>
@@ -104,10 +104,10 @@ Exemple de cas où les feuilles de style liées sont recherchées par le polyfil
       <map-link rel="stylesheet" type="application/pmtiles+stylesheet" href="pmtilesRulesModule.js"></map-link>
       <map-link rel="tile" type="application/pmtiles" tref="spearfish.pmtiles?theme=dark"></map-link>
     </map-extent>
-  </layer->
-  <layer- checked data-testid="light">
+  </map-layer>
+  <map-layer checked data-testid="light">
     <map-title>{z}/{x}/{y}.mvt test</map-title>
-    <!-- pas de map-head disponible, les enfants de l'élément layer- sont recherchés pour les feuilles de style liées -->
+    <!-- pas de map-head disponible, les enfants de l'élément map-layer sont recherchés pour les feuilles de style liées -->
     <map-link rel="stylesheet" type="application/pmtiles+stylesheet" href="pmtilesRulesModule.js"></map-link>
     <map-extent units="OSMTILE" checked="checked">
       <map-input name="beans" type="zoom" value="18" min="0" max="2"></map-input>
@@ -115,7 +115,7 @@ Exemple de cas où les feuilles de style liées sont recherchées par le polyfil
       <map-input name="bar" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
       <map-link rel="tile" type="application/vnd.mapbox-vector-tile" tref="tiles/osmtile/{beans}/{foo}/{bar}.mvt?theme=light"></map-link>
     </map-extent>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 

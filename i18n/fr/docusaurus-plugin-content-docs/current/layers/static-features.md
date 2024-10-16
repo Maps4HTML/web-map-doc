@@ -11,7 +11,7 @@ as you zoom in and out without distortion.
 ## Adding a single feature
 
 ```html
-<layer- label="My Feature Layer" checked>
+<map-layer label="My Feature Layer" checked>
   <map-feature zoom="2">
     <map-properties>
       <h1>Feature Popup Text</h1>
@@ -23,7 +23,7 @@ as you zoom in and out without distortion.
       </map-polygon>
     </map-geometry>
   </map-feature>
-</layer->
+</map-layer>
 ```
 
 ## Associated Elements
@@ -117,7 +117,7 @@ Sets the [extent](http://example.org/) of the layer.
   <mapml-viewer style="height: 500px;width:500px;" projection="CBMTILE" zoom="2" lat="45.5052040" lon="-75.2202344"
     controls>
 
-    <layer- label="Arizona" checked>
+    <map-layer label="Arizona" checked>
       <map-meta name="projection" content="CBMTILE"></map-meta>
       <map-meta name="zoom" content="min=1,max=5,value=0"></map-meta>
       <map-meta name="cs" content="gcrs"></map-meta>
@@ -174,7 +174,7 @@ Sets the [extent](http://example.org/) of the layer.
           </map-polygon>
         </map-geometry>
       </map-feature>
-    </layer->
+    </map-layer>
   </mapml-viewer>
 ```
 [ADD MAP HERE]

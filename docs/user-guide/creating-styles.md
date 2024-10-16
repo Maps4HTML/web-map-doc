@@ -15,7 +15,7 @@ style rules, while [sort-of declarative](https://glazkov.com/2024/01/16/declarat
 
 The pmtiles map archive and mvt [formats](../elements/link#type) in the MapML polyfill are integrated via 
 [the protomaps-leaflet library](https://docs.protomaps.com/pmtiles/leaflet).  Protomaps-leaflet is designed to support the (de facto standard) Web Mercator tile grid. This allows
-the MapML polyfill to integrate support for pmtiles and mvt data sources for only the `OSMTILE` projection.  `<layer->` and `<map-extent>` elements and the `<mapml-viewer>` will
+the MapML polyfill to integrate support for pmtiles and mvt data sources for only the `OSMTILE` projection.  `<map-layer>` and `<map-extent>` elements and the `<mapml-viewer>` will
 not work (and will be permanently `disabled`) when used with `<mapml-viewer projection="ANYTHING"...>` or `<map-extent units="ANYTHING"...>` values apart from `OSMTILE`.
 
 Before proceeding below, you should read the [protomaps-leaflet](https://docs.protomaps.com/pmtiles/leaflet#custom-vector-data) documentation on custom styling.

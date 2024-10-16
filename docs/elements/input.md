@@ -166,14 +166,14 @@ on the nature of the content.
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="0" lat="45.409071" lon="-75.703411" controls>
-  <layer- label="OpenStreetMap" checked>
+  <map-layer label="OpenStreetMap" checked>
     <map-extent units="OSMTILE" checked>
       <map-input name="z" type="zoom"  value="18" min="0" max="18" step="3"></map-input>
       <map-input name="x" type="location" units="tilematrix" axis="column" min="0"  max="262144" ></map-input>
       <map-input name="y" type="location" units="tilematrix" axis="row" min="0"  max="262144" ></map-input>
       <map-link rel="tile" tref="https://tile.openstreetmap.org/{z}/{x}/{y}.png" ></map-link>
     </map-extent>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 
@@ -186,7 +186,7 @@ labels, which may be duplicated on adjacent tiles many times over.
 
 ```html
 <mapml-viewer projection="CBMTILE" lat="60" lon="-95" zoom="2" controls>
-  <layer- label="Tiled WMS GetMap" checked>
+  <map-layer label="Tiled WMS GetMap" checked>
     <map-extent units="CBMTILE" checked>
       <!-- the units and axis attributes here appear at odds --> 
       <!-- however for rel="tile" and units="tilematrix" together tell the map that
@@ -202,7 +202,7 @@ labels, which may be duplicated on adjacent tiles many times over.
            https://github.com/Maps4HTML/MapML.js/issues/669 -->
       <map-input name="z" type="zoom" value="25" min="0" max="25"></map-input>
     </map-extent>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 

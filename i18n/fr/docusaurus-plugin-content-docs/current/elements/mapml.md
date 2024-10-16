@@ -4,10 +4,10 @@ title: "<mapml->"
 slug: /elements/mapml/
 ---
 
-L’élément `<mapml->` est la racine d’un document MapML (avec une extension de fichier .mapml) et il représente une couche. Un document MapML peut être extrait comme ressource distante à partir de l’URL de l’attribut source `<layer- src="..."></layer->` :
+L’élément `<mapml->` est la racine d’un document MapML (avec une extension de fichier .mapml) et il représente une couche. Un document MapML peut être extrait comme ressource distante à partir de l’URL de l’attribut source `<map-layer src="..."></map-layer>` :
 
 ```html
-<layer- label="Ma couche" src="https://example.org/mapml/mylayer" checked></layer->
+<map-layer label="Ma couche" src="https://example.org/mapml/mylayer" checked></map-layer>
 ```
 
 Un élément `<mapml->` indique que le document se trouve dans l’espace de noms xhtml, et 

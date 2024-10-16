@@ -61,7 +61,7 @@ via the map context menu Copy > Extent item as shown below:
 | [Content categories](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories) | [Metadata content](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#metadata_content) |
 | Permitted content | None, it is an [empty element](https://developer.mozilla.org/en-US/docs/Glossary/Empty_element).  |
 | Tag omission | While the HTML `<meta>` element is a void element, the polyfill `<map-link>` must have an end tag. |
-| Permitted parents | Inline: the `<layer->` element. In a MapML document: the `<map-head>` element. |
+| Permitted parents | Inline: the `<map-layer>` element. In a MapML document: the `<map-head>` element. |
 | Implicit ARIA role   | [No corresponding role](https://www.w3.org/TR/html-aria/#dfn-no-corresponding-role) |
 | Permitted ARIA roles | No role permitted |
 | DOM interface | [HTMLMetaElement extension](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMetaElement) |
@@ -78,7 +78,7 @@ by the `<map-geometry cs="gcrs">` attribute, which tells the polyfill how to par
 process strings of coordinates found in descendant `<map-coordinates>` elements.
 
 ```html
-<layer- label="Favourite Restaurant" checked>
+<map-layer label="Favourite Restaurant" checked>
   <map-meta name="projection" content="OSMTILE"></map-meta>
   <map-meta name="zoom" content="min=0,max=22,value=3"></map-meta>
   <map-feature>
@@ -89,7 +89,7 @@ process strings of coordinates found in descendant `<map-coordinates>` elements.
           </map-point>
       </map-geometry>
   </map-feature>
-</layer->
+</map-layer>
 ```
 
 ### Setting extent
@@ -98,7 +98,7 @@ Using the `<map-meta>` element to establish the pcrs (easting,northing) **extent
 a map layer, the coordinates of which are encoded as gcrs pairs. 
 
 ```html
-<layer- label="Favourite Restaurant" checked>
+<map-layer label="Favourite Restaurant" checked>
   <map-meta name="projection" content="OSMTILE"></map-meta>
   <map-meta name="zoom" content="min=0,max=22,value=3"></map-meta>
   <map-meta name="extent" content="top-left-easting=-8433179, top-left-northing=5689316, bottom-right-easting=-8420968,bottom-right-northing=5683139"></map-meta>
@@ -110,7 +110,7 @@ a map layer, the coordinates of which are encoded as gcrs pairs.
           </map-point>
       </map-geometry>
   </map-feature>
-</layer->
+</map-layer>
 ```
 
 ### Fallback cs for &lt;map-geometry&gt;
@@ -124,7 +124,7 @@ at which the feature should be displayed is not specified, nor the extent. Both
 values will fall back to the default values for the projection. 
 
 ```html
-<layer- label="Favourite Restaurant" checked>
+<map-layer label="Favourite Restaurant" checked>
   <map-meta name="projection" content="OSMTILE"></map-meta>
   <map-meta name="cs" content="gcrs" ></map-meta>
   <map-feature>
@@ -135,7 +135,7 @@ values will fall back to the default values for the projection.
           </map-point>
       </map-geometry>
   </map-feature>
-</layer->
+</map-layer>
 ```
 
 ### Default metadata
@@ -146,7 +146,7 @@ interpreted to be `gcrs` (longitude latitude).  The extent of the layer defaults
 to that of the projection.
 
 ```html
-<layer- label="Favourite Restaurant" checked>
+<map-layer label="Favourite Restaurant" checked>
   <map-feature>
     <map-featurecaption>Big Daddy's Crab Shack</map-featurecaption>
       <map-geometry>
@@ -155,7 +155,7 @@ to that of the projection.
           </map-point>
       </map-geometry>
   </map-feature>
-</layer->
+</map-layer>
 ```
 
 ---

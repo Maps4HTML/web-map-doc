@@ -115,8 +115,8 @@ Les valeurs de projection [définies par le polyfill](../mapml-viewer#projection
 
 ```html
 <mapml-viewer  projection="OSMTILE" zoom="1" lat="0" lon="0" controls>
- <layer- label="OpenStreetMap" src="https://geogratis.gc.ca/mapml/en/osmtile/osm/" checked hidden  ></layer->
- <layer- label="Source des fichiers GeoTIFF optimisés pour l’infonuagique (COG) du service des pavés cartographiques (TMS)" checked>
+ <map-layer label="OpenStreetMap" src="https://geogratis.gc.ca/mapml/en/osmtile/osm/" checked hidden  ></map-layer>
+ <map-layer label="Source des fichiers GeoTIFF optimisés pour l’infonuagique (COG) du service des pavés cartographiques (TMS)" checked>
    <map-extent units="OSMTILE" checked>
        <map-input name="zoom" type="zoom"  min="1" max="12"></map-input>
        <map-input name="row" type="location" axis="row" units="tilematrix" ></map-input>
@@ -125,7 +125,7 @@ Les valeurs de projection [définies par le polyfill](../mapml-viewer#projection
        <map-link tms rel="tile" tref="https://s3-eu-west-1.amazonaws.com/vito-lcv/global/2019/cog-grass-colored-fraction_grass/{zoom}/{col}/{row}.png">
    </map-link>
    </map-extent>
-   </layer->
+   </map-layer>
 </mapml-viewer>
 ```
 

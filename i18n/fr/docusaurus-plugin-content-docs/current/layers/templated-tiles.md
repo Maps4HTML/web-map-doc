@@ -9,14 +9,14 @@ In this section, we will learn how to create a templated tile layer. A templated
 ## Adding a templated layer
 
 ```html
-<layer- label="Templated Tile Layer" checked>
+<map-layer label="Templated Tile Layer" checked>
   <map-extent units="my-projection" checked>
     <map-input name="zoomLevel" type="zoom" min="1" max="1" value="0"></map-input>
     <map-input name="row" type="location" axis="row" units="tilematrix" min="0" max="2"></map-input>
     <map-input name="col" type="location" axis="column" units="tilematrix" min="0" max="2"></map-input>
     <map-link rel="tile" type="text/mapml" title="Templated Tiles" tref="tiles/{zoomLevel}/r{row}_c{col}.mapml"></map-link>
   </map-extent>
-</layer->
+</map-layer>
 ```
 
 ## Associated Elements
@@ -85,7 +85,7 @@ Sets the native minimum and maximum [native zoom](http://example.org/). It also 
 
 ```html
 <mapml-viewer projection="WGS84" zoom="1" lat="59.87304909" lon="-53.22587225" width="900" height="400" controls>
-  <layer- label="Inline Templated Tile" checked>
+  <map-layer label="Inline Templated Tile" checked>
     <map-meta name="zoom" content="min=1,max=2"></map-meta>
     <map-extent units="WGS84" checked hidden>
       <map-input name="zoomLevel" type="zoom" min="1" max="1" value="0"></map-input>
@@ -93,7 +93,7 @@ Sets the native minimum and maximum [native zoom](http://example.org/). It also 
       <map-input name="col" type="location" axis="column" units="tilematrix" min="0" max="2"></map-input>
       <map-link rel="tile" type="text/mapml" title="Templated Tile Layer" tref="data/wgs84/{zoomLevel}/r{row}_c{col}.mapml"></map-link>
     </map-extent>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 

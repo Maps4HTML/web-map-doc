@@ -4,10 +4,10 @@ title: "<mapml->"
 slug: /elements/mapml/
 ---
 
-The `<mapml->` element is the root of a MapML document (with a .mapml file extension) representing a layer. A MapML document allows itself to be fetched as a remote resource from the `<layer- src="..."></layer->` source attribute URL:
+The `<mapml->` element is the root of a MapML document (with a .mapml file extension) representing a layer. A MapML document allows itself to be fetched as a remote resource from the `<map-layer src="..."></map-layer>` source attribute URL:
 
 ```html
-<layer- label="My Layer" src="https://example.org/mapml/mylayer" checked></layer->
+<map-layer label="My Layer" src="https://example.org/mapml/mylayer" checked></map-layer>
 ```
 
 A `<mapml->` element declare the document to be in the xhtml namespace, and 

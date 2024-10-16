@@ -78,7 +78,7 @@ To style linked features simply target the `map-a` class in your CSS, once a lin
 `map-a-visited` class. See the example below:
 
 ```html
-<layer->
+<map-layer>
   <map-style>
     .map-a {
       stroke: red;
@@ -99,7 +99,7 @@ To style linked features simply target the `map-a` class in your CSS, once a lin
       </map-a>
     </map-geometry>
   </map-feature>
-</layer->
+</map-layer>
 ```
 
 ### Wrapping a Feature Type + Location Fragment 

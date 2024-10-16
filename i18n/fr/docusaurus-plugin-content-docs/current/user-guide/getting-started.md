@@ -88,7 +88,7 @@ La prochaine étape est de supprimer et remplacer l'image par une carte, en util
          <p>Les <s>pages</s> cartes Web : c'est si facile</p>
 		 // highlight-start
          <mapml-viewer projection="OSMTILE" zoom="2" lat="67.6" lon="-100.9" width="400" height="300" controls>
-             <layer- src="https://geogratis.gc.ca/mapml/en/osmtile/osm/" label="Open Street Map" checked ></layer->
+             <map-layer src="https://geogratis.gc.ca/mapml/en/osmtile/osm/" label="Open Street Map" checked ></map-layer>
          </mapml-viewer>
 		 // highlight-end
       </body>

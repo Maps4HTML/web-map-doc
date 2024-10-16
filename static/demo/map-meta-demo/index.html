@@ -32,8 +32,8 @@
         <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
         <textarea rows="10" style="width:100%" id="htmlEditor">
 <mapml-viewer projection="OSMTILE" zoom="3" lat="45.41868" lon="-75.690276" controls>
-  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Favourite Restaurant" checked>
+  <map-layer label="OpenStreetMap" src="../data/osm.mapml" checked></map-layer>
+  <map-layer label="Favourite Restaurant" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-meta name="zoom" content="min=3,max=10,value=3"></map-meta>
     <!-- cs can also be set through an attribute in map-geometry (cs="gcrs") -->
@@ -47,7 +47,7 @@
         </map-point>
       </map-geometry>
     </map-feature>
-  </layer->
+  </map-layer>
 </mapml-viewer></textarea>
     </div>
     <div class="tabcontent" id="CSS">
