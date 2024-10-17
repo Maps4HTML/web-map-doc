@@ -23,7 +23,7 @@ The `<mapml-viewer>` element is the main element you can use to put a custom Web
 </head>
 <body>
   <mapml-viewer projection="OSMTILE" zoom="0" lat="0.0" lon="0.0" controls>
-    <layer- label="OpenStreetMap" src="https://geogratis.gc.ca/mapml/en/osmtile/osm/" checked></layer->
+    <map-layer label="OpenStreetMap" src="https://geogratis.gc.ca/mapml/en/osmtile/osm/" checked></map-layer>
   </mapml-viewer>
 </body>
 </html>    

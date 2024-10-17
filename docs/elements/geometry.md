@@ -86,8 +86,8 @@ For each member geometry, the same non-schema constraints apply as to the unique
 ### Point
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
-  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Point Geometry" checked>
+  <map-layer label="OpenStreetMap" src="../data/osm.mapml" checked></map-layer>
+  <map-layer label="Point Geometry" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Point</map-featurecaption>
@@ -99,7 +99,7 @@ For each member geometry, the same non-schema constraints apply as to the unique
       </map-geometry>
       <map-properties><h2>This is a Point</h2></map-properties>
     </map-feature>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 
@@ -107,8 +107,8 @@ For each member geometry, the same non-schema constraints apply as to the unique
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
-  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Line Geometry" checked>
+  <map-layer label="OpenStreetMap" src="../data/osm.mapml" checked></map-layer>
+  <map-layer label="Line Geometry" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Line</map-featurecaption>
@@ -120,7 +120,7 @@ For each member geometry, the same non-schema constraints apply as to the unique
       </map-geometry>
       <map-properties><h2>This is a Line</h2></map-properties>
     </map-feature>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 
@@ -128,8 +128,8 @@ For each member geometry, the same non-schema constraints apply as to the unique
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
-  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Polygon Geometry" checked>
+  <map-layer label="OpenStreetMap" src="../data/osm.mapml" checked></map-layer>
+  <map-layer label="Polygon Geometry" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Polygon</map-featurecaption>
@@ -142,7 +142,7 @@ For each member geometry, the same non-schema constraints apply as to the unique
       </map-geometry>
       <map-properties><h2>This is a Polygon</h2></map-properties>
     </map-feature>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 
@@ -150,8 +150,8 @@ For each member geometry, the same non-schema constraints apply as to the unique
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
-  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="MultiPoint Geometry" checked>
+  <map-layer label="OpenStreetMap" src="../data/osm.mapml" checked></map-layer>
+  <map-layer label="MultiPoint Geometry" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>MultiPoint</map-featurecaption>
@@ -163,7 +163,7 @@ For each member geometry, the same non-schema constraints apply as to the unique
       </map-geometry>
       <map-properties><h2>This is a multipoint</h2></map-properties>
     </map-feature>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 
@@ -171,8 +171,8 @@ For each member geometry, the same non-schema constraints apply as to the unique
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
-  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="MultiLineString Geometry" checked>
+  <map-layer label="OpenStreetMap" src="../data/osm.mapml" checked></map-layer>
+  <map-layer label="MultiLineString Geometry" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>MultiLineString</map-featurecaption>
@@ -185,7 +185,7 @@ For each member geometry, the same non-schema constraints apply as to the unique
       </map-geometry>
       <map-properties><h2>This is a MultiLineString</h2></map-properties>
     </map-feature>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 
@@ -193,8 +193,8 @@ For each member geometry, the same non-schema constraints apply as to the unique
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
-  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="MultiPolygon Geometry" checked>
+  <map-layer label="OpenStreetMap" src="../data/osm.mapml" checked></map-layer>
+  <map-layer label="MultiPolygon Geometry" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>MultiPolygon</map-featurecaption>
@@ -211,7 +211,7 @@ For each member geometry, the same non-schema constraints apply as to the unique
       </map-geometry>
       <map-properties><h2>This is a MultiPolygon</h2></map-properties>
     </map-feature>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 
@@ -219,8 +219,8 @@ For each member geometry, the same non-schema constraints apply as to the unique
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
-  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Geometry Collection" checked>
+  <map-layer label="OpenStreetMap" src="../data/osm.mapml" checked></map-layer>
+  <map-layer label="Geometry Collection" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Geometry Collection</map-featurecaption>
@@ -240,7 +240,7 @@ For each member geometry, the same non-schema constraints apply as to the unique
       </map-geometry>
       <map-properties><h2>This is a Geometry Collection</h2></map-properties>
     </map-feature>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 

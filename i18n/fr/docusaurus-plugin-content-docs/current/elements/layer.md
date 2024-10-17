@@ -1,24 +1,24 @@
 ---
 id: layer
-title: "<layer->"
+title: "<map-layer>"
 slug: /layers/layer/
 ---
 
-Les cartes sont composées d’une ou de plusieurs couches. Ces couches sont appliquées par l’élément personnalisé `<layer->`.
-Tout le contenu `<mapml-viewer>` est compris dans un ou plusieurs éléments `<layer->`, en ligne ou extraits à distance, qui représentent le contenu de la couche.
+Les cartes sont composées d’une ou de plusieurs couches. Ces couches sont appliquées par l’élément personnalisé `<map-layer>`.
+Tout le contenu `<mapml-viewer>` est compris dans un ou plusieurs éléments `<map-layer>`, en ligne ou extraits à distance, qui représentent le contenu de la couche.
 
 ```html
-<layer- label="Ma couche" checked>
+<map-layer label="Ma couche" checked>
   ...le contenu de la couche s’affiche ici...
-</layer->
+</map-layer>
 ```
 
-`<layer->` n’est pas un élément ‘void’  – il doit être fermé par une balise `</layer->`.
+`<map-layer>` n’est pas un élément ‘void’  – il doit être fermé par une balise `</map-layer>`.
 
-Le contenu de la carte peut être en ligne, comme il est illustré ci-dessous – entre les balises de début `<layer->` et de fin `</layer->` – ou extrait, à partir de l’URL de l’attribut source `<layer- src="..."></layer->` :
+Le contenu de la carte peut être en ligne, comme il est illustré ci-dessous – entre les balises de début `<map-layer>` et de fin `</map-layer>` – ou extrait, à partir de l’URL de l’attribut source `<map-layer src="..."></map-layer>` :
 
 ```html
-<layer- label="Ma couche" src="https://example.org/mapml/mylayer" checked></layer->
+<map-layer label="Ma couche" src="https://example.org/mapml/mylayer" checked></map-layer>
 ```
 
 <iframe src="../../../demo/layer-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
@@ -35,13 +35,13 @@ Contient le chemin d’accès vers un document MapML.
 
 ### `checked`
 
-L’attribut `<layer- checked>` et la valeur « property » sont boolean. Si elle est présente, la valeur « property » vérifiée est considérée comme ‘true’; si elle n’est pas présente, la valeur « property » est 'false'. Notez que c’est la _présence_ de l’attribut qui fait que la valeur est « true », et non la valeur de l’attribut. Par exemple, l’attribut `checked="false"` s’avère en fait être « checked », [comme il est décrit dans MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#boolean_attributes).
+L’attribut `<map-layer checked>` et la valeur « property » sont boolean. Si elle est présente, la valeur « property » vérifiée est considérée comme ‘true’; si elle n’est pas présente, la valeur « property » est 'false'. Notez que c’est la _présence_ de l’attribut qui fait que la valeur est « true », et non la valeur de l’attribut. Par exemple, l’attribut `checked="false"` s’avère en fait être « checked », [comme il est décrit dans MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes#boolean_attributes).
 
 ---
 
 ### `hidden`
 
-L’attribut `<layer- hidden>` et la valeur « property » sont boolean. Si elle est présente, la couche est masquée dans le contrôle des couches.
+L’attribut `<map-layer hidden>` et la valeur « property » sont boolean. Si elle est présente, la couche est masquée dans le contrôle des couches.
 
 ---
 
@@ -53,7 +53,7 @@ Le contenu en ligne utilise l’attribut  `label` comme étiquette de texte affi
 
 ### `opacity`
 
-L'attribut `opacity` définit l'opacité initiale de l'élément `<layer->`. Les valeurs d'`opacity` valides vont de "0.0" à "1.0" et sont reflétées dans le contrôle de couche
+L'attribut `opacity` définit l'opacité initiale de l'élément `<map-layer>`. Les valeurs d'`opacity` valides vont de "0.0" à "1.0" et sont reflétées dans le contrôle de couche
 sous "Opacité" pour chaque couche. Lorsque l'attribut `opacity` n'est pas présent, l'opacité est fixée à "1.0" par défaut.
 
 ---
@@ -62,11 +62,11 @@ sous "Opacité" pour chaque couche. Lorsque l'attribut `opacity` n'est pas prés
 
 ### Opacité de couche
 
-L'exemple suivant définit l'`opacity` initiale d'un élément `<layer->`, à 0,5 sur 1,0. 
+L'exemple suivant définit l'`opacity` initiale d'un élément `<map-layer>`, à 0,5 sur 1,0. 
 
 ```html
 <mapml-viewer projection="CBMTILE" zoom="2" lat="45" lon="-90" controls>
-      <layer- opacity="0.5" label="CBMT" src="https://geogratis.gc.ca/mapml/en/cbmtile/cbmt/" checked></layer->
+      <map-layer opacity="0.5" label="CBMT" src="https://geogratis.gc.ca/mapml/en/cbmtile/cbmt/" checked></map-layer>
 </mapml-viewer>
 ```
 

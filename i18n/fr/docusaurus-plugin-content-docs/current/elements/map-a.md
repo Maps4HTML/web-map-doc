@@ -74,7 +74,7 @@ C.-à-d. `<map-a href="#1, 20, 30">...</map-a>` déplacera la carte vers la lati
 Pour modifier le style d’entités liées, ciblez simplement la classe `map-a` dans votre feuille de style en cascade (CSS). Après avoir cliqué sur un lien, vous pouvez cibler la classe `map-a-visited`. Voir l’exemple ci-dessous :
 
 ```html
-<layer->
+<map-layer>
   <map-style>
     .map-a {
       stroke: red;
@@ -95,7 +95,7 @@ Pour modifier le style d’entités liées, ciblez simplement la classe `map-a` 
       </map-a>
     </map-geometry>
   </map-feature>
-</layer->
+</map-layer>
 ```
 
 ### Encapsuler un type d’entités + un fragment de lieu

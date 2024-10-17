@@ -19,8 +19,8 @@ Dans l’exemple suivant, la fenêtre contextuelle s’affiche sous forme de [ta
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="12" lat="45.42" lon="-75.70">
-  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Ottawa" checked>
+  <map-layer label="OpenStreetMap" src="../data/osm.mapml" checked></map-layer>
+  <map-layer label="Ottawa" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-meta name="cs" content="gcrs"></map-meta>
     <map-feature>
@@ -55,7 +55,7 @@ Dans l’exemple suivant, la fenêtre contextuelle s’affiche sous forme de [ta
         </table>
       </map-properties>
     </map-feature>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 
