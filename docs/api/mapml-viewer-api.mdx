@@ -280,7 +280,7 @@ MapML defines a few built-in tiled CRS projections, including Web Mercator (OSMT
 
 The `<mapml-viewer>` custom element provides the custom projections API, which gives you the ability to create custom projections and use them in the `<mapml-viewer>` element, defined using extended JSON-based "proj4" syntax, supported by the proj4js library.
 
-We won't discuss the actual `<mapml-viewer>` element here, except to say that the map `projection` attribute should have the exact same value of the `projection` member of the JSON object you pass to the custom projections API's `defineCustomProjection` method, and every `<layer->` element in the map must declare and be encoded in that coordinate system, in order to display correctly.
+We won't discuss the actual `<mapml-viewer>` element here, except to say that the map `projection` attribute should have the exact same value of the `projection` member of the JSON object you pass to the custom projections API's `defineCustomProjection` method, and every `<map-layer>` element in the map must declare and be encoded in that coordinate system, in order to display correctly.
 
 The custom projections API is provided by the `<mapml-viewer>` element.  In a browser implementation, the API might be defined on the window object, but because of the ES6 modules used by custom elements, it is convenient to locate it on the mapping element which uses it.
 
@@ -329,7 +329,7 @@ navigator.geolocation.getCurrentPosition(success, error, options);
 
 ### geojson2mapml(json, options)
 
-Convert a GeoJSON feature or feature collection string or object to MapML [`<layer->`](/web-map-doc/docs/elements/layer/) containing one or more [`<map-feature>`](/web-map-doc/docs/elements/feature/) elements. Returns and adds the converted layer element to the map.
+Convert a GeoJSON feature or feature collection string or object to MapML [`<map-layer>`](/web-map-doc/docs/elements/layer/) containing one or more [`<map-feature>`](/web-map-doc/docs/elements/feature/) elements. Returns and adds the converted layer element to the map.
 
 :::tip
 
@@ -471,7 +471,7 @@ let output = map.geojson2mapml(json, {label: "Example 1", projection: "CBMTILE",
 <summary>Click to view the output HTMLElement</summary>
 
 ``` html
-<layer- label="Example 1" checked="">
+<map-layer label="Example 1" checked="">
    <map-meta name="projection" content="CBMTILE"></map-meta>
    <map-meta name="cs" content="gcrs"></map-meta>
    <map-feature>
@@ -485,7 +485,7 @@ let output = map.geojson2mapml(json, {label: "Example 1", projection: "CBMTILE",
          <h3>This is a property heading</h3>
       </map-properties>
    </map-feature>
-</layer->
+</map-layer>
 ```
 
 </details> 
@@ -524,7 +524,7 @@ let output = map.geojson2mapml(json, {label: "Example 2", caption: cap, properti
 <summary>Click to view the output HTMLElement</summary>
 
 ``` html
-<layer- label="Example 2" checked="">
+<map-layer label="Example 2" checked="">
    <map-meta name="projection" content="OSMTILE"></map-meta>
    <map-meta name="cs" content="gcrs"></map-meta>
    <map-feature>
@@ -538,7 +538,7 @@ let output = map.geojson2mapml(json, {label: "Example 2", caption: cap, properti
          <h1>This is a Point's property</h1>
       </map-properties>
    </map-feature>
-</layer->
+</map-layer>
 ```
 
 </details> 
@@ -571,7 +571,7 @@ let output = map.geojson2mapml(json);
 <summary>Click to view the output HTMLElement</summary>
 
 ``` html
-<layer- label="Point Geometry" checked="">
+<map-layer label="Point Geometry" checked="">
    <map-meta name="extent" content="top-left-longitude=-75.916809, top-left-latitude=45.886964, bottom-right-longitude=-75.516809,bottom-right-latitude=45.26964"></map-meta>
    <map-meta name="projection" content="OSMTILE"></map-meta>
    <map-meta name="cs" content="gcrs"></map-meta>
@@ -599,7 +599,7 @@ let output = map.geojson2mapml(json);
          </table>
       </map-properties>
    </map-feature>
-</layer->
+</map-layer>
 ```
 
 </details>
@@ -634,7 +634,7 @@ let output = map.geojson2mapml(json);
 </head>
 <body>
   <mapml-viewer projection="ATLAS_POLAR_MAP" zoom="2" lat="83.48919" lon="-87.7687" controls>
-    <layer- label="Atlas of Canada Polar Wall Map" checked>
+    <map-layer label="Atlas of Canada Polar Wall Map" checked>
     <map-link rel="license" title="Canadian Federal Geospatial Platform" href="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN/MapServer/"></map-link>
       <map-extent units="ATLAS_POLAR_MAP" checked hidden>
         <map-input type="zoom" name="z" min="0" max="6" value="6" ></map-input>
@@ -643,7 +643,7 @@ let output = map.geojson2mapml(json);
         <map-link rel="tile" tref="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN/MapServer/tile/{z}/{y}/{x}/"></map-link>
         <map-link rel="tile" tref="https://geoappext.nrcan.gc.ca/arcgis/rest/services/FGP/NCR_RCN_A/MapServer/tile/{z}/{y}/{x}/"></map-link>
       </map-extent>
-    </layer->
+    </map-layer>
   </mapml-viewer>
 </body>
 </html>

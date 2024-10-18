@@ -12,14 +12,14 @@ Exemple d’un élément `<map-extent>` servant à charger des pavés d’images
 
 ```html
 <mapml-viewer projection="OSMTILE" lat="10" lon="0" zoom="1">
-  <layer- label="OpenStreetMap" checked>
+  <map-layer label="OpenStreetMap" checked>
     <map-extent units="OSMTILE" checked hidden>
       <map-input name="z" type="zoom" value="18" min="0" max="18"></map-input>
       <map-input name="x" type="location" units="tilematrix" axis="column" min="0" max="262144"></map-input>
       <map-input name="y" type="location" units="tilematrix" axis="row" min="0" max="262144"></map-input>
       <map-link rel="tile" tref="https://tile.openstreetmap.org/{z}/{x}/{y}.png"></map-link>
     </map-extent>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 
@@ -88,7 +88,7 @@ L’exemple ci-dessous montre plusieurs éléments `<map-extent>` dans un couche
 ```html
 <mapml-viewer projection="OSMTILE" zoom="2" lat="53.331" lon="-91.667" controls>
   <!—Modifier la carte de base en cliquant sur les points de suspension (…) de la couche de la carte de base -->
-  <layer- label="Carte de base" checked="">
+  <map-layer label="Carte de base" checked="">
     <!—Cette étendue est masquée au niveau du contrôle de la couche, puisqu’aucune étiquette n’est fournie -->
     <map-extent units="OSMTILE" checked>
       <map-input name="TileMatrix" type="zoom" value="18" min="0" max="18"></map-input>
@@ -109,7 +109,7 @@ L’exemple ci-dessous montre plusieurs éléments `<map-extent>` dans un couche
       <map-link rel="tile" tref="https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/WMTS/tile/1.0.0/World_Imagery/default/default028mm/{TileMatrix}/{TileRow}/{TileCol}.jpg"></map-link>
       <map-link rel="tile" tref="https://services.arcgisonline.com/arcgis/rest/services/Reference/World_Boundaries_and_Places/MapServer/WMTS/tile/1.0.0/Reference_World_Boundaries_and_Places/default/default028mm/{TileMatrix}/{TileRow}/{TileCol}.png"></map-link>
     </map-extent>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 
@@ -119,7 +119,7 @@ L’exemple ci-dessous montre une demande de service de carte en ligne utilisant
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="4" lat="53.331" lon="-91.667" controls>
-  <layer- label="Toporama" checked="">
+  <map-layer label="Toporama" checked="">
     <map-extent xmlns="http://www.w3.org/1999/xhtml" units="OSMTILE" checked>
       <!—Paramètres URL de la demande de service de carte en ligne -->
       <map-input name="z" type="zoom" value="18" min="4" max="18"></map-input>
@@ -132,7 +132,7 @@ L’exemple ci-dessous montre une demande de service de carte en ligne utilisant
       <!-- Web Map Service requesting image -->
       <map-link rel="image" tref="http://wms.ess-ws.nrcan.gc.ca/wms/toporama_en?SERVICE=WMS&amp;REQUEST=GetMap&amp;FORMAT=image/jpeg&amp;TRANSPARENT=FALSE&amp;STYLES=&amp;VERSION=1.3.0&amp;LAYERS=WMS-Toporama&amp;WIDTH={w}&amp;HEIGHT={h}&amp;CRS=EPSG:3857&amp;BBOX={xmin},{ymin},{xmax},{ymax}&amp;m4h=t"></map-link>
     </map-extent>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 

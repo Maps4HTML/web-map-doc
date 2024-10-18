@@ -19,14 +19,14 @@ The checked property can't be changed if the disabled property is set.
 To set the checked state of a layer to on:
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 layer.checked = true; // valid values are true | false
 ```
 
 To read the checked state of the layer:
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 let isChecked = layer.checked;
 ```
 ---
@@ -43,14 +43,14 @@ user interface.
 To set/update whether the layer is "hidden":
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 layer.hidden = true; // valid values are true | false
 ```
 
-To get the `<layer->`'s hidden value:
+To get the `<map-layer>`'s hidden value:
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 let isHidden = layer.hidden;
 ```
 ---
@@ -71,20 +71,20 @@ map viewport.
 ### label
 `HTMLLayerElement.label` reflects the `label` content attribute, and specifies a 
 fallback accessible name for the layer, if the accessible name is not provided 
-via a local `<map-title>` element child of the `<layer->` element, or in the 
+via a local `<map-title>` element child of the `<map-layer>` element, or in the 
 `<map-head>` of a remote MapML document, loaded via the `src` URL value, respectively.
 
-To set/update the `<layer->`'s label:
+To set/update the `<map-layer>`'s label:
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 layer.label = "New Title";
 ```
 
-To get the `<layer->`'s label value:
+To get the `<map-layer>`'s label value:
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 let label = layer.label;
 ```
 ---
@@ -94,34 +94,34 @@ let label = layer.label;
 MapML document for the layer.  The src property may be undefined if the layer
 contains inline content.  If the src property returns a value, any inline content 
 will be ignored.
-To set/update the `<layer->`'s src:
+To set/update the `<map-layer>`'s src:
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 layer.src = "https://example.org";
 ```
 
-To get the `<layer->`'s src value (URL):
+To get the `<map-layer>`'s src value (URL):
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 let url = layer.src;
 ```
 ---
 ### opacity
 `HTMLLayerElement.opacity` provides read/write access to the `opacity` value, and is reflected in the layer control for each layer, under "Opacity".
 
-To set/update the `<layer->`'s opacity:
+To set/update the `<map-layer>`'s opacity:
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 layer.opacity = 0.5; // valid values from 0 to 1
 ```
 
-To get the `<layer->`'s opacity value:
+To get the `<map-layer>`'s opacity value:
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 let opacity = layer.opacity;
 ```
 
@@ -133,7 +133,7 @@ let opacity = layer.opacity;
 zoom level in which the extent fits completely.
 
 ```js
-let layer = document.querySelector('layer-');
+let layer = document.querySelector('map-layer');
 layer.zoomTo();
 ```
 
@@ -145,7 +145,7 @@ layer.zoomTo();
 
 | Function | Returns | Description |
 |----------|---------|-------------|
-| <code>mapml2geojson(\<Object\> options)</code> | A JavaScript (GeoJSON) feature collection object | This function transforms the `<feature>` element children of a `<layer->` element to a GeoJSON FeatureCollection object. You supply [options](#options) to control the transformation. This function must be used inside a windows.onload event.
+| <code>mapml2geojson(\<Object\> options)</code> | A JavaScript (GeoJSON) feature collection object | This function transforms the `<feature>` element children of a `<map-layer>` element to a GeoJSON FeatureCollection object. You supply [options](#options) to control the transformation. This function must be used inside a windows.onload event.
 
 :::caution
 
@@ -153,7 +153,7 @@ layer.zoomTo();
 
 ``` js
 window.onload = (event) => {
-  let layer = document.querySelector('layer-');
+  let layer = document.querySelector('map-layer');
   layer.mapml2geojson();
 };
 ```
@@ -202,7 +202,7 @@ so the resulting JSON SHOULD (somehow, tbd) be tagged with the datum in use by t
 #### Default options
 An example showcasing default GeoJSON output when no options are provided.
 ``` html
-<layer- label="Point Geometry" checked="">
+<map-layer label="Point Geometry" checked="">
    <map-meta name="extent" content="top-left-longitude=-75.916809, top-left-latitude=45.886964, bottom-right-longitude=-75.516809,bottom-right-latitude=45.26964"></map-meta>
    <map-meta name="projection" content="OSMTILE"></map-meta>
    <map-meta name="cs" content="gcrs"></map-meta>
@@ -230,10 +230,10 @@ An example showcasing default GeoJSON output when no options are provided.
          </table>
       </map-properties>
    </map-feature>
-</layer->
+</map-layer>
 <script>
 window.onload = (event) => {
-   let layer = document.querySelector('layer-');
+   let layer = document.querySelector('map-layer');
    let output = layer.mapml2geojson();
 };
 </script>

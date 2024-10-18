@@ -32,8 +32,8 @@
         <!------------------------------------------------- CHANGE THIS ------------------------------------------------->
         <textarea rows="10" style="width:100%" id="htmlEditor">
 <mapml-viewer projection="CBMTILE" zoom="4" lat="76" lon="-130" controls="">
-  <layer- label="CBMT" src="../data/cbmtile-cbmt.mapml" checked="" hidden=""></layer->
-  <layer- label="Permanent snow and ice (prob. 94% or more)" checked="">
+  <map-layer label="CBMT" src="../data/cbmtile-cbmt.mapml" checked="" hidden=""></map-layer>
+  <map-layer label="Permanent snow and ice (prob. 94% or more)" checked="">
     <map-link href="https://datacube.services.geo.ca/ows/msi?SERVICE=WMS&amp;REQUEST=GetCapabilities&amp;VERSION=1.3.0" rel="license" title="Open Government License"></map-link>
     <map-link rel="legend" href="https://datacube.services.geo.ca/assets/legend/legend_msi_binary.png" sizes="150x33" height="33" width="150" title="legend" type="image/png"></map-link>
     <map-extent units="CBMTILE" checked>
@@ -70,7 +70,7 @@
       <map-link tref="https://datacube.services.geo.ca/ows/msi?SERVICE=WMS&amp;REQUEST=GetMap&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;STYLES=msi-binary&amp;VERSION=1.3.0&amp;LAYERS=msi-94-or-more&amp;WIDTH={w}&amp;HEIGHT={h}&amp;CRS=EPSG:3978&amp;BBOX={xmin},{ymin},{xmax},{ymax}&amp;TIME={time}" rel="image"></map-link>
       <map-link tref="legend_query_msi-94-plus.mapml?BBOX={xmin},{ymin},{xmax},{ymax}&amp;TIME={time}" rel="query"></map-link>
     </map-extent>
-  </layer->
+  </map-layer>
 </mapml-viewer></textarea>
     </div>
     <div class="tabcontent" id="CSS">

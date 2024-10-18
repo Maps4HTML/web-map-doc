@@ -7,7 +7,7 @@ Les [caractéristiques](https://en.wikipedia.org/wiki/Geographical_feature) de l
 
 Les caractéristiques de la carte sont représentées dans HTML MapML par l’élément `<map-feature>` qui est rendu sur la carte par conversion en format SVG. Cela permet de mettre la caractéristique à l’échelle sans distorsion si l’utilisateur effectue un zoom avant ou arrière. 
 
-Un élément `<map-feature>` est le conteneur du nom accessible de la caractéristique (`<map-featurecaption>`), de ses propriétés scalaires (`<map-properties>`)  et de sa géométrie (`<map-geometry>`).  L’élément `<map-feature>` peut être modélisé sous forme de contenu HTML en ligne et comme élément-enfant de `<layer->` ou encore dans un document XHTML MapML comme élément- enfant de `<map-body>`.
+Un élément `<map-feature>` est le conteneur du nom accessible de la caractéristique (`<map-featurecaption>`), de ses propriétés scalaires (`<map-properties>`)  et de sa géométrie (`<map-geometry>`).  L’élément `<map-feature>` peut être modélisé sous forme de contenu HTML en ligne et comme élément-enfant de `<map-layer>` ou encore dans un document XHTML MapML comme élément- enfant de `<map-body>`.
 
 <iframe src="../../../demo/map-feature-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
@@ -123,7 +123,7 @@ Définit l’[extent](../meta/#attributs) de la couche.
   <mapml-viewer projection="CBMTILE" zoom="2" lat="45.5052040" lon="-75.2202344"
     controls>
 
-    <layer- label="Arizona" checked>
+    <map-layer label="Arizona" checked>
       <map-meta name="projection" content="CBMTILE"></map-meta>
       <map-meta name="zoom" content="min=1,max=5,value=0"></map-meta>
       <map-meta name="cs" content="gcrs"></map-meta>
@@ -180,13 +180,13 @@ Définit l’[extent](../meta/#attributs) de la couche.
           </map-polygon>
         </map-geometry>
       </map-feature>
-    </layer->
+    </map-layer>
   </mapml-viewer>
 ```
 ### Une caractéristique de la carte HTML en ligne
 
 ```html
-<layer- label="My Feature Layer" checked>
+<map-layer label="My Feature Layer" checked>
     <map-feature id="mem35059" zoom="17">
       <map-properties>
         <table>
@@ -213,13 +213,13 @@ Définit l’[extent](../meta/#attributs) de la couche.
         </map-point>
       </map-geometry>
     </map-feature>
-</layer->
+</map-layer>
 ```
 
 ### Une caractéristique de la carte dans un document XHTML MapML récupéré
 
 ```html
-<layer- label="Ma couche de caractéristiques" src="https://example.org/mem/35059.mapml"></layer->
+<map-layer label="Ma couche de caractéristiques" src="https://example.org/mem/35059.mapml"></map-layer>
 ```
 
 ### 35059.mapml:

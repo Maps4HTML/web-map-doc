@@ -34,7 +34,7 @@ This event is fired when a tile is first being created, the event contains the f
 The map:
 ```html
 <mapml-viewer projection="OSMTILE" zoom="0" lat="45" lon="-75" controls>
-  <layer- label="Custom Tiles" checked>
+  <map-layer label="Custom Tiles" checked>
     <map-meta name="zoom" content="min=0,max=23" ></map-meta>
     <map-extent units="OSMTILE" checked hidden>
       <map-input name="zoomLevel" type="zoom" min="0" max="23" value="1" ></map-input>
@@ -43,14 +43,14 @@ The map:
       <!-- listen for the tileloadstart event on this element -->
       <map-link rel="tile" title="" tref="" ></map-link>
     </map-extent>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 
 
 The JavaScript for creating custom tiles:
 ```js
-let layer = document.querySelector("body > mapml-viewer > layer- > map-extent > map-link");
+let layer = document.querySelector("body > mapml-viewer > map-layer > map-extent > map-link");
     layer.addEventListener("tileloadstart", (e) => {
       let customTile = document.createElement("p");
       customTile.innerHTML = `x: ${e.detail.x} y: ${e.detail.y} zoom: ${e.detail.zoom}`;

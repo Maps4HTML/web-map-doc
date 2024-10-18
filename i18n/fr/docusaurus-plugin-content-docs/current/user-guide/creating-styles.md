@@ -22,7 +22,7 @@ sous forme de requêtes par plage d'octets.
 Les [formats](../elements/link#type) de l'archive de carte pmtiles et mvt  dans le polyfill MapML sont intégrés via 
 [la bibliothèque protomaps-leaflet](https://docs.protomaps.com/pmtiles/leaflet).  Protomaps-leaflet est conçue pour prendre en charge 
 la grille de tuiles Web Mercator (standard de facto). Cela permet au polyfill MapML d'intégrer le support des sources de données pmtiles 
-et mvt pour la seule projection `OSMTILE`.  Les éléments `<layer->` et `<map-extent>` ainsi que le `<mapml-viewer>` 
+et mvt pour la seule projection `OSMTILE`.  Les éléments `<map-layer>` et `<map-extent>` ainsi que le `<mapml-viewer>` 
 ne fonctionneront pas (et seront « désactivés » de façon permanente) s'ils sont utilisés avec des valeurs `<mapml-viewer projection=« ANYTHING »...>` 
 ou `<map-extent units=« ANYTHING »...>` autres que `OSMTILE`.
 

@@ -22,8 +22,8 @@ Toutes les démonstrations comprises dans les pages de documentation contiennent
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="10" lon="-75.7" lat="45.4" controls>
-  <layer- label="OpenStreetMap" src="../data/osm.mapml" checked></layer->
-  <layer- label="Polygone" checked>
+  <map-layer label="OpenStreetMap" src="../data/osm.mapml" checked></map-layer>
+  <map-layer label="Polygone" checked>
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Polygone</map-featurecaption>
@@ -37,7 +37,7 @@ Toutes les démonstrations comprises dans les pages de documentation contiennent
       <map-properties><h2>Il s’agit d’un polygone</h2></map-properties>
     </map-feature>
     <map-style>.hole {stroke: #73A9AD;stroke-width: 4px;fill: none;fill-opacity: 1;}</map-style>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 

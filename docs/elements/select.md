@@ -43,7 +43,7 @@ This element contains the options for the `<map-select>` element. A `<map-select
 ### Change map source
 ```html
 <mapml-viewer projection="OSMTILE" zoom="2" lat="65" lon="-90" controls="">
-  <layer- label="Basemap" checked>
+  <map-layer label="Basemap" checked>
     <map-extent units="OSMTILE" checked>
       <map-input name="z" type="zoom"  value="18" min="0" max="18"></map-input>
       <map-input name="x" type="location" units="tilematrix" axis="column" min="0"  max="262144" ></map-input>
@@ -58,7 +58,7 @@ This element contains the options for the `<map-select>` element. A `<map-select
       
       <map-link rel="tile" tref="https://{source}/{z}/{x}/{y}.png" ></map-link>
     </map-extent>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 

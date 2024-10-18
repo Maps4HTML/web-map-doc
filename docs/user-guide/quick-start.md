@@ -22,7 +22,7 @@ Learn how to quickly create your first map.
 </head>
 <body>
 	<mapml-viewer width="800" height="400" projection="OSMTILE" zoom="1" lat="60.0" lon="-100.0" controls>
-		<layer- label="OpenStreetMap" src="https://maps4html.org/web-map-doc/demo/data/osm.mapml" checked></layer->	
+		<map-layer label="OpenStreetMap" src="https://maps4html.org/web-map-doc/demo/data/osm.mapml" checked></map-layer>	
 	</mapml-viewer>
 </body>
 </html>

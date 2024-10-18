@@ -33,7 +33,7 @@ Cet événement est déclenché à la création d’un pavé, et contient la str
 La carte :
 ```html
 <mapml-viewer projection="OSMTILE" zoom="0" lat="45" lon="-75" controls>
-  <layer- label="pavés personnalisés" checked>
+  <map-layer label="pavés personnalisés" checked>
     <map-meta name="zoom" content="min=0,max=23" ></map-meta>
     <map-extent units="OSMTILE" checked hidden>
       <map-input name="zoomLevel" type="zoom" min="0" max="23" value="1" ></map-input>
@@ -42,14 +42,14 @@ La carte :
       <!-- écoutez l’événement tileloadstart sur cet élément -->
       <map-link rel="tile" title="" tref="" ></map-link>
     </map-extent>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 
 
 Script Java pour créer des pavés personnalisés :
 ```js
-let layer = document.querySelector("body > mapml-viewer > layer- > map-extent > map-link");
+let layer = document.querySelector("body > mapml-viewer > map-layer > map-extent > map-link");
     layer.addEventListener("tileloadstart", (e) => {
       let customTile = document.createElement("p");
       customTile.innerHTML = `x: ${e.detail.x} y: ${e.detail.y} zoom: ${e.detail.zoom}`;

@@ -9,7 +9,7 @@ In this section, we will learn how to create a templated feature layer. A templa
 ## Adding a templated feature layer
 
 ```html
-<layer- label="Alabama" checked>
+<map-layer label="Alabama" checked>
   <map-meta name="zoom" content="min=2,max=5"></map-meta>
   <map-extent units="CBMTILE" checked hidden>
     <map-input name="z" type="zoom" min="2" max="18" value="0"></map-input>
@@ -19,7 +19,7 @@ In this section, we will learn how to create a templated feature layer. A templa
     <map-input name="ymax" type="location" units="gcrs" axis="latitude" position="top-left" min="45" max="46"></map-input>
     <map-link rel="features" tref="data/alabama_feature.mapml?{xmin}{ymin}{xmax}{ymax}{z}"></map-link>
   </map-extent>
-</layer->
+</map-layer>
 ```
 
 ## Associated Elements
@@ -91,7 +91,7 @@ Sets the zoom range of the layer. The layer will make requests from zoom levels 
 
 ```html
 <mapml-viewer projection="CBMTILE" zoom="3" lat="45.5052040" lon="-75.2202344" controls>
-  <layer- label="Alabama" checked>
+  <map-layer label="Alabama" checked>
     <map-meta name="zoom" content="min=2,max=5"></map-meta>
     <map-extent units="CBMTILE" checked hidden>
       <map-input name="z" type="zoom" min="2" max="18" value="0"></map-input>
@@ -101,7 +101,7 @@ Sets the zoom range of the layer. The layer will make requests from zoom levels 
       <map-input name="ymax" type="location" units="gcrs" axis="latitude" position="top-left" min="45" max="46"></map-input>
       <map-link rel="features" tref="data/alabama_feature.mapml?{xmin}{ymin}{xmax}{ymax}{z}"></map-link>
     </map-extent>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 

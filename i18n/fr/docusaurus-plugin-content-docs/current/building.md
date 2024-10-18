@@ -91,7 +91,7 @@ $ cat > index.html << EOF
   </head>
   <body>
     <mapml-viewer projection="CBMTILE" zoom="2" lat="45" lon="-90" controls>
-      <layer- label="Canada Base Map" src="https://geogratis.gc.ca/mapml/en/cbmtile/cbmt/" checked></layer->
+      <map-layer label="Canada Base Map" src="https://geogratis.gc.ca/mapml/en/cbmtile/cbmt/" checked></map-layer>
     </mapml-viewer>
   </body>
 </html>

@@ -43,7 +43,7 @@ Cet élément contient les options de l’élément `<map-select>`. Un élément
 ### Changer de source de carte
 ```html
 <mapml-viewer projection="OSMTILE" zoom="2" lat="65" lon="-90" controls="">
-  <layer- label="Carte de base" checked>
+  <map-layer label="Carte de base" checked>
     <map-extent units="OSMTILE" checked>
       <map-input name="z" type="zoom"  value="18" min="0" max="18"></map-input>
       <map-input name="x" type="location" units="tilematrix" axis="column" min="0"  max="262144" ></map-input>
@@ -58,7 +58,7 @@ Cet élément contient les options de l’élément `<map-select>`. Un élément
       
       <map-link rel="tile" tref="https://{source}/{z}/{x}/{y}.png" ></map-link>
     </map-extent>
-  </layer->
+  </map-layer>
 </mapml-viewer>
 ```
 

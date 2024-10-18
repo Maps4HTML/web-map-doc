@@ -1,25 +1,25 @@
 ---
 id: layer
-title: "<layer->"
+title: "<map-layer>"
 slug: /elements/layer/
 ---
 
-Maps have one or more layers. Map layers are implemented by the `<layer->` custom element.  
-All `<mapml-viewer>` content is contained by one or more `<layer->` elements, either inline or by remote fetch representing the layer's content.
+Maps have one or more layers. Map layers are implemented by the `<map-layer>` custom element.  
+All `<mapml-viewer>` content is contained by one or more `<map-layer>` elements, either inline or by remote fetch representing the layer's content.
 
 ```html
-<layer- label="My Layer" checked>
+<map-layer label="My Layer" checked>
   ...layer content goes here...
-</layer->
+</map-layer>
 ```
 
-`<layer->` is not a 'void' element - it must be closed with a `</layer->` tag.
+`<map-layer>` is not a 'void' element - it must be closed with a `</map-layer>` tag.
 
-Map content can either be inline, as shown above - between the beginning `<layer->` and ending `</layer->` tags -
-or fetched, from the `<layer- src="..."></layer->` source attribute URL:
+Map content can either be inline, as shown above - between the beginning `<map-layer>` and ending `</map-layer>` tags -
+or fetched, from the `<map-layer src="..."></map-layer>` source attribute URL:
 
 ```html
-<layer- label="My Layer" src="https://example.org/mapml/mylayer" checked></layer->
+<map-layer label="My Layer" src="https://example.org/mapml/mylayer" checked></map-layer>
 ```
 
 <iframe src="../../../demo/layer-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
@@ -39,7 +39,7 @@ Contains the path to a MapML document.
 
 ### `checked`
 
-The `<layer- checked>` attribute and property is boolean. When present,
+The `<map-layer checked>` attribute and property is boolean. When present,
 the checked property value is taken to be 'true'; when not present, the property
 value is 'false'.  Beware that it is the _presence_ of the attribute that makes it
 true, not the value of the attribute. For example, the attribute `checked="false"`
@@ -50,7 +50,7 @@ actually turns out to be checked,
 
 ### `hidden`
 
-The `<layer- hidden>` attribute and property is boolean. When present,
+The `<map-layer hidden>` attribute and property is boolean. When present,
 the layer is hidden in the layer control.
 
 ---
@@ -65,7 +65,7 @@ and the fetched `<map-title>` element is used.
 
 ### `opacity`
 
-The `opacity` attribute is used to set the initial opacity of the `<layer->` element.
+The `opacity` attribute is used to set the initial opacity of the `<map-layer>` element.
 Valid `opacity` values range from from "0.0" to "1.0" and are reflected in the layer control
 opacity input slider control. When the `opacity` attribute is not present, the opacity is set to "1.0" by default.
 
@@ -75,11 +75,11 @@ opacity input slider control. When the `opacity` attribute is not present, the o
 
 ### Layer Opacity
 
-The following example sets the initial `opacity` for a `<layer->`. 
+The following example sets the initial `opacity` for a `<map-layer>`. 
 
 ```html
 <mapml-viewer projection="CBMTILE" zoom="2" lat="45" lon="-90" controls>
-      <layer- opacity = "0.5" label="CBMT" src="https://geogratis.gc.ca/mapml/en/cbmtile/cbmt/" checked></layer->
+      <map-layer opacity = "0.5" label="CBMT" src="https://geogratis.gc.ca/mapml/en/cbmtile/cbmt/" checked></map-layer>
 </mapml-viewer>
 ```
 
