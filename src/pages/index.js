@@ -69,7 +69,7 @@ function Home() {
   }
   </style>
   <mapml-viewer projection="CBMTILE" zoom="5" lat="58" lon="-90" frameborder="0" controls>
-    <layer- label="CBMT" src="${mapUrl}" checked></layer->
+    <map-layer label="CBMT" src="${mapUrl}" checked></map-layer>
   </mapml-viewer>`;
   const context = useDocusaurusContext();
   const { siteConfig = {} } = context;
