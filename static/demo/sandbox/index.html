@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sandbox</title>
+    <script>
+      if (window.parent.location.href.includes('/fr/')) {
+        document.firstElementChild.lang = 'fr';
+      }
+    </script>
     <script type="module" src="../../dist/mapml.js"></script>
     <link rel="stylesheet" href="../sandbox.css"/>
 
