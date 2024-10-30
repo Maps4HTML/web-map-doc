@@ -1,7 +1,7 @@
 ---
 id: layer
 title: "<map-layer>"
-slug: /layers/layer/
+slug: /elements/layer/
 ---
 
 Les cartes sont composées d’une ou de plusieurs couches. Ces couches sont appliquées par l’élément personnalisé `<map-layer>`.
