@@ -124,3 +124,8 @@ catch (err) {
     // when demo page is not opened as an iframe, display default theme
 }
 
+// Append lang = fr, so the map may be able to be localized in fr
+if (window.parent.location.href.includes('/fr/')) {
+    document.firstElementChild.lang = 'fr';
+  }
+  
