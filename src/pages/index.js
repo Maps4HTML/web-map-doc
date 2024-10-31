@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
@@ -53,35 +53,30 @@ function Feature({ title, description }) {
 }
 
 function Home() {
-  const mapUrl = "./demo/data/osmtile-cbmt.mapml"
-  const mapiframe = `<script type="module" src="dist/mapml.js"></script>
-  <style>
-  html,
-  body {
-    height: 100%;
-  }
-  body {
-    margin: 0;
-  }
-  mapml-viewer {
-    width: 100%;
-    height: inherit;
-  }
-  </style>
-  <mapml-viewer projection="CBMTILE" zoom="5" lat="58" lon="-90" frameborder="0" controls>
-    <map-layer label="CBMT" src="${mapUrl}" checked></map-layer>
-  </mapml-viewer>`;
-  const context = useDocusaurusContext();
-  const { siteConfig = {} } = context;
-  const home = translate({"message":"Home","id":"mapml.HomePageContent.Home"});
-  const description = translate({"message":"Documentation for mapml-viewer and layer element suite","id":"mapml.HomePageContent.Description"});
-  return (
-    <Layout
-      title={home}
-      description={description}>
+  const { siteConfig = {}, i18n } = useDocusaurusContext();
+  const [mapiframe, setMapIframe] = useState('');
 
+  useEffect(() => {
+    const lang = i18n.currentLocale === 'fr' ? 'fr' : 'en';
+    const mapUrl = lang === 'en' ? "./demo/data/osmtile-cbmt.mapml" : "./demo/data/osmtile-cbmt-fr.mapml";
+    setMapIframe(`
+      <html lang="${lang}">
+        <script type="module" src="dist/mapml.js"></script>
+        <style>
+          html, body { height: 100%; margin: 0; }
+          mapml-viewer { width: 100%; height: inherit; }
+        </style>
+        <mapml-viewer projection="CBMTILE" zoom="5" lat="58" lon="-90" frameborder="0" controls>
+          <map-layer label="CBMT" src="${mapUrl}" checked></map-layer>
+        </mapml-viewer>
+      </html>
+    `);
+  }, [i18n.currentLocale]);
+
+  return (
+    <Layout title="Home" description="Documentation for mapml-viewer and layer element suite">
       <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <iframe tabIndex="-1" height="500px" width="100%" frameBorder="0" scrolling="no" title="MapML-viewer" srcDoc={mapiframe}></iframe>
+        <iframe tabIndex="-1" height="500px" width="100%" frameBorder="0" scrolling="no" title="MapML-viewer" srcDoc={mapiframe}></iframe>
         <div className="container">
 
     <h1 className="hero__title"><Translate id="mapml.HomePageContent.Hero.title">{siteConfig.title}</Translate></h1>
