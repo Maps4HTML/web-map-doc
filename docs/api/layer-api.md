@@ -125,6 +125,94 @@ let layer = document.querySelector('map-layer');
 let opacity = layer.opacity;
 ```
 
+### extent
+
+Read-only.  Returns the upper left and lower right coordinates of the 
+layer's minimum bounding rectangle as an object value.  
+
+```console
+> let f = document.querySelector('map-layer')
+> console.log(f.extent)
+> {topLeft: {…}, bottomRight: {…}, projection: 'CBMTILE'}
+```
+
+The extent object is structured as follows:
+
+<details>
+<summary>Click to view the extent object</summary>
+
+```js
+{
+    "projection": "CBMTILE",
+    "topLeft": {
+        "tcrs": [
+            {
+                "horizontal": 942.662039991251,
+                "vertical": 1029.0945982508472
+            },
+/* an object with "horizontal" and "vertical" properties for each zoom level in the array */
+            {
+                "horizontal": 546743983.1949257,
+                "vertical": 596874866.9854914
+            }
+        ],
+        "tilematrix": [
+            {
+                "horizontal": 3.6822735937158244,
+                "vertical": 4.019900774417372
+            },
+/* an object with "horizontal" and "vertical" properties for each zoom level in the array */
+            {
+                "horizontal": 2135718.6843551784,
+                "vertical": 2331542.4491620758
+            }
+        ],
+/* gcrs stands for "geographic coordinate reference system" */
+        "gcrs": {
+            "horizontal": -75.73195696514524,
+            "vertical": 45.40761073808424
+        },
+/* pcrs stands for "projected coordinate reference system" */
+        "pcrs": {
+            "horizontal": 1509108.7182317898,
+            "vertical": -170864.4342066869
+        }
+    },
+    "bottomRight": {
+        "tcrs": [
+            {
+                "horizontal": 942.7503158533199,
+                "vertical": 1029.1828741129164
+            },
+            {
+                "horizontal": 546795183.1949255,
+                "vertical": 596926066.9854914
+            }
+        ],
+        "tilematrix": [
+            {
+                "horizontal": 3.6826184213020308,
+                "vertical": 4.0202456020035795
+            },
+            {
+                "horizontal": 2135918.684355178,
+                "vertical": 2331742.4491620758
+            }
+        ],
+        "gcrs": {
+            "horizontal": -75.67858731979081,
+            "vertical": 45.387937810298354
+        },
+        "pcrs": {
+            "horizontal": 1512495.3916717991,
+            "vertical": -174251.10764670372
+        }
+    }
+}
+```
+
+</details>
+
 ---
 ## Methods
 
@@ -193,7 +281,7 @@ so the resulting JSON SHOULD (somehow, tbd) be tagged with the datum in use by t
 | changestyle     | Fired before the layer changes src due to user selecting alternate style in layer control |
 | changeprojection | Fired before the layer changes projection due to its declared projection being not equal to that of the map |
 | loadedmetadata | Fired when the metadata for a layer has loaded. The intent is that this event is analagous to the [media element loadedmetadata event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loadedmetadata_event), but for map layers. |
-|  map-change   | Fired when the `checked` attribute changes state            |
+|  map-change   | Fired when the `checked` attribute changes state through the layer menu           |
 ---
 
 ## Examples
