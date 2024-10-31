@@ -82,7 +82,7 @@ let max = feature.max;
 
 ### extent
 
-Read-only.  Returns the upper left and lower right coordinates of the 
+Read-only.  Returns the top left and bottom right coordinates of the 
 feature's minimum bounding rectangle as an object value.  
 
 For point features (which have a zero-area extent), an `extent` is calculated 

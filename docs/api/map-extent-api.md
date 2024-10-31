@@ -124,8 +124,9 @@ let opacity = extent.opacity;
 
 ### extent
 
-Read-only.  Returns the upper left and lower right coordinates of the 
-extent's minimum bounding rectangle as an object value.  
+`HTMLExtentElement.extent` provides READ-ONLY access to the top left 
+and bottom right coordinates of the layer's minimum bounding rectangle 
+as an object value.
 
 ```console
 > let f = document.querySelector('map-extent')
@@ -219,8 +220,8 @@ The extent object is structured as follows:
 zoom level in which the extent fits completely.
 
 ```js
-let extent = document.querySelector('map-extent');
-extent.zoomTo();
+let map-extent = document.querySelector('map-extent');
+map-extent.zoomTo();
 ```
 
 ---
@@ -229,7 +230,7 @@ extent.zoomTo();
 
 | Event name      	| Description                                          	|
 |--------------	|--------------------------------------------------------	|
-|  map-change   | Fired when the `checked` attribute changes state through the layer menu           |
+|  map-change   | Fired when the extent is checked or unchecked through the layer menu (by clicking or using the keyboard)           |
 ---
 
 ## Examples

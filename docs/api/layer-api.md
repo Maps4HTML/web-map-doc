@@ -127,8 +127,9 @@ let opacity = layer.opacity;
 
 ### extent
 
-Read-only.  Returns the upper left and lower right coordinates of the 
-layer's minimum bounding rectangle as an object value.  
+`HTMLLayerElement.extent` provides READ-ONLY access to the top left 
+and bottom right coordinates of the layer's minimum bounding rectangle 
+as an object value.
 
 ```console
 > let f = document.querySelector('map-layer')
@@ -281,7 +282,7 @@ so the resulting JSON SHOULD (somehow, tbd) be tagged with the datum in use by t
 | changestyle     | Fired before the layer changes src due to user selecting alternate style in layer control |
 | changeprojection | Fired before the layer changes projection due to its declared projection being not equal to that of the map |
 | loadedmetadata | Fired when the metadata for a layer has loaded. The intent is that this event is analagous to the [media element loadedmetadata event](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/loadedmetadata_event), but for map layers. |
-|  map-change   | Fired when the `checked` attribute changes state through the layer menu           |
+|  map-change   | Fired when the layer is checked or unchecked through the layer menu (by clicking or using the keyboard)           |
 ---
 
 ## Examples
