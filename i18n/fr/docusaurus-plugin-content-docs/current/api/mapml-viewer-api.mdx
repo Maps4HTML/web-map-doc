@@ -506,7 +506,7 @@ let json = {
     "properties": {"desc": "Ceci est un point"}
 };
 
-// function to set caption
+// fonction pour définir la légende
 let cap = function c(j) {
   let str = "Ce point se trouve à : (" + j.geometry.coordinates[0] + ", " + j.geometry.coordinates[1] + ").";
   return str;
@@ -610,7 +610,7 @@ let output = map.geojson2mapml(json);
 
 ### defineCustomProjection
 
-#### Basic options usage
+#### Utilisation des options de base
 
 ```html
 <!doctype html>

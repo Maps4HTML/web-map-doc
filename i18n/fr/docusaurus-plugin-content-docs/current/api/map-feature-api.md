@@ -18,13 +18,13 @@ caractéristiques servies par les services HTML (MapML) expriment l'échelle
 native ou naturelle de la caractéristique par le biais de ses attributs contenu 
 `zoom`, `min` et `max` (zoom) et des attributs IDL.
 
-To set the zoom:
+Pour définir le `zoom` :
 ```js
 let feature = document.querySelector('map-feature');
-feature.zoom = 5; // set's the 'native' zoom of the feature
+feature.zoom = 5; // définit le zoom "natif" de la fonctionnalité
 ```
 
-To get the zoom:
+Pour obtenir le `zoom` :
 ```js
 let feature = document.querySelector('map-feature');
 let zoom = feature.zoom; 
@@ -44,13 +44,13 @@ Si la valeur `min` n'est pas fournie, une valeur de repli sera calculée; la val
 de repli sera la valeur de `zoom` minimale de la couche ou, si elle n'est pas spécifiée, 
 la valeur minimale de la projection du visualiseur de carte, c'est-à-dire 0.
 
-To set the min:
+Pour définir le `min`:
 ```js
 let feature = document.querySelector('map-feature');
-feature.min = 5; // feature will not be rendered on zoom levels 0-4
+feature.min = 5; // la fonctionnalité ne sera pas rendue aux niveaux de zoom 0 à 4
 ```
 
-To get the min:
+Pour obtenir le `min`:
 ```js
 let feature = document.querySelector('map-feature');
 let min = feature.min;
@@ -71,10 +71,10 @@ sera la valeur de [`zoom`](#zoom) maximale de la couche ou, si elle n'est pas
 spécifiée, la valeur maximale de [`zoom`](#zoom) de la projection du visualiseur 
 de carte, par exemple 25 (en fonction de la projection).
 
-Pour définir la valeur `max` :
+Pour définir le `max` :
 ```js
 let feature = document.querySelector('map-feature');
-feature.max = 10; // feature will not be rendered past zoom level 10
+feature.max = 10; // la fonctionnalité ne sera pas rendue au-delà du niveau de zoom 10
 ```
 
 Pour obtenir le `max` :
@@ -201,7 +201,7 @@ que l'[`extent`](#extent) tienne ou non entièrement dans la fenêtre d'affichag
 
 ```js
 let f = document.querySelector('map-feature');
-f.zoomTo(); // re-center the map on the feature at its native zoom
+f.zoomTo(); // recentrer la carte sur la fonctionnalité à son niveau de zoom natif
 ```
 #### Paramètres
 
@@ -340,7 +340,7 @@ window.onload = (event) => {
 
 | Option | Type | Défaut | Description |
 |------|------|---------------|--------|
-| `propertyFunction` | \<Fonction\> | _s/o_ | Une fonction que vous fournissez qui fait correspondre l'élément `<map-properties>` de la caractéristique à un [membre GeoJSON "properties"](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2), puisque vous seul connaissez la conception du balisage dans votre valeur `<map-properties>`. Si vous ne fournissez pas cette option, une fonction par défaut tentera d'inverser un enfant `<table>` de l'élément `<map-properties>`, comme si cette table avait été générée par la fonction [default properties option function from geojson2mapml](mapml-viewer-api#options). |
+| `propertyFunction` | \<Fonction\> | _s/o_ | Une fonction que vous fournissez qui fait correspondre l'élément `<map-properties>` de la caractéristique à un [membre GeoJSON "properties"](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2), puisque vous seul connaissez la conception du balisage dans votre valeur `<map-properties>`. Si vous ne fournissez pas cette option, une fonction par défaut tentera d'inverser un enfant `<table>` de l'élément `<map-properties>`, comme si cette table avait été générée par la fonction [fonction des options de propriétés par défaut de geojson2mapml](mapml-viewer-api#options). |
 | `transform` | \<Boolean\> | `true` | Transforme les valeurs `<map-coordinates>` en valeurs `gcrs` (longitude,latitude), si ce n'est pas déjà le cas. GeoJSON [recommande](https://www.rfc-editor.org/rfc/rfc7946.html#section-4) d'utiliser les coordonnées de longitude et de latitude WGS 84, c'est donc le comportement par défaut. |
 ###### Notes
 
@@ -376,7 +376,7 @@ Un objet GeoJSON représentant la caractéristique
 ## Exemples
 
 ### mapml2geojson
-#### Default options
+#### Options par défaut
 Un exemple montrant la sortie GeoJSON par défaut lorsqu'aucune option n'est fournie.
 ``` html
 <map-layer label="Géométrie de point" checked="">

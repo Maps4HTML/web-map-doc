@@ -137,7 +137,7 @@ pmtilesRules.set(
             stroke:'black',
             font:"600 16px sans-serif"
           }),
-          // note that filter is a property of a rule, not an option to a symbolizer
+          // notez que filter est une propriété d'une règle, et non une option pour un symboliseur
           filter: (z,f) => { return f.props['str1'].trim().toLowerCase() !== 'no name'; }
         }
       ]
