@@ -36,7 +36,7 @@ prushfor@DESKTOP-8T9A8T8 MINGW64 ~/Documents/MapML.js (main)
 $
 ```
 
-Finally, build the project from source with "grunt", which should have been installed by npm in the previous step:
+Enfin, construisez le projet à partir du code source avec "grunt", qui devrait avoir été installé par npm à l'étape précédente :
 
 ```bash
 $ grunt default

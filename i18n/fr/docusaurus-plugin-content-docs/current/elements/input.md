@@ -110,7 +110,7 @@ Définit la plage de zoom en fonction des ressources qui sont demandées à l’
 ---
 ## Exemples
 
-### Input step
+### Étape d'entrée
 
 ```html
 <mapml-viewer projection="OSMTILE" zoom="0" lat="45.409071" lon="-75.703411" controls>

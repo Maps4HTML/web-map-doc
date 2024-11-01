@@ -29,10 +29,10 @@ Pour activer l'état `checked` d'un map-extent :
 
 ```js
 let extent = document.querySelector('map-extent');
-extent.checked = true; // valid values are true | false
+extent.checked = true; // les valeurs valides sont true | false
 ```
 
-To read the checked state of the map-extent:
+Pour lire l'état coché de l'étendue de la carte :
 
 ```js
 let extent = document.querySelector('map-extent');
@@ -55,7 +55,7 @@ contrôle de la couche :
 
 ```js
 let extent = document.querySelector('map-extent');
-extent.hidden = true; // valid values are true | false
+extent.hidden = true; // les valeurs valides sont true | false
 ```
 
 Pour obtenir la valeur cachée de `<map-extent>` :
@@ -94,7 +94,7 @@ Pour définir/mettre à jour l'étiquette de `<map-extent>` :
 
 ```js
 let extent = document.querySelector('map-extent');
-extent.label = "New Accessible Name";
+extent.label = "Nouveau nom accessible";
 ```
 
 Pour obtenir la valeur de l'étiquette de `<map-extent>` :
@@ -118,7 +118,7 @@ Pour définir/mettre à jour l'opacité de `<map-extent>` :
 
 ```js
 let extent = document.querySelector('map-extent');
-extent.opacity = 0.5; // valid values from 0 to 1
+extent.opacity = 0.5; // valeurs valides de 0 à 1
 ```
 
 Pour obtenir la valeur d'opacité de `<map-extent>` :

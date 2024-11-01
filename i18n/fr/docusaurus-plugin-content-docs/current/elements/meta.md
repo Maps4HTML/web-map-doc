@@ -28,9 +28,9 @@ L’attribut `name` indique le type de métadonnées définies. Les valeurs poss
 
 | `name`          | `content` valeur                                          	  |
 |--------------	|--------------------------------------------------------	|
-| projection    | [Nom de la projection] sensible à la casse (../mapml-viewer#projection), ou [nom de la projection personnalisée](../../api/mapml-viewer-api#definecustomprojectionoptions) |
-| extent        | \(\(_[position keyword](../input#position)_\)-\(_[axis name](../input#axis)_\)=\(_axis value_\)\(,\)\)4\(,\)\(zoom=\(_zoom value_\)\)0,1 |
-| cs            | [Abréviation du système de coordonnées] sensible à la casse](../input#units). |
+| projection    | [Nom de la projection](../mapml-viewer#projection) sensible à la casse, ou [nom de la projection personnalisée](../../api/mapml-viewer-api#definecustomprojectionoptions) |
+| extent        | \(\(_[mot-clé de position](../input#position)_\)-\(_[nom de l'axe](../input#axis)_\)=\(_valeur de l'axe_\)\(,\)\)4\(,\)\(zoom=\(_valeur de zoom_\)\)0,1 |
+| cs            | [Abréviation du système de coordonnées](../input#units) sensible à la casse. |
 | zoom          | (min=_valeur de zoom minimale_,max=_valeur de zoom maximale_,)(value=_valeur de zoom actuelle_) |
 
 :::tip
