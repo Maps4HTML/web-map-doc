@@ -21,7 +21,7 @@ native ou naturelle de la caractéristique par le biais de ses attributs contenu
 Pour définir le `zoom` :
 ```js
 let feature = document.querySelector('map-feature');
-feature.zoom = 5; // définit le zoom "natif" de la fonctionnalité
+feature.zoom = 5; // définit le zoom "natif" de l'objet
 ```
 
 Pour obtenir le `zoom` :
@@ -47,7 +47,7 @@ la valeur minimale de la projection du visualiseur de carte, c'est-à-dire 0.
 Pour définir le `min`:
 ```js
 let feature = document.querySelector('map-feature');
-feature.min = 5; // la fonctionnalité ne sera pas rendue aux niveaux de zoom 0 à 4
+feature.min = 5; // l'objet ne sera pas rendue aux niveaux de zoom 0 à 4
 ```
 
 Pour obtenir le `min`:
@@ -74,7 +74,7 @@ de carte, par exemple 25 (en fonction de la projection).
 Pour définir le `max` :
 ```js
 let feature = document.querySelector('map-feature');
-feature.max = 10; // la fonctionnalité ne sera pas rendue au-delà du niveau de zoom 10
+feature.max = 10; // l'objet ne sera pas rendue au-delà du niveau de zoom 10
 ```
 
 Pour obtenir le `max` :
@@ -201,7 +201,7 @@ que l'[`extent`](#extent) tienne ou non entièrement dans la fenêtre d'affichag
 
 ```js
 let f = document.querySelector('map-feature');
-f.zoomTo(); // recentrer la carte sur la fonctionnalité à son niveau de zoom natif
+f.zoomTo(); // recentrer la carte sur l'objet à son niveau de zoom natif
 ```
 #### Paramètres
 
