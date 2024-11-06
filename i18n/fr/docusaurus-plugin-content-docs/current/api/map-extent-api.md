@@ -134,10 +134,11 @@ let opacity = extent.opacity;
 en haut à gauche et en bas à droite du rectangle de délimitation minimal de 
 la couche sous forme d'objet.
 
-```console
-> let f = document.querySelector('map-extent')
-> console.log(f.extent)
-> {topLeft: {…}, bottomRight: {…}, projection: 'CBMTILE'}
+Pour obtenir la valeur de l'étendue de `<map-extent>` :
+
+```js
+let map-extent = document.querySelector('map-extent');
+let extent = map-extent.extent;
 ```
 
 L'objet extent est structuré comme suit :
@@ -224,8 +225,8 @@ L'objet extent est structuré comme suit :
 au niveau de zoom maximal dans lequel l'étendue s'ajuste complètement.
 
 ```js
-let extent = document.querySelector('map-extent');
-extent.zoomTo();
+let map-extent = document.querySelector('map-extent');
+map-extent.zoomTo();
 ```
 ---
 

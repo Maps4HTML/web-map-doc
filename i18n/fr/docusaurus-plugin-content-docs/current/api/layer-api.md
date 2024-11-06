@@ -113,10 +113,11 @@ let opacity = layer.opacity;
 haut à gauche et en bas à droite du rectangle de délimitation minimal de la couche 
 sous forme d'objet.
 
-```console
-> let f = document.querySelector('map-layer')
-> console.log(f.extent)
-> {topLeft: {…}, bottomRight: {…}, projection: 'CBMTILE'}
+Pour obtenir la valeur de l'étendue de `<map-layer>` :
+
+```js
+let layer = document.querySelector('map-layer');
+let extent = layer.extent;
 ```
 
 L'objet extent est structuré comme suit :
@@ -211,6 +212,8 @@ layer.zoomTo();
 ---
 
 ### mapml2geojson(options)
+
+`HTMLLayerElement.mapml2geojson(options)` renvoie la couche au format GeoJSON.
 
 | Fonction | Retours | Description |
 |----------|---------|-------------|

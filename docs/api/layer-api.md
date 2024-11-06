@@ -131,10 +131,11 @@ let opacity = layer.opacity;
 and bottom right coordinates of the layer's minimum bounding rectangle 
 as an object value.
 
-```console
-> let f = document.querySelector('map-layer')
-> console.log(f.extent)
-> {topLeft: {…}, bottomRight: {…}, projection: 'CBMTILE'}
+To get the `<map-layer>`'s extent value:
+
+```js
+let layer = document.querySelector('map-layer');
+let extent = layer.extent;
 ```
 
 The extent object is structured as follows:
