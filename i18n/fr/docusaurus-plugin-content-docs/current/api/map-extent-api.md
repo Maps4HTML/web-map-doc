@@ -128,16 +128,113 @@ let extent = document.querySelector('map-extent');
 let opacity = extent.opacity;
 ```
 
+### extent
+
+`HTMLExtentElement.extent` fournit un accès en LECTURE SEULE aux coordonnées 
+en haut à gauche et en bas à droite du rectangle de délimitation minimal de 
+la couche sous forme d'objet.
+
+Pour obtenir la valeur de l'étendue de `<map-extent>` :
+
+```js
+let map-extent = document.querySelector('map-extent');
+let extent = map-extent.extent;
+```
+
+L'objet extent est structuré comme suit :
+
+<details>
+<summary>Cliquez pour afficher l'objet extent</summary>
+
+```js
+{
+    "projection": "CBMTILE",
+    "topLeft": {
+        "tcrs": [
+            {
+                "horizontal": 942.662039991251,
+                "vertical": 1029.0945982508472
+            },
+/* un objet avec des propriétés "horizontal" et "vertical" pour chaque niveau de zoom dans le tableau */
+            {
+                "horizontal": 546743983.1949257,
+                "vertical": 596874866.9854914
+            }
+        ],
+        "tilematrix": [
+            {
+                "horizontal": 3.6822735937158244,
+                "vertical": 4.019900774417372
+            },
+/* un objet avec des propriétés "horizontal" et "vertical" pour chaque niveau de zoom dans le tableau */
+            {
+                "horizontal": 2135718.6843551784,
+                "vertical": 2331542.4491620758
+            }
+        ],
+/* gcrs signifie "système de référence des coordonnées géographiques" */
+        "gcrs": {
+            "horizontal": -75.73195696514524,
+            "vertical": 45.40761073808424
+        },
+/* pcrs signifie "système de référence des coordonnées projetées" */
+        "pcrs": {
+            "horizontal": 1509108.7182317898,
+            "vertical": -170864.4342066869
+        }
+    },
+    "bottomRight": {
+        "tcrs": [
+            {
+                "horizontal": 942.7503158533199,
+                "vertical": 1029.1828741129164
+            },
+            {
+                "horizontal": 546795183.1949255,
+                "vertical": 596926066.9854914
+            }
+        ],
+        "tilematrix": [
+            {
+                "horizontal": 3.6826184213020308,
+                "vertical": 4.0202456020035795
+            },
+            {
+                "horizontal": 2135918.684355178,
+                "vertical": 2331742.4491620758
+            }
+        ],
+        "gcrs": {
+            "horizontal": -75.67858731979081,
+            "vertical": 45.387937810298354
+        },
+        "pcrs": {
+            "horizontal": 1512495.3916717991,
+            "vertical": -174251.10764670372
+        }
+    }
+}
+```
+
+</details>
 ---
 ## Méthodes
 
+### zoomTo()
+`HTMLExtentElement.zoomTo()` zoomer sur l'étendue de la sous-couche dans la carte, 
+au niveau de zoom maximal dans lequel l'étendue s'ajuste complètement.
+
+```js
+let map-extent = document.querySelector('map-extent');
+map-extent.zoomTo();
+```
 ---
 
 ## Evénements
 
 | Nom de l'événement      	| Description                                          	|
 |--------------	|--------------------------------------------------------	|
-|  |  |
+| map-change    | Déclenché lorsque l'étendue est cochée ou décochée via le menu des couches (en cliquant ou en utilisant le clavier) |
 ---
 
 ## Exemples
