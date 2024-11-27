@@ -25,7 +25,7 @@ Working examples of `<mapml-viewer>` usage of themes and styles are [available o
 
 ## How to create a stylesheet module
 
-A pmtiles stylesheet used in the MapML polyfill is a JavaScript module source file which exports a 
+A pmtiles stylesheet used in the MapML polyfill is a JavaScript module source file which exports  
 two symbols, a `pmtilesRules` Map instance, and a Promise-valued `pmtilesRulesReady`, which is resolved when
 the required Sheet is loaded, per the following example:
 
@@ -56,6 +56,33 @@ export { pmtilesRules, pmtilesRulesReady };
 Pre-defined themes that you can use include: `light`, `dark`, `white`, `grayscale` and `black`. You should include the theme name in the URL template as a parameter (even though it is not required by the pmtiles or mvt resource), so that the URL template can be made unique and distinct from other pmtilesRules keys' use of the same pmtiles or mvt resource.
 
 :::
+
+## The required structure of the pmtiles 'stylesheet'
+
+The stylesheet module must export two symbols: `pmtilesRulesReady` and `pmtilesRules`.
+
+The `pmtilesRulesReady` export must be a Promise that signals to the MapML library that
+the pmttilesRules export is fully defined and ready for rendering.  If your stylesheet
+uses IconSymbolizer, it may be convenient to perform resource loading and processing
+via the asynchronous Sheet.load() function, which itself returns a Promise object that
+may be returned by your stylesheet as the pmtilesRulesReady value, as
+shown in the example above. If your stylesheet does not require icons, it should
+be possible to assign an already-resolved promise as the value of pmtilesRulesReady,
+via Promise.resolve(), and return that.
+
+```javascript
+const pmtilesRules = new Map();
+// a Map requires a key, in this case the absolute URL of the data source (but,
+// can also be the absolute value of the URL _template_ for the data source),
+// and an object to be mapped by the key, in this case, an object with a `theme`
+// member, whose value is itself an object with a `theme` member.
+pmtilesRules.set(
+    'https://maps4html.org/experiments/vector-tiles/pmtiles/spearfish.pmtiles?theme=light',
+    { theme: { theme: 'light' } }
+);
+const pmtilesRulesReady = Promise.resolve();
+export { pmtilesRules, pmtilesRulesReady };
+```
 
 The `pmtilesRules` export must be a [JavaScript Map-type object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map), structured as follows:
 
@@ -90,30 +117,36 @@ class SpearfishSymbolizer {
     context.fill();
   }
 }
+// the only other pmtilesRules keyed value besides `theme` that is supported is 
+// an object with a `rules` member. The value of the `rules` member is an object 
+// that has two optional array-valued members, `PAINT_RULES` and `LABEL_RULES`.
 const pmtilesRules = new Map();
 pmtilesRules.set(
   'http://localhost:8080/geoserver/gwc/service/wmts/rest/spearfish/OSMTILE/{z}/{y}/{x}?format=application/vnd.mapbox-vector-tile',
   {
+// PAINT_RULES and LABEL_RULES are each an array of dataLayer/symbolizer objects, with optional 
+// function-valued `filter` member (filter is a member of the same object as
+// dataLayer and symbolizer, not a property of those objects).
     rules: {
       PAINT_RULES: [
         {
           dataLayer: 'streams',
-          symbolizer: new M.protomapsL.LineSymbolizer({ color: 'steelblue', width: 2 })
+          symbolizer: new protomapsL.LineSymbolizer({ color: 'steelblue', width: 2 })
         },
         {
           dataLayer: 'roads',
-          symbolizer: new M.protomapsL.LineSymbolizer({ color: 'maroon', width: 2 })
+          symbolizer: new protomapsL.LineSymbolizer({ color: 'maroon', width: 2 })
         },
         {
           dataLayer: 'restricted',
-          symbolizer: new M.protomapsL.PolygonSymbolizer({
+          symbolizer: new protomapsL.PolygonSymbolizer({
             fill: 'red',
             opacity: 0.5
           })
         },
         {
           dataLayer: 'restricted',
-          symbolizer: new M.protomapsL.LineSymbolizer({ color: 'red', width: 2 })
+          symbolizer: new protomapsL.LineSymbolizer({ color: 'red', width: 2 })
         },
         {
           dataLayer: 'archsites',
@@ -133,7 +166,7 @@ pmtilesRules.set(
       LABEL_RULES: [
         {
           dataLayer: 'archsites',
-          symbolizer: new M.protomapsL.CenteredTextSymbolizer({
+          symbolizer: new protomapsL.CenteredTextSymbolizer({
             labelProps: ['str1'],
             fill:'white',
             width:2,
@@ -152,7 +185,7 @@ export { pmtilesRules };
 
 ## Available imported symbols from protomaps-leaflet
 
-The following imports from protomaps-leaflet are available on the `M.protomapsL` global variable e.g. `M.protomapsL.CenteredSymbolizer`, for use by your stylesheets:
+The following imports from protomaps-leaflet are available on the `protomapsL` import, for use by your stylesheets:
 
 ```javascript
 /* 
