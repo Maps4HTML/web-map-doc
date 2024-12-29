@@ -1,1 +1,436 @@
-import CodeMirror from"../edit/CodeMirror.js";import{docMethodOp}from"../display/operations.js";import{Line}from"../line/line_data.js";import{clipPos,clipPosArray,Pos}from"../line/pos.js";import{visualLine}from"../line/spans.js";import{getBetween,getLine,getLines,isLine,lineNo}from"../line/utils_line.js";import{classTest}from"../util/dom.js";import{splitLinesAuto}from"../util/feature_detection.js";import{createObj,map,isEmpty,sel_dontScroll}from"../util/misc.js";import{ensureCursorVisible,scrollToCoords}from"../display/scrolling.js";import{changeLine,makeChange,makeChangeFromHistory,replaceRange}from"./changes.js";import{computeReplacedSel}from"./change_measurement.js";import{BranchChunk,LeafChunk}from"./chunk.js";import{directionChanged,linkedDocs,updateDoc}from"./document_data.js";import{copyHistoryArray,History}from"./history.js";import{addLineWidget}from"./line_widget.js";import{copySharedMarkers,detachSharedMarkers,findSharedMarkers,markText}from"./mark_text.js";import{normalizeSelection,Range,simpleSelection}from"./selection.js";import{extendSelection,extendSelections,setSelection,setSelectionReplaceHistory,setSimpleSelection}from"./selection_updates.js";let nextDocId=0,Doc=function(t,e,i,n,s){if(!(this instanceof Doc))return new Doc(t,e,i,n,s);null==i&&(i=0),BranchChunk.call(this,[new LeafChunk([new Line("",null)])]),this.first=i,this.scrollTop=this.scrollLeft=0,this.cantEdit=!1,this.cleanGeneration=1,this.modeFrontier=this.highlightFrontier=i;let r=Pos(i,0);this.sel=simpleSelection(r),this.history=new History(null),this.id=++nextDocId,this.modeOption=e,this.lineSep=n,this.direction="rtl"==s?"rtl":"ltr",this.extend=!1,"string"==typeof t&&(t=this.splitLines(t)),updateDoc(this,{from:r,to:r,text:t}),setSelection(this,simpleSelection(r),sel_dontScroll)};Doc.prototype=createObj(BranchChunk.prototype,{constructor:Doc,iter:function(t,e,i){i?this.iterN(t-this.first,e-t,i):this.iterN(this.first,this.first+this.size,t)},insert:function(t,e){let i=0;for(let n=0;n<e.length;++n)i+=e[n].height;this.insertInner(t-this.first,e,i)},remove:function(t,e){this.removeInner(t-this.first,e)},getValue:function(t){let e=getLines(this,this.first,this.first+this.size);return!1===t?e:e.join(t||this.lineSeparator())},setValue:docMethodOp((function(t){let e=Pos(this.first,0),i=this.first+this.size-1;makeChange(this,{from:e,to:Pos(i,getLine(this,i).text.length),text:this.splitLines(t),origin:"setValue",full:!0},!0),this.cm&&scrollToCoords(this.cm,0,0),setSelection(this,simpleSelection(e),sel_dontScroll)})),replaceRange:function(t,e,i,n){e=clipPos(this,e),i=i?clipPos(this,i):e,replaceRange(this,t,e,i,n)},getRange:function(t,e,i){let n=getBetween(this,clipPos(this,t),clipPos(this,e));return!1===i?n:""===i?n.join(""):n.join(i||this.lineSeparator())},getLine:function(t){let e=this.getLineHandle(t);return e&&e.text},getLineHandle:function(t){if(isLine(this,t))return getLine(this,t)},getLineNumber:function(t){return lineNo(t)},getLineHandleVisualStart:function(t){return"number"==typeof t&&(t=getLine(this,t)),visualLine(t)},lineCount:function(){return this.size},firstLine:function(){return this.first},lastLine:function(){return this.first+this.size-1},clipPos:function(t){return clipPos(this,t)},getCursor:function(t){let e,i=this.sel.primary();return e=null==t||"head"==t?i.head:"anchor"==t?i.anchor:"end"==t||"to"==t||!1===t?i.to():i.from(),e},listSelections:function(){return this.sel.ranges},somethingSelected:function(){return this.sel.somethingSelected()},setCursor:docMethodOp((function(t,e,i){setSimpleSelection(this,clipPos(this,"number"==typeof t?Pos(t,e||0):t),null,i)})),setSelection:docMethodOp((function(t,e,i){setSimpleSelection(this,clipPos(this,t),clipPos(this,e||t),i)})),extendSelection:docMethodOp((function(t,e,i){extendSelection(this,clipPos(this,t),e&&clipPos(this,e),i)})),extendSelections:docMethodOp((function(t,e){extendSelections(this,clipPosArray(this,t),e)})),extendSelectionsBy:docMethodOp((function(t,e){let i=map(this.sel.ranges,t);extendSelections(this,clipPosArray(this,i),e)})),setSelections:docMethodOp((function(t,e,i){if(!t.length)return;let n=[];for(let s=0;s<t.length;s++)n[s]=new Range(clipPos(this,t[s].anchor),clipPos(this,t[s].head||t[s].anchor));null==e&&(e=Math.min(t.length-1,this.sel.primIndex)),setSelection(this,normalizeSelection(this.cm,n,e),i)})),addSelection:docMethodOp((function(t,e,i){let n=this.sel.ranges.slice(0);n.push(new Range(clipPos(this,t),clipPos(this,e||t))),setSelection(this,normalizeSelection(this.cm,n,n.length-1),i)})),getSelection:function(t){let e,i=this.sel.ranges;for(let n=0;n<i.length;n++){let t=getBetween(this,i[n].from(),i[n].to());e=e?e.concat(t):t}return!1===t?e:e.join(t||this.lineSeparator())},getSelections:function(t){let e=[],i=this.sel.ranges;for(let n=0;n<i.length;n++){let s=getBetween(this,i[n].from(),i[n].to());!1!==t&&(s=s.join(t||this.lineSeparator())),e[n]=s}return e},replaceSelection:function(t,e,i){let n=[];for(let s=0;s<this.sel.ranges.length;s++)n[s]=t;this.replaceSelections(n,e,i||"+input")},replaceSelections:docMethodOp((function(t,e,i){let n=[],s=this.sel;for(let o=0;o<s.ranges.length;o++){let e=s.ranges[o];n[o]={from:e.from(),to:e.to(),text:this.splitLines(t[o]),origin:i}}let r=e&&"end"!=e&&computeReplacedSel(this,n,e);for(let o=n.length-1;o>=0;o--)makeChange(this,n[o]);r?setSelectionReplaceHistory(this,r):this.cm&&ensureCursorVisible(this.cm)})),undo:docMethodOp((function(){makeChangeFromHistory(this,"undo")})),redo:docMethodOp((function(){makeChangeFromHistory(this,"redo")})),undoSelection:docMethodOp((function(){makeChangeFromHistory(this,"undo",!0)})),redoSelection:docMethodOp((function(){makeChangeFromHistory(this,"redo",!0)})),setExtending:function(t){this.extend=t},getExtending:function(){return this.extend},historySize:function(){let t=this.history,e=0,i=0;for(let n=0;n<t.done.length;n++)t.done[n].ranges||++e;for(let n=0;n<t.undone.length;n++)t.undone[n].ranges||++i;return{undo:e,redo:i}},clearHistory:function(){this.history=new History(this.history),linkedDocs(this,(t=>t.history=this.history),!0)},markClean:function(){this.cleanGeneration=this.changeGeneration(!0)},changeGeneration:function(t){return t&&(this.history.lastOp=this.history.lastSelOp=this.history.lastOrigin=null),this.history.generation},isClean:function(t){return this.history.generation==(t||this.cleanGeneration)},getHistory:function(){return{done:copyHistoryArray(this.history.done),undone:copyHistoryArray(this.history.undone)}},setHistory:function(t){let e=this.history=new History(this.history);e.done=copyHistoryArray(t.done.slice(0),null,!0),e.undone=copyHistoryArray(t.undone.slice(0),null,!0)},setGutterMarker:docMethodOp((function(t,e,i){return changeLine(this,t,"gutter",(t=>{let n=t.gutterMarkers||(t.gutterMarkers={});return n[e]=i,!i&&isEmpty(n)&&(t.gutterMarkers=null),!0}))})),clearGutter:docMethodOp((function(t){this.iter((e=>{e.gutterMarkers&&e.gutterMarkers[t]&&changeLine(this,e,"gutter",(()=>(e.gutterMarkers[t]=null,isEmpty(e.gutterMarkers)&&(e.gutterMarkers=null),!0)))}))})),lineInfo:function(t){let e;if("number"==typeof t){if(!isLine(this,t))return null;if(e=t,!(t=getLine(this,t)))return null}else if(e=lineNo(t),null==e)return null;return{line:e,handle:t,text:t.text,gutterMarkers:t.gutterMarkers,textClass:t.textClass,bgClass:t.bgClass,wrapClass:t.wrapClass,widgets:t.widgets}},addLineClass:docMethodOp((function(t,e,i){return changeLine(this,t,"gutter"==e?"gutter":"class",(t=>{let n="text"==e?"textClass":"background"==e?"bgClass":"gutter"==e?"gutterClass":"wrapClass";if(t[n]){if(classTest(i).test(t[n]))return!1;t[n]+=" "+i}else t[n]=i;return!0}))})),removeLineClass:docMethodOp((function(t,e,i){return changeLine(this,t,"gutter"==e?"gutter":"class",(t=>{let n="text"==e?"textClass":"background"==e?"bgClass":"gutter"==e?"gutterClass":"wrapClass",s=t[n];if(!s)return!1;if(null==i)t[n]=null;else{let e=s.match(classTest(i));if(!e)return!1;let r=e.index+e[0].length;t[n]=s.slice(0,e.index)+(e.index&&r!=s.length?" ":"")+s.slice(r)||null}return!0}))})),addLineWidget:docMethodOp((function(t,e,i){return addLineWidget(this,t,e,i)})),removeLineWidget:function(t){t.clear()},markText:function(t,e,i){return markText(this,clipPos(this,t),clipPos(this,e),i,i&&i.type||"range")},setBookmark:function(t,e){let i={replacedWith:e&&(null==e.nodeType?e.widget:e),insertLeft:e&&e.insertLeft,clearWhenEmpty:!1,shared:e&&e.shared,handleMouseEvents:e&&e.handleMouseEvents};return t=clipPos(this,t),markText(this,t,t,i,"bookmark")},findMarksAt:function(t){t=clipPos(this,t);let e=[],i=getLine(this,t.line).markedSpans;if(i)for(let n=0;n<i.length;++n){let s=i[n];(null==s.from||s.from<=t.ch)&&(null==s.to||s.to>=t.ch)&&e.push(s.marker.parent||s.marker)}return e},findMarks:function(t,e,i){t=clipPos(this,t),e=clipPos(this,e);let n=[],s=t.line;return this.iter(t.line,e.line+1,(r=>{let o=r.markedSpans;if(o)for(let l=0;l<o.length;l++){let r=o[l];null!=r.to&&s==t.line&&t.ch>=r.to||null==r.from&&s!=t.line||null!=r.from&&s==e.line&&r.from>=e.ch||i&&!i(r.marker)||n.push(r.marker.parent||r.marker)}++s})),n},getAllMarks:function(){let t=[];return this.iter((e=>{let i=e.markedSpans;if(i)for(let n=0;n<i.length;++n)null!=i[n].from&&t.push(i[n].marker)})),t},posFromIndex:function(t){let e,i=this.first,n=this.lineSeparator().length;return this.iter((s=>{let r=s.text.length+n;if(r>t)return e=t,!0;t-=r,++i})),clipPos(this,Pos(i,e))},indexFromPos:function(t){let e=(t=clipPos(this,t)).ch;if(t.line<this.first||t.ch<0)return 0;let i=this.lineSeparator().length;return this.iter(this.first,t.line,(t=>{e+=t.text.length+i})),e},copy:function(t){let e=new Doc(getLines(this,this.first,this.first+this.size),this.modeOption,this.first,this.lineSep,this.direction);return e.scrollTop=this.scrollTop,e.scrollLeft=this.scrollLeft,e.sel=this.sel,e.extend=!1,t&&(e.history.undoDepth=this.history.undoDepth,e.setHistory(this.getHistory())),e},linkedDoc:function(t){t||(t={});let e=this.first,i=this.first+this.size;null!=t.from&&t.from>e&&(e=t.from),null!=t.to&&t.to<i&&(i=t.to);let n=new Doc(getLines(this,e,i),t.mode||this.modeOption,e,this.lineSep,this.direction);return t.sharedHist&&(n.history=this.history),(this.linked||(this.linked=[])).push({doc:n,sharedHist:t.sharedHist}),n.linked=[{doc:this,isParent:!0,sharedHist:t.sharedHist}],copySharedMarkers(n,findSharedMarkers(this)),n},unlinkDoc:function(t){if(t instanceof CodeMirror&&(t=t.doc),this.linked)for(let e=0;e<this.linked.length;++e){if(this.linked[e].doc==t){this.linked.splice(e,1),t.unlinkDoc(this),detachSharedMarkers(findSharedMarkers(this));break}}if(t.history==this.history){let e=[t.id];linkedDocs(t,(t=>e.push(t.id)),!0),t.history=new History(null),t.history.done=copyHistoryArray(this.history.done,e),t.history.undone=copyHistoryArray(this.history.undone,e)}},iterLinkedDocs:function(t){linkedDocs(this,t)},getMode:function(){return this.mode},getEditor:function(){return this.cm},splitLines:function(t){return this.lineSep?t.split(this.lineSep):splitLinesAuto(t)},lineSeparator:function(){return this.lineSep||"\n"},setDirection:docMethodOp((function(t){"rtl"!=t&&(t="ltr"),t!=this.direction&&(this.direction=t,this.iter((t=>t.order=null)),this.cm&&directionChanged(this.cm))}))}),Doc.prototype.eachLine=Doc.prototype.iter;export default Doc;
+import CodeMirror from "../edit/CodeMirror.js"
+import { docMethodOp } from "../display/operations.js"
+import { Line } from "../line/line_data.js"
+import { clipPos, clipPosArray, Pos } from "../line/pos.js"
+import { visualLine } from "../line/spans.js"
+import { getBetween, getLine, getLines, isLine, lineNo } from "../line/utils_line.js"
+import { classTest } from "../util/dom.js"
+import { splitLinesAuto } from "../util/feature_detection.js"
+import { createObj, map, isEmpty, sel_dontScroll } from "../util/misc.js"
+import { ensureCursorVisible, scrollToCoords } from "../display/scrolling.js"
+
+import { changeLine, makeChange, makeChangeFromHistory, replaceRange } from "./changes.js"
+import { computeReplacedSel } from "./change_measurement.js"
+import { BranchChunk, LeafChunk } from "./chunk.js"
+import { directionChanged, linkedDocs, updateDoc } from "./document_data.js"
+import { copyHistoryArray, History } from "./history.js"
+import { addLineWidget } from "./line_widget.js"
+import { copySharedMarkers, detachSharedMarkers, findSharedMarkers, markText } from "./mark_text.js"
+import { normalizeSelection, Range, simpleSelection } from "./selection.js"
+import { extendSelection, extendSelections, setSelection, setSelectionReplaceHistory, setSimpleSelection } from "./selection_updates.js"
+
+let nextDocId = 0
+let Doc = function(text, mode, firstLine, lineSep, direction) {
+  if (!(this instanceof Doc)) return new Doc(text, mode, firstLine, lineSep, direction)
+  if (firstLine == null) firstLine = 0
+
+  BranchChunk.call(this, [new LeafChunk([new Line("", null)])])
+  this.first = firstLine
+  this.scrollTop = this.scrollLeft = 0
+  this.cantEdit = false
+  this.cleanGeneration = 1
+  this.modeFrontier = this.highlightFrontier = firstLine
+  let start = Pos(firstLine, 0)
+  this.sel = simpleSelection(start)
+  this.history = new History(null)
+  this.id = ++nextDocId
+  this.modeOption = mode
+  this.lineSep = lineSep
+  this.direction = (direction == "rtl") ? "rtl" : "ltr"
+  this.extend = false
+
+  if (typeof text == "string") text = this.splitLines(text)
+  updateDoc(this, {from: start, to: start, text: text})
+  setSelection(this, simpleSelection(start), sel_dontScroll)
+}
+
+Doc.prototype = createObj(BranchChunk.prototype, {
+  constructor: Doc,
+  // Iterate over the document. Supports two forms -- with only one
+  // argument, it calls that for each line in the document. With
+  // three, it iterates over the range given by the first two (with
+  // the second being non-inclusive).
+  iter: function(from, to, op) {
+    if (op) this.iterN(from - this.first, to - from, op)
+    else this.iterN(this.first, this.first + this.size, from)
+  },
+
+  // Non-public interface for adding and removing lines.
+  insert: function(at, lines) {
+    let height = 0
+    for (let i = 0; i < lines.length; ++i) height += lines[i].height
+    this.insertInner(at - this.first, lines, height)
+  },
+  remove: function(at, n) { this.removeInner(at - this.first, n) },
+
+  // From here, the methods are part of the public interface. Most
+  // are also available from CodeMirror (editor) instances.
+
+  getValue: function(lineSep) {
+    let lines = getLines(this, this.first, this.first + this.size)
+    if (lineSep === false) return lines
+    return lines.join(lineSep || this.lineSeparator())
+  },
+  setValue: docMethodOp(function(code) {
+    let top = Pos(this.first, 0), last = this.first + this.size - 1
+    makeChange(this, {from: top, to: Pos(last, getLine(this, last).text.length),
+                      text: this.splitLines(code), origin: "setValue", full: true}, true)
+    if (this.cm) scrollToCoords(this.cm, 0, 0)
+    setSelection(this, simpleSelection(top), sel_dontScroll)
+  }),
+  replaceRange: function(code, from, to, origin) {
+    from = clipPos(this, from)
+    to = to ? clipPos(this, to) : from
+    replaceRange(this, code, from, to, origin)
+  },
+  getRange: function(from, to, lineSep) {
+    let lines = getBetween(this, clipPos(this, from), clipPos(this, to))
+    if (lineSep === false) return lines
+    if (lineSep === '') return lines.join('')
+    return lines.join(lineSep || this.lineSeparator())
+  },
+
+  getLine: function(line) {let l = this.getLineHandle(line); return l && l.text},
+
+  getLineHandle: function(line) {if (isLine(this, line)) return getLine(this, line)},
+  getLineNumber: function(line) {return lineNo(line)},
+
+  getLineHandleVisualStart: function(line) {
+    if (typeof line == "number") line = getLine(this, line)
+    return visualLine(line)
+  },
+
+  lineCount: function() {return this.size},
+  firstLine: function() {return this.first},
+  lastLine: function() {return this.first + this.size - 1},
+
+  clipPos: function(pos) {return clipPos(this, pos)},
+
+  getCursor: function(start) {
+    let range = this.sel.primary(), pos
+    if (start == null || start == "head") pos = range.head
+    else if (start == "anchor") pos = range.anchor
+    else if (start == "end" || start == "to" || start === false) pos = range.to()
+    else pos = range.from()
+    return pos
+  },
+  listSelections: function() { return this.sel.ranges },
+  somethingSelected: function() {return this.sel.somethingSelected()},
+
+  setCursor: docMethodOp(function(line, ch, options) {
+    setSimpleSelection(this, clipPos(this, typeof line == "number" ? Pos(line, ch || 0) : line), null, options)
+  }),
+  setSelection: docMethodOp(function(anchor, head, options) {
+    setSimpleSelection(this, clipPos(this, anchor), clipPos(this, head || anchor), options)
+  }),
+  extendSelection: docMethodOp(function(head, other, options) {
+    extendSelection(this, clipPos(this, head), other && clipPos(this, other), options)
+  }),
+  extendSelections: docMethodOp(function(heads, options) {
+    extendSelections(this, clipPosArray(this, heads), options)
+  }),
+  extendSelectionsBy: docMethodOp(function(f, options) {
+    let heads = map(this.sel.ranges, f)
+    extendSelections(this, clipPosArray(this, heads), options)
+  }),
+  setSelections: docMethodOp(function(ranges, primary, options) {
+    if (!ranges.length) return
+    let out = []
+    for (let i = 0; i < ranges.length; i++)
+      out[i] = new Range(clipPos(this, ranges[i].anchor),
+                         clipPos(this, ranges[i].head || ranges[i].anchor))
+    if (primary == null) primary = Math.min(ranges.length - 1, this.sel.primIndex)
+    setSelection(this, normalizeSelection(this.cm, out, primary), options)
+  }),
+  addSelection: docMethodOp(function(anchor, head, options) {
+    let ranges = this.sel.ranges.slice(0)
+    ranges.push(new Range(clipPos(this, anchor), clipPos(this, head || anchor)))
+    setSelection(this, normalizeSelection(this.cm, ranges, ranges.length - 1), options)
+  }),
+
+  getSelection: function(lineSep) {
+    let ranges = this.sel.ranges, lines
+    for (let i = 0; i < ranges.length; i++) {
+      let sel = getBetween(this, ranges[i].from(), ranges[i].to())
+      lines = lines ? lines.concat(sel) : sel
+    }
+    if (lineSep === false) return lines
+    else return lines.join(lineSep || this.lineSeparator())
+  },
+  getSelections: function(lineSep) {
+    let parts = [], ranges = this.sel.ranges
+    for (let i = 0; i < ranges.length; i++) {
+      let sel = getBetween(this, ranges[i].from(), ranges[i].to())
+      if (lineSep !== false) sel = sel.join(lineSep || this.lineSeparator())
+      parts[i] = sel
+    }
+    return parts
+  },
+  replaceSelection: function(code, collapse, origin) {
+    let dup = []
+    for (let i = 0; i < this.sel.ranges.length; i++)
+      dup[i] = code
+    this.replaceSelections(dup, collapse, origin || "+input")
+  },
+  replaceSelections: docMethodOp(function(code, collapse, origin) {
+    let changes = [], sel = this.sel
+    for (let i = 0; i < sel.ranges.length; i++) {
+      let range = sel.ranges[i]
+      changes[i] = {from: range.from(), to: range.to(), text: this.splitLines(code[i]), origin: origin}
+    }
+    let newSel = collapse && collapse != "end" && computeReplacedSel(this, changes, collapse)
+    for (let i = changes.length - 1; i >= 0; i--)
+      makeChange(this, changes[i])
+    if (newSel) setSelectionReplaceHistory(this, newSel)
+    else if (this.cm) ensureCursorVisible(this.cm)
+  }),
+  undo: docMethodOp(function() {makeChangeFromHistory(this, "undo")}),
+  redo: docMethodOp(function() {makeChangeFromHistory(this, "redo")}),
+  undoSelection: docMethodOp(function() {makeChangeFromHistory(this, "undo", true)}),
+  redoSelection: docMethodOp(function() {makeChangeFromHistory(this, "redo", true)}),
+
+  setExtending: function(val) {this.extend = val},
+  getExtending: function() {return this.extend},
+
+  historySize: function() {
+    let hist = this.history, done = 0, undone = 0
+    for (let i = 0; i < hist.done.length; i++) if (!hist.done[i].ranges) ++done
+    for (let i = 0; i < hist.undone.length; i++) if (!hist.undone[i].ranges) ++undone
+    return {undo: done, redo: undone}
+  },
+  clearHistory: function() {
+    this.history = new History(this.history)
+    linkedDocs(this, doc => doc.history = this.history, true)
+  },
+
+  markClean: function() {
+    this.cleanGeneration = this.changeGeneration(true)
+  },
+  changeGeneration: function(forceSplit) {
+    if (forceSplit)
+      this.history.lastOp = this.history.lastSelOp = this.history.lastOrigin = null
+    return this.history.generation
+  },
+  isClean: function (gen) {
+    return this.history.generation == (gen || this.cleanGeneration)
+  },
+
+  getHistory: function() {
+    return {done: copyHistoryArray(this.history.done),
+            undone: copyHistoryArray(this.history.undone)}
+  },
+  setHistory: function(histData) {
+    let hist = this.history = new History(this.history)
+    hist.done = copyHistoryArray(histData.done.slice(0), null, true)
+    hist.undone = copyHistoryArray(histData.undone.slice(0), null, true)
+  },
+
+  setGutterMarker: docMethodOp(function(line, gutterID, value) {
+    return changeLine(this, line, "gutter", line => {
+      let markers = line.gutterMarkers || (line.gutterMarkers = {})
+      markers[gutterID] = value
+      if (!value && isEmpty(markers)) line.gutterMarkers = null
+      return true
+    })
+  }),
+
+  clearGutter: docMethodOp(function(gutterID) {
+    this.iter(line => {
+      if (line.gutterMarkers && line.gutterMarkers[gutterID]) {
+        changeLine(this, line, "gutter", () => {
+          line.gutterMarkers[gutterID] = null
+          if (isEmpty(line.gutterMarkers)) line.gutterMarkers = null
+          return true
+        })
+      }
+    })
+  }),
+
+  lineInfo: function(line) {
+    let n
+    if (typeof line == "number") {
+      if (!isLine(this, line)) return null
+      n = line
+      line = getLine(this, line)
+      if (!line) return null
+    } else {
+      n = lineNo(line)
+      if (n == null) return null
+    }
+    return {line: n, handle: line, text: line.text, gutterMarkers: line.gutterMarkers,
+            textClass: line.textClass, bgClass: line.bgClass, wrapClass: line.wrapClass,
+            widgets: line.widgets}
+  },
+
+  addLineClass: docMethodOp(function(handle, where, cls) {
+    return changeLine(this, handle, where == "gutter" ? "gutter" : "class", line => {
+      let prop = where == "text" ? "textClass"
+               : where == "background" ? "bgClass"
+               : where == "gutter" ? "gutterClass" : "wrapClass"
+      if (!line[prop]) line[prop] = cls
+      else if (classTest(cls).test(line[prop])) return false
+      else line[prop] += " " + cls
+      return true
+    })
+  }),
+  removeLineClass: docMethodOp(function(handle, where, cls) {
+    return changeLine(this, handle, where == "gutter" ? "gutter" : "class", line => {
+      let prop = where == "text" ? "textClass"
+               : where == "background" ? "bgClass"
+               : where == "gutter" ? "gutterClass" : "wrapClass"
+      let cur = line[prop]
+      if (!cur) return false
+      else if (cls == null) line[prop] = null
+      else {
+        let found = cur.match(classTest(cls))
+        if (!found) return false
+        let end = found.index + found[0].length
+        line[prop] = cur.slice(0, found.index) + (!found.index || end == cur.length ? "" : " ") + cur.slice(end) || null
+      }
+      return true
+    })
+  }),
+
+  addLineWidget: docMethodOp(function(handle, node, options) {
+    return addLineWidget(this, handle, node, options)
+  }),
+  removeLineWidget: function(widget) { widget.clear() },
+
+  markText: function(from, to, options) {
+    return markText(this, clipPos(this, from), clipPos(this, to), options, options && options.type || "range")
+  },
+  setBookmark: function(pos, options) {
+    let realOpts = {replacedWith: options && (options.nodeType == null ? options.widget : options),
+                    insertLeft: options && options.insertLeft,
+                    clearWhenEmpty: false, shared: options && options.shared,
+                    handleMouseEvents: options && options.handleMouseEvents}
+    pos = clipPos(this, pos)
+    return markText(this, pos, pos, realOpts, "bookmark")
+  },
+  findMarksAt: function(pos) {
+    pos = clipPos(this, pos)
+    let markers = [], spans = getLine(this, pos.line).markedSpans
+    if (spans) for (let i = 0; i < spans.length; ++i) {
+      let span = spans[i]
+      if ((span.from == null || span.from <= pos.ch) &&
+          (span.to == null || span.to >= pos.ch))
+        markers.push(span.marker.parent || span.marker)
+    }
+    return markers
+  },
+  findMarks: function(from, to, filter) {
+    from = clipPos(this, from); to = clipPos(this, to)
+    let found = [], lineNo = from.line
+    this.iter(from.line, to.line + 1, line => {
+      let spans = line.markedSpans
+      if (spans) for (let i = 0; i < spans.length; i++) {
+        let span = spans[i]
+        if (!(span.to != null && lineNo == from.line && from.ch >= span.to ||
+              span.from == null && lineNo != from.line ||
+              span.from != null && lineNo == to.line && span.from >= to.ch) &&
+            (!filter || filter(span.marker)))
+          found.push(span.marker.parent || span.marker)
+      }
+      ++lineNo
+    })
+    return found
+  },
+  getAllMarks: function() {
+    let markers = []
+    this.iter(line => {
+      let sps = line.markedSpans
+      if (sps) for (let i = 0; i < sps.length; ++i)
+        if (sps[i].from != null) markers.push(sps[i].marker)
+    })
+    return markers
+  },
+
+  posFromIndex: function(off) {
+    let ch, lineNo = this.first, sepSize = this.lineSeparator().length
+    this.iter(line => {
+      let sz = line.text.length + sepSize
+      if (sz > off) { ch = off; return true }
+      off -= sz
+      ++lineNo
+    })
+    return clipPos(this, Pos(lineNo, ch))
+  },
+  indexFromPos: function (coords) {
+    coords = clipPos(this, coords)
+    let index = coords.ch
+    if (coords.line < this.first || coords.ch < 0) return 0
+    let sepSize = this.lineSeparator().length
+    this.iter(this.first, coords.line, line => { // iter aborts when callback returns a truthy value
+      index += line.text.length + sepSize
+    })
+    return index
+  },
+
+  copy: function(copyHistory) {
+    let doc = new Doc(getLines(this, this.first, this.first + this.size),
+                      this.modeOption, this.first, this.lineSep, this.direction)
+    doc.scrollTop = this.scrollTop; doc.scrollLeft = this.scrollLeft
+    doc.sel = this.sel
+    doc.extend = false
+    if (copyHistory) {
+      doc.history.undoDepth = this.history.undoDepth
+      doc.setHistory(this.getHistory())
+    }
+    return doc
+  },
+
+  linkedDoc: function(options) {
+    if (!options) options = {}
+    let from = this.first, to = this.first + this.size
+    if (options.from != null && options.from > from) from = options.from
+    if (options.to != null && options.to < to) to = options.to
+    let copy = new Doc(getLines(this, from, to), options.mode || this.modeOption, from, this.lineSep, this.direction)
+    if (options.sharedHist) copy.history = this.history
+    ;(this.linked || (this.linked = [])).push({doc: copy, sharedHist: options.sharedHist})
+    copy.linked = [{doc: this, isParent: true, sharedHist: options.sharedHist}]
+    copySharedMarkers(copy, findSharedMarkers(this))
+    return copy
+  },
+  unlinkDoc: function(other) {
+    if (other instanceof CodeMirror) other = other.doc
+    if (this.linked) for (let i = 0; i < this.linked.length; ++i) {
+      let link = this.linked[i]
+      if (link.doc != other) continue
+      this.linked.splice(i, 1)
+      other.unlinkDoc(this)
+      detachSharedMarkers(findSharedMarkers(this))
+      break
+    }
+    // If the histories were shared, split them again
+    if (other.history == this.history) {
+      let splitIds = [other.id]
+      linkedDocs(other, doc => splitIds.push(doc.id), true)
+      other.history = new History(null)
+      other.history.done = copyHistoryArray(this.history.done, splitIds)
+      other.history.undone = copyHistoryArray(this.history.undone, splitIds)
+    }
+  },
+  iterLinkedDocs: function(f) {linkedDocs(this, f)},
+
+  getMode: function() {return this.mode},
+  getEditor: function() {return this.cm},
+
+  splitLines: function(str) {
+    if (this.lineSep) return str.split(this.lineSep)
+    return splitLinesAuto(str)
+  },
+  lineSeparator: function() { return this.lineSep || "\n" },
+
+  setDirection: docMethodOp(function (dir) {
+    if (dir != "rtl") dir = "ltr"
+    if (dir == this.direction) return
+    this.direction = dir
+    this.iter(line => line.order = null)
+    if (this.cm) directionChanged(this.cm)
+  })
+})
+
+// Public alias.
+Doc.prototype.eachLine = Doc.prototype.iter
+
+export default Doc

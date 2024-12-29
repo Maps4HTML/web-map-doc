@@ -1,1 +1,295 @@
-!function(){"use strict";var e=CodeMirror.Pos;function n(n){var o=Array.prototype.slice.call(arguments,1);testCM(n,(function(n){for(var r=0;r<o.length;r++){var t=o[r];"string"==typeof t&&0==r?n.setValue(t):"string"==typeof t?n.execCommand(t):t instanceof e?n.setCursor(t):t(n)}}))}function o(n,o,r){return function(t){eq(t.listSelections().length,1),eqCursorPos(t.getCursor("head"),e(n,o),r),eqCursorPos(t.getCursor("anchor"),e(n,o),r)}}function r(e,n){return function(o){eq(o.getValue(),e,n)}}function t(n){if(n.length%4)throw new Error("Wrong number of arguments for ranges.");for(var o=[],r=0;r<n.length;r+=4)o.push({anchor:e(n[r],n[r+1]),head:e(n[r+2],n[r+3])});return o}function c(){var e=t(arguments);return function(n){n.setSelections(e,0)}}function a(){var e=t(arguments);return function(n){var o=n.listSelections();if(o.length!=e.length)throw new Failure("Expected "+e.length+" selections, but found "+o.length);for(var r=0;r<o.length;r++)eqCharPos(o[r].anchor,e[r].anchor,"anchor "+r),eqCharPos(o[r].head,e[r].head,"head "+r)}}namespace="sublime_",n("bySubword","the foo_bar DooDahBah \n a FOOBar","goSubwordLeft",o(0,0),"goSubwordRight",o(0,3),"goSubwordRight",o(0,7),"goSubwordRight",o(0,11),"goSubwordRight",o(0,15),"goSubwordRight",o(0,18),"goSubwordRight",o(0,21),"goSubwordRight",o(0,22),"goSubwordRight",o(1,0),"goSubwordRight",o(1,2),"goSubwordRight",o(1,6),"goSubwordRight",o(1,9),"goSubwordLeft",o(1,6),"goSubwordLeft",o(1,3),"goSubwordLeft",o(1,1),"goSubwordLeft",o(1,0),"goSubwordLeft",o(0,22),"goSubwordLeft",o(0,18),"goSubwordLeft",o(0,15),"goSubwordLeft",o(0,12),"goSubwordLeft",o(0,8),"goSubwordLeft",o(0,4),"goSubwordLeft",o(0,0)),n("splitSelectionByLine","abc\ndef\nghi",c(0,1,2,2),"splitSelectionByLine",a(0,1,0,3,1,0,1,3,2,0,2,2)),n("splitSelectionByLineMulti","abc\ndef\nghi\njkl",c(0,1,1,1,1,2,3,2,3,3,3,3),"splitSelectionByLine",a(0,1,0,3,1,0,1,1,1,2,1,3,2,0,2,3,3,0,3,2,3,3,3,3)),n("selectLine","abc\ndef\nghi",c(0,1,0,1,2,0,2,1),"selectLine",a(0,0,1,0,2,0,2,3),c(0,1,1,0),"selectLine",a(0,0,2,0)),n("insertLineAfter","abcde\nfghijkl\nmn",c(0,1,0,1,0,3,0,3,1,2,1,2,1,3,1,5),"insertLineAfter",a(1,0,1,0,3,0,3,0),r("abcde\n\nfghijkl\n\nmn")),n("insertLineBefore","abcde\nfghijkl\nmn",c(0,1,0,1,0,3,0,3,1,2,1,2,1,3,1,5),"insertLineBefore",a(0,0,0,0,2,0,2,0),r("\nabcde\n\nfghijkl\nmn")),n("skipAndSelectNextOccurrence","a foo bar\nfoobar foo",c(0,2,0,5),"skipAndSelectNextOccurrence",a(1,0,1,3),"skipAndSelectNextOccurrence",a(1,7,1,10),"skipAndSelectNextOccurrence",a(0,2,0,5),e(0,3),"skipAndSelectNextOccurrence",a(0,2,0,5),"skipAndSelectNextOccurrence",a(1,7,1,10),c(0,6,0,9),"skipAndSelectNextOccurrence",a(1,3,1,6)),n("selectNextOccurrence","a foo bar\nfoobar foo",c(0,2,0,5),"selectNextOccurrence",a(0,2,0,5,1,0,1,3),"selectNextOccurrence",a(0,2,0,5,1,0,1,3,1,7,1,10),"selectNextOccurrence",a(0,2,0,5,1,0,1,3,1,7,1,10),e(0,3),"selectNextOccurrence",a(0,2,0,5),"selectNextOccurrence",a(0,2,0,5,1,7,1,10),c(0,6,0,9),"selectNextOccurrence",a(0,6,0,9,1,3,1,6)),n("selectScope","foo(a) {\n  bar[1, 2];\n}","selectScope",a(0,0,2,1),e(0,4),"selectScope",a(0,4,0,5),e(0,5),"selectScope",a(0,4,0,5),e(0,6),"selectScope",a(0,0,2,1),e(0,8),"selectScope",a(0,8,2,0),e(1,2),"selectScope",a(0,8,2,0),e(1,6),"selectScope",a(1,6,1,10),e(1,9),"selectScope",a(1,6,1,10),"selectScope",a(0,8,2,0),"selectScope",a(0,0,2,1)),n("goToBracket","foo(a) {\n  bar[1, 2];\n}",e(0,0),"goToBracket",o(0,0),e(0,4),"goToBracket",o(0,5),"goToBracket",o(0,4),e(0,8),"goToBracket",o(2,0),"goToBracket",o(0,8),e(1,2),"goToBracket",o(2,0),e(1,7),"goToBracket",o(1,10),"goToBracket",o(1,6)),n("swapLine","1\n2\n3---\n4\n5","swapLineDown",r("2\n1\n3---\n4\n5"),"swapLineUp",r("1\n2\n3---\n4\n5"),"swapLineUp",r("1\n2\n3---\n4\n5"),e(4,1),"swapLineDown",r("1\n2\n3---\n4\n5"),c(0,1,0,1,1,0,2,0,2,2,2,2),"swapLineDown",r("4\n1\n2\n3---\n5"),a(1,1,1,1,2,0,3,0,3,2,3,2),"swapLineUp",r("1\n2\n3---\n4\n5"),a(0,1,0,1,1,0,2,0,2,2,2,2)),n("swapLineEmptyBottomSel","1\n2\n3",c(0,1,1,0),"swapLineDown",r("2\n1\n3"),a(1,1,2,0),"swapLineUp",r("1\n2\n3"),a(0,1,1,0),"swapLineUp",r("1\n2\n3"),a(0,0,0,0)),n("swapLineUpFromEnd","a\nb\nc",e(2,1),"swapLineUp",a(1,1,1,1),r("a\nc\nb")),n("joinLines","abc\ndef\nghi\njkl","joinLines",r("abc def\nghi\njkl"),o(0,4),"undo",c(0,2,1,1),"joinLines",r("abc def ghi\njkl"),a(0,2,0,8),"undo",c(0,1,0,1,1,1,1,1,3,1,3,1),"joinLines",r("abc def ghi\njkl"),a(0,4,0,4,0,8,0,8,1,3,1,3)),n("duplicateLine","abc\ndef\nghi",e(1,0),"duplicateLine",r("abc\ndef\ndef\nghi"),o(2,0),"undo",c(0,1,0,1,1,1,1,1,2,1,2,1),"duplicateLine",r("abc\nabc\ndef\ndef\nghi\nghi"),a(1,1,1,1,3,1,3,1,5,1,5,1)),n("duplicateLineSelection","abcdef",c(0,1,0,1,0,2,0,4,0,5,0,5),"duplicateLine",r("abcdef\nabcdcdef\nabcdcdef"),a(2,1,2,1,2,4,2,6,2,7,2,7)),n("sortLines","c\nb\na\nC\nB\nA","sortLines",r("A\nB\nC\na\nb\nc"),"undo",c(0,0,2,0,3,0,5,0),"sortLines",r("b\nc\na\nB\nC\nA"),a(0,0,2,0,3,0,5,0),"undo",c(1,0,5,0),"sortLinesInsensitive",r("c\na\nB\nb\nC\nA")),n("bookmarks","abc\ndef\nghi\njkl",e(0,1),"toggleBookmark",c(1,1,1,2),"toggleBookmark",c(2,1,2,2),"toggleBookmark","nextBookmark",a(0,1,0,1),"nextBookmark",a(1,1,1,2),"nextBookmark",a(2,1,2,2),"prevBookmark",a(1,1,1,2),"prevBookmark",a(0,1,0,1),"prevBookmark",a(2,1,2,2),"prevBookmark",a(1,1,1,2),"toggleBookmark","prevBookmark",a(2,1,2,2),"prevBookmark",a(0,1,0,1),"selectBookmarks",a(0,1,0,1,2,1,2,2),"clearBookmarks",e(0,0),"selectBookmarks",o(0,0)),n("smartBackspace","  foo\n    bar",c(0,2,0,2,1,4,1,4,1,6,1,6),"smartBackspace",r("foo\n  br")),n("upAndDowncaseAtCursor","abc\ndef  x\nghI",c(0,1,0,3,1,1,1,1,1,4,1,4),"upcaseAtCursor",r("aBC\nDEF  x\nghI"),a(0,1,0,3,1,3,1,3,1,4,1,4),"downcaseAtCursor",r("abc\ndef  x\nghI"),a(0,1,0,3,1,3,1,3,1,4,1,4)),n("mark","abc\ndef\nghi",e(1,1),"setSublimeMark",e(2,1),"selectToSublimeMark",a(2,1,1,1),e(0,1),"swapWithSublimeMark",o(1,1),"swapWithSublimeMark",o(0,1),"deleteToSublimeMark",r("aef\nghi"),"sublimeYank",r("abc\ndef\nghi"),o(1,1)),n("findUnder","foo foobar  a","findUnder",a(0,4,0,7),"findUnder",a(0,0,0,3),"findUnderPrevious",a(0,4,0,7),"findUnderPrevious",a(0,0,0,3),e(0,4),"findUnder",a(0,4,0,10),e(0,11),"findUnder",a(0,11,0,11))}();
+(function() {
+  "use strict";
+  
+  var Pos = CodeMirror.Pos;
+  namespace = "sublime_";
+
+  function stTest(name) {
+    var actions = Array.prototype.slice.call(arguments, 1);
+    testCM(name, function(cm) {
+      for (var i = 0; i < actions.length; i++) {
+        var action = actions[i];
+        if (typeof action == "string" && i == 0)
+          cm.setValue(action);
+        else if (typeof action == "string")
+          cm.execCommand(action);
+        else if (action instanceof Pos)
+          cm.setCursor(action);
+        else
+          action(cm);
+      }
+    });
+  }
+
+  function at(line, ch, msg) {
+    return function(cm) {
+      eq(cm.listSelections().length, 1);
+      eqCursorPos(cm.getCursor("head"), Pos(line, ch), msg);
+      eqCursorPos(cm.getCursor("anchor"), Pos(line, ch), msg);
+    };
+  }
+
+  function val(content, msg) {
+    return function(cm) { eq(cm.getValue(), content, msg); };
+  }
+
+  function argsToRanges(args) {
+    if (args.length % 4) throw new Error("Wrong number of arguments for ranges.");
+    var ranges = [];
+    for (var i = 0; i < args.length; i += 4)
+      ranges.push({anchor: Pos(args[i], args[i + 1]),
+                   head: Pos(args[i + 2], args[i + 3])});
+    return ranges;
+  }
+
+  function setSel() {
+    var ranges = argsToRanges(arguments);
+    return function(cm) { cm.setSelections(ranges, 0); };
+  }
+
+  function hasSel() {
+    var ranges = argsToRanges(arguments);
+    return function(cm) {
+      var sels = cm.listSelections();
+      if (sels.length != ranges.length)
+        throw new Failure("Expected " + ranges.length + " selections, but found " + sels.length);
+      for (var i = 0; i < sels.length; i++) {
+        eqCharPos(sels[i].anchor, ranges[i].anchor, "anchor " + i);
+        eqCharPos(sels[i].head, ranges[i].head, "head " + i);
+      }
+    };
+  }
+
+  stTest("bySubword", "the foo_bar DooDahBah \n a FOOBar",
+         "goSubwordLeft", at(0, 0),
+         "goSubwordRight", at(0, 3),
+         "goSubwordRight", at(0, 7),
+         "goSubwordRight", at(0, 11),
+         "goSubwordRight", at(0, 15),
+         "goSubwordRight", at(0, 18),
+         "goSubwordRight", at(0, 21),
+         "goSubwordRight", at(0, 22),
+         "goSubwordRight", at(1, 0),
+         "goSubwordRight", at(1, 2),
+         "goSubwordRight", at(1, 6),
+         "goSubwordRight", at(1, 9),
+         "goSubwordLeft", at(1, 6),
+         "goSubwordLeft", at(1, 3),
+         "goSubwordLeft", at(1, 1),
+         "goSubwordLeft", at(1, 0),
+         "goSubwordLeft", at(0, 22),
+         "goSubwordLeft", at(0, 18),
+         "goSubwordLeft", at(0, 15),
+         "goSubwordLeft", at(0, 12),
+         "goSubwordLeft", at(0, 8),
+         "goSubwordLeft", at(0, 4),
+         "goSubwordLeft", at(0, 0));
+
+  stTest("splitSelectionByLine", "abc\ndef\nghi",
+         setSel(0, 1, 2, 2),
+         "splitSelectionByLine",
+         hasSel(0, 1, 0, 3,
+                1, 0, 1, 3,
+                2, 0, 2, 2));
+
+  stTest("splitSelectionByLineMulti", "abc\ndef\nghi\njkl",
+         setSel(0, 1, 1, 1,
+                1, 2, 3, 2,
+                3, 3, 3, 3),
+         "splitSelectionByLine",
+         hasSel(0, 1, 0, 3,
+                1, 0, 1, 1,
+                1, 2, 1, 3,
+                2, 0, 2, 3,
+                3, 0, 3, 2,
+                3, 3, 3, 3));
+
+  stTest("selectLine", "abc\ndef\nghi",
+         setSel(0, 1, 0, 1,
+                2, 0, 2, 1),
+         "selectLine",
+         hasSel(0, 0, 1, 0,
+                2, 0, 2, 3),
+         setSel(0, 1, 1, 0),
+         "selectLine",
+         hasSel(0, 0, 2, 0));
+
+  stTest("insertLineAfter", "abcde\nfghijkl\nmn",
+         setSel(0, 1, 0, 1,
+                0, 3, 0, 3,
+                1, 2, 1, 2,
+                1, 3, 1, 5), "insertLineAfter",
+         hasSel(1, 0, 1, 0,
+                3, 0, 3, 0), val("abcde\n\nfghijkl\n\nmn"));
+
+  stTest("insertLineBefore", "abcde\nfghijkl\nmn",
+         setSel(0, 1, 0, 1,
+                0, 3, 0, 3,
+                1, 2, 1, 2,
+                1, 3, 1, 5), "insertLineBefore",
+         hasSel(0, 0, 0, 0,
+                2, 0, 2, 0), val("\nabcde\n\nfghijkl\nmn"));
+
+  stTest("skipAndSelectNextOccurrence", "a foo bar\nfoobar foo",
+         setSel(0, 2, 0, 5), "skipAndSelectNextOccurrence", hasSel(1, 0, 1, 3),
+         "skipAndSelectNextOccurrence",  hasSel(1, 7, 1, 10),
+         "skipAndSelectNextOccurrence",  hasSel(0, 2, 0, 5),
+         Pos(0, 3), "skipAndSelectNextOccurrence", hasSel(0, 2, 0, 5),
+         "skipAndSelectNextOccurrence", hasSel(1, 7, 1, 10),
+         setSel(0, 6, 0, 9), "skipAndSelectNextOccurrence", hasSel(1, 3, 1, 6));
+
+  stTest("selectNextOccurrence", "a foo bar\nfoobar foo",
+         setSel(0, 2, 0, 5),
+         "selectNextOccurrence", hasSel(0, 2, 0, 5,
+                                        1, 0, 1, 3),
+         "selectNextOccurrence", hasSel(0, 2, 0, 5,
+                                        1, 0, 1, 3,
+                                        1, 7, 1, 10),
+         "selectNextOccurrence", hasSel(0, 2, 0, 5,
+                                        1, 0, 1, 3,
+                                        1, 7, 1, 10),
+         Pos(0, 3), "selectNextOccurrence", hasSel(0, 2, 0, 5),
+         "selectNextOccurrence", hasSel(0, 2, 0, 5,
+                                        1, 7, 1, 10),
+         setSel(0, 6, 0, 9),
+         "selectNextOccurrence", hasSel(0, 6, 0, 9,
+                                        1, 3, 1, 6));
+
+  stTest("selectScope", "foo(a) {\n  bar[1, 2];\n}",
+         "selectScope", hasSel(0, 0, 2, 1),
+         Pos(0, 4), "selectScope", hasSel(0, 4, 0, 5),
+         Pos(0, 5), "selectScope", hasSel(0, 4, 0, 5),
+         Pos(0, 6), "selectScope", hasSel(0, 0, 2, 1),
+         Pos(0, 8), "selectScope", hasSel(0, 8, 2, 0),
+         Pos(1, 2), "selectScope", hasSel(0, 8, 2, 0),
+         Pos(1, 6), "selectScope", hasSel(1, 6, 1, 10),
+         Pos(1, 9), "selectScope", hasSel(1, 6, 1, 10),
+         "selectScope", hasSel(0, 8, 2, 0),
+         "selectScope", hasSel(0, 0, 2, 1));
+
+  stTest("goToBracket", "foo(a) {\n  bar[1, 2];\n}",
+         Pos(0, 0), "goToBracket", at(0, 0),
+         Pos(0, 4), "goToBracket", at(0, 5), "goToBracket", at(0, 4),
+         Pos(0, 8), "goToBracket", at(2, 0), "goToBracket", at(0, 8),
+         Pos(1, 2), "goToBracket", at(2, 0),
+         Pos(1, 7), "goToBracket", at(1, 10), "goToBracket", at(1, 6));
+
+  stTest("swapLine", "1\n2\n3---\n4\n5",
+         "swapLineDown", val("2\n1\n3---\n4\n5"),
+         "swapLineUp", val("1\n2\n3---\n4\n5"),
+         "swapLineUp", val("1\n2\n3---\n4\n5"),
+         Pos(4, 1), "swapLineDown", val("1\n2\n3---\n4\n5"),
+         setSel(0, 1, 0, 1,
+                1, 0, 2, 0,
+                2, 2, 2, 2),
+         "swapLineDown", val("4\n1\n2\n3---\n5"),
+         hasSel(1, 1, 1, 1,
+                2, 0, 3, 0,
+                3, 2, 3, 2),
+         "swapLineUp", val("1\n2\n3---\n4\n5"),
+         hasSel(0, 1, 0, 1,
+                1, 0, 2, 0,
+                2, 2, 2, 2));
+
+  stTest("swapLineEmptyBottomSel", "1\n2\n3",
+         setSel(0, 1, 1, 0),
+         "swapLineDown", val("2\n1\n3"), hasSel(1, 1, 2, 0),
+         "swapLineUp", val("1\n2\n3"), hasSel(0, 1, 1, 0),
+         "swapLineUp", val("1\n2\n3"), hasSel(0, 0, 0, 0));
+
+  stTest("swapLineUpFromEnd", "a\nb\nc",
+         Pos(2, 1), "swapLineUp",
+         hasSel(1, 1, 1, 1), val("a\nc\nb"));
+
+  stTest("joinLines", "abc\ndef\nghi\njkl",
+         "joinLines", val("abc def\nghi\njkl"), at(0, 4),
+         "undo",
+         setSel(0, 2, 1, 1), "joinLines",
+         val("abc def ghi\njkl"), hasSel(0, 2, 0, 8),
+         "undo",
+         setSel(0, 1, 0, 1,
+                1, 1, 1, 1,
+                3, 1, 3, 1), "joinLines",
+         val("abc def ghi\njkl"), hasSel(0, 4, 0, 4,
+                                         0, 8, 0, 8,
+                                         1, 3, 1, 3));
+
+  stTest("duplicateLine", "abc\ndef\nghi",
+         Pos(1, 0), "duplicateLine", val("abc\ndef\ndef\nghi"), at(2, 0),
+         "undo",
+         setSel(0, 1, 0, 1,
+                1, 1, 1, 1,
+                2, 1, 2, 1), "duplicateLine",
+         val("abc\nabc\ndef\ndef\nghi\nghi"), hasSel(1, 1, 1, 1,
+                                                     3, 1, 3, 1,
+                                                     5, 1, 5, 1));
+  stTest("duplicateLineSelection", "abcdef",
+         setSel(0, 1, 0, 1,
+                0, 2, 0, 4,
+                0, 5, 0, 5),
+         "duplicateLine",
+         val("abcdef\nabcdcdef\nabcdcdef"), hasSel(2, 1, 2, 1,
+                                                   2, 4, 2, 6,
+                                                   2, 7, 2, 7));
+
+  stTest("sortLines", "c\nb\na\nC\nB\nA",
+         "sortLines", val("A\nB\nC\na\nb\nc"),
+         "undo",
+         setSel(0, 0, 2, 0,
+                3, 0, 5, 0),
+         "sortLines", val("b\nc\na\nB\nC\nA"),
+         hasSel(0, 0, 2, 0,
+                3, 0, 5, 0),
+         "undo",
+         setSel(1, 0, 5, 0), "sortLinesInsensitive", val("c\na\nB\nb\nC\nA"));
+
+  stTest("bookmarks", "abc\ndef\nghi\njkl",
+         Pos(0, 1), "toggleBookmark",
+         setSel(1, 1, 1, 2), "toggleBookmark",
+         setSel(2, 1, 2, 2), "toggleBookmark",
+         "nextBookmark", hasSel(0, 1, 0, 1),
+         "nextBookmark", hasSel(1, 1, 1, 2),
+         "nextBookmark", hasSel(2, 1, 2, 2),
+         "prevBookmark", hasSel(1, 1, 1, 2),
+         "prevBookmark", hasSel(0, 1, 0, 1),
+         "prevBookmark", hasSel(2, 1, 2, 2),
+         "prevBookmark", hasSel(1, 1, 1, 2),
+         "toggleBookmark",
+         "prevBookmark", hasSel(2, 1, 2, 2),
+         "prevBookmark", hasSel(0, 1, 0, 1),
+         "selectBookmarks", hasSel(0, 1, 0, 1,
+                                   2, 1, 2, 2),
+         "clearBookmarks",
+         Pos(0, 0), "selectBookmarks", at(0, 0));
+
+  stTest("smartBackspace", "  foo\n    bar",
+         setSel(0, 2, 0, 2, 1, 4, 1, 4, 1, 6, 1, 6), "smartBackspace",
+         val("foo\n  br"))
+
+  stTest("upAndDowncaseAtCursor", "abc\ndef  x\nghI",
+         setSel(0, 1, 0, 3,
+                1, 1, 1, 1,
+                1, 4, 1, 4), "upcaseAtCursor",
+         val("aBC\nDEF  x\nghI"), hasSel(0, 1, 0, 3,
+                                         1, 3, 1, 3,
+                                         1, 4, 1, 4),
+         "downcaseAtCursor",
+         val("abc\ndef  x\nghI"), hasSel(0, 1, 0, 3,
+                                         1, 3, 1, 3,
+                                         1, 4, 1, 4));
+
+  stTest("mark", "abc\ndef\nghi",
+         Pos(1, 1), "setSublimeMark",
+         Pos(2, 1), "selectToSublimeMark", hasSel(2, 1, 1, 1),
+         Pos(0, 1), "swapWithSublimeMark", at(1, 1), "swapWithSublimeMark", at(0, 1),
+         "deleteToSublimeMark", val("aef\nghi"),
+         "sublimeYank", val("abc\ndef\nghi"), at(1, 1));
+
+  stTest("findUnder", "foo foobar  a",
+         "findUnder", hasSel(0, 4, 0, 7),
+         "findUnder", hasSel(0, 0, 0, 3),
+         "findUnderPrevious", hasSel(0, 4, 0, 7),
+         "findUnderPrevious", hasSel(0, 0, 0, 3),
+         Pos(0, 4), "findUnder", hasSel(0, 4, 0, 10),
+         Pos(0, 11), "findUnder", hasSel(0, 11, 0, 11));
+})();

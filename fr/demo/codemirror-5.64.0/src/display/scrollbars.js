@@ -1,1 +1,194 @@
-import{addClass,elt,rmClass}from"../util/dom.js";import{on}from"../util/event.js";import{scrollGap,paddingVert}from"../measurement/position_measurement.js";import{ie,ie_version,mac,mac_geMountainLion}from"../util/browser.js";import{updateHeightsInViewport}from"./update_lines.js";import{Delayed}from"../util/misc.js";import{setScrollLeft,updateScrollTop}from"./scrolling.js";export function measureForScrollbars(t){let e=t.display,l=e.gutters.offsetWidth,i=Math.round(t.doc.height+paddingVert(t.display));return{clientHeight:e.scroller.clientHeight,viewHeight:e.wrapper.clientHeight,scrollWidth:e.scroller.scrollWidth,clientWidth:e.scroller.clientWidth,viewWidth:e.wrapper.clientWidth,barLeft:t.options.fixedGutter?l:0,docHeight:i,scrollHeight:i+scrollGap(t)+e.barHeight,nativeBarWidth:e.nativeBarWidth,gutterWidth:l}}class NativeScrollbars{constructor(t,e,l){this.cm=l;let i=this.vert=elt("div",[elt("div",null,null,"min-width: 1px")],"CodeMirror-vscrollbar"),r=this.horiz=elt("div",[elt("div",null,null,"height: 100%; min-height: 1px")],"CodeMirror-hscrollbar");i.tabIndex=r.tabIndex=-1,t(i),t(r),on(i,"scroll",(()=>{i.clientHeight&&e(i.scrollTop,"vertical")})),on(r,"scroll",(()=>{r.clientWidth&&e(r.scrollLeft,"horizontal")})),this.checkedZeroWidth=!1,ie&&ie_version<8&&(this.horiz.style.minHeight=this.vert.style.minWidth="18px")}update(t){let e=t.scrollWidth>t.clientWidth+1,l=t.scrollHeight>t.clientHeight+1,i=t.nativeBarWidth;if(l){this.vert.style.display="block",this.vert.style.bottom=e?i+"px":"0";let l=t.viewHeight-(e?i:0);this.vert.firstChild.style.height=Math.max(0,t.scrollHeight-t.clientHeight+l)+"px"}else this.vert.scrollTop=0,this.vert.style.display="",this.vert.firstChild.style.height="0";if(e){this.horiz.style.display="block",this.horiz.style.right=l?i+"px":"0",this.horiz.style.left=t.barLeft+"px";let e=t.viewWidth-t.barLeft-(l?i:0);this.horiz.firstChild.style.width=Math.max(0,t.scrollWidth-t.clientWidth+e)+"px"}else this.horiz.style.display="",this.horiz.firstChild.style.width="0";return!this.checkedZeroWidth&&t.clientHeight>0&&(0==i&&this.zeroWidthHack(),this.checkedZeroWidth=!0),{right:l?i:0,bottom:e?i:0}}setScrollLeft(t){this.horiz.scrollLeft!=t&&(this.horiz.scrollLeft=t),this.disableHoriz&&this.enableZeroWidthBar(this.horiz,this.disableHoriz,"horiz")}setScrollTop(t){this.vert.scrollTop!=t&&(this.vert.scrollTop=t),this.disableVert&&this.enableZeroWidthBar(this.vert,this.disableVert,"vert")}zeroWidthHack(){let t=mac&&!mac_geMountainLion?"12px":"18px";this.horiz.style.height=this.vert.style.width=t,this.horiz.style.pointerEvents=this.vert.style.pointerEvents="none",this.disableHoriz=new Delayed,this.disableVert=new Delayed}enableZeroWidthBar(t,e,l){t.style.pointerEvents="auto",e.set(1e3,(function i(){let r=t.getBoundingClientRect();("vert"==l?document.elementFromPoint(r.right-1,(r.top+r.bottom)/2):document.elementFromPoint((r.right+r.left)/2,r.bottom-1))!=t?t.style.pointerEvents="none":e.set(1e3,i)}))}clear(){let t=this.horiz.parentNode;t.removeChild(this.horiz),t.removeChild(this.vert)}}class NullScrollbars{update(){return{bottom:0,right:0}}setScrollLeft(){}setScrollTop(){}clear(){}}export function updateScrollbars(t,e){e||(e=measureForScrollbars(t));let l=t.display.barWidth,i=t.display.barHeight;updateScrollbarsInner(t,e);for(let r=0;r<4&&l!=t.display.barWidth||i!=t.display.barHeight;r++)l!=t.display.barWidth&&t.options.lineWrapping&&updateHeightsInViewport(t),updateScrollbarsInner(t,measureForScrollbars(t)),l=t.display.barWidth,i=t.display.barHeight}function updateScrollbarsInner(t,e){let l=t.display,i=l.scrollbars.update(e);l.sizer.style.paddingRight=(l.barWidth=i.right)+"px",l.sizer.style.paddingBottom=(l.barHeight=i.bottom)+"px",l.heightForcer.style.borderBottom=i.bottom+"px solid transparent",i.right&&i.bottom?(l.scrollbarFiller.style.display="block",l.scrollbarFiller.style.height=i.bottom+"px",l.scrollbarFiller.style.width=i.right+"px"):l.scrollbarFiller.style.display="",i.bottom&&t.options.coverGutterNextToScrollbar&&t.options.fixedGutter?(l.gutterFiller.style.display="block",l.gutterFiller.style.height=i.bottom+"px",l.gutterFiller.style.width=e.gutterWidth+"px"):l.gutterFiller.style.display=""}export let scrollbarModel={native:NativeScrollbars,null:NullScrollbars};export function initScrollbars(t){t.display.scrollbars&&(t.display.scrollbars.clear(),t.display.scrollbars.addClass&&rmClass(t.display.wrapper,t.display.scrollbars.addClass)),t.display.scrollbars=new scrollbarModel[t.options.scrollbarStyle]((e=>{t.display.wrapper.insertBefore(e,t.display.scrollbarFiller),on(e,"mousedown",(()=>{t.state.focused&&setTimeout((()=>t.display.input.focus()),0)})),e.setAttribute("cm-not-content","true")}),((e,l)=>{"horizontal"==l?setScrollLeft(t,e):updateScrollTop(t,e)}),t),t.display.scrollbars.addClass&&addClass(t.display.wrapper,t.display.scrollbars.addClass)}
+import { addClass, elt, rmClass } from "../util/dom.js"
+import { on } from "../util/event.js"
+import { scrollGap, paddingVert } from "../measurement/position_measurement.js"
+import { ie, ie_version, mac, mac_geMountainLion } from "../util/browser.js"
+import { updateHeightsInViewport } from "./update_lines.js"
+import { Delayed } from "../util/misc.js"
+
+import { setScrollLeft, updateScrollTop } from "./scrolling.js"
+
+// SCROLLBARS
+
+// Prepare DOM reads needed to update the scrollbars. Done in one
+// shot to minimize update/measure roundtrips.
+export function measureForScrollbars(cm) {
+  let d = cm.display, gutterW = d.gutters.offsetWidth
+  let docH = Math.round(cm.doc.height + paddingVert(cm.display))
+  return {
+    clientHeight: d.scroller.clientHeight,
+    viewHeight: d.wrapper.clientHeight,
+    scrollWidth: d.scroller.scrollWidth, clientWidth: d.scroller.clientWidth,
+    viewWidth: d.wrapper.clientWidth,
+    barLeft: cm.options.fixedGutter ? gutterW : 0,
+    docHeight: docH,
+    scrollHeight: docH + scrollGap(cm) + d.barHeight,
+    nativeBarWidth: d.nativeBarWidth,
+    gutterWidth: gutterW
+  }
+}
+
+class NativeScrollbars {
+  constructor(place, scroll, cm) {
+    this.cm = cm
+    let vert = this.vert = elt("div", [elt("div", null, null, "min-width: 1px")], "CodeMirror-vscrollbar")
+    let horiz = this.horiz = elt("div", [elt("div", null, null, "height: 100%; min-height: 1px")], "CodeMirror-hscrollbar")
+    vert.tabIndex = horiz.tabIndex = -1
+    place(vert); place(horiz)
+
+    on(vert, "scroll", () => {
+      if (vert.clientHeight) scroll(vert.scrollTop, "vertical")
+    })
+    on(horiz, "scroll", () => {
+      if (horiz.clientWidth) scroll(horiz.scrollLeft, "horizontal")
+    })
+
+    this.checkedZeroWidth = false
+    // Need to set a minimum width to see the scrollbar on IE7 (but must not set it on IE8).
+    if (ie && ie_version < 8) this.horiz.style.minHeight = this.vert.style.minWidth = "18px"
+  }
+
+  update(measure) {
+    let needsH = measure.scrollWidth > measure.clientWidth + 1
+    let needsV = measure.scrollHeight > measure.clientHeight + 1
+    let sWidth = measure.nativeBarWidth
+
+    if (needsV) {
+      this.vert.style.display = "block"
+      this.vert.style.bottom = needsH ? sWidth + "px" : "0"
+      let totalHeight = measure.viewHeight - (needsH ? sWidth : 0)
+      // A bug in IE8 can cause this value to be negative, so guard it.
+      this.vert.firstChild.style.height =
+        Math.max(0, measure.scrollHeight - measure.clientHeight + totalHeight) + "px"
+    } else {
+      this.vert.scrollTop = 0
+      this.vert.style.display = ""
+      this.vert.firstChild.style.height = "0"
+    }
+
+    if (needsH) {
+      this.horiz.style.display = "block"
+      this.horiz.style.right = needsV ? sWidth + "px" : "0"
+      this.horiz.style.left = measure.barLeft + "px"
+      let totalWidth = measure.viewWidth - measure.barLeft - (needsV ? sWidth : 0)
+      this.horiz.firstChild.style.width =
+        Math.max(0, measure.scrollWidth - measure.clientWidth + totalWidth) + "px"
+    } else {
+      this.horiz.style.display = ""
+      this.horiz.firstChild.style.width = "0"
+    }
+
+    if (!this.checkedZeroWidth && measure.clientHeight > 0) {
+      if (sWidth == 0) this.zeroWidthHack()
+      this.checkedZeroWidth = true
+    }
+
+    return {right: needsV ? sWidth : 0, bottom: needsH ? sWidth : 0}
+  }
+
+  setScrollLeft(pos) {
+    if (this.horiz.scrollLeft != pos) this.horiz.scrollLeft = pos
+    if (this.disableHoriz) this.enableZeroWidthBar(this.horiz, this.disableHoriz, "horiz")
+  }
+
+  setScrollTop(pos) {
+    if (this.vert.scrollTop != pos) this.vert.scrollTop = pos
+    if (this.disableVert) this.enableZeroWidthBar(this.vert, this.disableVert, "vert")
+  }
+
+  zeroWidthHack() {
+    let w = mac && !mac_geMountainLion ? "12px" : "18px"
+    this.horiz.style.height = this.vert.style.width = w
+    this.horiz.style.pointerEvents = this.vert.style.pointerEvents = "none"
+    this.disableHoriz = new Delayed
+    this.disableVert = new Delayed
+  }
+
+  enableZeroWidthBar(bar, delay, type) {
+    bar.style.pointerEvents = "auto"
+    function maybeDisable() {
+      // To find out whether the scrollbar is still visible, we
+      // check whether the element under the pixel in the bottom
+      // right corner of the scrollbar box is the scrollbar box
+      // itself (when the bar is still visible) or its filler child
+      // (when the bar is hidden). If it is still visible, we keep
+      // it enabled, if it's hidden, we disable pointer events.
+      let box = bar.getBoundingClientRect()
+      let elt = type == "vert" ? document.elementFromPoint(box.right - 1, (box.top + box.bottom) / 2)
+          : document.elementFromPoint((box.right + box.left) / 2, box.bottom - 1)
+      if (elt != bar) bar.style.pointerEvents = "none"
+      else delay.set(1000, maybeDisable)
+    }
+    delay.set(1000, maybeDisable)
+  }
+
+  clear() {
+    let parent = this.horiz.parentNode
+    parent.removeChild(this.horiz)
+    parent.removeChild(this.vert)
+  }
+}
+
+class NullScrollbars {
+  update() { return {bottom: 0, right: 0} }
+  setScrollLeft() {}
+  setScrollTop() {}
+  clear() {}
+}
+
+export function updateScrollbars(cm, measure) {
+  if (!measure) measure = measureForScrollbars(cm)
+  let startWidth = cm.display.barWidth, startHeight = cm.display.barHeight
+  updateScrollbarsInner(cm, measure)
+  for (let i = 0; i < 4 && startWidth != cm.display.barWidth || startHeight != cm.display.barHeight; i++) {
+    if (startWidth != cm.display.barWidth && cm.options.lineWrapping)
+      updateHeightsInViewport(cm)
+    updateScrollbarsInner(cm, measureForScrollbars(cm))
+    startWidth = cm.display.barWidth; startHeight = cm.display.barHeight
+  }
+}
+
+// Re-synchronize the fake scrollbars with the actual size of the
+// content.
+function updateScrollbarsInner(cm, measure) {
+  let d = cm.display
+  let sizes = d.scrollbars.update(measure)
+
+  d.sizer.style.paddingRight = (d.barWidth = sizes.right) + "px"
+  d.sizer.style.paddingBottom = (d.barHeight = sizes.bottom) + "px"
+  d.heightForcer.style.borderBottom = sizes.bottom + "px solid transparent"
+
+  if (sizes.right && sizes.bottom) {
+    d.scrollbarFiller.style.display = "block"
+    d.scrollbarFiller.style.height = sizes.bottom + "px"
+    d.scrollbarFiller.style.width = sizes.right + "px"
+  } else d.scrollbarFiller.style.display = ""
+  if (sizes.bottom && cm.options.coverGutterNextToScrollbar && cm.options.fixedGutter) {
+    d.gutterFiller.style.display = "block"
+    d.gutterFiller.style.height = sizes.bottom + "px"
+    d.gutterFiller.style.width = measure.gutterWidth + "px"
+  } else d.gutterFiller.style.display = ""
+}
+
+export let scrollbarModel = {"native": NativeScrollbars, "null": NullScrollbars}
+
+export function initScrollbars(cm) {
+  if (cm.display.scrollbars) {
+    cm.display.scrollbars.clear()
+    if (cm.display.scrollbars.addClass)
+      rmClass(cm.display.wrapper, cm.display.scrollbars.addClass)
+  }
+
+  cm.display.scrollbars = new scrollbarModel[cm.options.scrollbarStyle](node => {
+    cm.display.wrapper.insertBefore(node, cm.display.scrollbarFiller)
+    // Prevent clicks in the scrollbars from killing focus
+    on(node, "mousedown", () => {
+      if (cm.state.focused) setTimeout(() => cm.display.input.focus(), 0)
+    })
+    node.setAttribute("cm-not-content", "true")
+  }, (pos, axis) => {
+    if (axis == "horizontal") setScrollLeft(cm, pos)
+    else updateScrollTop(cm, pos)
+  }, cm)
+  if (cm.display.scrollbars.addClass)
+    addClass(cm.display.wrapper, cm.display.scrollbars.addClass)
+}

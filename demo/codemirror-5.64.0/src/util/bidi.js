@@ -1,1 +1,215 @@
-import{lst}from"./misc.js";export function iterateBidiSections(r,t,L,e){if(!r)return e(t,L,"ltr",0);let l=!1;for(let m=0;m<r.length;++m){let b=r[m];(b.from<L&&b.to>t||t==L&&b.to==t)&&(e(Math.max(b.from,t),Math.min(b.to,L),1==b.level?"rtl":"ltr",m),l=!0)}l||e(t,L,"ltr")}export let bidiOther=null;export function getBidiPartAt(r,t,L){let e;bidiOther=null;for(let l=0;l<r.length;++l){let m=r[l];if(m.from<t&&m.to>t)return l;m.to==t&&(m.from!=m.to&&"before"==L?e=l:bidiOther=l),m.from==t&&(m.from!=m.to&&"before"!=L?e=l:bidiOther=l)}return null!=e?e:bidiOther}let bidiOrdering=function(){let r=/[\u0590-\u05f4\u0600-\u06ff\u0700-\u08ac]/,t=/[stwN]/,L=/[LRr]/,e=/[Lb1n]/,l=/[1n]/;function m(r,t,L){this.level=r,this.from=t,this.to=L}return function(b,n){let N="ltr"==n?"L":"R";if(0==b.length||"ltr"==n&&!r.test(b))return!1;let o=b.length,f=[];for(let r=0;r<o;++r)f.push((i=b.charCodeAt(r))<=247?"bbbbbbbbbtstwsbbbbbbbbbbbbbbssstwNN%%%NNNNNN,N,N1111111111NNNNNNNLLLLLLLLLLLLLLLLLLLLLLLLLLNNNNNNLLLLLLLLLLLLLLLLLLLLLLLLLLNNNNbbbbbbsbbbbbbbbbbbbbbbbbbbbbbbbbb,N%%%%NNNNLNNNNN%%11NLNNN1LNNNNNLLLLLLLLLLLLLLLLLLLLLLLNLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLN".charAt(i):1424<=i&&i<=1524?"R":1536<=i&&i<=1785?"nnnnnnNNr%%r,rNNmmmmmmmmmmmrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrmmmmmmmmmmmmmmmmmmmmmnnnnnnnnnn%nnrrrmrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrmmmmmmmnNmmmmmmrrmmNmmmmrr1111111111".charAt(i-1536):1774<=i&&i<=2220?"r":8192<=i&&i<=8203?"w":8204==i?"b":"L");var i;for(let r=0,t=N;r<o;++r){let L=f[r];"m"==L?f[r]=t:t=L}for(let r=0,t=N;r<o;++r){let e=f[r];"1"==e&&"r"==t?f[r]="n":L.test(e)&&(t=e,"r"==e&&(f[r]="R"))}for(let r=1,t=f[0];r<o-1;++r){let L=f[r];"+"==L&&"1"==t&&"1"==f[r+1]?f[r]="1":","!=L||t!=f[r+1]||"1"!=t&&"n"!=t||(f[r]=t),t=L}for(let r=0;r<o;++r){let t=f[r];if(","==t)f[r]="N";else if("%"==t){let t;for(t=r+1;t<o&&"%"==f[t];++t);let L=r&&"!"==f[r-1]||t<o&&"1"==f[t]?"1":"N";for(let e=r;e<t;++e)f[e]=L;r=t-1}}for(let r=0,t=N;r<o;++r){let e=f[r];"L"==t&&"1"==e?f[r]="L":L.test(e)&&(t=e)}for(let r=0;r<o;++r)if(t.test(f[r])){let L;for(L=r+1;L<o&&t.test(f[L]);++L);let e="L"==(r?f[r-1]:N),l=e==("L"==(L<o?f[L]:N))?e?"L":"R":N;for(let t=r;t<L;++t)f[t]=l;r=L-1}let s,h=[];for(let r=0;r<o;)if(e.test(f[r])){let t=r;for(++r;r<o&&e.test(f[r]);++r);h.push(new m(0,t,r))}else{let t=r,L=h.length,e="rtl"==n?1:0;for(++r;r<o&&"L"!=f[r];++r);for(let b=t;b<r;)if(l.test(f[b])){t<b&&(h.splice(L,0,new m(1,t,b)),L+=e);let n=b;for(++b;b<r&&l.test(f[b]);++b);h.splice(L,0,new m(2,n,b)),L+=e,t=b}else++b;t<r&&h.splice(L,0,new m(1,t,r))}return"ltr"==n&&(1==h[0].level&&(s=b.match(/^\s+/))&&(h[0].from=s[0].length,h.unshift(new m(0,0,s[0].length))),1==lst(h).level&&(s=b.match(/\s+$/))&&(lst(h).to-=s[0].length,h.push(new m(0,o-s[0].length,o)))),"rtl"==n?h.reverse():h}}();export function getOrder(r,t){let L=r.order;return null==L&&(L=r.order=bidiOrdering(r.text,t)),L}
+import { lst } from "./misc.js"
+
+// BIDI HELPERS
+
+export function iterateBidiSections(order, from, to, f) {
+  if (!order) return f(from, to, "ltr", 0)
+  let found = false
+  for (let i = 0; i < order.length; ++i) {
+    let part = order[i]
+    if (part.from < to && part.to > from || from == to && part.to == from) {
+      f(Math.max(part.from, from), Math.min(part.to, to), part.level == 1 ? "rtl" : "ltr", i)
+      found = true
+    }
+  }
+  if (!found) f(from, to, "ltr")
+}
+
+export let bidiOther = null
+export function getBidiPartAt(order, ch, sticky) {
+  let found
+  bidiOther = null
+  for (let i = 0; i < order.length; ++i) {
+    let cur = order[i]
+    if (cur.from < ch && cur.to > ch) return i
+    if (cur.to == ch) {
+      if (cur.from != cur.to && sticky == "before") found = i
+      else bidiOther = i
+    }
+    if (cur.from == ch) {
+      if (cur.from != cur.to && sticky != "before") found = i
+      else bidiOther = i
+    }
+  }
+  return found != null ? found : bidiOther
+}
+
+// Bidirectional ordering algorithm
+// See http://unicode.org/reports/tr9/tr9-13.html for the algorithm
+// that this (partially) implements.
+
+// One-char codes used for character types:
+// L (L):   Left-to-Right
+// R (R):   Right-to-Left
+// r (AL):  Right-to-Left Arabic
+// 1 (EN):  European Number
+// + (ES):  European Number Separator
+// % (ET):  European Number Terminator
+// n (AN):  Arabic Number
+// , (CS):  Common Number Separator
+// m (NSM): Non-Spacing Mark
+// b (BN):  Boundary Neutral
+// s (B):   Paragraph Separator
+// t (S):   Segment Separator
+// w (WS):  Whitespace
+// N (ON):  Other Neutrals
+
+// Returns null if characters are ordered as they appear
+// (left-to-right), or an array of sections ({from, to, level}
+// objects) in the order in which they occur visually.
+let bidiOrdering = (function() {
+  // Character types for codepoints 0 to 0xff
+  let lowTypes = "bbbbbbbbbtstwsbbbbbbbbbbbbbbssstwNN%%%NNNNNN,N,N1111111111NNNNNNNLLLLLLLLLLLLLLLLLLLLLLLLLLNNNNNNLLLLLLLLLLLLLLLLLLLLLLLLLLNNNNbbbbbbsbbbbbbbbbbbbbbbbbbbbbbbbbb,N%%%%NNNNLNNNNN%%11NLNNN1LNNNNNLLLLLLLLLLLLLLLLLLLLLLLNLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLN"
+  // Character types for codepoints 0x600 to 0x6f9
+  let arabicTypes = "nnnnnnNNr%%r,rNNmmmmmmmmmmmrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrmmmmmmmmmmmmmmmmmmmmmnnnnnnnnnn%nnrrrmrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrmmmmmmmnNmmmmmmrrmmNmmmmrr1111111111"
+  function charType(code) {
+    if (code <= 0xf7) return lowTypes.charAt(code)
+    else if (0x590 <= code && code <= 0x5f4) return "R"
+    else if (0x600 <= code && code <= 0x6f9) return arabicTypes.charAt(code - 0x600)
+    else if (0x6ee <= code && code <= 0x8ac) return "r"
+    else if (0x2000 <= code && code <= 0x200b) return "w"
+    else if (code == 0x200c) return "b"
+    else return "L"
+  }
+
+  let bidiRE = /[\u0590-\u05f4\u0600-\u06ff\u0700-\u08ac]/
+  let isNeutral = /[stwN]/, isStrong = /[LRr]/, countsAsLeft = /[Lb1n]/, countsAsNum = /[1n]/
+
+  function BidiSpan(level, from, to) {
+    this.level = level
+    this.from = from; this.to = to
+  }
+
+  return function(str, direction) {
+    let outerType = direction == "ltr" ? "L" : "R"
+
+    if (str.length == 0 || direction == "ltr" && !bidiRE.test(str)) return false
+    let len = str.length, types = []
+    for (let i = 0; i < len; ++i)
+      types.push(charType(str.charCodeAt(i)))
+
+    // W1. Examine each non-spacing mark (NSM) in the level run, and
+    // change the type of the NSM to the type of the previous
+    // character. If the NSM is at the start of the level run, it will
+    // get the type of sor.
+    for (let i = 0, prev = outerType; i < len; ++i) {
+      let type = types[i]
+      if (type == "m") types[i] = prev
+      else prev = type
+    }
+
+    // W2. Search backwards from each instance of a European number
+    // until the first strong type (R, L, AL, or sor) is found. If an
+    // AL is found, change the type of the European number to Arabic
+    // number.
+    // W3. Change all ALs to R.
+    for (let i = 0, cur = outerType; i < len; ++i) {
+      let type = types[i]
+      if (type == "1" && cur == "r") types[i] = "n"
+      else if (isStrong.test(type)) { cur = type; if (type == "r") types[i] = "R" }
+    }
+
+    // W4. A single European separator between two European numbers
+    // changes to a European number. A single common separator between
+    // two numbers of the same type changes to that type.
+    for (let i = 1, prev = types[0]; i < len - 1; ++i) {
+      let type = types[i]
+      if (type == "+" && prev == "1" && types[i+1] == "1") types[i] = "1"
+      else if (type == "," && prev == types[i+1] &&
+               (prev == "1" || prev == "n")) types[i] = prev
+      prev = type
+    }
+
+    // W5. A sequence of European terminators adjacent to European
+    // numbers changes to all European numbers.
+    // W6. Otherwise, separators and terminators change to Other
+    // Neutral.
+    for (let i = 0; i < len; ++i) {
+      let type = types[i]
+      if (type == ",") types[i] = "N"
+      else if (type == "%") {
+        let end
+        for (end = i + 1; end < len && types[end] == "%"; ++end) {}
+        let replace = (i && types[i-1] == "!") || (end < len && types[end] == "1") ? "1" : "N"
+        for (let j = i; j < end; ++j) types[j] = replace
+        i = end - 1
+      }
+    }
+
+    // W7. Search backwards from each instance of a European number
+    // until the first strong type (R, L, or sor) is found. If an L is
+    // found, then change the type of the European number to L.
+    for (let i = 0, cur = outerType; i < len; ++i) {
+      let type = types[i]
+      if (cur == "L" && type == "1") types[i] = "L"
+      else if (isStrong.test(type)) cur = type
+    }
+
+    // N1. A sequence of neutrals takes the direction of the
+    // surrounding strong text if the text on both sides has the same
+    // direction. European and Arabic numbers act as if they were R in
+    // terms of their influence on neutrals. Start-of-level-run (sor)
+    // and end-of-level-run (eor) are used at level run boundaries.
+    // N2. Any remaining neutrals take the embedding direction.
+    for (let i = 0; i < len; ++i) {
+      if (isNeutral.test(types[i])) {
+        let end
+        for (end = i + 1; end < len && isNeutral.test(types[end]); ++end) {}
+        let before = (i ? types[i-1] : outerType) == "L"
+        let after = (end < len ? types[end] : outerType) == "L"
+        let replace = before == after ? (before ? "L" : "R") : outerType
+        for (let j = i; j < end; ++j) types[j] = replace
+        i = end - 1
+      }
+    }
+
+    // Here we depart from the documented algorithm, in order to avoid
+    // building up an actual levels array. Since there are only three
+    // levels (0, 1, 2) in an implementation that doesn't take
+    // explicit embedding into account, we can build up the order on
+    // the fly, without following the level-based algorithm.
+    let order = [], m
+    for (let i = 0; i < len;) {
+      if (countsAsLeft.test(types[i])) {
+        let start = i
+        for (++i; i < len && countsAsLeft.test(types[i]); ++i) {}
+        order.push(new BidiSpan(0, start, i))
+      } else {
+        let pos = i, at = order.length, isRTL = direction == "rtl" ? 1 : 0
+        for (++i; i < len && types[i] != "L"; ++i) {}
+        for (let j = pos; j < i;) {
+          if (countsAsNum.test(types[j])) {
+            if (pos < j) { order.splice(at, 0, new BidiSpan(1, pos, j)); at += isRTL }
+            let nstart = j
+            for (++j; j < i && countsAsNum.test(types[j]); ++j) {}
+            order.splice(at, 0, new BidiSpan(2, nstart, j))
+            at += isRTL
+            pos = j
+          } else ++j
+        }
+        if (pos < i) order.splice(at, 0, new BidiSpan(1, pos, i))
+      }
+    }
+    if (direction == "ltr") {
+      if (order[0].level == 1 && (m = str.match(/^\s+/))) {
+        order[0].from = m[0].length
+        order.unshift(new BidiSpan(0, 0, m[0].length))
+      }
+      if (lst(order).level == 1 && (m = str.match(/\s+$/))) {
+        lst(order).to -= m[0].length
+        order.push(new BidiSpan(0, len - m[0].length, len))
+      }
+    }
+
+    return direction == "rtl" ? order.reverse() : order
+  }
+})()
+
+// Get the bidi ordering for the given line (and cache it). Returns
+// false for lines that are fully left-to-right, and an array of
+// BidiSpan objects otherwise.
+export function getOrder(line, direction) {
+  let order = line.order
+  if (order == null) order = line.order = bidiOrdering(line.text, direction)
+  return order
+}

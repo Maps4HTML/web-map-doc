@@ -1,1 +1,555 @@
-import{deleteNearSelection}from"./deleteNearSelection.js";import{commands}from"./commands.js";import{attachDoc}from"../model/document_data.js";import{activeElt,addClass,rmClass}from"../util/dom.js";import{eventMixin,signal}from"../util/event.js";import{getLineStyles,getContextBefore,takeToken}from"../line/highlight.js";import{indentLine}from"../input/indent.js";import{triggerElectric}from"../input/input.js";import{onKeyDown,onKeyPress,onKeyUp}from"./key_events.js";import{onMouseDown}from"./mouse_events.js";import{getKeyMap}from"../input/keymap.js";import{endOfLine,moveLogically,moveVisually}from"../input/movement.js";import{endOperation,methodOp,operation,runInOp,startOperation}from"../display/operations.js";import{clipLine,clipPos,equalCursorPos,Pos}from"../line/pos.js";import{charCoords,charWidth,clearCaches,clearLineMeasurementCache,coordsChar,cursorCoords,displayHeight,displayWidth,estimateLineHeights,fromCoordSystem,intoCoordSystem,scrollGap,textHeight}from"../measurement/position_measurement.js";import{Range}from"../model/selection.js";import{replaceOneSelection,skipAtomic}from"../model/selection_updates.js";import{addToScrollTop,ensureCursorVisible,scrollIntoView,scrollToCoords,scrollToCoordsRange,scrollToRange}from"../display/scrolling.js";import{heightAtLine}from"../line/spans.js";import{updateGutterSpace}from"../display/update_display.js";import{indexOf,insertSorted,isWordChar,sel_dontScroll,sel_move}from"../util/misc.js";import{signalLater}from"../util/operation_group.js";import{getLine,isLine,lineAtHeight}from"../line/utils_line.js";import{regChange,regLineChange}from"../display/view_tracking.js";export default function(t){let e=t.optionHandlers,i=t.helpers={};t.prototype={constructor:t,focus:function(){window.focus(),this.display.input.focus()},setOption:function(t,i){let o=this.options,s=o[t];o[t]==i&&"mode"!=t||(o[t]=i,e.hasOwnProperty(t)&&operation(this,e[t])(this,i,s),signal(this,"optionChange",this,t))},getOption:function(t){return this.options[t]},getDoc:function(){return this.doc},addKeyMap:function(t,e){this.state.keyMaps[e?"push":"unshift"](getKeyMap(t))},removeKeyMap:function(t){let e=this.state.keyMaps;for(let i=0;i<e.length;++i)if(e[i]==t||e[i].name==t)return e.splice(i,1),!0},addOverlay:methodOp((function(e,i){let o=e.token?e:t.getMode(this.options,e);if(o.startState)throw new Error("Overlays may not be stateful.");insertSorted(this.state.overlays,{mode:o,modeSpec:e,opaque:i&&i.opaque,priority:i&&i.priority||0},(t=>t.priority)),this.state.modeGen++,regChange(this)})),removeOverlay:methodOp((function(t){let e=this.state.overlays;for(let i=0;i<e.length;++i){let o=e[i].modeSpec;if(o==t||"string"==typeof t&&o.name==t)return e.splice(i,1),this.state.modeGen++,void regChange(this)}})),indentLine:methodOp((function(t,e,i){"string"!=typeof e&&"number"!=typeof e&&(e=null==e?this.options.smartIndent?"smart":"prev":e?"add":"subtract"),isLine(this.doc,t)&&indentLine(this,t,e,i)})),indentSelection:methodOp((function(t){let e=this.doc.sel.ranges,i=-1;for(let o=0;o<e.length;o++){let s=e[o];if(s.empty())s.head.line>i&&(indentLine(this,s.head.line,t,!0),i=s.head.line,o==this.doc.sel.primIndex&&ensureCursorVisible(this));else{let r=s.from(),n=s.to(),l=Math.max(i,r.line);i=Math.min(this.lastLine(),n.line-(n.ch?0:1))+1;for(let e=l;e<i;++e)indentLine(this,e,t);let h=this.doc.sel.ranges;0==r.ch&&e.length==h.length&&h[o].from().ch>0&&replaceOneSelection(this.doc,o,new Range(r,h[o].to()),sel_dontScroll)}}})),getTokenAt:function(t,e){return takeToken(this,t,e)},getLineTokens:function(t,e){return takeToken(this,Pos(t),e,!0)},getTokenTypeAt:function(t){t=clipPos(this.doc,t);let e,i=getLineStyles(this,getLine(this.doc,t.line)),o=0,s=(i.length-1)/2,r=t.ch;if(0==r)e=i[2];else for(;;){let t=o+s>>1;if((t?i[2*t-1]:0)>=r)s=t;else{if(!(i[2*t+1]<r)){e=i[2*t+2];break}o=t+1}}let n=e?e.indexOf("overlay "):-1;return n<0?e:0==n?null:e.slice(0,n-1)},getModeAt:function(e){let i=this.doc.mode;return i.innerMode?t.innerMode(i,this.getTokenAt(e).state).mode:i},getHelper:function(t,e){return this.getHelpers(t,e)[0]},getHelpers:function(t,e){let o=[];if(!i.hasOwnProperty(e))return o;let s=i[e],r=this.getModeAt(t);if("string"==typeof r[e])s[r[e]]&&o.push(s[r[e]]);else if(r[e])for(let i=0;i<r[e].length;i++){let t=s[r[e][i]];t&&o.push(t)}else r.helperType&&s[r.helperType]?o.push(s[r.helperType]):s[r.name]&&o.push(s[r.name]);for(let i=0;i<s._global.length;i++){let t=s._global[i];t.pred(r,this)&&-1==indexOf(o,t.val)&&o.push(t.val)}return o},getStateAfter:function(t,e){let i=this.doc;return t=clipLine(i,null==t?i.first+i.size-1:t),getContextBefore(this,t+1,e).state},cursorCoords:function(t,e){let i,o=this.doc.sel.primary();return i=null==t?o.head:"object"==typeof t?clipPos(this.doc,t):t?o.from():o.to(),cursorCoords(this,i,e||"page")},charCoords:function(t,e){return charCoords(this,clipPos(this.doc,t),e||"page")},coordsChar:function(t,e){return t=fromCoordSystem(this,t,e||"page"),coordsChar(this,t.left,t.top)},lineAtHeight:function(t,e){return t=fromCoordSystem(this,{top:t,left:0},e||"page").top,lineAtHeight(this.doc,t+this.display.viewOffset)},heightAtLine:function(t,e,i){let o,s=!1;if("number"==typeof t){let e=this.doc.first+this.doc.size-1;t<this.doc.first?t=this.doc.first:t>e&&(t=e,s=!0),o=getLine(this.doc,t)}else o=t;return intoCoordSystem(this,o,{top:0,left:0},e||"page",i||s).top+(s?this.doc.height-heightAtLine(o):0)},defaultTextHeight:function(){return textHeight(this.display)},defaultCharWidth:function(){return charWidth(this.display)},getViewport:function(){return{from:this.display.viewFrom,to:this.display.viewTo}},addWidget:function(t,e,i,o,s){let r=this.display,n=(t=cursorCoords(this,clipPos(this.doc,t))).bottom,l=t.left;if(e.style.position="absolute",e.setAttribute("cm-ignore-events","true"),this.display.input.setUneditable(e),r.sizer.appendChild(e),"over"==o)n=t.top;else if("above"==o||"near"==o){let i=Math.max(r.wrapper.clientHeight,this.doc.height),s=Math.max(r.sizer.clientWidth,r.lineSpace.clientWidth);("above"==o||t.bottom+e.offsetHeight>i)&&t.top>e.offsetHeight?n=t.top-e.offsetHeight:t.bottom+e.offsetHeight<=i&&(n=t.bottom),l+e.offsetWidth>s&&(l=s-e.offsetWidth)}e.style.top=n+"px",e.style.left=e.style.right="","right"==s?(l=r.sizer.clientWidth-e.offsetWidth,e.style.right="0px"):("left"==s?l=0:"middle"==s&&(l=(r.sizer.clientWidth-e.offsetWidth)/2),e.style.left=l+"px"),i&&scrollIntoView(this,{left:l,top:n,right:l+e.offsetWidth,bottom:n+e.offsetHeight})},triggerOnKeyDown:methodOp(onKeyDown),triggerOnKeyPress:methodOp(onKeyPress),triggerOnKeyUp:onKeyUp,triggerOnMouseDown:methodOp(onMouseDown),execCommand:function(t){if(commands.hasOwnProperty(t))return commands[t].call(null,this)},triggerElectric:methodOp((function(t){triggerElectric(this,t)})),findPosH:function(t,e,i,o){let s=1;e<0&&(s=-1,e=-e);let r=clipPos(this.doc,t);for(let n=0;n<e&&(r=findPosH(this.doc,r,s,i,o),!r.hitSide);++n);return r},moveH:methodOp((function(t,e){this.extendSelectionsBy((i=>this.display.shift||this.doc.extend||i.empty()?findPosH(this.doc,i.head,t,e,this.options.rtlMoveVisually):t<0?i.from():i.to()),sel_move)})),deleteH:methodOp((function(t,e){let i=this.doc.sel,o=this.doc;i.somethingSelected()?o.replaceSelection("",null,"+delete"):deleteNearSelection(this,(i=>{let s=findPosH(o,i.head,t,e,!1);return t<0?{from:s,to:i.head}:{from:i.head,to:s}}))})),findPosV:function(t,e,i,o){let s=1,r=o;e<0&&(s=-1,e=-e);let n=clipPos(this.doc,t);for(let l=0;l<e;++l){let t=cursorCoords(this,n,"div");if(null==r?r=t.left:t.left=r,n=findPosV(this,t,s,i),n.hitSide)break}return n},moveV:methodOp((function(t,e){let i=this.doc,o=[],s=!this.display.shift&&!i.extend&&i.sel.somethingSelected();if(i.extendSelectionsBy((r=>{if(s)return t<0?r.from():r.to();let n=cursorCoords(this,r.head,"div");null!=r.goalColumn&&(n.left=r.goalColumn),o.push(n.left);let l=findPosV(this,n,t,e);return"page"==e&&r==i.sel.primary()&&addToScrollTop(this,charCoords(this,l,"div").top-n.top),l}),sel_move),o.length)for(let r=0;r<i.sel.ranges.length;r++)i.sel.ranges[r].goalColumn=o[r]})),findWordAt:function(t){let e=this.doc,i=getLine(e,t.line).text,o=t.ch,s=t.ch;if(i){let e=this.getHelper(t,"wordChars");"before"!=t.sticky&&s!=i.length||!o?++s:--o;let r=i.charAt(o),n=isWordChar(r,e)?t=>isWordChar(t,e):/\s/.test(r)?t=>/\s/.test(t):t=>!/\s/.test(t)&&!isWordChar(t);for(;o>0&&n(i.charAt(o-1));)--o;for(;s<i.length&&n(i.charAt(s));)++s}return new Range(Pos(t.line,o),Pos(t.line,s))},toggleOverwrite:function(t){null!=t&&t==this.state.overwrite||((this.state.overwrite=!this.state.overwrite)?addClass(this.display.cursorDiv,"CodeMirror-overwrite"):rmClass(this.display.cursorDiv,"CodeMirror-overwrite"),signal(this,"overwriteToggle",this,this.state.overwrite))},hasFocus:function(){return this.display.input.getField()==activeElt()},isReadOnly:function(){return!(!this.options.readOnly&&!this.doc.cantEdit)},scrollTo:methodOp((function(t,e){scrollToCoords(this,t,e)})),getScrollInfo:function(){let t=this.display.scroller;return{left:t.scrollLeft,top:t.scrollTop,height:t.scrollHeight-scrollGap(this)-this.display.barHeight,width:t.scrollWidth-scrollGap(this)-this.display.barWidth,clientHeight:displayHeight(this),clientWidth:displayWidth(this)}},scrollIntoView:methodOp((function(t,e){null==t?(t={from:this.doc.sel.primary().head,to:null},null==e&&(e=this.options.cursorScrollMargin)):"number"==typeof t?t={from:Pos(t,0),to:null}:null==t.from&&(t={from:t,to:null}),t.to||(t.to=t.from),t.margin=e||0,null!=t.from.line?scrollToRange(this,t):scrollToCoordsRange(this,t.from,t.to,t.margin)})),setSize:methodOp((function(t,e){let i=t=>"number"==typeof t||/^\d+$/.test(String(t))?t+"px":t;null!=t&&(this.display.wrapper.style.width=i(t)),null!=e&&(this.display.wrapper.style.height=i(e)),this.options.lineWrapping&&clearLineMeasurementCache(this);let o=this.display.viewFrom;this.doc.iter(o,this.display.viewTo,(t=>{if(t.widgets)for(let e=0;e<t.widgets.length;e++)if(t.widgets[e].noHScroll){regLineChange(this,o,"widget");break}++o})),this.curOp.forceUpdate=!0,signal(this,"refresh",this)})),operation:function(t){return runInOp(this,t)},startOperation:function(){return startOperation(this)},endOperation:function(){return endOperation(this)},refresh:methodOp((function(){let t=this.display.cachedTextHeight;regChange(this),this.curOp.forceUpdate=!0,clearCaches(this),scrollToCoords(this,this.doc.scrollLeft,this.doc.scrollTop),updateGutterSpace(this.display),(null==t||Math.abs(t-textHeight(this.display))>.5||this.options.lineWrapping)&&estimateLineHeights(this),signal(this,"refresh",this)})),swapDoc:methodOp((function(t){let e=this.doc;return e.cm=null,this.state.selectingText&&this.state.selectingText(),attachDoc(this,t),clearCaches(this),this.display.input.reset(),scrollToCoords(this,t.scrollLeft,t.scrollTop),this.curOp.forceScroll=!0,signalLater(this,"swapDoc",this,e),e})),phrase:function(t){let e=this.options.phrases;return e&&Object.prototype.hasOwnProperty.call(e,t)?e[t]:t},getInputField:function(){return this.display.input.getField()},getWrapperElement:function(){return this.display.wrapper},getScrollerElement:function(){return this.display.scroller},getGutterElement:function(){return this.display.gutters}},eventMixin(t),t.registerHelper=function(e,o,s){i.hasOwnProperty(e)||(i[e]=t[e]={_global:[]}),i[e][o]=s},t.registerGlobalHelper=function(e,o,s,r){t.registerHelper(e,o,r),i[e]._global.push({pred:s,val:r})}}function findPosH(t,e,i,o,s){let r=e,n=i,l=getLine(t,e.line),h=s&&"rtl"==t.direction?-i:i;function a(r){let n;if("codepoint"==o){let t=l.text.charCodeAt(e.ch+(i>0?0:-1));if(isNaN(t))n=null;else{let o=i>0?t>=55296&&t<56320:t>=56320&&t<57343;n=new Pos(e.line,Math.max(0,Math.min(l.text.length,e.ch+i*(o?2:1))),-i)}}else n=s?moveVisually(t.cm,l,e,i):moveLogically(l,e,i);if(null==n){if(r||!function(){let i=e.line+h;return!(i<t.first||i>=t.first+t.size)&&(e=new Pos(i,e.ch,e.sticky),l=getLine(t,i))}())return!1;e=endOfLine(s,t.cm,l,e.line,h)}else e=n;return!0}if("char"==o||"codepoint"==o)a();else if("column"==o)a(!0);else if("word"==o||"group"==o){let s=null,r="group"==o,n=t.cm&&t.cm.getHelper(e,"wordChars");for(let t=!0;!(i<0)||a(!t);t=!1){let o=l.text.charAt(e.ch)||"\n",h=isWordChar(o,n)?"w":r&&"\n"==o?"n":!r||/\s/.test(o)?null:"p";if(!r||t||h||(h="s"),s&&s!=h){i<0&&(i=1,a(),e.sticky="after");break}if(h&&(s=h),i>0&&!a(!t))break}}let d=skipAtomic(t,e,r,n,!0);return equalCursorPos(r,d)&&(d.hitSide=!0),d}function findPosV(t,e,i,o){let s,r,n=t.doc,l=e.left;if("page"==o){let o=Math.min(t.display.wrapper.clientHeight,window.innerHeight||document.documentElement.clientHeight),r=Math.max(o-.5*textHeight(t.display),3);s=(i>0?e.bottom:e.top)+i*r}else"line"==o&&(s=i>0?e.bottom+3:e.top-3);for(;r=coordsChar(t,l,s),r.outside;){if(i<0?s<=0:s>=n.height){r.hitSide=!0;break}s+=5*i}return r}
+import { deleteNearSelection } from "./deleteNearSelection.js"
+import { commands } from "./commands.js"
+import { attachDoc } from "../model/document_data.js"
+import { activeElt, addClass, rmClass } from "../util/dom.js"
+import { eventMixin, signal } from "../util/event.js"
+import { getLineStyles, getContextBefore, takeToken } from "../line/highlight.js"
+import { indentLine } from "../input/indent.js"
+import { triggerElectric } from "../input/input.js"
+import { onKeyDown, onKeyPress, onKeyUp } from "./key_events.js"
+import { onMouseDown } from "./mouse_events.js"
+import { getKeyMap } from "../input/keymap.js"
+import { endOfLine, moveLogically, moveVisually } from "../input/movement.js"
+import { endOperation, methodOp, operation, runInOp, startOperation } from "../display/operations.js"
+import { clipLine, clipPos, equalCursorPos, Pos } from "../line/pos.js"
+import { charCoords, charWidth, clearCaches, clearLineMeasurementCache, coordsChar, cursorCoords, displayHeight, displayWidth, estimateLineHeights, fromCoordSystem, intoCoordSystem, scrollGap, textHeight } from "../measurement/position_measurement.js"
+import { Range } from "../model/selection.js"
+import { replaceOneSelection, skipAtomic } from "../model/selection_updates.js"
+import { addToScrollTop, ensureCursorVisible, scrollIntoView, scrollToCoords, scrollToCoordsRange, scrollToRange } from "../display/scrolling.js"
+import { heightAtLine } from "../line/spans.js"
+import { updateGutterSpace } from "../display/update_display.js"
+import { indexOf, insertSorted, isWordChar, sel_dontScroll, sel_move } from "../util/misc.js"
+import { signalLater } from "../util/operation_group.js"
+import { getLine, isLine, lineAtHeight } from "../line/utils_line.js"
+import { regChange, regLineChange } from "../display/view_tracking.js"
+
+// The publicly visible API. Note that methodOp(f) means
+// 'wrap f in an operation, performed on its `this` parameter'.
+
+// This is not the complete set of editor methods. Most of the
+// methods defined on the Doc type are also injected into
+// CodeMirror.prototype, for backwards compatibility and
+// convenience.
+
+export default function(CodeMirror) {
+  let optionHandlers = CodeMirror.optionHandlers
+
+  let helpers = CodeMirror.helpers = {}
+
+  CodeMirror.prototype = {
+    constructor: CodeMirror,
+    focus: function(){window.focus(); this.display.input.focus()},
+
+    setOption: function(option, value) {
+      let options = this.options, old = options[option]
+      if (options[option] == value && option != "mode") return
+      options[option] = value
+      if (optionHandlers.hasOwnProperty(option))
+        operation(this, optionHandlers[option])(this, value, old)
+      signal(this, "optionChange", this, option)
+    },
+
+    getOption: function(option) {return this.options[option]},
+    getDoc: function() {return this.doc},
+
+    addKeyMap: function(map, bottom) {
+      this.state.keyMaps[bottom ? "push" : "unshift"](getKeyMap(map))
+    },
+    removeKeyMap: function(map) {
+      let maps = this.state.keyMaps
+      for (let i = 0; i < maps.length; ++i)
+        if (maps[i] == map || maps[i].name == map) {
+          maps.splice(i, 1)
+          return true
+        }
+    },
+
+    addOverlay: methodOp(function(spec, options) {
+      let mode = spec.token ? spec : CodeMirror.getMode(this.options, spec)
+      if (mode.startState) throw new Error("Overlays may not be stateful.")
+      insertSorted(this.state.overlays,
+                   {mode: mode, modeSpec: spec, opaque: options && options.opaque,
+                    priority: (options && options.priority) || 0},
+                   overlay => overlay.priority)
+      this.state.modeGen++
+      regChange(this)
+    }),
+    removeOverlay: methodOp(function(spec) {
+      let overlays = this.state.overlays
+      for (let i = 0; i < overlays.length; ++i) {
+        let cur = overlays[i].modeSpec
+        if (cur == spec || typeof spec == "string" && cur.name == spec) {
+          overlays.splice(i, 1)
+          this.state.modeGen++
+          regChange(this)
+          return
+        }
+      }
+    }),
+
+    indentLine: methodOp(function(n, dir, aggressive) {
+      if (typeof dir != "string" && typeof dir != "number") {
+        if (dir == null) dir = this.options.smartIndent ? "smart" : "prev"
+        else dir = dir ? "add" : "subtract"
+      }
+      if (isLine(this.doc, n)) indentLine(this, n, dir, aggressive)
+    }),
+    indentSelection: methodOp(function(how) {
+      let ranges = this.doc.sel.ranges, end = -1
+      for (let i = 0; i < ranges.length; i++) {
+        let range = ranges[i]
+        if (!range.empty()) {
+          let from = range.from(), to = range.to()
+          let start = Math.max(end, from.line)
+          end = Math.min(this.lastLine(), to.line - (to.ch ? 0 : 1)) + 1
+          for (let j = start; j < end; ++j)
+            indentLine(this, j, how)
+          let newRanges = this.doc.sel.ranges
+          if (from.ch == 0 && ranges.length == newRanges.length && newRanges[i].from().ch > 0)
+            replaceOneSelection(this.doc, i, new Range(from, newRanges[i].to()), sel_dontScroll)
+        } else if (range.head.line > end) {
+          indentLine(this, range.head.line, how, true)
+          end = range.head.line
+          if (i == this.doc.sel.primIndex) ensureCursorVisible(this)
+        }
+      }
+    }),
+
+    // Fetch the parser token for a given character. Useful for hacks
+    // that want to inspect the mode state (say, for completion).
+    getTokenAt: function(pos, precise) {
+      return takeToken(this, pos, precise)
+    },
+
+    getLineTokens: function(line, precise) {
+      return takeToken(this, Pos(line), precise, true)
+    },
+
+    getTokenTypeAt: function(pos) {
+      pos = clipPos(this.doc, pos)
+      let styles = getLineStyles(this, getLine(this.doc, pos.line))
+      let before = 0, after = (styles.length - 1) / 2, ch = pos.ch
+      let type
+      if (ch == 0) type = styles[2]
+      else for (;;) {
+        let mid = (before + after) >> 1
+        if ((mid ? styles[mid * 2 - 1] : 0) >= ch) after = mid
+        else if (styles[mid * 2 + 1] < ch) before = mid + 1
+        else { type = styles[mid * 2 + 2]; break }
+      }
+      let cut = type ? type.indexOf("overlay ") : -1
+      return cut < 0 ? type : cut == 0 ? null : type.slice(0, cut - 1)
+    },
+
+    getModeAt: function(pos) {
+      let mode = this.doc.mode
+      if (!mode.innerMode) return mode
+      return CodeMirror.innerMode(mode, this.getTokenAt(pos).state).mode
+    },
+
+    getHelper: function(pos, type) {
+      return this.getHelpers(pos, type)[0]
+    },
+
+    getHelpers: function(pos, type) {
+      let found = []
+      if (!helpers.hasOwnProperty(type)) return found
+      let help = helpers[type], mode = this.getModeAt(pos)
+      if (typeof mode[type] == "string") {
+        if (help[mode[type]]) found.push(help[mode[type]])
+      } else if (mode[type]) {
+        for (let i = 0; i < mode[type].length; i++) {
+          let val = help[mode[type][i]]
+          if (val) found.push(val)
+        }
+      } else if (mode.helperType && help[mode.helperType]) {
+        found.push(help[mode.helperType])
+      } else if (help[mode.name]) {
+        found.push(help[mode.name])
+      }
+      for (let i = 0; i < help._global.length; i++) {
+        let cur = help._global[i]
+        if (cur.pred(mode, this) && indexOf(found, cur.val) == -1)
+          found.push(cur.val)
+      }
+      return found
+    },
+
+    getStateAfter: function(line, precise) {
+      let doc = this.doc
+      line = clipLine(doc, line == null ? doc.first + doc.size - 1: line)
+      return getContextBefore(this, line + 1, precise).state
+    },
+
+    cursorCoords: function(start, mode) {
+      let pos, range = this.doc.sel.primary()
+      if (start == null) pos = range.head
+      else if (typeof start == "object") pos = clipPos(this.doc, start)
+      else pos = start ? range.from() : range.to()
+      return cursorCoords(this, pos, mode || "page")
+    },
+
+    charCoords: function(pos, mode) {
+      return charCoords(this, clipPos(this.doc, pos), mode || "page")
+    },
+
+    coordsChar: function(coords, mode) {
+      coords = fromCoordSystem(this, coords, mode || "page")
+      return coordsChar(this, coords.left, coords.top)
+    },
+
+    lineAtHeight: function(height, mode) {
+      height = fromCoordSystem(this, {top: height, left: 0}, mode || "page").top
+      return lineAtHeight(this.doc, height + this.display.viewOffset)
+    },
+    heightAtLine: function(line, mode, includeWidgets) {
+      let end = false, lineObj
+      if (typeof line == "number") {
+        let last = this.doc.first + this.doc.size - 1
+        if (line < this.doc.first) line = this.doc.first
+        else if (line > last) { line = last; end = true }
+        lineObj = getLine(this.doc, line)
+      } else {
+        lineObj = line
+      }
+      return intoCoordSystem(this, lineObj, {top: 0, left: 0}, mode || "page", includeWidgets || end).top +
+        (end ? this.doc.height - heightAtLine(lineObj) : 0)
+    },
+
+    defaultTextHeight: function() { return textHeight(this.display) },
+    defaultCharWidth: function() { return charWidth(this.display) },
+
+    getViewport: function() { return {from: this.display.viewFrom, to: this.display.viewTo}},
+
+    addWidget: function(pos, node, scroll, vert, horiz) {
+      let display = this.display
+      pos = cursorCoords(this, clipPos(this.doc, pos))
+      let top = pos.bottom, left = pos.left
+      node.style.position = "absolute"
+      node.setAttribute("cm-ignore-events", "true")
+      this.display.input.setUneditable(node)
+      display.sizer.appendChild(node)
+      if (vert == "over") {
+        top = pos.top
+      } else if (vert == "above" || vert == "near") {
+        let vspace = Math.max(display.wrapper.clientHeight, this.doc.height),
+        hspace = Math.max(display.sizer.clientWidth, display.lineSpace.clientWidth)
+        // Default to positioning above (if specified and possible); otherwise default to positioning below
+        if ((vert == 'above' || pos.bottom + node.offsetHeight > vspace) && pos.top > node.offsetHeight)
+          top = pos.top - node.offsetHeight
+        else if (pos.bottom + node.offsetHeight <= vspace)
+          top = pos.bottom
+        if (left + node.offsetWidth > hspace)
+          left = hspace - node.offsetWidth
+      }
+      node.style.top = top + "px"
+      node.style.left = node.style.right = ""
+      if (horiz == "right") {
+        left = display.sizer.clientWidth - node.offsetWidth
+        node.style.right = "0px"
+      } else {
+        if (horiz == "left") left = 0
+        else if (horiz == "middle") left = (display.sizer.clientWidth - node.offsetWidth) / 2
+        node.style.left = left + "px"
+      }
+      if (scroll)
+        scrollIntoView(this, {left, top, right: left + node.offsetWidth, bottom: top + node.offsetHeight})
+    },
+
+    triggerOnKeyDown: methodOp(onKeyDown),
+    triggerOnKeyPress: methodOp(onKeyPress),
+    triggerOnKeyUp: onKeyUp,
+    triggerOnMouseDown: methodOp(onMouseDown),
+
+    execCommand: function(cmd) {
+      if (commands.hasOwnProperty(cmd))
+        return commands[cmd].call(null, this)
+    },
+
+    triggerElectric: methodOp(function(text) { triggerElectric(this, text) }),
+
+    findPosH: function(from, amount, unit, visually) {
+      let dir = 1
+      if (amount < 0) { dir = -1; amount = -amount }
+      let cur = clipPos(this.doc, from)
+      for (let i = 0; i < amount; ++i) {
+        cur = findPosH(this.doc, cur, dir, unit, visually)
+        if (cur.hitSide) break
+      }
+      return cur
+    },
+
+    moveH: methodOp(function(dir, unit) {
+      this.extendSelectionsBy(range => {
+        if (this.display.shift || this.doc.extend || range.empty())
+          return findPosH(this.doc, range.head, dir, unit, this.options.rtlMoveVisually)
+        else
+          return dir < 0 ? range.from() : range.to()
+      }, sel_move)
+    }),
+
+    deleteH: methodOp(function(dir, unit) {
+      let sel = this.doc.sel, doc = this.doc
+      if (sel.somethingSelected())
+        doc.replaceSelection("", null, "+delete")
+      else
+        deleteNearSelection(this, range => {
+          let other = findPosH(doc, range.head, dir, unit, false)
+          return dir < 0 ? {from: other, to: range.head} : {from: range.head, to: other}
+        })
+    }),
+
+    findPosV: function(from, amount, unit, goalColumn) {
+      let dir = 1, x = goalColumn
+      if (amount < 0) { dir = -1; amount = -amount }
+      let cur = clipPos(this.doc, from)
+      for (let i = 0; i < amount; ++i) {
+        let coords = cursorCoords(this, cur, "div")
+        if (x == null) x = coords.left
+        else coords.left = x
+        cur = findPosV(this, coords, dir, unit)
+        if (cur.hitSide) break
+      }
+      return cur
+    },
+
+    moveV: methodOp(function(dir, unit) {
+      let doc = this.doc, goals = []
+      let collapse = !this.display.shift && !doc.extend && doc.sel.somethingSelected()
+      doc.extendSelectionsBy(range => {
+        if (collapse)
+          return dir < 0 ? range.from() : range.to()
+        let headPos = cursorCoords(this, range.head, "div")
+        if (range.goalColumn != null) headPos.left = range.goalColumn
+        goals.push(headPos.left)
+        let pos = findPosV(this, headPos, dir, unit)
+        if (unit == "page" && range == doc.sel.primary())
+          addToScrollTop(this, charCoords(this, pos, "div").top - headPos.top)
+        return pos
+      }, sel_move)
+      if (goals.length) for (let i = 0; i < doc.sel.ranges.length; i++)
+        doc.sel.ranges[i].goalColumn = goals[i]
+    }),
+
+    // Find the word at the given position (as returned by coordsChar).
+    findWordAt: function(pos) {
+      let doc = this.doc, line = getLine(doc, pos.line).text
+      let start = pos.ch, end = pos.ch
+      if (line) {
+        let helper = this.getHelper(pos, "wordChars")
+        if ((pos.sticky == "before" || end == line.length) && start) --start; else ++end
+        let startChar = line.charAt(start)
+        let check = isWordChar(startChar, helper)
+          ? ch => isWordChar(ch, helper)
+          : /\s/.test(startChar) ? ch => /\s/.test(ch)
+          : ch => (!/\s/.test(ch) && !isWordChar(ch))
+        while (start > 0 && check(line.charAt(start - 1))) --start
+        while (end < line.length && check(line.charAt(end))) ++end
+      }
+      return new Range(Pos(pos.line, start), Pos(pos.line, end))
+    },
+
+    toggleOverwrite: function(value) {
+      if (value != null && value == this.state.overwrite) return
+      if (this.state.overwrite = !this.state.overwrite)
+        addClass(this.display.cursorDiv, "CodeMirror-overwrite")
+      else
+        rmClass(this.display.cursorDiv, "CodeMirror-overwrite")
+
+      signal(this, "overwriteToggle", this, this.state.overwrite)
+    },
+    hasFocus: function() { return this.display.input.getField() == activeElt() },
+    isReadOnly: function() { return !!(this.options.readOnly || this.doc.cantEdit) },
+
+    scrollTo: methodOp(function (x, y) { scrollToCoords(this, x, y) }),
+    getScrollInfo: function() {
+      let scroller = this.display.scroller
+      return {left: scroller.scrollLeft, top: scroller.scrollTop,
+              height: scroller.scrollHeight - scrollGap(this) - this.display.barHeight,
+              width: scroller.scrollWidth - scrollGap(this) - this.display.barWidth,
+              clientHeight: displayHeight(this), clientWidth: displayWidth(this)}
+    },
+
+    scrollIntoView: methodOp(function(range, margin) {
+      if (range == null) {
+        range = {from: this.doc.sel.primary().head, to: null}
+        if (margin == null) margin = this.options.cursorScrollMargin
+      } else if (typeof range == "number") {
+        range = {from: Pos(range, 0), to: null}
+      } else if (range.from == null) {
+        range = {from: range, to: null}
+      }
+      if (!range.to) range.to = range.from
+      range.margin = margin || 0
+
+      if (range.from.line != null) {
+        scrollToRange(this, range)
+      } else {
+        scrollToCoordsRange(this, range.from, range.to, range.margin)
+      }
+    }),
+
+    setSize: methodOp(function(width, height) {
+      let interpret = val => typeof val == "number" || /^\d+$/.test(String(val)) ? val + "px" : val
+      if (width != null) this.display.wrapper.style.width = interpret(width)
+      if (height != null) this.display.wrapper.style.height = interpret(height)
+      if (this.options.lineWrapping) clearLineMeasurementCache(this)
+      let lineNo = this.display.viewFrom
+      this.doc.iter(lineNo, this.display.viewTo, line => {
+        if (line.widgets) for (let i = 0; i < line.widgets.length; i++)
+          if (line.widgets[i].noHScroll) { regLineChange(this, lineNo, "widget"); break }
+        ++lineNo
+      })
+      this.curOp.forceUpdate = true
+      signal(this, "refresh", this)
+    }),
+
+    operation: function(f){return runInOp(this, f)},
+    startOperation: function(){return startOperation(this)},
+    endOperation: function(){return endOperation(this)},
+
+    refresh: methodOp(function() {
+      let oldHeight = this.display.cachedTextHeight
+      regChange(this)
+      this.curOp.forceUpdate = true
+      clearCaches(this)
+      scrollToCoords(this, this.doc.scrollLeft, this.doc.scrollTop)
+      updateGutterSpace(this.display)
+      if (oldHeight == null || Math.abs(oldHeight - textHeight(this.display)) > .5 || this.options.lineWrapping)
+        estimateLineHeights(this)
+      signal(this, "refresh", this)
+    }),
+
+    swapDoc: methodOp(function(doc) {
+      let old = this.doc
+      old.cm = null
+      // Cancel the current text selection if any (#5821)
+      if (this.state.selectingText) this.state.selectingText()
+      attachDoc(this, doc)
+      clearCaches(this)
+      this.display.input.reset()
+      scrollToCoords(this, doc.scrollLeft, doc.scrollTop)
+      this.curOp.forceScroll = true
+      signalLater(this, "swapDoc", this, old)
+      return old
+    }),
+
+    phrase: function(phraseText) {
+      let phrases = this.options.phrases
+      return phrases && Object.prototype.hasOwnProperty.call(phrases, phraseText) ? phrases[phraseText] : phraseText
+    },
+
+    getInputField: function(){return this.display.input.getField()},
+    getWrapperElement: function(){return this.display.wrapper},
+    getScrollerElement: function(){return this.display.scroller},
+    getGutterElement: function(){return this.display.gutters}
+  }
+  eventMixin(CodeMirror)
+
+  CodeMirror.registerHelper = function(type, name, value) {
+    if (!helpers.hasOwnProperty(type)) helpers[type] = CodeMirror[type] = {_global: []}
+    helpers[type][name] = value
+  }
+  CodeMirror.registerGlobalHelper = function(type, name, predicate, value) {
+    CodeMirror.registerHelper(type, name, value)
+    helpers[type]._global.push({pred: predicate, val: value})
+  }
+}
+
+// Used for horizontal relative motion. Dir is -1 or 1 (left or
+// right), unit can be "codepoint", "char", "column" (like char, but
+// doesn't cross line boundaries), "word" (across next word), or
+// "group" (to the start of next group of word or
+// non-word-non-whitespace chars). The visually param controls
+// whether, in right-to-left text, direction 1 means to move towards
+// the next index in the string, or towards the character to the right
+// of the current position. The resulting position will have a
+// hitSide=true property if it reached the end of the document.
+function findPosH(doc, pos, dir, unit, visually) {
+  let oldPos = pos
+  let origDir = dir
+  let lineObj = getLine(doc, pos.line)
+  let lineDir = visually && doc.direction == "rtl" ? -dir : dir
+  function findNextLine() {
+    let l = pos.line + lineDir
+    if (l < doc.first || l >= doc.first + doc.size) return false
+    pos = new Pos(l, pos.ch, pos.sticky)
+    return lineObj = getLine(doc, l)
+  }
+  function moveOnce(boundToLine) {
+    let next
+    if (unit == "codepoint") {
+      let ch = lineObj.text.charCodeAt(pos.ch + (dir > 0 ? 0 : -1))
+      if (isNaN(ch)) {
+        next = null
+      } else {
+        let astral = dir > 0 ? ch >= 0xD800 && ch < 0xDC00 : ch >= 0xDC00 && ch < 0xDFFF
+        next = new Pos(pos.line, Math.max(0, Math.min(lineObj.text.length, pos.ch + dir * (astral ? 2 : 1))), -dir)
+      }
+    } else if (visually) {
+      next = moveVisually(doc.cm, lineObj, pos, dir)
+    } else {
+      next = moveLogically(lineObj, pos, dir)
+    }
+    if (next == null) {
+      if (!boundToLine && findNextLine())
+        pos = endOfLine(visually, doc.cm, lineObj, pos.line, lineDir)
+      else
+        return false
+    } else {
+      pos = next
+    }
+    return true
+  }
+
+  if (unit == "char" || unit == "codepoint") {
+    moveOnce()
+  } else if (unit == "column") {
+    moveOnce(true)
+  } else if (unit == "word" || unit == "group") {
+    let sawType = null, group = unit == "group"
+    let helper = doc.cm && doc.cm.getHelper(pos, "wordChars")
+    for (let first = true;; first = false) {
+      if (dir < 0 && !moveOnce(!first)) break
+      let cur = lineObj.text.charAt(pos.ch) || "\n"
+      let type = isWordChar(cur, helper) ? "w"
+        : group && cur == "\n" ? "n"
+        : !group || /\s/.test(cur) ? null
+        : "p"
+      if (group && !first && !type) type = "s"
+      if (sawType && sawType != type) {
+        if (dir < 0) {dir = 1; moveOnce(); pos.sticky = "after"}
+        break
+      }
+
+      if (type) sawType = type
+      if (dir > 0 && !moveOnce(!first)) break
+    }
+  }
+  let result = skipAtomic(doc, pos, oldPos, origDir, true)
+  if (equalCursorPos(oldPos, result)) result.hitSide = true
+  return result
+}
+
+// For relative vertical movement. Dir may be -1 or 1. Unit can be
+// "page" or "line". The resulting position will have a hitSide=true
+// property if it reached the end of the document.
+function findPosV(cm, pos, dir, unit) {
+  let doc = cm.doc, x = pos.left, y
+  if (unit == "page") {
+    let pageSize = Math.min(cm.display.wrapper.clientHeight, window.innerHeight || document.documentElement.clientHeight)
+    let moveAmount = Math.max(pageSize - .5 * textHeight(cm.display), 3)
+    y = (dir > 0 ? pos.bottom : pos.top) + dir * moveAmount
+
+  } else if (unit == "line") {
+    y = dir > 0 ? pos.bottom + 3 : pos.top - 3
+  }
+  let target
+  for (;;) {
+    target = coordsChar(cm, x, y)
+    if (!target.outside) break
+    if (dir < 0 ? y <= 0 : y >= doc.height) { target.hitSide = true; break }
+    y += dir * 5
+  }
+  return target
+}

@@ -1,1 +1,284 @@
-import{countColumn}from"../util/misc.js";import{copyState,innerMode,startState}from"../modes.js";import StringStream from"../util/StringStream.js";import{getLine,lineNo}from"./utils_line.js";import{clipPos}from"./pos.js";class SavedContext{constructor(e,t){this.state=e,this.lookAhead=t}}class Context{constructor(e,t,o,n){this.state=t,this.doc=e,this.line=o,this.maxLookAhead=n||0,this.baseTokens=null,this.baseTokenPos=1}lookAhead(e){let t=this.doc.getLine(this.line+e);return null!=t&&e>this.maxLookAhead&&(this.maxLookAhead=e),t}baseToken(e){if(!this.baseTokens)return null;for(;this.baseTokens[this.baseTokenPos]<=e;)this.baseTokenPos+=2;let t=this.baseTokens[this.baseTokenPos+1];return{type:t&&t.replace(/( |^)overlay .*/,""),size:this.baseTokens[this.baseTokenPos]-e}}nextLine(){this.line++,this.maxLookAhead>0&&this.maxLookAhead--}static fromSaved(e,t,o){return t instanceof SavedContext?new Context(e,copyState(e.mode,t.state),o,t.lookAhead):new Context(e,copyState(e.mode,t),o)}save(e){let t=!1!==e?copyState(this.doc.mode,this.state):this.state;return this.maxLookAhead>0?new SavedContext(t,this.maxLookAhead):t}}export function highlightLine(e,t,o,n){let s=[e.state.modeGen],i={};runMode(e,t.text,e.doc.mode,o,((e,t)=>s.push(e,t)),i,n);let a=o.state;for(let r=0;r<e.state.overlays.length;++r){o.baseTokens=s;let n=e.state.overlays[r],l=1,h=0;o.state=!0,runMode(e,t.text,n.mode,o,((e,t)=>{let o=l;for(;h<e;){let t=s[l];t>e&&s.splice(l,1,e,s[l+1],t),l+=2,h=Math.min(e,t)}if(t)if(n.opaque)s.splice(o,l-o,e,"overlay "+t),l=o+2;else for(;o<l;o+=2){let e=s[o+1];s[o+1]=(e?e+" ":"")+"overlay "+t}}),i),o.state=a,o.baseTokens=null,o.baseTokenPos=1}return{styles:s,classes:i.bgClass||i.textClass?i:null}}export function getLineStyles(e,t,o){if(!t.styles||t.styles[0]!=e.state.modeGen){let n=getContextBefore(e,lineNo(t)),s=t.text.length>e.options.maxHighlightLength&&copyState(e.doc.mode,n.state),i=highlightLine(e,t,n);s&&(n.state=s),t.stateAfter=n.save(!s),t.styles=i.styles,i.classes?t.styleClasses=i.classes:t.styleClasses&&(t.styleClasses=null),o===e.doc.highlightFrontier&&(e.doc.modeFrontier=Math.max(e.doc.modeFrontier,++e.doc.highlightFrontier))}return t.styles}export function getContextBefore(e,t,o){let n=e.doc,s=e.display;if(!n.mode.startState)return new Context(n,!0,t);let i=findStartLine(e,t,o),a=i>n.first&&getLine(n,i-1).stateAfter,r=a?Context.fromSaved(n,a,i):new Context(n,startState(n.mode),i);return n.iter(i,t,(o=>{processLine(e,o.text,r);let n=r.line;o.stateAfter=n==t-1||n%5==0||n>=s.viewFrom&&n<s.viewTo?r.save():null,r.nextLine()})),o&&(n.modeFrontier=r.line),r}export function processLine(e,t,o,n){let s=e.doc.mode,i=new StringStream(t,e.options.tabSize,o);for(i.start=i.pos=n||0,""==t&&callBlankLine(s,o.state);!i.eol();)readToken(s,i,o.state),i.start=i.pos}function callBlankLine(e,t){if(e.blankLine)return e.blankLine(t);if(!e.innerMode)return;let o=innerMode(e,t);return o.mode.blankLine?o.mode.blankLine(o.state):void 0}function readToken(e,t,o,n){for(let s=0;s<10;s++){n&&(n[0]=innerMode(e,o).mode);let s=e.token(t,o);if(t.pos>t.start)return s}throw new Error("Mode "+e.name+" failed to advance stream.")}class Token{constructor(e,t,o){this.start=e.start,this.end=e.pos,this.string=e.current(),this.type=t||null,this.state=o}}export function takeToken(e,t,o,n){let s,i=e.doc,a=i.mode;t=clipPos(i,t);let r,l=getLine(i,t.line),h=getContextBefore(e,t.line,o),d=new StringStream(l.text,e.options.tabSize,h);for(n&&(r=[]);(n||d.pos<t.ch)&&!d.eol();)d.start=d.pos,s=readToken(a,d,h.state),n&&r.push(new Token(d,s,copyState(i.mode,h.state)));return n?r:new Token(d,s,h.state)}function extractLineClasses(e,t){if(e)for(;;){let o=e.match(/(?:^|\s+)line-(background-)?(\S+)/);if(!o)break;e=e.slice(0,o.index)+e.slice(o.index+o[0].length);let n=o[1]?"bgClass":"textClass";null==t[n]?t[n]=o[2]:new RegExp("(?:^|\\s)"+o[2]+"(?:$|\\s)").test(t[n])||(t[n]+=" "+o[2])}return e}function runMode(e,t,o,n,s,i,a){let r=o.flattenSpans;null==r&&(r=e.options.flattenSpans);let l,h=0,d=null,c=new StringStream(t,e.options.tabSize,n),f=e.options.addModeClass&&[null];for(""==t&&extractLineClasses(callBlankLine(o,n.state),i);!c.eol();){if(c.pos>e.options.maxHighlightLength?(r=!1,a&&processLine(e,t,n,c.pos),c.pos=t.length,l=null):l=extractLineClasses(readToken(o,c,n.state,f),i),f){let e=f[0].name;e&&(l="m-"+(l?e+" "+l:e))}if(!r||d!=l){for(;h<c.start;)h=Math.min(c.start,h+5e3),s(h,d);d=l}c.start=c.pos}for(;h<c.pos;){let e=Math.min(c.pos,h+5e3);s(e,d),h=e}}function findStartLine(e,t,o){let n,s,i=e.doc,a=o?-1:t-(e.doc.mode.innerMode?1e3:100);for(let r=t;r>a;--r){if(r<=i.first)return i.first;let t=getLine(i,r-1),a=t.stateAfter;if(a&&(!o||r+(a instanceof SavedContext?a.lookAhead:0)<=i.modeFrontier))return r;let l=countColumn(t.text,null,e.options.tabSize);(null==s||n>l)&&(s=r-1,n=l)}return s}export function retreatFrontier(e,t){if(e.modeFrontier=Math.min(e.modeFrontier,t),e.highlightFrontier<t-10)return;let o=e.first;for(let n=t-1;n>o;n--){let s=getLine(e,n).stateAfter;if(s&&(!(s instanceof SavedContext)||n+s.lookAhead<t)){o=n+1;break}}e.highlightFrontier=Math.min(e.highlightFrontier,o)}
+import { countColumn } from "../util/misc.js"
+import { copyState, innerMode, startState } from "../modes.js"
+import StringStream from "../util/StringStream.js"
+
+import { getLine, lineNo } from "./utils_line.js"
+import { clipPos } from "./pos.js"
+
+class SavedContext {
+  constructor(state, lookAhead) {
+    this.state = state
+    this.lookAhead = lookAhead
+  }
+}
+
+class Context {
+  constructor(doc, state, line, lookAhead) {
+    this.state = state
+    this.doc = doc
+    this.line = line
+    this.maxLookAhead = lookAhead || 0
+    this.baseTokens = null
+    this.baseTokenPos = 1
+  }
+
+  lookAhead(n) {
+    let line = this.doc.getLine(this.line + n)
+    if (line != null && n > this.maxLookAhead) this.maxLookAhead = n
+    return line
+  }
+
+  baseToken(n) {
+    if (!this.baseTokens) return null
+    while (this.baseTokens[this.baseTokenPos] <= n)
+      this.baseTokenPos += 2
+    let type = this.baseTokens[this.baseTokenPos + 1]
+    return {type: type && type.replace(/( |^)overlay .*/, ""),
+            size: this.baseTokens[this.baseTokenPos] - n}
+  }
+
+  nextLine() {
+    this.line++
+    if (this.maxLookAhead > 0) this.maxLookAhead--
+  }
+
+  static fromSaved(doc, saved, line) {
+    if (saved instanceof SavedContext)
+      return new Context(doc, copyState(doc.mode, saved.state), line, saved.lookAhead)
+    else
+      return new Context(doc, copyState(doc.mode, saved), line)
+  }
+
+  save(copy) {
+    let state = copy !== false ? copyState(this.doc.mode, this.state) : this.state
+    return this.maxLookAhead > 0 ? new SavedContext(state, this.maxLookAhead) : state
+  }
+}
+
+
+// Compute a style array (an array starting with a mode generation
+// -- for invalidation -- followed by pairs of end positions and
+// style strings), which is used to highlight the tokens on the
+// line.
+export function highlightLine(cm, line, context, forceToEnd) {
+  // A styles array always starts with a number identifying the
+  // mode/overlays that it is based on (for easy invalidation).
+  let st = [cm.state.modeGen], lineClasses = {}
+  // Compute the base array of styles
+  runMode(cm, line.text, cm.doc.mode, context, (end, style) => st.push(end, style),
+          lineClasses, forceToEnd)
+  let state = context.state
+
+  // Run overlays, adjust style array.
+  for (let o = 0; o < cm.state.overlays.length; ++o) {
+    context.baseTokens = st
+    let overlay = cm.state.overlays[o], i = 1, at = 0
+    context.state = true
+    runMode(cm, line.text, overlay.mode, context, (end, style) => {
+      let start = i
+      // Ensure there's a token end at the current position, and that i points at it
+      while (at < end) {
+        let i_end = st[i]
+        if (i_end > end)
+          st.splice(i, 1, end, st[i+1], i_end)
+        i += 2
+        at = Math.min(end, i_end)
+      }
+      if (!style) return
+      if (overlay.opaque) {
+        st.splice(start, i - start, end, "overlay " + style)
+        i = start + 2
+      } else {
+        for (; start < i; start += 2) {
+          let cur = st[start+1]
+          st[start+1] = (cur ? cur + " " : "") + "overlay " + style
+        }
+      }
+    }, lineClasses)
+    context.state = state
+    context.baseTokens = null
+    context.baseTokenPos = 1
+  }
+
+  return {styles: st, classes: lineClasses.bgClass || lineClasses.textClass ? lineClasses : null}
+}
+
+export function getLineStyles(cm, line, updateFrontier) {
+  if (!line.styles || line.styles[0] != cm.state.modeGen) {
+    let context = getContextBefore(cm, lineNo(line))
+    let resetState = line.text.length > cm.options.maxHighlightLength && copyState(cm.doc.mode, context.state)
+    let result = highlightLine(cm, line, context)
+    if (resetState) context.state = resetState
+    line.stateAfter = context.save(!resetState)
+    line.styles = result.styles
+    if (result.classes) line.styleClasses = result.classes
+    else if (line.styleClasses) line.styleClasses = null
+    if (updateFrontier === cm.doc.highlightFrontier)
+      cm.doc.modeFrontier = Math.max(cm.doc.modeFrontier, ++cm.doc.highlightFrontier)
+  }
+  return line.styles
+}
+
+export function getContextBefore(cm, n, precise) {
+  let doc = cm.doc, display = cm.display
+  if (!doc.mode.startState) return new Context(doc, true, n)
+  let start = findStartLine(cm, n, precise)
+  let saved = start > doc.first && getLine(doc, start - 1).stateAfter
+  let context = saved ? Context.fromSaved(doc, saved, start) : new Context(doc, startState(doc.mode), start)
+
+  doc.iter(start, n, line => {
+    processLine(cm, line.text, context)
+    let pos = context.line
+    line.stateAfter = pos == n - 1 || pos % 5 == 0 || pos >= display.viewFrom && pos < display.viewTo ? context.save() : null
+    context.nextLine()
+  })
+  if (precise) doc.modeFrontier = context.line
+  return context
+}
+
+// Lightweight form of highlight -- proceed over this line and
+// update state, but don't save a style array. Used for lines that
+// aren't currently visible.
+export function processLine(cm, text, context, startAt) {
+  let mode = cm.doc.mode
+  let stream = new StringStream(text, cm.options.tabSize, context)
+  stream.start = stream.pos = startAt || 0
+  if (text == "") callBlankLine(mode, context.state)
+  while (!stream.eol()) {
+    readToken(mode, stream, context.state)
+    stream.start = stream.pos
+  }
+}
+
+function callBlankLine(mode, state) {
+  if (mode.blankLine) return mode.blankLine(state)
+  if (!mode.innerMode) return
+  let inner = innerMode(mode, state)
+  if (inner.mode.blankLine) return inner.mode.blankLine(inner.state)
+}
+
+function readToken(mode, stream, state, inner) {
+  for (let i = 0; i < 10; i++) {
+    if (inner) inner[0] = innerMode(mode, state).mode
+    let style = mode.token(stream, state)
+    if (stream.pos > stream.start) return style
+  }
+  throw new Error("Mode " + mode.name + " failed to advance stream.")
+}
+
+class Token {
+  constructor(stream, type, state) {
+    this.start = stream.start; this.end = stream.pos
+    this.string = stream.current()
+    this.type = type || null
+    this.state = state
+  }
+}
+
+// Utility for getTokenAt and getLineTokens
+export function takeToken(cm, pos, precise, asArray) {
+  let doc = cm.doc, mode = doc.mode, style
+  pos = clipPos(doc, pos)
+  let line = getLine(doc, pos.line), context = getContextBefore(cm, pos.line, precise)
+  let stream = new StringStream(line.text, cm.options.tabSize, context), tokens
+  if (asArray) tokens = []
+  while ((asArray || stream.pos < pos.ch) && !stream.eol()) {
+    stream.start = stream.pos
+    style = readToken(mode, stream, context.state)
+    if (asArray) tokens.push(new Token(stream, style, copyState(doc.mode, context.state)))
+  }
+  return asArray ? tokens : new Token(stream, style, context.state)
+}
+
+function extractLineClasses(type, output) {
+  if (type) for (;;) {
+    let lineClass = type.match(/(?:^|\s+)line-(background-)?(\S+)/)
+    if (!lineClass) break
+    type = type.slice(0, lineClass.index) + type.slice(lineClass.index + lineClass[0].length)
+    let prop = lineClass[1] ? "bgClass" : "textClass"
+    if (output[prop] == null)
+      output[prop] = lineClass[2]
+    else if (!(new RegExp("(?:^|\\s)" + lineClass[2] + "(?:$|\\s)")).test(output[prop]))
+      output[prop] += " " + lineClass[2]
+  }
+  return type
+}
+
+// Run the given mode's parser over a line, calling f for each token.
+function runMode(cm, text, mode, context, f, lineClasses, forceToEnd) {
+  let flattenSpans = mode.flattenSpans
+  if (flattenSpans == null) flattenSpans = cm.options.flattenSpans
+  let curStart = 0, curStyle = null
+  let stream = new StringStream(text, cm.options.tabSize, context), style
+  let inner = cm.options.addModeClass && [null]
+  if (text == "") extractLineClasses(callBlankLine(mode, context.state), lineClasses)
+  while (!stream.eol()) {
+    if (stream.pos > cm.options.maxHighlightLength) {
+      flattenSpans = false
+      if (forceToEnd) processLine(cm, text, context, stream.pos)
+      stream.pos = text.length
+      style = null
+    } else {
+      style = extractLineClasses(readToken(mode, stream, context.state, inner), lineClasses)
+    }
+    if (inner) {
+      let mName = inner[0].name
+      if (mName) style = "m-" + (style ? mName + " " + style : mName)
+    }
+    if (!flattenSpans || curStyle != style) {
+      while (curStart < stream.start) {
+        curStart = Math.min(stream.start, curStart + 5000)
+        f(curStart, curStyle)
+      }
+      curStyle = style
+    }
+    stream.start = stream.pos
+  }
+  while (curStart < stream.pos) {
+    // Webkit seems to refuse to render text nodes longer than 57444
+    // characters, and returns inaccurate measurements in nodes
+    // starting around 5000 chars.
+    let pos = Math.min(stream.pos, curStart + 5000)
+    f(pos, curStyle)
+    curStart = pos
+  }
+}
+
+// Finds the line to start with when starting a parse. Tries to
+// find a line with a stateAfter, so that it can start with a
+// valid state. If that fails, it returns the line with the
+// smallest indentation, which tends to need the least context to
+// parse correctly.
+function findStartLine(cm, n, precise) {
+  let minindent, minline, doc = cm.doc
+  let lim = precise ? -1 : n - (cm.doc.mode.innerMode ? 1000 : 100)
+  for (let search = n; search > lim; --search) {
+    if (search <= doc.first) return doc.first
+    let line = getLine(doc, search - 1), after = line.stateAfter
+    if (after && (!precise || search + (after instanceof SavedContext ? after.lookAhead : 0) <= doc.modeFrontier))
+      return search
+    let indented = countColumn(line.text, null, cm.options.tabSize)
+    if (minline == null || minindent > indented) {
+      minline = search - 1
+      minindent = indented
+    }
+  }
+  return minline
+}
+
+export function retreatFrontier(doc, n) {
+  doc.modeFrontier = Math.min(doc.modeFrontier, n)
+  if (doc.highlightFrontier < n - 10) return
+  let start = doc.first
+  for (let line = n - 1; line > start; line--) {
+    let saved = getLine(doc, line).stateAfter
+    // change is on 3
+    // state on line 1 looked ahead 2 -- so saw 3
+    // test 1 + 2 < 3 should cover this
+    if (saved && (!(saved instanceof SavedContext) || line + saved.lookAhead < n)) {
+      start = line + 1
+      break
+    }
+  }
+  doc.highlightFrontier = Math.min(doc.highlightFrontier, start)
+}

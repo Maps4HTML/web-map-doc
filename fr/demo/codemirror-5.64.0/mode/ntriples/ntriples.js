@@ -1,1 +1,195 @@
-!function(e){"object"==typeof exports&&"object"==typeof module?e(require("../../lib/codemirror")):"function"==typeof define&&define.amd?define(["../../lib/codemirror"],e):e(CodeMirror)}((function(e){"use strict";e.defineMode("ntriples",(function(){var e=0,n=1,t=2,r=3,i=4,a=5,o=6,u=7,f=8,l=9,s=10,c=11,p=12;function d(d,h){var v,b=d.location;v=b==e&&"<"==h?n:b==e&&"_"==h?t:b==r&&"<"==h?i:b==a&&"<"==h?o:b==a&&"_"==h?u:b==a&&'"'==h?f:b==n&&">"==h||b==t&&" "==h?r:b==i&&">"==h?a:b==o&&">"==h||b==u&&" "==h||b==f&&'"'==h||b==l&&" "==h||b==s&&">"==h?c:b==f&&"@"==h?l:b==f&&"^"==h?s:" "!=h||b!=e&&b!=r&&b!=a&&b!=c?b==c&&"."==h?e:p:b,d.location=v}return{startState:function(){return{location:e,uris:[],anchors:[],bnodes:[],langs:[],types:[]}},token:function(e,n){var t=e.next();if("<"==t){d(n,t);var r="";return e.eatWhile((function(e){return"#"!=e&&">"!=e&&(r+=e,!0)})),n.uris.push(r),e.match("#",!1)?"variable":(e.next(),d(n,">"),"variable")}if("#"==t){var i="";return e.eatWhile((function(e){return">"!=e&&" "!=e&&(i+=e,!0)})),n.anchors.push(i),"variable-2"}if(">"==t)return d(n,">"),"variable";if("_"==t){d(n,t);var a="";return e.eatWhile((function(e){return" "!=e&&(a+=e,!0)})),n.bnodes.push(a),e.next(),d(n," "),"builtin"}if('"'==t)return d(n,t),e.eatWhile((function(e){return'"'!=e})),e.next(),"@"!=e.peek()&&"^"!=e.peek()&&d(n,'"'),"string";if("@"==t){d(n,"@");var o="";return e.eatWhile((function(e){return" "!=e&&(o+=e,!0)})),n.langs.push(o),e.next(),d(n," "),"string-2"}if("^"==t){e.next(),d(n,"^");var u="";return e.eatWhile((function(e){return">"!=e&&(u+=e,!0)})),n.types.push(u),e.next(),d(n,">"),"variable"}" "==t&&d(n,t),"."==t&&d(n,t)}}})),e.defineMIME("application/n-triples","ntriples"),e.defineMIME("application/n-quads","ntriples"),e.defineMIME("text/n-triples","ntriples")}));
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: https://codemirror.net/LICENSE
+
+/**********************************************************
+* This script provides syntax highlighting support for
+* the N-Triples format.
+* N-Triples format specification:
+*     https://www.w3.org/TR/n-triples/
+***********************************************************/
+
+/*
+    The following expression defines the defined ASF grammar transitions.
+
+    pre_subject ->
+        {
+        ( writing_subject_uri | writing_bnode_uri )
+            -> pre_predicate
+                -> writing_predicate_uri
+                    -> pre_object
+                        -> writing_object_uri | writing_object_bnode |
+                          (
+                            writing_object_literal
+                                -> writing_literal_lang | writing_literal_type
+                          )
+                            -> post_object
+                                -> BEGIN
+         } otherwise {
+             -> ERROR
+         }
+*/
+
+(function(mod) {
+  if (typeof exports == "object" && typeof module == "object") // CommonJS
+    mod(require("../../lib/codemirror"));
+  else if (typeof define == "function" && define.amd) // AMD
+    define(["../../lib/codemirror"], mod);
+  else // Plain browser env
+    mod(CodeMirror);
+})(function(CodeMirror) {
+"use strict";
+
+CodeMirror.defineMode("ntriples", function() {
+
+  var Location = {
+    PRE_SUBJECT         : 0,
+    WRITING_SUB_URI     : 1,
+    WRITING_BNODE_URI   : 2,
+    PRE_PRED            : 3,
+    WRITING_PRED_URI    : 4,
+    PRE_OBJ             : 5,
+    WRITING_OBJ_URI     : 6,
+    WRITING_OBJ_BNODE   : 7,
+    WRITING_OBJ_LITERAL : 8,
+    WRITING_LIT_LANG    : 9,
+    WRITING_LIT_TYPE    : 10,
+    POST_OBJ            : 11,
+    ERROR               : 12
+  };
+  function transitState(currState, c) {
+    var currLocation = currState.location;
+    var ret;
+
+    // Opening.
+    if     (currLocation == Location.PRE_SUBJECT && c == '<') ret = Location.WRITING_SUB_URI;
+    else if(currLocation == Location.PRE_SUBJECT && c == '_') ret = Location.WRITING_BNODE_URI;
+    else if(currLocation == Location.PRE_PRED    && c == '<') ret = Location.WRITING_PRED_URI;
+    else if(currLocation == Location.PRE_OBJ     && c == '<') ret = Location.WRITING_OBJ_URI;
+    else if(currLocation == Location.PRE_OBJ     && c == '_') ret = Location.WRITING_OBJ_BNODE;
+    else if(currLocation == Location.PRE_OBJ     && c == '"') ret = Location.WRITING_OBJ_LITERAL;
+
+    // Closing.
+    else if(currLocation == Location.WRITING_SUB_URI     && c == '>') ret = Location.PRE_PRED;
+    else if(currLocation == Location.WRITING_BNODE_URI   && c == ' ') ret = Location.PRE_PRED;
+    else if(currLocation == Location.WRITING_PRED_URI    && c == '>') ret = Location.PRE_OBJ;
+    else if(currLocation == Location.WRITING_OBJ_URI     && c == '>') ret = Location.POST_OBJ;
+    else if(currLocation == Location.WRITING_OBJ_BNODE   && c == ' ') ret = Location.POST_OBJ;
+    else if(currLocation == Location.WRITING_OBJ_LITERAL && c == '"') ret = Location.POST_OBJ;
+    else if(currLocation == Location.WRITING_LIT_LANG && c == ' ') ret = Location.POST_OBJ;
+    else if(currLocation == Location.WRITING_LIT_TYPE && c == '>') ret = Location.POST_OBJ;
+
+    // Closing typed and language literal.
+    else if(currLocation == Location.WRITING_OBJ_LITERAL && c == '@') ret = Location.WRITING_LIT_LANG;
+    else if(currLocation == Location.WRITING_OBJ_LITERAL && c == '^') ret = Location.WRITING_LIT_TYPE;
+
+    // Spaces.
+    else if( c == ' ' &&
+             (
+               currLocation == Location.PRE_SUBJECT ||
+               currLocation == Location.PRE_PRED    ||
+               currLocation == Location.PRE_OBJ     ||
+               currLocation == Location.POST_OBJ
+             )
+           ) ret = currLocation;
+
+    // Reset.
+    else if(currLocation == Location.POST_OBJ && c == '.') ret = Location.PRE_SUBJECT;
+
+    // Error
+    else ret = Location.ERROR;
+
+    currState.location=ret;
+  }
+
+  return {
+    startState: function() {
+       return {
+           location : Location.PRE_SUBJECT,
+           uris     : [],
+           anchors  : [],
+           bnodes   : [],
+           langs    : [],
+           types    : []
+       };
+    },
+    token: function(stream, state) {
+      var ch = stream.next();
+      if(ch == '<') {
+         transitState(state, ch);
+         var parsedURI = '';
+         stream.eatWhile( function(c) { if( c != '#' && c != '>' ) { parsedURI += c; return true; } return false;} );
+         state.uris.push(parsedURI);
+         if( stream.match('#', false) ) return 'variable';
+         stream.next();
+         transitState(state, '>');
+         return 'variable';
+      }
+      if(ch == '#') {
+        var parsedAnchor = '';
+        stream.eatWhile(function(c) { if(c != '>' && c != ' ') { parsedAnchor+= c; return true; } return false;});
+        state.anchors.push(parsedAnchor);
+        return 'variable-2';
+      }
+      if(ch == '>') {
+          transitState(state, '>');
+          return 'variable';
+      }
+      if(ch == '_') {
+          transitState(state, ch);
+          var parsedBNode = '';
+          stream.eatWhile(function(c) { if( c != ' ' ) { parsedBNode += c; return true; } return false;});
+          state.bnodes.push(parsedBNode);
+          stream.next();
+          transitState(state, ' ');
+          return 'builtin';
+      }
+      if(ch == '"') {
+          transitState(state, ch);
+          stream.eatWhile( function(c) { return c != '"'; } );
+          stream.next();
+          if( stream.peek() != '@' && stream.peek() != '^' ) {
+              transitState(state, '"');
+          }
+          return 'string';
+      }
+      if( ch == '@' ) {
+          transitState(state, '@');
+          var parsedLang = '';
+          stream.eatWhile(function(c) { if( c != ' ' ) { parsedLang += c; return true; } return false;});
+          state.langs.push(parsedLang);
+          stream.next();
+          transitState(state, ' ');
+          return 'string-2';
+      }
+      if( ch == '^' ) {
+          stream.next();
+          transitState(state, '^');
+          var parsedType = '';
+          stream.eatWhile(function(c) { if( c != '>' ) { parsedType += c; return true; } return false;} );
+          state.types.push(parsedType);
+          stream.next();
+          transitState(state, '>');
+          return 'variable';
+      }
+      if( ch == ' ' ) {
+          transitState(state, ch);
+      }
+      if( ch == '.' ) {
+          transitState(state, ch);
+      }
+    }
+  };
+});
+
+// define the registered Media Type for n-triples:
+// https://www.w3.org/TR/n-triples/#n-triples-mediatype
+CodeMirror.defineMIME("application/n-triples", "ntriples");
+
+// N-Quads is based on the N-Triples format (so same highlighting works)
+// https://www.w3.org/TR/n-quads/
+CodeMirror.defineMIME("application/n-quads", "ntriples");
+
+// previously used, though technically incorrect media type for n-triples
+CodeMirror.defineMIME("text/n-triples", "ntriples");
+
+});

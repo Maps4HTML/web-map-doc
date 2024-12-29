@@ -1,1 +1,201 @@
-!function(e){"object"==typeof exports&&"object"==typeof module?e(require("../../lib/codemirror")):"function"==typeof define&&define.amd?define(["../../lib/codemirror"],e):e(CodeMirror)}((function(e){var n={pairs:"()[]{}''\"\"",closeBefore:")]}'\":;>",triples:"",explode:"[]{}"},t=e.Pos;function r(e,t){return"pairs"==t&&"string"==typeof e?e:"object"==typeof e&&null!=e[t]?e[t]:n[t]}e.defineOption("autoCloseBrackets",!1,(function(n,t,o){o&&o!=e.Init&&(n.removeKeyMap(i),n.state.closeBrackets=null),t&&(a(r(t,"pairs")),n.state.closeBrackets=t,n.addKeyMap(i))}));var i={Backspace:function(n){var i=s(n);if(!i||n.getOption("disableInput"))return e.Pass;for(var a=r(i,"pairs"),o=n.listSelections(),l=0;l<o.length;l++){if(!o[l].empty())return e.Pass;var c=f(n,o[l].head);if(!c||a.indexOf(c)%2!=0)return e.Pass}for(l=o.length-1;l>=0;l--){var h=o[l].head;n.replaceRange("",t(h.line,h.ch-1),t(h.line,h.ch+1),"+delete")}},Enter:function(n){var t=s(n),i=t&&r(t,"explode");if(!i||n.getOption("disableInput"))return e.Pass;for(var a=n.listSelections(),o=0;o<a.length;o++){if(!a[o].empty())return e.Pass;var c=f(n,a[o].head);if(!c||i.indexOf(c)%2!=0)return e.Pass}n.operation((function(){var e=n.lineSeparator()||"\n";n.replaceSelection(e+e,null),l(n,-1),a=n.listSelections();for(var t=0;t<a.length;t++){var r=a[t].head.line;n.indentLine(r,null,!0),n.indentLine(r+1,null,!0)}}))}};function a(e){for(var n=0;n<e.length;n++){var t=e.charAt(n),r="'"+t+"'";i[r]||(i[r]=o(t))}}function o(n){return function(i){return function(n,i){var a=s(n);if(!a||n.getOption("disableInput"))return e.Pass;var o=r(a,"pairs"),f=o.indexOf(i);if(-1==f)return e.Pass;for(var u,d=r(a,"closeBefore"),p=r(a,"triples"),g=o.charAt(f+1)==i,v=n.listSelections(),b=f%2==0,P=0;P<v.length;P++){var S,k=v[P],y=k.head,O=n.getRange(y,t(y.line,y.ch+1));if(b&&!k.empty())S="surround";else if(!g&&b||O!=i)if(g&&y.ch>1&&p.indexOf(i)>=0&&n.getRange(t(y.line,y.ch-2),y)==i+i){if(y.ch>2&&/\bstring/.test(n.getTokenTypeAt(t(y.line,y.ch-2))))return e.Pass;S="addFour"}else if(g){var m=0==y.ch?" ":n.getRange(t(y.line,y.ch-1),y);if(e.isWordChar(O)||m==i||e.isWordChar(m))return e.Pass;S="both"}else{if(!b||!(0===O.length||/\s/.test(O)||d.indexOf(O)>-1))return e.Pass;S="both"}else S=g&&h(n,y)?"both":p.indexOf(i)>=0&&n.getRange(y,t(y.line,y.ch+3))==i+i+i?"skipThree":"skip";if(u){if(u!=S)return e.Pass}else u=S}var x=f%2?o.charAt(f-1):i,A=f%2?i:o.charAt(f+1);n.operation((function(){if("skip"==u)l(n,1);else if("skipThree"==u)l(n,3);else if("surround"==u){for(var e=n.getSelections(),t=0;t<e.length;t++)e[t]=x+e[t]+A;n.replaceSelections(e,"around"),e=n.listSelections().slice();for(t=0;t<e.length;t++)e[t]=c(e[t]);n.setSelections(e)}else"both"==u?(n.replaceSelection(x+A,null),n.triggerElectric(x+A),l(n,-1)):"addFour"==u&&(n.replaceSelection(x+x+x+x,"before"),l(n,1))}))}(i,n)}}function s(e){var n=e.state.closeBrackets;return!n||n.override?n:e.getModeAt(e.getCursor()).closeBrackets||n}function l(e,n){for(var t=[],r=e.listSelections(),i=0,a=0;a<r.length;a++){var o=r[a];o.head==e.getCursor()&&(i=a);var s=o.head.ch||n>0?{line:o.head.line,ch:o.head.ch+n}:{line:o.head.line-1};t.push({anchor:s,head:s})}e.setSelections(t,i)}function c(n){var r=e.cmpPos(n.anchor,n.head)>0;return{anchor:new t(n.anchor.line,n.anchor.ch+(r?-1:1)),head:new t(n.head.line,n.head.ch+(r?1:-1))}}function f(e,n){var r=e.getRange(t(n.line,n.ch-1),t(n.line,n.ch+1));return 2==r.length?r:null}function h(e,n){var r=e.getTokenAt(t(n.line,n.ch+1));return/\bstring/.test(r.type)&&r.start==n.ch&&(0==n.ch||!/\bstring/.test(e.getTokenTypeAt(n)))}a(n.pairs+"`")}));
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: https://codemirror.net/LICENSE
+
+(function(mod) {
+  if (typeof exports == "object" && typeof module == "object") // CommonJS
+    mod(require("../../lib/codemirror"));
+  else if (typeof define == "function" && define.amd) // AMD
+    define(["../../lib/codemirror"], mod);
+  else // Plain browser env
+    mod(CodeMirror);
+})(function(CodeMirror) {
+  var defaults = {
+    pairs: "()[]{}''\"\"",
+    closeBefore: ")]}'\":;>",
+    triples: "",
+    explode: "[]{}"
+  };
+
+  var Pos = CodeMirror.Pos;
+
+  CodeMirror.defineOption("autoCloseBrackets", false, function(cm, val, old) {
+    if (old && old != CodeMirror.Init) {
+      cm.removeKeyMap(keyMap);
+      cm.state.closeBrackets = null;
+    }
+    if (val) {
+      ensureBound(getOption(val, "pairs"))
+      cm.state.closeBrackets = val;
+      cm.addKeyMap(keyMap);
+    }
+  });
+
+  function getOption(conf, name) {
+    if (name == "pairs" && typeof conf == "string") return conf;
+    if (typeof conf == "object" && conf[name] != null) return conf[name];
+    return defaults[name];
+  }
+
+  var keyMap = {Backspace: handleBackspace, Enter: handleEnter};
+  function ensureBound(chars) {
+    for (var i = 0; i < chars.length; i++) {
+      var ch = chars.charAt(i), key = "'" + ch + "'"
+      if (!keyMap[key]) keyMap[key] = handler(ch)
+    }
+  }
+  ensureBound(defaults.pairs + "`")
+
+  function handler(ch) {
+    return function(cm) { return handleChar(cm, ch); };
+  }
+
+  function getConfig(cm) {
+    var deflt = cm.state.closeBrackets;
+    if (!deflt || deflt.override) return deflt;
+    var mode = cm.getModeAt(cm.getCursor());
+    return mode.closeBrackets || deflt;
+  }
+
+  function handleBackspace(cm) {
+    var conf = getConfig(cm);
+    if (!conf || cm.getOption("disableInput")) return CodeMirror.Pass;
+
+    var pairs = getOption(conf, "pairs");
+    var ranges = cm.listSelections();
+    for (var i = 0; i < ranges.length; i++) {
+      if (!ranges[i].empty()) return CodeMirror.Pass;
+      var around = charsAround(cm, ranges[i].head);
+      if (!around || pairs.indexOf(around) % 2 != 0) return CodeMirror.Pass;
+    }
+    for (var i = ranges.length - 1; i >= 0; i--) {
+      var cur = ranges[i].head;
+      cm.replaceRange("", Pos(cur.line, cur.ch - 1), Pos(cur.line, cur.ch + 1), "+delete");
+    }
+  }
+
+  function handleEnter(cm) {
+    var conf = getConfig(cm);
+    var explode = conf && getOption(conf, "explode");
+    if (!explode || cm.getOption("disableInput")) return CodeMirror.Pass;
+
+    var ranges = cm.listSelections();
+    for (var i = 0; i < ranges.length; i++) {
+      if (!ranges[i].empty()) return CodeMirror.Pass;
+      var around = charsAround(cm, ranges[i].head);
+      if (!around || explode.indexOf(around) % 2 != 0) return CodeMirror.Pass;
+    }
+    cm.operation(function() {
+      var linesep = cm.lineSeparator() || "\n";
+      cm.replaceSelection(linesep + linesep, null);
+      moveSel(cm, -1)
+      ranges = cm.listSelections();
+      for (var i = 0; i < ranges.length; i++) {
+        var line = ranges[i].head.line;
+        cm.indentLine(line, null, true);
+        cm.indentLine(line + 1, null, true);
+      }
+    });
+  }
+
+  function moveSel(cm, dir) {
+    var newRanges = [], ranges = cm.listSelections(), primary = 0
+    for (var i = 0; i < ranges.length; i++) {
+      var range = ranges[i]
+      if (range.head == cm.getCursor()) primary = i
+      var pos = range.head.ch || dir > 0 ? {line: range.head.line, ch: range.head.ch + dir} : {line: range.head.line - 1}
+      newRanges.push({anchor: pos, head: pos})
+    }
+    cm.setSelections(newRanges, primary)
+  }
+
+  function contractSelection(sel) {
+    var inverted = CodeMirror.cmpPos(sel.anchor, sel.head) > 0;
+    return {anchor: new Pos(sel.anchor.line, sel.anchor.ch + (inverted ? -1 : 1)),
+            head: new Pos(sel.head.line, sel.head.ch + (inverted ? 1 : -1))};
+  }
+
+  function handleChar(cm, ch) {
+    var conf = getConfig(cm);
+    if (!conf || cm.getOption("disableInput")) return CodeMirror.Pass;
+
+    var pairs = getOption(conf, "pairs");
+    var pos = pairs.indexOf(ch);
+    if (pos == -1) return CodeMirror.Pass;
+
+    var closeBefore = getOption(conf,"closeBefore");
+
+    var triples = getOption(conf, "triples");
+
+    var identical = pairs.charAt(pos + 1) == ch;
+    var ranges = cm.listSelections();
+    var opening = pos % 2 == 0;
+
+    var type;
+    for (var i = 0; i < ranges.length; i++) {
+      var range = ranges[i], cur = range.head, curType;
+      var next = cm.getRange(cur, Pos(cur.line, cur.ch + 1));
+      if (opening && !range.empty()) {
+        curType = "surround";
+      } else if ((identical || !opening) && next == ch) {
+        if (identical && stringStartsAfter(cm, cur))
+          curType = "both";
+        else if (triples.indexOf(ch) >= 0 && cm.getRange(cur, Pos(cur.line, cur.ch + 3)) == ch + ch + ch)
+          curType = "skipThree";
+        else
+          curType = "skip";
+      } else if (identical && cur.ch > 1 && triples.indexOf(ch) >= 0 &&
+                 cm.getRange(Pos(cur.line, cur.ch - 2), cur) == ch + ch) {
+        if (cur.ch > 2 && /\bstring/.test(cm.getTokenTypeAt(Pos(cur.line, cur.ch - 2)))) return CodeMirror.Pass;
+        curType = "addFour";
+      } else if (identical) {
+        var prev = cur.ch == 0 ? " " : cm.getRange(Pos(cur.line, cur.ch - 1), cur)
+        if (!CodeMirror.isWordChar(next) && prev != ch && !CodeMirror.isWordChar(prev)) curType = "both";
+        else return CodeMirror.Pass;
+      } else if (opening && (next.length === 0 || /\s/.test(next) || closeBefore.indexOf(next) > -1)) {
+        curType = "both";
+      } else {
+        return CodeMirror.Pass;
+      }
+      if (!type) type = curType;
+      else if (type != curType) return CodeMirror.Pass;
+    }
+
+    var left = pos % 2 ? pairs.charAt(pos - 1) : ch;
+    var right = pos % 2 ? ch : pairs.charAt(pos + 1);
+    cm.operation(function() {
+      if (type == "skip") {
+        moveSel(cm, 1)
+      } else if (type == "skipThree") {
+        moveSel(cm, 3)
+      } else if (type == "surround") {
+        var sels = cm.getSelections();
+        for (var i = 0; i < sels.length; i++)
+          sels[i] = left + sels[i] + right;
+        cm.replaceSelections(sels, "around");
+        sels = cm.listSelections().slice();
+        for (var i = 0; i < sels.length; i++)
+          sels[i] = contractSelection(sels[i]);
+        cm.setSelections(sels);
+      } else if (type == "both") {
+        cm.replaceSelection(left + right, null);
+        cm.triggerElectric(left + right);
+        moveSel(cm, -1)
+      } else if (type == "addFour") {
+        cm.replaceSelection(left + left + left + left, "before");
+        moveSel(cm, 1)
+      }
+    });
+  }
+
+  function charsAround(cm, pos) {
+    var str = cm.getRange(Pos(pos.line, pos.ch - 1),
+                          Pos(pos.line, pos.ch + 1));
+    return str.length == 2 ? str : null;
+  }
+
+  function stringStartsAfter(cm, pos) {
+    var token = cm.getTokenAt(Pos(pos.line, pos.ch + 1))
+    return /\bstring/.test(token.type) && token.start == pos.ch &&
+      (pos.ch == 0 || !/\bstring/.test(cm.getTokenTypeAt(pos)))
+  }
+});

@@ -1,1 +1,24 @@
-import StringStream from"../../util/StringStream.js";import{countColumn}from"../../util/misc.js";import*as modeMethods from"../../modes.js";var root="undefined"!=typeof globalThis?globalThis:window;for(var exported in root.CodeMirror={},CodeMirror.StringStream=StringStream,modeMethods)CodeMirror[exported]=modeMethods[exported];CodeMirror.defineMode("null",(()=>({token:r=>r.skipToEnd()}))),CodeMirror.defineMIME("text/plain","null"),CodeMirror.registerHelper=CodeMirror.registerGlobalHelper=Math.min,CodeMirror.splitLines=function(r){return r.split(/\r?\n|\r/)},CodeMirror.countColumn=countColumn,CodeMirror.defaults={indentUnit:2};export default CodeMirror;
+import StringStream from "../../util/StringStream.js"
+import { countColumn } from "../../util/misc.js"
+import * as modeMethods from "../../modes.js"
+
+// declare global: globalThis, CodeMirror
+
+// Create a minimal CodeMirror needed to use runMode, and assign to root.
+var root = typeof globalThis !== 'undefined' ? globalThis : window
+root.CodeMirror = {}
+
+// Copy StringStream and mode methods into CodeMirror object.
+CodeMirror.StringStream = StringStream
+for (var exported in modeMethods) CodeMirror[exported] = modeMethods[exported]
+
+// Minimal default mode.
+CodeMirror.defineMode("null", () => ({token: stream => stream.skipToEnd()}))
+CodeMirror.defineMIME("text/plain", "null")
+
+CodeMirror.registerHelper = CodeMirror.registerGlobalHelper = Math.min
+CodeMirror.splitLines = function(string) { return string.split(/\r?\n|\r/) }
+CodeMirror.countColumn = countColumn
+
+CodeMirror.defaults = { indentUnit: 2 }
+export default CodeMirror

@@ -1,1 +1,173 @@
-import{Pos}from"../line/pos.js";import{visualLine}from"../line/spans.js";import{getLine}from"../line/utils_line.js";import{charCoords,cursorCoords,displayWidth,paddingH,wrappedLineExtentChar}from"../measurement/position_measurement.js";import{getOrder,iterateBidiSections}from"../util/bidi.js";import{elt}from"../util/dom.js";import{onBlur}from"./focus.js";export function updateSelection(t){t.display.input.showSelection(t.display.input.prepareSelection())}export function prepareSelection(t,e=!0){let o=t.doc,r={},i=r.cursors=document.createDocumentFragment(),l=r.selection=document.createDocumentFragment(),n=t.options.$customCursor;n&&(e=!0);for(let s=0;s<o.sel.ranges.length;s++){if(!e&&s==o.sel.primIndex)continue;let r=o.sel.ranges[s];if(r.from().line>=t.display.viewTo||r.to().line<t.display.viewFrom)continue;let p=r.empty();if(n){let e=n(t,r);e&&drawSelectionCursor(t,e,i)}else(p||t.options.showCursorWhenSelecting)&&drawSelectionCursor(t,r.head,i);p||drawSelectionRange(t,r,l)}return r}export function drawSelectionCursor(t,e,o){let r=cursorCoords(t,e,"div",null,null,!t.options.singleCursorHeightPerLine),i=o.appendChild(elt("div","\xa0","CodeMirror-cursor"));if(i.style.left=r.left+"px",i.style.top=r.top+"px",i.style.height=Math.max(0,r.bottom-r.top)*t.options.cursorHeight+"px",/\bcm-fat-cursor\b/.test(t.getWrapperElement().className)){let o=charCoords(t,e,"div",null,null),r=o.right-o.left;i.style.width=(r>0?r:t.defaultCharWidth())+"px"}if(r.other){let t=o.appendChild(elt("div","\xa0","CodeMirror-cursor CodeMirror-secondarycursor"));t.style.display="",t.style.left=r.other.left+"px",t.style.top=r.other.top+"px",t.style.height=.85*(r.other.bottom-r.other.top)+"px"}}function cmpCoords(t,e){return t.top-e.top||t.left-e.left}function drawSelectionRange(t,e,o){let r=t.display,i=t.doc,l=document.createDocumentFragment(),n=paddingH(t.display),s=n.left,p=Math.max(r.sizerWidth,displayWidth(t)-r.sizer.offsetLeft)-n.right,d="ltr"==i.direction;function a(t,e,o,r){e<0&&(e=0),e=Math.round(e),r=Math.round(r),l.appendChild(elt("div",null,"CodeMirror-selected",`position: absolute; left: ${t}px;\n                             top: ${e}px; width: ${null==o?p-t:o}px;\n                             height: ${r-e}px`))}function u(e,o,r){let l,n,u=getLine(i,e),c=u.text.length;function h(o,r){return charCoords(t,Pos(e,o),"div",u,r)}function f(e,o,r){let i=wrappedLineExtentChar(t,u,null,e),l="ltr"==o==("after"==r)?"left":"right";return h("after"==r?i.begin:i.end-(/\s/.test(u.text.charAt(i.end-1))?2:1),l)[l]}let m=getOrder(u,i.direction);return iterateBidiSections(m,o||0,null==r?c:r,((t,e,i,u)=>{let g="ltr"==i,C=h(t,g?"left":"right"),y=h(e-1,g?"right":"left"),b=null==o&&0==t,x=null==r&&e==c,v=0==u,w=!m||u==m.length-1;if(y.top-C.top<=3){let t=(d?x:b)&&w,e=(d?b:x)&&v?s:(g?C:y).left,o=t?p:(g?y:C).right;a(e,C.top,o-e,C.bottom)}else{let o,r,l,n;g?(o=d&&b&&v?s:C.left,r=d?p:f(t,i,"before"),l=d?s:f(e,i,"after"),n=d&&x&&w?p:y.right):(o=d?f(t,i,"before"):s,r=!d&&b&&v?p:C.right,l=!d&&x&&w?s:y.left,n=d?f(e,i,"after"):p),a(o,C.top,r-o,C.bottom),C.bottom<y.top&&a(s,C.bottom,null,y.top),a(l,y.top,n-l,y.bottom)}(!l||cmpCoords(C,l)<0)&&(l=C),cmpCoords(y,l)<0&&(l=y),(!n||cmpCoords(C,n)<0)&&(n=C),cmpCoords(y,n)<0&&(n=y)})),{start:l,end:n}}let c=e.from(),h=e.to();if(c.line==h.line)u(c.line,c.ch,h.ch);else{let t=getLine(i,c.line),e=getLine(i,h.line),o=visualLine(t)==visualLine(e),r=u(c.line,c.ch,o?t.text.length+1:null).end,l=u(h.line,o?0:null,h.ch).start;o&&(r.top<l.top-2?(a(r.right,r.top,null,r.bottom),a(s,l.top,l.left,l.bottom)):a(r.right,r.top,l.left-r.right,r.bottom)),r.bottom<l.top&&a(s,r.bottom,null,l.top)}o.appendChild(l)}export function restartBlink(t){if(!t.state.focused)return;let e=t.display;clearInterval(e.blinker);let o=!0;e.cursorDiv.style.visibility="",t.options.cursorBlinkRate>0?e.blinker=setInterval((()=>{t.hasFocus()||onBlur(t),e.cursorDiv.style.visibility=(o=!o)?"":"hidden"}),t.options.cursorBlinkRate):t.options.cursorBlinkRate<0&&(e.cursorDiv.style.visibility="hidden")}
+import { Pos } from "../line/pos.js"
+import { visualLine } from "../line/spans.js"
+import { getLine } from "../line/utils_line.js"
+import { charCoords, cursorCoords, displayWidth, paddingH, wrappedLineExtentChar } from "../measurement/position_measurement.js"
+import { getOrder, iterateBidiSections } from "../util/bidi.js"
+import { elt } from "../util/dom.js"
+import { onBlur } from "./focus.js"
+
+export function updateSelection(cm) {
+  cm.display.input.showSelection(cm.display.input.prepareSelection())
+}
+
+export function prepareSelection(cm, primary = true) {
+  let doc = cm.doc, result = {}
+  let curFragment = result.cursors = document.createDocumentFragment()
+  let selFragment = result.selection = document.createDocumentFragment()
+
+  let customCursor = cm.options.$customCursor
+  if (customCursor) primary = true
+  for (let i = 0; i < doc.sel.ranges.length; i++) {
+    if (!primary && i == doc.sel.primIndex) continue
+    let range = doc.sel.ranges[i]
+    if (range.from().line >= cm.display.viewTo || range.to().line < cm.display.viewFrom) continue
+    let collapsed = range.empty()
+    if (customCursor) {
+      let head = customCursor(cm, range)
+      if (head) drawSelectionCursor(cm, head, curFragment)
+    } else if (collapsed || cm.options.showCursorWhenSelecting) {
+      drawSelectionCursor(cm, range.head, curFragment)
+    }
+    if (!collapsed)
+      drawSelectionRange(cm, range, selFragment)
+  }
+  return result
+}
+
+// Draws a cursor for the given range
+export function drawSelectionCursor(cm, head, output) {
+  let pos = cursorCoords(cm, head, "div", null, null, !cm.options.singleCursorHeightPerLine)
+
+  let cursor = output.appendChild(elt("div", "\u00a0", "CodeMirror-cursor"))
+  cursor.style.left = pos.left + "px"
+  cursor.style.top = pos.top + "px"
+  cursor.style.height = Math.max(0, pos.bottom - pos.top) * cm.options.cursorHeight + "px"
+
+  if (/\bcm-fat-cursor\b/.test(cm.getWrapperElement().className)) {
+    let charPos = charCoords(cm, head, "div", null, null)
+    let width = charPos.right - charPos.left
+    cursor.style.width = (width > 0 ? width : cm.defaultCharWidth()) + "px"
+  }
+
+  if (pos.other) {
+    // Secondary cursor, shown when on a 'jump' in bi-directional text
+    let otherCursor = output.appendChild(elt("div", "\u00a0", "CodeMirror-cursor CodeMirror-secondarycursor"))
+    otherCursor.style.display = ""
+    otherCursor.style.left = pos.other.left + "px"
+    otherCursor.style.top = pos.other.top + "px"
+    otherCursor.style.height = (pos.other.bottom - pos.other.top) * .85 + "px"
+  }
+}
+
+function cmpCoords(a, b) { return a.top - b.top || a.left - b.left }
+
+// Draws the given range as a highlighted selection
+function drawSelectionRange(cm, range, output) {
+  let display = cm.display, doc = cm.doc
+  let fragment = document.createDocumentFragment()
+  let padding = paddingH(cm.display), leftSide = padding.left
+  let rightSide = Math.max(display.sizerWidth, displayWidth(cm) - display.sizer.offsetLeft) - padding.right
+  let docLTR = doc.direction == "ltr"
+
+  function add(left, top, width, bottom) {
+    if (top < 0) top = 0
+    top = Math.round(top)
+    bottom = Math.round(bottom)
+    fragment.appendChild(elt("div", null, "CodeMirror-selected", `position: absolute; left: ${left}px;
+                             top: ${top}px; width: ${width == null ? rightSide - left : width}px;
+                             height: ${bottom - top}px`))
+  }
+
+  function drawForLine(line, fromArg, toArg) {
+    let lineObj = getLine(doc, line)
+    let lineLen = lineObj.text.length
+    let start, end
+    function coords(ch, bias) {
+      return charCoords(cm, Pos(line, ch), "div", lineObj, bias)
+    }
+
+    function wrapX(pos, dir, side) {
+      let extent = wrappedLineExtentChar(cm, lineObj, null, pos)
+      let prop = (dir == "ltr") == (side == "after") ? "left" : "right"
+      let ch = side == "after" ? extent.begin : extent.end - (/\s/.test(lineObj.text.charAt(extent.end - 1)) ? 2 : 1)
+      return coords(ch, prop)[prop]
+    }
+
+    let order = getOrder(lineObj, doc.direction)
+    iterateBidiSections(order, fromArg || 0, toArg == null ? lineLen : toArg, (from, to, dir, i) => {
+      let ltr = dir == "ltr"
+      let fromPos = coords(from, ltr ? "left" : "right")
+      let toPos = coords(to - 1, ltr ? "right" : "left")
+
+      let openStart = fromArg == null && from == 0, openEnd = toArg == null && to == lineLen
+      let first = i == 0, last = !order || i == order.length - 1
+      if (toPos.top - fromPos.top <= 3) { // Single line
+        let openLeft = (docLTR ? openStart : openEnd) && first
+        let openRight = (docLTR ? openEnd : openStart) && last
+        let left = openLeft ? leftSide : (ltr ? fromPos : toPos).left
+        let right = openRight ? rightSide : (ltr ? toPos : fromPos).right
+        add(left, fromPos.top, right - left, fromPos.bottom)
+      } else { // Multiple lines
+        let topLeft, topRight, botLeft, botRight
+        if (ltr) {
+          topLeft = docLTR && openStart && first ? leftSide : fromPos.left
+          topRight = docLTR ? rightSide : wrapX(from, dir, "before")
+          botLeft = docLTR ? leftSide : wrapX(to, dir, "after")
+          botRight = docLTR && openEnd && last ? rightSide : toPos.right
+        } else {
+          topLeft = !docLTR ? leftSide : wrapX(from, dir, "before")
+          topRight = !docLTR && openStart && first ? rightSide : fromPos.right
+          botLeft = !docLTR && openEnd && last ? leftSide : toPos.left
+          botRight = !docLTR ? rightSide : wrapX(to, dir, "after")
+        }
+        add(topLeft, fromPos.top, topRight - topLeft, fromPos.bottom)
+        if (fromPos.bottom < toPos.top) add(leftSide, fromPos.bottom, null, toPos.top)
+        add(botLeft, toPos.top, botRight - botLeft, toPos.bottom)
+      }
+
+      if (!start || cmpCoords(fromPos, start) < 0) start = fromPos
+      if (cmpCoords(toPos, start) < 0) start = toPos
+      if (!end || cmpCoords(fromPos, end) < 0) end = fromPos
+      if (cmpCoords(toPos, end) < 0) end = toPos
+    })
+    return {start: start, end: end}
+  }
+
+  let sFrom = range.from(), sTo = range.to()
+  if (sFrom.line == sTo.line) {
+    drawForLine(sFrom.line, sFrom.ch, sTo.ch)
+  } else {
+    let fromLine = getLine(doc, sFrom.line), toLine = getLine(doc, sTo.line)
+    let singleVLine = visualLine(fromLine) == visualLine(toLine)
+    let leftEnd = drawForLine(sFrom.line, sFrom.ch, singleVLine ? fromLine.text.length + 1 : null).end
+    let rightStart = drawForLine(sTo.line, singleVLine ? 0 : null, sTo.ch).start
+    if (singleVLine) {
+      if (leftEnd.top < rightStart.top - 2) {
+        add(leftEnd.right, leftEnd.top, null, leftEnd.bottom)
+        add(leftSide, rightStart.top, rightStart.left, rightStart.bottom)
+      } else {
+        add(leftEnd.right, leftEnd.top, rightStart.left - leftEnd.right, leftEnd.bottom)
+      }
+    }
+    if (leftEnd.bottom < rightStart.top)
+      add(leftSide, leftEnd.bottom, null, rightStart.top)
+  }
+
+  output.appendChild(fragment)
+}
+
+// Cursor-blinking
+export function restartBlink(cm) {
+  if (!cm.state.focused) return
+  let display = cm.display
+  clearInterval(display.blinker)
+  let on = true
+  display.cursorDiv.style.visibility = ""
+  if (cm.options.cursorBlinkRate > 0)
+    display.blinker = setInterval(() => {
+      if (!cm.hasFocus()) onBlur(cm)
+      display.cursorDiv.style.visibility = (on = !on) ? "" : "hidden"
+    }, cm.options.cursorBlinkRate)
+  else if (cm.options.cursorBlinkRate < 0)
+    display.cursorDiv.style.visibility = "hidden"
+}

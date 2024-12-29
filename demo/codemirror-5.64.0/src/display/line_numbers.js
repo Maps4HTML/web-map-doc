@@ -1,1 +1,48 @@
-import{lineNumberFor}from"../line/utils_line.js";import{compensateForHScroll}from"../measurement/position_measurement.js";import{elt}from"../util/dom.js";import{updateGutterSpace}from"./update_display.js";export function alignHorizontally(e){let t=e.display,i=t.view;if(!(t.alignWidgets||t.gutters.firstChild&&e.options.fixedGutter))return;let r=compensateForHScroll(t)-t.scroller.scrollLeft+e.doc.scrollLeft,l=t.gutters.offsetWidth,n=r+"px";for(let o=0;o<i.length;o++)if(!i[o].hidden){e.options.fixedGutter&&(i[o].gutter&&(i[o].gutter.style.left=n),i[o].gutterBackground&&(i[o].gutterBackground.style.left=n));let t=i[o].alignable;if(t)for(let e=0;e<t.length;e++)t[e].style.left=n}e.options.fixedGutter&&(t.gutters.style.left=r+l+"px")}export function maybeUpdateLineNumberWidth(e){if(!e.options.lineNumbers)return!1;let t=e.doc,i=lineNumberFor(e.options,t.first+t.size-1),r=e.display;if(i.length!=r.lineNumChars){let t=r.measure.appendChild(elt("div",[elt("div",i)],"CodeMirror-linenumber CodeMirror-gutter-elt")),l=t.firstChild.offsetWidth,n=t.offsetWidth-l;return r.lineGutter.style.width="",r.lineNumInnerWidth=Math.max(l,r.lineGutter.offsetWidth-n)+1,r.lineNumWidth=r.lineNumInnerWidth+n,r.lineNumChars=r.lineNumInnerWidth?i.length:-1,r.lineGutter.style.width=r.lineNumWidth+"px",updateGutterSpace(e.display),!0}return!1}
+import { lineNumberFor } from "../line/utils_line.js"
+import { compensateForHScroll } from "../measurement/position_measurement.js"
+import { elt } from "../util/dom.js"
+
+import { updateGutterSpace } from "./update_display.js"
+
+// Re-align line numbers and gutter marks to compensate for
+// horizontal scrolling.
+export function alignHorizontally(cm) {
+  let display = cm.display, view = display.view
+  if (!display.alignWidgets && (!display.gutters.firstChild || !cm.options.fixedGutter)) return
+  let comp = compensateForHScroll(display) - display.scroller.scrollLeft + cm.doc.scrollLeft
+  let gutterW = display.gutters.offsetWidth, left = comp + "px"
+  for (let i = 0; i < view.length; i++) if (!view[i].hidden) {
+    if (cm.options.fixedGutter) {
+      if (view[i].gutter)
+        view[i].gutter.style.left = left
+      if (view[i].gutterBackground)
+        view[i].gutterBackground.style.left = left
+    }
+    let align = view[i].alignable
+    if (align) for (let j = 0; j < align.length; j++)
+      align[j].style.left = left
+  }
+  if (cm.options.fixedGutter)
+    display.gutters.style.left = (comp + gutterW) + "px"
+}
+
+// Used to ensure that the line number gutter is still the right
+// size for the current document size. Returns true when an update
+// is needed.
+export function maybeUpdateLineNumberWidth(cm) {
+  if (!cm.options.lineNumbers) return false
+  let doc = cm.doc, last = lineNumberFor(cm.options, doc.first + doc.size - 1), display = cm.display
+  if (last.length != display.lineNumChars) {
+    let test = display.measure.appendChild(elt("div", [elt("div", last)],
+                                               "CodeMirror-linenumber CodeMirror-gutter-elt"))
+    let innerW = test.firstChild.offsetWidth, padding = test.offsetWidth - innerW
+    display.lineGutter.style.width = ""
+    display.lineNumInnerWidth = Math.max(innerW, display.lineGutter.offsetWidth - padding) + 1
+    display.lineNumWidth = display.lineNumInnerWidth + padding
+    display.lineNumChars = display.lineNumInnerWidth ? last.length : -1
+    display.lineGutter.style.width = display.lineNumWidth + "px"
+    updateGutterSpace(cm.display)
+    return true
+  }
+  return false
+}

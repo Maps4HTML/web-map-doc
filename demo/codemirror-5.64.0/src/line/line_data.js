@@ -1,1 +1,349 @@
-import{getOrder}from"../util/bidi.js";import{ie,ie_version,webkit}from"../util/browser.js";import{elt,eltP,joinClasses}from"../util/dom.js";import{eventMixin,signal}from"../util/event.js";import{hasBadBidiRects,zeroWidthElement}from"../util/feature_detection.js";import{lst,spaceStr}from"../util/misc.js";import{getLineStyles}from"./highlight.js";import{attachMarkedSpans,compareCollapsedMarkers,detachMarkedSpans,lineIsHidden,visualLineContinued}from"./spans.js";import{getLine,lineNo,updateLineHeight}from"./utils_line.js";export class Line{constructor(e,t,l){this.text=e,attachMarkedSpans(this,t),this.height=l?l(this):1}lineNo(){return lineNo(this)}}eventMixin(Line);export function updateLine(e,t,l,s){e.text=t,e.stateAfter&&(e.stateAfter=null),e.styles&&(e.styles=null),null!=e.order&&(e.order=null),detachMarkedSpans(e),attachMarkedSpans(e,l);let i=s?s(e):1;i!=e.height&&updateLineHeight(e,i)}export function cleanUpLine(e){e.parent=null,detachMarkedSpans(e)}let styleToClassCache={},styleToClassCacheWithMode={};function interpretTokenStyle(e,t){if(!e||/^\s*$/.test(e))return null;let l=t.addModeClass?styleToClassCacheWithMode:styleToClassCache;return l[e]||(l[e]=e.replace(/\S+/g,"cm-$&"))}export function buildLineContent(e,t){let l=eltP("span",null,null,webkit?"padding-right: .1px":null),s={pre:eltP("pre",[l],"CodeMirror-line"),content:l,col:0,pos:0,cm:e,trailingSpace:!1,splitSpaces:e.getOption("lineWrapping")};t.measure={};for(let i=0;i<=(t.rest?t.rest.length:0);i++){let l,n=i?t.rest[i-1]:t.line;s.pos=0,s.addToken=buildToken,hasBadBidiRects(e.display.measure)&&(l=getOrder(n,e.doc.direction))&&(s.addToken=buildTokenBadBidi(s.addToken,l)),s.map=[];let a=t!=e.display.externalMeasured&&lineNo(n);insertLineContent(n,s,getLineStyles(e,n,a)),n.styleClasses&&(n.styleClasses.bgClass&&(s.bgClass=joinClasses(n.styleClasses.bgClass,s.bgClass||"")),n.styleClasses.textClass&&(s.textClass=joinClasses(n.styleClasses.textClass,s.textClass||""))),0==s.map.length&&s.map.push(0,0,s.content.appendChild(zeroWidthElement(e.display.measure))),0==i?(t.measure.map=s.map,t.measure.cache={}):((t.measure.maps||(t.measure.maps=[])).push(s.map),(t.measure.caches||(t.measure.caches=[])).push({}))}if(webkit){let e=s.content.lastChild;(/\bcm-tab\b/.test(e.className)||e.querySelector&&e.querySelector(".cm-tab"))&&(s.content.className="cm-tab-wrap-hack")}return signal(e,"renderLine",e,t.line,s.pre),s.pre.className&&(s.textClass=joinClasses(s.pre.className,s.textClass||"")),s}export function defaultSpecialCharPlaceholder(e){let t=elt("span","\u2022","cm-invalidchar");return t.title="\\u"+e.charCodeAt(0).toString(16),t.setAttribute("aria-label",t.title),t}function buildToken(e,t,l,s,i,n,a){if(!t)return;let r,o=e.splitSpaces?splitSpaces(t,e.trailingSpace):t,p=e.cm.state.specialChars,d=!1;if(p.test(t)){r=document.createDocumentFragment();let l=0;for(;;){p.lastIndex=l;let s,i=p.exec(t),n=i?i.index-l:t.length-l;if(n){let t=document.createTextNode(o.slice(l,l+n));ie&&ie_version<9?r.appendChild(elt("span",[t])):r.appendChild(t),e.map.push(e.pos,e.pos+n,t),e.col+=n,e.pos+=n}if(!i)break;if(l+=n+1,"\t"==i[0]){let t=e.cm.options.tabSize,l=t-e.col%t;s=r.appendChild(elt("span",spaceStr(l),"cm-tab")),s.setAttribute("role","presentation"),s.setAttribute("cm-text","\t"),e.col+=l}else"\r"==i[0]||"\n"==i[0]?(s=r.appendChild(elt("span","\r"==i[0]?"\u240d":"\u2424","cm-invalidchar")),s.setAttribute("cm-text",i[0]),e.col+=1):(s=e.cm.options.specialCharPlaceholder(i[0]),s.setAttribute("cm-text",i[0]),ie&&ie_version<9?r.appendChild(elt("span",[s])):r.appendChild(s),e.col+=1);e.map.push(e.pos,e.pos+1,s),e.pos++}}else e.col+=t.length,r=document.createTextNode(o),e.map.push(e.pos,e.pos+t.length,r),ie&&ie_version<9&&(d=!0),e.pos+=t.length;if(e.trailingSpace=32==o.charCodeAt(t.length-1),l||s||i||d||n||a){let t=l||"";s&&(t+=s),i&&(t+=i);let o=elt("span",[r],t,n);if(a)for(let e in a)a.hasOwnProperty(e)&&"style"!=e&&"class"!=e&&o.setAttribute(e,a[e]);return e.content.appendChild(o)}e.content.appendChild(r)}function splitSpaces(e,t){if(e.length>1&&!/  /.test(e))return e;let l=t,s="";for(let i=0;i<e.length;i++){let t=e.charAt(i);" "!=t||!l||i!=e.length-1&&32!=e.charCodeAt(i+1)||(t="\xa0"),s+=t,l=" "==t}return s}function buildTokenBadBidi(e,t){return(l,s,i,n,a,r,o)=>{i=i?i+" cm-force-border":"cm-force-border";let p=l.pos,d=p+s.length;for(;;){let c;for(let e=0;e<t.length&&(c=t[e],!(c.to>p&&c.from<=p));e++);if(c.to>=d)return e(l,s,i,n,a,r,o);e(l,s.slice(0,c.to-p),i,n,null,r,o),n=null,s=s.slice(c.to-p),p=c.to}}}function buildCollapsedSpan(e,t,l,s){let i=!s&&l.widgetNode;i&&e.map.push(e.pos,e.pos+t,i),!s&&e.cm.display.input.needsContentAttribute&&(i||(i=e.content.appendChild(document.createElement("span"))),i.setAttribute("cm-marker",l.id)),i&&(e.cm.display.input.setUneditable(i),e.content.appendChild(i)),e.pos+=t,e.trailingSpace=!1}function insertLineContent(e,t,l){let s=e.markedSpans,i=e.text,n=0;if(!s){for(let e=1;e<l.length;e+=2)t.addToken(t,i.slice(n,n=l[e]),interpretTokenStyle(l[e+1],t.cm.options));return}let a,r,o,p,d,c,u,h=i.length,m=0,f=1,C="",g=0;for(;;){if(g==m){o=p=d=r="",u=null,c=null,g=1/0;let e,l=[];for(let t=0;t<s.length;++t){let i=s[t],n=i.marker;if("bookmark"==n.type&&i.from==m&&n.widgetNode)l.push(n);else if(i.from<=m&&(null==i.to||i.to>m||n.collapsed&&i.to==m&&i.from==m)){if(null!=i.to&&i.to!=m&&g>i.to&&(g=i.to,p=""),n.className&&(o+=" "+n.className),n.css&&(r=(r?r+";":"")+n.css),n.startStyle&&i.from==m&&(d+=" "+n.startStyle),n.endStyle&&i.to==g&&(e||(e=[])).push(n.endStyle,i.to),n.title&&((u||(u={})).title=n.title),n.attributes)for(let e in n.attributes)(u||(u={}))[e]=n.attributes[e];n.collapsed&&(!c||compareCollapsedMarkers(c.marker,n)<0)&&(c=i)}else i.from>m&&g>i.from&&(g=i.from)}if(e)for(let t=0;t<e.length;t+=2)e[t+1]==g&&(p+=" "+e[t]);if(!c||c.from==m)for(let s=0;s<l.length;++s)buildCollapsedSpan(t,0,l[s]);if(c&&(c.from||0)==m){if(buildCollapsedSpan(t,(null==c.to?h+1:c.to)-m,c.marker,null==c.from),null==c.to)return;c.to==m&&(c=!1)}}if(m>=h)break;let e=Math.min(h,g);for(;;){if(C){let l=m+C.length;if(!c){let s=l>e?C.slice(0,e-m):C;t.addToken(t,s,a?a+o:o,d,m+s.length==g?p:"",r,u)}if(l>=e){C=C.slice(e-m),m=e;break}m=l,d=""}C=i.slice(n,n=l[f++]),a=interpretTokenStyle(l[f++],t.cm.options)}}}export function LineView(e,t,l){this.line=t,this.rest=visualLineContinued(t),this.size=this.rest?lineNo(lst(this.rest))-l+1:1,this.node=this.text=null,this.hidden=lineIsHidden(e,t)}export function buildViewArray(e,t,l){let s,i=[];for(let n=t;n<l;n=s){let t=new LineView(e.doc,getLine(e.doc,n),n);s=n+t.size,i.push(t)}return i}
+import { getOrder } from "../util/bidi.js"
+import { ie, ie_version, webkit } from "../util/browser.js"
+import { elt, eltP, joinClasses } from "../util/dom.js"
+import { eventMixin, signal } from "../util/event.js"
+import { hasBadBidiRects, zeroWidthElement } from "../util/feature_detection.js"
+import { lst, spaceStr } from "../util/misc.js"
+
+import { getLineStyles } from "./highlight.js"
+import { attachMarkedSpans, compareCollapsedMarkers, detachMarkedSpans, lineIsHidden, visualLineContinued } from "./spans.js"
+import { getLine, lineNo, updateLineHeight } from "./utils_line.js"
+
+// LINE DATA STRUCTURE
+
+// Line objects. These hold state related to a line, including
+// highlighting info (the styles array).
+export class Line {
+  constructor(text, markedSpans, estimateHeight) {
+    this.text = text
+    attachMarkedSpans(this, markedSpans)
+    this.height = estimateHeight ? estimateHeight(this) : 1
+  }
+
+  lineNo() { return lineNo(this) }
+}
+eventMixin(Line)
+
+// Change the content (text, markers) of a line. Automatically
+// invalidates cached information and tries to re-estimate the
+// line's height.
+export function updateLine(line, text, markedSpans, estimateHeight) {
+  line.text = text
+  if (line.stateAfter) line.stateAfter = null
+  if (line.styles) line.styles = null
+  if (line.order != null) line.order = null
+  detachMarkedSpans(line)
+  attachMarkedSpans(line, markedSpans)
+  let estHeight = estimateHeight ? estimateHeight(line) : 1
+  if (estHeight != line.height) updateLineHeight(line, estHeight)
+}
+
+// Detach a line from the document tree and its markers.
+export function cleanUpLine(line) {
+  line.parent = null
+  detachMarkedSpans(line)
+}
+
+// Convert a style as returned by a mode (either null, or a string
+// containing one or more styles) to a CSS style. This is cached,
+// and also looks for line-wide styles.
+let styleToClassCache = {}, styleToClassCacheWithMode = {}
+function interpretTokenStyle(style, options) {
+  if (!style || /^\s*$/.test(style)) return null
+  let cache = options.addModeClass ? styleToClassCacheWithMode : styleToClassCache
+  return cache[style] ||
+    (cache[style] = style.replace(/\S+/g, "cm-$&"))
+}
+
+// Render the DOM representation of the text of a line. Also builds
+// up a 'line map', which points at the DOM nodes that represent
+// specific stretches of text, and is used by the measuring code.
+// The returned object contains the DOM node, this map, and
+// information about line-wide styles that were set by the mode.
+export function buildLineContent(cm, lineView) {
+  // The padding-right forces the element to have a 'border', which
+  // is needed on Webkit to be able to get line-level bounding
+  // rectangles for it (in measureChar).
+  let content = eltP("span", null, null, webkit ? "padding-right: .1px" : null)
+  let builder = {pre: eltP("pre", [content], "CodeMirror-line"), content: content,
+                 col: 0, pos: 0, cm: cm,
+                 trailingSpace: false,
+                 splitSpaces: cm.getOption("lineWrapping")}
+  lineView.measure = {}
+
+  // Iterate over the logical lines that make up this visual line.
+  for (let i = 0; i <= (lineView.rest ? lineView.rest.length : 0); i++) {
+    let line = i ? lineView.rest[i - 1] : lineView.line, order
+    builder.pos = 0
+    builder.addToken = buildToken
+    // Optionally wire in some hacks into the token-rendering
+    // algorithm, to deal with browser quirks.
+    if (hasBadBidiRects(cm.display.measure) && (order = getOrder(line, cm.doc.direction)))
+      builder.addToken = buildTokenBadBidi(builder.addToken, order)
+    builder.map = []
+    let allowFrontierUpdate = lineView != cm.display.externalMeasured && lineNo(line)
+    insertLineContent(line, builder, getLineStyles(cm, line, allowFrontierUpdate))
+    if (line.styleClasses) {
+      if (line.styleClasses.bgClass)
+        builder.bgClass = joinClasses(line.styleClasses.bgClass, builder.bgClass || "")
+      if (line.styleClasses.textClass)
+        builder.textClass = joinClasses(line.styleClasses.textClass, builder.textClass || "")
+    }
+
+    // Ensure at least a single node is present, for measuring.
+    if (builder.map.length == 0)
+      builder.map.push(0, 0, builder.content.appendChild(zeroWidthElement(cm.display.measure)))
+
+    // Store the map and a cache object for the current logical line
+    if (i == 0) {
+      lineView.measure.map = builder.map
+      lineView.measure.cache = {}
+    } else {
+      ;(lineView.measure.maps || (lineView.measure.maps = [])).push(builder.map)
+      ;(lineView.measure.caches || (lineView.measure.caches = [])).push({})
+    }
+  }
+
+  // See issue #2901
+  if (webkit) {
+    let last = builder.content.lastChild
+    if (/\bcm-tab\b/.test(last.className) || (last.querySelector && last.querySelector(".cm-tab")))
+      builder.content.className = "cm-tab-wrap-hack"
+  }
+
+  signal(cm, "renderLine", cm, lineView.line, builder.pre)
+  if (builder.pre.className)
+    builder.textClass = joinClasses(builder.pre.className, builder.textClass || "")
+
+  return builder
+}
+
+export function defaultSpecialCharPlaceholder(ch) {
+  let token = elt("span", "\u2022", "cm-invalidchar")
+  token.title = "\\u" + ch.charCodeAt(0).toString(16)
+  token.setAttribute("aria-label", token.title)
+  return token
+}
+
+// Build up the DOM representation for a single token, and add it to
+// the line map. Takes care to render special characters separately.
+function buildToken(builder, text, style, startStyle, endStyle, css, attributes) {
+  if (!text) return
+  let displayText = builder.splitSpaces ? splitSpaces(text, builder.trailingSpace) : text
+  let special = builder.cm.state.specialChars, mustWrap = false
+  let content
+  if (!special.test(text)) {
+    builder.col += text.length
+    content = document.createTextNode(displayText)
+    builder.map.push(builder.pos, builder.pos + text.length, content)
+    if (ie && ie_version < 9) mustWrap = true
+    builder.pos += text.length
+  } else {
+    content = document.createDocumentFragment()
+    let pos = 0
+    while (true) {
+      special.lastIndex = pos
+      let m = special.exec(text)
+      let skipped = m ? m.index - pos : text.length - pos
+      if (skipped) {
+        let txt = document.createTextNode(displayText.slice(pos, pos + skipped))
+        if (ie && ie_version < 9) content.appendChild(elt("span", [txt]))
+        else content.appendChild(txt)
+        builder.map.push(builder.pos, builder.pos + skipped, txt)
+        builder.col += skipped
+        builder.pos += skipped
+      }
+      if (!m) break
+      pos += skipped + 1
+      let txt
+      if (m[0] == "\t") {
+        let tabSize = builder.cm.options.tabSize, tabWidth = tabSize - builder.col % tabSize
+        txt = content.appendChild(elt("span", spaceStr(tabWidth), "cm-tab"))
+        txt.setAttribute("role", "presentation")
+        txt.setAttribute("cm-text", "\t")
+        builder.col += tabWidth
+      } else if (m[0] == "\r" || m[0] == "\n") {
+        txt = content.appendChild(elt("span", m[0] == "\r" ? "\u240d" : "\u2424", "cm-invalidchar"))
+        txt.setAttribute("cm-text", m[0])
+        builder.col += 1
+      } else {
+        txt = builder.cm.options.specialCharPlaceholder(m[0])
+        txt.setAttribute("cm-text", m[0])
+        if (ie && ie_version < 9) content.appendChild(elt("span", [txt]))
+        else content.appendChild(txt)
+        builder.col += 1
+      }
+      builder.map.push(builder.pos, builder.pos + 1, txt)
+      builder.pos++
+    }
+  }
+  builder.trailingSpace = displayText.charCodeAt(text.length - 1) == 32
+  if (style || startStyle || endStyle || mustWrap || css || attributes) {
+    let fullStyle = style || ""
+    if (startStyle) fullStyle += startStyle
+    if (endStyle) fullStyle += endStyle
+    let token = elt("span", [content], fullStyle, css)
+    if (attributes) {
+      for (let attr in attributes) if (attributes.hasOwnProperty(attr) && attr != "style" && attr != "class")
+        token.setAttribute(attr, attributes[attr])
+    }
+    return builder.content.appendChild(token)
+  }
+  builder.content.appendChild(content)
+}
+
+// Change some spaces to NBSP to prevent the browser from collapsing
+// trailing spaces at the end of a line when rendering text (issue #1362).
+function splitSpaces(text, trailingBefore) {
+  if (text.length > 1 && !/  /.test(text)) return text
+  let spaceBefore = trailingBefore, result = ""
+  for (let i = 0; i < text.length; i++) {
+    let ch = text.charAt(i)
+    if (ch == " " && spaceBefore && (i == text.length - 1 || text.charCodeAt(i + 1) == 32))
+      ch = "\u00a0"
+    result += ch
+    spaceBefore = ch == " "
+  }
+  return result
+}
+
+// Work around nonsense dimensions being reported for stretches of
+// right-to-left text.
+function buildTokenBadBidi(inner, order) {
+  return (builder, text, style, startStyle, endStyle, css, attributes) => {
+    style = style ? style + " cm-force-border" : "cm-force-border"
+    let start = builder.pos, end = start + text.length
+    for (;;) {
+      // Find the part that overlaps with the start of this text
+      let part
+      for (let i = 0; i < order.length; i++) {
+        part = order[i]
+        if (part.to > start && part.from <= start) break
+      }
+      if (part.to >= end) return inner(builder, text, style, startStyle, endStyle, css, attributes)
+      inner(builder, text.slice(0, part.to - start), style, startStyle, null, css, attributes)
+      startStyle = null
+      text = text.slice(part.to - start)
+      start = part.to
+    }
+  }
+}
+
+function buildCollapsedSpan(builder, size, marker, ignoreWidget) {
+  let widget = !ignoreWidget && marker.widgetNode
+  if (widget) builder.map.push(builder.pos, builder.pos + size, widget)
+  if (!ignoreWidget && builder.cm.display.input.needsContentAttribute) {
+    if (!widget)
+      widget = builder.content.appendChild(document.createElement("span"))
+    widget.setAttribute("cm-marker", marker.id)
+  }
+  if (widget) {
+    builder.cm.display.input.setUneditable(widget)
+    builder.content.appendChild(widget)
+  }
+  builder.pos += size
+  builder.trailingSpace = false
+}
+
+// Outputs a number of spans to make up a line, taking highlighting
+// and marked text into account.
+function insertLineContent(line, builder, styles) {
+  let spans = line.markedSpans, allText = line.text, at = 0
+  if (!spans) {
+    for (let i = 1; i < styles.length; i+=2)
+      builder.addToken(builder, allText.slice(at, at = styles[i]), interpretTokenStyle(styles[i+1], builder.cm.options))
+    return
+  }
+
+  let len = allText.length, pos = 0, i = 1, text = "", style, css
+  let nextChange = 0, spanStyle, spanEndStyle, spanStartStyle, collapsed, attributes
+  for (;;) {
+    if (nextChange == pos) { // Update current marker set
+      spanStyle = spanEndStyle = spanStartStyle = css = ""
+      attributes = null
+      collapsed = null; nextChange = Infinity
+      let foundBookmarks = [], endStyles
+      for (let j = 0; j < spans.length; ++j) {
+        let sp = spans[j], m = sp.marker
+        if (m.type == "bookmark" && sp.from == pos && m.widgetNode) {
+          foundBookmarks.push(m)
+        } else if (sp.from <= pos && (sp.to == null || sp.to > pos || m.collapsed && sp.to == pos && sp.from == pos)) {
+          if (sp.to != null && sp.to != pos && nextChange > sp.to) {
+            nextChange = sp.to
+            spanEndStyle = ""
+          }
+          if (m.className) spanStyle += " " + m.className
+          if (m.css) css = (css ? css + ";" : "") + m.css
+          if (m.startStyle && sp.from == pos) spanStartStyle += " " + m.startStyle
+          if (m.endStyle && sp.to == nextChange) (endStyles || (endStyles = [])).push(m.endStyle, sp.to)
+          // support for the old title property
+          // https://github.com/codemirror/CodeMirror/pull/5673
+          if (m.title) (attributes || (attributes = {})).title = m.title
+          if (m.attributes) {
+            for (let attr in m.attributes)
+              (attributes || (attributes = {}))[attr] = m.attributes[attr]
+          }
+          if (m.collapsed && (!collapsed || compareCollapsedMarkers(collapsed.marker, m) < 0))
+            collapsed = sp
+        } else if (sp.from > pos && nextChange > sp.from) {
+          nextChange = sp.from
+        }
+      }
+      if (endStyles) for (let j = 0; j < endStyles.length; j += 2)
+        if (endStyles[j + 1] == nextChange) spanEndStyle += " " + endStyles[j]
+
+      if (!collapsed || collapsed.from == pos) for (let j = 0; j < foundBookmarks.length; ++j)
+        buildCollapsedSpan(builder, 0, foundBookmarks[j])
+      if (collapsed && (collapsed.from || 0) == pos) {
+        buildCollapsedSpan(builder, (collapsed.to == null ? len + 1 : collapsed.to) - pos,
+                           collapsed.marker, collapsed.from == null)
+        if (collapsed.to == null) return
+        if (collapsed.to == pos) collapsed = false
+      }
+    }
+    if (pos >= len) break
+
+    let upto = Math.min(len, nextChange)
+    while (true) {
+      if (text) {
+        let end = pos + text.length
+        if (!collapsed) {
+          let tokenText = end > upto ? text.slice(0, upto - pos) : text
+          builder.addToken(builder, tokenText, style ? style + spanStyle : spanStyle,
+                           spanStartStyle, pos + tokenText.length == nextChange ? spanEndStyle : "", css, attributes)
+        }
+        if (end >= upto) {text = text.slice(upto - pos); pos = upto; break}
+        pos = end
+        spanStartStyle = ""
+      }
+      text = allText.slice(at, at = styles[i++])
+      style = interpretTokenStyle(styles[i++], builder.cm.options)
+    }
+  }
+}
+
+
+// These objects are used to represent the visible (currently drawn)
+// part of the document. A LineView may correspond to multiple
+// logical lines, if those are connected by collapsed ranges.
+export function LineView(doc, line, lineN) {
+  // The starting line
+  this.line = line
+  // Continuing lines, if any
+  this.rest = visualLineContinued(line)
+  // Number of logical lines in this visual line
+  this.size = this.rest ? lineNo(lst(this.rest)) - lineN + 1 : 1
+  this.node = this.text = null
+  this.hidden = lineIsHidden(doc, line)
+}
+
+// Create a range of LineView objects for the given lines.
+export function buildViewArray(cm, from, to) {
+  let array = [], nextPos
+  for (let pos = from; pos < to; pos = nextPos) {
+    let view = new LineView(cm.doc, getLine(cm.doc, pos), pos)
+    nextPos = pos + view.size
+    array.push(view)
+  }
+  return array
+}

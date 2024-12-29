@@ -1,1 +1,10 @@
-export let sawReadOnlySpans=!1,sawCollapsedSpans=!1;export function seeReadOnlySpans(){sawReadOnlySpans=!0}export function seeCollapsedSpans(){sawCollapsedSpans=!0}
+// Optimize some code when these features are not used.
+export let sawReadOnlySpans = false, sawCollapsedSpans = false
+
+export function seeReadOnlySpans() {
+  sawReadOnlySpans = true
+}
+
+export function seeCollapsedSpans() {
+  sawCollapsedSpans = true
+}

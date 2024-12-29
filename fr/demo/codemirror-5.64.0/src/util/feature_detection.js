@@ -1,1 +1,84 @@
-import{elt,range,removeChildren,removeChildrenAndAdd}from"./dom.js";import{ie,ie_version}from"./browser.js";export let dragAndDrop=function(){if(ie&&ie_version<9)return!1;let e=elt("div");return"draggable"in e||"dragDrop"in e}();let zwspSupported,badBidiRects;export function zeroWidthElement(e){if(null==zwspSupported){let t=elt("span","\u200b");removeChildrenAndAdd(e,elt("span",[t,document.createTextNode("x")])),0!=e.firstChild.offsetHeight&&(zwspSupported=t.offsetWidth<=1&&t.offsetHeight>2&&!(ie&&ie_version<8))}let t=zwspSupported?elt("span","\u200b"):elt("span","\xa0",null,"display: inline-block; width: 1px; margin-right: -1px");return t.setAttribute("cm-text",""),t}export function hasBadBidiRects(e){if(null!=badBidiRects)return badBidiRects;let t=removeChildrenAndAdd(e,document.createTextNode("A\u062eA")),n=range(t,0,1).getBoundingClientRect(),r=range(t,1,2).getBoundingClientRect();return removeChildren(e),!(!n||n.left==n.right)&&(badBidiRects=r.right-n.right<3)}export let splitLinesAuto=3!="\n\nb".split(/\n/).length?e=>{let t=0,n=[],r=e.length;for(;t<=r;){let r=e.indexOf("\n",t);-1==r&&(r=e.length);let i=e.slice(t,"\r"==e.charAt(r-1)?r-1:r),o=i.indexOf("\r");-1!=o?(n.push(i.slice(0,o)),t+=o+1):(n.push(i),t=r+1)}return n}:e=>e.split(/\r\n?|\n/);export let hasSelection=window.getSelection?e=>{try{return e.selectionStart!=e.selectionEnd}catch(t){return!1}}:e=>{let t;try{t=e.ownerDocument.selection.createRange()}catch(n){}return!(!t||t.parentElement()!=e)&&0!=t.compareEndPoints("StartToEnd",t)};export let hasCopyEvent=(()=>{let e=elt("div");return"oncopy"in e||(e.setAttribute("oncopy","return;"),"function"==typeof e.oncopy)})();let badZoomedRects=null;export function hasBadZoomedRects(e){if(null!=badZoomedRects)return badZoomedRects;let t=removeChildrenAndAdd(e,elt("span","x")),n=t.getBoundingClientRect(),r=range(t,0,1).getBoundingClientRect();return badZoomedRects=Math.abs(n.left-r.left)>1}
+import { elt, range, removeChildren, removeChildrenAndAdd } from "./dom.js"
+import { ie, ie_version } from "./browser.js"
+
+// Detect drag-and-drop
+export let dragAndDrop = function() {
+  // There is *some* kind of drag-and-drop support in IE6-8, but I
+  // couldn't get it to work yet.
+  if (ie && ie_version < 9) return false
+  let div = elt('div')
+  return "draggable" in div || "dragDrop" in div
+}()
+
+let zwspSupported
+export function zeroWidthElement(measure) {
+  if (zwspSupported == null) {
+    let test = elt("span", "\u200b")
+    removeChildrenAndAdd(measure, elt("span", [test, document.createTextNode("x")]))
+    if (measure.firstChild.offsetHeight != 0)
+      zwspSupported = test.offsetWidth <= 1 && test.offsetHeight > 2 && !(ie && ie_version < 8)
+  }
+  let node = zwspSupported ? elt("span", "\u200b") :
+    elt("span", "\u00a0", null, "display: inline-block; width: 1px; margin-right: -1px")
+  node.setAttribute("cm-text", "")
+  return node
+}
+
+// Feature-detect IE's crummy client rect reporting for bidi text
+let badBidiRects
+export function hasBadBidiRects(measure) {
+  if (badBidiRects != null) return badBidiRects
+  let txt = removeChildrenAndAdd(measure, document.createTextNode("A\u062eA"))
+  let r0 = range(txt, 0, 1).getBoundingClientRect()
+  let r1 = range(txt, 1, 2).getBoundingClientRect()
+  removeChildren(measure)
+  if (!r0 || r0.left == r0.right) return false // Safari returns null in some cases (#2780)
+  return badBidiRects = (r1.right - r0.right < 3)
+}
+
+// See if "".split is the broken IE version, if so, provide an
+// alternative way to split lines.
+export let splitLinesAuto = "\n\nb".split(/\n/).length != 3 ? string => {
+  let pos = 0, result = [], l = string.length
+  while (pos <= l) {
+    let nl = string.indexOf("\n", pos)
+    if (nl == -1) nl = string.length
+    let line = string.slice(pos, string.charAt(nl - 1) == "\r" ? nl - 1 : nl)
+    let rt = line.indexOf("\r")
+    if (rt != -1) {
+      result.push(line.slice(0, rt))
+      pos += rt + 1
+    } else {
+      result.push(line)
+      pos = nl + 1
+    }
+  }
+  return result
+} : string => string.split(/\r\n?|\n/)
+
+export let hasSelection = window.getSelection ? te => {
+  try { return te.selectionStart != te.selectionEnd }
+  catch(e) { return false }
+} : te => {
+  let range
+  try {range = te.ownerDocument.selection.createRange()}
+  catch(e) {}
+  if (!range || range.parentElement() != te) return false
+  return range.compareEndPoints("StartToEnd", range) != 0
+}
+
+export let hasCopyEvent = (() => {
+  let e = elt("div")
+  if ("oncopy" in e) return true
+  e.setAttribute("oncopy", "return;")
+  return typeof e.oncopy == "function"
+})()
+
+let badZoomedRects = null
+export function hasBadZoomedRects(measure) {
+  if (badZoomedRects != null) return badZoomedRects
+  let node = removeChildrenAndAdd(measure, elt("span", "x"))
+  let normal = node.getBoundingClientRect()
+  let fromRange = range(node, 0, 1).getBoundingClientRect()
+  return badZoomedRects = Math.abs(normal.left - fromRange.left) > 1
+}

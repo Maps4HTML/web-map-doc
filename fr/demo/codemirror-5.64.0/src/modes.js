@@ -1,1 +1,96 @@
-import{copyObj,createObj}from"./util/misc.js";export let modes={},mimeModes={};export function defineMode(e,t){arguments.length>2&&(t.dependencies=Array.prototype.slice.call(arguments,2)),modes[e]=t}export function defineMIME(e,t){mimeModes[e]=t}export function resolveMode(e){if("string"==typeof e&&mimeModes.hasOwnProperty(e))e=mimeModes[e];else if(e&&"string"==typeof e.name&&mimeModes.hasOwnProperty(e.name)){let t=mimeModes[e.name];"string"==typeof t&&(t={name:t}),(e=createObj(t,e)).name=t.name}else{if("string"==typeof e&&/^[\w\-]+\/[\w\-]+\+xml$/.test(e))return resolveMode("application/xml");if("string"==typeof e&&/^[\w\-]+\/[\w\-]+\+json$/.test(e))return resolveMode("application/json")}return"string"==typeof e?{name:e}:e||{name:"null"}}export function getMode(e,t){t=resolveMode(t);let o=modes[t.name];if(!o)return getMode(e,"text/plain");let n=o(e,t);if(modeExtensions.hasOwnProperty(t.name)){let e=modeExtensions[t.name];for(let t in e)e.hasOwnProperty(t)&&(n.hasOwnProperty(t)&&(n["_"+t]=n[t]),n[t]=e[t])}if(n.name=t.name,t.helperType&&(n.helperType=t.helperType),t.modeProps)for(let r in t.modeProps)n[r]=t.modeProps[r];return n}export let modeExtensions={};export function extendMode(e,t){let o=modeExtensions.hasOwnProperty(e)?modeExtensions[e]:modeExtensions[e]={};copyObj(t,o)}export function copyState(e,t){if(!0===t)return t;if(e.copyState)return e.copyState(t);let o={};for(let n in t){let e=t[n];e instanceof Array&&(e=e.concat([])),o[n]=e}return o}export function innerMode(e,t){let o;for(;e.innerMode&&(o=e.innerMode(t),o&&o.mode!=e);)t=o.state,e=o.mode;return o||{mode:e,state:t}}export function startState(e,t,o){return!e.startState||e.startState(t,o)}
+import { copyObj, createObj } from "./util/misc.js"
+
+// Known modes, by name and by MIME
+export let modes = {}, mimeModes = {}
+
+// Extra arguments are stored as the mode's dependencies, which is
+// used by (legacy) mechanisms like loadmode.js to automatically
+// load a mode. (Preferred mechanism is the require/define calls.)
+export function defineMode(name, mode) {
+  if (arguments.length > 2)
+    mode.dependencies = Array.prototype.slice.call(arguments, 2)
+  modes[name] = mode
+}
+
+export function defineMIME(mime, spec) {
+  mimeModes[mime] = spec
+}
+
+// Given a MIME type, a {name, ...options} config object, or a name
+// string, return a mode config object.
+export function resolveMode(spec) {
+  if (typeof spec == "string" && mimeModes.hasOwnProperty(spec)) {
+    spec = mimeModes[spec]
+  } else if (spec && typeof spec.name == "string" && mimeModes.hasOwnProperty(spec.name)) {
+    let found = mimeModes[spec.name]
+    if (typeof found == "string") found = {name: found}
+    spec = createObj(found, spec)
+    spec.name = found.name
+  } else if (typeof spec == "string" && /^[\w\-]+\/[\w\-]+\+xml$/.test(spec)) {
+    return resolveMode("application/xml")
+  } else if (typeof spec == "string" && /^[\w\-]+\/[\w\-]+\+json$/.test(spec)) {
+    return resolveMode("application/json")
+  }
+  if (typeof spec == "string") return {name: spec}
+  else return spec || {name: "null"}
+}
+
+// Given a mode spec (anything that resolveMode accepts), find and
+// initialize an actual mode object.
+export function getMode(options, spec) {
+  spec = resolveMode(spec)
+  let mfactory = modes[spec.name]
+  if (!mfactory) return getMode(options, "text/plain")
+  let modeObj = mfactory(options, spec)
+  if (modeExtensions.hasOwnProperty(spec.name)) {
+    let exts = modeExtensions[spec.name]
+    for (let prop in exts) {
+      if (!exts.hasOwnProperty(prop)) continue
+      if (modeObj.hasOwnProperty(prop)) modeObj["_" + prop] = modeObj[prop]
+      modeObj[prop] = exts[prop]
+    }
+  }
+  modeObj.name = spec.name
+  if (spec.helperType) modeObj.helperType = spec.helperType
+  if (spec.modeProps) for (let prop in spec.modeProps)
+    modeObj[prop] = spec.modeProps[prop]
+
+  return modeObj
+}
+
+// This can be used to attach properties to mode objects from
+// outside the actual mode definition.
+export let modeExtensions = {}
+export function extendMode(mode, properties) {
+  let exts = modeExtensions.hasOwnProperty(mode) ? modeExtensions[mode] : (modeExtensions[mode] = {})
+  copyObj(properties, exts)
+}
+
+export function copyState(mode, state) {
+  if (state === true) return state
+  if (mode.copyState) return mode.copyState(state)
+  let nstate = {}
+  for (let n in state) {
+    let val = state[n]
+    if (val instanceof Array) val = val.concat([])
+    nstate[n] = val
+  }
+  return nstate
+}
+
+// Given a mode and a state (for that mode), find the inner mode and
+// state at the position that the state refers to.
+export function innerMode(mode, state) {
+  let info
+  while (mode.innerMode) {
+    info = mode.innerMode(state)
+    if (!info || info.mode == mode) break
+    state = info.state
+    mode = info.mode
+  }
+  return info || {mode: mode, state: state}
+}
+
+export function startState(mode, a1, a2) {
+  return mode.startState ? mode.startState(a1, a2) : true
+}
