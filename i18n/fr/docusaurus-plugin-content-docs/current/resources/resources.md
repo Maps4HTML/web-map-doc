@@ -3,7 +3,12 @@ id: resources
 title: Ressources
 slug: /resources/resources
 ---
-
-:::info 
-En construction
-:::
+Cette page contient des descriptions et des liens vers des ressources logicielles qui peuvent vous aider si vous souhaitez publier des cartes web depuis votre propre site.
+## GeoServer
+[GeoServer](https://geoserver.org) est un système de gestion de contenu spatial complet pour publier du contenu cartographique sur le Web. GeoServer est un projet open source mature géré sous l'égide de la fondation Open Source Geospatial (OSGEO). Le [module MapML](https://docs.geoserver.org/latest/en/user/extensions/mapml/index.html) est une extension plugin open source robuste pour GeoServer qui permet la prise en charge de MapML à travers de nombreux standards de l'Open Geospatial Consortium supportés par GeoServer.
+## GDAL - Bibliothèque d'abstraction de données géospatiales
+[GDAL](https://gdal.org) est une application logicielle de traduction de formats d'interopérabilité haute performance qui lit et écrit une multitude de formats via une API de ligne de commande moderne. MapML est pris en charge pour les types de données [raster](https://gdal.org/en/stable/programs/gdal2tiles.html#mapml-options) et [vectorielles](https://gdal.org/en/stable/drivers/vector/mapml.html). Pour les rasters, GDAL prend en charge la re-tuilage des données d'entrée en pyramides de tuiles compatibles MapML ou en ensembles de matrices de tuiles, et il génère un document text/mapml qui peut être utilisé par un élément `<map-layer src="..."></map-layer>`. Pour les données vectorielles, l'API vectorielle de GDAL prend en charge la traduction en lecture-écriture d'une grande variété de formats vectoriels, y compris MapML. La prise en charge des attributs pour la *lecture* de MapML est conditionnelle à ce qu'il soit écrit dans une structure HTML très spécifique, c'est-à-dire qu'il peut lire les attributs du format que GDAL génère pour MapML.
+## Services de cartes web et services de tuiles de cartes web
+Si vous avez accès à des [services de cartes ou de tuiles basés sur des standards pour le web](https://www.geoseer.net/), par exemple Minnesota MapServer, Deegree ou même ESRI, il est très probable que vous puissiez « écrire votre propre » MapML à utiliser pour incorporer ces services dans une carte qui utilise le [visualiseur de cartes MapML.js](../installation), selon les exemples et la documentation de ce site.
+## Extension de navigateur MapML Chromium
+L'[extension de navigateur MapML](../extension/features/) peut être utilisée pour rendre et contrôler certains aspects de l'expérience utilisateur MapML.js. Aucune extension n'est disponible pour Firefox ou Safari à ce moment.
