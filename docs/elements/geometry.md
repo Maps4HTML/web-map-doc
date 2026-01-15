@@ -13,8 +13,7 @@ A `<map-geometry>` element has one child element, which can be a `<map-point>`, 
 
 ### `cs`
 
-Defines the Coordinate System of the geometry. When no `cs` is provided, the coordinate system of descendant `<map-coordinates>` elements is determined by a fallback to any in-scope `<map-meta name="cs" content="...">`.  If no fallback coordinate system is identified by a `<map-meta>` element, the default value of `pcrs` (projected coordinates) is used.
-
+Defines the Coordinate System of the geometry. When no `cs` is provided, the coordinate system of descendant `<map-coordinates>` elements is determined by a fallback to any in-scope `<map-meta name="cs" content="...">`. If no fallback coordinate system is specified by a `<map-meta>` element, the default coordinate system of the `map-layer` is used; if none is defined, `gcrs` (geographic coordinates) is used.
 
 | CRS | Description |
 |------|-------------|
@@ -91,7 +90,6 @@ For each member geometry, the same non-schema constraints apply as to the unique
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Point</map-featurecaption>
-      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
       <map-geometry cs="gcrs">
         <map-point class="point">
           <map-coordinates>-75.6916809 45.4186964</map-coordinates>
@@ -112,7 +110,6 @@ For each member geometry, the same non-schema constraints apply as to the unique
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Line</map-featurecaption>
-      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
       <map-geometry cs="gcrs">
         <map-linestring class="line">
           <map-coordinates>-75.6168365 45.471929 -75.6855011 45.458445 -75.7016373 45.4391764 -75.7030106 45.4259255 -75.7236099 45.4208652 -75.7565689 45.4117074 -75.7833481 45.384225 -75.8197403 45.3714435 -75.8516693 45.377714</map-coordinates>
@@ -133,7 +130,6 @@ For each member geometry, the same non-schema constraints apply as to the unique
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Polygon</map-featurecaption>
-      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
       <map-geometry cs="gcrs">
         <map-polygon class="polygon">
           <map-coordinates>-75.5859375 45.4656690 -75.6813812 45.4533876 -75.6961441 45.4239978 -75.7249832 45.4083331 -75.7792282 45.3772317 -75.7534790 45.3294614 -75.5831909 45.3815724 -75.6024170 45.4273712 -75.5673981 45.4639834 -75.5859375 45.4656690</map-coordinates>
@@ -155,7 +151,6 @@ For each member geometry, the same non-schema constraints apply as to the unique
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>MultiPoint</map-featurecaption>
-      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
       <map-geometry cs="gcrs">
         <map-multipoint class="point">
           <map-coordinates>-75.7016373 45.4391764 -75.7236099 45.4208652 -75.7833481 45.384225</map-coordinates>
@@ -176,7 +171,6 @@ For each member geometry, the same non-schema constraints apply as to the unique
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>MultiLineString</map-featurecaption>
-      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
       <map-geometry cs="gcrs">
         <map-multilinestring class="line">
           <map-coordinates>-75.6168365 45.471929 -75.6855011 45.458445 -75.7016373 45.4391764 -75.7030106 45.4259255</map-coordinates>
@@ -198,7 +192,6 @@ For each member geometry, the same non-schema constraints apply as to the unique
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>MultiPolygon</map-featurecaption>
-      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
       <map-geometry cs="gcrs">
         <map-multipolygon class="polygon">
           <map-polygon>
@@ -224,7 +217,6 @@ For each member geometry, the same non-schema constraints apply as to the unique
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Geometry Collection</map-featurecaption>
-      <!-- Setting the geometry coordinates to gcrs, as the default is pcrs -->
       <map-geometry cs="gcrs">
         <map-geometrycollection>
           <map-polygon class="polygon">

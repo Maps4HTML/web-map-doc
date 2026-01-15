@@ -37,7 +37,6 @@ Toutes les démonstrations comprises dans les pages de documentation contiennent
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Polygone</map-featurecaption>
-      <!-- Régler les coordonnées de géométrie à gcrs, puisque la valeur par défaut correspond à pcrs -->
       <map-geometry cs="gcrs">
         <map-polygon>
           <map-coordinates>-75.5859375 45.4656690 -75.6813812 45.4533876 -75.6961441 45.4239978 -75.7249832 45.4083331 -75.7792282 45.3772317 -75.7534790 45.3294614 -75.5831909 45.3815724 -75.6024170 45.4273712 -75.5673981 45.4639834 -75.5859375 45.4656690</map-coordinates>
