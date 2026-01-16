@@ -13,7 +13,7 @@ Un élément `<map-geometry>` a un élément-enfant qui peut être `<map-point>`
 
 ### `cs`
 
-Définit le système de coordonnées de la géométrie. Si aucun `cs` n’est fourni, le système de coordonnées des éléments descendants `<map-coordinates>` est déterminé par un retour vers n’importe `<map-meta name="cs" content="...">` dans la portée. Si aucun système de coordonnées n’est identifié par un élément `<map-meta>`, la valeur par défaut de `pcrs` (coordonnées projetées) est utilisée.
+Définit le système de coordonnées de la géométrie. Si aucun `cs` n’est fourni, le système de coordonnées des éléments descendants `<map-coordinates>` est déterminé par un retour vers n’importe `<map-meta name="cs" content="...">` dans la portée. Si aucun système de coordonnées de secours n’est spécifié par un élément `<map-meta>`, le système de coordonnées par défaut du `map-layer` est utilisé; si aucun n'est défini, `gcrs` (coordonnées géographiques) est utilisé.
 
 Système de référence de coordonnées
 | CRS | Description |
@@ -91,7 +91,6 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Point</map-featurecaption>
-      <!—Les coordonnées de la géométrie sont celles du gcrs, puisque le système de référence des coordonnées par défaut est pcrs -->
       <map-geometry cs="gcrs">
         <map-point class="point">
           <map-coordinates>-75.6916809 45.4186964</map-coordinates>
@@ -112,7 +111,6 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Ligne</map-featurecaption>
-      <!—Les coordonnées de la géométrie sont celles de gcrs, puisque le système de référence des coordonnées par défaut est pcrs -->
       <map-geometry cs="gcrs">
         <map-linestring class="line">
           <map-coordinates>-75.6168365 45.471929 -75.6855011 45.458445 -75.7016373 45.4391764 -75.7030106 45.4259255 -75.7236099 45.4208652 -75.7565689 45.4117074 -75.7833481 45.384225 -75.8197403 45.3714435 -75.8516693 45.377714</map-coordinates>
@@ -133,7 +131,6 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Polygone</map-featurecaption>
-      <!-- Les coordonnées de la géométrie sont celles de gcrs, puisque le système de référence des coordonnées par défaut est pcrs -->
       <map-geometry cs="gcrs">
         <map-polygon class="polygon">
           <map-coordinates>-75.5859375 45.4656690 -75.6813812 45.4533876 -75.6961441 45.4239978 -75.7249832 45.4083331 -75.7792282 45.3772317 -75.7534790 45.3294614 -75.5831909 45.3815724 -75.6024170 45.4273712 -75.5673981 45.4639834 -75.5859375 45.4656690</map-coordinates>
@@ -155,7 +152,6 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>MultiPoint</map-featurecaption>
-      <!-- Les coordonnées de la géométrie sont celles de gcrs, puisque le système de référence des coordonnées par défaut est pcrs -->
       <map-geometry cs="gcrs">
         <map-multipoint class="point">
           <map-coordinates>-75.7016373 45.4391764 -75.7236099 45.4208652 -75.7833481 45.384225</map-coordinates>
@@ -176,7 +172,6 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>MultiLineString</map-featurecaption>
-      <!-- Les coordonnées de la géométrie sont celles de gcrs, puisque le système de référence des coordonnées par défaut est pcrs -->
       <map-geometry cs="gcrs">
         <map-multilinestring class="line">
           <map-coordinates>-75.6168365 45.471929 -75.6855011 45.458445 -75.7016373 45.4391764 -75.7030106 45.4259255</map-coordinates>
@@ -198,7 +193,6 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>MultiPolygon</map-featurecaption>
-      <!-- Les coordonnées de la géométrie sont celles de gcrs, puisque le système de référence des coordonnées par défaut est pcrs -->
       <map-geometry cs="gcrs">
         <map-multipolygon class="polygon">
           <map-polygon>
@@ -224,7 +218,6 @@ Pour chaque géométrie membre, les mêmes contraintes non schéma s’appliquen
     <map-meta name="projection" content="OSMTILE"></map-meta>
     <map-feature>
       <map-featurecaption>Collection de géométries</map-featurecaption>
-      <!-- Les coordonnées de la géométrie sont celles de gcrs, puisque le système de référence des coordonnées par défaut est pcrs -->
       <map-geometry cs="gcrs">
         <map-geometrycollection>
           <map-polygon class="polygon">
