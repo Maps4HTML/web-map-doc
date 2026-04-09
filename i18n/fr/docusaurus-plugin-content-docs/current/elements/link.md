@@ -14,8 +14,7 @@ L'élément `<map-link>` a plusieurs usages :
 - fournir un modèle URL traité et converti en URL et extrait par le polyfill chaque fois que la carte requiert le rendu d’un nouveau contenu, comme un pavé, en utilisant les valeurs rel `tile`, `image`, `feature` et `query`, conjointement avec l’attribut  `tref="..."`. Ces liens sont automatiquement créés et suivis/importés, s’il y a lieu;
 - inclure des liens vers des graphiques de légende pour une couche. À l’heure actuelle, ces liens sont présentés comme des hyperliens, et non comme des graphiques;
 - fournir des liens vers des feuilles de style en cascade (CSS) et pmtiles en utilisant la valeur rel `stylesheet`, lesquelles sont importées automatiquement par le polyfill;
-- fournir des liens vers les couches au niveau de zoom natif suivant, en utilisant les valeurs rel `zoomin`, `zoomout`. Ces liens sont automatiquement suivis par le polyfill, s’il y a lieu.
-
+- les liens fournissent des gabarits d'URL (dans l'attribut `tref`) pour des points de terminaison de recherche géoréférencée via la valeur rel `search`, et pour l'autocomplétion par anticipation via la valeur rel `suggestions`. Ces liens alimentent le [contrôle de recherche](../../user-guide/search) lorsqu'il est [activé](../mapml-viewer/#controlslist) sur le visualiseur.
 <!-- démo/exemple -->
 <iframe src="../../../demo/map-link-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
 
@@ -40,6 +39,8 @@ L’attribut `rel` désigne le type de ressource auquel il est lié. MapML défi
 | `legend`     | La relation de lien `legend` désigne un lien vers des métadonnées, habituellement une image, décrivant les symboles utilisés dans la couche actuelle. Actuellement, le polyfill crée un hyperlien pour l’étiquette de la couche dans le contrôle des couches, lequel hyperlien s’ouvre dans un nouveau contexte de navigation. |
 | `query`      | La relation de lien `query` est utilisée conjointement avec l’attribut `tref="..."` pour établir un modèle URL permettant de créer une URL de requête de carte en fonction des gestes de l’utilisateur dans la carte, par exemple cliquer ou appuyer sur la carte. Ces URL sont extraites et la réponse est présentée dans une fenêtre contextuelle dans le haut de la carte. Ces requêtes peuvent retourner des réponses text/html ou text/mapml. Dans ce dernier cas, la réponse peut contenir plus d’une entité. Le cas échéant, une fenêtre contextuelle paginée est générée pour permettre à l’utilisateur de parcourir les métadonnées de chaque entité. |
 | `stylesheet` | Le lien importe une feuille de style en cascade (CSS) ou pmtiles à partir de la valeur `href`. |
+| `search`     | L'attribut `tref` contient un gabarit d'URL pour un point de terminaison de recherche géoréférencée. L'attribut `tref` doit contenir une référence de variable `{searchTerms}` qui est substituée par la requête de l'utilisateur. Seul le premier lien `search` par couche est utilisé. Une couche doit fournir un lien `search` pour que le contrôle de recherche devienne activé. Voir [Recherche](../../user-guide/search). |
+| `suggestions` | L'attribut `tref` contient un gabarit d'URL pour un point de terminaison d'autocomplétion par anticipation. Utilise la même substitution `{searchTerms}` que `search`. Un lien de suggestions est optionnel mais recommandé : lorsqu'il est présent, les résultats apparaissent au fur et à mesure que l'utilisateur tape (avec rebond). Seul le premier lien `suggestions` par couche est utilisé. Voir [Recherche](../../user-guide/search). |
 
 
 ---
@@ -90,7 +91,9 @@ Avis [désignation linguistique](https://datatracker.ietf.org/doc/html/rfc5646) 
 ---
 ### `tref`
 
-L’attribut `tref` contient une chaîne qui, une fois traitée, sera considérée comme une URL et sera extraite automatiquement par le polyfill. Cette chaîne est appelée modèle URL. Le traitement effectué avant qu’un modèle URL devienne une URL valide est une _substitution de référence à une variable_. Les variables sont créées par les éléments `<map-input name="foo">`. Le nom d’une variable peut être référencée dans la chaîne du modèle URL contenue dans la valeur `tref`, à l’aide de la notation de syntaxe `{foo}`. Une chaîne de modèle URL peut contenir aucune ou plusieurs références à une variable. Le traitement supprimera les références aux variables qui sont valides. Par conséquent, toutes les variables créées par les éléments `<map-input>`s qui sont référencées dans le modèle seront remplacées par la valeur de la variable au moment du traitement.
+L'attribut `tref` contient une chaîne qui, une fois traitée, sera considérée comme une URL et sera extraite automatiquement par le polyfill. Cette chaîne est appelée gabarit URL. Le traitement effectué avant qu'un gabarit URL devienne une URL valide est une _substitution de référence à une variable_. Les variables sont habituellement créées et nommées par les éléments `<map-input name="foo">`. Le nom d'une variable peut être référencée dans la chaîne du gabarit URL contenue dans la valeur `tref`, à l'aide de la notation de syntaxe `{foo}`. Une chaîne de gabarit URL peut contenir aucune ou plusieurs références à une variable. Le traitement résoudra les références aux variables qui sont valides. Par conséquent, toutes les variables créées par les éléments `<map-input>`s qui sont référencées dans le gabarit seront remplacées par la valeur de la variable au moment du traitement.
+
+Pour les valeurs `rel` de lien `search` ou `suggestions`, la variable `searchTerms` est **prédéfinie** et liée au texte saisi par l'utilisateur dans le formulaire du contrôle de recherche. La variable doit être utilisée dans le gabarit d'URL de l'attribut `tref`, via la référence de variable `{searchTerms}`.
 
 ---
 ### `tms`
@@ -130,6 +133,63 @@ Les requêtes média pour la carte peuvent inclure des propriétés CSS de carte
 ---
 
 ## Exemples
+
+### Recherche et suggestions
+
+Dans un document MapML distant, les liens `search` et `suggestions` sont des enfants de `<map-head>` :
+
+```xml
+<mapml- xmlns="http://www.w3.org/1999/xhtml">
+  <map-head>
+    <map-title>OpenStreetMap</map-title>
+    <map-link rel="search"
+              tref="https://photon.komoot.io/api/?q={searchTerms}&amp;limit=5"></map-link>
+    <map-link rel="suggestions"
+              tref="https://photon.komoot.io/api/?q={searchTerms}&amp;limit=5"></map-link>
+  </map-head>
+  <map-body>
+      <map-extent units="OSMTILE" checked="checked" hidden="hidden">
+        <map-input name="z" type="zoom" min="0" max="18" value="3"></map-input>
+        <map-input name="x" type="location" axis="column" units="tilematrix"></map-input>
+        <map-input name="y" type="location" axis="row" units="tilematrix"></map-input>
+        <map-link rel="tile"
+                  tref="https://tile.openstreetmap.org/{z}/{x}/{y}.png"></map-link>
+      </map-extent>
+  </map-body>
+</mapml->
+```
+
+En ligne dans le HTML, les liens `search` et `suggestions` sont des enfants directs de l'élément `<map-layer>` :
+
+```html
+<html lang="fr">
+  <head>...</head>
+  <body>
+    <mapml-viewer projection="OSMTILE" zoom="3" lat="45" lon="-75"
+                  controls controlslist="search">
+      <map-layer label="OpenStreetMap" checked>
+        <map-link rel="search"
+                  tref="https://photon.komoot.io/api/?q={searchTerms}&limit=5"></map-link>
+        <map-link rel="suggestions"
+                  tref="https://photon.komoot.io/api/?q={searchTerms}&limit=5"></map-link>
+        <map-extent units="OSMTILE" checked hidden>
+          <map-input name="z" type="zoom" min="0" max="18" value="3"></map-input>
+          <map-input name="x" type="location" axis="column" units="tilematrix"></map-input>
+          <map-input name="y" type="location" axis="row" units="tilematrix"></map-input>
+          <map-link rel="tile"
+                    tref="https://tile.openstreetmap.org/{z}/{x}/{y}.png"></map-link>
+        </map-extent>
+      </map-layer>
+    </mapml-viewer>
+  </body>
+</html>
+```
+
+La commande de recherche est désactivée tant qu'au moins une couche cochée (`checked`) ne fournit pas
+un `<map-link rel="search">`. Le lien `suggestions` est optionnel — sans celui-ci, le
+contrôle fonctionne toujours mais ne retourne des résultats que lors de la soumission.
+
+---
 
 ### Tile Mapping Specification (tms)
 
@@ -176,6 +236,8 @@ Les requêtes média pour la carte peuvent inclure des propriétés CSS de carte
 
 |  | Spéc. | Visualiseur | API |
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Interpréter les lieux et les positions sur une carte (5.3)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-locations) |  |  |  |
+|           <div class="undecided">[Sélectionner la vue d'une carte à partir d'une adresse ou d'un nom de lieu (5.3.2)](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/145)</div>             | complet | [complet](https://maps4html.org/web-map-doc/docs/user-guide/search) | [complet](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#events) |
 | [**Entités vectorielles et superpositions (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors) |  |  |  |
 |                        <div class="requirement">Affiche l’attribution des données cartographiques et les liens (5.2.4)</div>                   | complet | complet |  |
 | [**Navigation des utilisateurs (vue panoramique et zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |

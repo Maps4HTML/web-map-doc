@@ -22,7 +22,7 @@ The `<mapml-viewer>` element is the main element you can use to put a custom Web
   </style>
 </head>
 <body>
-  <mapml-viewer projection="OSMTILE" zoom="0" lat="0.0" lon="0.0" controls>
+  <mapml-viewer projection="OSMTILE" zoom="0" lat="0.0" lon="0.0" controls controlslist="geolocation search">
     <map-layer label="OpenStreetMap" src="https://geogratis.gc.ca/mapml/en/osmtile/osm/" checked></map-layer>
   </mapml-viewer>
 </body>
@@ -82,7 +82,9 @@ The default projection is `OSMTILE`.
 
 ### `controlslist`
 
-`controlslist` - an enumerated attribute, possible values are: "`nofullscreen`", "`nolayer`", "`noreload`", "`noscale`" and "`nozoom`".  Occasionally, you may not want your users to have access to a particular control, so you may prune the set of controls automatically presented (when you have used the `controls` boolean attribute).
+`controlslist` - an enumerated attribute, possible values are: "`nofullscreen`", "`nolayer`", "`noreload`", "`noscale`", "`nozoom`", "`geolocation`" and "`search`".  The `no*` tokens let you prune the set of controls automatically presented (when you have used the `controls` boolean attribute), while unlike the `no*` tokens (which hide default controls), the `geolocation` and `search` tokens are **opt-in**. `geolocation` and `search` add location and search controls to the map, respectively. The search control is `disabled` by default, and becomes enabled only when at least one `checked` [`<map-layer>`](../layer/) contains a [`<map-link rel="search">`](../link/) element.
+
+For a full guide to configuring and customizing search, see the [Search user guide](../../user-guide/search).
 
 ---
 
@@ -132,8 +134,9 @@ present. When it is not present or removed, these features are enabled again.
 |            <div class="requirement">Display a basic map without JavaScript (5.1.5)</div>             | full | [limited](https://maps4html.org/experiments/progressive-enhancement/) |  |
 |            <div class="requirement">Display map content in a users preferred language (5.1.6)</div>            | [full](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/136) | [full](https://github.com/Maps4HTML/mapml-extension) |  |
 | [**Interpreting locations and map positions (5.3)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-locations) |  |  |  |
-|           <div class="requirement">Select map view from latitude and longitude point (5.3.1)</div>             | full | full | [full](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#zoomtolat-lon-zoom) |
-|           <div class="undecided">Display map tiles defined in various common coordinate systems (5.3.3)</div>             | [full](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/14) | full | [full](https://maps4html.org/web-map-doc/docs/api/custom-projections) |
+|           <div class="requirement">Select map view from latitude and longitude point (5.3.1)</div>             | full | full | [full](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#zoomtolat-lon-zoom) |
+|           <div class="undecided">[Select map view from street address or place name (5.3.2)](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/145)</div>             | full | [full](https://maps4html.org/web-map-doc/docs/user-guide/search) | [full](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#events) |
+|           <div class="undecided">Display map tiles defined in various common coordinate systems (5.3.3)</div>             | [full](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/14) | full | [full](https://maps4html.org/web-map-doc/docs/api/custom-projections) |
 |           <div class="undecided">Reproject map tile data into a new projection or globe view (5.3.4)</div>             | [under discussion](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/3) | none |  |
 |           <div class="undecided">Save the location or export to other application (5.3.5)</div>             | limited | limited |  |
 | [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |

@@ -13,13 +13,13 @@ L’interface HTMLMapmlViewerElement représente l’élément `<mapml-viewer>`.
 
 | Nom de la propriété      	| Description                                          	|
 |--------------	|--------------------------------------------------------	|
-| [controls](#controls)     	| Active ou désactive les contrôles natifs de la carte. Reproduit l’attribut controls.    	|
-| [controlsList](#controlslist) 	| Permet de changer l’ensemble des contrôles natifs. Reproduit l’attribut controlslist. 	|
-| [extent](#extent)       	| Retourne l’étendue de la carte affichée. En lecture seule.           	|
-| [lat](#lat)          	| Obtient ou définit la latitude de la carte. Reproduit dans l’attribut de contenu lat. Aucun effet sur l'état dynamique de la carte. |
-| [lon](#lon)          	| Obtient ou définit la longitude de la carte. Reproduit dans l’attribut de contenu lon. Aucun effet sur l'état dynamique de la carte.|
-| [projection](#projection)   	| Projection de la carte. Reproduit l’attribut projection.       	|
-| [zoom](#zoom)   	| Obtient ou définit le niveau de zoom de la carte. Reproduit dans l’attribut de contenu zoom. Aucun effet sur l'état dynamique de la carte.|
+| [controls](#controls)     	| Active ou désactive les contrôles natifs de la carte. Reproduit l'attribut `controls`.    	|
+| [controlsList](#controlslist) 	| Permet de changer l'ensemble des contrôles natifs par script. Notez l'utilisation du camelCase pour le nom de la propriété vs le nom de l'attribut en minuscules. Reproduit l'attribut `controlslist`. 	|
+| [extent](#extent)       	| Retourne l'étendue de la carte affichée. En lecture seule.           	|
+| [lat](#lat)          	| Obtient ou définit la latitude de la carte. Reproduit dans l'attribut de contenu lat. Aucun effet sur l'état dynamique de la carte. |
+| [lon](#lon)          	| Obtient ou définit la longitude de la carte. Reproduit dans l'attribut de contenu lon. Aucun effet sur l'état dynamique de la carte.|
+| [projection](#projection)   	| Projection de la carte. Reproduit l'attribut `projection`.       	|
+| [zoom](#zoom)   	| Obtient ou définit le niveau de zoom de la carte. Reproduit dans l'attribut de contenu `zoom`. Aucun effet sur l'état dynamique de la carte.|
 
 ### controls
 
@@ -45,8 +45,10 @@ qui aide l'utilisateur à sélectionner les contrôles à afficher sur l'éléme
 Pour définir l’attribut controlslist :
 ```js
 let map = document.querySelector('mapml-viewer');
-map.controlsList.value = "noreload nozoom"; // les valeurs peuvent être noreload | nofullscreen | nozoom | nolayer
+map.controlsList.value = "noreload nozoom"; // les valeurs peuvent être noreload | nofullscreen | nozoom | nolayer | search | geolocation
 map.controlsList.add("nofullscreen"); // peut également être ajouté à l'aide de la méthode 'add'
+map.controlsList.add("geolocation");  // ajoute la commande de localisation
+map.controlsList.add("search"); // ajoute la commande de recherche, désactivée jusqu'à ce qu'un lien de gabarit d'URL de recherche soit défini
 map.controlsList.toggle("nolayer"); // peut également être basculé à l'aide de la méthode 'toggle.
 // Voir toutes les méthodes ici - https://developer.mozilla.org/fr/docs/Web/API/DOMTokenList
 ```
@@ -224,7 +226,8 @@ let zoom = map.zoom;
 | [viewSource()](#viewsource)             	| Affiche la source de la carte.                                          	|
 | [defineCustomProjection(options)](#definecustomprojectionoptions)	| Définir une projection personnalisée à utiliser par la page.  |
 | [zoomTo(lat, lon, zoom)](#zoomtolat-lon-zoom) | Survole la carte ou effectue un mouvement panoramique vers un (nouvel) emplacement et à un autre niveau de zoom.|
-| [geojson2mapml(json, options)](#zoomtolat-lon-zoom) | Convertit une caractéristique GeoJSON ou une chaîne ou un objet de collection de caractéristiques en élément MapML `<map-layer>` contenant un ou plusieurs éléments `<map-feature>`. |
+| [zoomToExtent(west, south, east, north)](#zoomtoextentwest-south-east-north) | Ajuste la vue de la carte à une étendue géographique. |
+| [geojson2mapml(json, options)](#geojson2mapml) | Convertit une caractéristique GeoJSON ou une chaîne ou un objet de collection de caractéristiques en élément MapML `<map-layer>` contenant un ou plusieurs éléments `<map-feature>`. |
 | [matchMedia(mediaQueryString)](#matchmediamediaquerystring)        | Renvoie un objet similaire à [MediaQueryList](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList). |
 
 
@@ -331,6 +334,19 @@ navigator.geolocation.getCurrentPosition(success, error, options);
 
 ---
 
+### zoomToExtent(west, south, east, north)
+
+Ajuste la vue de la carte à l'étendue géographique définie par les quatre valeurs de coordonnées,
+en choisissant automatiquement le niveau de zoom maximal approprié.
+
+```js
+let map = document.querySelector('mapml-viewer');
+// Ajuster la carte pour afficher le sud de l'Ontario
+map.zoomToExtent(-80, 43, -70, 48);
+```
+
+---
+
 ### geojson2mapml(json, options)
 
 Convertit une caractéristique GeoJSON ou une chaîne ou un objet de collection de caractéristiques en élément MapML `<map-layer>` contenant un ou plusieurs éléments `<map-feature>`.
@@ -405,7 +421,60 @@ Bien que cela ne soit pas strictement des fonctionnalités "média", certaines p
 | zoomend       | Déclenché après que le niveau de zoom de la carte a changé |
 | preclick      | Déclenché avant que l’utilisateur clique sur la carte  |
 | contextmenu   | Déclenché lorsque l’utilisateur fait un clic droit sur la carte ou touche celle-ci |
+| [mapsearch](#mapsearch) | Déclenché après que les réponses de recherche arrivent de toutes les couches activées pour la recherche. |
+| [mapsuggestions](#mapsuggestions) | Déclenché après que les réponses de suggestions par anticipation arrivent de toutes les couches activées pour la recherche. |
 
+### mapsearch
+
+Déclenché sur l'élément `<mapml-viewer>` après que les réponses de recherche ont été reçues de toutes les couches cochées qui contiennent un [`<map-link rel="search">`](../elements/link/#rel). Déclenché lorsque l'utilisateur appuie sur **Entrée** dans le champ de recherche **ou sélectionne une suggestion** dans la liste déroulante d'anticipation (sélectionner une suggestion utilise le texte d'affichage de la suggestion comme requête de recherche). L'événement se propage (bubbles) et est annulable.
+
+La structure `e.detail` est identique à [`mapsuggestions`](#mapsuggestions).
+
+Par défaut, le gestionnaire intégré de l'événement `mapsearch` affiche une liste de résultats cliquables dans le panneau de recherche, navigue vers le premier résultat et maintient le focus sur le champ de recherche. Pour chaque entité, il s'attend à ce que `e.detail.responses[].data` soit une **FeatureCollection GeoJSON** et recherche :
+
+- **Nom d'affichage** — utilise `properties.display_name` si présent ; sinon construit une chaîne séparée par des virgules à partir de `properties.name`, `city`, `county`, `state` et `country` (en ignorant les doublons de `name`). Se rabat sur `"Unnamed"`.
+- **Navigation sur la carte** — effectue un zoom et un panoramique pour ajuster `feature.bbox` (`[ouest, sud, est, nord]`), en se rabattant sur `properties.extent` (même format). Si aucun des deux n'est disponible, centre la carte sur la première valeur `geometry.coordinates` (`[lon, lat]`) au niveau de zoom `properties.zoom` (par défaut `14`).
+
+Appelez `e.preventDefault()` pour supprimer la navigation par défaut et gérer les résultats vous-même.
+
+```js
+let map = document.querySelector('mapml-viewer');
+map.addEventListener('mapsearch', (e) => {
+  e.preventDefault(); // prendre en charge le traitement des résultats
+  const { query, responses } = e.detail;
+  for (const { data, layer } of responses) {
+    // data est le JSON retourné par le point de terminaison de recherche
+    for (const feature of data.features) {
+      console.log(feature.properties.display_name, feature.bbox);
+    }
+  }
+});
+```
+
+---
+
+### mapsuggestions
+
+Déclenché sur l'élément `<mapml-viewer>` après que les réponses de suggestions ont été reçues de toutes les couches cochées qui contiennent un [`<map-link rel="suggestions">`](../elements/link/#rel). L'événement se propage (bubbles) et est annulable.
+
+| Propriété `e.detail` | Description |
+|---------------------|-------------|
+| `query` | La chaîne de recherche saisie par l'utilisateur. |
+| `responses` | Un tableau d'objets `{ data, link, layer }` — un par couche répondante. `data` est la réponse JSON analysée, `link` est l'élément `<map-link>` d'origine, et `layer` est l'élément `<map-layer>`. |
+
+Appelez `e.preventDefault()` pour supprimer la liste déroulante de suggestions intégrée et gérer les résultats vous-même.
+
+```js
+let map = document.querySelector('mapml-viewer');
+map.addEventListener('mapsuggestions', (e) => {
+  e.preventDefault(); // prendre en charge le rendu
+  const { query, responses } = e.detail;
+  for (const { data, layer } of responses) {
+    // data est le JSON retourné par le point de terminaison de suggestions
+    console.log(layer.label, data);
+  }
+});
+```
 ---
 ## Exemples
 
@@ -766,6 +835,8 @@ let output = map.geojson2mapml(json);
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
 | [**Propriétés**](#propriétés) | complet | complet | complet |
 | [**Méthodes**](#méthodes) | limité * | complet | limité * |
+| [**Interpréter les lieux et les positions sur une carte (5.3)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-locations) |  |  |  |
+|           <div class="undecided">[Sélectionner la vue d'une carte à partir d'une adresse ou d'un nom de lieu (5.3.2)](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/145)</div>             | complet | [complet](https://maps4html.org/web-map-doc/docs/user-guide/search) | [complet](#events) |
 
 <details>
 <summary>Exceptions *</summary>

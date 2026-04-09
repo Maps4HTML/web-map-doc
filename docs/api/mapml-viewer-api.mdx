@@ -13,13 +13,13 @@ The HTMLMapmlViewerElement interface represents the `<mapml-viewer>` element.
 
 | Property name      	| Description                                          	|
 |--------------	|--------------------------------------------------------	|
-| [controls](#controls)     	| Turns native map controls on or off. Reflects the controls attribute.    	|
-| [controlsList](#controlslist) 	| Allows to change the set of native controls. Reflects the controlslist attribute. 	|
+| [controls](#controls)     	| Turns native map controls on or off. Reflects the `controls` attribute.    	|
+| [controlsList](#controlslist) 	| Allows to change the set of native controls with script. Note use of camelCase of the property name vs lowercase attribute name. Reflects the `controlslist` attribute. 	|
 | [extent](#extent)       	| Returns the extent of the current map view. Read only.           	|
 | [lat](#lat)          	| Get or set the map's latitude. Reflects to the lat content attribute. No effect on map dynamic state. |
 | [lon](#lon)          	| Get or set the map's longitude. Reflects to the lon content attribute. No effect on map dynamic state. |
-| [projection](#projection)   	| The map's projection. Reflects the projection attribute.       	|
-| [zoom](#zoom)   	| Get or set the map's zoom level. Reflects to the zoom content attribute. No effect on map dynamic state. |
+| [projection](#projection)   	| The map's projection. Reflects the `projection` attribute.       	|
+| [zoom](#zoom)   	| Get or set the map's zoom level. Reflects to the `zoom` content attribute. No effect on map dynamic state. |
 
 ### controls
 
@@ -45,8 +45,10 @@ that helps the user select what controls to display on the `mapml-viewer` elemen
 To set the controlslist attribute:
 ```js
 let map = document.querySelector('mapml-viewer');
-map.controlsList.value = "noreload nozoom"; // values can be noreload | nofullscreen | nozoom | nolayer
+map.controlsList.value = "noreload nozoom"; // values can be noreload | nofullscreen | nozoom | nolayer | search | geolocation
 map.controlsList.add("nofullscreen"); // can also add using the 'add' method
+map.controlsList.add("geolocation");  // adds the locate control
+map.controlsList.add("search"); // adds the search control, disabled until a search URL template link is defined
 map.controlsList.toggle("nolayer"); // can also toggle using the 'toggle' method
 // view all methods here - https://developer.mozilla.org/en-US/docs/Web/API/DOMTokenList
 ```
@@ -221,7 +223,8 @@ let zoom = map.zoom;
 | [viewSource()](#viewsource)             	| View the source of the map.                                          	|
 | [defineCustomProjection(options)](#definecustomprojectionoptions) 	| Define a custom projection for use by the page. |
 | [zoomTo(lat, lon, zoom)](#zoomtolat-lon-zoom) | Fly or pan the map to a (new) location and zoom level.|
-| [geojson2mapml(json, options)](#zoomtolat-lon-zoom) | Add a GeoJSON Layer to the map. |
+| [zoomToExtent(west, south, east, north)](#zoomtoextentwest-south-east-north) | Fit the map view to a geographic extent. |
+| [geojson2mapml(json, options)](#geojson2mapml) | Add a GeoJSON Layer to the map. |
 | [matchMedia(mediaQueryString)](#matchmediamediaquerystring)        | Returns a [MediaQueryList](https://developer.mozilla.org/en-US/docs/Web/API/MediaQueryList)-like object.
 
 
@@ -328,6 +331,19 @@ navigator.geolocation.getCurrentPosition(success, error, options);
 
 ---
 
+### zoomToExtent(west, south, east, north)
+
+Fit the map view to the geographic extent defined by the four coordinate values,
+automatically choosing the appropriate maximum zoom level. 
+
+```js
+let map = document.querySelector('mapml-viewer');
+// Fit the map to show southern Ontario
+map.zoomToExtent(-80, 43, -70, 48);
+```
+
+---
+
 ### geojson2mapml(json, options)
 
 Convert a GeoJSON feature or feature collection string or object to MapML [`<map-layer>`](/web-map-doc/docs/elements/layer/) containing one or more [`<map-feature>`](/web-map-doc/docs/elements/feature/) elements. Returns and adds the converted layer element to the map.
@@ -406,6 +422,79 @@ state of the queried map properties (projection, zoom, extent); any change to th
 | zoomend       | Fired after the map has changed zoom level |
 | preclick      | Fired before a click on the map is triggered.  May not be a primitive. |
 | contextmenu   | Fired when user right-clicks or long presses on map. May not be a primitive.|
+| [mapsearch](#mapsearch) | Fired after search responses arrive from all search-enabled layers. |
+| [mapsuggestions](#mapsuggestions) | Fired after typeahead suggestion responses arrive from all search-enabled layers. |
+
+### mapsearch
+
+Fired on the `<mapml-viewer>` element after search responses have been received
+from all checked layers that contain a
+[`<map-link rel="search">`](../elements/link/#rel). Triggered when the user
+presses **Enter** in the search input **or selects a suggestion** from the
+typeahead dropdown (selecting a suggestion uses the suggestion's display text as
+a search query). The event bubbles and is cancelable.
+
+The `e.detail` structure is identical to [`mapsuggestions`](#mapsuggestions).
+
+By default, the built-in `mapsearch` event handler renders a list of clickable
+results in the search panel, navigates to the first result, and keeps focus on
+the search input. For each feature it expects `e.detail.responses[].data` to be
+a **GeoJSON FeatureCollection** and looks for:
+
+- **Display name** — uses `properties.display_name` if present; otherwise
+  builds a comma-separated string from `properties.name`, `city`, `county`,
+  `state`, and `country` (skipping duplicates of `name`). Falls back to
+  `"Unnamed"`.
+- **Map navigation** — zooms and pans to fit `feature.bbox`
+  (`[west, south, east, north]`), falling back to `properties.extent` (same
+  format). If neither is available, centers the map on the first 
+  `geometry.coordinates` (`[lon, lat]`) value at `properties.zoom` (default `14`).
+
+Call `e.preventDefault()` to suppress the default navigation and handle results
+yourself.
+
+```js
+let map = document.querySelector('mapml-viewer');
+map.addEventListener('mapsearch', (e) => {
+  e.preventDefault(); // take over result handling
+  const { query, responses } = e.detail;
+  for (const { data, layer } of responses) {
+    // data is the JSON returned by the search endpoint
+    for (const feature of data.features) {
+      console.log(feature.properties.display_name, feature.bbox);
+    }
+  }
+});
+```
+
+---
+
+### mapsuggestions
+
+Fired on the `<mapml-viewer>` element after suggestions responses have been
+received from all checked layers that contain a
+[`<map-link rel="suggestions">`](../elements/link/#rel). The event bubbles and
+is cancelable.
+
+| `e.detail` property | Description |
+|---------------------|-------------|
+| `query` | The search string the user typed. |
+| `responses` | An array of `{ data, link, layer }` objects — one per responding layer. `data` is the parsed JSON response, `link` is the originating `<map-link>` element, and `layer` is the `<map-layer>` element. |
+
+Call `e.preventDefault()` to suppress the built-in suggestion dropdown and
+handle results yourself.
+
+```js
+let map = document.querySelector('mapml-viewer');
+map.addEventListener('mapsuggestions', (e) => {
+  e.preventDefault(); // take over rendering
+  const { query, responses } = e.detail;
+  for (const { data, layer } of responses) {
+    // data is the JSON returned by the suggestions endpoint
+    console.log(layer.label, data);
+  }
+});
+```
 
 ---
 
@@ -773,6 +862,8 @@ let output = map.geojson2mapml(json);
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
 | [**Properties**](#properties) | full | full | full |
 | [**Methods**](#methods) | partial * | full | partial * |
+| [**Interpreting locations and map positions (5.3)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-locations) |  |  |  |
+|           <div class="undecided">[Select map view from street address or place name (5.3.2)](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/145)</div>             | full | [full](https://maps4html.org/web-map-doc/docs/user-guide/search) | [full](#events) |
 
 <details>
 <summary>Exceptions *</summary>

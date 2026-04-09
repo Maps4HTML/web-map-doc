@@ -32,16 +32,23 @@ module.exports = {
   ],
   'User Guide': [
     {
-      'Getting Started': [
+      type: 'category',
+      label: 'Getting Started',
+      key: 'user-guide-getting-started',
+      items: [
         'user-guide/quick-start'
       ],
+    },
+    'user-guide/search',
+    {
       'Styling': [
         'user-guide/creating-styles',
         'user-guide/using-styles'
       ],
       'Tutorials': [
         'user-guide/getting-started',
-        'user-guide/modifying-map'
+        'user-guide/modifying-map',
+        'user-guide/custom-handlers'
       ]
     }
   ],
