@@ -15,7 +15,7 @@ maps.  Most of the extensions center on proposed new values of the `rel` attribu
 - provide a URL template that is processed and converted to a URL and fetched by the polyfill, each time the map requires new content to render, such as a tile, via the `tile`, `image`, `feature` and `query` rel values, in conjunction with the `tref="..."` attribute. Such links are automatically created and followed / imported when appropriate.
 - include links to legend graphics for a layer.  Currently such links are rendered as hyperlinks, not as graphics.
 - provide links to CSS and pmtiles stylesheets via the `stylesheet` rel value, which are imported by the polyfill automatically.
-- provide links to layers at next native zoom level via `zoomin`, `zoomout` rel values.  Such links are automatically followed by the polyfill when appropriate.
+- links provide URL templates (in the `tref` attribute) for georeferenced search endpoints via the `search` rel value, and for typeahead/autocomplete via the `suggestions` rel value.  These links power the [search control](../../user-guide/search) when it is [enabled](../mapml-viewer/#controlslist) on the viewer.
 
 <!-- demo / example -->
 <iframe src="../../../demo/map-link-demo/" title="MapML Demo" height="410" width="100%" scrolling="no" frameBorder="0"></iframe>
@@ -42,6 +42,8 @@ defines several uses of existing and new `rel` keyword values.
 | `legend`     | The `legend` link relation designates a link to metadata, typically an image, describing the symbology used by the current layer.  Currently, the polyfill creates a hyperlink for the label of the layer in the layer control, which opens in a new browsing context. |
 | `query`      | The `query` link relation is used in combination with the `tref="..."` attribute to establish a URL template that composes a map query URL based on user map gestures such as click or touch. These URLs are fetched and the response presented on top of the map as a popup. Such queries can return text/html or text/mapml responses. In the latter case, the response may contain more than one feature, in which case a 'paged' popup is generated, allowing the user to cycle through the features' individual metadata. |
 | `stylesheet` | The link imports a CSS or [pmtiles](../../user-guide/creating-styles) stylesheet from the `href` value. |
+| `search`     | The `tref` attribute contains a URL template for a georeferenced search endpoint. The `tref` attribute must contain a `{searchTerms}` variable reference that is substituted with the user's query. Only the first `search` link per layer is used. A layer must provide a `search` link for the search control to become enabled. See [Search](../../user-guide/search). |
+| `suggestions` | The `tref` attribute contains a URL template for a typeahead / autocomplete endpoint. Uses the same `{searchTerms}` substitution as `search`. A suggestions link is optional but recommended: when present, results appear as the user types (debounced). Only the first `suggestions` link per layer is used. See [Search](../../user-guide/search). |
 
 
 ---
@@ -104,13 +106,17 @@ Advisory [language designation](https://datatracker.ietf.org/doc/html/rfc5646) a
 The `tref` attribute contains a string that, once processed, will be treated as 
 a URL and fetched automatically by the polyfill. The string is known as a URL
 template.  The processing that takes place prior to a URL template becoming a
-valid URL is _variable reference substitution_.  Variables are created by 
-`<map-input name="foo">` elements.  The name of the variable can be
+valid URL is _variable reference substitution_.  Variables are usually created 
+and named by `<map-input name="foo">` elements.  The name of the variable can be
 referenced in the URL template string contained in the `tref` value, using the
 `{foo}` syntax notation.  A URL template string can contain 0 or more variable
-references.  Processing will remove variable references that are valid. That is,
+references.  Processing will resolve variable references that are valid. That is,
 all variables that have been created by `<map-input>`s that are referenced in the
 template will be replaced with the value of the variable at the time of processing.
+
+For link `rel` values `search` or `suggestions`, the variable `searchTerms` is **predefined**
+and bound to user text input from the search control form. The variable should be 
+used in the `tref` attribute URL template, via the `{searchTerms}` variable reference.
 
 ---
 ### `tms`
@@ -161,6 +167,63 @@ and [extent](../../api/mapml-viewer-api#extent).
 
 ## Examples
 
+### Search and suggestions
+
+In a remote MapML document, `search` and `suggestions` links are children of `<map-head>`:
+
+```xml
+<mapml- xmlns="http://www.w3.org/1999/xhtml">
+  <map-head>
+    <map-title>OpenStreetMap</map-title>
+    <map-link rel="search"
+              tref="https://photon.komoot.io/api/?q={searchTerms}&amp;limit=5"></map-link>
+    <map-link rel="suggestions"
+              tref="https://photon.komoot.io/api/?q={searchTerms}&amp;limit=5"></map-link>
+  </map-head>
+  <map-body>
+      <map-extent units="OSMTILE" checked="checked" hidden="hidden">
+        <map-input name="z" type="zoom" min="0" max="18" value="3"></map-input>
+        <map-input name="x" type="location" axis="column" units="tilematrix"></map-input>
+        <map-input name="y" type="location" axis="row" units="tilematrix"></map-input>
+        <map-link rel="tile"
+                  tref="https://tile.openstreetmap.org/{z}/{x}/{y}.png"></map-link>
+      </map-extent>
+  </map-body>
+</mapml->
+```
+
+Within inline in HTML, the `search` and `suggestions` links are direct children of the `<map-layer>` element:
+
+```html
+<html lang="en">
+  <head>...</head>
+  <body>
+    <mapml-viewer projection="OSMTILE" zoom="3" lat="45" lon="-75"
+                  controls controlslist="search">
+      <map-layer label="OpenStreetMap" checked>
+        <map-link rel="search"
+                  tref="https://photon.komoot.io/api/?q={searchTerms}&limit=5"></map-link>
+        <map-link rel="suggestions"
+                  tref="https://photon.komoot.io/api/?q={searchTerms}&limit=5"></map-link>
+        <map-extent units="OSMTILE" checked hidden>
+          <map-input name="z" type="zoom" min="0" max="18" value="3"></map-input>
+          <map-input name="x" type="location" axis="column" units="tilematrix"></map-input>
+          <map-input name="y" type="location" axis="row" units="tilematrix"></map-input>
+          <map-link rel="tile"
+                    tref="https://tile.openstreetmap.org/{z}/{x}/{y}.png"></map-link>
+        </map-extent>
+      </map-layer>
+    </mapml-viewer>
+  </body>
+</html>
+```
+
+The search control is disabled until at least one `checked` layer provides
+a `<map-link rel="search">`. The `suggestions` link is optional — without it the
+control still works but only returns results on submission.
+
+---
+
 ### Tile Mapping Specification (tms)
 
 ```html
@@ -206,6 +269,8 @@ and [extent](../../api/mapml-viewer-api#extent).
 
 |  | Spec | Viewer | API |
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
+| [**Interpreting locations and map positions (5.3)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-locations) |  |  |  |
+|           <div class="undecided">[Select map view from street address or place name (5.3.2)](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/145)</div>             | full | [full](https://maps4html.org/web-map-doc/docs/user-guide/search) | [full](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#events) |
 | [**Vector features and overlays (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors) |  |  |  |
 |                        <div class="requirement">Display map data attribution and links (5.2.4)</div>                   | full | full |  |
 | [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |
