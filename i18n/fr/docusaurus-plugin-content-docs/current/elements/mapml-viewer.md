@@ -110,7 +110,7 @@ carte lorsqu'il est présent. Lorsqu'il n'est pas présent ou qu'il est supprim�
 
 | Spécification                                                |
 |--------------------------------------------------------------|
-| [Élément MapML « map »](https://maps4html.org/MapML-Specification/spec/#the-map-element-0) |
+| [Élément MapML « map »](https://maps4html.org/MapML-Specification/spec/#the-mapviewer-element) |
 | [Élément HTML « map »](https://html.spec.whatwg.org/multipage/image-maps.html#the-map-element) |
 
 ---
@@ -134,7 +134,7 @@ carte lorsqu'il est présent. Lorsqu'il n'est pas présent ou qu'il est supprim�
 |            <div class="requirement">Afficher le contenu d’une carte dans la langue préférée de l’utilisateur (5.1.6)</div>            | [complet](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/136) | [complet](https://github.com/Maps4HTML/mapml-extension) |  |
 | [**Interpréter les lieux et les positions sur une carte (5.3)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-locations) |  |  |  |
 |           <div class="requirement">Sélectionner la vue d'une carte à partir d'un point de latitude et de longitude (5.3.1)</div>             | complet | complet | [complet](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#zoomtolat-lon-zoom) |
-|           <div class="undecided">[Sélectionner la vue d'une carte à partir d'une adresse ou d'un nom de lieu (5.3.2)](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/145)</div>             | complet | [complet](https://maps4html.org/web-map-doc/docs/user-guide/search) | [complet](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#events) |
+|           <div class="undecided">[Sélectionner la vue d'une carte à partir d'une adresse ou d'un nom de lieu (5.3.2)](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/145)</div>             | [complet](https://maps4html.org/MapML-Specification/spec/#attr-mapviewer-controlslist-search) | [complet](https://maps4html.org/web-map-doc/docs/user-guide/search) | [complet](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#events) |
 |           <div class="undecided">Afficher les pavés de carte définis dans divers systèmes de coordonnées courants (5.3.3)</div>             | [complet](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/14) | complet | [complet](https://maps4html.org/web-map-doc/docs/api/custom-projections) |
 |           <div class="undecided">Reprojeter les données des pavés de carte dans une nouvelle projection ou dans la vue Globe (5.3.4)</div>             | [en cours de discussion](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/3) | aucun |  |
 |           <div class="undecided">Sauvegarder l’emplacement ou l’exporter dans une autre application (5.3.5)</div>             | limité | limité |  |

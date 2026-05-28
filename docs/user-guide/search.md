@@ -1,6 +1,6 @@
 ---
 id: search
-title: Search
+title: Enabling the Search Control
 slug: /user-guide/search
 ---
 

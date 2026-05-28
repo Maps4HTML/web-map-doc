@@ -39,7 +39,14 @@ module.exports = {
         'user-guide/quick-start'
       ],
     },
-    'user-guide/search',
+    {
+      type: 'category',
+      label: 'Search',
+      items: [
+        'user-guide/search',
+        'user-guide/custom-handlers'
+      ],
+    },
     {
       'Styling': [
         'user-guide/creating-styles',
@@ -47,8 +54,7 @@ module.exports = {
       ],
       'Tutorials': [
         'user-guide/getting-started',
-        'user-guide/modifying-map',
-        'user-guide/custom-handlers'
+        'user-guide/modifying-map'
       ]
     }
   ],

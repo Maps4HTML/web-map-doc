@@ -1,6 +1,6 @@
 ---
 id: search
-title: Recherche
+title: Activer le contrôle de recherche
 slug: /user-guide/search
 ---
 
