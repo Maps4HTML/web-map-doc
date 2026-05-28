@@ -237,7 +237,7 @@ contrôle fonctionne toujours mais ne retourne des résultats que lors de la sou
 |  | Spéc. | Visualiseur | API |
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
 | [**Interpréter les lieux et les positions sur une carte (5.3)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-locations) |  |  |  |
-|           <div class="undecided">[Sélectionner la vue d'une carte à partir d'une adresse ou d'un nom de lieu (5.3.2)](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/145)</div>             | complet | [complet](https://maps4html.org/web-map-doc/docs/user-guide/search) | [complet](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#events) |
+|           <div class="undecided">[Sélectionner la vue d'une carte à partir d'une adresse ou d'un nom de lieu (5.3.2)](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/145)</div>             | [complet](https://maps4html.org/MapML-Specification/spec/#link-rel-search) | [complet](https://maps4html.org/web-map-doc/docs/user-guide/search) | [complet](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#events) |
 | [**Entités vectorielles et superpositions (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors) |  |  |  |
 |                        <div class="requirement">Affiche l’attribution des données cartographiques et les liens (5.2.4)</div>                   | complet | complet |  |
 | [**Navigation des utilisateurs (vue panoramique et zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |

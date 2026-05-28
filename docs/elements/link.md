@@ -270,7 +270,7 @@ control still works but only returns results on submission.
 |  | Spec | Viewer | API |
 |:---------------------------------------------------------------------------------|:------: |:-----: |:---: |
 | [**Interpreting locations and map positions (5.3)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-locations) |  |  |  |
-|           <div class="undecided">[Select map view from street address or place name (5.3.2)](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/145)</div>             | full | [full](https://maps4html.org/web-map-doc/docs/user-guide/search) | [full](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#events) |
+|           <div class="undecided">[Select map view from street address or place name (5.3.2)](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/145)</div>             | [full](https://maps4html.org/MapML-Specification/spec/#link-rel-search) | [full](https://maps4html.org/web-map-doc/docs/user-guide/search) | [full](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#events) |
 | [**Vector features and overlays (5.2)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-vectors) |  |  |  |
 |                        <div class="requirement">Display map data attribution and links (5.2.4)</div>                   | full | full |  |
 | [**User navigation (pan and zoom) (5.4)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-user-navigation) |  |  |  |

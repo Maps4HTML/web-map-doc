@@ -111,7 +111,7 @@ present. When it is not present or removed, these features are enabled again.
 
 | Specification                                                |
 |--------------------------------------------------------------|
-| [MapML map element](https://maps4html.org/MapML-Specification/spec/#the-mapml-viewer-element-0) |
+| [MapML map element](https://maps4html.org/MapML-Specification/spec/#the-mapviewer-element) |
 | [HTML map element](https://html.spec.whatwg.org/multipage/image-maps.html#the-map-element) |
 
 ---
@@ -135,7 +135,7 @@ present. When it is not present or removed, these features are enabled again.
 |            <div class="requirement">Display map content in a users preferred language (5.1.6)</div>            | [full](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/136) | [full](https://github.com/Maps4HTML/mapml-extension) |  |
 | [**Interpreting locations and map positions (5.3)**](https://maps4html.org/HTML-Map-Element-UseCases-Requirements/#map-viewers-capabilities-locations) |  |  |  |
 |           <div class="requirement">Select map view from latitude and longitude point (5.3.1)</div>             | full | full | [full](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#zoomtolat-lon-zoom) |
-|           <div class="undecided">[Select map view from street address or place name (5.3.2)](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/145)</div>             | full | [full](https://maps4html.org/web-map-doc/docs/user-guide/search) | [full](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#events) |
+|           <div class="undecided">[Select map view from street address or place name (5.3.2)](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/145)</div>             | [full](https://maps4html.org/MapML-Specification/spec/#attr-mapviewer-controlslist-search) | [full](https://maps4html.org/web-map-doc/docs/user-guide/search) | [full](https://maps4html.org/web-map-doc/docs/api/mapml-viewer-api#events) |
 |           <div class="undecided">Display map tiles defined in various common coordinate systems (5.3.3)</div>             | [full](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/14) | full | [full](https://maps4html.org/web-map-doc/docs/api/custom-projections) |
 |           <div class="undecided">Reproject map tile data into a new projection or globe view (5.3.4)</div>             | [under discussion](https://github.com/Maps4HTML/HTML-Map-Element-UseCases-Requirements/issues/3) | none |  |
 |           <div class="undecided">Save the location or export to other application (5.3.5)</div>             | limited | limited |  |
