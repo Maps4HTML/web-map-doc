@@ -19,6 +19,10 @@
     "message": "Guide d'utilisateur",
     "description": "The label for the user guides in sidebar sidebar"
   },
+  "sidebar.sidebar.category.user-guide-getting-started": {
+    "message": "Guide de démarrage",
+    "description": "The label for category Getting Started under User Guide in sidebar sidebar"
+  },
   "sidebar.sidebar.category.Styling": {
     "message": "Les styles",
     "description": "The label for styling in sidebar sidebar"
