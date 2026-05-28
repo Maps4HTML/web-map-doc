@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkmapml_viewer_doc=globalThis.webpackChunkmapml_viewer_doc||[]).push([[7472],{5513(e){e.exports=JSON.parse('{"title":"Recent posts","items":[]}')}}]);
