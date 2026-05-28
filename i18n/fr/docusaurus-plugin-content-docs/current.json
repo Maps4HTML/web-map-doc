@@ -23,6 +23,10 @@
     "message": "Les styles",
     "description": "The label for styling in sidebar sidebar"
   },
+  "sidebar.sidebar.category.Search": {
+    "message": "Recherche",
+    "description": "The label for category Search in sidebar sidebar"
+  },
   "sidebar.sidebar.category.Tutorials": {
     "message": "Tutoriels",
     "description": "The label for Tutorials in sidebar sidebar"
