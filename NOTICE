@@ -1,0 +1,365 @@
+NOTICE
+======
+
+web-map-doc -- documentation for the MapML.js polyfill
+<https://maps4html.org/web-map-doc/>
+
+This work redistributes third-party open source software and references
+third-party map data. The notices below are reproduced in satisfaction of the
+terms of the licenses of those works, and must be retained in all copies and
+derivative works of this work, including modified copies.
+
+The original portions of this work -- that is, the documentation, example
+code, demonstration pages and assets authored in this repository and not
+derived from the works identified below -- are licensed by their contributors
+under the W3C Software and Document License, the text of which appears in the
+LICENSE.md file in the root of this repository.
+
+    Copyright 2021-2026 Canada Centre for Mapping and Earth Observation - Natural Resources Canada,
+    and Malvoz <https://github.com/Malvoz>, together with the other
+    contributors to this repository
+    <https://github.com/Maps4HTML/web-map-doc/graphs/contributors>.
+
+Every contribution to this repository is made by a signatory of the W3C
+Community Contributor License Agreement
+<https://www.w3.org/community/about/agreements/cla/>.
+
+=============================================================================
+PART 1 -- THE MapML.js BUILD REDISTRIBUTED UNDER static/dist/
+=============================================================================
+
+The files under `static/dist/` (`mapml.js`, `mapml.js.map`, `mapml.css`,
+`pmtilesRules.js`, `index.html` and `images/`) are a verbatim copy of the
+built output of MapML.js <https://github.com/Maps4HTML/MapML.js>, kept in
+sync by the "Sync MapML Build" workflow. They are not authored in this
+repository and are not modified here.
+
+    Copyright 2015-2024 Canada Centre for Mapping and Earth Observation,
+    Strategic Policy and Innovation Sector, Natural Resources Canada,
+    and the contributors to the MapML.js repository
+    <https://github.com/Maps4HTML/MapML.js/graphs/contributors>.
+
+That material is licensed under the W3C Software and Document License, which
+is the same license that applies to the original portions of this repository
+and whose full text appears in LICENSE.md.
+
+-----------------------------------------------------------------------------
+W3C SOFTWARE AND DOCUMENT NOTICE AND LICENSE
+<http://www.w3.org/Consortium/Legal/2015/copyright-software-and-document>
+SPDX-License-Identifier: W3C-20150513
+-----------------------------------------------------------------------------
+
+All Reports in this Repository are licensed by Contributors under the
+W3C Software and Document License
+<http://www.w3.org/Consortium/Legal/2015/copyright-software-and-document>.
+Contributions to Specifications are made under the W3C CLA
+<https://www.w3.org/community/about/agreements/cla/>.
+
+License
+
+By obtaining and/or copying this work, you (the licensee) agree that you have
+read, understood, and will comply with the following terms and conditions.
+
+Permission to copy, modify, and distribute this work, with or without
+modification, for any purpose and without fee or royalty is hereby granted,
+provided that you include the following on ALL copies of the work or portions
+thereof, including modifications:
+
+The full text of this NOTICE in a location viewable to users of the
+redistributed or derivative work.
+
+Any pre-existing intellectual property disclaimers, notices, or terms and
+conditions. If none exist, the W3C Software and Document Short Notice should
+be included.
+
+Notice of any changes or modifications, through a copyright statement on the
+new code or document such as "This software or document includes material
+copied from or derived from [title and URI of the W3C document].
+Copyright © [YEAR] W3C® (MIT, ERCIM, Keio, Beihang)."
+
+Disclaimers
+
+THIS WORK IS PROVIDED "AS IS," AND COPYRIGHT HOLDERS MAKE NO REPRESENTATIONS
+OR WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO, WARRANTIES OF
+MERCHANTABILITY OR FITNESS FOR ANY PARTICULAR PURPOSE OR THAT THE USE OF THE
+SOFTWARE OR DOCUMENT WILL NOT INFRINGE ANY THIRD PARTY PATENTS, COPYRIGHTS,
+TRADEMARKS OR OTHER RIGHTS.
+COPYRIGHT HOLDERS WILL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL OR
+CONSEQUENTIAL DAMAGES ARISING OUT OF ANY USE OF THE SOFTWARE OR DOCUMENT.
+
+The name and trademarks of copyright holders may NOT be used in advertising or
+publicity pertaining to the work without specific, written prior permission.
+Title to copyright in this work will at all times remain with copyright holders.
+
+
+=============================================================================
+PART 2 -- LIBRARIES BUNDLED INTO static/dist/mapml.js
+=============================================================================
+
+`static/dist/mapml.js` is a bundle. The following libraries are compiled into
+it and are therefore redistributed by this repository and by the published
+documentation site. Their copyright notices, license texts and disclaimers are
+reproduced below as required.
+
+-----------------------------------------------------------------------------
+Leaflet <https://leafletjs.com/>
+SPDX-License-Identifier: BSD-2-Clause
+-----------------------------------------------------------------------------
+
+BSD 2-Clause License
+
+Copyright (c) 2010-2023, Volodymyr Agafonkin
+Copyright (c) 2010-2011, CloudMade
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+-----------------------------------------------------------------------------
+Proj4js / proj4 <https://github.com/proj4js/proj4js>
+SPDX-License-Identifier: MIT
+-----------------------------------------------------------------------------
+
+Proj4js -- Javascript reprojection library.
+
+Authors:
+- Mike Adair madairATdmsolutions.ca
+- Richard Greenwood richATgreenwoodmap.com
+- Didier Richard didier.richardATign.fr
+- Stephen Irons stephen.ironsATclear.net.nz
+- Olivier Terral oterralATgmail.com
+- Calvin Metcalf cmetcalfATappgeo.com
+
+Copyright (c) 2014, Mike Adair, Richard Greenwood, Didier Richard,
+Stephen Irons, Olivier Terral and Calvin Metcalf
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the "Software"),
+to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+
+-----------------------------------------------------------------------------
+Proj4Leaflet <https://github.com/kartena/Proj4Leaflet>
+Consumed as the Maps4HTML ES module fork
+<https://github.com/Maps4HTML/proj4leaflet>
+SPDX-License-Identifier: BSD-2-Clause
+-----------------------------------------------------------------------------
+
+Copyright (c) 2012, Kartena AB
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+-----------------------------------------------------------------------------
+Leaflet.Locate <https://github.com/domoritz/leaflet-locatecontrol>
+SPDX-License-Identifier: MIT
+-----------------------------------------------------------------------------
+
+The MIT License (MIT)
+
+Copyright © 2014 Dominik Moritz
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+-----------------------------------------------------------------------------
+protomaps-leaflet <https://github.com/protomaps/protomaps-leaflet>
+PMTiles <https://github.com/protomaps/PMTiles>
+SPDX-License-Identifier: BSD-3-Clause
+-----------------------------------------------------------------------------
+
+Copyright 2021-2024 Protomaps LLC
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors
+   may be used to endorse or promote products derived from this software
+   without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+The licenses of any further dependencies bundled into the MapML.js build are
+recorded in the LICENSE.md file of the MapML.js repository
+<https://github.com/Maps4HTML/MapML.js/blob/main/LICENSE.md>, which governs
+that build.
+
+
+=============================================================================
+PART 3 -- CodeMirror VENDORED UNDER static/demo/codemirror-5.64.0/
+=============================================================================
+
+The directory `static/demo/codemirror-5.64.0/` contains an unmodified copy of
+CodeMirror 5.64.0 <https://codemirror.net/5/>, used by the interactive demo
+pages. Its own LICENSE and AUTHORS files are retained in that directory.
+
+SPDX-License-Identifier: MIT
+
+MIT License
+
+Copyright (C) 2017 by Marijn Haverbeke <marijnh@gmail.com> and others
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+
+=============================================================================
+PART 4 -- DOCUSAURUS AND REACT IN THE GENERATED SITE
+=============================================================================
+
+This documentation site is generated with Docusaurus
+<https://docusaurus.io/>, which emits Docusaurus and React runtime code into
+the published site under `build/`. That generated output therefore
+redistributes the following works. The sources are not vendored in this
+repository; they are installed from npm at build time.
+
+    Docusaurus -- Copyright (c) Meta Platforms, Inc. and affiliates.
+    <https://github.com/facebook/docusaurus>
+    SPDX-License-Identifier: MIT
+
+    React -- Copyright (c) Meta Platforms, Inc. and affiliates.
+    <https://github.com/facebook/react>
+    SPDX-License-Identifier: MIT
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+The licenses of the complete set of build-time npm dependencies are recorded
+in `package-lock.json` and in the `node_modules` tree produced by
+`npm install`; they are not reproduced here because those packages are not
+redistributed by this repository.
+
+
+=============================================================================
+PART 5 -- MAP DATA AND SERVICES REFERENCED BY THE DEMONSTRATIONS
+=============================================================================
+
+The demonstration pages and the MapML documents under `static/demo/data/`
+reference map services operated by third parties. That data is not
+redistributed by this repository; it is fetched by the browser at run time and
+remains subject to the terms of its providers:
+
+    Canada Base Map - Transportation (CBMT) and other services published by
+    Natural Resources Canada <https://geoappext.nrcan.gc.ca>, available under
+    the Open Government Licence - Canada
+    <https://open.canada.ca/en/open-government-licence-canada>.
+
+    OpenStreetMap tiles <https://tile.openstreetmap.org>, © OpenStreetMap
+    contributors, available under the Open Database License
+    <https://www.openstreetmap.org/copyright>.
+
+Attribution for these services is carried in the MapML documents themselves
+via `<map-link rel="license">` and is surfaced to end users through the map
+attribution control.

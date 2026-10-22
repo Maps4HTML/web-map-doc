@@ -2,6 +2,7 @@
   "name": "mapml-viewer-doc",
   "version": "0.0.0",
   "private": true,
+  "license": "W3C-20150513",
   "scripts": {
     "node-version": "echo Node version: && node --version",
     "docusaurus": "docusaurus",
