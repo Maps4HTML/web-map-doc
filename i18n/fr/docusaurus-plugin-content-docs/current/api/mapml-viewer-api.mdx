@@ -20,6 +20,7 @@ L’interface HTMLMapmlViewerElement représente l’élément `<mapml-viewer>`.
 | [lon](#lon)          	| Obtient ou définit la longitude de la carte. Reproduit dans l'attribut de contenu lon. Aucun effet sur l'état dynamique de la carte.|
 | [projection](#projection)   	| Projection de la carte. Reproduit l'attribut `projection`.       	|
 | [zoom](#zoom)   	| Obtient ou définit le niveau de zoom de la carte. Reproduit dans l'attribut de contenu `zoom`. Aucun effet sur l'état dynamique de la carte.|
+| [static](#static)   	| Désactive le déplacement et le zoom interactifs (lorsque présent) ou les réactive (attribut retiré). Reproduit dans l'attribut de contenu `static` et, s'il est affiché au moyen du mot-clé `static` de controlsList, dans le contrôle statique. |
 
 ### controls
 
@@ -45,7 +46,7 @@ qui aide l'utilisateur à sélectionner les contrôles à afficher sur l'éléme
 Pour définir l’attribut controlslist :
 ```js
 let map = document.querySelector('mapml-viewer');
-map.controlsList.value = "noreload nozoom"; // les valeurs peuvent être noreload | nofullscreen | nozoom | nolayer | search | geolocation
+map.controlsList.value = "noreload nozoom"; // les valeurs peuvent être noreload | nofullscreen | nozoom | nolayer | search | geolocation | static
 map.controlsList.add("nofullscreen"); // peut également être ajouté à l'aide de la méthode 'add'
 map.controlsList.add("geolocation");  // ajoute la commande de localisation
 map.controlsList.add("search"); // ajoute la commande de recherche, désactivée jusqu'à ce qu'un lien de gabarit d'URL de recherche soit défini
@@ -211,6 +212,22 @@ Pour obtenir la longitude :
 ```js
 let map = document.querySelector('mapml-viewer');
 let zoom = map.zoom;
+```
+
+### static
+
+Pour rendre la carte non déplaçable et non zoomable (statique) :
+
+```js
+let map = document.querySelector('mapml-viewer');
+map.static = true; // ou false pour activer le déplacement et le zoom
+```
+
+Pour vérifier si la carte a désactivé les gestes de déplacement et de zoom de l'utilisateur :
+
+```js
+let map = document.querySelector('mapml-viewer');
+let isFrozen = map.static;
 ```
 
 ---

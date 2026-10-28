@@ -81,9 +81,11 @@ La projection par défaut est `OSMTILE`.
 
 ### `controlslist`
 
-`controlslist` - attribut énuméré. Les valeurs possibles sont les suivantes : "`nofullscreen`", "`nolayer`", "`noreload`", "`noscale`", "`nozoom`", "`geolocation`" et "`search`". Les jetons `no*` permettent de réduire l'ensemble des commandes offertes automatiquement (si vous avez utilisé l'attribut booléen `controls`), tandis que contrairement aux jetons `no*` (qui masquent les commandes par défaut), les jetons `geolocation` et `search` sont **optionnels**. `geolocation` et `search` ajoutent respectivement les commandes de localisation et de recherche à la carte. La commande de recherche est `disabled` par défaut, et ne devient activée que lorsqu'au moins une [`<map-layer>`](../layer/) cochée (`checked`) contient un élément [`<map-link rel="search">`](../link/).
+`controlslist` - attribut énuméré. Les valeurs possibles sont les suivantes : "`nofullscreen`", "`nolayer`", "`noreload`", "`noscale`", "`nozoom`", "`geolocation`", "`search`" et "`static`". Les jetons `no*` permettent de réduire l'ensemble des commandes offertes automatiquement (si vous avez utilisé l'attribut booléen `controls`), tandis que contrairement aux jetons `no*` (qui masquent les commandes par défaut), les jetons `geolocation`, `search` et `static` sont **optionnels**. `geolocation` et `search` ajoutent respectivement les commandes de localisation et de recherche à la carte. La commande de recherche est `disabled` par défaut, et ne devient activée que lorsqu'au moins une [`<map-layer>`](../layer/) cochée (`checked`) contient un élément [`<map-link rel="search">`](../link/).
 
 Pour un guide complet sur la configuration et la personnalisation de la recherche, consultez le [guide d'utilisation de la recherche](../../user-guide/search).
+
+ Le jeton `static` de `controlslist` ajoute à la carte une commande de verrouillage-déverrouillage qui reflète l'état de l'attribut booléen [`static`](#static), verrouillant ou déverrouillant la carte vis-à-vis des gestes de déplacement et de zoom à la souris ou tactiles.
 
 ---
 

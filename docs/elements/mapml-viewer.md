@@ -82,9 +82,11 @@ The default projection is `OSMTILE`.
 
 ### `controlslist`
 
-`controlslist` - an enumerated attribute, possible values are: "`nofullscreen`", "`nolayer`", "`noreload`", "`noscale`", "`nozoom`", "`geolocation`" and "`search`".  The `no*` tokens let you prune the set of controls automatically presented (when you have used the `controls` boolean attribute), while unlike the `no*` tokens (which hide default controls), the `geolocation` and `search` tokens are **opt-in**. `geolocation` and `search` add location and search controls to the map, respectively. The search control is `disabled` by default, and becomes enabled only when at least one `checked` [`<map-layer>`](../layer/) contains a [`<map-link rel="search">`](../link/) element.
+`controlslist` - an enumerated attribute, possible values are: "`nofullscreen`", "`nolayer`", "`noreload`", "`noscale`", "`nozoom`", "`geolocation`", "`search`" and "`static`".  The `no*` tokens let you prune the set of controls automatically presented (when you have used the `controls` boolean attribute), while unlike the `no*` tokens (which hide default controls), the `geolocation`, `search` and `static` tokens are **opt-in**. `geolocation` and `search` add location and search controls to the map, respectively. The search control is `disabled` by default, and becomes enabled only when at least one `checked` [`<map-layer>`](../layer/) contains a [`<map-link rel="search">`](../link/) element.
 
 For a full guide to configuring and customizing search, see the [Search user guide](../../user-guide/search).
+
+ The `static` controlslist keyword adds a locked-unlocked control to the map that reflects the state of the [`static`](#static) boolean attribute, locking and unlocking the map from pan and zoom mouse or touch gestures.
 
 ---
 
