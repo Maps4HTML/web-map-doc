@@ -20,6 +20,7 @@ The HTMLMapmlViewerElement interface represents the `<mapml-viewer>` element.
 | [lon](#lon)          	| Get or set the map's longitude. Reflects to the lon content attribute. No effect on map dynamic state. |
 | [projection](#projection)   	| The map's projection. Reflects the `projection` attribute.       	|
 | [zoom](#zoom)   	| Get or set the map's zoom level. Reflects to the `zoom` content attribute. No effect on map dynamic state. |
+| [static](#static)   	| Turns interactive pan / zoom off (when present) or on (attribute removed). Reflects to the `static` content attribute and if rendered via the controlsList `static` keyword, the static control. |
 
 ### controls
 
@@ -45,7 +46,7 @@ that helps the user select what controls to display on the `mapml-viewer` elemen
 To set the controlslist attribute:
 ```js
 let map = document.querySelector('mapml-viewer');
-map.controlsList.value = "noreload nozoom"; // values can be noreload | nofullscreen | nozoom | nolayer | search | geolocation
+map.controlsList.value = "noreload nozoom"; // values can be noreload | nofullscreen | nozoom | nolayer | search | geolocation | static
 map.controlsList.add("nofullscreen"); // can also add using the 'add' method
 map.controlsList.add("geolocation");  // adds the locate control
 map.controlsList.add("search"); // adds the search control, disabled until a search URL template link is defined
@@ -208,6 +209,22 @@ To get the longitude:
 ```js
 let map = document.querySelector('mapml-viewer');
 let zoom = map.zoom;
+```
+
+### static
+
+To make the map non-pannable and non-zoomable (static):
+
+```js
+let map = document.querySelector('mapml-viewer');
+map.static = true; // or false to enable pan and zoom
+```
+
+To check if the map has disabled user's pan and zoom gestures:
+
+```js
+let map = document.querySelector('mapml-viewer');
+let isFrozen = map.static;
 ```
 
 ---
